@@ -1,0 +1,587 @@
+diff --git a/scripts/read_route.py b/scripts/read_route.py
+index ba7d4d5..9a468fd 100644
+--- a/scripts/read_route.py
++++ b/scripts/read_route.py
+@@ -1,28 +1,42 @@
+ #!/usr/bin/env python3
+-"""Resolve a documented route and print only its owning section."""
++"""Resolve a documented route and print only its owning section.
++
++Résolution en trois étapes (READING_MAP, « Résolution des routes ») :
++1. table « Locators principaux » (raccourcis et sous-locators) ;
++2. préfixe : titre unique du propriétaire qui commence par le locator ;
++3. sous-locator X/Y/Z : sous-titre commençant par Z dans le bloc de X/Y.
++Plusieurs titres : « locator ambigu ». Les titres placés dans un bloc de code sont
++ignorés. Un bloc servi exclut les sous-blocs qui portent leur propre locator.
++"""
+ from __future__ import annotations
+ 
+ import argparse
+ import re
+-import sys
+ from pathlib import Path
+ 
+ ROOT = Path(__file__).resolve().parents[1]
+ OFFICIAL = ROOT / "V1" / "official" if (ROOT / "V1" / "official").is_dir() else ROOT / "official"
+ MAP = OFFICIAL / "READING_MAP.md"
++PREFIXES = ("DIRECTION", "ACTION", "SAVOIR", "BIBLIOTHEQUE", "CHANGELOG")
++HEADING_LOCATOR = re.compile(rf"^#+\s+`?((?:{'|'.join(PREFIXES)})/[A-Za-z0-9_\-]+)`?(?=\s|$)")
++
++
++class RouteError(Exception):
++    """Échec de résolution gouverné."""
+ 
+ 
+ def fail(message: str) -> "NoReturn":
+     raise SystemExit(f"ROUTE READ FAILED — {message}")
+ 
+ 
+-def parse_routes(text: str) -> dict[str, tuple[str, str]]:
++def parse_route_rows(text: str) -> list[tuple[str, str, list[str]]]:
++    """Lignes de la table : (locator, fichier propriétaire, chaîne de titres). Les doublons sont conservés."""
+     if "## Locators principaux" not in text:
+-        fail("section des locators principaux absente")
++        raise RouteError("section des locators principaux absente")
+     section = text.split("## Locators principaux", 1)[1]
+     if "## Condition d’arrêt" in section:
+         section = section.split("## Condition d’arrêt", 1)[0]
+-    routes: dict[str, tuple[str, str]] = {}
++    rows: list[tuple[str, str, list[str]]] = []
+     for line in section.splitlines():
+         if not line.startswith("| `") or " | `" not in line or not line.endswith(" |"):
+             continue
+@@ -34,53 +48,131 @@ def parse_routes(text: str) -> dict[str, tuple[str, str]]:
+             continue
+         match = re.fullmatch(r"`([^`]+)`\s+—\s+`(.+)`", destination)
+         if not match:
+-            fail(f"destination mal formée pour {locator_cell}")
+-        owner_name, heading = match.groups()
+-        routes[locator_cell[1:-1]] = (owner_name, heading.replace("\\`", "`"))
+-    return routes
++            raise RouteError(f"destination mal formée pour {locator_cell}")
++        owner_name, chain = match.groups()
++        headings = [part.replace("\\`", "`").strip() for part in re.split(r"`\s+›\s+`", chain)]
++        rows.append((locator_cell[1:-1], owner_name.strip(), headings))
++    return rows
++
++
++def parse_routes(text: str) -> dict[str, tuple[str, list[str]]]:
++    return {locator: (owner, chain) for locator, owner, chain in parse_route_rows(text)}
++
++
++def headings(lines: list[str]) -> list[tuple[int, int, str]]:
++    """(index, niveau, ligne) des titres, hors blocs de code (F-RRT-001)."""
++    found, fence = [], None
++    for index, line in enumerate(lines):
++        stripped = line.lstrip()
++        if stripped.startswith(("```", "~~~")):
++            marker = stripped[:3]
++            fence = None if fence == marker else (fence or marker)
++            continue
++        if fence is None and line.startswith("#"):
++            level = len(line) - len(line.lstrip("#"))
++            if level <= 6 and line[level:level + 1] in (" ", ""):
++                found.append((index, level, line.strip()))
++    return found
++
++
++def heading_locator(heading: str) -> str | None:
++    match = HEADING_LOCATOR.match(heading)
++    return match.group(1) if match else None
++
++
++def block_end(lines: list[str], heads: list[tuple[int, int, str]], start: int) -> int:
++    level = next(lvl for idx, lvl, _ in heads if idx == start)
++    return next((idx for idx, lvl, _ in heads if idx > start and lvl <= level), len(lines))
+ 
+ 
+-def read_block(path: Path, heading: str) -> list[str]:
++def owner_file(locator: str) -> Path:
++    prefix = locator.split("/", 1)[0]
++    if prefix not in PREFIXES:
++        raise RouteError(f"locator inconnu : {locator}")
++    return OFFICIAL / f"{prefix}.md"
++
++
++def _unique(candidates: list[int], lines: list[str], locator: str) -> int:
++    if len(candidates) > 1:
++        shown = " | ".join(lines[i].strip() for i in candidates)
++        raise RouteError(f"locator ambigu : {locator} ; candidats : {shown}")
++    return candidates[0]
++
++
++def resolve(locator: str, routes: dict[str, tuple[str, list[str]]] | None = None) -> tuple[Path, list[str], int]:
++    """Renvoie (fichier, lignes, index du titre servi)."""
++    if routes is None:
++        if not MAP.is_file():
++            raise RouteError("READING_MAP.md absent")
++        routes = parse_routes(MAP.read_text(encoding="utf-8"))
++    if locator in routes:  # 1. table
++        owner_name, chain = routes[locator]
++        path = OFFICIAL / owner_name
++        if not path.is_file():
++            raise RouteError(f"propriétaire absent : {owner_name}")
++        lines = path.read_text(encoding="utf-8").splitlines()
++        heads = headings(lines)
++        low, high, index = 0, len(lines), -1
++        for heading in chain:
++            candidates = [idx for idx, _, text in heads if low <= idx < high and text == heading]
++            if not candidates:
++                raise RouteError(f"titre introuvable dans {owner_name} : {heading}")
++            index = _unique(candidates, lines, locator)
++            low, high = index + 1, block_end(lines, heads, index)
++        return path, lines, index
++    path = owner_file(locator)
++    if not path.is_file():
++        raise RouteError(f"propriétaire absent : {path.name}")
+     lines = path.read_text(encoding="utf-8").splitlines()
+-    try:
+-        start = next(i for i, line in enumerate(lines) if line.strip() == heading)
+-    except StopIteration:
+-        fail(f"titre introuvable dans {path.relative_to(ROOT)} : {heading}")
+-    level = len(heading) - len(heading.lstrip("#"))
+-    end = len(lines)
+-    for i in range(start + 1, len(lines)):
+-        line = lines[i]
+-        if line.startswith("#"):
+-            current = len(line) - len(line.lstrip("#"))
+-            if current <= level:
+-                end = i
+-                break
+-    return lines[start:end]
++    heads = headings(lines)
++    candidates = [idx for idx, _, text in heads if heading_locator(text) == locator]  # 2. préfixe
++    if candidates:
++        return path, lines, _unique(candidates, lines, locator)
++    parent, _, leaf = locator.rpartition("/")
++    if parent.count("/") >= 1:  # 3. sous-locator X/Y/Z
++        parent_path, parent_lines, parent_index = resolve(parent, routes)
++        if parent_path == path:
++            end = block_end(lines, heads, parent_index)
++            pattern = re.compile(rf"^#+\s+`?{re.escape(leaf)}`?(?=\s|$)")
++            sub = [idx for idx, _, text in heads if parent_index < idx < end and pattern.match(text)]
++            if sub:
++                return path, lines, _unique(sub, lines, locator)
++    raise RouteError(f"locator inconnu : {locator}")
++
++
++def extract(lines: list[str], index: int) -> list[str]:
++    """Bloc du titre servi, sans les sous-blocs porteurs de leur propre locator."""
++    heads = headings(lines)
++    end = block_end(lines, heads, index)
++    served, skip_until = [], -1
++    for i in range(index, end):
++        if i < skip_until:
++            continue
++        head = next((text for idx, _, text in heads if idx == i), None)
++        own = heading_locator(head) if head and i != index else None
++        if own:
++            served.append(f"> `{own}` : servi séparément")
++            skip_until = block_end(lines, heads, i)
++            continue
++        served.append(lines[i])
++    return served
+ 
+ 
+ def main(argv: list[str] | None = None) -> int:
+     parser = argparse.ArgumentParser(description="Charge le bloc exact d’un locator READING_MAP.")
+-    parser.add_argument("locator", help="locator, par exemple DIRECTION/START")
++    parser.add_argument("locator", help="locator, par exemple DIRECTION/START ou SAVOIR/CRAFT/CFT-01")
+     args = parser.parse_args(argv)
+-    if not MAP.is_file():
+-        fail("READING_MAP.md absent")
+-    routes = parse_routes(MAP.read_text(encoding="utf-8"))
+-    if args.locator not in routes:
+-        available = ", ".join(sorted(routes))
+-        fail(f"locator inconnu : {args.locator}; disponibles : {available}")
+-    owner_name, heading = routes[args.locator]
+-    owner = OFFICIAL / owner_name
+-    if not owner.is_file():
+-        fail(f"propriétaire absent : {owner_name}")
+-    block = read_block(owner, heading)
++    try:
++        path, lines, index = resolve(args.locator)
++    except RouteError as exc:
++        fail(str(exc))
+     print(f"ROUTE: {args.locator}")
+-    print(f"OWNER: {owner.relative_to(ROOT)}")
+-    print(f"HEADING: {heading}")
++    print(f"OWNER: {path.relative_to(ROOT)}")
++    print(f"HEADING: {lines[index].strip()}")
+     print("---")
+-    print("\n".join(block))
++    print("\n".join(extract(lines, index)))
+     return 0
+ 
+ 
+ if __name__ == "__main__":
+     raise SystemExit(main())
+-
+diff --git a/scripts/validate_design_governance.py b/scripts/validate_design_governance.py
+index 4ef961f..c2a2459 100644
+--- a/scripts/validate_design_governance.py
++++ b/scripts/validate_design_governance.py
+@@ -147,7 +147,7 @@ def check_canonicity_language(errors: list[str]) -> None:
+ 
+ def check_lifecycle_contract(errors: list[str]) -> None:
+     changelog = (OFFICIAL / "CHANGELOG.md").read_text(encoding="utf-8")
+-    required_terms = ("PILOT", "ADOPTED", "DEPRECATED", "ABANDONED", "routes présentes dans le seed", "Migration des anciens aliases")
++    required_terms = ("SEED", "PILOT", "ADOPTED", "DEPRECATED", "ABANDONED", "routes présentes dans le seed", "Migration des anciens aliases")
+     for term in required_terms:
+         if term not in changelog:
+             fail(errors, f"contrat de cycle de vie incomplet dans CHANGELOG : {term}")
+diff --git a/scripts/validate_reading_map.py b/scripts/validate_reading_map.py
+index 9fdc849..ec2d71c 100644
+--- a/scripts/validate_reading_map.py
++++ b/scripts/validate_reading_map.py
+@@ -1,14 +1,30 @@
+ #!/usr/bin/env python3
+-"""Validate the derived reading and multi-perspective map without creating authority."""
++"""Valide la carte de lecture et les façades, sans créer d’autorité.
++
++Deux contrôles :
++1. carte : table des locators (unicité, propriétaire, correspondance, résolution),
++   couverture de tout locator cité, unicité des titres porteurs d’un locator ;
++   la résolution est celle de read_route.py (un seul résolveur) ;
++2. façades : liste close des conditions de façade (LCF). Chaque entrée nomme une
++   façade, la condition du propriétaire qu’elle doit conserver et sa source. Une
++   entrée n’entre que par une PATCH-DECISION, avec sa mutation rouge.
++Limite déclarée : une contradiction nouvelle hors de la LCF n’est pas détectée ;
++la revue bornée des façades avant release la complète.
++"""
+ from __future__ import annotations
+ 
+ import re
+ import sys
+ from pathlib import Path
+ 
+-ROOT = Path(__file__).resolve().parents[1]
+-OFFICIAL = ROOT / "V1" / "official" if (ROOT / "V1" / "official").is_dir() else ROOT / "official"
++sys.dont_write_bytecode = True  # l’import du résolveur ne doit rien écrire dans le package
++sys.path.insert(0, str(Path(__file__).resolve().parent))
++import read_route as rr  # noqa: E402
++
++ROOT = rr.ROOT
++OFFICIAL = rr.OFFICIAL
+ MAP = OFFICIAL / "READING_MAP.md"
++SKILL_DIR = ROOT / "skills" / "design-governance-practice" if (ROOT / "skills").is_dir() else ROOT / "skill"
+ REQUIRED = (
+     "Statut :** guide dérivé non normatif",
+     "## Chemin canonique de démarrage",
+@@ -26,50 +42,249 @@ REQUIRED = (
+     "N/A-JUSTIFIED",
+     "NOT-VERIFIED",
+ )
+-OWNER_MAP = {
+-    "DIRECTION/*": OFFICIAL / "DIRECTION.md",
+-    "ACTION/*": OFFICIAL / "ACTION.md",
+-    "SAVOIR/*": OFFICIAL / "SAVOIR.md",
+-    "BIBLIOTHEQUE/*": OFFICIAL / "BIBLIOTHEQUE.md",
+-    "CHANGELOG/*": OFFICIAL / "CHANGELOG.md",
+-}
++OWNER_MAP = {f"{prefix}/*": OFFICIAL / f"{prefix}.md" for prefix in rr.PREFIXES}
++CITED = re.compile(rf"`((?:{'|'.join(rr.PREFIXES)})/[A-Z0-9_\-]+(?:/[A-Z0-9_\-]+)?)`")
+ 
+ 
+ def fail(message: str) -> None:
+     raise SystemExit(f"READING MAP VALIDATION FAILED — {message}")
+ 
+ 
+-def check_locator_destinations(text: str) -> None:
+-    """Ensure every listed locator resolves to the exact heading it names."""
+-    if "## Locators principaux" not in text:
+-        fail("section des locators principaux absente")
+-    text = text.split("## Locators principaux", 1)[1]
+-    if "## Condition d’arrêt" in text:
+-        text = text.split("## Condition d’arrêt", 1)[0]
+-    rows = []
+-    for line in text.splitlines():
+-        if not line.startswith("| `") or " | `" not in line or not line.endswith(" |"):
++# ---------- 1. Carte ----------
++def check_map(text: str, errors: list[str]) -> None:
++    try:
++        rows = rr.parse_route_rows(text)
++    except rr.RouteError as exc:
++        errors.append(str(exc))
++        return
++    routes = {locator: (owner, chain) for locator, owner, chain in rows}
++    seen: set[str] = set()
++    for locator, owner, chain in rows:
++        if locator in seen:
++            errors.append(f"locator en double : {locator}")
+             continue
+-        cells = [cell.strip() for cell in line.strip().strip("|").split("|")]
+-        if len(cells) != 2 or not cells[0].startswith("`") or not cells[0].endswith("`"):
++        seen.add(locator)
++        prefix = locator.split("/", 1)[0]
++        if owner != f"{prefix}.md":
++            errors.append(f"propriétaire incohérent : {locator} → {owner}")
+             continue
+-        locator = cells[0][1:-1]
+-        destination = cells[1]
+-        match = re.fullmatch(r"`([^`]+)`\s+—\s+`(.+)`", destination)
+-        if not match:
+-            fail(f"destination de locator mal formée : {locator}")
+-        owner_name, heading = match.groups()
+-        owner_name = owner_name.strip()
+-        heading = heading.strip().replace("\\`", "`")
+-        owner = OFFICIAL / owner_name
+-        if not owner.is_file():
+-            fail(f"fichier propriétaire absent pour {locator} : {owner_name}")
+-        headings = {line.strip() for line in owner.read_text(encoding="utf-8").splitlines() if line.lstrip().startswith("#")}
+-        if heading not in headings:
+-            fail(f"titre de locator introuvable : {locator} -> {owner_name} — {heading}")
+-        rows.append(locator)
+-    if len(rows) < 10:
+-        fail("table des locators principaux incomplète ou illisible")
++        root_locator = "/".join(locator.split("/")[:2])
++        if rr.heading_locator(chain[0]) != root_locator:
++            errors.append(f"destination ne correspond pas au locator : {locator} → {chain[0]}")
++            continue
++        try:
++            rr.resolve(locator, routes)
++        except rr.RouteError as exc:
++            errors.append(f"titre de locator introuvable : {locator} ({exc})")
++    # unicité des titres porteurs d’un locator, dans tous les propriétaires
++    carriers: dict[str, list[str]] = {}
++    for prefix in rr.PREFIXES:
++        path = OFFICIAL / f"{prefix}.md"
++        lines = path.read_text(encoding="utf-8").splitlines()
++        for index, _, heading in rr.headings(lines):
++            own = rr.heading_locator(heading)
++            if own:
++                carriers.setdefault(own, []).append(f"{path.name}:{index + 1}")
++    for locator, places in sorted(carriers.items()):
++        if len(places) > 1:
++            errors.append(f"locator ambigu : {locator} porté par {', '.join(places)}")
++    # couverture : tout locator cité dans les fichiers officiels et la skill est servi
++    cited: set[str] = set()
++    sources = sorted(OFFICIAL.glob("*.md")) + [SKILL_DIR / "SKILL.md"]
++    for source in sources:
++        if source.is_file():
++            cited.update(CITED.findall(source.read_text(encoding="utf-8")))
++    for locator in sorted(cited):
++        try:
++            rr.resolve(locator, routes)
++        except rr.RouteError as exc:
++            errors.append(f"locator cité non résolu : {locator} ({exc})")
++
++
++# ---------- 2. Façades : liste close des conditions (LCF) ----------
++HANDOFF_TOKENS = re.compile(r"\b(MODE|DECISION-CHANGE|DECISION|RISK|SCOPE|ARTIFACT|OBSERVATION|METHOD|TRACE-LOCATOR|NOT-VERIFIED|"
++                            r"NEXT-ACTION|OWNER|NEXT-PROOF|EXIT-CONDITION)\b")
++VISIBLE = "MODE — DECISION — CHANGE — PROOF — LIMIT — NEXT-ACTION — OWNER"
++OUTCOME = r"(CHANGED|CONFIRMED|ABANDONED|N/A-JUSTIFIED|NOT-OBSERVED)"
++USER_EFFECT = re.compile(r"(?i)mémorable|mémoris|tâche|usage|utilisabilit")
++PROTOCOL = re.compile(r"(?i)protocole|participant")
++UNBOUNDED = re.compile(r"(?<!vise à )(?<!visent à )augmente la (probabilité|qualité)")
++STATUS_TOKEN = re.compile(r"`(SEED|PILOT|ADOPTED|DEPRECATED|ABANDONED)`")
++
++
++def cells(line: str) -> list[str]:
++    return [cell.strip() for cell in line.strip().strip("|").split("|")]
++
++
++def row(text: str, key: str, col: int = 0) -> list[str] | None:
++    for line in text.splitlines():
++        if line.startswith("|") and not line.startswith("|---"):
++            found = cells(line)
++            if len(found) > col and key in found[col]:
++                return found
++    return None
++
++
++def before(text: str, first: str, second: str) -> bool:
++    return first in text and second in text and text.index(first) < text.index(second)
++
++
++def after(text: str, marker: str, length: int) -> str:
++    index = text.find(marker)
++    return text[index:index + length] if index >= 0 else ""
++
++
++def fenced_after(text: str, marker: str) -> str:
++    index = text.find(marker)
++    if index < 0:
++        return ""
++    match = re.search(r"```(?:text)?\n(.*?)```", text[index:], re.S)
++    return match.group(1) if match else ""
++
++
++def rows_between(text: str, start: str, stop: str) -> list[list[str]]:
++    index = text.find(start)
++    if index < 0:
++        return []
++    segment = text[index:]
++    end = segment.find(stop, len(start))
++    segment = segment[: end if end > 0 else len(segment)]
++    found = [cells(line) for line in segment.splitlines() if line.startswith("| ") and not line.startswith("|---")]
++    return found[1:]
++
++
++def plain(cell: str) -> str:
++    return re.sub(r"[*`]", "", cell).strip()
++
++
++def load_texts() -> dict[str, str]:
++    files = {
++        "D": OFFICIAL / "DIRECTION.md", "A": OFFICIAL / "ACTION.md", "S": OFFICIAL / "SAVOIR.md",
++        "B": OFFICIAL / "BIBLIOTHEQUE.md", "C": OFFICIAL / "CHANGELOG.md", "G": OFFICIAL / "GLOSSAIRE.md",
++        "Q": OFFICIAL / "QUICKSTART.md", "RM": MAP, "OM": OFFICIAL / "ORCHESTRATION_MAP.md",
++        "README": ROOT / "README.md", "NOTES": ROOT / "RELEASE_NOTES.md",
++        "SK": SKILL_DIR / "SKILL.md", "EX": SKILL_DIR / "references" / "examples.md",
++    }
++    return {key: path.read_text(encoding="utf-8") if path.is_file() else "" for key, path in files.items()}
++
++
++def lcf_07(t: dict[str, str]) -> bool:
++    chain = after(t["D"], "**Chaîne de lecture interne.**", 700)
++    prio = fenced_after(t["D"], "RUN-PRIORITY")
++    rows = [row(t["RM"], "Direction identitaire"), row(t["OM"], "Direction forte et spécifique"), row(t["SK"], "`DIRECTION`")]
++    return (before(chain, "`VISUAL_TARGET`", "`FIRST-OBJECT`") and before(prio, "DIRECTION —", "FIRST-OBJECT —")
++            and all(r and before(" ".join(r), "VISUAL_TARGET", "FIRST-OBJECT") for r in rows))
++
++
++def lcf_03(t: dict[str, str]) -> bool:
++    ui, proof, system = row(t["OM"], "UI/UX habitable"), row(t["OM"], "Preuve et décision fiables"), row(t["OM"], "Système maintenable")
++    keys = ("migration", "rollback", "CHANGELOG")
++    return (bool(ui) and "ACTION/GATE-A" in ui[1] and "ACTION/GATE-A" not in ui[2]
++            and bool(proof) and re.search(r"(?i)gate", proof[1]) is not None and re.search(r"(?i)gate", proof[2]) is None
++            and bool(system) and all(k in system[1] for k in keys) and not any(k in system[2] for k in keys))
++
++
++def lcf_11(t: dict[str, str]) -> bool:
++    lines = [l for b in re.findall(r"```text\n(.*?)```", t["EX"], re.S) for l in b.splitlines() if l.startswith("DECISION-CHANGE:")]
++    glossary = next((l for l in t["G"].splitlines() if l.startswith("| **DECISION-CHANGE** |")), "")
++    return (bool(lines) and all(re.match(rf"DECISION-CHANGE: {OUTCOME} — .+\(observation : .+\)", l) for l in lines)
++            and re.search(OUTCOME, glossary) is not None and "observation" in glossary)
++
++
++def lcf_12(t: dict[str, str]) -> bool:
++    blocks = [b for b in re.findall(r"```text\n(.*?)```", t["EX"], re.S) if "ACCEPTED-WITH-RESERVATION" in b]
++    glossary = [l for l in t["G"].splitlines() if l.startswith("|") and "ACCEPTED-WITH-RESERVATION" in l and "Exemple" not in l and "**Verdict" not in l]
++    complete = lambda s: all(re.search(p, s, re.I) for p in (r"owner", r"prochaine preuve", r"revue", r"(condition de )?sortie"))
++    return all(re.search(r"(?m)^RESERVATION: ", b) and complete(b) for b in blocks) and all(complete(l) for l in glossary)
++
++
++def lcf_13(t: dict[str, str]) -> bool:
++    blocks = re.findall(r"```text\n(.*?)```", t["EX"], re.S)
++    return (all(not re.search(r"(?m)^NOT-OBSERVED:", b) for b in blocks)
++            and all("STATE: CLOSED" not in b or re.search(r"(?m)^VERDICT: ", b) for b in blocks))
++
++
++def lcf_14(t: dict[str, str]) -> bool:
++    evidence = [l for b in re.findall(r"```text\n(.*?)```", t["EX"], re.S) for l in b.splitlines() if l.startswith("EVIDENCE:") and "capture" in l]
++    return bool(evidence) and all(not USER_EFFECT.search(l) or PROTOCOL.search(l) for l in evidence)
++
++
++def lcf_15_16_17(t: dict[str, str]) -> tuple[bool, bool, bool]:
++    first = rows_between(t["D"], "### Contrat positif du premier objet", "\n#")
++    dims = [plain(r[0]) for r in first]
++    quick = [plain(r[0]) for r in rows_between(t["Q"], "## 6. Produire une qualité positive", "\n#")]
++    cft = {plain(r[0]) for r in rows_between(t["S"], "## CFT-00", "### Creative Quality Review")}
++    header = next((l for l in t["D"][t["D"].find("### Contrat positif du premier objet"):].splitlines() if l.startswith("| Dimension")), "")
++    col = next((k for k, c in enumerate(cells(header)) if "CFT-00" in c), None)
++    mapped = [v.strip() for r in first if col is not None and len(r) > col for v in re.split(r"[,+/]| et ", plain(r[col])) if v.strip()]
++    triggers = {plain(r[0]): r[1] for r in rows_between(t["D"], "### Déclencheurs critiques", "\n#") if len(r) > 1}
++    pick = lambda start: next((v for k, v in triggers.items() if k.startswith(start)), "")
++    motif, scene, density = pick("Motif possiblement générique"), pick("Asset, motion, scène"), pick("Détail final")
++    return (bool(dims) and quick == dims,
++            col is not None and bool(mapped) and all(v in cft or v in {"—", "DIRECTION"} for v in mapped),
++            "SAVOIR/CRAFT/CFT-01" in motif and "ACTION/ANTI-SLOP" in motif and "BIBLIOTHEQUE/" in scene and "SAVOIR/CRAFT" in density)
++
++
++def lcf_20(t: dict[str, str]) -> bool:
++    section = t["C"][t["C"].find("## Cycle de vie des routes"):t["C"].find("## Migration des anciens aliases")]
++    table = {m.group(1) for m in (re.match(r"\| `([A-Z]+)` \|", l) for l in section.splitlines()) if m}
++    listed = [l for l in t["B"].splitlines() if "`PILOT`" in l and "`DEPRECATED`" in l]
++    return bool(table) and len(listed) >= 2 and all(set(STATUS_TOKEN.findall(l)) == table for l in listed)
++
++
++def lcf_21(t: dict[str, str]) -> bool:
++    present = [t[k] for k in ("README", "NOTES", "C") if t[k]]  # RELEASE_NOTES n’existe pas dans la distribution Local
++    return all("NOT-VERIFIED" in text for text in present) and not UNBOUNDED.search(t["D"])
++
++
++def check_facades(errors: list[str]) -> None:
++    t = load_texts()
++    rm33, rm49 = row(t["RM"], "Direction identitaire"), row(t["RM"], "Accessibilité")
++    qs_dir, rd_dir, rd_iter = row(t["Q"], "`DIRECTION`", 1), row(t["README"], "`DIRECTION`", 1), row(t["README"], "`ITER`", 1)
++    index = row(t["D"], "Nouvelle structure d’écran")
++    entry = after(t["D"], "Ce gabarit est une vue d’activation", 600)
++    fast = row(t["D"], "Quel est le risque dominant ?")
++    prio = fenced_after(t["D"], "RUN-PRIORITY")
++    canon = HANDOFF_TOKENS.findall(fenced_after(t["A"], "### ACTION/HANDOFF"))
++    f15, f16, f17 = lcf_15_16_17(t)
++    # (ID, façade, source propriétaire, condition tenue)
++    table = [
++        ("LCF-01", "READING_MAP, ligne « Direction identitaire »", "DIRECTION/START ; ACTION/RUN-DIRECTION [FORCÉ]",
++         bool(rm33) and "ACTION/RUN-DIRECTION" in rm33[1] and "ACTION/RUN-DIRECTION" not in rm33[2]),
++        ("LCF-02", "READING_MAP, ligne « Accessibilité »", "ACTION/GATE-A (contrôles applicables dus)",
++         bool(rm49) and "N/A-JUSTIFIED" not in rm49[-1] and "ACTION/GATE-A" in rm49[-1]),
++        ("LCF-03", "ORCHESTRATION_MAP, noyau UI/UX, preuve, système", "ACTION/GATE-A ; gate du risque ; paquet SYSTÈME (B3)", lcf_03(t)),
++        ("LCF-04", "QUICKSTART et README, ligne DIRECTION", "DIRECTION/START (direction visuelle autonome)",
++         bool(qs_dir) and bool(rd_dir) and all("craft" not in c[0].lower() and "autonome" in c[0] for c in (qs_dir, rd_dir))),
++        ("LCF-05", "README, ligne ITER", "DIRECTION/START (ITER : direction existante et retrouvable)",
++         bool(rd_iter) and re.search(r"(?i)direction[^|]*(retrouvable|existante)", rd_iter[0]) is not None),
++        ("LCF-06", "DIRECTION, index « Nouvelle structure d’écran »", "DIRECTION/START (classification)",
++         bool(index) and "classification `ACTION/RUN-STANDARD`" not in index[1]),
++        ("LCF-07", "DIRECTION 72, RUN-PRIORITY, READING_MAP, ORCHESTRATION_MAP, skill", "DIRECTION 55 (cible avant premier objet)", lcf_07(t)),
++        ("LCF-08", "DIRECTION, gabarit START et FAST-PATH", "ACTION/RUN_CARD (OWNER et SCOPE jamais omis)",
++         re.search(r"`?OWNER`? et `?SCOPE`?[^.]*jamais omis", entry) is not None and bool(fast) and "si nécessaire" not in fast[1]),
++        ("LCF-09", "DIRECTION, RUN-PRIORITY et récapitulatif de protection (point 4)", "BIBLIOTHEQUE/SELECT, SCENE",
++         bool(re.search(r"FIRST-OBJECT —[\s\S]*?sauf si", prio))),
++        ("LCF-10", "QUICKSTART et README, tables de mode", "D-FAC-1 (classement : voir DIRECTION/START)",
++         all(re.search(r"(?i)classement\s*:\s*voir `DIRECTION/START`", text) for text in (t["Q"], t["README"]))),
++        ("LCF-C1", "READING_MAP et skill, copies du handoff", "ACTION/HANDOFF",
++         bool(canon) and HANDOFF_TOKENS.findall(fenced_after(t["RM"], "## Handoff minimal commun")) == canon
++         and all(token in HANDOFF_TOKENS.findall(after(t["SK"], "## Carte de lecture et sortie", 2500)) for token in canon)),
++        ("LCF-C2", "QUICKSTART et skill, réponse visible", "ACTION/HANDOFF",
++         all(VISIBLE in text for text in (after(t["A"], "### ACTION/HANDOFF", 3000), t["Q"], t["SK"]))),
++        ("LCF-11", "exemples de la skill et GLOSSAIRE, DECISION-CHANGE", "ACTION/STATUS (triade) ; INV-C1-1", lcf_11(t)),
++        ("LCF-12", "exemples et GLOSSAIRE, ACCEPTED-WITH-RESERVATION", "INV-B2-9 ; ACTION (réserve complète)", lcf_12(t)),
++        ("LCF-13", "exemples de la skill, NOT-OBSERVED et VERDICT", "triade C1 ; INV-C1-4", lcf_13(t)),
++        ("LCF-14", "exemples de la skill, EVIDENCE fondées sur des captures", "ACTION (claims et protocole)", lcf_14(t)),
++        ("LCF-15", "QUICKSTART §6", "DIRECTION/FIRST-OBJECT (dimensions)", f15),
++        ("LCF-16", "DIRECTION, contrat du premier objet, colonne CFT-00", "SAVOIR/CRAFT/CFT-00", f16),
++        ("LCF-17", "DIRECTION, déclencheurs critiques", "SAVOIR/CRAFT ; BIBLIOTHEQUE ; ACTION/ANTI-SLOP", f17),
++        ("LCF-20", "BIBLIOTHEQUE, listes des statuts de route", "CHANGELOG, cycle de vie", lcf_20(t)),
++        ("LCF-21", "DIRECTION, README, RELEASE_NOTES, CHANGELOG", "CHANGELOG (efficacité NOT-VERIFIED)", lcf_21(t)),
++    ]
++    for lcf_id, facade, source, held in table:
++        if not held:
++            errors.append(f"{lcf_id} : condition de façade non tenue — {facade} (propriétaire : {source})")
+ 
+ 
+ def main() -> int:
+@@ -86,20 +301,24 @@ def main() -> int:
+             fail(f"fichier propriétaire absent : {owner}")
+     for target in re.findall(r"\]\(([^)]+)\)", text):
+         target = target.split("#", 1)[0]
+-        if target.startswith(("http://", "https://", "mailto:")):
+-            continue
+-        if not target:
++        if not target or target.startswith(("http://", "https://", "mailto:")):
+             continue
+         if not (MAP.parent / target).exists():
+             fail(f"lien relatif non résolu : {target}")
+-    check_locator_destinations(text)
+     # The map must remain derived and cannot introduce a competing classifier.
+     if "source" not in text or "normative" not in text or "ne reclassifie pas" not in text:
+         fail("frontière de non-autorité ou de non-reclassification absente")
+-    print("READING MAP VALIDATION PASSED — carte dérivée, propriétaires, handoff et liens contrôlés")
++    errors: list[str] = []
++    check_map(text, errors)
++    check_facades(errors)
++    if errors:
++        print("READING MAP VALIDATION FAILED")
++        for error in errors:
++            print(f"- {error}")
++        return 1
++    print("READING MAP VALIDATION PASSED — carte dérivée, propriétaires, locators, liens et conditions de façade contrôlés")
+     return 0
+ 
+ 
+ if __name__ == "__main__":
+     raise SystemExit(main())
+-

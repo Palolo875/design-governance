@@ -1,0 +1,150 @@
+FICHE,GRAPPE,SÉVÉRITÉ,COUVERTURE DU DÉFAUT,"CAS NÉGATIFS ET GARDES (B03 vert, B01 rouge)",CAS POSITIFS,VÉRIFICATION 13.01,COUCHES,ÉTAT B03 V1.1.0
+F-ACT-001,C4,Significatif,cas négatif ou garde,C4:R-02; C4:G-01; C4:G-02; C4:G-03,,,texte,vert
+F-ACT-002,C2,Significatif,cas négatif ou garde,C2:G-01; C2:G-04,C2:C2-P3,,"machine, texte",vert
+F-ACT-003,E1,Mineur,cas négatif ou garde,E1:E1-01,,,texte,vert
+F-ACT-004,E1,Mineur,cas négatif ou garde,E1:E1-02,,,texte,vert
+F-ACT-005,C2,Significatif,cas négatif ou garde,C2:K-03; C2:K-04; C2:G-12,,,"contrats, texte",vert
+F-ACT-006,C2,Significatif,cas négatif ou garde,C2:K-05,C2:K-P2; C2:K-P3,,contrats,vert
+F-ACT-007,C2,Significatif,cas négatif ou garde,C2:K-01; C2:K-02; C2:G-12,C2:K-P5,,"contrats, texte",vert
+F-ACT-008,C9,Significatif,cas négatif ou garde,C9:L-01; C9:L-02; C9:L-03,,,contrats,vert
+F-ACT-009,C1,Significatif,cas négatif ou garde,C1:C1-05; C1:C1-06,C1:C1-P2,,machine,vert
+F-ACT-010,B2,Majeur,cas négatif ou garde,B2:B2-01; B2:B2-02; B2:B2-03; B2:B2-04,,,machine,vert
+F-ACT-011,C1,Significatif,cas négatif ou garde,C1:C1-07; C1:C1-08,,,machine,vert
+F-ACT-012,B2,Majeur,cas négatif ou garde,B2:B2-06; B2:B2-07; B2:B2-08; B2:B2-09,,,machine,vert
+F-ACT-013,C1,Significatif,cas négatif ou garde,C1:C1-01; C1:C1-04,,,machine,vert
+F-ACT-014,C1,Significatif,cas négatif ou garde,C1:C1-01; C1:C1-02; C1:G-01,,,"machine, texte",vert
+F-ACT-015,B3,Majeur,cas négatif ou garde,B3:B3-01; B3:B3-02; B3:B3-03,B3:B3-P1,,machine,vert
+F-ACT-016,E1,Mineur,cas négatif ou garde,E1:E1-03,,,texte,vert
+F-ACT-017,B1,Majeur,cas négatif ou garde,B1:B1-03; B1:B1-04; B1:B1-05; B1:B1-06; C2:C2-01; C2:C2-02; C2:C2-03,B1:B1-P2,,machine,vert
+F-ACT-018,B2,Majeur,cas négatif ou garde,B2:B2-10; B2:B2-11,,,machine,vert
+F-ACT-019,B2,Significatif,vérification 13.01,,,V-1,texte,vert
+F-ACT-020,C4,Significatif,cas négatif ou garde,C4:C4-01; C4:C4-02; C4:G-07,C4:C4-P1; C4:C4-P2; C4:C4-P3; C4:C4-P4,,"machine, texte",vert
+F-ACT-021,B3,Majeur,vérification 13.01 (+ positif de proportion B3-P4),,B3:B3-P4,V-6,"machine, texte",vert
+F-ACT-022,B2,Majeur,cas négatif ou garde,B2:B2-12; B2:B2-13,,,machine,vert
+F-ACT-023,B2,Majeur,cas négatif ou garde,B2:B2-09; B2:B2-14; B2:B2-15,,,machine,vert
+F-ACT-024,B2,Majeur,cas négatif ou garde,B2:B2-16; B2:B2-17,,,machine,vert
+F-ACT-025,C1,Significatif,cas négatif ou garde,C1:G-10,C1:C1-P3,,"machine, texte",vert
+F-ACT-026,D3,Significatif,cas négatif ou garde,D3:G-01; D3:G-02,,,texte,vert
+F-ACT-027,C1,Significatif,cas négatif ou garde,C1:G-08,,,texte,vert
+F-ACT-028,C2,Significatif,vérification 13.01,,,V-2,texte,vert
+F-ACT-029,C2,Significatif,cas négatif ou garde,C2:G-10,,,texte,vert
+F-ACT-030,C2,Significatif,cas négatif ou garde,C2:G-11,C2:K-P4,,"contrats, texte",vert
+F-ACT-031,B3,Significatif,cas négatif ou garde,B3:B3-04,B3:B3-P1,,machine,vert
+F-ACT-032,E1,Mineur,cas négatif ou garde,E1:E1-04,,,texte,vert
+F-ACT-033,D3,Significatif,cas négatif ou garde,D3:G-03,,,texte,vert
+F-ACT-034,E1,Mineur,cas négatif ou garde,E1:E1-05,,,texte,vert
+F-ACT-036,B3,Significatif,cas négatif ou garde,B3:B3-05; B3:B3-06; B3:B3-07,B3:B3-P2,,machine,vert
+F-ACT-037,D3,Significatif,cas négatif ou garde,D3:G-04; D3:G-05,,,texte,vert
+F-ACT-038,B1,Majeur,cas négatif ou garde,B1:B1-06; B1:B1-07; B1:B1-08,B1:B1-P3,,machine,vert
+F-ACT-039,B1,Significatif,cas négatif ou garde,B1:B1-09,B1:B1-P3,,machine,vert
+F-ALL-001,A2,Significatif,cas négatif ou garde,A2:A2-04; A2X:Y-7,,,"machine, non-régression",vert
+F-ALL-002,E2,Mineur,cas négatif ou garde,E2:E2-01,,,distributions,vert
+F-BIB-001,B3,Significatif,cas négatif ou garde,B3:B3-07; B3:B3-08,,,machine,vert
+F-BIB-002,C3,Significatif,cas négatif ou garde,C3:G-01; C3:G-02; C3:G-03,,,texte,vert
+F-BIB-003,E1,Mineur,cas négatif ou garde,E1:E1-06,,,texte,vert
+F-BIB-004,B5,Significatif,cas négatif ou garde,B5:B5-01; B5:B5-02; B5:B5-03,,,texte,vert
+F-BIB-005,C7,Significatif,cas négatif ou garde,C7:G-01,,,texte,vert
+F-BLD-001,C8,Significatif,cas négatif ou garde,C8:R-1,,,distributions,vert
+F-BLD-002,E2,Mineur,cas négatif ou garde,E2:E2-02,,,distributions,vert
+F-BLD-003,E2,Mineur,cas négatif ou garde,E2:E2-03,,,distributions,vert
+F-BLD-004,C8,Significatif,cas négatif ou garde,C8:R-2,,,distributions,vert
+F-CHG-001,D4,Significatif,cas négatif ou garde,D4:M-13; D4:G-01; D4:G-02; D4:G-03; D4:G-04; D4:G-06; D4:LCF-20,,,texte,vert
+F-DF-001,C9,Significatif,cas négatif ou garde,C9:D-01; C9:D-02,C9:D-P1; C9:D-P2,,contrats,vert
+F-DF-002,E2,Mineur,cas négatif ou garde,E2:E2-04; E2:E2-05,,,contrats,vert
+F-DIR-001,C5,Significatif,cas négatif ou garde,C5:LCF-07,,,texte,vert
+F-DIR-002,D4,Significatif,cas négatif ou garde,D4:M-14; D4:LCF-21,,,texte,vert
+F-DIR-003,D2,Significatif,cas négatif ou garde,D2:D2-01; D2:D2-02; D2:G-02; D2:G-03,D2:D2-P1,,"machine, texte",vert
+F-DIR-005,E1,Mineur,cas négatif ou garde,E1:E1-07,,,texte,vert
+F-DIR-006,C2,Significatif,cas négatif ou garde,C2:G-02,,,texte,vert
+F-DIR-007,B1,Majeur,cas négatif ou garde,B1:B1-01; B1:B1-02,B1:B1-P1,,machine,vert
+F-DIR-008,C5,Significatif,cas négatif ou garde,C5:LCF-08,,,texte,vert
+F-DIR-009,D2,Significatif,cas négatif ou garde,D2:G-01,,,texte,vert
+F-DIR-010,C2,Significatif,cas négatif ou garde,C2:G-05,,,texte,vert
+F-DIR-011,C1,Significatif,cas négatif ou garde,C1:C1-03; C1:G-02,,,"machine, texte",vert
+F-DIR-012,E1,Mineur,cas négatif ou garde,E1:E1-08,,,texte,vert
+F-DIR-013,C2,Significatif,cas négatif ou garde,C2:G-06,,,texte,vert
+F-DIR-014,E1,Mineur,cas négatif ou garde,E1:E1-09,,,texte,vert
+F-DIR-015,E1,Mineur,cas négatif ou garde,E1:E1-10,,,texte,vert
+F-DIR-016,B1,Significatif,vérification 13.01,,,V-3,texte,vert
+F-DIR-018,C5,Significatif,cas négatif ou garde,C5:LCF-09; E1:E1-17,,,texte,vert
+F-DIR-019,C1,Significatif,cas négatif ou garde,C1:G-02,,,texte,vert
+F-DIR-020,D1,Significatif,cas négatif ou garde,D1:M-11; D1:LCF-15,,,texte,vert
+F-DIR-021,C1,Significatif,cas négatif ou garde,C1:G-04,,,texte,vert
+F-DIR-023,C2,Significatif,cas négatif ou garde,C2:G-08; C2:G-09,,,texte,vert
+F-DIR-024,C1,Significatif,cas négatif ou garde,C1:G-05,,,texte,vert
+F-DIR-025,E1,Mineur,cas négatif ou garde,E1:E1-11,,,texte,vert
+F-DIR-026,E1,Mineur,cas négatif ou garde,E1:E1-12,,,texte,vert
+F-DIR-027,B4,Majeur,cas négatif ou garde,B4:B4-01; B4:B4-03; B4:B4-05; B4:B4-06; B4:B4-07; B4:B4-08,B4:B4-P1; B4:B4-P2; B4:B4-P3,,machine,vert
+F-DIR-028,C4,Significatif,cas négatif ou garde,C4:R-01; C4:G-06,,,texte,vert
+F-DIR-029,C1,Significatif,cas négatif ou garde,C1:G-03,,,texte,vert
+F-DIR-030,D1,Significatif,cas négatif ou garde,D1:LCF-16; D1:G-01; D1:G-02; D1:G-03; D1:G-04,,,texte,vert
+F-DIR-031,E1,Mineur,cas négatif ou garde,E1:E1-13,,,texte,vert
+F-DIR-032,C1,Significatif,cas négatif ou garde,C1:G-06,,,texte,vert
+F-DIR-033,C1,Mineur,cas négatif ou garde,C1:G-07,,,texte,vert
+F-DIR-034,C2,Significatif,cas négatif ou garde,C2:G-07,,,texte,vert
+F-DIR-035,C2,Significatif,cas négatif ou garde,C2:G-07,,,texte,vert
+F-DIR-036,D2,Significatif,cas négatif ou garde,D2:D2-03; D2:G-04,D2:D2-P2,,"machine, texte",vert
+F-DIR-037,E1,Mineur,cas négatif ou garde,E1:E1-14,,,texte,vert
+F-DIR-039,C2,Significatif,cas négatif ou garde,C2:G-03,,,texte,vert
+F-DIR-040,E1,Mineur,cas négatif ou garde,E1:E1-15,,,texte,vert
+F-DIR-041,C5,Significatif,cas négatif ou garde,C5:LCF-06,,,texte,vert
+F-DIR-042,D1,Significatif,cas négatif ou garde,D1:M-12; D1:LCF-17,,,texte,vert
+F-DIR-043,E1,Mineur,cas négatif ou garde,E1:E1-16,,,texte,vert
+F-DIR-045,E1,Mineur,cas négatif ou garde,E1:E1-18,,,texte,vert
+F-DIR-046,D4,Significatif,cas négatif ou garde,D4:G-05,,,texte,vert
+F-EX-001,C6,Significatif,cas négatif ou garde,C6:M-7; C6:LCF-11,,,texte,vert
+F-EX-002,C6,Significatif,cas négatif ou garde,C6:M-10; C6:LCF-14,,,texte,vert
+F-EX-003,E1,Mineur,cas négatif ou garde,E1:E1-19,,,texte,vert
+F-FIX-001,A2,Mineur,cas négatif ou garde,A2:A2-02; A2:A2-03; A2X:Y-5,,,"machine, non-régression",vert
+F-FIX-002,A2,Significatif,cas négatif ou garde,A2:A2-05; A2X:Y-1; A2X:Y-2; A2X:Y-3; A2X:Y-6,,,"machine, non-régression",vert
+F-FIX-003,A2,Significatif,cas négatif ou garde,A2:A2-01; A2X:Y-4,,,"machine, non-régression",vert
+F-FLOW-001,E1,Mineur,cas négatif ou garde,E1:E1-20,,,texte,vert
+F-GLO-001,E1,Mineur,cas négatif ou garde,E1:E1-21,,,texte,vert
+F-GLO-002,C6,Significatif,cas négatif ou garde,C6:M-8; C6:LCF-12; C6:G-01,,,texte,vert
+F-MAN-001,E2,Mineur,cas négatif ou garde,E2:E2-09,,,distributions,vert
+F-MAN-002,E2,Mineur,cas négatif ou garde,E2:E2-10; E2:E2-11,,,distributions,vert
+F-MP-001,E1,Mineur,cas négatif ou garde,E1:E1-22,,,texte,vert
+F-OM-001,C5,Significatif,cas négatif ou garde,C5:M-3; C5:LCF-03,,,texte,vert
+F-PC-001,C3,Significatif,cas négatif ou garde,C3:C3-01; C3:C3-02; C3:C3-03,C3:C3-P1; C3:C3-P2,,contrats,vert
+F-PC-002,C9,Significatif,cas négatif ou garde,C9:P-01; C9:P-02,C9:P-P1,,machine,vert
+F-QS-001,E1,Mineur,cas négatif ou garde,E1:E1-23,,,texte,vert
+F-QS-002,C5,Significatif,cas négatif ou garde,C5:M-4; C5:LCF-04,,,texte,vert
+F-QS-003,B1,Significatif,vérification 13.01,,,V-4,texte,vert
+F-QS-004,E1,Mineur,cas négatif ou garde,E1:E1-24,,,texte,vert
+F-RB-001,C9,Significatif,cas négatif ou garde,C9:R-01; C9:R-02; C9:R-03,C9:R-P1,,machine,vert
+F-RB-002,E2,Mineur,cas négatif ou garde,E2:E2-06; E2:E2-07; E2:E2-08,,,contrats,vert
+F-RC-001,B2,Significatif,positif discriminant (sur-rejet corrigé),,B2:B2-P3,,machine,vert
+F-RDR-001,C5,Significatif,cas négatif ou garde,C5:M-5; C5:LCF-05,,,texte,vert
+F-RM-001,C5,Significatif,cas négatif ou garde,C5:M-1; C5:LCF-01,,,texte,vert
+F-RM-002,C5,Significatif,cas négatif ou garde,C5:M-2; C5:LCF-02,,,texte,vert
+F-RM-003,C4,Significatif,cas négatif ou garde,C4:R-03; C4:R-04; C4:R-05; C4:R-06; C4:G-04; C4:G-05,,,texte,vert
+F-RRT-001,E2,Mineur,cas négatif ou garde,E2:E2-12,,,texte,vert
+F-SAV-001,E1,Mineur,cas négatif ou garde,E1:E1-25,,,texte,vert
+F-SAV-002,C7,Significatif,cas négatif ou garde,C7:G-03; C7:G-04; C7:G-05,,,texte,vert
+F-SAV-003,B4,Significatif,cas négatif ou garde,B4:B4-02; B4:B4-04,,,machine,vert
+F-SAV-004,E1,Mineur,cas négatif ou garde,E1:E1-26,,,texte,vert
+F-SAV-005,C1,Significatif,cas négatif ou garde,C1:C1-09; C1:G-09,,,"machine, texte",vert
+F-SAV-006,C7,Significatif,cas négatif ou garde,C7:G-02,,,texte,vert
+F-SAV-007,B5,Significatif,cas négatif ou garde,B5:B5-04; B5:B5-05,,,texte,vert
+F-SAV-009,D3,Significatif,cas négatif ou garde,D3:G-06; D3:G-07,,,texte,vert
+F-SAV-010,E1,Mineur,cas négatif ou garde,E1:E1-27,,,texte,vert
+F-SK-001,C3,Significatif,cas négatif ou garde,C3:G-04; C3:G-05; C3:G-06; C3:G-07; C3:G-08; C5:M-6; C5:LCF-C1; C5:LCF-C2,,,texte,vert
+F-SK-002,E1,Mineur,cas négatif ou garde,E1:E1-28,,,distributions,vert
+F-VCT-001,A1,Majeur,cas négatif ou garde,A1:A1-07; A1:A1-08; A1:A1-09; A1:A1-10; A1X:X-5; A1X:X-6; A1X:X-7,,,machine,vert
+F-VCT-002,E2,Mineur,cas négatif ou garde,E2:E2-14,,,contrats,vert
+F-VCT-003,A1,Mineur,cas négatif ou garde,A1:A1-11; A1X:X-4,,,machine,vert
+F-VDG-001,C8,Significatif,cas négatif ou garde,C8:R-3,,,distributions,vert
+F-VDG-002,E2,Mineur,cas négatif ou garde,E2:E2-15,,,distributions,vert
+F-VDG-004,E2,Mineur,cas négatif ou garde,E2:E2-16,,,distributions,vert
+F-VRC-001,E2,Mineur,cas négatif ou garde,E2:E2-17,,,machine,vert
+F-VRC-002,E2,Mineur,cas négatif ou garde,E2:E2-18,,,machine,vert
+F-VRC-003,E2,Mineur,cas négatif ou garde,E2:E2-19; E2:E2-20,,,machine,vert
+F-VRC-004,E2,Mineur,cas négatif ou garde,E2:E2-21,,,machine,vert
+F-VRC-005,E2,Mineur,cas C4-P3 + vérification 13.01,,,"V-5 ; C4:C4-P3 (épreuve machine, rattachement E2 §4.2)",machine,vert
+F-VRC-006,A1,Significatif,cas négatif ou garde,A1:A1-05; A1:A1-06; A1X:X-1; A1X:X-2; A1X:X-3,,,machine,vert
+F-VRC-007,A1,Majeur,cas négatif ou garde,A1:A1-01; A1:A1-02,,,machine,vert
+F-VRC-008,A1,Significatif,cas négatif ou garde,A1:A1-03; A1:A1-04,,,machine,vert
+F-VRM-001,C4,Significatif,cas négatif ou garde,C4:V-01; C4:V-02; C4:V-03; C4:V-04; C4:R-07,,,texte,vert
+F-VRM-002,E2,Mineur,cas négatif ou garde,E2:E2-22,,,texte,vert
+F-VRM-003,C5,Significatif,cas négatif ou garde,C5:M-1,,,texte,vert
+F-WF-001,E2,Mineur,cas négatif ou garde,E2:E2-23,,,distributions,vert

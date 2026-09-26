@@ -1,0 +1,398 @@
+{
+ "A1": {
+  "temoins": [
+   4,
+   4
+  ],
+  "cas": [
+   11,
+   11
+  ],
+  "sha256": "84e1f02973b4d81010bdbb595a02e54f7afaa1c392586a909a9b8cec5c12d063",
+  "contre_epreuve": [
+   4,
+   4,
+   11,
+   11
+  ],
+  "cas_significatifs": 11
+ },
+ "A2": {
+  "temoins": [
+   1,
+   2
+  ],
+  "cas": [
+   5,
+   5
+  ],
+  "sha256": "b8a2178ff5bfb14063491f4468134c67f9ccfa798f32ecd261183c6684ab9080",
+  "contre_epreuve": [
+   2,
+   2,
+   5,
+   5
+  ],
+  "cas_significatifs": 5
+ },
+ "B1": {
+  "temoins": [
+   1,
+   1
+  ],
+  "cas": [
+   12,
+   12
+  ],
+  "sha256": "8f7e66870c22c845e4d0950069ff79c788cf141c2159842075efe1085887c989",
+  "contre_epreuve": [
+   1,
+   1,
+   12,
+   12
+  ],
+  "cas_significatifs": 12
+ },
+ "B2": {
+  "temoins": [
+   1,
+   1
+  ],
+  "cas": [
+   19,
+   19
+  ],
+  "sha256": "265bd8af8d4e69945668cf75dbc914bf866b31686cb7fd3f828e272fcc4073e6",
+  "contre_epreuve": [
+   1,
+   1,
+   19,
+   19
+  ],
+  "cas_significatifs": 19
+ },
+ "B3": {
+  "temoins": [
+   1,
+   1
+  ],
+  "cas": [
+   12,
+   12
+  ],
+  "sha256": "bac696bd2d7febf516ad0e4fa732709732bef4798ed0a38dc5548e637e687763",
+  "contre_epreuve": [
+   1,
+   1,
+   12,
+   12
+  ],
+  "cas_significatifs": 12
+ },
+ "B4": {
+  "temoins": [
+   1,
+   1
+  ],
+  "cas": [
+   12,
+   12
+  ],
+  "sha256": "ec7e7d421ca9e29a55c6e0adb321136a92447b71b83514282baa1252b568b5c9",
+  "contre_epreuve": [
+   1,
+   1,
+   12,
+   12
+  ],
+  "cas_significatifs": 12
+ },
+ "B5": {
+  "temoins": [
+   1,
+   1
+  ],
+  "cas": [
+   3,
+   5
+  ],
+  "sha256": "f68971cebd260fede2e4c3d8002ed4fa9a6bbae238fd202eb0e2ba08793666c3",
+  "contre_epreuve": [
+   1,
+   1,
+   3,
+   5
+  ],
+  "cas_significatifs": 3
+ },
+ "C1": {
+  "temoins": [
+   1,
+   1
+  ],
+  "cas": [
+   16,
+   23
+  ],
+  "sha256": "bc2897827542580bfbdb3e043f99c8ed08d8f8c1f4f495cc5bbaca63f37db434",
+  "contre_epreuve": [
+   1,
+   1,
+   16,
+   23
+  ],
+  "cas_significatifs": 16
+ },
+ "C2": {
+  "temoins": [
+   3,
+   3
+  ],
+  "cas": [
+   23,
+   28
+  ],
+  "sha256": "29df0a402036ee6cc5b0b4abe057a60f8983dd87b467960d501b2aa67b30423f",
+  "contre_epreuve": [
+   3,
+   3,
+   23,
+   28
+  ],
+  "cas_significatifs": 23
+ },
+ "C3": {
+  "temoins": [
+   2,
+   2
+  ],
+  "cas": [
+   10,
+   14
+  ],
+  "sha256": "d3a00b92af63a5c0861384a33b1b22ff9acfbd3e6ade60cdb13c8159ba673633",
+  "contre_epreuve": [
+   2,
+   2,
+   10,
+   14
+  ],
+  "cas_significatifs": 10
+ },
+ "C4": {
+  "temoins": [
+   2,
+   3
+  ],
+  "cas": [
+   17,
+   24
+  ],
+  "sha256": "0346e1306149b5259ad6e06a7eb61f280984301346c9a4bf535dfcb35422c5f3",
+  "contre_epreuve": [
+   3,
+   3,
+   17,
+   24
+  ],
+  "cas_significatifs": 17
+ },
+ "C5": {
+  "temoins": [
+   1,
+   2
+  ],
+  "cas": [
+   6,
+   18
+  ],
+  "sha256": "8aca2e3aedffe12084ba885e9c792a397b3f44c2a6286ccfd00d8c650d0706fb",
+  "contre_epreuve": [
+   2,
+   2,
+   0,
+   18
+  ],
+  "cas_significatifs": 0
+ },
+ "C6": {
+  "temoins": [
+   0,
+   1
+  ],
+  "cas": [
+   4,
+   9
+  ],
+  "sha256": "a1f9f11e806ff70d5f34d501001caa8dd033f772a410a3f1376b1b1e23627a5f",
+  "contre_epreuve": [
+   1,
+   1,
+   0,
+   9
+  ],
+  "cas_significatifs": 0
+ },
+ "C7": {
+  "temoins": [
+   4,
+   4
+  ],
+  "cas": [
+   1,
+   5
+  ],
+  "sha256": "9a4ec26ca50f1efb0c9803fdd48d9b140d0ae87bd7347dbce09425b8e2427d35",
+  "contre_epreuve": [
+   4,
+   4,
+   1,
+   5
+  ],
+  "cas_significatifs": 1
+ },
+ "C8": {
+  "temoins": [
+   0,
+   1
+  ],
+  "cas": [
+   0,
+   3
+  ],
+  "sha256": "f7bea3a28dc0ce0c3b82cac96c516cd4264b2a1a0a453f208d845538d6fd7f6a",
+  "contre_epreuve": [
+   1,
+   1,
+   0,
+   3
+  ],
+  "cas_significatifs": 0
+ },
+ "C9": {
+  "temoins": [
+   2,
+   2
+  ],
+  "cas": [
+   14,
+   14
+  ],
+  "sha256": "407386799dff5cdf4907ec03d31fd491cf803c134a1fd0a4806606203889b501",
+  "contre_epreuve": [
+   2,
+   2,
+   14,
+   14
+  ],
+  "cas_significatifs": 14
+ },
+ "D1": {
+  "temoins": [
+   0,
+   1
+  ],
+  "cas": [
+   4,
+   9
+  ],
+  "sha256": "7e13458ef226eb1212335de0223fa5db87688a693b16991a12ac1853851f6f98",
+  "contre_epreuve": [
+   1,
+   1,
+   2,
+   9
+  ],
+  "cas_significatifs": 2
+ },
+ "D2": {
+  "temoins": [
+   1,
+   1
+  ],
+  "cas": [
+   7,
+   10
+  ],
+  "sha256": "3cd619367f6227ecb45133b61efa7c3c333b1f30f4cdf4247c3a073bf79ceca2",
+  "contre_epreuve": [
+   1,
+   1,
+   7,
+   10
+  ],
+  "cas_significatifs": 7
+ },
+ "D3": {
+  "temoins": [
+   4,
+   4
+  ],
+  "cas": [
+   6,
+   7
+  ],
+  "sha256": "d2b060de636d98878bf6c0c68879a385cdbc74a52ec3e164a20ef779ef9091f2",
+  "contre_epreuve": [
+   4,
+   4,
+   6,
+   7
+  ],
+  "cas_significatifs": 6
+ },
+ "D4": {
+  "temoins": [
+   0,
+   1
+  ],
+  "cas": [
+   8,
+   10
+  ],
+  "sha256": "55648806e4e2ce3ec6562d278a3d89dd0e27daeb573991cf3a6f8b79774e0da6",
+  "contre_epreuve": [
+   1,
+   1,
+   5,
+   10
+  ],
+  "cas_significatifs": 5
+ },
+ "E1": {
+  "temoins": [
+   1,
+   1
+  ],
+  "cas": [
+   7,
+   28
+  ],
+  "sha256": "712bb9ba39fa4f6c92169a3fc106fb6721bf583172b6f2bad696a4be29e4da36",
+  "contre_epreuve": [
+   1,
+   1,
+   7,
+   28
+  ],
+  "cas_significatifs": 7
+ },
+ "E2": {
+  "temoins": [
+   1,
+   2
+  ],
+  "cas": [
+   11,
+   22
+  ],
+  "sha256": "d72b7e1d121f50b5911478aca86b64607b20d37f9725f3616c1a814094202a19",
+  "contre_epreuve": [
+   2,
+   2,
+   8,
+   22
+  ],
+  "cas_significatifs": 8
+ }
+}

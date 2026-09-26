@@ -1,0 +1,24 @@
+{
+  "domain": "outil B2B de pilotage industriel",
+  "audience": "responsables d'exploitation expérimentés, usage desktop puis tablette",
+  "expertise": "élevée sur les opérations, variable sur l'outil",
+  "jtbd": "détecter un écart critique et décider rapidement d'une action",
+  "trust_model": "la confiance vient de la traçabilité, de la stabilité et de la lisibilité des alertes",
+  "critical_actions": ["filtrer une alerte", "inspecter la cause", "assigner une action"],
+  "domain_conventions": ["densité informationnelle", "statuts explicites", "horodatage visible"],
+  "cultural_context": "vocabulaire opérationnel direct, sans métaphore ambiguë",
+  "originality_tolerance": "medium",
+  "proof_requirements": ["inspection experte des alertes", "test de tâche sur incident"],
+  "domain_risks": ["faux sentiment de sécurité", "surcharge en situation urgente", "alerte critique"],
+  "required_research": ["modèles mentaux des opérateurs", "patterns d'alertes industrielles"],
+  "critical_states": ["données en retard", "source indisponible", "incident non assigné"],
+  "design_constraints": ["prioriser les anomalies", "préserver la lisibilité à forte densité"],
+  "evidence_plan": ["comparaison desktop/tablette", "observation d'une tâche d'alerte", "inspection clavier et contraste"],
+  "policy_profile": {
+    "risk_triggers": ["alerte critique", "donnée retardée", "action irréversible"],
+    "required_controls": ["inspection experte des alertes", "statut explicite", "horodatage", "focus clavier", "récupération après erreur"],
+    "depth_rules": ["activer la recherche si le modèle mental est incertain", "inspecter desktop et tablette si la densité change"],
+    "contraindications": ["ne pas porter la gravité par la couleur seule", "ne pas utiliser une animation permanente pour signaler l'urgence"]
+  }
+}
+

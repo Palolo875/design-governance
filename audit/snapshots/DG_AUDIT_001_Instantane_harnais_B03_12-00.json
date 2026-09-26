@@ -1,0 +1,244 @@
+{
+ "A1": {
+  "temoins": [
+   4,
+   4
+  ],
+  "cas": [
+   0,
+   11
+  ],
+  "sha256": "84e1f02973b4d81010bdbb595a02e54f7afaa1c392586a909a9b8cec5c12d063"
+ },
+ "A2": {
+  "temoins": [
+   2,
+   2
+  ],
+  "cas": [
+   0,
+   5
+  ],
+  "sha256": "b8a2178ff5bfb14063491f4468134c67f9ccfa798f32ecd261183c6684ab9080"
+ },
+ "B1": {
+  "temoins": [
+   1,
+   1
+  ],
+  "cas": [
+   0,
+   12
+  ],
+  "sha256": "8f7e66870c22c845e4d0950069ff79c788cf141c2159842075efe1085887c989"
+ },
+ "B2": {
+  "temoins": [
+   1,
+   1
+  ],
+  "cas": [
+   1,
+   19
+  ],
+  "sha256": "265bd8af8d4e69945668cf75dbc914bf866b31686cb7fd3f828e272fcc4073e6"
+ },
+ "B3": {
+  "temoins": [
+   1,
+   1
+  ],
+  "cas": [
+   1,
+   12
+  ],
+  "sha256": "bac696bd2d7febf516ad0e4fa732709732bef4798ed0a38dc5548e637e687763"
+ },
+ "B4": {
+  "temoins": [
+   1,
+   1
+  ],
+  "cas": [
+   0,
+   12
+  ],
+  "sha256": "ec7e7d421ca9e29a55c6e0adb321136a92447b71b83514282baa1252b568b5c9"
+ },
+ "B5": {
+  "temoins": [
+   1,
+   1
+  ],
+  "cas": [
+   0,
+   5
+  ],
+  "sha256": "f68971cebd260fede2e4c3d8002ed4fa9a6bbae238fd202eb0e2ba08793666c3"
+ },
+ "C1": {
+  "temoins": [
+   1,
+   1
+  ],
+  "cas": [
+   0,
+   23
+  ],
+  "sha256": "5446ef0936f15095fab8492fbce6debd9f6fc475c90c40b0e129f391b3450e6d"
+ },
+ "C2": {
+  "temoins": [
+   3,
+   3
+  ],
+  "cas": [
+   0,
+   28
+  ],
+  "sha256": "dadee65a14ea10045ceeb50e16b3e88aa434ff84a31eb0c0d8e12b266b3c0cab"
+ },
+ "C3": {
+  "temoins": [
+   2,
+   2
+  ],
+  "cas": [
+   0,
+   14
+  ],
+  "sha256": "d1ed804162e172fe1dd2d2c07f20f78293e3297fdbd72537147bdb9aa6cc604c"
+ },
+ "C4": {
+  "temoins": [
+   3,
+   3
+  ],
+  "cas": [
+   0,
+   24
+  ],
+  "sha256": "0c8d45a3bfe45aed8cc2c850b8e8c2b5fb3a2ae013b4f6e90b67e3bcf943d88f"
+ },
+ "C5": {
+  "temoins": [
+   2,
+   2
+  ],
+  "cas": [
+   0,
+   18
+  ],
+  "sha256": "8aca2e3aedffe12084ba885e9c792a397b3f44c2a6286ccfd00d8c650d0706fb"
+ },
+ "C6": {
+  "temoins": [
+   1,
+   1
+  ],
+  "cas": [
+   0,
+   9
+  ],
+  "sha256": "a1f9f11e806ff70d5f34d501001caa8dd033f772a410a3f1376b1b1e23627a5f"
+ },
+ "C7": {
+  "temoins": [
+   4,
+   4
+  ],
+  "cas": [
+   0,
+   5
+  ],
+  "sha256": "9a4ec26ca50f1efb0c9803fdd48d9b140d0ae87bd7347dbce09425b8e2427d35"
+ },
+ "C8": {
+  "temoins": [
+   1,
+   1
+  ],
+  "cas": [
+   0,
+   3
+  ],
+  "sha256": "f7bea3a28dc0ce0c3b82cac96c516cd4264b2a1a0a453f208d845538d6fd7f6a"
+ },
+ "C9": {
+  "temoins": [
+   2,
+   2
+  ],
+  "cas": [
+   0,
+   14
+  ],
+  "sha256": "a7856f11989e86f3c82ce93f92cf5b5292e1541dc80584785ba5445f641c41b9"
+ },
+ "D1": {
+  "temoins": [
+   1,
+   1
+  ],
+  "cas": [
+   0,
+   9
+  ],
+  "sha256": "7e13458ef226eb1212335de0223fa5db87688a693b16991a12ac1853851f6f98"
+ },
+ "D2": {
+  "temoins": [
+   1,
+   1
+  ],
+  "cas": [
+   0,
+   10
+  ],
+  "sha256": "3cd619367f6227ecb45133b61efa7c3c333b1f30f4cdf4247c3a073bf79ceca2"
+ },
+ "D3": {
+  "temoins": [
+   4,
+   4
+  ],
+  "cas": [
+   0,
+   7
+  ],
+  "sha256": "d2b060de636d98878bf6c0c68879a385cdbc74a52ec3e164a20ef779ef9091f2"
+ },
+ "D4": {
+  "temoins": [
+   1,
+   1
+  ],
+  "cas": [
+   1,
+   10
+  ],
+  "sha256": "55648806e4e2ce3ec6562d278a3d89dd0e27daeb573991cf3a6f8b79774e0da6"
+ },
+ "E1": {
+  "temoins": [
+   1,
+   1
+  ],
+  "cas": [
+   0,
+   28
+  ],
+  "sha256": "712bb9ba39fa4f6c92169a3fc106fb6721bf583172b6f2bad696a4be29e4da36"
+ },
+ "E2": {
+  "temoins": [
+   2,
+   2
+  ],
+  "cas": [
+   0,
+   22
+  ],
+  "sha256": "bda1f8d6b30f3cbd881974a969b5d7426ad4da83a9644fe3c4985609b22d0f85"
+ }
+}

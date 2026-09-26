@@ -1,0 +1,168 @@
+diff --git a/V1/official/BIBLIOTHEQUE.md b/V1/official/BIBLIOTHEQUE.md
+index d7d2380..8a855c0 100644
+--- a/V1/official/BIBLIOTHEQUE.md
++++ b/V1/official/BIBLIOTHEQUE.md
+@@ -55,12 +55,12 @@ Le chemin minimal décrit une hypothèse de proportion. Il ne prouve ni réducti
+ 
+ | Niveau | Minimum attendu | Ne pas exiger par défaut |
+ |---|---|---|
+-| Local | Décision touchée, responsabilité, preuve attendue, limite ; `N/A-JUSTIFIED` si aucune route ne change. | Contrat complet de promotion. |
++| Local | Contrat réduit (`BIBLIOTHEQUE/CONTRACTS`) ; `N/A-JUSTIFIED` si aucune route ne change. | Contrat complet de promotion. |
+ | Route au statut `PILOT` | Contrat réduit, contre-indication, preuve, `DECISION-CHANGE` et périmètre déclaré. | Adoption ou compatibilité générale. |
+ | Partagé | Contrat complet, consumers, owner, compatibilité, états, mobile, accessibilité, migration et rollback selon le risque. | Promotion silencieuse. |
+ | Durable | Usages contrastés, baseline, observation ou mesure de gain, maintenance, owner et prochaine revue. | Validation par beauté, fréquence ou screenshot unique. |
+ 
+-`PILOT`, `ADOPTED`, `DEPRECATED` et `ABANDONED` sont des statuts de cycle de vie `CHANGELOG`, jamais des modes, niveaux de structure, états, issues ou verdicts `ACTION`. `OWNER` désigne le responsable de la décision et de sa prochaine preuve ; `NEXT-OWNER` désigne le destinataire de l’action suivante ; l’owner de maintenance d’une route partagée reste distinct et se conserve dans le contrat d’évolution.
++`SEED`, `PILOT`, `ADOPTED`, `DEPRECATED` et `ABANDONED` sont des statuts de cycle de vie `CHANGELOG`, jamais des modes, niveaux de structure, états, issues ou verdicts `ACTION`. `OWNER` désigne le responsable de la décision et de sa prochaine preuve ; `NEXT-OWNER` désigne le destinataire de l’action suivante ; l’owner de maintenance d’une route partagée reste distinct et se conserve dans le contrat d’évolution.
+ 
+ 
+ > L’interface ne commence ni avec une « landing premium », ni avec une grille de cartes, ni avec une image inspirante. Elle déclare d’abord **où elle vit**, **comment le regard circule**, **quelle preuve devient tangible** et **comment la personne agit**.
+@@ -170,7 +170,7 @@ Une route est refusée lorsqu’elle ne change aucune décision d’espace, de h
+ 
+ Pour un delta local, réponds avant toute sélection : quelle relation change, quel risque domine, quelle est la preuve la moins coûteuse et quelle décision sera différente si la preuve est positive ou négative ? Si aucune décision ne change, conserve la structure existante et inscris l’héritage ou le cas documentaire ; utilise `N/A-JUSTIFIED` seulement si le contrôle ou la décision est réellement non applicable dans le scope déclaré, avec justification ACTION, owner et prochaine preuve.
+ 
+-`N/A-JUSTIFIED` n’est pas une sortie de confort. Elle n’est valable que lorsque le contrôle ou la décision principale est réellement non applicable dans le scope déclaré, ou lorsqu’une paire équivalente reste valide après le dernier changement substantiel, avec artefact, owner et `NEXT-PROOF` selon ACTION. Un héritage documentaire sans contrôle applicable doit être marqué comme tel dans la trace, sans transformer l’absence de changement en verdict.
++`N/A-JUSTIFIED` n’est pas une sortie de confort. Elle n’est valable que lorsque le contrôle ou la décision principale est réellement non applicable dans le scope déclaré, ou lorsqu’une paire équivalente reste valide après le dernier changement substantiel, avec artefact, owner et `NEXT-PROOF` selon ACTION. Paire équivalente : seulement lorsque B1b est déclenché et que la paire couvre exactement la même décision — voir `ACTION/GATE-B/B1b`. Un héritage documentaire sans contrôle applicable doit être marqué comme tel dans la trace, sans transformer l’absence de changement en verdict.
+ 
+ ### Question de sélection
+ 
+@@ -214,26 +214,32 @@ Une matière, une métaphore ou un phénomène n’est retenu que s’il modifie
+ 
+ ### BIBLIOTHEQUE/DERIVE — inventer sans fabriquer un menu
+ 
+-Lorsqu’aucune route existante ne rend suffisamment bien la décision, dérive une forme locale à partir d’une responsabilité existante avant d’envisager toute promotion. La dérivation déclare :
++Lorsqu’aucune route existante ne rend suffisamment bien la décision, dérive une forme locale à partir d’une responsabilité existante avant d’envisager toute promotion. La dérivation déclare ses lignes par phase ; les huit premières forment le contrat réduit de `BIBLIOTHEQUE/CONTRACTS` :
+ 
+ ```text
+-BASE-ROUTE: route ou héritage de départ
+-PRODUCT-CONSTRAINT: contrainte réelle qui rend l’héritage insuffisant
+-CHANGED-LEVER: foyer, rythme, preuve, voisinage, temporalité, responsive ou action
++[Avant build — contrat réduit]
++BASE-ROUTE: route ou héritage de départ (décision initiale)
++PRODUCT-CONSTRAINT: contrainte réelle qui rend l’héritage insuffisant (décision initiale)
++CHANGED-LEVER: foyer, rythme, preuve, voisinage, temporalité, responsive ou action (décision initiale)
+ PRESERVED-RESPONSIBILITY: responsabilité conservée
+ NEW-COUNTERINDICATION: situation où la dérivation devient nuisible
+-FIRST-OBJECT: objet réel dans lequel la dérivation sera observée
+-STRUCTURAL-SIGNATURE: écart et limite antérieure
++FIRST-OBJECT: objet réel dans lequel la dérivation sera observée (preuve attendue)
++OBSERVABLE-CONSEQUENCE: conséquence testable (preuve attendue)
+ PREVIOUS-LIMIT: limite de l’héritage
+-OBSERVABLE-CONSEQUENCE: conséquence testable
+-EXIT-CONDITION: résultat qui maintient, modifie ou abandonne
++[Si le risque l’active]
++STRUCTURAL-SIGNATURE: écart ouvert et limite antérieure
++A11Y / PERFORMANCE: bases, budget, méthode et limite
++[Après observation]
+ SCOPE: medium, viewport, état, contenu et surface
+ CONTENT / STATES: données et états effectivement couverts
+-A11Y / PERFORMANCE: bases, budget, méthode et limite lorsque le risque les active
+ PROOF-TYPE / PROOF-LIMIT: ce qui est établi et ce qui reste non prouvé
+-OWNER / NEXT-PROOF: responsable et prochaine vérification
++EXIT-CONDITION: résultat qui maintient, modifie ou abandonne
++OWNER / NEXT-PROOF: owner hérité de la ligne de run sauf changement ; prochaine vérification
++[Promotion : table complète de BIBLIOTHEQUE/CONTRACTS, par BIBLIOTHEQUE/EVOLUTION]
+ ```
+ 
++Un essai local à faible risque démarre avec les huit lignes « avant build ». Un risque actif (erreur, contenu long, accessibilité, performance) rappelle ses lignes sans attendre la promotion.
++
+ Une dérivation modifie d’abord un seul levier principal, puis vérifie la responsabilité, la contre-indication, le contenu, les états, le responsive, l’accessibilité, la performance et la preuve attendue. Elle reste locale tant que plusieurs usages contrastés ne démontrent pas une responsabilité stable et un gain réel. Si elle devient candidate, son statut et sa promotion passent par `BIBLIOTHEQUE/EVOLUTION`, puis `CHANGELOG` ; aucun usage répété ne constitue une promotion silencieuse. Ne crée pas de route canonique nommée d’après une tendance ou une peau — par exemple `SCENE/BENTO`, `SCENE/GLASS_HERO` ou `SCENE/EDITORIAL_PREMIUM` — lorsque le nom ne décrit ni une responsabilité structurelle ni une preuve distinctive.
+ 
+ ### Signaux de convergence structurelle
+@@ -255,7 +261,7 @@ Un signal de convergence déclenche une reformulation de la tension, de la signa
+ 
+ ## BIBLIOTHEQUE/CONTRACTS — contrat commun de route
+ 
+-Une route locale commence par un contrat réduit : responsabilité, contre-indications, preuve attendue et décision initiale. Lorsqu’elle est suivie comme candidate, elle peut porter le statut de cycle de vie `PILOT`, distinct du niveau de contrat et des statuts de run. Après observation, renseigne `DECISION-CHANGE` ou l’issue ACTION appropriée. Le contrat complet est nécessaire, mais non suffisant, pour `ADOPTED` : la promotion exige aussi usages contrastés, gain observé ou mesuré, maintenance, compatibilité, owner, prochaine revue et décision persistée dans `CHANGELOG`.
++Une route locale commence par un contrat réduit : décision initiale, responsabilité, contre-indication, preuve attendue et limite. C’est la seule définition du contrat réduit ; la ligne `Local` du contrat minimal par périmètre et les lignes « avant build » de `BIBLIOTHEQUE/DERIVE` y renvoient. Lorsqu’elle est suivie comme candidate, elle peut porter le statut de cycle de vie `PILOT`, distinct du niveau de contrat et des statuts de run. Après observation, renseigne `DECISION-CHANGE` ou l’issue ACTION appropriée. Le contrat complet est nécessaire, mais non suffisant, pour `ADOPTED` : la promotion exige aussi usages contrastés, gain observé ou mesuré, maintenance, compatibilité, owner, prochaine revue et décision persistée dans `CHANGELOG`.
+ 
+ Toute route durable déclare :
+ 
+@@ -399,13 +405,14 @@ Une déclaration de grille précise :
+ - `ANCHORS` ;
+ - `RHYTHM` ;
+ - `FOCUS` lorsque radialité, axialité ou hiérarchie le requièrent ;
+-- `MOBILE-PRIORITY` ;
+-- `MOBILE-NEIGHBORHOOD` ;
+-- `MOBILE-ACTION` ;
+-- `MOBILE-STATE` ;
+-- `MOBILE-CONTENT` ;
+-- `MOBILE-PERFORMANCE` ;
+-- `MOBILE-COVERAGE-LIMIT` ;
++- les familles `MOBILE-*`, lorsque le mobile est dans le scope ou qu’un risque responsive est réel ; sinon `N/A-JUSTIFIED` :
++  - `MOBILE-PRIORITY` ;
++  - `MOBILE-NEIGHBORHOOD` ;
++  - `MOBILE-ACTION` ;
++  - `MOBILE-STATE` ;
++  - `MOBILE-CONTENT` ;
++  - `MOBILE-PERFORMANCE` ;
++  - `MOBILE-COVERAGE-LIMIT` ;
+ - fallback et condition de sortie si la relation ne survit pas au contexte.
+ 
+ Les valeurs comme « 12 colonnes » ou « baseline 8 » sont des points de départ adaptables, jamais des validations universelles. `MOBILE-STATE`, `MOBILE-CONTENT` et `MOBILE-PERFORMANCE` sont conditionnels au risque : renseigne-les lorsque la grille porte directement une décision d’état, de contenu ou de performance ; sinon conserve la responsabilité dans la scène, l’objet ou `SAVOIR/CONTEXT` et justifie le périmètre, le scope et la prochaine preuve.
+@@ -619,6 +626,26 @@ Grain, trame, aplat, bordure ou hachure donnent un statut de matière conçue.
+ | `LAYER/SCENES` | Composition, support et hiérarchie d’un écran. | Routes `SUPPORT/*`, `GRID/*`, `SCENE/*`. |
+ | `LAYER/TEMPLATES` | Séquence de scènes pour une intention produit. | Une route `TEMPLATE/*` si elle est nommée, avec slots, états, mobile, contre-indications, owner et preuve ; les exemples Produit, dashboard, authentification, archive et campagne restent descriptifs sinon. |
+ 
++### Contrat de composant partagé
++
++S’applique à un pattern réutilisable, à un composant critique ou à un composant partagé ; un delta local n’en porte aucune obligation. C’est la seule définition de la structure d’un composant : `ACTION` en garde la baseline comme preuve, la migration et le verdict ; `SAVOIR/SYSTEM` en garde le jugement (tokens, modes, interopérabilité, maintenance).
++
++```text
++INTENTION / NON-USAGE
++SÉMANTIQUE / CLAVIER ET FOCUS
++ANATOMIE ET SLOTS
++TOKENS CONSOMMÉS ET MODES
++VARIANTS UTILES
++ÉTATS
++RESPONSIVE
++FRONTIÈRES DE COMPOSITION
++BASELINE DE RENDU
++SOURCE DE VÉRITÉ
++OWNER
++COMPATIBILITÉ
++PROCHAINE REVUE
++```
++
+ ### Échelle de responsabilité
+ 
+ | Couche | Peut | Ne peut pas |
+@@ -704,7 +731,7 @@ Le contrôle de module vérifie support, grille, scène, objet, états, mobile e
+ 
+ | Test | Question | Type possible |
+ |---|---|---|
+-| Non-généricité | Sans image, données et nom, la structure pourrait-elle appartenir à cinquante produits ? Si oui, changer la relation support/grille/scène/preuve, pas ajouter du polish. | `PERCEPTUAL`, `EXPERT` |
++| Non-généricité | Sans image, données et nom, la structure pourrait-elle appartenir à cinquante produits ? Si oui, la structure dépend de ce qui a été retiré. Si la dépendance est porteuse (relation déclarée, fallback prévu par `DIRECTION/VISUAL_TARGET`), la conserver. Si elle est décorative, changer la relation support/grille/scène/preuve plutôt qu’ajouter du polish. Dans les deux cas, décider sur le rendu entier, la tâche et `ACTION/GATE-C`. | `PERCEPTUAL`, `EXPERT` |
+ | Silhouette | Après floutage, support, foyer, masses et axes restent-ils perceptibles ? | `PERCEPTUAL` |
+ | Grille | Éléments critiques partagent-ils un axe, rythme ou relation identifiable ? Les ruptures changent-elles une priorité ? | `PERCEPTUAL`, `EXPERT` |
+ | Preuve | Objet ou micro-interface répond-il à la promesse avec contenu, état et action crédibles ? | `EXPERT`, `USER/TASK` |
+@@ -759,7 +786,7 @@ Il peut s’agir d’une réduction d’erreur, d’une décision plus directe,
+ | Non-homogénéisation | Les rendus restent situés malgré la route commune. |
+ | Maintenance | Owner et prochaine revue nommés. |
+ 
+-Une route peut être `PILOT`, `ADOPTED`, `DEPRECATED` ou `ABANDONED` dans la gouvernance du `CHANGELOG`. Ces statuts ne sont pas des verdicts d’écran, des issues de run ou des statuts de gate.
++Une route peut être `SEED`, `PILOT`, `ADOPTED`, `DEPRECATED` ou `ABANDONED` dans la gouvernance du `CHANGELOG`. Ces statuts ne sont pas des verdicts d’écran, des issues de run ou des statuts de gate.
+ 
+ ### Contribution et retour d’usage
+ 
+diff --git a/V1/official/CHANGELOG.md b/V1/official/CHANGELOG.md
+index 9b7a289..23c42c2 100644
+--- a/V1/official/CHANGELOG.md
++++ b/V1/official/CHANGELOG.md
+@@ -34,12 +34,13 @@ Les statuts de route décrivent la maintenance d’une route candidate ou canoni
+ 
+ | Statut | Sens | Transition autorisée |
+ |---|---|---|
+-| `PILOT` | Route locale ou candidate testée dans un périmètre déclaré. | `ADOPTED` ou `ABANDONED`. |
++| `SEED` | Route du seed V1, canonique par construction, sans gain mesuré. | `ADOPTED` (contrat de gain réel satisfait, `BIBLIOTHEQUE/EVOLUTION`) ou `DEPRECATED`. |
++| `PILOT` | Route locale ou candidate testée dans un périmètre déclaré. | `ADOPTED` ou `ABANDONED` ; `DEPRECATED` lorsque la route a des consumers. |
+ | `ADOPTED` | Route canonique dont le contrat, la maintenance et le gain sont acceptés. | `DEPRECATED`. |
+-| `DEPRECATED` | Route conservée pour migration ou compatibilité ; elle ne doit pas être choisie dans un nouveau run. | `ABANDONED` après migration. |
++| `DEPRECATED` | Route conservée pour migration ou compatibilité ; elle ne doit pas être choisie dans un nouveau run. Aucun nouvel usage ; migration par `ACTION/RUN-SYSTEM` (paquet SYSTÈME). | `ABANDONED` après migration. |
+ | `ABANDONED` | Route qui n’est plus maintenue ni proposée. | Aucune transition silencieuse. |
+ 
+-Les routes présentes dans le seed de la V1 constituent la baseline canonique. Toute nouvelle route ou promotion doit indiquer son problème, sa décision, son owner, son contrat, sa preuve, sa limite, sa compatibilité et sa prochaine revue.
++Les routes présentes dans le seed de la V1 ont le statut `SEED` : canoniques, sans gain mesuré. `ADOPTED` exige le contrat de gain réel (`BIBLIOTHEQUE/EVOLUTION`). Une route peut être dépréciée depuis tout état publié ou utilisé (`SEED`, `PILOT` avec consumers, `ADOPTED`) ; une dépréciation interdit les nouveaux usages, exige une migration et ne revendique aucun gain. Toute nouvelle route ou promotion doit indiquer son problème, sa décision, son owner, son contrat, sa preuve, sa limite, sa compatibilité et sa prochaine revue.
+ 
+ ## Migration des anciens aliases
+ 

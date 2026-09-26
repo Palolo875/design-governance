@@ -1,0 +1,19 @@
+{
+  "run_card": {
+    "id": "INVALID-FAIL-ASSUMED-ACCEPTED",
+    "owner": "design-owner",
+    "date_version": "2026-08-29 / V1",
+    "mode": "STANDARD",
+    "decision": "Corriger une surface avant diffusion.",
+    "decision_intent": "Corriger une surface avant diffusion.",
+    "risk": {"level": "important", "critical_protection": null},
+    "sources": ["DIRECTION/START", "ACTION/RUN-STANDARD"],
+    "artifact": {"locator": "ticket-ou-commit", "scope": "surface concernée"},
+    "trace_locator": "ticket-ou-chemin",
+    "next_proof": "Rejouer le contrôle après correction.",
+    "proof": {"observed": ["Le défaut est observé."], "not_verified": ["Correction non rejouée."]},
+    "decision_change": {"value": "Diffusion limitée malgré le défaut.", "evidence": "Décision documentée."},
+    "closure": {"state": "CLOSED", "issue": "FAIL-ASSUMED", "verdict": "ACCEPTED-WITH-RESERVATION", "limitations": ["Le défaut reste à corriger."]}
+  }
+}
+

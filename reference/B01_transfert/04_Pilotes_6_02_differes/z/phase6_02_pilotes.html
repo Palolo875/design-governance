@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Phase 6.02 — deux pilotes de premier objet</title>
+  <style>
+    :root { color-scheme: light; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    button { cursor: pointer; font: inherit; }
+    button:focus-visible, a:focus-visible { outline: 3px solid #d87234; outline-offset: 4px; }
+    [hidden] { display: none !important; }
+    body[data-case="sound"] { background: #111b21; color: #f3f0e9; font-family: system-ui, sans-serif; }
+    body[data-case="incident"] { background: #e8ecee; color: #152735; font-family: system-ui, sans-serif; }
+    body[data-case="sound"] .incident, body[data-case="incident"] .sound { display: none; }
+    .pilot-mark { font-size: 11px; font-weight: 750; letter-spacing: .13em; text-transform: uppercase; }
+    .sound { min-height: 100vh; overflow: hidden; }
+    .sound nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 23px clamp(20px, 5vw, 76px); border-bottom: 1px solid #ffffff1c; }
+    .sound .brand { display: flex; align-items: center; gap: 11px; font-family: Georgia, serif; font-size: 21px; letter-spacing: -.035em; }
+    .sound .brand i { width: 28px; height: 28px; border: 1.5px solid #d8bc85; border-radius: 45% 55% 60% 35%; display: inline-block; transform: rotate(20deg); }
+    .sound .pilot-mark { color: #e5bd82; text-align: right; }
+    .sound-hero { display: grid; grid-template-columns: minmax(360px, .9fr) minmax(440px, 1.1fr); min-height: 640px; align-items: center; padding: 22px clamp(20px, 5vw, 76px) 35px; gap: clamp(24px, 4vw, 75px); }
+    .sound-copy { max-width: 580px; position: relative; z-index: 2; }
+    .sound .eyebrow { color: #dbc69b; font-weight: 700; text-transform: uppercase; font-size: 12px; letter-spacing: .18em; margin: 0 0 20px; }
+    .sound h1 { font-family: Georgia, serif; font-weight: 400; font-size: clamp(52px, 5.1vw, 84px); line-height: .98; letter-spacing: -.065em; margin: 0; }
+    .sound h1 em { font-style: normal; color: #d6b57b; }
+    .sound .lead { color: #c3cbd0; line-height: 1.65; max-width: 465px; font-size: 17px; margin: 26px 0 29px; }
+    .sound-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 15px; }
+    .sound .primary { background: #e6c99b; color: #1b2525; border: 0; border-radius: 3px; font-weight: 750; padding: 16px 20px; min-height: 52px; }
+    .sound .quiet { background: transparent; border: 1px solid #b8c5c277; color: #f3f0e9; border-radius: 3px; padding: 13px 17px; min-height: 52px; }
+    .sound .meta { color: #9eaaa9; font-size: 12px; line-height: 1.5; margin: 27px 0 0; }
+    .sound .status { min-height: 34px; color: #f1dab2; font-size: 14px; margin: 18px 0 0; }
+    .sound-map { position: relative; min-height: 555px; isolation: isolate; display: grid; place-items: center; background: radial-gradient(circle at 48% 44%, #3b524a, #233832 37%, #172b2c 70%, #122329 100%); border: 1px solid #bdc5a029; overflow: hidden; }
+    .sound-map::before { content: ""; position: absolute; inset: -100px; opacity: .3; background: repeating-linear-gradient(120deg, transparent 0 31px, #bac1a311 32px 33px); }
+    .ring { position: absolute; top: 48%; left: 51%; width: var(--size); aspect-ratio: 1.5; border: 1px solid #ded09a9c; border-radius: 47% 53% 54% 46% / 55% 50% 50% 45%; transform: translate(-50%, -50%) rotate(var(--turn)); box-shadow: 0 0 17px #f9d7ab0b; }
+    .ring:nth-of-type(2) { opacity: .8; } .ring:nth-of-type(3) { opacity: .7; } .ring:nth-of-type(4) { opacity: .62; } .ring:nth-of-type(5) { opacity: .52; } .ring:nth-of-type(6) { opacity: .42; }
+    .sound-map .dot { position: absolute; top: 49%; left: 52%; width: 13px; height: 13px; border-radius: 50%; background: #f5cf94; box-shadow: 0 0 0 10px #edd1a722, 0 0 35px 17px #f9d7ab5e; }
+    .map-label { position: absolute; color: #ece0bf; font-size: 11px; letter-spacing: .13em; text-transform: uppercase; }
+    .map-label.north { top: 19%; left: 19%; }.map-label.west { bottom: 22%; left: 15%; }.map-label.east { right: 12%; top: 29%; }
+    .map-bottom { position: absolute; bottom: 0; width: 100%; display: flex; justify-content: space-between; align-items: end; gap: 15px; padding: 20px; background: linear-gradient(transparent,#0b1e22bb); font-size: 12px; color: #dce5d6; }
+    .sound-map .chapter { text-transform: uppercase; letter-spacing: .15em; color: #c6d3b4; font-size: 10px; display: block; margin-bottom: 5px; }
+    .sound-map .wave { height: 18px; display: flex; gap: 3px; align-items: center; }
+    .sound-map .wave span { display: inline-block; width: 3px; height: var(--h); background: #e6c99b; border-radius: 4px; }
+    .sound-map.is-unavailable { filter: saturate(.45); }
+    .sound-map.is-unavailable .dot { box-shadow: 0 0 0 10px #ffffff22; background: #bdc5bd; }
+    .incident { min-height: 100vh; }
+    .inc-header { min-height: 68px; background: #15303d; color: #f4f7f6; display: flex; align-items: center; justify-content: space-between; padding: 14px clamp(18px, 3vw, 48px); gap: 18px; }
+    .inc-header .logo { font-weight: 800; letter-spacing: -.045em; font-size: 22px; }
+    .inc-header .logo strong { color: #c0e1de; }
+    .inc-header .pilot-mark { color: #d1e3e3; max-width: 400px; text-align: right; }
+    .inc-wrap { max-width: 1440px; margin: 0 auto; padding: 30px clamp(18px, 3vw, 48px) 60px; }
+    .inc-top { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 21px; }
+    .inc-top .kicker { text-transform: uppercase; font-size: 11px; letter-spacing: .12em; font-weight: 800; color: #536674; }
+    .inc-top h1 { letter-spacing: -.04em; font-size: clamp(32px, 3.3vw, 45px); margin: 4px 0 0; line-height: 1.04; }
+    .inc-top p { color: #60707b; margin: 8px 0 0; }
+    .inc-toolbar { display: flex; flex-wrap: wrap; gap: 8px; }
+    .inc-toolbar button { background: #fff; color: #263944; border: 1px solid #c4ced0; border-radius: 6px; padding: 9px 12px; min-height: 44px; font-size: 13px; }
+    .inc-toolbar button[aria-pressed="true"] { border-color: #224852; background: #dcf0ed; font-weight: 750; }
+    .inc-columns { display: grid; grid-template-columns: minmax(210px, 280px) minmax(380px, 1fr) minmax(230px, 300px); gap: 14px; align-items: start; }
+    .inc-card { border: 1px solid #ccd5d8; background: #fff; border-radius: 9px; box-shadow: 0 8px 28px #13323c08; }
+    .inc-card h2 { font-size: 14px; margin: 0; letter-spacing: .01em; }
+    .inc-list .cap, .inc-action .cap { border-bottom: 1px solid #e0e6e8; padding: 18px; }
+    .inc-item { margin: 12px; padding: 14px; border: 1px solid #e1e6e8; border-radius: 7px; color: #263f4a; }
+    .inc-item.selected { background: #fff8f3; border: 1.5px solid #d67a43; }
+    .inc-item strong { display: block; line-height: 1.35; margin: 8px 0 7px; }
+    .inc-item small { color: #596d75; }
+    .tag { display: inline-block; background: #fbe7d9; color: #7d350e; font-size: 11px; font-weight: 800; border-radius: 3px; padding: 4px 6px; text-transform: uppercase; letter-spacing: .04em; }
+    .tag.muted { background: #eef1f1; color: #4d6168; }
+    .inc-main { padding: 0 26px 28px; border-top: 5px solid #c66432; }
+    .inc-main .overline { display: flex; justify-content: space-between; gap: 12px; color: #536570; font-size: 12px; letter-spacing: .05em; font-weight: 750; margin: 22px 0 13px; }
+    .inc-main h2 { font-size: clamp(25px, 2.4vw, 34px); letter-spacing: -.035em; line-height: 1.15; max-width: 580px; }
+    .inc-main .summary { font-size: 15px; line-height: 1.55; color: #314953; margin: 15px 0 23px; max-width: 650px; }
+    .inc-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .inc-metrics div { border: 1px solid #dce4e4; background: #f4f7f7; border-radius: 5px; padding: 12px; min-height: 76px; }
+    .inc-metrics span { display: block; color: #566b74; font-size: 12px; margin-bottom: 7px; }
+    .inc-metrics strong { font-size: 18px; letter-spacing: -.02em; }
+    .inc-main h3 { font-size: 13px; margin: 26px 0 10px; text-transform: uppercase; letter-spacing: .06em; }
+    .inc-timeline { border-left: 2px solid #d7e1e1; margin-left: 6px; padding-left: 15px; font-size: 13px; color: #45616b; line-height: 1.8; }
+    .inc-action .body { padding: 18px; }
+    .inc-action .body p { color: #49616b; font-size: 14px; line-height: 1.55; margin: 0 0 17px; }
+    .inc-action button.main { width: 100%; min-height: 50px; color: white; background: #164b52; border: 0; border-radius: 5px; padding: 11px; font-weight: 750; }
+    .inc-action .after { margin: 16px 0 0; padding: 11px; font-size: 13px; background: #e8f3ee; border-left: 3px solid #388264; color: #194e3c; line-height: 1.4; }
+    .inc-footer { font-size: 12px; color: #62747e; margin-top: 17px; line-height: 1.5; }
+    .inc-unavailable { background: #fff; border: 1px solid #d7a483; border-radius: 8px; padding: 25px; min-height: 250px; }
+    .inc-unavailable strong { font-size: 24px; display: block; letter-spacing: -.03em; }
+    .inc-unavailable p { color: #485e68; line-height: 1.6; max-width: 550px; }
+    .inc-unavailable button { border: 1px solid #25515d; background: #fff; border-radius: 4px; padding: 12px 16px; min-height: 48px; font-weight: 700; }
+    @media (max-width: 980px) {
+      .sound-hero { grid-template-columns: 1fr; min-height: 0; padding-top: 48px; }
+      .sound-copy { max-width: 710px; }
+      .sound-map { min-height: 430px; }
+      .inc-columns { grid-template-columns: minmax(0, 1fr) minmax(220px, 280px); }
+      .inc-list { display: none; }
+    }
+    @media (max-width: 650px) {
+      .sound nav { padding: 18px 19px; }
+      .sound .brand { font-size: 19px; }
+      .sound .pilot-mark { font-size: 9px; }
+      .sound-hero { padding: 44px 19px 26px; gap: 31px; }
+      .sound h1 { font-size: clamp(49px, 13vw, 68px); }
+      .sound .lead { margin: 21px 0; font-size: 15px; }
+      .sound-map { min-height: 385px; }
+      .ring { width: var(--size); }
+      .map-label.east { right: 8%; }
+      .inc-header { padding: 13px 17px; }
+      .inc-header .logo { font-size: 18px; }
+      .inc-header .pilot-mark { font-size: 9px; max-width: 160px; }
+      .inc-wrap { padding: 21px 15px 32px; }
+      .inc-top { display: block; }
+      .inc-top h1 { font-size: 35px; }
+      .inc-toolbar { margin-top: 15px; }
+      .inc-toolbar button { flex: 1; }
+      .inc-columns { display: flex; flex-direction: column; }
+      .inc-main { order: 1; padding: 0 18px 20px; width: 100%; }
+      .inc-action { order: 2; width: 100%; }
+      .inc-list { order: 3; }
+      .inc-metrics { grid-template-columns: repeat(2,1fr); }
+      .inc-metrics div:last-child { grid-column: 1 / -1; }
+    }
+    .mobile-action { display: none; }
+    @media (max-width: 650px) {
+      .mobile-action { display: block; margin: 0 0 18px; }
+      .mobile-action button { width: 100%; min-height: 48px; background: #164b52; border: 0; color: #fff; font-weight: 750; border-radius: 5px; }
+      .mobile-action p { color: #194e3c; background: #e8f3ee; font-size: 13px; padding: 8px; }
+      .inc-action { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; } }
+  </style>
+</head>
+<body>
+  <div class="sound">
+    <nav aria-label="Présentation du service">
+      <div class="brand"><i aria-hidden="true"></i>Strates</div>
+      <div class="pilot-mark">Pilote fictif · sons synthétiques · aucune donnée de ville</div>
+    </nav>
+    <main class="sound-hero">
+      <section class="sound-copy" aria-label="Première scène">
+        <p class="eyebrow">Un lieu, plusieurs écoutes</p>
+        <h1>La ville s’écoute <em>par strates.</em></h1>
+        <p class="lead">Traversez un paysage sonore expérimental. Chaque couche change le rythme de l’écoute ; le premier geste commence ici, avec un motif créé pour cette démonstration.</p>
+        <div class="sound-actions">
+          <button type="button" class="primary" id="listen">Écouter le motif synthétique</button>
+          <button type="button" class="quiet" id="soundToggle">Simuler une indisponibilité</button>
+        </div>
+        <p id="soundStatus" class="status" role="status" aria-live="polite">Prêt à écouter un motif généré localement.</p>
+        <p class="meta">Démonstration locale : ce son ne représente aucun quartier réel. Aucun enregistrement ni résultat d’usage n’est revendiqué.</p>
+      </section>
+      <div class="sound-map" role="img" aria-label="Relief abstrait en anneaux montrant des couches d'écoute et un foyer central">
+        <span class="ring" style="--size:88%;--turn:8deg"></span>
+        <span class="ring" style="--size:74%;--turn:-13deg"></span>
+        <span class="ring" style="--size:59%;--turn:17deg"></span>
+        <span class="ring" style="--size:44%;--turn:-8deg"></span>
+        <span class="ring" style="--size:29%;--turn:12deg"></span>
+        <span class="ring" style="--size:15%;--turn:-5deg"></span>
+        <span class="dot"></span>
+        <span class="map-label north">Écho</span><span class="map-label west">Souffle</span><span class="map-label east">Pulse</span>
+        <div class="map-bottom">
+          <div><span class="chapter">Couche 01 / 03</span>Centre · motif d’essai</div>
+          <div class="wave" aria-hidden="true"><span style="--h:8px"></span><span style="--h:15px"></span><span style="--h:10px"></span><span style="--h:18px"></span><span style="--h:8px"></span><span style="--h:13px"></span></div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <div class="incident">
+    <header class="inc-header">
+      <div class="logo">Signal<strong>/</strong>atelier</div>
+      <div class="pilot-mark">Pilote fictif · incidents et personnes simulés · aucune action externe</div>
+    </header>
+    <main class="inc-wrap">
+      <div class="inc-top">
+        <div><div class="kicker">Atelier Nord / suivi</div><h1>Incidents en cours</h1><p>Une alerte prioritaire, une cause à confirmer, une décision à assigner.</p></div>
+        <div class="inc-toolbar" aria-label="États de démonstration">
+          <button type="button" data-state="normal" aria-pressed="true">Vue courante</button>
+          <button type="button" data-state="unavailable" aria-pressed="false">Source indisponible</button>
+          <button type="button" data-state="success" aria-pressed="false">Après assignation</button>
+        </div>
+      </div>
+      <div id="incidentNormal" class="inc-columns">
+        <aside class="inc-card inc-list" aria-label="Liste d'incidents">
+          <div class="cap"><h2>Flux d’incidents <span aria-hidden="true">·</span> 02</h2></div>
+          <div class="inc-item selected"><span class="tag">Critique · à traiter</span><strong>Arrêt du convoyeur 07</strong><small>Il y a 12 min · ligne Nord</small></div>
+          <div class="inc-item"><span class="tag muted">Surveillance</span><strong>Température hors plage</strong><small>Il y a 36 min · module 04</small></div>
+        </aside>
+        <article class="inc-card inc-main">
+          <div class="overline"><span>INC-047 · LIGNE NORD</span><span id="incidentAge">Il y a 12 min</span></div>
+          <span class="tag" id="incidentTag">Critique · à traiter</span>
+          <h2>Convoyeur 07 à l’arrêt</h2>
+          <p class="summary">Le signal de vitesse est absent. La cause n’est pas confirmée ; vérifier le capteur et la dernière séquence avant toute intervention.</p>
+          <div class="mobile-action">
+            <button type="button" id="assignMobile">Assigner la vérification</button>
+            <p id="assignMobileResult" role="status" aria-live="polite" hidden>Assignation locale simulée. Vérification à reprendre sur le système réel.</p>
+          </div>
+          <div class="inc-metrics">
+            <div><span>Signal</span><strong>Absent</strong></div>
+            <div><span>Dernier relevé</span><strong>08:41</strong></div>
+            <div><span>Responsable</span><strong id="incidentOwner">À assigner</strong></div>
+          </div>
+          <h3>Éléments disponibles</h3>
+          <div class="inc-timeline">08:41 · Dernier relevé du capteur<br>08:43 · Détection de l’arrêt<br>Cause proposée : capteur à vérifier (hypothèse)</div>
+        </article>
+        <aside class="inc-card inc-action">
+          <div class="cap"><h2>Prochaine décision</h2></div>
+          <div class="body">
+            <p>Attribuer une vérification à l’équipe d’astreinte. Aucune action sur la machine n’est effectuée depuis ce pilote.</p>
+            <button type="button" class="main" id="assign">Assigner la vérification</button>
+            <p id="assignResult" class="after" role="status" aria-live="polite" hidden>Assignation locale simulée. Vérification à reprendre sur le système réel.</p>
+          </div>
+        </aside>
+      </div>
+      <section id="incidentUnavailable" class="inc-unavailable" role="status" hidden>
+        <strong>Source momentanément indisponible</strong>
+        <p>Les détails d’alerte ne sont pas à jour. Aucune assignation n’est possible ici tant que les données ne sont pas rétablies. L’incident reste à vérifier par l’équipe responsable.</p>
+        <button type="button" id="retry">Revenir à la vue d’essai</button>
+      </section>
+      <p class="inc-footer">Données inventées pour tester le premier objet, la hiérarchie et les états. Ne sert ni à piloter une installation ni à attester des résultats d’opérateurs.</p>
+    </main>
+  </div>
+  <script>
+    const query = new URLSearchParams(location.search);
+    const selectedCase = query.get('case') === 'incident' ? 'incident' : 'sound';
+    document.body.dataset.case = selectedCase;
+    const initialState = query.get('state') || 'normal';
+    if (selectedCase === 'sound') {
+      const status = document.getElementById('soundStatus');
+      const listen = document.getElementById('listen');
+      const toggle = document.getElementById('soundToggle');
+      const map = document.querySelector('.sound-map');
+      let unavailable = initialState === 'unavailable';
+      function updateSound() {
+        listen.disabled = unavailable;
+        toggle.textContent = unavailable ? 'Rétablir la démonstration' : 'Simuler une indisponibilité';
+        status.textContent = unavailable ? 'Lecture indisponible. Rétablissez la démonstration pour relancer le motif.' : 'Prêt à écouter un motif généré localement.';
+        map.classList.toggle('is-unavailable', unavailable);
+        document.body.dataset.state = unavailable ? 'unavailable' : 'normal';
+      }
+      toggle.addEventListener('click', () => { unavailable = !unavailable; updateSound(); });
+      listen.addEventListener('click', () => {
+        if (unavailable) return;
+        try {
+          const Audio = window.AudioContext || window.webkitAudioContext;
+          if (!Audio) { status.textContent = 'Son synthétique indisponible sur ce navigateur.'; return; }
+          const ctx = new Audio();
+          [196, 261.6, 329.6].forEach((freq, index) => {
+            const oscillator = ctx.createOscillator();
+            const gain = ctx.createGain();
+            oscillator.type = 'sine'; oscillator.frequency.value = freq;
+            gain.gain.setValueAtTime(.0001, ctx.currentTime + index * .24);
+            gain.gain.exponentialRampToValueAtTime(.08, ctx.currentTime + index * .24 + .03);
+            gain.gain.exponentialRampToValueAtTime(.0001, ctx.currentTime + index * .24 + .6);
+            oscillator.connect(gain).connect(ctx.destination);
+            oscillator.start(ctx.currentTime + index * .24);
+            oscillator.stop(ctx.currentTime + index * .24 + .62);
+          });
+          status.textContent = 'Motif synthétique lancé localement. Aucune ambiance de ville enregistrée.';
+          setTimeout(() => ctx.close(), 1800);
+        } catch { status.textContent = 'La lecture sonore est indisponible ici ; le geste reste sans effet externe.'; }
+      });
+      updateSound();
+    } else {
+      const controls = [...document.querySelectorAll('.inc-toolbar button')];
+      const normal = document.getElementById('incidentNormal');
+      const unavailable = document.getElementById('incidentUnavailable');
+      const assign = document.getElementById('assign');
+      const result = document.getElementById('assignResult');
+      const assignMobile = document.getElementById('assignMobile');
+      const mobileResult = document.getElementById('assignMobileResult');
+      let state = 'normal';
+      function updateIncident(next) {
+        state = ['normal','unavailable','success'].includes(next) ? next : 'normal';
+        document.body.dataset.state = state;
+        controls.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.state === state)));
+        normal.hidden = state === 'unavailable';
+        unavailable.hidden = state !== 'unavailable';
+        assign.disabled = state === 'success';
+        assign.textContent = state === 'success' ? 'Vérification assignée localement' : 'Assigner la vérification';
+        assignMobile.disabled = state === 'success';
+        assignMobile.textContent = assign.textContent;
+        document.getElementById('incidentOwner').textContent = state === 'success' ? 'Équipe d’astreinte' : 'À assigner';
+        document.getElementById('incidentTag').textContent = state === 'success' ? 'Critique · vérification assignée' : 'Critique · à traiter';
+        result.hidden = state !== 'success';
+        mobileResult.hidden = state !== 'success';
+      }
+      controls.forEach(button => button.addEventListener('click', () => updateIncident(button.dataset.state)));
+      document.getElementById('retry').addEventListener('click', () => updateIncident('normal'));
+      assign.addEventListener('click', () => updateIncident('success'));
+      assignMobile.addEventListener('click', () => updateIncident('success'));
+      updateIncident(initialState);
+    }
+  </script>
+</body>
+</html>

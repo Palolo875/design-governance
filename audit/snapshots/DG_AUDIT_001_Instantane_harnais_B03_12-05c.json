@@ -1,0 +1,266 @@
+{
+ "A1": {
+  "temoins": [
+   4,
+   4
+  ],
+  "cas": [
+   11,
+   11
+  ],
+  "sha256": "84e1f02973b4d81010bdbb595a02e54f7afaa1c392586a909a9b8cec5c12d063",
+  "cas_significatifs": 11
+ },
+ "A2": {
+  "temoins": [
+   2,
+   2
+  ],
+  "cas": [
+   5,
+   5
+  ],
+  "sha256": "b8a2178ff5bfb14063491f4468134c67f9ccfa798f32ecd261183c6684ab9080",
+  "cas_significatifs": 5
+ },
+ "B1": {
+  "temoins": [
+   1,
+   1
+  ],
+  "cas": [
+   12,
+   12
+  ],
+  "sha256": "8f7e66870c22c845e4d0950069ff79c788cf141c2159842075efe1085887c989",
+  "cas_significatifs": 12
+ },
+ "B2": {
+  "temoins": [
+   1,
+   1
+  ],
+  "cas": [
+   19,
+   19
+  ],
+  "sha256": "265bd8af8d4e69945668cf75dbc914bf866b31686cb7fd3f828e272fcc4073e6",
+  "cas_significatifs": 19
+ },
+ "B3": {
+  "temoins": [
+   1,
+   1
+  ],
+  "cas": [
+   12,
+   12
+  ],
+  "sha256": "bac696bd2d7febf516ad0e4fa732709732bef4798ed0a38dc5548e637e687763",
+  "cas_significatifs": 12
+ },
+ "B4": {
+  "temoins": [
+   1,
+   1
+  ],
+  "cas": [
+   12,
+   12
+  ],
+  "sha256": "ec7e7d421ca9e29a55c6e0adb321136a92447b71b83514282baa1252b568b5c9",
+  "cas_significatifs": 12
+ },
+ "B5": {
+  "temoins": [
+   1,
+   1
+  ],
+  "cas": [
+   5,
+   5
+  ],
+  "sha256": "f68971cebd260fede2e4c3d8002ed4fa9a6bbae238fd202eb0e2ba08793666c3",
+  "cas_significatifs": 5
+ },
+ "C1": {
+  "temoins": [
+   1,
+   1
+  ],
+  "cas": [
+   23,
+   23
+  ],
+  "sha256": "bc2897827542580bfbdb3e043f99c8ed08d8f8c1f4f495cc5bbaca63f37db434",
+  "cas_significatifs": 23
+ },
+ "C2": {
+  "temoins": [
+   3,
+   3
+  ],
+  "cas": [
+   28,
+   28
+  ],
+  "sha256": "29df0a402036ee6cc5b0b4abe057a60f8983dd87b467960d501b2aa67b30423f",
+  "cas_significatifs": 28
+ },
+ "C3": {
+  "temoins": [
+   2,
+   2
+  ],
+  "cas": [
+   14,
+   14
+  ],
+  "sha256": "d3a00b92af63a5c0861384a33b1b22ff9acfbd3e6ade60cdb13c8159ba673633",
+  "cas_significatifs": 14
+ },
+ "C4": {
+  "temoins": [
+   3,
+   3
+  ],
+  "cas": [
+   23,
+   24
+  ],
+  "sha256": "0346e1306149b5259ad6e06a7eb61f280984301346c9a4bf535dfcb35422c5f3",
+  "cas_significatifs": 23
+ },
+ "C5": {
+  "temoins": [
+   2,
+   2
+  ],
+  "cas": [
+   18,
+   18
+  ],
+  "sha256": "1e7a6f4e0d724851cdb0f222cdfb73993dd863a378186c130c07582619238a23",
+  "cas_significatifs": 18
+ },
+ "C6": {
+  "temoins": [
+   1,
+   1
+  ],
+  "cas": [
+   9,
+   9
+  ],
+  "sha256": "a1f9f11e806ff70d5f34d501001caa8dd033f772a410a3f1376b1b1e23627a5f",
+  "cas_significatifs": 9
+ },
+ "C7": {
+  "temoins": [
+   4,
+   4
+  ],
+  "cas": [
+   5,
+   5
+  ],
+  "sha256": "9a4ec26ca50f1efb0c9803fdd48d9b140d0ae87bd7347dbce09425b8e2427d35",
+  "cas_significatifs": 5
+ },
+ "C8": {
+  "temoins": [
+   1,
+   1
+  ],
+  "cas": [
+   0,
+   3
+  ],
+  "sha256": "f7bea3a28dc0ce0c3b82cac96c516cd4264b2a1a0a453f208d845538d6fd7f6a",
+  "cas_significatifs": 0
+ },
+ "C9": {
+  "temoins": [
+   2,
+   2
+  ],
+  "cas": [
+   14,
+   14
+  ],
+  "sha256": "407386799dff5cdf4907ec03d31fd491cf803c134a1fd0a4806606203889b501",
+  "cas_significatifs": 14
+ },
+ "D1": {
+  "temoins": [
+   1,
+   1
+  ],
+  "cas": [
+   9,
+   9
+  ],
+  "sha256": "7e13458ef226eb1212335de0223fa5db87688a693b16991a12ac1853851f6f98",
+  "cas_significatifs": 9
+ },
+ "D2": {
+  "temoins": [
+   1,
+   1
+  ],
+  "cas": [
+   10,
+   10
+  ],
+  "sha256": "3cd619367f6227ecb45133b61efa7c3c333b1f30f4cdf4247c3a073bf79ceca2",
+  "cas_significatifs": 10
+ },
+ "D3": {
+  "temoins": [
+   4,
+   4
+  ],
+  "cas": [
+   7,
+   7
+  ],
+  "sha256": "d2b060de636d98878bf6c0c68879a385cdbc74a52ec3e164a20ef779ef9091f2",
+  "cas_significatifs": 7
+ },
+ "D4": {
+  "temoins": [
+   1,
+   1
+  ],
+  "cas": [
+   10,
+   10
+  ],
+  "sha256": "55648806e4e2ce3ec6562d278a3d89dd0e27daeb573991cf3a6f8b79774e0da6",
+  "cas_significatifs": 10
+ },
+ "E1": {
+  "temoins": [
+   1,
+   1
+  ],
+  "cas": [
+   27,
+   28
+  ],
+  "sha256": "b4509c89f8466b8e64ff28e22339a52265087a92b6f8c0df6ea3054979d4a64a",
+  "cas_significatifs": 27
+ },
+ "E2": {
+  "temoins": [
+   2,
+   2
+  ],
+  "cas": [
+   9,
+   22
+  ],
+  "sha256": "d72b7e1d121f50b5911478aca86b64607b20d37f9725f3616c1a814094202a19",
+  "cas_significatifs": 9
+ }
+}

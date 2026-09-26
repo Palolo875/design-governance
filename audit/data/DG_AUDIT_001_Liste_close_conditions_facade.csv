@@ -1,0 +1,22 @@
+ID,FAÇADE(S),CONDITION VÉRIFIÉE AU BUILD,SOURCE PROPRIÉTAIRE,FICHE,MUTATION ROUGE (A2)
+LCF-01,"READING_MAP (routage, « Direction identitaire »)","ACTION/RUN-DIRECTION dans « Première lecture », jamais dans « Ajouter seulement si nécessaire »",DIRECTION 734–735 [FORCÉ],F-RM-001,M-1
+LCF-02,READING_MAP (perspective « Accessibilité »),le non-chargement de SAVOIR/CONTEXT ne contient pas N/A-JUSTIFIED et renvoie aux contrôles ACTION/GATE-A applicables,ACTION/GATE-A ; ACTION 202,F-RM-002,M-2
+LCF-03,"ORCHESTRATION_MAP (UI/UX, Preuve, Système)","ACTION/GATE-A, le gate du risque et migration / rollback / CHANGELOG dans le noyau, absents du renforcement",ACTION/GATE-A ; ACTION/RUN-SYSTEM ; B3 (paquet SYSTÈME),F-OM-001,M-3
+LCF-04,QUICKSTART (table des modes) ; README racine,la ligne DIRECTION ne contient pas « craft » et porte le critère de START (« autonome »),DIRECTION/START 132,F-QS-002,M-4
+LCF-05,README racine (table d'entrée),la ligne ITER exige une direction existante et retrouvable,DIRECTION/START 133,F-RDR-001,M-5
+LCF-06,DIRECTION (index à la demande),« Nouvelle structure d’écran » ne présélectionne pas ACTION/RUN-STANDARD,DIRECTION/START,F-DIR-041,—
+LCF-07,"DIRECTION 72, RUN-PRIORITY ; READING_MAP ; ORCHESTRATION_MAP ; skill",VISUAL_TARGET (ou « DIRECTION — ») précède FIRST-OBJECT,DIRECTION 55,F-DIR-001,—
+LCF-08,DIRECTION/START (entrée minimale) ; DIRECTION/FAST-PATH,OWNER et SCOPE jamais omis ; pas d'« owner si nécessaire »,ACTION/HANDOFF (reprise) ; ACTION/RUN_CARD,F-DIR-008,—
+LCF-09,"DIRECTION/EXTERNAL-START (RUN-PRIORITY) ; DIRECTION, récapitulatif de protection, point 4 (E1)","la ligne FIRST-OBJECT et le point 4 du récapitulatif portent l'exception « sauf si » la navigation, la recherche ou les cartes sont l'objet de preuve","BIBLIOTHEQUE/SELECT, SCENE",F-DIR-018 ; F-DIR-043 (E1),—
+LCF-10,"QUICKSTART, README racine",chaque table de mode porte « Classement : voir `DIRECTION/START` »,D-FAC-1 = c,D-FAC-1,—
+LCF-C1,READING_MAP 56 ; skill,copie du handoff = jetons de ACTION/HANDOFF (même ordre pour READING_MAP ; tous présents pour la skill),ACTION/HANDOFF,F-SK-001 (C3),M-6
+LCF-C2,QUICKSTART ; skill,réponse visible identique au canon de ACTION/HANDOFF,ACTION/HANDOFF (C3 T-4),F-SK-001 (C3),—
+LCF-11,skill references/examples.md (blocs) ; GLOSSAIRE (DECISION-CHANGE),DECISION-CHANGE d'exemple = « issue de la triade — décision (observation : …) » ; GLOSSAIRE : issue + observation,ACTION 206–236 ; INV-C1-1,F-EX-001,M-7
+LCF-12,examples.md ; GLOSSAIRE (lignes portant ACCEPTED-WITH-RESERVATION),"réserve avec owner, prochaine preuve, date de revue et condition de sortie",INV-B2-9 ; ACTION 413–427,F-GLO-002,M-8
+LCF-13,examples.md (blocs),NOT-OBSERVED seulement comme issue de DECISION-CHANGE ; STATE: CLOSED ⇒ VERDICT:,Triade C1 ; INV-C1-4,C1 (application),M-9
+LCF-14,examples.md (lignes EVIDENCE fondées sur des captures),"aucun claim de mémorisation, tâche ou usage sans protocole ou participants nommés",F-ACT-018 ; ACTION 329–331,F-EX-002,M-10
+LCF-15,QUICKSTART §6,"dimensions = celles du contrat positif de DIRECTION/FIRST-OBJECT, mêmes noms, même ordre",DIRECTION 324–333,F-DIR-020,M-11
+LCF-16,DIRECTION/FIRST-OBJECT (contrat positif),colonne « Dimension CFT-00 » : valeurs ∈ dimensions de SAVOIR/CRAFT/CFT-00 ou « DIRECTION »,SAVOIR/CRAFT/CFT-00,F-DIR-030,—
+LCF-17,DIRECTION (déclencheurs critiques),motif générique → SAVOIR/CRAFT/CFT-01 + ACTION/ANTI-SLOP ; scène → BIBLIOTHEQUE/… ; détail final (densité) → SAVOIR/CRAFT,SAVOIR 255 ; BIBLIOTHEQUE 425 ; CFT-03,F-DIR-042,M-12
+LCF-20,"BIBLIOTHEQUE 63, 762 (listes de statuts)","statuts listés = statuts de la table du cycle de vie du CHANGELOG (SEED compris après correction) — condition de conservation, déjà vraie sur B01","CHANGELOG, cycle de vie",F-CHG-001,M-13
+LCF-21,"README racine, RELEASE_NOTES, CHANGELOG ; DIRECTION",efficacité NOT-VERIFIED dans les trois ; aucune formulation « augmente la probabilité / la qualité » non bornée par « vise à » dans DIRECTION (extension déclarée aux claims d'efficacité),CHANGELOG 21 ; README 16,F-DIR-002,M-14

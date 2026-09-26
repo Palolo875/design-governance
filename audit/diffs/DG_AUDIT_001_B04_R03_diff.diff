@@ -1,0 +1,254 @@
+diff --git a/RELEASE_NOTES.md b/RELEASE_NOTES.md
+index 7d862e3..a268751 100644
+--- a/RELEASE_NOTES.md
++++ b/RELEASE_NOTES.md
+@@ -15,7 +15,7 @@ La release est présentée comme un système cohérent, utilisable et testable.
+ - **Autorité du schéma et oracles de test.** Les validateurs `RUN_CARD` et contrats refusent un schéma absent, vide, incomplet ou hors sous-ensemble, et vérifient qu’un témoin invalide est rejeté. Chaque fixture déclare son motif attendu ; chaque invariant a son cas unitaire à faute unique.
+ - **Contrat `RUN_CARD` migré.** Protection critique à résultat, exception `FAIL-ASSUMED` structurée, axes V/U/A/T, réserves complètes, capacité et version de la preuve, droits, paquet SYSTÈME, B1b, ancres typées, conséquence décisionnelle (`CHANGED`, `CONFIRMED`, `ABANDONED`, `N/A-JUSTIFIED`, `NOT-OBSERVED`), temps du verdict et reclassement. Profil strict : mêmes exigences par mode, locators locaux résolus depuis le dossier de la carte.
+ - **Contrats de production.** Objets facultatifs, scopes attendu et observé séparés, jetons canoniques, couverture risque → contrôle, sources qualifiées, plan de preuve structuré ; CLI ouverte aux fichiers externes avec `--type`.
+-- **Lecture et routes.** Le lecteur résout par table, préfixe et sous-locator (dont `DIRECTION/START/TREE`), refuse l’ambiguïté et ignore les titres des blocs de code. Le validateur de carte contrôle la couverture de tout locator cité et 35 conditions de façade.
++- **Lecture et routes.** Le lecteur résout par table, préfixe et sous-locator (dont `DIRECTION/START/TREE`), refuse l’ambiguïté et ignore les titres des blocs de code. Le validateur de carte contrôle la couverture de tout locator cité et 42 conditions de façade.
+ - **Sources normatives.** Statut `SEED` du cycle de vie ; deux sorties canoniques (réponse visible et handoff) ; table de correspondance `RUN_CARD` par phase ; promesse du validateur (ce qu’il atteste, ce qu’il n’atteste pas) ; triade de conséquence décisionnelle ; cible visuelle en une seule table ; contrat du premier objet relié à `SAVOIR/CRAFT/CFT-00` ; marquage `TRUTH` à deux axes ; regard externe qualifié ; palette sans répartition imposée ; contrat de composant partagé unique dans `BIBLIOTHEQUE/COMPONENTS`.
+ - **Façades.** QUICKSTART, README des deux distributions, glossaire, cartes et skill corrigés sur les écarts relevés ; la cohérence opposable se limite à la liste close des conditions de façade (`validate_reading_map.py`) : une divergence hors de cette liste n’est pas détectée. Efficacité déclarée `NOT-VERIFIED` partout.
+ - **Outils et build.** Archives créées dans le répertoire de travail puis publiées, membres contrôlés contre le manifeste, promotion transactionnelle, liens symboliques refusés, exclusions limitées à la racine ; manifeste sans doublon et version unique ; lectures non UTF-8, clés JSON répétées et types illégaux refusés proprement ; `validate_all.py` lançable depuis n’importe quel dossier ; chemins propres à l’export Local ; actions du workflow épinglées par SHA complet (runtime node24).
+diff --git a/V1/official/ACTION.md b/V1/official/ACTION.md
+index fc2c237..666ea0f 100644
+--- a/V1/official/ACTION.md
++++ b/V1/official/ACTION.md
+@@ -383,7 +383,7 @@ Pour un agent ou un script, la `RUN_CARD` ou l’`EXECUTION-SNAPSHOT` peut être
+ 
+ La projection canonique se trouve dans `schemas/run_card.example.json`. Utilisez-la comme exemple machine-readable et validez-la avec `python3 scripts/validate_run_card.py schemas/run_card.example.json`. ACTION ne duplique pas ici un exemple YAML partiel : la projection JSON est la source unique de l’exemple structuré, tandis que cette section précise seulement son rôle de transport.
+ 
+-Les valeurs `state`, `issue`, `verdict`, `gate`, `axis`, `decision_change`, `NOT-VERIFIED`, `NOT-OBSERVED` et `N/A-JUSTIFIED` ne doivent pas être fusionnées. `null` signifie qu’aucune valeur n’est déclarée dans cette projection ; il ne signifie ni réussite ni preuve absente. La projection ne doit jamais introduire `SELF-DECLARED`, `ATLAS-PASS`, `POLISHED`, `SLOP-FREE` ou un score esthétique. La projection machine ne remplace ni la trace complète, ni l’observation, ni la clôture d’ACTION.
++Les valeurs `state`, `issue`, `verdict`, `gate`, `axis`, `decision_change`, `NOT-VERIFIED`, `NOT-OBSERVED` et `N/A-JUSTIFIED` ne doivent pas être fusionnées. `null` signifie qu’aucune valeur n’est déclarée dans cette projection ; il ne signifie ni réussite ni preuve absente. Seuls `closure.issue`, `closure.verdict` et `risk.critical_protection` admettent `null` ; un champ facultatif sans valeur est omis (par exemple `closure.direction_status` hors surface `DIRECTION`), et un champ requis sans valeur suit sa règle propre (par exemple des ancres vides avec une issue non nulle). La projection ne doit jamais introduire `SELF-DECLARED`, `ATLAS-PASS`, `POLISHED`, `SLOP-FREE` ou un score esthétique. La projection machine ne remplace ni la trace complète, ni l’observation, ni la clôture d’ACTION.
+ 
+ ### Frontière de validation et de preuve
+ 
+@@ -463,7 +463,7 @@ Livre d’abord l’artefact ou le lien de rendu. Enregistre ensuite le paquet m
+ | **ITER** | Direction rappelée et retrouvable, diff observable, non-régression, preuve du risque touché, V/U/A/T mis à jour, verdict, risque restant, prochaine action et conséquence décisionnelle (`DECISION-CHANGE`, `N/A-JUSTIFIED` ou `NOT-OBSERVED`). | Forme seule, dans la trace. |
+ | **STANDARD** | Rendu ou artefact, hiérarchie, typographie, états pertinents, V/U/A/T, verdict, risque restant, prochaine action et conséquence décisionnelle (`DECISION-CHANGE`, `N/A-JUSTIFIED` ou `NOT-OBSERVED`). | Forme seule, dans la trace. |
+ | **DIRECTION** | Artefact, direction écrite, ancre/spec, capture, trace locale des assets pertinents, écarts, revue créative, creative close, gates A/B/C, V/U/A/T, statut de direction, verdict global, owner, risque restant, prochaine preuve et conséquence décisionnelle (`DECISION-CHANGE`, `N/A-JUSTIFIED` ou `NOT-OBSERVED`). | Invariants DIRECTION et B1b (`closure.b1b`). |
+-| **SYSTÈME** | Décision de système, impact, consumers, owner, migration/rollback, non-régression, réserves, verdict et entrée CHANGELOG. | `closure.system_package`. |
++| **SYSTÈME** | Décision de système, impact, consumers, owner, migration/rollback, non-régression, réserves, verdict, entrée CHANGELOG et conséquence décisionnelle (`DECISION-CHANGE`, `N/A-JUSTIFIED` ou `NOT-OBSERVED`). | `closure.system_package`. |
+ 
+ Un verdict vert ne certifie que ce que la liste close contrôle (voir la frontière de validation d’`ACTION/RUN_CARD`).
+ 
+@@ -664,7 +664,7 @@ La partition vérifie aussi reflow, zoom et ajustements d’espacement utilisate
+ - **Format, poids cible, fallback, mouvement et reduced motion :**
+ - **Preuve V/U/A/T (après observation) et contre-indication :**
+ 
+-La provenance informe l’origine ; elle ne constitue pas une autorisation de réemploi. Un droit inconnu (`rights_status` : `unknown`) interdit `ACCEPTED` ; `ACCEPTED-WITH-RESERVATION` reste possible avec une réserve structurée dont le scope couvre les droits et dont la condition de sortie est leur clearance, et la diffusion attend cette clearance. Un droit non autorisé déclenche `RETURNED`, `ESCALATED` ou le statut prévu par le contexte avant diffusion. La machine contrôle seulement l’exclusion d’`ACCEPTED` ; la réserve sur les droits reste à la trace.
++La provenance informe l’origine ; elle ne constitue pas une autorisation de réemploi. Un droit inconnu (`rights_status` : `unknown`) interdit `ACCEPTED` ; `ACCEPTED-WITH-RESERVATION` reste possible avec une réserve structurée dont le scope couvre les droits et dont la condition de sortie est leur clearance, et la diffusion attend cette clearance. Un droit non autorisé déclenche `RETURNED`, `ESCALATED` ou le statut prévu par le contexte avant diffusion. La machine ne contrôle cette exclusion que pour une `RUN_CARD` `DIRECTION`, où `artifact.rights_status` est requis ; dans les autres modes, comme pour la réserve sur les droits, le contrôle reste à la trace.
+ 
+ ### Contrat de composant et baseline
+ 
+@@ -1000,7 +1000,7 @@ Tout cycle qui modifie ACTION ou un contrat connexe se clôt par une recette ava
+ | Échappatoire théâtrale | Chaque mécanisme est testé contre sa manière la plus facile d’être satisfait sans intention. |
+ | Run réel | Une modification substantielle est exercée sur un run réel avant adoption élargie. |
+ | Ownership | Owner du changement, statut d’adoption et prochaine revue sont nommés. |
+-| Réserves | Owner, périmètre, impact, date de revue, prochaine preuve et condition de sortie sont persistants. |
++| Réserves | Owner, périmètre, date ou version, impact, date de revue, prochaine preuve et condition de sortie sont persistants. |
+ 
+ La recette peut être automatisée pour les fichiers, routes, statuts et renvois. Elle doit rester humaine pour le scope, l’intention, l’échappatoire théâtrale, la proportionnalité et le jugement du risque.
+ 
+@@ -1018,7 +1018,7 @@ Avant de clôturer un run, vérifie :
+ 4. Le scope et la limite de couverture sont-ils connus lorsque la preuve le requiert ?
+ 5. Les V/U/A/T touchés et le risque restant sont-ils renseignés ?
+ 6. Le statut de direction, le verdict global, l’owner et la prochaine action sont-ils persistants ?
+-7. La réserve, si elle existe, possède-t-elle owner, périmètre, impact, date de revue, prochaine preuve et condition de sortie ?
++7. La réserve, si elle existe, possède-t-elle owner, périmètre, date ou version, impact, date de revue, prochaine preuve et condition de sortie ?
+ 8. Quelle décision concrète a changé grâce à la procédure ? Si la réponse est « aucune », la procédure est-elle réellement justifiée ?
+ 9. Quel niveau de qualité était visé au premier rendu, et quel élément observable démontre qu’il était composé, spécifique et suffisamment résolu pour le mode ?
+ 10. La dernière modification a-t-elle changé une relation perceptible, produit, preuve, accessibilité ou robustesse, ou seulement la justification ?
+diff --git a/V1/official/CHANGELOG.md b/V1/official/CHANGELOG.md
+index 07e4887..6f6ae64 100644
+--- a/V1/official/CHANGELOG.md
++++ b/V1/official/CHANGELOG.md
+@@ -13,8 +13,8 @@ Aucun changement de schéma, d’invariant machine ni de fixture. Les cartes val
+ - **B1b.** La portée écrite rejoint celle du validateur : toute surface `DIRECTION` qui accepte avec V en `PASS` ou `PASS-WITH-RESERVATION`.
+ - **Sorties par mode.** Les blocs `RUN-*` renvoient au paquet de leur mode dans `ACTION/CLOSE-PACKAGE`, qui reprend leurs éléments propres.
+ - **Façades.** Creative Boot sans nombre fixe d’anti-directions ni de tension ; chargement de Gate B en `LITE` et `ITER` ; projection machine conforme au schéma (valeurs d’axes, cinq champs de `profile_decision`) ; colonne « Retour si… » dans le §6 du QUICKSTART ; légende des tags ; exemple `CLOSED` du glossaire aligné sur la protection critique ; exemples de la skill renvoyant à la sérialisation.
+-- **Textes normatifs.** Table de correspondance `VISUAL_TARGET` limitée aux champs de sa table ; droits inconnus (`ACCEPTED` interdit, réserve possible, diffusion après clearance) ; une seule liste pour les ressources techniques (`ACTION/POLICIES`).
+-- **Validateur de carte.** La liste close des conditions de façade passe de 21 à 35 conditions.
++- **Textes normatifs.** Table de correspondance `VISUAL_TARGET` limitée aux champs de sa table ; droits inconnus (`ACCEPTED` interdit, réserve possible, diffusion après clearance, contrôle machine en `DIRECTION` seulement) ; `null` réservé aux champs qui l’admettent ; une seule liste pour les ressources techniques (`ACTION/POLICIES`).
++- **Validateur de carte.** La liste close des conditions de façade passe de 21 à 42 conditions.
+ - **Erratum V1.1.0.** La phrase « façades alignées sur leurs propriétaires » est bornée à ce que la liste close contrôle.
+ 
+ **L’efficacité sur des runs réels reste `NOT-VERIFIED`.**
+diff --git a/V1/official/GLOSSAIRE.md b/V1/official/GLOSSAIRE.md
+index 157e35b..62b96e4 100644
+--- a/V1/official/GLOSSAIRE.md
++++ b/V1/official/GLOSSAIRE.md
+@@ -56,7 +56,7 @@ Ces exemples illustrent l’usage des termes ; ils ne créent pas de règle supp
+ | **NOT-VERIFIED** | « Le contraste a été inspecté ; aucun test avec lecteur d’écran n’a été exécuté. » |
+ | **DECISION-CHANGE** | « `CHANGED` — après observation à 390 px, la décision « deux CTA de même poids » est abandonnée au profit d’un CTA principal unique (observation : capture avant/après). » |
+ | **N/A-JUSTIFIED** | « Aucun test de préférence n’est applicable : la décision porte ici uniquement sur la robustesse du composant. » |
+-| **CLOSED** | « La trace et les artefacts sont persistés. `CLOSED` ne dit rien du verdict : un run peut être clos en `RETURN`. Clos en `ACCEPTED-WITH-RESERVATION`, il porte une réserve complète (owner, portée, impact, prochaine preuve, date de revue, condition de sortie). Une protection critique restée `NOT-VERIFIED` exclut `ACCEPTED`, pas la réserve ; une protection en échec (`FAIL`) exclut tout verdict accepté. » |
++| **CLOSED** | « La trace et les artefacts sont persistés. `CLOSED` ne dit rien du verdict : un run peut être clos en `RETURN`. Clos en `ACCEPTED-WITH-RESERVATION`, il porte une réserve complète (owner, portée, date ou version, impact, prochaine preuve, date de revue, condition de sortie). Une protection critique restée `NOT-VERIFIED` exclut `ACCEPTED`, pas la réserve ; une protection en échec (`FAIL`) exclut tout verdict accepté. » |
+ 
+ ## Pour commencer sans vocabulaire préalable
+ 
+diff --git a/V1/official/QUICKSTART.md b/V1/official/QUICKSTART.md
+index c716215..07ef5c6 100644
+--- a/V1/official/QUICKSTART.md
++++ b/V1/official/QUICKSTART.md
+@@ -150,8 +150,8 @@ Le mode est une hypothèse de routage, jamais un moyen de réduire la protection
+ 
+ | Mode | Charger d’abord | Ajouter uniquement si cela change la décision |
+ |---|---|---|
+-| `LITE` | `DIRECTION/START`, `ACTION/RUN-LITE`, `ACTION/FAST-PATH`. | `SAVOIR`, `BIBLIOTHEQUE` ou une ancre si le jugement ou la structure changent réellement. |
+-| `ITER` | `DIRECTION/START`, `ACTION/RUN-ITER`, direction existante. | `SAVOIR` pour l’intégrité, `DIRECTION/VISUAL_TARGET` ou la couche système si la direction ou la portée changent. |
++| `LITE` | `DIRECTION/START`, `ACTION/RUN-LITE`, `ACTION/FAST-PATH`, `ACTION/GATE-A` applicable et `ACTION/GATE-B` du risque dominant. | `SAVOIR`, `BIBLIOTHEQUE` ou une ancre si le jugement ou la structure changent réellement. |
++| `ITER` | `DIRECTION/START`, `ACTION/RUN-ITER`, direction existante, `ACTION/GATE-A` applicable et `ACTION/GATE-B` du risque touché. | `SAVOIR` pour l’intégrité, `DIRECTION/VISUAL_TARGET` ou la couche système si la direction ou la portée changent. |
+ | `STANDARD` | `DIRECTION/START`, `ACTION/RUN-STANDARD`, `BIBLIOTHEQUE/SELECT` si la structure est ouverte. | `SAVOIR`, atelier ou `CFT-00` si le craft ou la qualité perceptuelle deviennent la décision. |
+ | `DIRECTION` | `DIRECTION/START`, `DIRECTION/VISUAL_TARGET`, `DIRECTION/FIRST-OBJECT`, `DIRECTION/DOUBLE-LOOP`, `ACTION/RUN-DIRECTION`, `SAVOIR/CRAFT/CFT-00` et les gates applicables. | Atlas, profil, référence ou atelier si cette source peut modifier la direction. |
+ | `SYSTÈME` | `DIRECTION/START`, `ACTION/RUN-SYSTEM`, `BIBLIOTHEQUE/COMPONENTS` si un composant change. | `SAVOIR` pour le jugement du système, l’atelier ou `CHANGELOG` si l’expression ou la règle partagée est en jeu. |
+@@ -227,7 +227,7 @@ RISK: identity + usage
+ SCOPE: desktop 1440, mobile 390, état initial, contenu réel de la page d’accueil
+ NEXT-PROOF: capture des deux viewports + revue créative + test de compréhension ciblé
+ OWNER: design-lead
+-STATE: BUILDING
++STATE: CHECKING
+ 
+ DECISION-INTENT:
+ La page doit donner une présence éditoriale forte tout en faisant comprendre
+@@ -249,11 +249,11 @@ le premier geste et l’objet visuel perd sa relation avec le titre.
+ DOMINANT-DEFECT:
+ La hiérarchie mobile sépare l’objet de la promesse et dilue le premier geste.
+ 
+-CHANGE:
++CORRECTION:
+ Rapprocher l’objet et le titre, réduire la saillance du CTA secondaire et réviser le crop.
+ 
+ DECISION-CHANGE:
+-Le défaut de hiérarchie est réel ; la correction modifie l’artefact et doit être réobservée.
++ABANDONED — la composition mobile du premier rendu est abandonnée : l’objet s’y sépare de la promesse et le CTA secondaire concurrence le premier geste (observation : capture mobile 390). La recomposition est décrite dans `CORRECTION` et reste à réobserver.
+ 
+ LIMIT:
+ Aucun test de lecteur d’écran ni test de performance exécuté dans ce run.
+diff --git a/V1/official/SAVOIR.md b/V1/official/SAVOIR.md
+index 5f0f40b..f609149 100644
+--- a/V1/official/SAVOIR.md
++++ b/V1/official/SAVOIR.md
+@@ -27,7 +27,7 @@ SAVOIR ne remplace pas :
+ 
+ `SAVOIR/ROUTING` est la carte de décision principale de ce fichier. Commencez par une seule route principale ; ajoutez une route de renvoi uniquement si elle peut modifier la décision, la preuve ou la limite. `READING_MAP.md` fournit une vue dérivée des déclencheurs et du non-chargement ; il ne remplace ni DIRECTION ni ACTION.
+ 
+-La sortie de SAVOIR n’est pas un verdict. Elle doit transmettre à ACTION la décision jugée, le principe ou la méthode utilisés, la conséquence observable, la preuve attendue, la limite, le propriétaire et la prochaine preuve. Si aucune décision ne change, retournez `N/A-JUSTIFIED` et ne chargez pas une route supplémentaire.
++La sortie de SAVOIR n’est pas un verdict. Elle doit transmettre à ACTION la décision jugée, le principe ou la méthode utilisés, la conséquence observable, la preuve attendue, la limite, le propriétaire et la prochaine preuve. Si aucune décision ne peut changer, ne chargez pas une route supplémentaire. À la clôture, si aucune décision n’est changée, confirmée ou abandonnée, la triade d’`ACTION/STATUS` s’applique : `N/A-JUSTIFIED` lorsqu’aucune conséquence n’était applicable, `NOT-OBSERVED` lorsqu’une conséquence attendue n’a pas été observée.
+ 
+ **Condition d’arrêt de lecture :** arrêter lorsque la question de jugement, le levier choisi, la contre-indication, la limite et la prochaine observation sont explicites.
+ 
+@@ -876,7 +876,7 @@ Avant un verdict `DIRECTION`, réponds par une phrase liée à un objet concret
+ | Quel écart entre spec et rendu reste ? | Écart important ignoré ou justifié après coup. |
+ | Quelle preuve manque encore ? | `PASS` affirmé sans preuve adaptée. |
+ | Quelle hypothèse de contexte reste incertaine ? | Coût d’erreur élevé sans owner ni prochaine preuve. |
+-| Quelle décision concrète a changé grâce à cette procédure ? | Aucune décision modifiée, confirmée ou abandonnée sans justification `N/A-JUSTIFIED`. |
++| Quelle décision concrète a changé grâce à cette procédure ? | Aucune décision modifiée, confirmée ou abandonnée, sans `N/A-JUSTIFIED` justifié ni `NOT-OBSERVED` déclaré (triade d’`ACTION/STATUS`). |
+ | Quelle règle risque d’être satisfaite dans la lettre seulement ? | Aucun test d’échappatoire théâtrale ni artefact de conséquence observable n’a été fourni. |
+ 
+ ## Contrôle d’intégrité
+diff --git a/scripts/validate_reading_map.py b/scripts/validate_reading_map.py
+index 6820650..80ffc5d 100644
+--- a/scripts/validate_reading_map.py
++++ b/scripts/validate_reading_map.py
+@@ -360,6 +360,72 @@ def lcf_35(t: dict[str, str]) -> bool:
+     return bool(closed) and "n’est pas éligible" not in closed and "NOT-VERIFIED" in closed and "exclut `ACCEPTED`" in closed
+ 
+ 
++# ---------- R.03 (DG-AUDIT-001) : LCF-36 à LCF-42 ----------
++NO_DECISION = re.compile(r"(?i)aucune décision (ne change|n’est changée|modifiée)")
++
++
++def lcf_36(t: dict[str, str]) -> bool:
++    l = next((x for x in t["A"].splitlines() if "Un droit inconnu" in x), "")
++    return "que pour une `RUN_CARD` `DIRECTION`" in l and "contrôle seulement l’exclusion" not in l
++
++
++def lcf_37(t: dict[str, str]) -> bool:
++    seg = t["A"][t["A"].find("## ACTION/CLOSE-PACKAGE"):]
++    rows = [l for l in seg[:seg.find("\n\n", seg.find("| Mode | Paquet minimal"))].splitlines() if l.startswith("| **")]
++    return len(rows) == 5 and all("NOT-OBSERVED" in l for l in rows)
++
++
++def lcf_38(t: dict[str, str]) -> bool:
++    lines = [l for k in ("A", "D", "S", "B", "Q", "G", "SK", "EX") for l in t[k].splitlines()
++             if NO_DECISION.search(l) and "N/A-JUSTIFIED" in l]
++    sav = next((l for l in t["S"].splitlines() if l.startswith("La sortie de SAVOIR")), "")
++    return (all("NOT-OBSERVED" in l or "non applicable" in l or "selon le contrat ACTION" in l for l in lines)
++            and "À la clôture" in sav)
++
++
++def lcf_39(t: dict[str, str]) -> bool:
++    sec = t["Q"][t["Q"].find("## 5. Charger"):t["Q"].find("## 6.")]
++    return all((r := row(sec, f"`{m}`")) and "ACTION/GATE-B" in r[1] for m in ("LITE", "ITER"))
++
++
++def lcf_40(t: dict[str, str]) -> bool:
++    closed = next((l for l in t["G"].splitlines() if l.startswith("| **CLOSED** |")), "")
++    exit_rows = [l for l in t["A"].splitlines() if l.startswith("| Réserves |") or l.startswith("7. La réserve")]
++    return "date ou version" in closed and len(exit_rows) == 2 and all("date ou version" in l for l in exit_rows)
++
++
++def lcf_41(t: dict[str, str]) -> bool:
++    try:
++        schema = json.loads(SCHEMA.read_text(encoding="utf-8"))
++    except (OSError, ValueError):
++        return False
++    found: list[str] = []
++
++    def walk(node: object, path: list[str]) -> None:
++        if isinstance(node, dict):
++            enum, typ = node.get("enum"), node.get("type")
++            if (isinstance(enum, list) and None in enum) or typ == "null" or (isinstance(typ, list) and "null" in typ):
++                found.append(".".join(p for p in path if p not in ("properties", "run_card")))
++            for key, value in node.items():
++                walk(value, path + [key])
++        elif isinstance(node, list):
++            for value in node:
++                walk(value, path)
++
++    walk(schema.get("properties", {}), [])
++    line = next((l for l in t["A"].splitlines() if "`null` signifie" in l), "")
++    return (bool(found) and all(f"`{f}`" in line for f in found) and "champ facultatif sans valeur est omis" in line
++            and "schéma l’admet" in t["MP"] and "champ facultatif sans valeur est omis" in t["MP"])
++
++
++def lcf_42(t: dict[str, str]) -> bool:
++    ex = t["Q"][t["Q"].find("## 9. Exemple complet minimal"):t["Q"].find("## 10.")]
++    after = ex.split("DECISION-CHANGE:\n", 1)
++    return (bool(ex) and not re.search(r"(?m)^CHANGE:", ex) and len(after) == 2
++            and re.match(OUTCOME + r" — ", after[1]) is not None and "reste à réobserver" in after[1].split("\n\n")[0]
++            and not after[1].startswith("CHANGED"))
++
++
+ def check_facades(errors: list[str]) -> None:
+     t = load_texts()
+     rm33, rm49 = row(t["RM"], "Direction identitaire"), row(t["RM"], "Accessibilité")
+@@ -418,6 +484,13 @@ def check_facades(errors: list[str]) -> None:
+         ("LCF-33", "SAVOIR, ressource de stack", "ACTION/POLICIES (sept champs) ; D3 T-6 ; R-13", lcf_33(t)),
+         ("LCF-34", "ACTION, sorties des blocs RUN-*", "ACTION/CLOSE-PACKAGE ; C4 T-2 ; R-14", lcf_34(t)),
+         ("LCF-35", "GLOSSAIRE, exemple CLOSED", "ACTION (protection critique) ; B1", lcf_35(t)),
++        ("LCF-36", "ACTION, droits inconnus : portée du contrôle machine", "validate_run_card (rights_status, DIRECTION) ; Q-01", lcf_36(t)),
++        ("LCF-37", "ACTION/CLOSE-PACKAGE, cinq paquets", "ACTION/STATUS (triade) ; validate_run_card (decision_change) ; Q-02", lcf_37(t)),
++        ("LCF-38", "sources et façades : « aucune décision » et N/A-JUSTIFIED", "ACTION/STATUS (triade) ; Q-03", lcf_38(t)),
++        ("LCF-39", "QUICKSTART §5, chargement LITE et ITER", "ACTION/PRECONDITION (Gate B du risque) ; Q-06", lcf_39(t)),
++        ("LCF-40", "GLOSSAIRE, exemple CLOSED : réserve à sept attributs", "ACTION (réserve) ; RESERVATION_FIELDS ; Q-10", lcf_40(t)),
++        ("LCF-41", "ACTION et machine_projection : champs admettant null", "schemas/run_card.schema.json ; O-1", lcf_41(t)),
++        ("LCF-42", "QUICKSTART §9 : DECISION-CHANGE selon la triade", "ACTION/STATUS ; ACTION/HANDOFF ; Q-05", lcf_42(t)),
+     ]
+     for lcf_id, facade, source, held in table:
+         if not held:
+diff --git a/skills/design-governance-practice/references/machine_projection.md b/skills/design-governance-practice/references/machine_projection.md
+index 99e49a8..3a030de 100644
+--- a/skills/design-governance-practice/references/machine_projection.md
++++ b/skills/design-governance-practice/references/machine_projection.md
+@@ -117,7 +117,7 @@ run_card:
+         outcome: confirmed
+ ```
+ 
+-Préserver les distinctions entre `STATE`, `ISSUE`, `VERDICT`, statut de direction, `GATE`, `AXIS` et `DECISION-CHANGE`. Le `closure.verdict` global utilise uniquement les six valeurs d’ACTION. Les axes (`closure.axes`) prennent uniquement `PASS`, `PASS-WITH-RESERVATION`, `RETURN`, `NOT-VERIFIED` ou `N/A-JUSTIFIED` ; `NOT-OBSERVED` qualifie une conséquence décisionnelle (`decision_change.outcome`), jamais un axe. Aucune de ces valeurs ne devient un verdict global. `null` ne signifie ni réussite ni preuve absente.
++Préserver les distinctions entre `STATE`, `ISSUE`, `VERDICT`, statut de direction, `GATE`, `AXIS` et `DECISION-CHANGE`. Le `closure.verdict` global utilise uniquement les six valeurs d’ACTION. Les axes (`closure.axes`) prennent uniquement `PASS`, `PASS-WITH-RESERVATION`, `RETURN`, `NOT-VERIFIED` ou `N/A-JUSTIFIED` ; `NOT-OBSERVED` qualifie une conséquence décisionnelle (`decision_change.outcome`), jamais un axe. Aucune de ces valeurs ne devient un verdict global. `null` ne signifie ni réussite ni preuve absente ; il n’est admis que là où le schéma l’admet (`ACTION/RUN_CARD`) ; ailleurs, un champ facultatif sans valeur est omis.
+ 
+ `CLOSED` signifie que la trace et les artefacts sont persistés. Pour un verdict `ACCEPTED` ou `ACCEPTED-WITH-RESERVATION`, `proof.provenance` est obligatoire et doit identifier l’artefact, sa version, la méthode et la date d’observation. Pour une RUN_CARD `DIRECTION` clôturée, `creative_close` est obligatoire et doit contenir `presence`, `signature`, `craft_detail`, `dominant_defect` et `next_polish_action`. Lorsqu’une route `SAVOIR/STYLE` est activée, `profile_decision` peut transporter la phase, la décision, les dials, la contre-indication et la preuve de son effet ; s’il est présent, ses cinq champs sont obligatoires (`phase`, `decision`, `dials`, `counterindication`, `evidence`). Il peut coexister avec `RETURN`, `EXPLORATORY` ou une issue déclarée ; un axe ou une preuve peut rester `NOT-VERIFIED`. Il ne doit jamais être interprété comme un verdict positif.
+ 

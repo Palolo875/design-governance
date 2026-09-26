@@ -1,0 +1,1079 @@
+diff -u -r '--exclude=__pycache__' audit/package/.github/workflows/validate.yml b02/.github/workflows/validate.yml
+--- audit/package/.github/workflows/validate.yml	2026-09-25 00:24:06.000000000 +0000
++++ b02/.github/workflows/validate.yml	2026-09-25 11:24:55.208895253 +0000
+@@ -12,9 +12,9 @@
+     runs-on: ubuntu-latest
+     steps:
+       - name: Checkout
+-        uses: actions/checkout@v4
++        uses: actions/checkout@v5
+       - name: Set up Python
+-        uses: actions/setup-python@v5
++        uses: actions/setup-python@v6
+         with:
+           python-version: '3.11'
+       - name: Run package audit
+diff -u -r '--exclude=__pycache__' audit/package/README.md b02/README.md
+--- audit/package/README.md	2026-09-25 00:24:06.000000000 +0000
++++ b02/README.md	2026-09-25 11:26:09.328194193 +0000
+@@ -1,10 +1,10 @@
+-# Design Governance V1.0.0
++# Design Governance V1.0.1
+ 
+ Design Governance V1 est un cadre de **direction, de création, de jugement et de vérification du design**. Il aide à transformer un brief en décision située, artefact réel, observation pertinente et trace proportionnée au risque.
+ 
+ Le corpus s’adresse à un designer, une équipe produit ou un agent qui doit produire un travail visuellement dirigé, spécifique, construit et poli, tout en rendant ses décisions, ses preuves et ses limites lisibles.
+ 
+-> **Statut expérimental :** Design Governance V1.0.0 est une expérimentation maintenue. La baseline est contrôlée et destinée à un usage supervisé ; elle ne promet ni beauté automatique, ni réussite universelle, ni validation d’usage, ni conformité sans preuve adaptée.
++> **Statut expérimental :** Design Governance V1.0.1 est une expérimentation maintenue. La baseline est contrôlée et destinée à un usage supervisé ; elle ne promet ni beauté automatique, ni réussite universelle, ni validation d’usage, ni conformité sans preuve adaptée.
+ 
+ ## Fiche de version
+ 
+@@ -43,10 +43,10 @@
+ | Situation | Chemin de départ | Point d’attention |
+ |---|---|---|
+ | Correction locale à faible risque | `LITE` | Preuve minimale et scope étroit. |
+-| Amélioration guidée par une observation | `ITER` | La correction doit modifier l’artefact ou la décision. |
++| Retouche d’une surface dont la direction est retrouvable | `ITER` | Direction existante retrouvable ; la correction doit modifier l’artefact ou la décision. Sans direction retrouvable, reclasser avec `DIRECTION/START`. |
+ | Construction produit standard | `STANDARD` | Structure, contenu réel, états et usage proportionnés. |
+ | Décision visuelle ou identitaire | `DIRECTION` | Premier objet, cible visuelle, craft et preuve réelle. |
+-| Système partagé ou bibliothèque | `SYSTÈME` | Cohérence inter-surfaces, robustesse et promotion. |
++| Décision partagée qui est l’objet direct du run | `SYSTÈME` | Consumers, migration, rollback, non-régression et entrée `CHANGELOG`. |
+ 
+ Ces chemins sont des points d’entrée vers les contrats propriétaires, non de nouvelles règles du README. Pour une surface créative, le premier rendu doit déjà être composé, spécifique, crédible et suffisamment résolu selon le risque. Le `one-shot` peut compresser les cycles seulement après observation réelle ; il ne supprime ni le jugement ni la preuve applicable.
+ 
+diff -u -r '--exclude=__pycache__' audit/package/RELEASE_NOTES.md b02/RELEASE_NOTES.md
+--- audit/package/RELEASE_NOTES.md	2026-09-25 00:24:06.000000000 +0000
++++ b02/RELEASE_NOTES.md	2026-09-25 11:26:09.328924404 +0000
+@@ -1,12 +1,16 @@
+-# Release notes — Design Governance V1.0.0
++# Release notes — Design Governance V1.0.1
+ 
+-**Statut expérimental :** Design Governance V1.0.0 est une expérimentation maintenue.  
+-**Date de publication :** 2026-09-19  
++**Statut expérimental :** Design Governance V1.0.1 est une expérimentation maintenue.  
++**Date de publication :** candidat du 2026-09-25, non publié (V1.0.0 : 2026-09-19)  
+ **Usage recommandé :** pilote contrôlé, supervision humaine et preuve adaptée au risque
+ 
++## Changements depuis V1.0.0
++
++Version corrective : contrôles machine qui ne peuvent plus réussir sur un schéma vide ou affaibli, archives vérifiées contre le manifest, 70 locators servis par la CLI, façades réalignées sur les minima de leurs propriétaires et CI sous Node 24. Aucune règle normative n’est modifiée. Détail dans `V1/official/CHANGELOG.md`.
++
+ ## Présentation
+ 
+-Design Governance V1.0.0 est une baseline publique pour diriger, créer, juger, construire et vérifier un travail de design. Elle aide à transformer un brief en décision située, artefact réel, observation pertinente et trace proportionnée au risque.
++Design Governance V1.0.1 est une baseline publique pour diriger, créer, juger, construire et vérifier un travail de design. Elle aide à transformer un brief en décision située, artefact réel, observation pertinente et trace proportionnée au risque.
+ 
+ La release est présentée comme un système cohérent, utilisable et testable. Elle ne promet ni beauté automatique, ni réussite universelle, ni validation d’usage sans preuve adaptée.
+ 
+@@ -53,7 +57,7 @@
+ 
+ ## Limites déclarées
+ 
+-V1.0.0 est une baseline expérimentale. Son efficacité de lecture, son adoption, sa charge cognitive, sa performance de production et sa supériorité par rapport à une autre méthode ne sont pas déclarées comme démontrées.
++V1.0.1 est une baseline expérimentale. Son efficacité de lecture, son adoption, sa charge cognitive, sa performance de production et sa supériorité par rapport à une autre méthode ne sont pas déclarées comme démontrées.
+ 
+ L’historique détaillé de construction et de travail est conservé hors de la distribution publique. Il n’est pas nécessaire pour utiliser la baseline.
+ 
+diff -u -r '--exclude=__pycache__' audit/package/V1/official/CHANGELOG.md b02/V1/official/CHANGELOG.md
+--- audit/package/V1/official/CHANGELOG.md	2026-09-25 00:24:06.000000000 +0000
++++ b02/V1/official/CHANGELOG.md	2026-09-25 11:26:09.328757277 +0000
+@@ -1,10 +1,22 @@
+-# Changelog — Design Governance V1.0.0
++# Changelog — Design Governance V1.0.1
+ 
+-**Version publique :** `V1.0.0`  
+-**Statut expérimental :** Design Governance V1.0.0 est une expérimentation maintenue.  
+-**Date de publication :** 2026-09-19  
++**Version publique :** `V1.0.1`  
++**Statut expérimental :** Design Governance V1.0.1 est une expérimentation maintenue.  
++**Date de publication :** candidat du 2026-09-25, non publié (baseline précédente V1.0.0 du 2026-09-19)  
+ **Usage recommandé :** pilote contrôlé, supervision humaine et preuve adaptée au risque
+ 
++## V1.0.1 — Correctifs d’outillage et de façade (candidat)
++
++Version corrective issue de l’audit `DG-AUDIT-001` (lot 1, phase 11.01). **Aucune règle normative de `DIRECTION.md`, `ACTION.md`, `SAVOIR.md` ou `BIBLIOTHEQUE.md` n’est modifiée.** Les changements portent sur les contrôles machine, l’accès aux sections et l’alignement des façades sur leurs propriétaires.
++
++- **Contrôles machine.** Un schéma vide, non objet ou sans champ requis n’est plus admis ; chaque enum gardé et chaque champ requis atteint par l’exemple est muté et doit être rejeté. Les clés JSON répétées et l’UTF-8 invalide deviennent des diagnostics ; une entrée hors contrat ne produit plus d’exception brute. Chaque fixture négative de la suite native déclare son motif attendu ; le runner global vérifie ce motif et résout les fixtures depuis la racine du package.
++- **Distributions.** Le build refuse les liens symboliques, crée des archives neuves, compare chaque archive à la liste du manifest de son profil, publie archives et `dist` ensemble et restaure la dernière distribution après une publication interrompue. Le validateur documentaire contrôle l’unicité du manifest, sa version face à ce CHANGELOG et les répertoires générés seulement à la racine.
++- **Accès aux sections.** `READING_MAP.md` sert désormais tous les locators cités par le package (70 au lieu de 24), dont `ACTION/HANDOFF`, `ACTION/STATUS`, `ACTION/PRECONDITION`, `SAVOIR/SOURCE` et `SAVOIR/TOOLS`. L’extraction ignore les titres placés dans un bloc de code et refuse un titre ambigu.
++- **Façades.** `ACTION/RUN-DIRECTION`, les minima `SYSTÈME` et les contrôles applicables de `ACTION/GATE-A` ne sont plus présentés comme des ajouts facultatifs dans `READING_MAP.md`, `ORCHESTRATION_MAP.md` et `QUICKSTART.md` ; `ITER` exige une direction retrouvable dans le README ; un craft qui ne redéfinit pas la direction reste `ITER` ; la skill restitue les champs complets d’`ACTION/HANDOFF` et nomme le dossier officiel des deux profils ; le flux de référence montre la reprise après protection critique et après `NOT-VERIFIED`. Un contrôle empêche une route de mode d’apparaître en ajout conditionnel.
++- **CI.** Le workflow utilise `actions/checkout@v5` et `actions/setup-python@v6`, qui s’exécutent sous Node 24.
++
++**Limites.** Ces contrôles protègent l’intégrité de la projection et des distributions ; ils ne prouvent ni la réalité d’un run, ni la qualité d’un rendu, ni l’usage. Aucun run CI hébergé n’a encore été observé pour V1.0.1.
++
+ ## V1.0.0 — Baseline expérimentale
+ 
+ Design Governance V1.0.0 est une baseline publique cohérente pour diriger, construire, juger et vérifier un travail de design. Elle transforme un brief en décision située, artefact réel, observation pertinente et trace proportionnée au risque.
+diff -u -r '--exclude=__pycache__' audit/package/V1/official/ORCHESTRATION_MAP.md b02/V1/official/ORCHESTRATION_MAP.md
+--- audit/package/V1/official/ORCHESTRATION_MAP.md	2026-09-25 00:24:06.000000000 +0000
++++ b02/V1/official/ORCHESTRATION_MAP.md	2026-09-25 11:24:39.330038921 +0000
+@@ -17,14 +17,14 @@
+ | **Direction forte et spécifique** | `DIRECTION/START` + `ACTION/RUN-DIRECTION` + `DIRECTION/FIRST-OBJECT` + `DIRECTION/VISUAL_TARGET` | `DIRECTION/CREATIVE-BOOT`, `DIRECTION/DOMAIN-FRAME`, `SAVOIR/CRAFT`, `SAVOIR/SOURCE`, `SAVOIR/STYLE`, `BIBLIOTHEQUE/SELECT` | Premier objet réel, revue créative, observation du défaut dominant et correction réellement observée. |
+ | **Beauté, goût et craft situés** | `DIRECTION/FIRST-OBJECT` + `SAVOIR/CRAFT` + `ACTION/FIRST-RENDER` | `SAVOIR/STYLE`, contenu crédible, matière, typographie ou ancre lorsque chacun peut modifier le jugement | Rendu réel dans le scope ; jugement créatif séparé des preuves d’usage, d’accessibilité et de robustesse. |
+ | **Créativité variée mais utile** | `DIRECTION/CREATIVE-BOOT` + `DIRECTION/VISUAL_TARGET` + une alternative située | `DIRECTION/DOMAIN-FRAME`, `SAVOIR/SOURCE` ou atelier seulement si l’axe de divergence change une décision | Comparaison dans le même scope par public, JTBD, promesse, geste, structure ou expression. |
+-| **UI/UX habitable** | `ACTION/UI-UX-REALITY` + `BIBLIOTHEQUE/SELECT` + contenu et états réels | `ACTION/GATE-A`, responsive, focus, récupération, runtime ou `SAVOIR/CONTEXT` selon le risque | Tâche, états, viewports, contenu extrême, clavier ou méthode adaptée au claim. |
+-| **Preuve et décision fiables** | `ACTION/STRUCTURED-PROOF` + artefact réel + `ACTION/CLOSE-EXIT-CHECK` | Gate correspondant au risque, preuve croisée ou `RUN_CARD` stricte si la persistance l’exige | Claim, méthode, scope, date, artefact, limite et `TRACE-LOCATOR` retrouvables. |
++| **UI/UX habitable** | `ACTION/UI-UX-REALITY` + `BIBLIOTHEQUE/SELECT` + contenu et états réels + contrôles applicables de `ACTION/GATE-A` | Responsive, focus approfondi, récupération, runtime ou `SAVOIR/CONTEXT` selon le risque | Tâche, états, viewports, contenu extrême, clavier ou méthode adaptée au claim. |
++| **Preuve et décision fiables** | `ACTION/STRUCTURED-PROOF` + artefact réel + gates exigés par le mode (`ACTION/PRECONDITION`) + `ACTION/CLOSE-EXIT-CHECK` | Preuve croisée ou `RUN_CARD` stricte si la persistance l’exige | Claim, méthode, scope, date, artefact, limite et `TRACE-LOCATOR` retrouvables. |
+ | **Vitesse sans appauvrissement** | `DIRECTION/START` + `ACTION/FAST-PATH` + `LITE` ou `ITER` correctement classé | Ajouter une seule capacité si elle peut changer la décision ; reclassifier si le risque ou le périmètre augmente | Artefact réel, observation ciblée, preuve minimale applicable et prochaine action. |
+-| **Système maintenable** | `ACTION/RUN-SYSTEM` + `BIBLIOTHEQUE/COMPONENTS` | `BIBLIOTHEQUE/EVOLUTION`, `SAVOIR/SYSTEM`, migration, rollback ou `CHANGELOG` selon la décision partagée | Consumers, compatibilité, non-régression, owner, migration et condition de reprise. |
++| **Système maintenable** | `ACTION/RUN-SYSTEM` + consumers, migration, rollback, non-régression et entrée `CHANGELOG` (minimum `SYSTÈME`) | `BIBLIOTHEQUE/COMPONENTS` si un composant est touché, `BIBLIOTHEQUE/EVOLUTION`, `SAVOIR/SYSTEM` selon la décision partagée | Consumers, compatibilité, non-régression, owner, migration et condition de reprise. |
+ | **Domaine sensible ou incertain** | `DIRECTION/DOMAIN-FRAME` + `SAVOIR/SOURCE` + `ACTION/STRUCTURED-PROOF` | Contexte culturel, conventions, confiance ou recherche seulement si un déclencheur peut changer la décision | Source ou observation reliée à la décision, transformation, rejet et limite. |
+ | **Agent contrôlé** | `DIRECTION/START` + `ACTION/AUTHORITY` + `SKILL.md` + owner | `READING_MAP`, `RUN_CARD` et cette fiche seulement si plusieurs capacités sont réellement nécessaires | Artefact livré, autonomie exercée, décision, preuve, limite, escalade et prochaine action. |
+ 
+-Ces combinaisons ne sont pas des parcours obligatoires. Elles indiquent des capacités compatibles ; `READING_MAP.md` résout le premier chemin et les sources propriétaires définissent le contenu exact des routes.
++Les minima que `ACTION/PRECONDITION` impose au mode classé ne figurent jamais dans la colonne de renforcement : ils restent dus dans chaque combinaison. Ces combinaisons ne sont pas des parcours obligatoires. Elles indiquent des capacités compatibles ; `READING_MAP.md` résout le premier chemin et les sources propriétaires définissent le contenu exact des routes.
+ 
+ ## Variation créative
+ 
+diff -u -r '--exclude=__pycache__' audit/package/V1/official/QUICKSTART.md b02/V1/official/QUICKSTART.md
+--- audit/package/V1/official/QUICKSTART.md	2026-09-25 00:24:06.000000000 +0000
++++ b02/V1/official/QUICKSTART.md	2026-09-25 11:26:09.327937202 +0000
+@@ -1,6 +1,6 @@
+-# Design Governance V1.0.0 — Quickstart
++# Design Governance V1.0.1 — Quickstart
+ 
+-**Package Design Governance V1.0.0.** Expérimentation maintenue pour diriger, construire et vérifier un travail de design avec une trace proportionnée au risque. Il est destiné à un usage supervisé et ne constitue pas une preuve d’efficacité en production.
++**Package Design Governance V1.0.1.** Expérimentation maintenue pour diriger, construire et vérifier un travail de design avec une trace proportionnée au risque. Il est destiné à un usage supervisé et ne constitue pas une preuve d’efficacité en production.
+ 
+ > **Rôle de ce guide :** fournir une interface d’activation rapide. Il oriente la lecture et l’action, mais n’ajoute aucune règle, route, gate, axe, statut, verdict ou autorité. Les cinq sources normatives font foi.
+ 
+@@ -138,8 +138,8 @@
+ | Correction locale, contraste, contenu, bug ou petit ajustement | `LITE` ou `ITER` | `DIRECTION/START`, puis `ACTION/RUN-LITE` ou `ACTION/RUN-ITER`. |
+ | Nouvelle page ou nouveau flow sans identité autonome | `STANDARD` | `DIRECTION/START`, `ACTION/RUN-STANDARD`, puis `BIBLIOTHEQUE/SELECT` si la structure est ouverte. |
+ | Brief flou ou risque impossible à classer | Clarification ou `EXTERNAL-START` avant le mode | `DIRECTION/START`, puis conservation de l’incertitude et reclassification. |
+-| Première scène, identité, direction visuelle ou enjeu de craft dominant | `DIRECTION` | `DIRECTION/START`, `DIRECTION/VISUAL_TARGET`, `SAVOIR/CRAFT — CFT-00`, puis `ACTION/RUN-DIRECTION`. |
+-| Token, composant, pattern, convention ou format partagé | `SYSTÈME` | `DIRECTION/START`, `ACTION/RUN-SYSTEM`, `BIBLIOTHEQUE/COMPONENTS` et `CHANGELOG` si nécessaire. |
++| Première scène, identité, direction visuelle, ou craft qui redéfinit la direction | `DIRECTION` | `DIRECTION/START`, `DIRECTION/VISUAL_TARGET`, `SAVOIR/CRAFT — CFT-00`, puis `ACTION/RUN-DIRECTION`. Un travail de craft sur une direction retrouvable, sans remise en cause identitaire, reste `ITER`. |
++| Token, composant, pattern, convention ou format partagé, objet direct du run avec plusieurs consumers | `SYSTÈME` | `DIRECTION/START`, `ACTION/RUN-SYSTEM` avec migration, rollback, non-régression et entrée `CHANGELOG` ; `BIBLIOTHEQUE/COMPONENTS` si un composant est touché. |
+ 
+ Le mode est une hypothèse de routage, jamais un moyen de réduire la protection. Avant de conserver `LITE` ou `ITER`, vérifiez qu’aucun consumer partagé, geste critique, état, donnée, permission, sécurité, confidentialité ou preuve critique n’est touché. Si le périmètre ou le risque augmente, reclassifiez.
+ 
+@@ -151,7 +151,7 @@
+ | `ITER` | `DIRECTION/START`, `ACTION/RUN-ITER`, direction existante. | `SAVOIR` pour l’intégrité, `DIRECTION/VISUAL_TARGET` ou la couche système si la direction ou la portée changent. |
+ | `STANDARD` | `DIRECTION/START`, `ACTION/RUN-STANDARD`, `BIBLIOTHEQUE/SELECT` si la structure est ouverte. | `SAVOIR`, atelier ou `CFT-00` si le craft ou la qualité perceptuelle deviennent la décision. |
+ | `DIRECTION` | `DIRECTION/START`, `DIRECTION/VISUAL_TARGET`, `DIRECTION/FIRST-OBJECT`, `DIRECTION/DOUBLE-LOOP`, `ACTION/RUN-DIRECTION`, `SAVOIR/CRAFT — CFT-00` et les gates applicables. | Atlas, profil, référence ou atelier si cette source peut modifier la direction. |
+-| `SYSTÈME` | `DIRECTION/START`, `ACTION/RUN-SYSTEM`, `BIBLIOTHEQUE/COMPONENTS`. | `SAVOIR` pour le jugement du système, l’atelier ou `CHANGELOG` si l’expression ou la règle partagée est en jeu. |
++| `SYSTÈME` | `DIRECTION/START`, `ACTION/RUN-SYSTEM` avec migration, rollback, non-régression et entrée `CHANGELOG` ; `BIBLIOTHEQUE/COMPONENTS` si un composant est touché. | `SAVOIR` pour le jugement du système ou l’atelier si l’expression partagée est en jeu. |
+ 
+ « Non chargé par défaut » signifie qu’un module n’est pas lu sans raison ; ce n’est jamais une interdiction d’activer une source nécessaire. La charge documentaire ne diminue ni le mode, ni le niveau de preuve, ni la protection d’un risque.
+ 
+diff -u -r '--exclude=__pycache__' audit/package/V1/official/READING_MAP.md b02/V1/official/READING_MAP.md
+--- audit/package/V1/official/READING_MAP.md	2026-09-25 00:24:06.000000000 +0000
++++ b02/V1/official/READING_MAP.md	2026-09-25 11:24:21.401376976 +0000
+@@ -30,14 +30,14 @@
+ | Brief vague ou risque inconnu | `DIRECTION/START` | `DIRECTION/EXTERNAL-START` | Clarification, mode, risque, owner et prochaine preuve |
+ | Correction locale | `DIRECTION/START` → `ACTION/RUN-LITE` ou `RUN-ITER` | `SAVOIR` ou `BIBLIOTHEQUE` si la décision change | Delta, scope, preuve, limite, prochaine action |
+ | Nouvelle surface opérationnelle | `DIRECTION/START` → `ACTION/RUN-STANDARD` | `BIBLIOTHEQUE/SELECT`, `SAVOIR/CONTEXT` | Artefact, hiérarchie, états, preuve, risque restant |
+-| Direction identitaire | `DIRECTION/START` → `DIRECTION/VISUAL_TARGET` | `DIRECTION/FIRST-OBJECT`, `SAVOIR/CRAFT`, `ACTION/RUN-DIRECTION` | Direction, objet, capture, écarts, preuve, limite |
+-| Structure ou composant partagé | `DIRECTION/START` → `ACTION/RUN-SYSTEM` | `BIBLIOTHEQUE/COMPONENTS`, `SAVOIR/SYSTEM`, `CHANGELOG` | Consumers, owner, compatibilité, migration, rollback |
++| Direction identitaire | `DIRECTION/START` → `DIRECTION/VISUAL_TARGET` → `ACTION/RUN-DIRECTION` | `DIRECTION/FIRST-OBJECT`, `SAVOIR/CRAFT` | Direction, objet, capture, écarts, preuve, limite |
++| Structure ou composant partagé | `DIRECTION/START` → `ACTION/RUN-SYSTEM` (migration, rollback, non-régression et entrée `CHANGELOG` inclus) | `BIBLIOTHEQUE/COMPONENTS` si un composant est touché, `SAVOIR/SYSTEM` | Consumers, owner, compatibilité, migration, rollback |
+ | Preuve, vérification ou clôture | `ACTION` | Gate et route correspondant au risque | Observation, interprétation, décision, preuve, limite, sortie |
+ | Règle ou route durable | `CHANGELOG` et source propriétaire | `ACTION` pour preuve et `BIBLIOTHEQUE/EVOLUTION` si structure | Décision, source, owner, compatibilité, preuve, revue |
+ 
+ ## Activation multi-perspective
+ 
+-Une perspective ne se charge que si son déclencheur peut modifier la décision. `N/A-JUSTIFIED` est une sortie valide lorsque la perspective est examinée et non applicable.
++Une perspective ne se charge que si son déclencheur peut modifier la décision. `N/A-JUSTIFIED` est une sortie valide lorsque la perspective est examinée et non applicable. La colonne « Non-chargement » ne dispense jamais d’un minimum que `ACTION/PRECONDITION` impose au mode classé.
+ 
+ | Perspective | Déclencheur | Lecture minimale | Sortie | Non-chargement |
+ |---|---|---|---|---|
+@@ -46,7 +46,7 @@
+ | Usage | JTBD, action, confiance, récupération ou tâche critique | `ACTION/UI-UX-REALITY` | Geste, résultat, état, limite | Aucun impact sur usage déclaré |
+ | Contenu | Données, longueur, langue, claim ou état | `SAVOIR/TYPE` ou `STATE` | Contenu crédible, hiérarchie, limite | Contenu inchangé et non déterminant |
+ | Responsive | Mobile, zoom, reflow ou viewport critique | `ACTION/UI-UX-REALITY` + `SAVOIR/CONTEXT` | Recomposition, priorité, preuve de scope | Aucun changement de viewport ou risque déclaré |
+-| Accessibilité | Focus, clavier, sémantique, contraste, motion ou population critique | `SAVOIR/CONTEXT` + `ACTION/GATE-A` | Méthode, scope, résultat, limite | Risque explicitement hors scope et `N/A-JUSTIFIED` |
++| Accessibilité | Focus, clavier, sémantique, contraste, motion ou population critique | `SAVOIR/CONTEXT` + `ACTION/GATE-A` | Méthode, scope, résultat, limite | Aucune surface interactive, aucun contenu perçu ni état touché ; sinon les contrôles applicables de `ACTION/GATE-A` restent dus. `N/A-JUSTIFIED` exige cette raison vérifiable ; une simple déclaration de hors-scope ne suffit pas. |
+ | Runtime | Compatibilité, performance, fallback ou plateforme | `SAVOIR/TECH` + `ACTION` | Runtime, méthode, erreur, fallback, preuve | Aucun claim technique |
+ | Preuve | Claim, capture, mesure, verdict ou clôture | `ACTION` | Claim, méthode, scope, date, limite, locator | Aucune affirmation de résultat |
+ | Maintenance | Consumer partagé, trace, migration ou reprise | `ACTION` + `CHANGELOG` si durable | Owner, diff, compatibilité, revue, réouverture | Delta local sans conséquence future |
+@@ -92,7 +92,7 @@
+ 
+ ## Locators principaux
+ 
+-Les locators ci-dessous sont des titres exacts dans la baseline V1. Les routes non listées restent résolues par leur préfixe propriétaire et leur titre exact ; elles ne doivent pas être devinées.
++Les locators ci-dessous sont des titres exacts dans la baseline V1. Tout locator cité par une source normative, une façade ou la skill du package figure dans cette table et reste servi par `scripts/read_route.py` ; `scripts/validate_reading_map.py` le vérifie. Un nom absent de cette table n’est pas une route : il doit être résolu par son propriétaire ou déclaré `NOT-VERIFIED`, jamais deviné.
+ 
+ | Locator | Destination exacte |
+ |---|---|
+@@ -120,6 +120,52 @@
+ | `BIBLIOTHEQUE/SELECT` | `BIBLIOTHEQUE.md` — `## BIBLIOTHEQUE/SELECT — choisir avant de composer` |
+ | `BIBLIOTHEQUE/COMPONENTS` | `BIBLIOTHEQUE.md` — `## BIBLIOTHEQUE/COMPONENTS — couches et dépendances` |
+ | `BIBLIOTHEQUE/EVOLUTION` | `BIBLIOTHEQUE.md` — `## BIBLIOTHEQUE/EVOLUTION — promotion et dépréciation` |
++| `DIRECTION/CREATIVE-BOOT` | `DIRECTION.md` — `### DIRECTION/CREATIVE-BOOT — activer la boucle avant le premier pixel` |
++| `DIRECTION/DAILY` | `DIRECTION.md` — `## DIRECTION/DAILY — charger proportionnellement` |
++| `DIRECTION/DIRECTION-ATELIER` | `DIRECTION.md` — `## DIRECTION/DIRECTION-ATELIER — module officiel de direction située` |
++| `DIRECTION/DOMAIN-FRAME` | `DIRECTION.md` — `### DIRECTION/DOMAIN-FRAME — adapter le design au domaine` |
++| `DIRECTION/EXTERNAL-START` | `DIRECTION.md` — `## DIRECTION/EXTERNAL-START — activation portable sur brief vague` |
++| `DIRECTION/SERVICE-BOUNDARY` | `DIRECTION.md` — `## DIRECTION/SERVICE-BOUNDARY — ne pas confondre relation et contrat` |
++| `ACTION/ANTI-SLOP` | `ACTION.md` — `## ACTION/ANTI-SLOP — conséquence de gate` |
++| `ACTION/AUTHORITY` | `ACTION.md` — `### ACTION/AUTHORITY — portée d’action et reprise` |
++| `ACTION/GATE-B` | `ACTION.md` — `## ACTION/GATE-B — jugement contextualisé et risques` |
++| `ACTION/GATE-C` | `ACTION.md` — `## ACTION/GATE-C — craft sur rendu réel` |
++| `ACTION/HANDOFF` | `ACTION.md` — `### ACTION/HANDOFF — sortie minimale commune` |
++| `ACTION/MAINTENANCE` | `ACTION.md` — `## ACTION/MAINTENANCE — recette documentaire` |
++| `ACTION/OVERRIDE` | `ACTION.md` — `## ACTION/OVERRIDE — FAIL-ASSUMED et péremption` |
++| `ACTION/PIPELINE-DIRECTION` | `ACTION.md` — `## ACTION/PIPELINE-DIRECTION — direction vérifiable` |
++| `ACTION/POLICIES` | `ACTION.md` — `## ACTION/POLICIES — contraste et inspection` |
++| `ACTION/PRECONDITION` | `ACTION.md` — `## ACTION/PRECONDITION — mode, capacité et preuve` |
++| `ACTION/RUN` | `ACTION.md` — `## ACTION/RUN — routes d’exécution` |
++| `ACTION/RUN_CARD` | `ACTION.md` — `## ACTION/RUN_CARD — carte de run minimale` |
++| `ACTION/STATUS` | `ACTION.md` — `## ACTION/STATUS — états, issues et verdicts` |
++| `ACTION/STRUCTURED-PROOF` | `ACTION.md` — `## ACTION/STRUCTURED-PROOF — contrats avant build` |
++| `ACTION/VISUAL_PROOF` | `ACTION.md` — `## ACTION/VISUAL_PROOF — rendre la direction vérifiable` |
++| `SAVOIR/CONTEXT` | `SAVOIR.md` — `# SAVOIR/CONTEXT — accessibilité, contexte et robustesse` |
++| `SAVOIR/DESIGN-ATLAS` | `SAVOIR.md` — `# SAVOIR/DESIGN-ATLAS — familles et responsabilités` |
++| `SAVOIR/FAST-PATH` | `SAVOIR.md` — `### SAVOIR/FAST-PATH — juger sans produire un dossier` |
++| `SAVOIR/FRAME` | `SAVOIR.md` — `# SAVOIR/FRAME — fondations et cadrage` |
++| `SAVOIR/INTEGRITY` | `SAVOIR.md` — `# SAVOIR/INTEGRITY — limites, délégation et critique` |
++| `SAVOIR/SOURCE` | `SAVOIR.md` — `# SAVOIR/SOURCE — ancre et sourcing visuel` |
++| `SAVOIR/STATE` | `SAVOIR.md` — `# SAVOIR/STATE — craft, composants et états` |
++| `SAVOIR/STYLE` | `SAVOIR.md` — `# SAVOIR/STYLE — profils contrôlés et dials` |
++| `SAVOIR/SYSTEM` | `SAVOIR.md` — `# SAVOIR/SYSTEM — tokens et composants` |
++| `SAVOIR/TECH` | `SAVOIR.md` — `# SAVOIR/TECH — techniques, tests et stack` |
++| `SAVOIR/TOOLS` | `SAVOIR.md` — `# SAVOIR/TOOLS — claims, tendances et calibration` |
++| `SAVOIR/TYPE` | `SAVOIR.md` — `# SAVOIR/TYPE — typographie et données` |
++| `BIBLIOTHEQUE/COMPAT` | `BIBLIOTHEQUE.md` — `## BIBLIOTHEQUE/COMPAT — combiner avec une raison` |
++| `BIBLIOTHEQUE/CONTRACTS` | `BIBLIOTHEQUE.md` — `## BIBLIOTHEQUE/CONTRACTS — contrat commun de route` |
++| `BIBLIOTHEQUE/DERIVE` | `BIBLIOTHEQUE.md` — `### BIBLIOTHEQUE/DERIVE — inventer sans fabriquer un menu` |
++| `BIBLIOTHEQUE/FAST-PATH` | `BIBLIOTHEQUE.md` — `### BIBLIOTHEQUE/FAST-PATH — vérifier avant de sélectionner` |
++| `BIBLIOTHEQUE/GATE` | `BIBLIOTHEQUE.md` — `## BIBLIOTHEQUE/GATE — contrôle de module structurel complémentaire` |
++| `BIBLIOTHEQUE/GRID` | `BIBLIOTHEQUE.md` — `## BIBLIOTHEQUE/GRID — comment le regard circule` |
++| `BIBLIOTHEQUE/MICRO` | `BIBLIOTHEQUE.md` — `## BIBLIOTHEQUE/MICRO — unités denses` |
++| `BIBLIOTHEQUE/MODIFIER` | `BIBLIOTHEQUE.md` — `## BIBLIOTHEQUE/MODIFIER — comportements transversaux` |
++| `BIBLIOTHEQUE/OBJECT` | `BIBLIOTHEQUE.md` — `## BIBLIOTHEQUE/OBJECT — quelle preuve devient tangible` |
++| `BIBLIOTHEQUE/SCENE` | `BIBLIOTHEQUE.md` — `## BIBLIOTHEQUE/SCENE — comment la promesse devient une surface` |
++| `BIBLIOTHEQUE/SIGNATURE` | `BIBLIOTHEQUE.md` — `### BIBLIOTHEQUE/SIGNATURE — rendre l’écart vérifiable` |
++| `BIBLIOTHEQUE/SUPPORT` | `BIBLIOTHEQUE.md` — `## BIBLIOTHEQUE/SUPPORT — où la surface vit` |
++| `BIBLIOTHEQUE/TENSION` | `BIBLIOTHEQUE.md` — `### BIBLIOTHEQUE/TENSION — diverger avant de sélectionner` |
+ 
+ ## Condition d’arrêt
+ 
+diff -u -r '--exclude=__pycache__' audit/package/V1/official/README.md b02/V1/official/README.md
+--- audit/package/V1/official/README.md	2026-09-25 00:24:06.000000000 +0000
++++ b02/V1/official/README.md	2026-09-25 11:26:09.327529349 +0000
+@@ -1,6 +1,6 @@
+-# Design Governance V1.0.0
++# Design Governance V1.0.1
+ 
+-**Design Governance V1.0.0** est une expérimentation maintenue : un cadre de direction, de création, de jugement et de vérification du design. Il aide un humain ou un agent à transformer un brief en projet, interface, application, scène, identité ou système réellement construit, dirigé, exploitable et vérifiable.
++**Design Governance V1.0.1** est une expérimentation maintenue : un cadre de direction, de création, de jugement et de vérification du design. Il aide un humain ou un agent à transformer un brief en projet, interface, application, scène, identité ou système réellement construit, dirigé, exploitable et vérifiable.
+ 
+ V1 vise une première proposition composée, spécifique et soignée, sans imposer un registre esthétique par défaut. La qualité recherchée dépend du produit, du public, du contenu, du médium et du contexte.
+ 
+diff -u -r '--exclude=__pycache__' audit/package/scripts/build_distributions.sh b02/scripts/build_distributions.sh
+--- audit/package/scripts/build_distributions.sh	2026-09-25 00:24:06.000000000 +0000
++++ b02/scripts/build_distributions.sh	2026-09-25 11:26:09.328573870 +0000
+@@ -7,6 +7,11 @@
+ STAGE="$WORK/dist"
+ BACKUP="$ROOT/.dist.previous"
+ 
++# Reprise après une publication interrompue : restaurer la dernière distribution
++# publiée plutôt que d’effacer sa seule copie.
++if [[ -e "$BACKUP" && ! -e "$DIST" ]]; then
++  mv "$BACKUP" "$DIST"
++fi
+ rm -rf "$WORK" "$BACKUP"
+ mkdir -p "$STAGE/github" "$STAGE/local"
+ 
+@@ -42,9 +47,9 @@
+ cp -a "$ROOT/scripts/validate_reading_map.py" "$STAGE/local/scripts/validate_reading_map.py"
+ cp -a "$ROOT/scripts/read_route.py" "$STAGE/local/scripts/read_route.py"
+ cat > "$STAGE/local/README.md" <<'EOF'
+-# Design Governance V1.0.0 — export Local
++# Design Governance V1.0.1 — export Local
+ 
+-Design Governance V1.0.0 est une expérimentation maintenue qui aide à transformer un brief en proposition de design visuellement dirigée, cultivée, spécifique, construite et polie, puis en travail vérifiable. Il peut servir pour un correctif local, une nouvelle surface, une direction visuelle ou une modification de composant partagé. Son usage recommandé est supervisé ; son efficacité réelle reste à vérifier.
++Design Governance V1.0.1 est une expérimentation maintenue qui aide à transformer un brief en proposition de design visuellement dirigée, cultivée, spécifique, construite et polie, puis en travail vérifiable. Il peut servir pour un correctif local, une nouvelle surface, une direction visuelle ou une modification de composant partagé. Son usage recommandé est supervisé ; son efficacité réelle reste à vérifier.
+ 
+ ## Commencer en deux minutes
+ 
+@@ -144,20 +149,55 @@
+ find "$STAGE/github" "$STAGE/local" -type d -name '__pycache__' -prune -exec rm -rf {} +
+ SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH:-0}"
+ find "$STAGE/github" "$STAGE/local" -exec touch -h -d "@$SOURCE_DATE_EPOCH" {} +
++# Un lien symbolique n’est pas transporté par `find -type f` : il doit bloquer le build.
++if [[ -n "$(find "$STAGE/github" "$STAGE/local" -type l -print -quit)" ]]; then
++  echo "BUILD FAILED — lien symbolique dans la distribution : $(find "$STAGE/github" "$STAGE/local" -type l -print | head -n 5)" >&2
++  exit 1
++fi
++# Archives neuves dans le répertoire de travail : `zip` ne complète jamais une ancienne archive.
++ZIPS="$WORK/zips"
++mkdir -p "$ZIPS"
+ (
+   cd "$STAGE/github"
+-  LC_ALL=C find . -type f -print | sort | zip -X -q "$ROOT/Design_Governance_V1_GITHUB.zip" -@
++  LC_ALL=C find . -type f -print | sort | zip -X -q "$ZIPS/Design_Governance_V1_GITHUB.zip" -@
+ )
+ (
+   cd "$STAGE/local"
+-  LC_ALL=C find . -type f -print | sort | zip -X -q "$ROOT/Design_Governance_V1_LOCAL.zip" -@
++  LC_ALL=C find . -type f -print | sort | zip -X -q "$ZIPS/Design_Governance_V1_LOCAL.zip" -@
+ )
+ 
+-# Publier uniquement après validations et archivage réussis.
++# Chaque archive doit contenir exactement la liste du manifest de son profil.
++python3 - "$ROOT/scripts/package_manifest.json" "$ZIPS" <<'PY'
++import json
++import sys
++import zipfile
++from pathlib import Path
++
++manifest = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
++zips = Path(sys.argv[2])
++for profile, name in (("github", "Design_Governance_V1_GITHUB.zip"), ("local", "Design_Governance_V1_LOCAL.zip")):
++    with zipfile.ZipFile(zips / name) as archive:
++        members = [item.removeprefix("./") for item in archive.namelist() if not item.endswith("/")]
++        if archive.testzip() is not None:
++            raise SystemExit(f"BUILD FAILED — archive corrompue : {name}")
++    expected = manifest[profile]
++    if len(members) != len(set(members)):
++        raise SystemExit(f"BUILD FAILED — membre dupliqué dans {name}")
++    missing = sorted(set(expected) - set(members))
++    extra = sorted(set(members) - set(expected))
++    if missing or extra:
++        raise SystemExit(f"BUILD FAILED — {name} diffère du manifest : manquants {missing}, en trop {extra}")
++    print(f"ARCHIVE PASSED — {name} : {len(members)} membres, identiques au manifest {profile}")
++PY
++
++# Publier uniquement après validations et archivage réussis ; archives et dist
++# changent ensemble, et la sauvegarde n’est effacée qu’après publication complète.
+ if [[ -e "$DIST" ]]; then
+   mv "$DIST" "$BACKUP"
+ fi
+ mv "$STAGE" "$DIST"
++mv -f "$ZIPS/Design_Governance_V1_GITHUB.zip" "$ROOT/Design_Governance_V1_GITHUB.zip"
++mv -f "$ZIPS/Design_Governance_V1_LOCAL.zip" "$ROOT/Design_Governance_V1_LOCAL.zip"
+ rm -rf "$BACKUP" "$WORK"
+ 
+ printf 'Generated:\n  %s\n  %s\n' \
+diff -u -r '--exclude=__pycache__' audit/package/scripts/package_manifest.json b02/scripts/package_manifest.json
+--- audit/package/scripts/package_manifest.json	2026-09-25 00:24:06.000000000 +0000
++++ b02/scripts/package_manifest.json	2026-09-25 11:26:09.328391455 +0000
+@@ -1,5 +1,5 @@
+ {
+-  "version": "1.0.0",
++  "version": "1.0.1",
+   "github": [
+     ".github/workflows/validate.yml",
+     ".gitignore",
+diff -u -r '--exclude=__pycache__' audit/package/scripts/read_route.py b02/scripts/read_route.py
+--- audit/package/scripts/read_route.py	2026-09-25 00:24:06.000000000 +0000
++++ b02/scripts/read_route.py	2026-09-25 11:23:39.868092823 +0000
+@@ -40,21 +40,42 @@
+     return routes
+ 
+ 
++def heading_lines(lines: list[str]) -> list[int]:
++    """Indices des vrais titres Markdown : hors blocs de code, sans indentation."""
++    indices: list[int] = []
++    fence: str | None = None
++    for index, line in enumerate(lines):
++        stripped = line.lstrip()
++        marker = stripped[:3]
++        if marker in ("```", "~~~"):
++            if fence is None:
++                fence = marker
++            elif marker == fence:
++                fence = None
++            continue
++        if fence is None and line.startswith("#"):
++            indices.append(index)
++    return indices
++
++
+ def read_block(path: Path, heading: str) -> list[str]:
+     lines = path.read_text(encoding="utf-8").splitlines()
+-    try:
+-        start = next(i for i, line in enumerate(lines) if line.strip() == heading)
+-    except StopIteration:
++    headings = heading_lines(lines)
++    matches = [i for i in headings if lines[i].strip() == heading]
++    if not matches:
+         fail(f"titre introuvable dans {path.relative_to(ROOT)} : {heading}")
++    if len(matches) > 1:
++        fail(f"titre ambigu ({len(matches)} occurrences) dans {path.relative_to(ROOT)} : {heading}")
++    start = matches[0]
+     level = len(heading) - len(heading.lstrip("#"))
+     end = len(lines)
+-    for i in range(start + 1, len(lines)):
+-        line = lines[i]
+-        if line.startswith("#"):
+-            current = len(line) - len(line.lstrip("#"))
+-            if current <= level:
+-                end = i
+-                break
++    for i in headings:
++        if i <= start:
++            continue
++        current = len(lines[i]) - len(lines[i].lstrip("#"))
++        if current <= level:
++            end = i
++            break
+     return lines[start:end]
+ 
+ 
+diff -u -r '--exclude=__pycache__' audit/package/scripts/validate_all.py b02/scripts/validate_all.py
+--- audit/package/scripts/validate_all.py	2026-09-25 00:24:06.000000000 +0000
++++ b02/scripts/validate_all.py	2026-09-25 11:23:30.849278408 +0000
+@@ -21,9 +21,12 @@
+             digest.update(chunk)
+     return digest.hexdigest()
+ 
+-def expect_failure(command: list[str], label: str) -> None:
+-    """Vérifie qu’un scénario d’entrée invalide échoue réellement."""
++def expect_failure(command: list[str], label: str, expected: str | None = None) -> None:
++    """Vérifie qu’un scénario d’entrée invalide échoue réellement, et pour le bon motif."""
+     target = next((Path(part) for part in command if part.endswith(".json")), None)
++    if target is not None and not target.is_absolute():
++        # Les chemins relatifs sont résolus depuis la racine du package, pas depuis le cwd appelant.
++        target = ROOT / target
+     if target is not None and not target.is_file() and label not in {"fichier absent", "JSON malformé"}:
+         raise SystemExit(f"CLI REGRESSION FAILED — {label} : fixture absente : {target}")
+     result = subprocess.run(command, cwd=ROOT, text=True, capture_output=True)
+@@ -33,6 +36,8 @@
+     output = result.stdout + result.stderr
+     if "Traceback (most recent call last)" in output:
+         raise SystemExit(f"CLI REGRESSION FAILED — {label} a échoué par exception non gouvernée")
++    if expected is not None and expected not in output:
++        raise SystemExit(f"CLI REGRESSION FAILED — {label} a échoué pour un autre motif : attendu {expected!r}, obtenu {output.strip()!r}")
+     print(f"+ expected failure ({label})")
+ 
+ def main() -> int:
+@@ -48,15 +53,16 @@
+     )
+     run([sys.executable, "scripts/validate_contracts.py", "schemas/examples/domain_frame.example.json"])
+     run([sys.executable, "scripts/validate_run_card.py", "schemas/run_card.example.json"])
+-    for fixture in (
+-        "invalid_capability_profile_missing_basis.json",
+-        "invalid_accepted_lost_in_build.json",
+-        "invalid_critical_without_protection.json",
+-        "invalid_critical_placeholder_protection.json",
++    for fixture, reason in (
++        ("invalid_capability_profile_missing_basis.json", "capability_profile exige basis non vide"),
++        ("invalid_accepted_lost_in_build.json", "LOST-IN-BUILD ne peut pas produire un verdict accepté"),
++        ("invalid_critical_without_protection.json", "un risque critical exige une critical_protection structurée"),
++        ("invalid_critical_placeholder_protection.json", "critical_protection.control ne peut pas être un placeholder"),
+     ):
+         expect_failure(
+             [sys.executable, "scripts/validate_run_card.py", f"schemas/fixtures/{fixture}"],
+             fixture,
++            reason,
+         )
+     with tempfile.TemporaryDirectory(prefix="design-governance-cli-") as temp_dir:
+         temp = Path(temp_dir)
+@@ -64,7 +70,7 @@
+         strict_card.write_text((ROOT / "schemas/run_card.example.json").read_text(encoding="utf-8").replace("chemin-ou-url-local", "schemas/run_card.example.json").replace("ticket-ou-chemin-de-run", "schemas/run_card.example.json"), encoding="utf-8")
+         run([sys.executable, "scripts/validate_run_card.py", "--strict", str(strict_card)])
+         expect_failure(
+-            [sys.executable, "scripts/validate_run_card.py", "--strict", "schemas/run_card.example.json"],
++            [sys.executable, "scripts/validate_run_card.py", "--strict", str(ROOT / "schemas/run_card.example.json")],
+             "strict placeholder",
+         )
+         malformed = temp / "malformed.json"
+diff -u -r '--exclude=__pycache__' audit/package/scripts/validate_contracts.py b02/scripts/validate_contracts.py
+--- audit/package/scripts/validate_contracts.py	2026-09-25 00:24:06.000000000 +0000
++++ b02/scripts/validate_contracts.py	2026-09-25 11:23:19.048970256 +0000
+@@ -74,13 +74,107 @@
+                 validate(value[key], child, f"{path}.{key}")
+ 
+ 
++def reject_duplicate_keys(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
++    result: dict[str, Any] = {}
++    for key, value in pairs:
++        if key in result:
++            raise ValueError(f"clé JSON répétée : {key}")
++        result[key] = value
++    return result
++
++
+ def load(path: Path) -> Any:
+     try:
+-        return json.loads(path.read_text(encoding="utf-8"))
+-    except (OSError, json.JSONDecodeError) as exc:
++        return json.loads(path.read_text(encoding="utf-8"), object_pairs_hook=reject_duplicate_keys)
++    except (OSError, UnicodeDecodeError, ValueError) as exc:
+         raise ValidationError(f"lecture impossible {path}: {exc}") from exc
+ 
+ 
++def load_schema(path: Path) -> dict[str, Any]:
++    """Un schéma vide, non objet ou sans champ requis ne peut rien valider."""
++    schema = load(path)
++    if not isinstance(schema, dict) or not schema:
++        raise ValidationError(f"schéma non admissible (vide ou non objet) : {path.name}")
++    if schema.get("type") != "object" or not schema.get("required") or not isinstance(schema.get("properties"), dict):
++        raise ValidationError(f"schéma non admissible (type objet, required et properties attendus) : {path.name}")
++    return schema
++
++
++def check_document(name: str, document: Any, schema: dict[str, Any]) -> None:
++    try:
++        validate(document, schema)
++        semantic_check(name, document)
++    except ValidationError:
++        raise
++    except (KeyError, TypeError, AttributeError, IndexError, ValueError) as exc:
++        raise ValidationError(f"entrée non conforme au contrat attendu ({type(exc).__name__}) : {exc}") from exc
++
++
++# Chemins dont le vocabulaire doit rester fermé par un enum du schéma.
++GUARDED_ENUM_PATHS = {
++    "domain_frame": (("originality_tolerance",),),
++    "research_brief": (("depth",),),
++    "production_contracts": (
++        ("ui_ux_reality_pack", "coverage_map", 0, "proof_status"),
++        ("evaluation_case", "expected_depth"),
++    ),
++}
++CANARY_VALUE = "__HORS_VOCABULAIRE_CANARI__"
++
++
++def schema_node(schema: dict[str, Any], path: tuple[Any, ...]) -> dict[str, Any] | None:
++    node: Any = schema
++    for part in path:
++        if not isinstance(node, dict):
++            return None
++        node = node.get("items") if isinstance(part, int) else node.get("properties", {}).get(part)
++    return node if isinstance(node, dict) else None
++
++
++def mutate(document: Any, path: tuple[Any, ...], delete: bool = False) -> Any:
++    result = copy.deepcopy(document)
++    parent = result
++    for part in path[:-1]:
++        parent = parent[part]
++    if delete:
++        del parent[path[-1]]
++    else:
++        parent[path[-1]] = CANARY_VALUE
++    return result
++
++
++def required_paths(value: Any, schema: dict[str, Any], path: tuple[Any, ...] = ()) -> list[tuple[Any, ...]]:
++    found: list[tuple[Any, ...]] = []
++    if isinstance(value, dict):
++        found.extend(path + (key,) for key in schema.get("required", []) if key in value)
++        for key, child in schema.get("properties", {}).items():
++            if key in value and isinstance(child, dict):
++                found.extend(required_paths(value[key], child, path + (key,)))
++    elif isinstance(value, list) and value and isinstance(schema.get("items"), dict):
++        found.extend(required_paths(value[0], schema["items"], path + (0,)))
++    return found
++
++
++def check_schema_bites(name: str, schema: dict[str, Any], document: Any) -> None:
++    """Chaque enum gardé et chaque champ requis atteint par l’exemple doit mordre."""
++    for path in GUARDED_ENUM_PATHS[name]:
++        label = ".".join(str(part) for part in path)
++        node = schema_node(schema, path)
++        if node is None or not isinstance(node.get("enum"), list) or not node["enum"]:
++            raise ValidationError(f"enum gardé absent du schéma : {label}")
++        try:
++            check_document(name, mutate(document, path), schema)
++        except ValidationError:
++            continue
++        raise ValidationError(f"valeur hors vocabulaire acceptée : {label}")
++    for path in required_paths(document, schema):
++        try:
++            check_document(name, mutate(document, path, delete=True), schema)
++        except ValidationError:
++            continue
++        raise ValidationError(f"champ requis supprimé accepté : {'.'.join(str(part) for part in path)}")
++
++
+ def semantic_check(name: str, document: Any) -> None:
+     if name == "domain_frame":
+         policy = document["policy_profile"]
+@@ -137,8 +231,7 @@
+ def expect_invalid(name: str, schema: dict[str, Any], document: Any, mutation: Any) -> None:
+     mutated = mutation(copy.deepcopy(document))
+     try:
+-        validate(mutated, schema)
+-        semantic_check(name, mutated)
++        check_document(name, mutated, schema)
+     except ValidationError:
+         return
+     raise ValidationError(f"mutation négative acceptée à tort: {name}")
+@@ -166,10 +259,9 @@
+         print(f"- chemin non canonique : {path}")
+         return 1
+     try:
+-        schema = load(CONTRACTS[name][0])
++        schema = load_schema(CONTRACTS[name][0])
+         document = load(path)
+-        validate(document, schema)
+-        semantic_check(name, document)
++        check_document(name, document, schema)
+     except (OSError, ValidationError) as exc:
+         print("CONTRACT VALIDATION FAILED")
+         print(f"- {exc}")
+@@ -190,13 +282,13 @@
+     documents: dict[str, Any] = {}
+     for name, (schema_path, example_path) in CONTRACTS.items():
+         try:
+-            schema = load(schema_path)
++            schema = load_schema(schema_path)
+             document = load(example_path)
+             schemas[name] = schema
+             documents[name] = document
+-            validate(document, schema)
+-            semantic_check(name, document)
+-            print(f"+ {name}: valid")
++            check_document(name, document, schema)
++            check_schema_bites(name, schema, document)
++            print(f"+ {name}: valid, contraintes du schéma effectives")
+         except ValidationError as exc:
+             errors.append(f"{name}: {exc}")
+     if not errors:
+diff -u -r '--exclude=__pycache__' audit/package/scripts/validate_design_governance.py b02/scripts/validate_design_governance.py
+--- audit/package/scripts/validate_design_governance.py	2026-09-25 00:24:06.000000000 +0000
++++ b02/scripts/validate_design_governance.py	2026-09-25 11:25:20.491490995 +0000
+@@ -15,14 +15,19 @@
+ MANIFEST = ROOT / "scripts" / "package_manifest.json"
+ try:
+     import json
+-    manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
++    def _unique_keys(pairs):
++        keys = [key for key, _ in pairs]
++        if len(keys) != len(set(keys)):
++            raise ValueError("clé JSON répétée dans le manifest")
++        return dict(pairs)
++    manifest = json.loads(MANIFEST.read_text(encoding="utf-8"), object_pairs_hook=_unique_keys)
+     if not isinstance(manifest, dict):
+         raise ValueError("le manifest racine doit être un objet")
+     EXPECTED = manifest["local" if IS_LOCAL else "github"]
+     if not isinstance(EXPECTED, list) or not all(isinstance(item, str) for item in EXPECTED):
+         raise ValueError("la liste de chemins du manifest est invalide")
+     OFFICIAL = ROOT / ("official" if IS_LOCAL else "V1/official")
+-except (OSError, ValueError, KeyError, TypeError) as exc:
++except (OSError, ValueError, KeyError, TypeError, UnicodeDecodeError) as exc:
+     print(f"PACKAGE VALIDATION FAILED — manifest illisible : {exc}")
+     sys.exit(1)
+ 
+@@ -48,12 +53,40 @@
+     errors.append(message)
+ 
+ 
++def check_manifest(errors: list[str]) -> None:
++    """Le manifest doit être unique et porter la version publiée par CHANGELOG."""
++    for profile in ("github", "local"):
++        paths = manifest.get(profile, [])
++        duplicates = sorted({path for path in paths if paths.count(path) > 1})
++        for path in duplicates:
++            fail(errors, f"chemin dupliqué dans le manifest {profile} : {path}")
++    version = manifest.get("version")
++    if not isinstance(version, str) or not re.fullmatch(r"\d+\.\d+\.\d+", version):
++        fail(errors, f"version du manifest absente ou mal formée : {version!r}")
++        return
++    changelog = OFFICIAL / "CHANGELOG.md"
++    if changelog.is_file():
++        match = re.search(r"\*\*Version publique :\*\* `V([^`]+)`", changelog.read_text(encoding="utf-8"))
++        if not match or match.group(1) != version:
++            fail(errors, f"version du manifest ({version}) différente de la version publique du CHANGELOG ({match.group(1) if match else 'absente'})")
++    for entry in (OFFICIAL / "README.md", ROOT / "README.md" if not IS_LOCAL else None):
++        if entry is not None and entry.is_file():
++            first_line = entry.read_text(encoding="utf-8").splitlines()[0]
++            if f"V{version}" not in first_line:
++                fail(errors, f"titre sans la version du manifest ({version}) : {entry.relative_to(ROOT)}")
++
++
+ def check_expected_files(errors: list[str]) -> None:
+     expected = set(EXPECTED)
+     for relative in EXPECTED:
+         if not (ROOT / relative).is_file():
+             fail(errors, f"fichier attendu absent : {relative}")
+-    generated = {"dist", ".build", "__pycache__"}
++    for path in ROOT.rglob("*"):
++        if path.is_symlink():
++            fail(errors, f"lien symbolique refusé dans le package (non transporté par les archives) : {path.relative_to(ROOT)}")
++    # Seuls les répertoires générés à la racine sont ignorés ; un `.build` ou un
++    # `dist` imbriqué dans une source serait copié par le build et doit être vu.
++    root_generated = {"dist", ".build", ".dist.previous"}
+     allowed_root_artifacts = {
+         "Design_Governance_V1_GITHUB.zip",
+         "Design_Governance_V1_LOCAL.zip",
+@@ -62,7 +95,8 @@
+         path.relative_to(ROOT).as_posix()
+         for path in ROOT.rglob("*")
+         if path.is_file()
+-        and not any(part in generated for part in path.relative_to(ROOT).parts)
++        and path.relative_to(ROOT).parts[0] not in root_generated
++        and "__pycache__" not in path.relative_to(ROOT).parts
+         and path.relative_to(ROOT).as_posix() not in allowed_root_artifacts
+     }
+     extras = sorted(actual - expected)
+@@ -136,9 +170,18 @@
+             fail(errors, f"statut de direction utilisé comme STATE : {path.relative_to(ROOT)}")
+ 
+ 
++def read_required(path: Path, errors: list[str]) -> str:
++    if not path.is_file():
++        fail(errors, f"fichier requis absent : {path.relative_to(ROOT)}")
++        return ""
++    return path.read_text(encoding="utf-8")
++
++
+ def check_canonicity_language(errors: list[str]) -> None:
+-    readme = (OFFICIAL / "README.md").read_text(encoding="utf-8")
+-    changelog = (OFFICIAL / "CHANGELOG.md").read_text(encoding="utf-8")
++    readme = read_required(OFFICIAL / "README.md", errors)
++    changelog = read_required(OFFICIAL / "CHANGELOG.md", errors)
++    if not readme or not changelog:
++        return
+     if "Les cinq fichiers suivants sont les **seules sources normatives** de V1" not in readme:
+         fail(errors, "la hiérarchie des sources normatives n’est pas formulée dans le README officiel")
+     if "exactement sept fichiers canoniques" in changelog or "sept fichiers actifs" in changelog:
+@@ -146,7 +189,9 @@
+ 
+ 
+ def check_lifecycle_contract(errors: list[str]) -> None:
+-    changelog = (OFFICIAL / "CHANGELOG.md").read_text(encoding="utf-8")
++    changelog = read_required(OFFICIAL / "CHANGELOG.md", errors)
++    if not changelog:
++        return
+     required_terms = ("PILOT", "ADOPTED", "DEPRECATED", "ABANDONED", "routes présentes dans le seed", "Migration des anciens aliases")
+     for term in required_terms:
+         if term not in changelog:
+@@ -155,13 +200,15 @@
+         if alias not in changelog:
+             fail(errors, f"alias de migration absent du CHANGELOG : {alias}")
+ 
+-    bibliography = (OFFICIAL / "BIBLIOTHEQUE.md").read_text(encoding="utf-8")
++    bibliography = read_required(OFFICIAL / "BIBLIOTHEQUE.md", errors)
+     if "section « Migration des anciens aliases » de `CHANGELOG.md`" not in bibliography:
+         fail(errors, "BIBLIOTHEQUE ne pointe pas vers le propriétaire de sa migration")
+ 
+ 
+ def check_reading_contract(errors: list[str]) -> None:
+-    action = (OFFICIAL / "ACTION.md").read_text(encoding="utf-8")
++    action = read_required(OFFICIAL / "ACTION.md", errors)
++    if not action:
++        return
+     for mode in ("LITE", "ITER", "STANDARD", "DIRECTION", "SYSTÈME"):
+         if f"`{mode}`" not in action:
+             fail(errors, f"mode absent de la carte de lecture ACTION : {mode}")
+@@ -171,8 +218,8 @@
+     if "FAST-PATH" not in action or "sixième voie" not in action:
+         fail(errors, "orientation ACTION absente : FAST-PATH doit être qualifié comme vue et non comme voie")
+ 
+-    official_readme = (OFFICIAL / "README.md").read_text(encoding="utf-8")
+-    if "la `RUN_CARD` rassemble" not in official_readme:
++    official_readme = read_required(OFFICIAL / "README.md", errors)
++    if official_readme and "la `RUN_CARD` rassemble" not in official_readme:
+         fail(errors, "RUN_CARD insuffisamment introduite dans le README officiel")
+ 
+ 
+@@ -187,7 +234,7 @@
+     ]
+     marker = "expérimentation maintenue"
+     for path in official_sources + [path for path in public_entry_docs if path.is_file()]:
+-        text = path.read_text(encoding="utf-8")
++        text = read_required(path, errors)
+         if marker not in text.lower():
+             fail(errors, f"marqueur expérimental public absent ou divergent : {path.relative_to(ROOT)}")
+ 
+@@ -202,6 +249,7 @@
+ 
+ def main() -> int:
+     errors: list[str] = []
++    check_manifest(errors)
+     check_expected_files(errors)
+     check_links(errors)
+     check_action_projection_source(errors)
+diff -u -r '--exclude=__pycache__' audit/package/scripts/validate_reading_map.py b02/scripts/validate_reading_map.py
+--- audit/package/scripts/validate_reading_map.py	2026-09-25 00:24:06.000000000 +0000
++++ b02/scripts/validate_reading_map.py	2026-09-25 11:24:10.863898907 +0000
+@@ -39,7 +39,7 @@
+     raise SystemExit(f"READING MAP VALIDATION FAILED — {message}")
+ 
+ 
+-def check_locator_destinations(text: str) -> None:
++def check_locator_destinations(text: str) -> set[str]:
+     """Ensure every listed locator resolves to the exact heading it names."""
+     if "## Locators principaux" not in text:
+         fail("section des locators principaux absente")
+@@ -67,9 +67,59 @@
+         headings = {line.strip() for line in owner.read_text(encoding="utf-8").splitlines() if line.lstrip().startswith("#")}
+         if heading not in headings:
+             fail(f"titre de locator introuvable : {locator} -> {owner_name} — {heading}")
++        if locator in rows:
++            fail(f"locator dupliqué dans la table : {locator}")
+         rows.append(locator)
+     if len(rows) < 10:
+         fail("table des locators principaux incomplète ou illisible")
++    return set(rows)
++
++
++LOCATOR_PATTERN = re.compile(r"\b(?:DIRECTION|ACTION|SAVOIR|BIBLIOTHEQUE)/[A-Z][A-Z0-9_-]*[A-Z0-9]")
++MODE_ROUTES = re.compile(r"ACTION/RUN-(?:LITE|ITER|STANDARD|DIRECTION|SYSTEM)")
++
++
++def check_cited_locators(listed: set[str]) -> None:
++    """Tout locator cité dans le package doit être servi par la CLI."""
++    skill_dirs = [ROOT / "skills", ROOT / "skill"]
++    sources = sorted(OFFICIAL.glob("*.md")) + [ROOT / "README.md"]
++    for directory in skill_dirs:
++        if directory.is_dir():
++            sources.extend(sorted(directory.rglob("*.md")))
++    for source in sources:
++        if not source.is_file():
++            continue
++        for locator in sorted(set(LOCATOR_PATTERN.findall(source.read_text(encoding="utf-8")))):
++            if locator not in listed:
++                fail(f"locator cité mais absent de la table CLI : {locator} ({source.relative_to(ROOT)})")
++
++
++def check_routing_minima(text: str) -> None:
++    """Une route de mode ne peut pas être présentée comme ajout conditionnel."""
++    section = text.split("## Routage minimal par décision", 1)[1].split("\n## ", 1)[0]
++    for line in section.splitlines():
++        cells = [cell.strip() for cell in line.strip().strip("|").split("|")]
++        if len(cells) != 4 or cells[0].startswith("---") or cells[0] == "Décision dominante":
++            continue
++        misplaced = MODE_ROUTES.findall(cells[2])
++        if misplaced:
++            fail(f"route de mode en ajout conditionnel : {', '.join(misplaced)} ({cells[0]})")
++
++
++def normalize_field(field: str) -> str:
++    return re.sub(r"\s+", "", field).upper()
++
++
++def check_handoff_fields(text: str) -> None:
++    """Le handoff de la carte doit reprendre tous les champs d’ACTION/HANDOFF."""
++    action = (OFFICIAL / "ACTION.md").read_text(encoding="utf-8")
++    owner_block = action.split("### ACTION/HANDOFF", 1)[1].split("```text", 1)[1].split("```", 1)[0]
++    owner_fields = {normalize_field(field) for field in re.split(r"—|\n", owner_block) if field.strip()}
++    map_block = text.split("## Handoff minimal commun", 1)[1].split("```text", 1)[1].split("```", 1)[0]
++    map_fields = {normalize_field(line.split(":", 1)[0]) for line in map_block.splitlines() if ":" in line}
++    missing = sorted(owner_fields - map_fields)
++    if missing:
++        fail(f"handoff de la carte incomplet au regard d’ACTION/HANDOFF : {', '.join(missing)}")
+ 
+ 
+ def main() -> int:
+@@ -92,7 +142,10 @@
+             continue
+         if not (MAP.parent / target).exists():
+             fail(f"lien relatif non résolu : {target}")
+-    check_locator_destinations(text)
++    listed = check_locator_destinations(text)
++    check_cited_locators(listed)
++    check_routing_minima(text)
++    check_handoff_fields(text)
+     # The map must remain derived and cannot introduce a competing classifier.
+     if "source" not in text or "normative" not in text or "ne reclassifie pas" not in text:
+         fail("frontière de non-autorité ou de non-reclassification absente")
+diff -u -r '--exclude=__pycache__' audit/package/scripts/validate_run_card.py b02/scripts/validate_run_card.py
+--- audit/package/scripts/validate_run_card.py	2026-09-25 00:24:06.000000000 +0000
++++ b02/scripts/validate_run_card.py	2026-09-25 11:22:50.392218809 +0000
+@@ -124,10 +124,20 @@
+                 validate_node(value[key], child_schema, child_path)
+ 
+ 
++def reject_duplicate_keys(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
++    """Refuse une clé JSON répétée au lieu de garder silencieusement la dernière."""
++    result: dict[str, Any] = {}
++    for key, value in pairs:
++        if key in result:
++            raise ValueError(f"clé JSON répétée : {key}")
++        result[key] = value
++    return result
++
++
+ def load_json(path: Path) -> Any:
+     try:
+-        return json.loads(path.read_text(encoding="utf-8"))
+-    except (OSError, json.JSONDecodeError) as exc:
++        return json.loads(path.read_text(encoding="utf-8"), object_pairs_hook=reject_duplicate_keys)
++    except (OSError, UnicodeDecodeError, ValueError) as exc:
+         try:
+             display_path = path.relative_to(ROOT)
+         except ValueError:
+@@ -325,13 +335,19 @@
+ 
+ 
+ def validate_card(document: Any, schema: dict[str, Any], strict: bool = False, source_path: Path | None = None) -> None:
+-    check_held_message(document)
+-    # Donner priorité aux diagnostics métier lisibles avant les exigences
+-    # conditionnelles du schéma, sans relâcher la validation structurelle.
+-    check_semantic_contract(document)
+-    if strict:
+-        check_strict_contract(document, source_path or EXAMPLE)
+-    validate_node(document, schema)
++    try:
++        check_held_message(document)
++        # Donner priorité aux diagnostics métier lisibles avant les exigences
++        # conditionnelles du schéma, sans relâcher la validation structurelle.
++        check_semantic_contract(document)
++        if strict:
++            check_strict_contract(document, source_path or EXAMPLE)
++        validate_node(document, schema)
++    except ValidationError:
++        raise
++    except (KeyError, TypeError, AttributeError, IndexError, ValueError) as exc:
++        # Une entrée hors contrat devient un diagnostic, jamais une exception brute.
++        raise ValidationError(f"entrée non conforme au contrat attendu ({type(exc).__name__}) : {exc}") from exc
+ 
+ 
+ def check_fixture(
+@@ -355,16 +371,92 @@
+         errors.append(f"fixture invalide acceptée — {path.relative_to(ROOT)}")
+ 
+ 
++# Chemins dont le vocabulaire doit rester fermé par un enum du schéma. La liste
++# nomme des chemins, pas des valeurs : le schéma reste l’autorité du vocabulaire.
++GUARDED_ENUM_PATHS = (
++    ("run_card", "mode"),
++    ("run_card", "risk", "level"),
++    ("run_card", "anchors", 0, "role"),
++    ("run_card", "anchors", 0, "transformation_status"),
++    ("run_card", "closure", "state"),
++    ("run_card", "closure", "direction_status"),
++    ("run_card", "closure", "issue"),
++    ("run_card", "closure", "verdict"),
++)
++CANARY_VALUE = "__HORS_VOCABULAIRE_CANARI__"
++
++
++def schema_node(schema: dict[str, Any], path: tuple[Any, ...]) -> dict[str, Any] | None:
++    node: Any = schema
++    for part in path:
++        if not isinstance(node, dict):
++            return None
++        node = node.get("items") if isinstance(part, int) else node.get("properties", {}).get(part)
++    return node if isinstance(node, dict) else None
++
++
++def mutate(document: Any, path: tuple[Any, ...], delete: bool = False) -> Any:
++    copy_ = json.loads(json.dumps(document))
++    parent = copy_
++    for part in path[:-1]:
++        parent = parent[part]
++    if delete:
++        del parent[path[-1]]
++    else:
++        parent[path[-1]] = CANARY_VALUE
++    return copy_
++
++
++def required_paths(value: Any, schema: dict[str, Any], path: tuple[Any, ...] = ()) -> list[tuple[Any, ...]]:
++    found: list[tuple[Any, ...]] = []
++    if isinstance(value, dict):
++        found.extend(path + (key,) for key in schema.get("required", []) if key in value)
++        for key, child in schema.get("properties", {}).items():
++            if key in value and isinstance(child, dict):
++                found.extend(required_paths(value[key], child, path + (key,)))
++    elif isinstance(value, list) and value and isinstance(schema.get("items"), dict):
++        found.extend(required_paths(value[0], schema["items"], path + (0,)))
++    return found
++
++
+ def check_schema_authority(schema: dict[str, Any], errors: list[str]) -> None:
+-    """Régression : une modification d’enum dans le schéma doit modifier le résultat."""
++    """Le schéma doit être admissible et chacune de ses contraintes doit mordre.
++
++    Un schéma vide, partiel ou amputé d’un enum gardé ne peut plus produire un
++    PASS : chaque enum gardé et chaque champ requis atteint par l’exemple est
++    muté, et la mutation doit être rejetée.
++    """
++    card_schema = schema_node(schema, ("run_card",))
++    if schema.get("type") != "object" or not schema.get("required") or not card_schema or not card_schema.get("required"):
++        errors.append("schéma RUN_CARD non admissible : type objet, required racine et contrat run_card attendus")
++        return
+     document = load_json(EXAMPLE)
++    for path in GUARDED_ENUM_PATHS:
++        node = schema_node(schema, path)
++        label = ".".join(str(part) for part in path)
++        if node is None or not isinstance(node.get("enum"), list) or not node["enum"]:
++            errors.append(f"enum gardé absent du schéma : {label}")
++            continue
++        try:
++            validate_card(mutate(document, path), schema)
++        except ValidationError:
++            continue
++        errors.append(f"valeur hors vocabulaire acceptée : {label}")
++    # Le validateur doit lire le vocabulaire dans le schéma, pas le recopier.
+     altered_schema = json.loads(json.dumps(schema))
+     altered_schema["properties"]["run_card"]["properties"]["mode"]["enum"] = ["SCHEMA-DRIVEN-TEST"]
+-    document["run_card"]["mode"] = "SCHEMA-DRIVEN-TEST"
++    altered = json.loads(json.dumps(document))
++    altered["run_card"]["mode"] = "SCHEMA-DRIVEN-TEST"
+     try:
+-        validate_card(document, altered_schema)
++        validate_card(altered, altered_schema)
+     except ValidationError as exc:
+         errors.append(f"le validateur n’utilise pas l’enum du schéma : {exc}")
++    for path in required_paths(document, schema):
++        try:
++            validate_card(mutate(document, path, delete=True), schema)
++        except ValidationError:
++            continue
++        errors.append(f"champ requis supprimé accepté : {'.'.join(str(part) for part in path)}")
+ 
+ 
+ def validate_single_path(path: Path, schema: dict[str, Any], strict: bool = False) -> int:
+@@ -403,6 +495,8 @@
+             schema = load_json(SCHEMA)
+             if not isinstance(schema, dict):
+                 raise ValidationError("le schéma racine doit être un objet")
++            if not schema:
++                raise ValidationError("schéma vide : aucune règle ne peut être validée")
+         except ValidationError as exc:
+             errors.append(str(exc))
+             schema = {}
+@@ -427,7 +521,20 @@
+             errors,
+             expected_message="HELD est un statut de direction, pas une valeur de state",
+         )
+-        check_fixture(FIXTURES / "invalid_missing_proof.json", schema, False, errors)
++        check_fixture(
++            FIXTURES / "invalid_missing_proof.json",
++            schema,
++            False,
++            errors,
++            expected_message="un verdict accepté exige au moins une preuve observed",
++        )
++        check_fixture(
++            FIXTURES / "invalid_capability_profile_missing_basis.json",
++            schema,
++            False,
++            errors,
++            expected_message="capability_profile exige basis non vide",
++        )
+         check_fixture(
+             FIXTURES / "invalid_empty_proof.json",
+             schema,
+diff -u -r '--exclude=__pycache__' audit/package/skills/design-governance-practice/SKILL.md b02/skills/design-governance-practice/SKILL.md
+--- audit/package/skills/design-governance-practice/SKILL.md	2026-09-25 00:24:06.000000000 +0000
++++ b02/skills/design-governance-practice/SKILL.md	2026-09-25 11:24:55.208621182 +0000
+@@ -13,7 +13,7 @@
+ 
+ ## Carte de lecture et sortie
+ 
+-Lorsque le package le fournit, utilisez `V1/official/READING_MAP.md` comme vue dérivée pour résoudre le premier chemin, les perspectives conditionnelles et le handoff. Si plusieurs capacités doivent être combinées pour obtenir un résultat créatif, produit, technique ou de preuve plus fort, utilisez ensuite `V1/official/ORCHESTRATION_MAP.md` pour choisir le profil, les intensités et les conditions d’ajustement. Ces cartes ne remplacent aucune source normative. Avant de terminer, restituez au minimum `MODE`, `DECISION`, `RISK`, `SCOPE`, `ARTIFACT`, `PROOF/TRACE-LOCATOR`, `LIMIT`, `NEXT-ACTION`, `OWNER`, `NEXT-PROOF` et `EXIT-CONDITION`, ou marquez explicitement les champs non applicables.
++Lorsque le package le fournit, utilisez `READING_MAP.md` du dossier officiel (`V1/official/` dans la distribution GitHub, `official/` dans l’export Local) comme vue dérivée pour résoudre le premier chemin, les perspectives conditionnelles et le handoff. Si plusieurs capacités doivent être combinées pour obtenir un résultat créatif, produit, technique ou de preuve plus fort, utilisez ensuite `ORCHESTRATION_MAP.md`, dans le même dossier, pour choisir le profil, les intensités et les conditions d’ajustement. Ces cartes ne remplacent aucune source normative. Avant de terminer, restituez les champs de `ACTION/HANDOFF` : `MODE`, `DECISION`, `RISK`, `SCOPE`, `ARTIFACT`, `OBSERVATION/METHOD`, `PROOF/TRACE-LOCATOR`, `LIMIT/NOT-VERIFIED`, `DECISION-CHANGE`, `NEXT-ACTION`, `OWNER`, `NEXT-PROOF` et `EXIT-CONDITION`, en marquant `N/A-JUSTIFIED` les champs non applicables. Une sortie courte qui ne peut pas les fournir reste une préparation ou une décision non clôturée, pas une preuve complète.
+ 
+ ### Activation en 30 secondes
+ 
+diff -u -r '--exclude=__pycache__' audit/package/skills/design-governance-practice/references/flow.md b02/skills/design-governance-practice/references/flow.md
+--- audit/package/skills/design-governance-practice/references/flow.md	2026-09-25 00:24:06.000000000 +0000
++++ b02/skills/design-governance-practice/references/flow.md	2026-09-25 11:24:55.208784592 +0000
+@@ -11,11 +11,14 @@
+   E --> F[Vérifier et corriger]
+   F --> G[Décider et fermer]
+   A -. risque critique .-> H[Protection de niveau]
++  H -- reclasser, protéger d’abord --> B
+   F -. preuve absente .-> I[NOT-VERIFIED]
++  I -- réserve, owner et prochaine preuve --> G
++  I -. preuve obtenable .-> F
+   E -. défaut créatif .-> C
+ ```
+ 
+-En texte : **classer et protéger le run, cultiver et diriger la décision, composer et construire l’artefact, polir et observer le rendu, vérifier et corriger ce qui est observable, puis décider et fermer avec ses limites**. La boucle créative élève le résultat ; la boucle de gouvernance protège le risque, la preuve et la vérité de ce qui peut être affirmé.
++En texte : **classer et protéger le run, cultiver et diriger la décision, composer et construire l’artefact, polir et observer le rendu, vérifier et corriger ce qui est observable, puis décider et fermer avec ses limites**. La boucle créative élève le résultat ; la boucle de gouvernance protège le risque, la preuve et la vérité de ce qui peut être affirmé. Un risque critique ne s’arrête pas à la protection : le run est reclassé si nécessaire, puis repris une fois la protection posée. Une preuve absente ne devient jamais `PASS` : soit elle est obtenue et la vérification reprend, soit le run se ferme avec la réserve `NOT-VERIFIED`, l’owner et la prochaine preuve.
+ 
+ Charger `DIRECTION/START` avant un build, une modification, une vérification, une action externe ou une décision persistante. Charger les routes approfondies uniquement si elles peuvent modifier une décision, un artefact, une preuve, une limite ou la prochaine action.
+ 

@@ -1,0 +1,56 @@
+# DG-AUDIT-001 — Phase 2 — QUICKSTART, bloc 5
+
+## Périmètre, reprise et intégrité
+
+- Source : `audit_work/package/V1/official/QUICKSTART.md`, **lignes 192–212**, section 8 « Handoff agentique » ; l'exemple de la section 9 commence à 213 et sera lu au prochain bloc.
+- Reprise : plan maître, rapport QUICKSTART bloc 4 (158–191), rapports blocs 1–3 et checkpoint transversal des cinq propriétaires ; protocole externe v2.0 §12 relu pour les passages A–D. Les constats antérieurs F-DIR-008/010/017/028, F-ACT-002/026/030 et F-QS-001/002 ont été confrontés avant déduplication.
+- Baseline B01 stable, SHA-256 revérifiés : système compilé `016e60028795e6c849e3e84974b103382791e8096ada6be8405a173415f5355d` ; protocole `990fc86f0e11c9fa20e7c8c3b8ae2bea66dd81defe70eaa6c8d84b2dc20610dd` ; QUICKSTART `c3334f12447c6dab8ac8794f5817ae52788ff06d8eff0e8d7e2d92fe7319bcde` ; DIRECTION `f634bc561dab243e53fa1a988c2a49565f3d6330a8e5af0e4fbaea4128bf2a7f` ; ACTION `d73ad55167f71f775954092c3a91c00347753cae520031202f946b228257b50d` ; SAVOIR `41cb6f6e7cfcca4631f8701436055606c078f47d548eca6bc21e49a76e884820` ; BIBLIOTHEQUE `8628595d6323df5d76c2b0d57dbe49fd11e62c3178e1ce849e5d72799bb03684` ; CHANGELOG `0876654994f063ebb670392a5967044ad483bbdb8ebf6b5ce8a156609f08df45`.
+- Interfaces relues : `DIRECTION/SERVICE-BOUNDARY` 113–117, `START` 119–140, mémoire de lancement 219–241 et checkpoint pré-build 499–505 ; `ACTION/HANDOFF` 23–35, `AUTHORITY` 63–67, `PRECONDITION` 190–202, `RUN_CARD` 252–286 et `CLOSE-EXIT-CHECK` 915–930 ; `READING_MAP` 53 et 91. Cette vérification documentaire ne démontre aucune exécution agentique en production.
+
+## Passage A — architecture de la façade
+
+La section comporte un **brief d'entrée** à six lignes (197–202), un parcours d'agent en une phrase (205), une **sortie courte** à sept étiquettes (208), puis les bornes de confirmation et de capacité (211). La présence de `AUTONOMY` et `CONFIRMATION` est utile : l'agent reçoit une portée plutôt que d'inférer une permission de sa seule capacité. Le renvoi à `DIRECTION/START` conserve le propriétaire du mode, et la vérification du risque dominant évite de réduire la tâche à la fabrication de l'artefact.
+
+Le mot « par défaut » à 205–208 rend cependant la sortie de façade facile à prendre pour un handoff suffisant. Le bloc 1 du même QUICKSTART (ligne 33) annonçait déjà une autre « sortie minimale ». `ACTION/HANDOFF` 25–33 possède la sortie de run et distingue explicitement une préparation ou clarification d'un run clôturé. Le paragraphe 211 ne renvoie pas à `ACTION/AUTHORITY` ni au checkpoint `DIRECTION` avant build ; les deux existent et s'appliquent selon le cas. Le renvoi à la **skill pratique** est présent ailleurs dans le guide, mais pas dans les lignes 192–212 : l'audit de cette skill et de ses références relève de l'unité prévue ultérieurement, sans lui prêter ici une autorité de remplacement.
+
+## Passage B — contrat sémantique et pertes de projection
+
+| Élément de la section 8 | Ce qu'il prépare correctement | Ce qu'il faut encore transporter dans la trace ACTION |
+|---|---|---|
+| `OBJECTIVE`, `SCOPE`, `CONSTRAINTS`, `OUTPUT` (197–202) | Résultat, surface/public/version, contraintes et livrable attendu. | La décision dominante et le risque sont classés ensuite par START ; artefact réellement livré et scope de **preuve** doivent être distingués des attentes initiales. |
+| `AUTONOMY`, `CONFIRMATION` (199–200) | Portée proposée et actions nécessitant accord. | `ACTION/AUTHORITY` 65 demande la **base** de l'autonomie, sa portée, la condition de reprise/escalade et le rôle qui reprend la décision lorsque ces éléments peuvent changer décision, risque, persistance ou action externe. La déclaration d'un brief ne crée pas une permission d'outil. |
+| « produit l'artefact » (205) | Parcours de travail sous autorisation valable. | Un checkpoint DIRECTION pré-build est requis si une nouvelle position identitaire sort de l'autonomie explicite (DIRECTION 503, 722). La phrase 211 peut le protéger si `CONFIRMATION` le nomme, mais ne le rappelle pas en tant que tel ; l'ordre de la phrase 205 ne l'autorise pas à être sauté. |
+| `MODE — DECISION — CHANGE — PROOF — LIMIT — NEXT-ACTION — OWNER` (208) | Décision, preuve, limite, prochaine action et responsable demeurent visibles. | `ACTION/HANDOFF` 28–30 exige aussi `RISK`, `SCOPE`, `ARTIFACT`, `OBSERVATION/METHOD`, `PROOF/TRACE-LOCATOR`, `DECISION-CHANGE`, `NEXT-PROOF`, `EXIT-CONDITION`. Certains éléments figurent **à l'entrée**, ce qui ne garantit ni leur état final ni leur lien à l'observation. Le mot `CHANGE` peut désigner une correction prévue alors que `DECISION-CHANGE` ne se déclare qu'après conséquence observée (DIRECTION 229–233). |
+| Capacité indisponible (211) | Refus explicite de choisir un mode plus léger. | `ACTION/PRECONDITION` 192 et profil 284–286 distinguent mode, voie de preuve, statut et possibilité de livraison. « Requalifie la protection nécessaire » se lit comme adaptation/renforcement de la preuve et de l'issue, pas comme déclassement de mode ou preuve présumée. |
+
+**Temporalité.** Avant l'exécution, `OUTPUT` et `PROOF` peuvent nommer l'artefact et la méthode *attendus*. Après construction, observation et contrôle, ils peuvent nommer le résultat *réel* avec version, scope et locator. Un `CHANGE` de plan n'est ni observation, ni `DECISION-CHANGE`. Si un champ de `ACTION/HANDOFF` n'est réellement pas applicable, `N/A-JUSTIFIED` est prévu ; une preuve requise mais indisponible est `NOT-VERIFIED`, pas un PASS (ACTION 33, 202). Pour un run persistant, la trace et la projection RUN_CARD sont nécessaires suivant le mode et le statut ; sept mots dans une réponse ne les remplacent pas.
+
+**Pouvoir de décider.** La dernière phrase 211 est protectrice pour les actions sensibles et hors périmètre. La portée grammaticale de « hors du périmètre autorisé » est toutefois ambiguë dans l'énumération : elle peut qualifier toutes les actions ou surtout l'action persistante. `ACTION/AUTHORITY` tranche le principe opérationnel : origine et portée de l'autorisation doivent être retrouvables, checkpoint absent ne vaut pas approbation, `APPROVED` ne signifie ni qualité ni clôture. Pour une action externe, `DIRECTION/SERVICE-BOUNDARY` 117 précise qu'un système détenteur de la permission autorise/exécute et retourne l'observation. Une confirmation demandée dans le brief ne vaut pas permission obtenue ; une autonomie effectivement accordée et suffisamment bornée ne doit pas être annulée par une demande rituelle supplémentaire.
+
+## Passage C — lecteurs simulés et épreuve d'accès
+
+| Cas simulé | Lecture rapide possible | Conduite conforme à l'interface propriétaire |
+|---|---|---|
+| Page identitaire, autonomie limitée à proposer une position | 205 « produit l'artefact » semble ordonner le build immédiatement. | Formuler la position et l'alternative, demander le checkpoint pré-build à l'owner compétent, ou conserver `EXPLORATORY`/autre issue selon risque et absence de checkpoint. La revue créative d'un tiers ne confère pas l'autorité. |
+| Correction locale autorisée, outil de capture indisponible | Répondre `PROOF: testé` ou rétrograder en LITE pour conclure. | Garder le mode START ; préciser ce qui a réellement été inspecté, `NOT-VERIFIED` sur ce qui dépend de la capture, prochaine preuve et statut adéquat. |
+| Publication hors portée donnée au brief | Traiter `AUTONOMY` comme permission externe suffisante. | Préparer intention et scope ; obtenir l'accord requis du décideur et la permission effective du système externe, puis rattacher l'effet observé et sa limite à la trace. |
+| Agent transmet à une autre équipe un rendu seulement projeté | Envoyer les sept labels de 208, `CHANGE` comme retouche envisagée. | Rendre `ARTIFACT`, `RISK`, `SCOPE`, méthode, locator, `NEXT-PROOF` et condition de sortie résolubles ; marquer intention et preuve à venir sans prétendre à un run clôturé. |
+| Correction mobile après capture initiale | Copier la preuve avant correction sous `PROOF` et conclure. | Observer la version corrigée ; relier la décision et l'effet à cette version ou conserver la limite/retour. |
+| Fix local déjà autorisé et preuve suffisante | Redemander confirmation au seul motif que la modification est persistante. | Reprendre la portée autorisée et ses conditions ; respecter les checkpoints réellement applicables sans ajouter un accord générique à tout enregistrement. |
+
+**Accès documentaire ciblé.** Depuis la racine du package, `python3 scripts/read_route.py` résout `DIRECTION/START` (code 0). Il refuse `ACTION/AUTHORITY`, `ACTION/HANDOFF` et `ACTION/PRECONDITION` (code 1), alors que ces titres existent dans ACTION ; c'est une occurrence supplémentaire de **F-DIR-028**, non une absence des règles. `ACTION/RUN_CARD` est également refusé comme route, mais `READING_MAP` 91 indique expressément que RUN_CARD est un adaptateur machine, pas un locator Markdown ; cet échec **n'est pas** compté comme défaut de couverture du lecteur. Le test vérifie l'accès, pas l'aptitude d'un agent à appliquer l'autorité dans un produit réel.
+
+## Passage D — résistance, déduplication et issue
+
+| ID existant | Effet précis de ce bloc | Épreuve ultérieure |
+|---|---|---|
+| **F-DIR-010 / F-DIR-008** | Troisième résumé autonome de sortie ; champs propriétaires ACTION manquants malgré owner explicitement conservé. L'absence d'owner **dans le brief d'entrée** n'est pas un défaut en soi si l'agent le récupère et le transporte ensuite. | Handoff avant et après run ; comparer les champs de 208 aux 13 éléments du propriétaire, sans obliger un résultat qui n'existe pas encore. |
+| **F-ACT-002 / F-ACT-030** | `CHANGE` mélange plan d'édition et changement de décision ; preuve prospective ou réalisée peu différenciée. | Même brief à trois temps : avant build, capture initiale et capture après correction ; vérifier versions, méthode, locator et conséquence. |
+| **F-DIR-017 / F-ACT-026** | La liste de confirmation peut masquer le checkpoint de direction et le rôle du décideur ; la revue externe ne l'accorde pas. | Identité nouvelle, autonomie explicite couvrante / non couvrante, checkpoint disponible / absent, puis regard externe. |
+| **F-DIR-028** | Locators ACTION/AUTHORITY, HANDOFF et PRECONDITION introuvables par le lecteur ; RUN_CARD a un accès machine distinct documenté. | Rendre les renvois utiles résolubles ou expliciter l'accès exact, puis rejouer les trois locators. |
+
+**Aucun nouvel ID :** ces pertes et ambiguïtés ont des causes et tests déjà documentés chez les propriétaires ; **103 fiches provisoires** au total (101 propriétaires et F-QS-001/002). Ce diagnostic ne déclare ni permission obtenue, ni qualité vérifiée, ni PASS de handoff. Aucune source normative, schéma ou skill n'a été modifié.
+
+## Sortie et prochaine unité
+
+Les lignes **192–212** ont reçu les quatre passages et six scénarios, avec contrôle de la baseline et du rapport précédent. **Prochaine unité : QUICKSTART.md lignes 213–261**, section 9 « Exemple complet minimal », jusqu'avant la section 10 à 262. Vérifier notamment si l'exemple sépare intention, artefact réellement construit, observation, correction prévue, `DECISION-CHANGE` et preuve post-correction ; confronter les champs illustratifs à ACTION/RUN_CARD et au schéma sans prendre l'exemple pour une RUN_CARD valide ni faire de conclusion système en phase 2.

@@ -1,0 +1,380 @@
+diff --git a/scripts/validate_all.py b/scripts/validate_all.py
+index cf0f113..4676a56 100644
+--- a/scripts/validate_all.py
++++ b/scripts/validate_all.py
+@@ -21,8 +21,8 @@ def sha256(path: Path) -> str:
+             digest.update(chunk)
+     return digest.hexdigest()
+ 
+-def expect_failure(command: list[str], label: str) -> None:
+-    """Vérifie qu’un scénario d’entrée invalide échoue réellement."""
++def expect_failure(command: list[str], label: str, expected_message: str) -> None:
++    """Vérifie qu’un scénario d’entrée invalide échoue réellement, et pour le motif attendu."""
+     target = next((Path(part) for part in command if part.endswith(".json")), None)
+     if target is not None and not target.is_file() and label not in {"fichier absent", "JSON malformé"}:
+         raise SystemExit(f"CLI REGRESSION FAILED — {label} : fixture absente : {target}")
+@@ -33,6 +33,8 @@ def expect_failure(command: list[str], label: str) -> None:
+     output = result.stdout + result.stderr
+     if "Traceback (most recent call last)" in output:
+         raise SystemExit(f"CLI REGRESSION FAILED — {label} a échoué par exception non gouvernée")
++    if expected_message not in output:
++        raise SystemExit(f"CLI REGRESSION FAILED — {label} a échoué pour un autre motif : attendu {expected_message!r}")
+     print(f"+ expected failure ({label})")
+ 
+ def main() -> int:
+@@ -45,18 +47,20 @@ def main() -> int:
+     expect_failure(
+         [sys.executable, "scripts/read_route.py", "DIRECTION/UNKNOWN"],
+         "locator inconnu",
++        "locator inconnu : DIRECTION/UNKNOWN",
+     )
+     run([sys.executable, "scripts/validate_contracts.py", "schemas/examples/domain_frame.example.json"])
+     run([sys.executable, "scripts/validate_run_card.py", "schemas/run_card.example.json"])
+-    for fixture in (
+-        "invalid_capability_profile_missing_basis.json",
+-        "invalid_accepted_lost_in_build.json",
+-        "invalid_critical_without_protection.json",
+-        "invalid_critical_placeholder_protection.json",
++    for fixture, motif in (
++        ("invalid_capability_profile_missing_basis.json", "capability_profile exige basis non vide"),
++        ("invalid_accepted_lost_in_build.json", "LOST-IN-BUILD ne peut pas produire un verdict accepté"),
++        ("invalid_critical_without_protection.json", "un risque critical exige une critical_protection structurée"),
++        ("invalid_critical_placeholder_protection.json", "critical_protection.control ne peut pas être un placeholder"),
+     ):
+         expect_failure(
+             [sys.executable, "scripts/validate_run_card.py", f"schemas/fixtures/{fixture}"],
+             fixture,
++            motif,
+         )
+     with tempfile.TemporaryDirectory(prefix="design-governance-cli-") as temp_dir:
+         temp = Path(temp_dir)
+@@ -66,16 +70,19 @@ def main() -> int:
+         expect_failure(
+             [sys.executable, "scripts/validate_run_card.py", "--strict", "schemas/run_card.example.json"],
+             "strict placeholder",
++            "strict : placeholder",
+         )
+         malformed = temp / "malformed.json"
+         malformed.write_text('{"run_card":', encoding="utf-8")
+         expect_failure(
+             [sys.executable, "scripts/validate_run_card.py", str(malformed)],
+             "JSON malformé",
++            "lecture JSON impossible",
+         )
+         expect_failure(
+             [sys.executable, "scripts/validate_run_card.py", str(temp / "missing.json")],
+             "fichier absent",
++            "lecture JSON impossible",
+         )
+     build_script = ROOT / "scripts/build_distributions.sh"
+     if not build_script.is_file():
+diff --git a/scripts/validate_run_card.py b/scripts/validate_run_card.py
+index ca57bdd..e7a3873 100644
+--- a/scripts/validate_run_card.py
++++ b/scripts/validate_run_card.py
+@@ -341,12 +341,15 @@ def check_fixture(
+     errors: list[str],
+     expected_message: str | None = None,
+ ) -> None:
++    if not should_pass and not expected_message:
++        errors.append(f"oracle sans motif — {path.relative_to(ROOT)} : un négatif doit déclarer son message attendu")
++        return
+     try:
+         validate_card(load_json(path), schema)
+     except ValidationError as exc:
+         if should_pass:
+             errors.append(f"fixture valide rejetée — {path.relative_to(ROOT)} : {exc}")
+-        elif expected_message and expected_message not in str(exc):
++        elif expected_message not in str(exc):
+             errors.append(
+                 f"diagnostic inattendu — {path.relative_to(ROOT)} : attendu {expected_message!r}, obtenu {str(exc)!r}"
+             )
+@@ -355,6 +358,125 @@ def check_fixture(
+         errors.append(f"fixture invalide acceptée — {path.relative_to(ROOT)}")
+ 
+ 
++# Table déclarative des fixtures (A2) : nom → None (valide) ou motif attendu, sous-chaîne
++# stable du diagnostic existant. Tout fichier de schemas/fixtures/ doit y figurer, et
++# toute entrée doit exister. Les négatifs restent des scénarios composites nommés.
++FIXTURE_TABLE: dict[str, str | None] = {
++    "valid_closed_return.json": None,
++    "valid_direction_with_profile_decision.json": None,
++    "valid_direction_exploratory_untransformed.json": None,
++    "invalid_state_held.json": "HELD est un statut de direction, pas une valeur de state",
++    "invalid_missing_proof.json": "un verdict accepté exige au moins une preuve observed",
++    "invalid_empty_proof.json": "un verdict accepté exige au moins une preuve observed",
++    "invalid_global_axis_verdict.json": "closure.verdict : valeur non canonique : PASS",
++    "invalid_direction_missing_object.json": "DIRECTION exige un objet direction",
++    "invalid_direction_missing_trace_locator.json": "DIRECTION exige trace_locator",
++    "invalid_direction_missing_creative_close.json": "DIRECTION clôturée exige creative_close",
++    "invalid_direction_missing_status.json": "DIRECTION décidée ou clôturée exige direction_status",
++    "invalid_creative_close_missing_field.json": "creative_close exige le champ craft_detail",
++    "invalid_profile_decision_missing_evidence.json": "profile_decision : champ obligatoire absent : evidence",
++    "invalid_accepted_before_decision.json": "un verdict accepté exige state DECIDED ou CLOSED",
++    "invalid_accepted_without_provenance.json": "un verdict accepté exige proof.provenance",
++    "invalid_accepted_without_limitations.json": "verdict accepté exige une limitation non vide",
++    "invalid_accepted_without_observed.json": "verdict accepté exige au moins une preuve observed",
++    "invalid_fail_assumed_accepted.json": "issue bloquante ou FAIL-ASSUMED",
++    "invalid_capability_available_without_basis.json": "capability_profile exige basis non vide",
++    "invalid_capability_profile_missing_basis.json": "capability_profile exige basis non vide",
++    "invalid_critical_without_protection.json": "un risque critical exige une critical_protection structurée",
++    "invalid_critical_placeholder_protection.json": "critical_protection.control ne peut pas être un placeholder",
++    "invalid_accepted_lost_in_build.json": "LOST-IN-BUILD ne peut pas produire un verdict accepté",
++    "invalid_lite_missing_minimum.json": "run_card : champ obligatoire absent : risk",
++    "invalid_direction_untransformed_anchor.json": "un verdict accepté exige transformation_status transformed",
++}
++
++DELETE = object()
++CRITICAL = {"level": "critical", "critical_protection": {"control": "Contrôle nommé", "owner": "owner-nommé", "scope": "Scope nommé", "failure_action": "RETURNED", "evidence_locator": "preuve-nommée"}}
++RC = "run_card"
++# Cas unitaires à faute unique (A2) : base valide (vérifiée d'abord), éventuelles retouches
++# qui gardent la base valide, UNE faute, motif attendu. Tout invariant ajouté arrive ici.
++UNIT_CASES: list[tuple[str, Path, list[tuple[tuple[str, ...], Any]], tuple[tuple[str, ...], Any], str]] = [
++    ("U-01", EXAMPLE, [], ((RC, "closure", "state"), "HELD"), "HELD est un statut de direction"),
++    ("U-02", EXAMPLE, [], ((RC, "proof"), DELETE), "un verdict accepté exige au moins une preuve observed"),
++    ("U-03", FIXTURES / "valid_closed_return.json", [], ((RC, "proof"), DELETE), "run_card : champ obligatoire absent : proof"),
++    ("U-04", EXAMPLE, [], ((RC, "proof", "observed"), []), "un verdict accepté exige au moins une preuve observed"),
++    ("U-05", EXAMPLE, [], ((RC, "closure", "verdict"), "PASS"), "closure.verdict : valeur non canonique : PASS"),
++    ("U-06", EXAMPLE, [], ((RC, "direction"), DELETE), "DIRECTION exige un objet direction"),
++    ("U-07", EXAMPLE, [], ((RC, "trace_locator"), DELETE), "DIRECTION exige trace_locator"),
++    ("U-08", EXAMPLE, [], ((RC, "creative_close"), DELETE), "DIRECTION clôturée exige creative_close"),
++    ("U-09", EXAMPLE, [], ((RC, "closure", "direction_status"), DELETE), "DIRECTION décidée ou clôturée exige direction_status"),
++    ("U-10", EXAMPLE, [], ((RC, "creative_close", "craft_detail"), DELETE), "creative_close exige le champ craft_detail"),
++    ("U-11", FIXTURES / "valid_direction_with_profile_decision.json", [], ((RC, "profile_decision", "evidence"), DELETE), "profile_decision : champ obligatoire absent : evidence"),
++    ("U-12", EXAMPLE, [], ((RC, "closure", "state"), "CHECKING"), "un verdict accepté exige state DECIDED ou CLOSED"),
++    ("U-13", EXAMPLE, [], ((RC, "proof", "provenance"), DELETE), "un verdict accepté exige proof.provenance"),
++    ("U-14", EXAMPLE, [], ((RC, "closure", "limitations"), []), "verdict accepté exige une limitation non vide"),
++    ("U-15", EXAMPLE, [], ((RC, "closure", "issue"), "FAIL-ASSUMED"), "issue bloquante ou FAIL-ASSUMED"),
++    ("U-16", EXAMPLE, [], ((RC, "closure", "issue"), "BLOCKED"), "issue bloquante ou FAIL-ASSUMED"),
++    ("U-17", EXAMPLE, [], ((RC, "capability_profile", "basis"), []), "capability_profile exige basis non vide"),
++    ("U-18", EXAMPLE, [], ((RC, "capability_profile", "basis"), DELETE), "capability_profile exige basis non vide"),
++    ("U-19", EXAMPLE, [], ((RC, "risk", "level"), "critical"), "un risque critical exige une critical_protection structurée"),
++    ("U-20", EXAMPLE, [((RC, "risk"), CRITICAL)], ((RC, "risk", "critical_protection", "control"), "TODO"), "critical_protection.control ne peut pas être un placeholder"),
++    ("U-21", EXAMPLE, [], ((RC, "closure", "direction_status"), "LOST-IN-BUILD"), "LOST-IN-BUILD ne peut pas produire un verdict accepté"),
++    ("U-22", FIXTURES / "valid_closed_return.json", [], ((RC, "risk"), DELETE), "run_card : champ obligatoire absent : risk"),
++    ("U-23", EXAMPLE, [], ((RC, "anchors", 0, "transformation_status"), "not_transformed"), "un verdict accepté exige transformation_status transformed"),
++]
++
++
++def apply_edit(document: Any, path: tuple[Any, ...], value: Any) -> None:
++    node = document
++    for key in path[:-1]:
++        node = node[key]
++    if value is DELETE:
++        del node[path[-1]]
++    else:
++        node[path[-1]] = json.loads(json.dumps(value))
++
++
++def check_unit_cases(schema: dict[str, Any], errors: list[str]) -> None:
++    passed = 0
++    for case_id, base, edits, (fault_path, fault_value), motif in UNIT_CASES:
++        try:
++            document = load_json(base)
++            for path, value in edits:
++                apply_edit(document, path, value)
++        except (KeyError, IndexError, TypeError, ValidationError) as exc:
++            errors.append(f"cas unitaire {case_id} : base illisible ({exc})")
++            continue
++        try:
++            validate_card(document, schema)
++        except ValidationError as exc:
++            errors.append(f"cas unitaire {case_id} : base invalide ({exc})")
++            continue
++        try:
++            apply_edit(document, fault_path, fault_value)
++        except (KeyError, IndexError, TypeError) as exc:
++            errors.append(f"cas unitaire {case_id} : chemin de faute introuvable ({exc})")
++            continue
++        try:
++            validate_card(document, schema)
++        except ValidationError as exc:
++            if motif in str(exc):
++                passed += 1
++            else:
++                errors.append(f"cas unitaire {case_id} : attendu {motif!r}, obtenu {str(exc)!r}")
++            continue
++        errors.append(f"cas unitaire {case_id} : faute unique acceptée ({motif})")
++    print(f"+ cas unitaires : {passed}/{len(UNIT_CASES)}")
++
++
++def check_fixture_table(schema: dict[str, Any], errors: list[str]) -> None:
++    present = {path.name for path in FIXTURES.glob("*.json")}
++    for name in sorted(present - set(FIXTURE_TABLE)):
++        errors.append(f"fixture non déclarée : schemas/fixtures/{name}")
++    for name in sorted(set(FIXTURE_TABLE) - present):
++        errors.append(f"fixture déclarée absente : schemas/fixtures/{name}")
++    before = len(errors)
++    for name, motif in FIXTURE_TABLE.items():
++        if name in present:
++            check_fixture(FIXTURES / name, schema, motif is None, errors, expected_message=motif)
++    checked = len(present & set(FIXTURE_TABLE))
++    print(f"+ fixtures déclarées : {checked - (len(errors) - before)}/{len(FIXTURE_TABLE)}")
++
++
+ def check_schema_authority(schema: dict[str, Any], errors: list[str]) -> None:
+     """Régression : une modification d’enum dans le schéma doit modifier le résultat."""
+     document = load_json(EXAMPLE)
+@@ -450,160 +572,8 @@ def main(argv: list[str] | None = None) -> int:
+ 
+     # Suite intégrée : le schéma est garanti opérant par le chargement gouverné.
+     check_fixture(EXAMPLE, schema, True, errors)
+-    check_fixture(FIXTURES / "valid_closed_return.json", schema, True, errors)
+-    check_fixture(
+-        FIXTURES / "invalid_state_held.json",
+-        schema,
+-        False,
+-        errors,
+-        expected_message="HELD est un statut de direction, pas une valeur de state",
+-    )
+-    check_fixture(FIXTURES / "invalid_missing_proof.json", schema, False, errors)
+-    check_fixture(
+-        FIXTURES / "invalid_empty_proof.json",
+-        schema,
+-        False,
+-        errors,
+-        expected_message="un verdict accepté exige au moins une preuve observed",
+-    )
+-    check_fixture(
+-        FIXTURES / "invalid_global_axis_verdict.json",
+-        schema,
+-        False,
+-        errors,
+-        expected_message="closure.verdict : valeur non canonique : PASS",
+-    )
+-    check_fixture(
+-        FIXTURES / "invalid_direction_missing_object.json",
+-        schema,
+-        False,
+-        errors,
+-        expected_message="DIRECTION exige un objet direction",
+-    )
+-    check_fixture(
+-        FIXTURES / "invalid_direction_missing_trace_locator.json",
+-        schema,
+-        False,
+-        errors,
+-        expected_message="DIRECTION exige trace_locator",
+-    )
+-    check_fixture(
+-        FIXTURES / "invalid_direction_missing_creative_close.json",
+-        schema,
+-        False,
+-        errors,
+-        expected_message="DIRECTION clôturée exige creative_close",
+-    )
+-    check_fixture(
+-        FIXTURES / "invalid_direction_missing_status.json",
+-        schema,
+-        False,
+-        errors,
+-        expected_message="DIRECTION décidée ou clôturée exige direction_status",
+-    )
+-    check_fixture(
+-        FIXTURES / "invalid_creative_close_missing_field.json",
+-        schema,
+-        False,
+-        errors,
+-        expected_message="creative_close exige le champ craft_detail",
+-    )
+-    check_fixture(
+-        FIXTURES / "valid_direction_with_profile_decision.json",
+-        schema,
+-        True,
+-        errors,
+-    )
+-    check_fixture(
+-        FIXTURES / "invalid_profile_decision_missing_evidence.json",
+-        schema,
+-        False,
+-        errors,
+-        expected_message="profile_decision : champ obligatoire absent : evidence",
+-    )
+-    check_fixture(
+-        FIXTURES / "invalid_accepted_before_decision.json",
+-        schema,
+-        False,
+-        errors,
+-        expected_message="un verdict accepté exige state DECIDED ou CLOSED",
+-    )
+-    check_fixture(
+-        FIXTURES / "invalid_accepted_without_provenance.json",
+-        schema,
+-        False,
+-        errors,
+-        expected_message="un verdict accepté exige proof.provenance",
+-    )
+-    check_fixture(
+-        FIXTURES / "invalid_accepted_without_limitations.json",
+-        schema,
+-        False,
+-        errors,
+-        expected_message="verdict accepté exige une limitation non vide",
+-    )
+-    check_fixture(
+-        FIXTURES / "invalid_accepted_without_observed.json",
+-        schema,
+-        False,
+-        errors,
+-        expected_message="verdict accepté exige au moins une preuve observed",
+-    )
+-    check_fixture(
+-        FIXTURES / "invalid_fail_assumed_accepted.json",
+-        schema,
+-        False,
+-        errors,
+-        expected_message="issue bloquante ou FAIL-ASSUMED",
+-    )
+-    check_fixture(
+-        FIXTURES / "valid_direction_exploratory_untransformed.json",
+-        schema,
+-        True,
+-        errors,
+-    )
+-    check_fixture(
+-        FIXTURES / "invalid_capability_available_without_basis.json",
+-        schema,
+-        False,
+-        errors,
+-        expected_message="capability_profile exige basis non vide",
+-    )
+-    check_fixture(
+-        FIXTURES / "invalid_critical_without_protection.json",
+-        schema,
+-        False,
+-        errors,
+-        expected_message="un risque critical exige une critical_protection structurée",
+-    )
+-    check_fixture(
+-        FIXTURES / "invalid_critical_placeholder_protection.json",
+-        schema,
+-        False,
+-        errors,
+-        expected_message="critical_protection.control ne peut pas être un placeholder",
+-    )
+-    check_fixture(
+-        FIXTURES / "invalid_accepted_lost_in_build.json",
+-        schema,
+-        False,
+-        errors,
+-        expected_message="LOST-IN-BUILD ne peut pas produire un verdict accepté",
+-    )
+-    check_fixture(
+-        FIXTURES / "invalid_lite_missing_minimum.json",
+-        schema,
+-        False,
+-        errors,
+-        expected_message="run_card : champ obligatoire absent : risk",
+-    )
+-    check_fixture(
+-        FIXTURES / "invalid_direction_untransformed_anchor.json",
+-        schema,
+-        False,
+-        errors,
+-        expected_message="un verdict accepté exige transformation_status transformed",
+-    )
++    check_fixture_table(schema, errors)
++    check_unit_cases(schema, errors)
+     check_schema_authority(schema, errors)
+ 
+     if errors:

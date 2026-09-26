@@ -1,0 +1,158 @@
+ID,Famille,Cause racine,Gravité provisoire,Type de correction envisagé,Lot proposé,Statut B02
+F-ACT-001,C,Accès CLI incomplet ou trop large,Majeur,Routing/façade,Lot 1,Lot 1 — non traitée (voir rapport 11.01)
+F-ACT-002,D,Façade affaiblissant un minimum propriétaire,Majeur,Clarification de façade,Lot 1,Partielle en B02
+F-ACT-003,H,Ordre et raccords internes DIRECTION/ACTION,Significatif,Déplacement/clarification,Lot 3,Hors lot 1 — ouverte
+F-ACT-004,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-ACT-005,E,Projection RUN_CARD/contrats : forme sans lien sémantique,Significatif,Documenter la portée + 2-3 règles ciblées,Lot 2,Hors lot 1 — ouverte
+F-ACT-006,E,Projection RUN_CARD/contrats : forme sans lien sémantique,Significatif,Documenter la portée + 2-3 règles ciblées,Lot 2,Hors lot 1 — ouverte
+F-ACT-007,E,Projection RUN_CARD/contrats : forme sans lien sémantique,Significatif,Documenter la portée + 2-3 règles ciblées,Lot 2,Hors lot 1 — ouverte
+F-ACT-008,E,Projection RUN_CARD/contrats : forme sans lien sémantique,Significatif,Documenter la portée + 2-3 règles ciblées,Lot 2,Hors lot 1 — ouverte
+F-ACT-009,E,Projection RUN_CARD/contrats : forme sans lien sémantique,Significatif,Documenter la portée + 2-3 règles ciblées,Lot 2,Hors lot 1 — ouverte
+F-ACT-010,E,Projection RUN_CARD/contrats : forme sans lien sémantique,Significatif,Documenter la portée + 2-3 règles ciblées,Lot 2,Hors lot 1 — ouverte
+F-ACT-011,E,Projection RUN_CARD/contrats : forme sans lien sémantique,Significatif,Documenter la portée + 2-3 règles ciblées,Lot 2,Hors lot 1 — ouverte
+F-ACT-012,E,Projection RUN_CARD/contrats : forme sans lien sémantique,Significatif,Documenter la portée + 2-3 règles ciblées,Lot 2,Hors lot 1 — ouverte
+F-ACT-013,E,Projection RUN_CARD/contrats : forme sans lien sémantique,Significatif,Documenter la portée + 2-3 règles ciblées,Lot 2,Hors lot 1 — ouverte
+F-ACT-014,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-ACT-015,E,Projection RUN_CARD/contrats : forme sans lien sémantique,Significatif,Documenter la portée + 2-3 règles ciblées,Lot 2,Hors lot 1 — ouverte
+F-ACT-016,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-ACT-017,E,Projection RUN_CARD/contrats : forme sans lien sémantique,Majeur,Documenter la portée + 2-3 règles ciblées,Lot 2,Hors lot 1 — ouverte
+F-ACT-018,E,Projection RUN_CARD/contrats : forme sans lien sémantique,Significatif,Documenter la portée + 2-3 règles ciblées,Lot 2,Hors lot 1 — ouverte
+F-ACT-019,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-ACT-020,E,Projection RUN_CARD/contrats : forme sans lien sémantique,Significatif,Documenter la portée + 2-3 règles ciblées,Lot 2,Hors lot 1 — ouverte
+F-ACT-021,E,Projection RUN_CARD/contrats : forme sans lien sémantique,Significatif,Documenter la portée + 2-3 règles ciblées,Lot 2,Hors lot 1 — ouverte
+F-ACT-022,E,Projection RUN_CARD/contrats : forme sans lien sémantique,Significatif,Documenter la portée + 2-3 règles ciblées,Lot 2,Hors lot 1 — ouverte
+F-ACT-023,E,Projection RUN_CARD/contrats : forme sans lien sémantique,Significatif,Documenter la portée + 2-3 règles ciblées,Lot 2,Hors lot 1 — ouverte
+F-ACT-024,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-ACT-025,E,Projection RUN_CARD/contrats : forme sans lien sémantique,Significatif,Documenter la portée + 2-3 règles ciblées,Lot 2,Hors lot 1 — ouverte
+F-ACT-026,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-ACT-027,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-ACT-028,E,Projection RUN_CARD/contrats : forme sans lien sémantique,Significatif,Documenter la portée + 2-3 règles ciblées,Lot 2,Hors lot 1 — ouverte
+F-ACT-029,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-ACT-030,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-ACT-031,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-ACT-032,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-ACT-033,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-ACT-034,E,Projection RUN_CARD/contrats : forme sans lien sémantique,Significatif,Documenter la portée + 2-3 règles ciblées,Lot 2,Hors lot 1 — ouverte
+F-ACT-035,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-ACT-036,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-ACT-037,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-ACT-038,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-ACT-039,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-ALL-001,A,Faux succès des oracles machine,Majeur,Validateur/test,Lot 1,Corrigée en B02 — non éprouvée par mutation dédiée
+F-ALL-002,B,Erreurs brutes et reprise d'outillage,Mineur,Validateur/instrumentation,Lot 2,Corrigée en B02 — mutation discriminante B01/B02
+F-BIB-001,G,Frontières normatives et capacité positive (propriétaires),Observation,Attendre preuve perceptuelle / décision owner,Après 6.02,Hors lot 1 — ouverte
+F-BIB-002,G,Frontières normatives et capacité positive (propriétaires),Observation,Attendre preuve perceptuelle / décision owner,Après 6.02,Hors lot 1 — ouverte
+F-BIB-003,G,Frontières normatives et capacité positive (propriétaires),Observation,Attendre preuve perceptuelle / décision owner,Après 6.02,Hors lot 1 — ouverte
+F-BIB-004,G,Frontières normatives et capacité positive (propriétaires),Significatif,Attendre preuve perceptuelle / décision owner,Après 6.02,Hors lot 1 — ouverte
+F-BIB-005,G,Frontières normatives et capacité positive (propriétaires),Observation,Attendre preuve perceptuelle / décision owner,Après 6.02,Hors lot 1 — ouverte
+F-BLD-001,A,Faux succès des oracles machine,Majeur,Validateur/test,Lot 1,Corrigée en B02 — mutation discriminante B01/B02
+F-BLD-002,B,Erreurs brutes et reprise d'outillage,Mineur,Validateur/instrumentation,Lot 2,Partielle en B02
+F-BLD-003,B,Erreurs brutes et reprise d'outillage,Mineur,Validateur/instrumentation,Lot 2,Corrigée en B02 — non éprouvée par mutation dédiée
+F-BLD-004,A,Faux succès des oracles machine,Majeur,Validateur/test,Lot 1,Corrigée en B02 — mutation discriminante B01/B02
+F-CHG-001,E,Projection RUN_CARD/contrats : forme sans lien sémantique,Observation,Documenter la portée + 2-3 règles ciblées,Lot 2,Hors lot 1 — ouverte
+F-DF-001,E,Projection RUN_CARD/contrats : forme sans lien sémantique,Significatif,Documenter la portée + 2-3 règles ciblées,Lot 2,Hors lot 1 — ouverte
+F-DF-002,E,Projection RUN_CARD/contrats : forme sans lien sémantique,Significatif,Documenter la portée + 2-3 règles ciblées,Lot 2,Hors lot 1 — ouverte
+F-DIR-001,H,Ordre et raccords internes DIRECTION/ACTION,Significatif,Déplacement/clarification,Lot 3,Hors lot 1 — ouverte
+F-DIR-002,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-DIR-003,H,Ordre et raccords internes DIRECTION/ACTION,Significatif,Déplacement/clarification,Lot 3,Hors lot 1 — ouverte
+F-DIR-004,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-DIR-005,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-DIR-006,H,Ordre et raccords internes DIRECTION/ACTION,Significatif,Déplacement/clarification,Lot 3,Hors lot 1 — ouverte
+F-DIR-007,E,Projection RUN_CARD/contrats : forme sans lien sémantique,Majeur,Documenter la portée + 2-3 règles ciblées,Lot 2,Hors lot 1 — ouverte
+F-DIR-008,H,Ordre et raccords internes DIRECTION/ACTION,Significatif,Déplacement/clarification,Lot 3,Hors lot 1 — ouverte
+F-DIR-009,G,Frontières normatives et capacité positive (propriétaires),Observation,Attendre preuve perceptuelle / décision owner,Après 6.02,Hors lot 1 — ouverte
+F-DIR-010,H,Ordre et raccords internes DIRECTION/ACTION,Significatif,Déplacement/clarification,Lot 3,Hors lot 1 — ouverte
+F-DIR-011,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-DIR-012,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-DIR-013,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-DIR-014,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-DIR-015,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-DIR-016,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-DIR-017,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-DIR-018,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-DIR-019,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-DIR-020,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-DIR-021,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-DIR-022,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-DIR-023,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-DIR-024,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-DIR-025,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-DIR-026,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-DIR-027,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-DIR-028,C,Accès CLI incomplet ou trop large,Significatif,Routing/façade,Lot 1,Corrigée en B02 — mutation discriminante B01/B02
+F-DIR-029,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-DIR-030,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-DIR-031,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-DIR-032,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-DIR-033,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-DIR-034,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-DIR-035,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-DIR-036,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-DIR-037,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-DIR-038,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-DIR-039,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-DIR-040,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-DIR-041,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-DIR-042,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-DIR-043,H,Ordre et raccords internes DIRECTION/ACTION,Significatif,Déplacement/clarification,Lot 3,Hors lot 1 — ouverte
+F-DIR-044,C,Accès CLI incomplet ou trop large,Significatif,Routing/façade,Lot 1,Lot 1 — non traitée (voir rapport 11.01)
+F-DIR-045,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-DIR-046,Z,Non triable : description absente des fichiers transmis,—,Recharger le rapport source,Bloqué,Hors lot 1 — ouverte
+F-EX-001,F,Rejet à tort ou exemple incohérent,Significatif,Correction ciblée,Lot 2,Hors lot 1 — ouverte
+F-EX-002,F,Rejet à tort ou exemple incohérent,Significatif,Correction ciblée,Lot 2,Hors lot 1 — ouverte
+F-EX-003,F,Rejet à tort ou exemple incohérent,Significatif,Correction ciblée,Lot 2,Hors lot 1 — ouverte
+F-FIX-001,A,Faux succès des oracles machine,Mineur,Validateur/test,Lot 1,Corrigée en B02 — non éprouvée par mutation dédiée
+F-FIX-002,A,Faux succès des oracles machine,Significatif,Validateur/test,Lot 1,Partielle en B02
+F-FIX-003,A,Faux succès des oracles machine,Majeur,Validateur/test,Lot 1,Corrigée en B02 — mutation discriminante B01/B02
+F-FLOW-001,D,Façade affaiblissant un minimum propriétaire,Majeur,Clarification de façade,Lot 1,Corrigée en B02 — non éprouvée par mutation dédiée
+F-GLO-001,J,Éditorial mineur,Mineur,Clarification,Lot 3,Hors lot 1 — ouverte
+F-GLO-002,J,Éditorial mineur,Mineur,Clarification,Lot 3,Hors lot 1 — ouverte
+F-MAN-001,A,Faux succès des oracles machine,Majeur,Validateur/test,Lot 1,Corrigée en B02 — mutation discriminante B01/B02
+F-MAN-002,A,Faux succès des oracles machine,Majeur,Validateur/test,Lot 1,Corrigée en B02 — mutation discriminante B01/B02
+F-MP-001,F,Rejet à tort ou exemple incohérent,Significatif,Correction ciblée,Lot 2,Hors lot 1 — ouverte
+F-OM-001,D,Façade affaiblissant un minimum propriétaire,Majeur,Clarification de façade,Lot 1,Corrigée en B02 — non éprouvée par mutation dédiée
+F-OM-002,G,Frontières normatives et capacité positive (propriétaires),Observation,Attendre preuve perceptuelle / décision owner,Après 6.02,Hors lot 1 — ouverte
+F-PC-001,F,Rejet à tort ou exemple incohérent,Significatif,Correction ciblée,Lot 2,Hors lot 1 — ouverte
+F-PC-002,E,Projection RUN_CARD/contrats : forme sans lien sémantique,Significatif,Documenter la portée + 2-3 règles ciblées,Lot 2,Hors lot 1 — ouverte
+F-QS-001,D,Façade affaiblissant un minimum propriétaire,Majeur,Clarification de façade,Lot 1,Partielle en B02
+F-QS-002,D,Façade affaiblissant un minimum propriétaire,Majeur,Clarification de façade,Lot 1,Corrigée en B02 — non éprouvée par mutation dédiée
+F-QS-003,J,Éditorial mineur,Mineur,Clarification,Lot 3,Hors lot 1 — ouverte
+F-QS-004,D,Façade affaiblissant un minimum propriétaire,Majeur,Clarification de façade,Lot 1,Lot 1 — non traitée (voir rapport 11.01)
+F-RB-001,E,Projection RUN_CARD/contrats : forme sans lien sémantique,Significatif,Documenter la portée + 2-3 règles ciblées,Lot 2,Hors lot 1 — ouverte
+F-RB-002,E,Projection RUN_CARD/contrats : forme sans lien sémantique,Significatif,Documenter la portée + 2-3 règles ciblées,Lot 2,Hors lot 1 — ouverte
+F-RC-001,F,Rejet à tort ou exemple incohérent,Significatif,Correction ciblée,Lot 2,Hors lot 1 — ouverte
+F-RDR-001,D,Façade affaiblissant un minimum propriétaire,Majeur,Clarification de façade,Lot 1,Corrigée en B02 — non éprouvée par mutation dédiée
+F-RM-001,D,Façade affaiblissant un minimum propriétaire,Majeur,Clarification de façade,Lot 1,Corrigée en B02 — mutation discriminante B01/B02
+F-RM-002,D,Façade affaiblissant un minimum propriétaire,Majeur,Clarification de façade,Lot 1,Corrigée en B02 — non éprouvée par mutation dédiée
+F-RRT-001,A,Faux succès des oracles machine,Significatif,Validateur/test,Lot 1,Corrigée en B02 — mutation discriminante B01/B02
+F-SAV-001,G,Frontières normatives et capacité positive (propriétaires),Observation,Attendre preuve perceptuelle / décision owner,Après 6.02,Hors lot 1 — ouverte
+F-SAV-002,G,Frontières normatives et capacité positive (propriétaires),Observation,Attendre preuve perceptuelle / décision owner,Après 6.02,Hors lot 1 — ouverte
+F-SAV-003,G,Frontières normatives et capacité positive (propriétaires),Significatif,Attendre preuve perceptuelle / décision owner,Après 6.02,Hors lot 1 — ouverte
+F-SAV-004,G,Frontières normatives et capacité positive (propriétaires),Observation,Attendre preuve perceptuelle / décision owner,Après 6.02,Hors lot 1 — ouverte
+F-SAV-005,G,Frontières normatives et capacité positive (propriétaires),Observation,Attendre preuve perceptuelle / décision owner,Après 6.02,Hors lot 1 — ouverte
+F-SAV-006,G,Frontières normatives et capacité positive (propriétaires),Observation,Attendre preuve perceptuelle / décision owner,Après 6.02,Hors lot 1 — ouverte
+F-SAV-007,G,Frontières normatives et capacité positive (propriétaires),Observation,Attendre preuve perceptuelle / décision owner,Après 6.02,Hors lot 1 — ouverte
+F-SAV-008,G,Frontières normatives et capacité positive (propriétaires),Observation,Attendre preuve perceptuelle / décision owner,Après 6.02,Hors lot 1 — ouverte
+F-SAV-009,G,Frontières normatives et capacité positive (propriétaires),Observation,Attendre preuve perceptuelle / décision owner,Après 6.02,Hors lot 1 — ouverte
+F-SAV-010,D,Façade affaiblissant un minimum propriétaire,Majeur,Clarification de façade,Lot 1,Retirée du lot 1 (propriétaire SAVOIR) → lot 3
+F-SK-001,D,Façade affaiblissant un minimum propriétaire,Majeur,Clarification de façade,Lot 1,Corrigée en B02 — non éprouvée par mutation dédiée
+F-SK-002,C,Accès CLI incomplet ou trop large,Significatif,Routing/façade,Lot 1,Corrigée en B02 — non éprouvée par mutation dédiée
+F-VCT-001,A,Faux succès des oracles machine,Majeur,Validateur/test,Lot 1,Corrigée en B02 — mutation discriminante B01/B02
+F-VCT-002,B,Erreurs brutes et reprise d'outillage,Mineur,Validateur/instrumentation,Lot 2,Corrigée en B02 — non éprouvée par mutation dédiée
+F-VCT-003,A,Faux succès des oracles machine,Majeur,Validateur/test,Lot 1,Corrigée en B02 — mutation discriminante B01/B02
+F-VDG-001,A,Faux succès des oracles machine,Majeur,Validateur/test,Lot 1,Corrigée en B02 — mutation discriminante B01/B02
+F-VDG-002,J,Éditorial mineur,Mineur,Clarification,Lot 3,Hors lot 1 — ouverte
+F-VDG-003,J,Éditorial mineur,Mineur,Clarification,Lot 3,Hors lot 1 — ouverte
+F-VDG-004,B,Erreurs brutes et reprise d'outillage,Mineur,Validateur/instrumentation,Lot 2,Corrigée en B02 — mutation discriminante B01/B02
+F-VRC-001,A,Faux succès des oracles machine,Majeur,Validateur/test,Lot 1,Corrigée en B02 — mutation discriminante B01/B02
+F-VRC-002,B,Erreurs brutes et reprise d'outillage,Mineur,Validateur/instrumentation,Lot 2,Corrigée en B02 — mutation discriminante B01/B02
+F-VRC-003,B,Erreurs brutes et reprise d'outillage,Mineur,Validateur/instrumentation,Lot 2,Corrigée en B02 — non éprouvée par mutation dédiée
+F-VRC-004,E,Projection RUN_CARD/contrats : forme sans lien sémantique,Significatif,Documenter la portée + 2-3 règles ciblées,Lot 2,Hors lot 1 — ouverte
+F-VRC-005,E,Projection RUN_CARD/contrats : forme sans lien sémantique,Significatif,Documenter la portée + 2-3 règles ciblées,Lot 2,Hors lot 1 — ouverte
+F-VRC-006,A,Faux succès des oracles machine,Majeur,Validateur/test,Lot 1,Corrigée en B02 — mutation discriminante B01/B02
+F-VRC-007,A,Faux succès des oracles machine,Majeur,Validateur/test,Lot 1,Corrigée en B02 — mutation discriminante B01/B02
+F-VRC-008,B,Erreurs brutes et reprise d'outillage,Mineur,Validateur/instrumentation,Lot 2,Corrigée en B02 — non éprouvée par mutation dédiée
+F-VRM-001,A,Faux succès des oracles machine,Majeur,Validateur/test,Lot 1,Corrigée en B02 — mutation discriminante B01/B02
+F-VRM-002,A,Faux succès des oracles machine,Majeur,Validateur/test,Lot 1,Corrigée en B02 — mutation discriminante B01/B02
+F-VRM-003,A,Faux succès des oracles machine,Significatif,Validateur/test,Lot 1,Lot 1 — non traitée (voir rapport 11.01)
+F-WF-001,I,CI hébergée,Significatif,Mise à jour workflow,Lot 1,Partielle en B02

@@ -1,0 +1,93 @@
+ID,FAMILLE,INVARIANT,STATUT,SOURCE HUMAINE,FICHES
+INV-E01,Registres,"HELD est un statut de direction, pas une valeur de state",EXISTANT — conservé,ACTION/STATUS,
+INV-E02,Capacité,capability_profile exige basis non vide lorsque available contient un élément,EXISTANT — remplacé par INV-B2-6 (basis typée),ACTION 283–289,F-ACT-018
+INV-E03,Protection critique,un risque critical exige une critical_protection structurée,EXISTANT — conservé,DIRECTION 140 ; ACTION RUN_CARD,
+INV-E04,Protection critique,"critical_protection exige ses champs (control, owner, scope, failure_action, evidence_locator)",EXISTANT — conservé,ACTION RUN_CARD,
+INV-E05,Protection critique,critical_protection : aucun placeholder,EXISTANT — conservé,ACTION RUN_CARD,
+INV-E06,Protection critique,"failure_action ∈ {RETURNED, BLOCKED, ESCALATED}",EXISTANT — conservé,ACTION RUN_CARD,
+INV-E07,DIRECTION,"DIRECTION exige un objet direction (thèse, anti-direction non vide, premier objet)",EXISTANT — conservé,DIRECTION ; ACTION/RUN-DIRECTION,
+INV-E08,Trace,DIRECTION exige trace_locator,EXISTANT — conservé,ACTION TRACE-LOCATOR 273,
+INV-E09,Registres,DIRECTION décidée ou clôturée exige direction_status,EXISTANT — conservé,ACTION/STATUS,
+INV-E10,Ancres,chaque ancrage DIRECTION est structuré et complet (champs non vides),EXISTANT — conservé pour la structure ; l’exigence « au moins un ancrage » devient INV-B4-6,DIRECTION/VISUAL_TARGET ; ACTION/PIPELINE-DIRECTION,F-DIR-027
+INV-E11,Ancres,transformed incompatible avec un verdict exploratoire ou de retour,EXISTANT — RETIRÉ (F-RC-001),—,F-RC-001
+INV-E12,Ancres,un verdict accepté exige transformation_status transformed,EXISTANT — conservé,DIRECTION anchors,
+INV-E13,Style,profile_decision : objet avec ses champs obligatoires,EXISTANT — conservé,SAVOIR/STYLE,F-SAV-005 (C1)
+INV-E14,Clôture DIRECTION,DIRECTION clôturée exige creative_close complet,EXISTANT — conservé,ACTION 405,F-ACT-025 (C1)
+INV-E15,Trace,STANDARD et SYSTÈME exigent trace_locator,EXISTANT — conservé,ACTION TRACE-LOCATOR 273,
+INV-E16,Compatibilités,LOST-IN-BUILD ne peut pas produire un verdict accepté,EXISTANT — conservé,ACTION/STATUS,
+INV-E17,Compatibilités,BLOCKED ou FAIL-ASSUMED ne peut pas produire un verdict accepté,EXISTANT — généralisé par INV-B2-1,ACTION/STATUS,F-ACT-010
+INV-E18,Preuve,observed et not_verified ne contiennent pas le même claim,EXISTANT — conservé,ACTION preuve,
+INV-E19,Acceptation,verdict accepté ⇒ state DECIDED ou CLOSED,EXISTANT — conservé,ACTION/STATUS 121–132,
+INV-E20,Acceptation,verdict accepté ⇒ au moins une preuve observed,EXISTANT — conservé,ACTION 327–331,
+INV-E21,Acceptation,"verdict accepté ⇒ proof.provenance complète (locator, version, méthode, date)",EXISTANT — conservé,ACTION 655,
+INV-E22,Acceptation,provenance.artifact_locator = artifact.locator,EXISTANT — conservé,ACTION 407–411,
+INV-E23,Acceptation,verdict accepté ⇒ limitation non vide,EXISTANT — conservé,ACTION 413–427,
+INV-E24,Conséquence,DIRECTION clôturée sans decision_change ⇒ issue ou verdict non accepté,EXISTANT — généralisé par INV-C1-3,ACTION 206–218,F-ACT-013
+INV-S01,Profil strict,strict : aucun placeholder ou texte générique,EXISTANT — conservé,README ; QUICKSTART 121,
+INV-S02,Profil strict,strict : artifact.locator renseigné,EXISTANT — conservé,README ; QUICKSTART 121,
+INV-S03,Profil strict,strict : trace_locator renseigné,EXISTANT — conservé,README ; QUICKSTART 121,
+INV-S04,Profil strict,strict : trace_locator sans URL de démonstration,EXISTANT — conservé,README ; QUICKSTART 121,F-VRC-004/005 (E2)
+INV-S05,Profil strict,strict : artefact local présent,EXISTANT — conservé,README ; QUICKSTART 121,F-VRC-004/005 (E2)
+INV-B1-1,Protection critique,"risque critical ⇒ mode ∉ {LITE, ITER}",NOUVEAU — B1 (11.03),DIRECTION 140,F-DIR-007
+INV-B1-2,Protection critique,"critical_protection.result ∈ {PASS, FAIL, NOT-VERIFIED} requis",NOUVEAU — B1 (11.03),ACTION 283–299,F-ACT-017
+INV-B1-3a,Protection critique,result NOT-VERIFIED ⇒ verdict ≠ ACCEPTED,NOUVEAU — B1 (11.03),ACTION 299,F-ACT-017
+INV-B1-3b,Protection critique,result FAIL ⇒ aucun verdict accepté et issue = failure_action,NOUVEAU — B1 (11.03),sens de failure_action,"F-ACT-017, F-ACT-038"
+INV-B1-4,Exception,"issue FAIL-ASSUMED ⇒ closure.exception (réserve commune + gate_axis, failure_evidence, requested_by)",NOUVEAU — B1 (11.03),"ACTION 808–824, 427",F-ACT-038
+INV-B1-5,Exception,exception.failure_evidence ∈ proof.observed,NOUVEAU — B1 (11.03),ACTION 810,F-ACT-038
+INV-B1-6,Exception,"exception.disposition ∈ {NON-DIFFUSÉ, DIFFUSÉ-LIMITÉ, RETIRÉ, ESCALADÉ}",NOUVEAU — B1 (11.03),"ACTION 142, 810",F-ACT-039
+INV-B2-1,Compatibilités,"issue ≠ null ⇒ verdict ∉ {ACCEPTED, ACCEPTED-WITH-RESERVATION}",NOUVEAU — B2 (11.04),ACTION/STATUS (matrice ajoutée),F-ACT-010
+INV-B2-2,Compatibilités,direction_status PARTIALLY-HELD ⇒ verdict ≠ ACCEPTED,NOUVEAU — B2 (11.04),ACTION/STATUS (matrice ajoutée),F-ACT-010
+INV-B2-3,Axes,"verdict accepté ⇒ closure.axes {V,U,A,T} ; un axe RETURN ⇒ aucun verdict accepté ; un axe NOT-VERIFIED ou PASS-WITH-RESERVATION ⇒ verdict ≠ ACCEPTED",NOUVEAU — B2 (11.04),"ACTION 164–175, 299",F-ACT-012
+INV-B2-4,Capacité,verdict accepté ⇒ provenance.capability ∈ available et ∉ unavailable,NOUVEAU — B2 (11.04),ACTION 283–289,F-ACT-018
+INV-B2-5,Capacité,verdict accepté ⇒ capability_profile présent,NOUVEAU — B2 (11.04),ACTION 283,F-ACT-018
+INV-B2-6,Capacité,"basis typée {capability, kind ∈ {tool_result, attested_environment, user_source, unattested_declaration}, detail} ; la capacité de provenance d’un verdict accepté n’a pas une basis unattested_declaration",NOUVEAU — B2 (11.04),ACTION 284–289,F-ACT-018
+INV-B2-7,Fraîcheur,verdict accepté ⇒ artifact.version présent et égal à provenance.artifact_version,NOUVEAU — B2 (11.04),ACTION 407–411,F-ACT-022
+INV-B2-8,Fraîcheur,provenance.observed_at est une date ISO 8601,NOUVEAU — B2 (11.04),ACTION 407,F-ACT-022
+INV-B2-9,Réserves,"ACCEPTED-WITH-RESERVATION ⇒ closure.reservations non vide ; chaque réserve a ses 7 attributs, non vides, sans placeholder, review_date ISO",NOUVEAU — B2 (11.04),ACTION 413–427,F-ACT-023
+INV-B2-10,Droits,"mode DIRECTION ⇒ artifact.rights_status ∈ {not_applicable, cleared, unknown, restricted} ; rights_status unknown ⇒ verdict ≠ ACCEPTED",NOUVEAU — B2 (11.04),ACTION 429–435,F-ACT-024
+INV-B3-1,Paquet SYSTÈME,"mode SYSTÈME ∧ verdict accepté ⇒ closure.system_package complet : impact, consumers (≥ 1), owner, migration, rollback, non_regression, changelog_ref ; aucun champ vide ni placeholder",NOUVEAU — B3 (11.05),"ACTION 200, 379–387, 399","F-ACT-015, F-ACT-021"
+INV-B3-2,Paquet SYSTÈME,"non_regression.baseline exige locator, version et état",NOUVEAU — B3 (11.05),ACTION 590–594,F-ACT-031
+INV-B3-3,B1b,"mode DIRECTION ∧ verdict accepté ∧ axes.V ∈ {PASS, PASS-WITH-RESERVATION} ⇒ closure.b1b ; statut DONE ⇒ paire {before_locator ≠ after_locator, decision, outcome ∈ {confirmed, modified, abandoned}}",NOUVEAU — B3 (11.05),ACTION 704–712,"F-ACT-036, F-ACT-021"
+INV-B3-4,B1b,"b1b N/A-JUSTIFIED ⇒ reason ∈ {no_editable_decision, equivalent_pair_valid}, covered_decision, owner, next_proof ; equivalent_pair_valid ⇒ pair_ref",NOUVEAU — B3 (11.05),ACTION 714,"F-ACT-036, F-BIB-001"
+INV-B4-1,Ancres,"anchors[].type ∈ {generated, observed, provided} requis",NOUVEAU — B4 (11.06),"DIRECTION 381, 583–585",F-DIR-027
+INV-B4-2,Ancres,anchors[].date est une date ISO 8601 (la fraîcheur reste un jugement : forme seule),NOUVEAU — B4 (11.06),DIRECTION 577 (ancre fraîche),F-DIR-027
+INV-B4-3,Ancres,"mode DIRECTION ⇒ direction.identity_stake ∈ {high, normal}",NOUVEAU — B4 (11.06),"DIRECTION 439–441, 587",F-DIR-027
+INV-B4-4,Ancres,"identity_stake high ∧ tous les ancrages generated ∧ direction_status ∈ {HELD, HELD-WITH-ACCEPTED-DIFFERENCE} ⇒ direction.calibration {basis ∈ {real_constraint, generated_only_reserved}, detail} ; basis ∈ {observed_anchor, provided_anchor, real_constraint, generated_only_reserved} (une revue indépendante n’est pas une base de calibration)",NOUVEAU — B4 (11.06),"DIRECTION 441, 587","F-DIR-027, F-SAV-003"
+INV-B4-5,Ancres,calibration generated_only_reserved ⇒ verdict ≠ ACCEPTED,NOUVEAU — B4 (11.06),DIRECTION 441,F-DIR-027
+INV-B4-6,Ancres,mode DIRECTION sans ancrage ⇒ aucun verdict accepté et issue non nulle (sérialisation honnête d’ACTION 483 ; remplace l’exigence inconditionnelle « au moins un ancrage »),NOUVEAU — B4 (11.06),DIRECTION 577 ; ACTION 483,F-DIR-027
+INV-C1-1,Conséquence,"decision_change.outcome ∈ {CHANGED, CONFIRMED, ABANDONED, N/A-JUSTIFIED, NOT-OBSERVED} requis ; N/A-JUSTIFIED ⇒ reason non vide",NOUVEAU — C1 (11.08),ACTION 206–236,"F-ACT-013, F-ACT-014, F-DIR-011"
+INV-C1-2,Conséquence,outcome NOT-OBSERVED ⇒ verdict ≠ ACCEPTED,NOUVEAU — C1 (11.08),ACTION 236 (seul un résultat observé alimente un verdict),F-ACT-014
+INV-C1-3,Conséquence,"state CLOSED ∧ verdict accepté ∧ mode ∈ {ITER, STANDARD, DIRECTION, SYSTÈME} ⇒ decision_change (LITE : facultatif, ACTION 345)",NOUVEAU — C1 (11.08),"ACTION 206–218, 345",F-ACT-013
+INV-C1-4,Temps,"closure.verdict nullable ; state ∈ {INTAKE, CLASSIFIED, SPECCED, BUILDING} ⇒ verdict null ; state ∈ {DECIDED, CLOSED} ⇒ verdict non nul (assouplissement du schéma)",NOUVEAU — C1 (11.08),ACTION/STATUS 121–132,F-ACT-009
+INV-C1-5,Registres,"issue RECLASSIFIED ⇒ closure.reclassification {to_mode ∈ modes ∖ {mode}, successor_run_ref}",NOUVEAU — C1 (11.08),ACTION/STATUS 139,F-ACT-011
+INV-C1-6,Style,"profile_decision.phase ∈ {intended, observed} ; verdict accepté ∧ profile_decision ⇒ phase observed",NOUVEAU — C1 (11.08),SAVOIR 582–593 ; ACTION 218,F-SAV-005
+INV-C2-1,Projection,"risk.statement requis dans tous les modes, non vide, sans placeholder (champ de lancement du minimum RUN_CARD ; exception déclarée à « qui accepte prouve »)",NOUVEAU — C2 (11.09),ACTION 256–274 (RISK 271) ; ACTION/HANDOFF,"F-ACT-017 (1), F-ACT-002"
+INV-C2-2,Contrats de production (validate_contracts),"racine : creative_direction_set, ui_ux_reality_pack, evaluation_case individuellement facultatifs, au moins un présent ; semantic_check par objet présent",NOUVEAU — C2 (11.09),ACTION 529 ; README 13,F-ACT-006
+INV-C2-3,Contrats de production (validate_contracts),"coverage_map[].proof_status ∈ {OBSERVED, NOT-VERIFIED, N/A-JUSTIFIED} ; N/A-JUSTIFIED ⇒ reason non vide",NOUVEAU — C2 (11.09),ACTION/STATUS (triade) ; ACTION/HANDOFF,F-ACT-007
+INV-C2-4,Contrats de production (validate_contracts),"ui_ux_reality_pack : expected_scope requis, observed_scope chaîne ou null ; une entrée OBSERVED ⇒ observed_scope non vide",NOUVEAU — C2 (11.09),ACTION 107 (PROOF-SCOPE « réellement observé »),"F-ACT-005, F-ACT-030"
+INV-C3-1,Contrats de production (validate_contracts),"creative_direction_set.directions deux à deux distinctes après normalisation (casse, espaces) du couple (tension, ensemble des structural_changes) ; accompagne le retrait du quota structural_changes ≥ 2 (minItems 1)",NOUVEAU — C3 (11.10),DIRECTION 716 (alternative) ; ACTION 903 ; SAVOIR 279,F-PC-001
+INV-C3-2,Contrats de production (validate_contracts),structural_changes d'une direction distincts après normalisation,NOUVEAU — C3 (11.10),DIRECTION 718 (pas de variation nominale),F-PC-001
+INV-C4-1,Trace,"mode ITER ⇒ trace_locator non vide, en profil normal comme strict (toute RUN_CARD sérialisée est persistante ; ITER éphémère = mémoire locale sans RUN_CARD)",NOUVEAU — C4 (11.11),ACTION 273 ; ACTION/HANDOFF ; DIRECTION 241,F-ACT-020 ; F-DIR-036 (partie trace)
+INV-C4-2,Trace,"profil strict = exigences par mode du profil normal + placeholders, hôtes de démonstration et existence des locators locaux résolus depuis le dossier de la carte ; LITE sans trace_locator valide si l'artefact résout",NOUVEAU — C4 (11.11),ACTION 273 ; ACTION/RUN_CARD (frontière de validation),F-ACT-020
+INV-C9-1,Contrats de production (validate_contracts),"domain_frame.policy_profile.risk_coverage : chaque domain_risk (identité normalisée : casse, espaces) a au moins une entrée ; chaque entrée cite un risque déclaré et soit un control ∈ required_controls (normalisé), soit une review non vide",NOUVEAU — C9 (11.16),DIRECTION/DOMAIN-FRAME 190–215 ; D-ACT-1,F-DF-001
+INV-C9-3,Contrats de production (validate_contracts),"coverage_map.requirement = « <matrice>: <élément exact normalisé> » (identité, pas inclusion de mots) ; chaque élément de state_matrix a une entrée de couverture",NOUVEAU — C9 (11.16),ACTION/UI-UX-REALITY 97–107,F-PC-002
+INV-C9-4,Contrats de production (validate_contracts),"research_brief.entries[] : source_status ∈ {verified_in_run, unverified_knowledge, user_source_unverified} ; source non placeholder (?, tbd, todo, inconnu, n/a) ; source_date ISO (AAAA, AAAA-MM, AAAA-MM-JJ) ou unknown ; verified_in_run ⇒ source_locator non vide et date connue",NOUVEAU — C9 (11.16),"SAVOIR/SOURCE (fiche minimale : STATUS, date, TRACE-LOCATOR)",F-RB-001
+INV-K01,Contrats de production (validate_contracts),domain_risks ∩ policy_profile.risk_triggers ≠ ∅ (appariement lexical exact),EXISTANT — remplacé par INV-C9-1,validate_contracts 85–88,F-DF-001
+INV-K02,Contrats de production (validate_contracts),"proof_requirements ∩ required_controls ≠ ∅ — normalisé (casse, espaces)",EXISTANT — conservé (modifié : normalisation),validate_contracts 89–90,F-DF-001
+INV-K03,Contrats de production (validate_contracts),uncertainty_before / after non vides,EXISTANT — conservé (redondant avec minLength),validate_contracts 93–94,
+INV-K04,Contrats de production (validate_contracts),uncertainty_before ≠ uncertainty_after,"EXISTANT — RETIRÉ (E2, F-RB-002 : rejetait une incertitude honnêtement inchangée)",validate_contracts 95–96,
+INV-K05,Contrats de production (validate_contracts),chaque entrée de recherche : decision_changed et artifact_consequence non vides,EXISTANT — conservé (redondant avec minLength),validate_contracts 97–99,
+INV-K06,Contrats de production (validate_contracts),creative_direction_set.directions : ids uniques,EXISTANT — conservé,validate_contracts 104–105,
+INV-K07,Contrats de production (validate_contracts),selected_direction ∈ ids,EXISTANT — conservé,validate_contracts 106–107,
+INV-K08,Contrats de production (validate_contracts),chaque direction modifie ≥ 2 relations structurelles (et schéma minItems 2),"EXISTANT — RETIRÉ (C3, quota sans source)",validate_contracts 108–110,F-PC-001
+INV-K09,Contrats de production (validate_contracts),coverage_map non vide,EXISTANT — conservé,validate_contracts 115–116,
+INV-K10,Contrats de production (validate_contracts),coverage_map.requirement porte le préfixe de sa matrice,EXISTANT — remplacé par INV-C9-3,validate_contracts 117–119,F-PC-002
+INV-K11,Contrats de production (validate_contracts),mots de l'exigence présents dans la matrice concaténée,EXISTANT — remplacé par INV-C9-3,validate_contracts 120–130,F-PC-002
+INV-K12,Contrats de production (validate_contracts),proof_scope non vide,EXISTANT — remplacé par INV-C2-4,validate_contracts 131–132,F-ACT-005
+INV-K13,Contrats de production (validate_contracts),au moins une exigence vérifiable dans les matrices,EXISTANT — conservé,validate_contracts 133–134,
+INV-K14,Contrats de production (validate_contracts),schéma : directions maxItems 3,"EXISTANT — conservé (borne sans source textuelle, aucune friction observée ; observation F)",production_contracts.schema.json,F-PC-001 (signalé C3)
+INV-K15,Contrats de production (validate_contracts),schéma : directions minItems 2,"EXISTANT — conservé (définition d'un ensemble, C3)",DIRECTION 716,F-PC-001
+INV-D2-1,Temps,"closure.state ∈ {INTAKE, CLASSIFIED, SPECCED, BUILDING} ⇒ ni decision_change ni creative_close (champs « après observation » de la colonne Phase, C2)",NOUVEAU — D2 (11.18),"ACTION 204–218 ; ACTION/RUN_CARD (table de correspondance, C2)",F-DIR-003
+INV-D2-2,Trace,mode ITER ⇒ direction.thesis non vide (rappel de direction de RUN-ITER ; trace exigée par INV-C4-1) ; sinon reclasser (DIRECTION 672),NOUVEAU — D2 (11.18),ACTION/RUN-ITER 351–353 ; DIRECTION 672–674,F-DIR-036
+INV-E2-1,Contrats de production (validate_contracts),"domain_frame.evidence_plan[] = objets {method, scope, artifact, limit, next_proof}, chacun non vide et sans placeholder ; artefact attendu admis",NOUVEAU — E2 (11.21),DIRECTION 207,F-DF-002
+INV-E2-2,Contrats de production (validate_contracts),"research_brief : depth none ⇒ entries peut être vide ; depth ∈ {targeted, deep} ⇒ ≥ 1 entrée ; aucune entrée ⇒ uncertainty_after = uncertainty_before ; stop_condition et incertitudes sans placeholder",NOUVEAU — E2 (11.21),SAVOIR/SOURCE (activation par déclencheur),F-RB-002

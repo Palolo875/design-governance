@@ -1,0 +1,2680 @@
+diff --git a/schemas/domain_frame.schema.json b/schemas/domain_frame.schema.json
+index 7e21db2..d24d448 100644
+--- a/schemas/domain_frame.schema.json
++++ b/schemas/domain_frame.schema.json
+@@ -8,8 +8,8 @@
+   "properties": {
+     "domain": {"type":"string","minLength":1}, "audience":{"type":"string","minLength":1}, "expertise":{"type":"string","minLength":1}, "jtbd":{"type":"string","minLength":1}, "trust_model":{"type":"string","minLength":1},
+     "critical_actions":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}}, "domain_conventions":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}}, "cultural_context":{"type":"string","minLength":1}, "originality_tolerance":{"enum":["low","medium","high","unknown"]}, "proof_requirements":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}},
+-    "domain_risks":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}}, "required_research":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}}, "critical_states":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}}, "design_constraints":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}}, "evidence_plan":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}},
+-    "policy_profile":{"type":"object","required":["risk_triggers","required_controls","depth_rules","contraindications"],"additionalProperties":false,"properties":{"risk_triggers":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}},"required_controls":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}},"depth_rules":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}},"contraindications":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}}}}
++    "domain_risks":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}}, "required_research":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}}, "critical_states":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}}, "design_constraints":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}}, "evidence_plan":{"type":"array","minItems":1,"items":{"type":"object","required":["method","scope","artifact","limit","next_proof"],"additionalProperties":false,"properties":{"method":{"type":"string","minLength":1},"scope":{"type":"string","minLength":1},"artifact":{"type":"string","minLength":1},"limit":{"type":"string","minLength":1},"next_proof":{"type":"string","minLength":1}}}},
++    "policy_profile":{"type":"object","required":["risk_triggers","required_controls","risk_coverage","depth_rules","contraindications"],"additionalProperties":false,"properties":{"risk_triggers":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}},"required_controls":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}},"risk_coverage":{"type":"array","minItems":1,"items":{"type":"object","required":["risk"],"additionalProperties":false,"properties":{"risk":{"type":"string","minLength":1},"control":{"type":"string","minLength":1},"review":{"type":"string","minLength":1}}}},"depth_rules":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}},"contraindications":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}}}}
+   }
+ }
+ 
+diff --git a/schemas/examples/domain_frame.example.json b/schemas/examples/domain_frame.example.json
+index 76df9b8..7414126 100644
+--- a/schemas/examples/domain_frame.example.json
++++ b/schemas/examples/domain_frame.example.json
+@@ -13,10 +13,22 @@
+   "required_research": ["modèles mentaux des opérateurs", "patterns d'alertes industrielles"],
+   "critical_states": ["données en retard", "source indisponible", "incident non assigné"],
+   "design_constraints": ["prioriser les anomalies", "préserver la lisibilité à forte densité"],
+-  "evidence_plan": ["comparaison desktop/tablette", "observation d'une tâche d'alerte", "inspection clavier et contraste"],
++  "evidence_plan": [
++    {"method": "comparaison desktop/tablette", "scope": "écran incidents, 1440 et 834", "artifact": "captures desktop et tablette attendues", "limit": "pas de test utilisateur", "next_proof": "observation d'une tâche d'alerte"},
++    {"method": "observation d'une tâche d'alerte", "scope": "filtrer, inspecter et assigner une alerte critique", "artifact": "enregistrement de tâche attendu", "limit": "opérateurs internes, sans incident réel", "next_proof": "observation en situation d'incident"},
++    {"method": "inspection clavier et contraste", "scope": "panneau d'alerte et actions", "artifact": "relevé clavier et mesures de contraste attendus", "limit": "lecteur d'écran non couvert", "next_proof": "test au lecteur d'écran"}
++  ],
+   "policy_profile": {
+     "risk_triggers": ["alerte critique", "donnée retardée", "action irréversible"],
+     "required_controls": ["inspection experte des alertes", "statut explicite", "horodatage", "focus clavier", "récupération après erreur"],
++    "risk_coverage": [
++      {"risk": "faux sentiment de sécurité", "control": "statut explicite"},
++      {"risk": "faux sentiment de sécurité", "control": "horodatage"},
++      {"risk": "surcharge en situation urgente", "review": "test de tâche sur incident (proof_requirements)"},
++      {"risk": "surcharge en situation urgente", "control": "récupération après erreur"},
++      {"risk": "alerte critique", "control": "inspection experte des alertes"},
++      {"risk": "alerte critique", "control": "focus clavier"}
++    ],
+     "depth_rules": ["activer la recherche si le modèle mental est incertain", "inspecter desktop et tablette si la densité change"],
+     "contraindications": ["ne pas porter la gravité par la couleur seule", "ne pas utiliser une animation permanente pour signaler l'urgence"]
+   }
+diff --git a/schemas/examples/production_contracts.example.json b/schemas/examples/production_contracts.example.json
+index 7595872..99e22e9 100644
+--- a/schemas/examples/production_contracts.example.json
++++ b/schemas/examples/production_contracts.example.json
+@@ -17,12 +17,18 @@
+     "responsive_matrix":["desktop: contexte et détail côte à côte", "tablette: détail prioritaire, contexte repliable", "petit écran: séquence guidée"],
+     "accessibility_basis":["sémantique des statuts", "focus visible", "clavier", "contraste", "information non portée par la couleur"],
+     "robustness_basis":["libellés longs", "horodatages variables", "absence de données", "non-régression du tri"],
+-    "proof_scope":"desktop 1440, tablette 834, clavier, données nominales et source indisponible",
++    "expected_scope":"desktop 1440, tablette 834, clavier, données nominales et source indisponible",
++    "observed_scope":"desktop 1440, clavier, état source indisponible",
+     "coverage_map":[
+-      {"requirement":"state_matrix: source indisponible", "artifact_locator":"/incidents?state=unavailable", "proof_status":"observed"},
+-      {"requirement":"responsive_matrix: tablette", "artifact_locator":"/incidents@834px", "proof_status":"not_verified"},
+-      {"requirement":"accessibility_basis: focus clavier", "artifact_locator":"/incidents#alert-focus", "proof_status":"observed"},
+-      {"requirement":"robustness_basis: libellés longs", "artifact_locator":"/incidents?fixture=long-labels", "proof_status":"not_verified"}
++      {"requirement":"state_matrix: loading des données", "artifact_locator":"/incidents?state=loading", "proof_status":"NOT-VERIFIED"},
++      {"requirement":"state_matrix: empty sans alerte", "artifact_locator":"/incidents?state=empty", "proof_status":"NOT-VERIFIED"},
++      {"requirement":"state_matrix: error source indisponible", "artifact_locator":"/incidents?state=unavailable", "proof_status":"OBSERVED"},
++      {"requirement":"state_matrix: unavailable données en retard", "artifact_locator":"/incidents?state=stale", "proof_status":"NOT-VERIFIED"},
++      {"requirement":"state_matrix: success assignation", "artifact_locator":"/incidents?state=assigned", "proof_status":"NOT-VERIFIED"},
++      {"requirement":"responsive_matrix: tablette: détail prioritaire, contexte repliable", "artifact_locator":"/incidents@834px", "proof_status":"NOT-VERIFIED"},
++      {"requirement":"accessibility_basis: focus visible", "artifact_locator":"/incidents#alert-focus", "proof_status":"OBSERVED"},
++      {"requirement":"accessibility_basis: contraste", "artifact_locator":"/incidents#contrast", "proof_status":"OBSERVED"},
++      {"requirement":"robustness_basis: libellés longs", "artifact_locator":"/incidents?fixture=long-labels", "proof_status":"NOT-VERIFIED"}
+     ]
+   },
+   "evaluation_case": {
+diff --git a/schemas/examples/research_brief.example.json b/schemas/examples/research_brief.example.json
+index 322337c..2aa55fc 100644
+--- a/schemas/examples/research_brief.example.json
++++ b/schemas/examples/research_brief.example.json
+@@ -8,6 +8,9 @@
+   "entries": [
+     {
+       "source": "entretiens opérateurs internes, synthèse 2026-09",
++      "source_status": "user_source_unverified",
++      "source_date": "2026-09",
++      "source_locator": "notes/entretiens-operateurs-2026-09.md",
+       "source_class": "retours opérateurs",
+       "reliability_basis": "synthèse de quatre opérateurs du même contexte, sans observation d'incident réel",
+       "observed": "les opérateurs cherchent d'abord le niveau de gravité puis la dernière observation fiable",
+diff --git a/schemas/fixtures/invalid_accepted_before_decision.json b/schemas/fixtures/invalid_accepted_before_decision.json
+index 220c684..133f258 100644
+--- a/schemas/fixtures/invalid_accepted_before_decision.json
++++ b/schemas/fixtures/invalid_accepted_before_decision.json
+@@ -8,6 +8,7 @@
+     "decision_intent": "Faire comprendre la relation entre le produit et son premier geste.",
+     "risk": {
+       "level": "important",
++      "statement": "Risque principal : la décision « Faire comprendre la relation entre le produit et son premier geste » échoue dans le scope déclaré.",
+       "critical_protection": null
+     },
+     "sources": [
+@@ -21,11 +22,13 @@
+       "anti_direction": [
+         "Hero générique sans objet directeur."
+       ],
+-      "first_object": "Objet principal qui rend la relation produit-geste observable."
++      "first_object": "Objet principal qui rend la relation produit-geste observable.",
++      "identity_stake": "normal"
+     },
+     "anchors": [
+       {
+         "role": "direction",
++        "type": "observed",
+         "source": "URL ou référence réellement ouverte",
+         "date": "2026-08-29",
+         "scope": "matière, rythme et hiérarchie de la première scène",
+@@ -44,7 +47,8 @@
+     ],
+     "artifact": {
+       "locator": "chemin-ou-url-local",
+-      "scope": "Viewport desktop et mobile de la première scène, état initial."
++      "scope": "Viewport desktop et mobile de la première scène, état initial.",
++      "rights_status": "not_applicable"
+     },
+     "trace_locator": "ticket-ou-chemin-de-run",
+     "next_proof": "Revue de la scène mobile et test de la première action.",
+@@ -60,7 +64,16 @@
+         "participant non requis pour cette passe"
+       ],
+       "basis": [
+-        "capacité déclarée dans le périmètre et les limites du run"
++        {
++          "capability": "artefact disponible",
++          "kind": "attested_environment",
++          "detail": "capacité déclarée dans le périmètre et les limites du run"
++        },
++        {
++          "capability": "navigateur/capture disponible",
++          "kind": "attested_environment",
++          "detail": "capacité déclarée dans le périmètre et les limites du run"
++        }
+       ]
+     },
+     "proof": {
+@@ -72,6 +85,7 @@
+       ]
+     },
+     "decision_change": {
++      "outcome": "CHANGED",
+       "value": "L’objet directeur a remplacé une composition générique.",
+       "evidence": "Comparaison de la capture initiale et de la capture après édition."
+     },
+diff --git a/schemas/fixtures/invalid_accepted_lost_in_build.json b/schemas/fixtures/invalid_accepted_lost_in_build.json
+index 7a70f1e..a681dca 100644
+--- a/schemas/fixtures/invalid_accepted_lost_in_build.json
++++ b/schemas/fixtures/invalid_accepted_lost_in_build.json
+@@ -8,6 +8,7 @@
+     "decision_intent": "Faire comprendre la relation entre le produit et son premier geste.",
+     "risk": {
+       "level": "important",
++      "statement": "Risque principal : la décision « Faire comprendre la relation entre le produit et son premier geste » échoue dans le scope déclaré.",
+       "critical_protection": null
+     },
+     "sources": [
+@@ -21,11 +22,13 @@
+       "anti_direction": [
+         "Hero générique sans objet directeur."
+       ],
+-      "first_object": "Objet principal qui rend la relation produit-geste observable."
++      "first_object": "Objet principal qui rend la relation produit-geste observable.",
++      "identity_stake": "normal"
+     },
+     "anchors": [
+       {
+         "role": "direction",
++        "type": "observed",
+         "source": "URL ou référence réellement ouverte",
+         "date": "2026-08-29",
+         "scope": "matière, rythme et hiérarchie de la première scène",
+@@ -44,7 +47,8 @@
+     ],
+     "artifact": {
+       "locator": "chemin-ou-url-local",
+-      "scope": "Viewport desktop et mobile de la première scène, état initial."
++      "scope": "Viewport desktop et mobile de la première scène, état initial.",
++      "rights_status": "not_applicable"
+     },
+     "trace_locator": "ticket-ou-chemin-de-run",
+     "next_proof": "Revue de la scène mobile et test de la première action.",
+@@ -61,7 +65,16 @@
+         "runtime/données réelles"
+       ],
+       "basis": [
+-        "artefact inspecté et environnement de capture disponible ; clavier/AT et participant non exécutés dans cette passe"
++        {
++          "capability": "artefact textuel",
++          "kind": "attested_environment",
++          "detail": "artefact inspecté et environnement de capture disponible ; clavier/AT et participant non exécutés dans cette passe"
++        },
++        {
++          "capability": "navigateur/capture",
++          "kind": "attested_environment",
++          "detail": "artefact inspecté et environnement de capture disponible ; clavier/AT et participant non exécutés dans cette passe"
++        }
+       ]
+     },
+     "proof": {
+@@ -73,6 +86,7 @@
+       ]
+     },
+     "decision_change": {
++      "outcome": "CHANGED",
+       "value": "L’objet directeur a remplacé une composition générique.",
+       "evidence": "Comparaison de la capture initiale et de la capture après édition."
+     },
+diff --git a/schemas/fixtures/invalid_accepted_without_limitations.json b/schemas/fixtures/invalid_accepted_without_limitations.json
+index 4e03edd..66f007b 100644
+--- a/schemas/fixtures/invalid_accepted_without_limitations.json
++++ b/schemas/fixtures/invalid_accepted_without_limitations.json
+@@ -6,12 +6,12 @@
+     "mode": "LITE",
+     "decision": "Vérifier un correctif local.",
+     "decision_intent": "Vérifier un correctif local.",
+-    "risk": {"level": "normal", "critical_protection": null},
++    "risk": {"level": "normal", "statement": "Risque principal : la décision « Vérifier un correctif local » échoue dans le scope déclaré.", "critical_protection": null},
+     "sources": ["DIRECTION/START", "ACTION/RUN-LITE"],
+     "artifact": {"locator": "local-artifact", "scope": "composant"},
+     "next_proof": "Rejouer le contrôle local.",
+     "proof": {"observed": ["Correctif observé."], "not_verified": ["Autres surfaces non vérifiées."], "provenance": {"artifact_locator": "local-artifact", "artifact_version": "2026-08-29 / V1", "method": "Inspection locale du composant.", "observed_at": "2026-08-29"}},
+-    "decision_change": {"value": "Le contraste a été corrigé.", "evidence": "Capture avant/après."},
++    "decision_change": {"outcome": "CHANGED", "value": "Le contraste a été corrigé.", "evidence": "Capture avant/après."},
+     "closure": {"state": "CLOSED", "issue": null, "verdict": "ACCEPTED", "limitations": []}
+   }
+ }
+diff --git a/schemas/fixtures/invalid_accepted_without_observed.json b/schemas/fixtures/invalid_accepted_without_observed.json
+index a3883a2..1b0bb3a 100644
+--- a/schemas/fixtures/invalid_accepted_without_observed.json
++++ b/schemas/fixtures/invalid_accepted_without_observed.json
+@@ -6,7 +6,7 @@
+     "mode": "LITE",
+     "decision": "Vérifier un correctif local.",
+     "decision_intent": "Vérifier un correctif local.",
+-    "risk": {"level": "normal", "critical_protection": null},
++    "risk": {"level": "normal", "statement": "Risque principal : la décision « Vérifier un correctif local » échoue dans le scope déclaré.", "critical_protection": null},
+     "sources": ["DIRECTION/START", "ACTION/RUN-LITE"],
+     "artifact": {"locator": "local-artifact", "scope": "composant"},
+     "next_proof": "Obtenir une observation réelle.",
+diff --git a/schemas/fixtures/invalid_accepted_without_provenance.json b/schemas/fixtures/invalid_accepted_without_provenance.json
+index f6f2231..f58a848 100644
+--- a/schemas/fixtures/invalid_accepted_without_provenance.json
++++ b/schemas/fixtures/invalid_accepted_without_provenance.json
+@@ -8,6 +8,7 @@
+     "decision_intent": "Faire comprendre la relation entre le produit et son premier geste.",
+     "risk": {
+       "level": "important",
++      "statement": "Risque principal : la décision « Faire comprendre la relation entre le produit et son premier geste » échoue dans le scope déclaré.",
+       "critical_protection": null
+     },
+     "sources": [
+@@ -21,11 +22,13 @@
+       "anti_direction": [
+         "Hero générique sans objet directeur."
+       ],
+-      "first_object": "Objet principal qui rend la relation produit-geste observable."
++      "first_object": "Objet principal qui rend la relation produit-geste observable.",
++      "identity_stake": "normal"
+     },
+     "anchors": [
+       {
+         "role": "direction",
++        "type": "observed",
+         "source": "URL ou référence réellement ouverte",
+         "date": "2026-08-29",
+         "scope": "matière, rythme et hiérarchie de la première scène",
+@@ -44,7 +47,8 @@
+     ],
+     "artifact": {
+       "locator": "chemin-ou-url-local",
+-      "scope": "Viewport desktop et mobile de la première scène, état initial."
++      "scope": "Viewport desktop et mobile de la première scène, état initial.",
++      "rights_status": "not_applicable"
+     },
+     "trace_locator": "ticket-ou-chemin-de-run",
+     "next_proof": "Revue de la scène mobile et test de la première action.",
+@@ -60,7 +64,16 @@
+         "participant non requis pour cette passe"
+       ],
+       "basis": [
+-        "capacité déclarée dans le périmètre et les limites du run"
++        {
++          "capability": "artefact disponible",
++          "kind": "attested_environment",
++          "detail": "capacité déclarée dans le périmètre et les limites du run"
++        },
++        {
++          "capability": "navigateur/capture disponible",
++          "kind": "attested_environment",
++          "detail": "capacité déclarée dans le périmètre et les limites du run"
++        }
+       ]
+     },
+     "proof": {
+@@ -72,6 +85,7 @@
+       ]
+     },
+     "decision_change": {
++      "outcome": "CHANGED",
+       "value": "L’objet directeur a remplacé une composition générique.",
+       "evidence": "Comparaison de la capture initiale et de la capture après édition."
+     },
+diff --git a/schemas/fixtures/invalid_capability_available_without_basis.json b/schemas/fixtures/invalid_capability_available_without_basis.json
+index 0d95bcd..ad2c17e 100644
+--- a/schemas/fixtures/invalid_capability_available_without_basis.json
++++ b/schemas/fixtures/invalid_capability_available_without_basis.json
+@@ -8,6 +8,7 @@
+     "decision_intent": "Faire comprendre la relation entre le produit et son premier geste.",
+     "risk": {
+       "level": "important",
++      "statement": "Risque principal : la décision « Faire comprendre la relation entre le produit et son premier geste » échoue dans le scope déclaré.",
+       "critical_protection": null
+     },
+     "sources": [
+@@ -21,11 +22,13 @@
+       "anti_direction": [
+         "Hero générique sans objet directeur."
+       ],
+-      "first_object": "Objet principal qui rend la relation produit-geste observable."
++      "first_object": "Objet principal qui rend la relation produit-geste observable.",
++      "identity_stake": "normal"
+     },
+     "anchors": [
+       {
+         "role": "direction",
++        "type": "observed",
+         "source": "URL ou référence réellement ouverte",
+         "date": "2026-08-29",
+         "scope": "matière, rythme et hiérarchie de la première scène",
+@@ -44,7 +47,8 @@
+     ],
+     "artifact": {
+       "locator": "chemin-ou-url-local",
+-      "scope": "Viewport desktop et mobile de la première scène, état initial."
++      "scope": "Viewport desktop et mobile de la première scène, état initial.",
++      "rights_status": "not_applicable"
+     },
+     "trace_locator": "ticket-ou-chemin-de-run",
+     "next_proof": "Revue de la scène mobile et test de la première action.",
+@@ -76,6 +80,7 @@
+       }
+     },
+     "decision_change": {
++      "outcome": "CHANGED",
+       "value": "L’objet directeur a remplacé une composition générique.",
+       "evidence": "Comparaison de la capture initiale et de la capture après édition."
+     },
+diff --git a/schemas/fixtures/invalid_capability_profile_missing_basis.json b/schemas/fixtures/invalid_capability_profile_missing_basis.json
+index c687e29..6b553af 100644
+--- a/schemas/fixtures/invalid_capability_profile_missing_basis.json
++++ b/schemas/fixtures/invalid_capability_profile_missing_basis.json
+@@ -8,6 +8,7 @@
+     "decision_intent": "Faire comprendre la relation entre le produit et son premier geste.",
+     "risk": {
+       "level": "important",
++      "statement": "Risque principal : la décision « Faire comprendre la relation entre le produit et son premier geste » échoue dans le scope déclaré.",
+       "critical_protection": null
+     },
+     "sources": [
+@@ -21,11 +22,13 @@
+       "anti_direction": [
+         "Hero générique sans objet directeur."
+       ],
+-      "first_object": "Objet principal qui rend la relation produit-geste observable."
++      "first_object": "Objet principal qui rend la relation produit-geste observable.",
++      "identity_stake": "normal"
+     },
+     "anchors": [
+       {
+         "role": "direction",
++        "type": "observed",
+         "source": "URL ou référence réellement ouverte",
+         "date": "2026-08-29",
+         "scope": "matière, rythme et hiérarchie de la première scène",
+@@ -44,7 +47,8 @@
+     ],
+     "artifact": {
+       "locator": "chemin-ou-url-local",
+-      "scope": "Viewport desktop et mobile de la première scène, état initial."
++      "scope": "Viewport desktop et mobile de la première scène, état initial.",
++      "rights_status": "not_applicable"
+     },
+     "trace_locator": "ticket-ou-chemin-de-run",
+     "next_proof": "Revue de la scène mobile et test de la première action.",
+@@ -70,6 +74,7 @@
+       ]
+     },
+     "decision_change": {
++      "outcome": "CHANGED",
+       "value": "L’objet directeur a remplacé une composition générique.",
+       "evidence": "Comparaison de la capture initiale et de la capture après édition."
+     },
+diff --git a/schemas/fixtures/invalid_creative_close_missing_field.json b/schemas/fixtures/invalid_creative_close_missing_field.json
+index 3456b50..7590c01 100644
+--- a/schemas/fixtures/invalid_creative_close_missing_field.json
++++ b/schemas/fixtures/invalid_creative_close_missing_field.json
+@@ -8,6 +8,7 @@
+     "decision_intent": "Faire comprendre la relation entre le produit et son premier geste.",
+     "risk": {
+       "level": "important",
++      "statement": "Risque principal : la décision « Faire comprendre la relation entre le produit et son premier geste » échoue dans le scope déclaré.",
+       "critical_protection": null
+     },
+     "sources": [
+@@ -21,11 +22,13 @@
+       "anti_direction": [
+         "Hero générique sans objet directeur."
+       ],
+-      "first_object": "Objet principal qui rend la relation produit-geste observable."
++      "first_object": "Objet principal qui rend la relation produit-geste observable.",
++      "identity_stake": "normal"
+     },
+     "anchors": [
+       {
+         "role": "direction",
++        "type": "observed",
+         "source": "URL ou référence réellement ouverte",
+         "date": "2026-08-29",
+         "scope": "matière, rythme et hiérarchie de la première scène",
+@@ -44,7 +47,8 @@
+     ],
+     "artifact": {
+       "locator": "chemin-ou-url-local",
+-      "scope": "Viewport desktop et mobile de la première scène, état initial."
++      "scope": "Viewport desktop et mobile de la première scène, état initial.",
++      "rights_status": "not_applicable"
+     },
+     "trace_locator": "ticket-ou-chemin-de-run",
+     "next_proof": "Revue de la scène mobile et test de la première action.",
+@@ -60,7 +64,16 @@
+         "participant non requis pour cette passe"
+       ],
+       "basis": [
+-        "capacité déclarée dans le périmètre et les limites du run"
++        {
++          "capability": "artefact disponible",
++          "kind": "attested_environment",
++          "detail": "capacité déclarée dans le périmètre et les limites du run"
++        },
++        {
++          "capability": "navigateur/capture disponible",
++          "kind": "attested_environment",
++          "detail": "capacité déclarée dans le périmètre et les limites du run"
++        }
+       ]
+     },
+     "proof": {
+@@ -72,6 +85,7 @@
+       ]
+     },
+     "decision_change": {
++      "outcome": "CHANGED",
+       "value": "L’objet directeur a remplacé une composition générique.",
+       "evidence": "Comparaison de la capture initiale et de la capture après édition."
+     },
+diff --git a/schemas/fixtures/invalid_critical_placeholder_protection.json b/schemas/fixtures/invalid_critical_placeholder_protection.json
+index 1226f9a..ec869dd 100644
+--- a/schemas/fixtures/invalid_critical_placeholder_protection.json
++++ b/schemas/fixtures/invalid_critical_placeholder_protection.json
+@@ -8,12 +8,14 @@
+     "decision_intent": "Faire comprendre la relation entre le produit et son premier geste.",
+     "risk": {
+       "level": "critical",
++      "statement": "Risque principal : la décision « Faire comprendre la relation entre le produit et son premier geste » échoue dans le scope déclaré.",
+       "critical_protection": {
+         "control": "placeholder",
+         "owner": "todo",
+         "scope": "todo",
+         "failure_action": "RETURNED",
+-        "evidence_locator": "todo"
++        "evidence_locator": "todo",
++        "result": "NOT-VERIFIED"
+       }
+     },
+     "sources": [
+@@ -27,11 +29,13 @@
+       "anti_direction": [
+         "Hero générique sans objet directeur."
+       ],
+-      "first_object": "Objet principal qui rend la relation produit-geste observable."
++      "first_object": "Objet principal qui rend la relation produit-geste observable.",
++      "identity_stake": "normal"
+     },
+     "anchors": [
+       {
+         "role": "direction",
++        "type": "observed",
+         "source": "URL ou référence réellement ouverte",
+         "date": "2026-08-29",
+         "scope": "matière, rythme et hiérarchie de la première scène",
+@@ -50,7 +54,8 @@
+     ],
+     "artifact": {
+       "locator": "chemin-ou-url-local",
+-      "scope": "Viewport desktop et mobile de la première scène, état initial."
++      "scope": "Viewport desktop et mobile de la première scène, état initial.",
++      "rights_status": "not_applicable"
+     },
+     "trace_locator": "ticket-ou-chemin-de-run",
+     "next_proof": "Revue de la scène mobile et test de la première action.",
+@@ -67,7 +72,16 @@
+         "runtime/données réelles"
+       ],
+       "basis": [
+-        "artefact inspecté et environnement de capture disponible ; clavier/AT et participant non exécutés dans cette passe"
++        {
++          "capability": "artefact textuel",
++          "kind": "attested_environment",
++          "detail": "artefact inspecté et environnement de capture disponible ; clavier/AT et participant non exécutés dans cette passe"
++        },
++        {
++          "capability": "navigateur/capture",
++          "kind": "attested_environment",
++          "detail": "artefact inspecté et environnement de capture disponible ; clavier/AT et participant non exécutés dans cette passe"
++        }
+       ]
+     },
+     "proof": {
+@@ -79,6 +93,7 @@
+       ]
+     },
+     "decision_change": {
++      "outcome": "CHANGED",
+       "value": "L’objet directeur a remplacé une composition générique.",
+       "evidence": "Comparaison de la capture initiale et de la capture après édition."
+     },
+diff --git a/schemas/fixtures/invalid_critical_without_protection.json b/schemas/fixtures/invalid_critical_without_protection.json
+index 3dfb271..1262abe 100644
+--- a/schemas/fixtures/invalid_critical_without_protection.json
++++ b/schemas/fixtures/invalid_critical_without_protection.json
+@@ -8,6 +8,7 @@
+     "decision_intent": "Faire comprendre la relation entre le produit et son premier geste.",
+     "risk": {
+       "level": "critical",
++      "statement": "Risque principal : la décision « Faire comprendre la relation entre le produit et son premier geste » échoue dans le scope déclaré.",
+       "critical_protection": null
+     },
+     "sources": [
+@@ -21,11 +22,13 @@
+       "anti_direction": [
+         "Hero générique sans objet directeur."
+       ],
+-      "first_object": "Objet principal qui rend la relation produit-geste observable."
++      "first_object": "Objet principal qui rend la relation produit-geste observable.",
++      "identity_stake": "normal"
+     },
+     "anchors": [
+       {
+         "role": "direction",
++        "type": "observed",
+         "source": "URL ou référence réellement ouverte",
+         "date": "2026-08-29",
+         "scope": "matière, rythme et hiérarchie de la première scène",
+@@ -44,7 +47,8 @@
+     ],
+     "artifact": {
+       "locator": "chemin-ou-url-local",
+-      "scope": "Viewport desktop et mobile de la première scène, état initial."
++      "scope": "Viewport desktop et mobile de la première scène, état initial.",
++      "rights_status": "not_applicable"
+     },
+     "trace_locator": "ticket-ou-chemin-de-run",
+     "next_proof": "Revue de la scène mobile et test de la première action.",
+@@ -61,7 +65,16 @@
+         "runtime/données réelles"
+       ],
+       "basis": [
+-        "artefact inspecté et environnement de capture disponible ; clavier/AT et participant non exécutés dans cette passe"
++        {
++          "capability": "artefact textuel",
++          "kind": "attested_environment",
++          "detail": "artefact inspecté et environnement de capture disponible ; clavier/AT et participant non exécutés dans cette passe"
++        },
++        {
++          "capability": "navigateur/capture",
++          "kind": "attested_environment",
++          "detail": "artefact inspecté et environnement de capture disponible ; clavier/AT et participant non exécutés dans cette passe"
++        }
+       ]
+     },
+     "proof": {
+@@ -73,6 +86,7 @@
+       ]
+     },
+     "decision_change": {
++      "outcome": "CHANGED",
+       "value": "L’objet directeur a remplacé une composition générique.",
+       "evidence": "Comparaison de la capture initiale et de la capture après édition."
+     },
+diff --git a/schemas/fixtures/invalid_direction_missing_creative_close.json b/schemas/fixtures/invalid_direction_missing_creative_close.json
+index 2afd2d6..edb383b 100644
+--- a/schemas/fixtures/invalid_direction_missing_creative_close.json
++++ b/schemas/fixtures/invalid_direction_missing_creative_close.json
+@@ -8,6 +8,7 @@
+     "decision_intent": "Faire comprendre la relation entre le produit et son premier geste.",
+     "risk": {
+       "level": "important",
++      "statement": "Risque principal : la décision « Faire comprendre la relation entre le produit et son premier geste » échoue dans le scope déclaré.",
+       "critical_protection": null
+     },
+     "sources": [
+@@ -21,11 +22,13 @@
+       "anti_direction": [
+         "Hero générique sans objet directeur."
+       ],
+-      "first_object": "Objet principal qui rend la relation produit-geste observable."
++      "first_object": "Objet principal qui rend la relation produit-geste observable.",
++      "identity_stake": "normal"
+     },
+     "anchors": [
+       {
+         "role": "direction",
++        "type": "observed",
+         "source": "URL ou référence réellement ouverte",
+         "date": "2026-08-29",
+         "scope": "matière, rythme et hiérarchie de la première scène",
+@@ -44,7 +47,8 @@
+     ],
+     "artifact": {
+       "locator": "chemin-ou-url-local",
+-      "scope": "Viewport desktop et mobile de la première scène, état initial."
++      "scope": "Viewport desktop et mobile de la première scène, état initial.",
++      "rights_status": "not_applicable"
+     },
+     "trace_locator": "ticket-ou-chemin-de-run",
+     "next_proof": "Revue de la scène mobile et test de la première action.",
+@@ -60,7 +64,16 @@
+         "participant non requis pour cette passe"
+       ],
+       "basis": [
+-        "capacité déclarée dans le périmètre et les limites du run"
++        {
++          "capability": "artefact disponible",
++          "kind": "attested_environment",
++          "detail": "capacité déclarée dans le périmètre et les limites du run"
++        },
++        {
++          "capability": "navigateur/capture disponible",
++          "kind": "attested_environment",
++          "detail": "capacité déclarée dans le périmètre et les limites du run"
++        }
+       ]
+     },
+     "proof": {
+@@ -72,6 +85,7 @@
+       ]
+     },
+     "decision_change": {
++      "outcome": "CHANGED",
+       "value": "L’objet directeur a remplacé une composition générique.",
+       "evidence": "Comparaison de la capture initiale et de la capture après édition."
+     },
+diff --git a/schemas/fixtures/invalid_direction_missing_object.json b/schemas/fixtures/invalid_direction_missing_object.json
+index a63be5c..8395a64 100644
+--- a/schemas/fixtures/invalid_direction_missing_object.json
++++ b/schemas/fixtures/invalid_direction_missing_object.json
+@@ -6,9 +6,9 @@
+     "mode": "DIRECTION",
+     "decision": "Rendre la direction visible.",
+     "decision_intent": "Rendre la direction visible.",
+-    "risk": {"level": "important", "critical_protection": null},
++    "risk": {"level": "important", "statement": "Risque principal : la décision « Rendre la direction visible » échoue dans le scope déclaré.", "critical_protection": null},
+     "sources": ["DIRECTION/START", "ACTION/RUN-DIRECTION"],
+-    "artifact": {"locator": "local-artifact", "scope": "première scène"},
++    "artifact": {"locator": "local-artifact", "scope": "première scène", "rights_status": "not_applicable"},
+     "trace_locator": "ticket-ou-chemin",
+     "next_proof": "Construire et observer le premier objet.",
+     "proof": {"observed": ["Le fichier est lisible."], "not_verified": ["Direction non observée."]},
+diff --git a/schemas/fixtures/invalid_direction_missing_status.json b/schemas/fixtures/invalid_direction_missing_status.json
+index 685c2ce..aa74454 100644
+--- a/schemas/fixtures/invalid_direction_missing_status.json
++++ b/schemas/fixtures/invalid_direction_missing_status.json
+@@ -8,6 +8,7 @@
+     "decision_intent": "Faire comprendre la relation entre le produit et son premier geste.",
+     "risk": {
+       "level": "important",
++      "statement": "Risque principal : la décision « Faire comprendre la relation entre le produit et son premier geste » échoue dans le scope déclaré.",
+       "critical_protection": null
+     },
+     "sources": [
+@@ -21,11 +22,13 @@
+       "anti_direction": [
+         "Hero générique sans objet directeur."
+       ],
+-      "first_object": "Objet principal qui rend la relation produit-geste observable."
++      "first_object": "Objet principal qui rend la relation produit-geste observable.",
++      "identity_stake": "normal"
+     },
+     "anchors": [
+       {
+         "role": "direction",
++        "type": "observed",
+         "source": "URL ou référence réellement ouverte",
+         "date": "2026-08-29",
+         "scope": "matière, rythme et hiérarchie de la première scène",
+@@ -44,7 +47,8 @@
+     ],
+     "artifact": {
+       "locator": "chemin-ou-url-local",
+-      "scope": "Viewport desktop et mobile de la première scène, état initial."
++      "scope": "Viewport desktop et mobile de la première scène, état initial.",
++      "rights_status": "not_applicable"
+     },
+     "trace_locator": "ticket-ou-chemin-de-run",
+     "next_proof": "Revue de la scène mobile et test de la première action.",
+@@ -60,7 +64,16 @@
+         "participant non requis pour cette passe"
+       ],
+       "basis": [
+-        "capacité déclarée dans le périmètre et les limites du run"
++        {
++          "capability": "artefact disponible",
++          "kind": "attested_environment",
++          "detail": "capacité déclarée dans le périmètre et les limites du run"
++        },
++        {
++          "capability": "navigateur/capture disponible",
++          "kind": "attested_environment",
++          "detail": "capacité déclarée dans le périmètre et les limites du run"
++        }
+       ]
+     },
+     "proof": {
+@@ -72,6 +85,7 @@
+       ]
+     },
+     "decision_change": {
++      "outcome": "CHANGED",
+       "value": "L’objet directeur a remplacé une composition générique.",
+       "evidence": "Comparaison de la capture initiale et de la capture après édition."
+     },
+diff --git a/schemas/fixtures/invalid_direction_missing_trace_locator.json b/schemas/fixtures/invalid_direction_missing_trace_locator.json
+index d38987a..1090094 100644
+--- a/schemas/fixtures/invalid_direction_missing_trace_locator.json
++++ b/schemas/fixtures/invalid_direction_missing_trace_locator.json
+@@ -6,13 +6,13 @@
+     "mode": "DIRECTION",
+     "decision": "Rendre la direction visible.",
+     "decision_intent": "Rendre la direction visible.",
+-    "risk": {"level": "important", "critical_protection": null},
++    "risk": {"level": "important", "statement": "Risque principal : la décision « Rendre la direction visible » échoue dans le scope déclaré.", "critical_protection": null},
+     "sources": ["DIRECTION/START", "ACTION/RUN-DIRECTION"],
+-    "direction": {"thesis": "La matière porte le premier geste.", "anti_direction": ["Hero générique."], "first_object": "Objet directeur."},
+-    "artifact": {"locator": "local-artifact", "scope": "première scène"},
++    "direction": {"thesis": "La matière porte le premier geste.", "anti_direction": ["Hero générique."], "first_object": "Objet directeur.", "identity_stake": "normal"},
++    "artifact": {"locator": "local-artifact", "scope": "première scène", "rights_status": "not_applicable"},
+     "next_proof": "Observer le premier objet dans le rendu réel.",
+     "proof": {"observed": ["La scène a été construite."], "not_verified": ["Revue externe non réalisée."]},
+-    "decision_change": {"value": "La scène a été dirigée.", "evidence": "Capture dans le scope déclaré."},
++    "decision_change": {"outcome": "CHANGED", "value": "La scène a été dirigée.", "evidence": "Capture dans le scope déclaré."},
+     "closure": {"state": "CLOSED", "direction_status": "HELD", "issue": null, "verdict": "ACCEPTED-WITH-RESERVATION", "limitations": ["Revue externe non réalisée."]}
+   }
+ }
+diff --git a/schemas/fixtures/invalid_direction_untransformed_anchor.json b/schemas/fixtures/invalid_direction_untransformed_anchor.json
+index 82999f0..b1339e9 100644
+--- a/schemas/fixtures/invalid_direction_untransformed_anchor.json
++++ b/schemas/fixtures/invalid_direction_untransformed_anchor.json
+@@ -8,6 +8,7 @@
+     "decision_intent": "Construire une scène située.",
+     "risk": {
+       "level": "important",
++      "statement": "Risque principal : la décision « Construire une scène située » échoue dans le scope déclaré.",
+       "critical_protection": null
+     },
+     "sources": [
+@@ -19,11 +20,13 @@
+       "anti_direction": [
+         "Copier la référence."
+       ],
+-      "first_object": "Objet directeur."
++      "first_object": "Objet directeur.",
++      "identity_stake": "normal"
+     },
+     "anchors": [
+       {
+         "role": "direction",
++        "type": "observed",
+         "source": "URL ou référence réellement ouverte",
+         "date": "2026-08-29",
+         "scope": "matière",
+@@ -39,7 +42,8 @@
+     ],
+     "artifact": {
+       "locator": "local-artifact",
+-      "scope": "première scène"
++      "scope": "première scène",
++      "rights_status": "not_applicable"
+     },
+     "trace_locator": "ticket-ou-chemin",
+     "next_proof": "Observer la transformation dans le rendu.",
+@@ -58,6 +62,7 @@
+       }
+     },
+     "decision_change": {
++      "outcome": "CHANGED",
+       "value": "Direction exploratoire.",
+       "evidence": "Capture locale."
+     },
+diff --git a/schemas/fixtures/invalid_empty_proof.json b/schemas/fixtures/invalid_empty_proof.json
+index aa2520e..59ffbd2 100644
+--- a/schemas/fixtures/invalid_empty_proof.json
++++ b/schemas/fixtures/invalid_empty_proof.json
+@@ -8,6 +8,7 @@
+     "decision_intent": "Vérifier un correctif local.",
+     "risk": {
+       "level": "normal",
++      "statement": "Risque principal : la décision « Vérifier un correctif local » échoue dans le scope déclaré.",
+       "critical_protection": null
+     },
+     "sources": [
+diff --git a/schemas/fixtures/invalid_fail_assumed_accepted.json b/schemas/fixtures/invalid_fail_assumed_accepted.json
+index b84e6a9..aa1597b 100644
+--- a/schemas/fixtures/invalid_fail_assumed_accepted.json
++++ b/schemas/fixtures/invalid_fail_assumed_accepted.json
+@@ -6,14 +6,14 @@
+     "mode": "STANDARD",
+     "decision": "Corriger une surface avant diffusion.",
+     "decision_intent": "Corriger une surface avant diffusion.",
+-    "risk": {"level": "important", "critical_protection": null},
++    "risk": {"level": "important", "statement": "Risque principal : la décision « Corriger une surface avant diffusion » échoue dans le scope déclaré.", "critical_protection": null},
+     "sources": ["DIRECTION/START", "ACTION/RUN-STANDARD"],
+     "artifact": {"locator": "ticket-ou-commit", "scope": "surface concernée"},
+     "trace_locator": "ticket-ou-chemin",
+     "next_proof": "Rejouer le contrôle après correction.",
+     "proof": {"observed": ["Le défaut est observé."], "not_verified": ["Correction non rejouée."]},
+-    "decision_change": {"value": "Diffusion limitée malgré le défaut.", "evidence": "Décision documentée."},
+-    "closure": {"state": "CLOSED", "issue": "FAIL-ASSUMED", "verdict": "ACCEPTED-WITH-RESERVATION", "limitations": ["Le défaut reste à corriger."]}
++    "decision_change": {"outcome": "CHANGED", "value": "Diffusion limitée malgré le défaut.", "evidence": "Décision documentée."},
++    "closure": {"state": "CLOSED", "issue": "FAIL-ASSUMED", "verdict": "ACCEPTED-WITH-RESERVATION", "limitations": ["Le défaut reste à corriger."], "exception": {"owner": "design-owner", "scope": "Surface concernée, diffusion interne", "impact": "Défaut connu livré sous exception", "next_proof": "Correction et nouvelle observation", "review_date": "2026-09-12", "exit_condition": "Défaut corrigé et observé", "gate_axis": "Gate A / défaut observé", "failure_evidence": "Le défaut est observé.", "requested_by": "Owner produit (demande écrite)", "disposition": "DIFFUSÉ-LIMITÉ"}}
+   }
+ }
+ 
+diff --git a/schemas/fixtures/invalid_global_axis_verdict.json b/schemas/fixtures/invalid_global_axis_verdict.json
+index 06a07fa..feaa81a 100644
+--- a/schemas/fixtures/invalid_global_axis_verdict.json
++++ b/schemas/fixtures/invalid_global_axis_verdict.json
+@@ -4,6 +4,7 @@
+     "decision_intent": "Vérifier un correctif local.",
+     "risk": {
+       "level": "normal",
++      "statement": "Risque principal : la décision « Vérifier un correctif local » échoue dans le scope déclaré.",
+       "critical_protection": null
+     },
+     "sources": [
+diff --git a/schemas/fixtures/invalid_missing_proof.json b/schemas/fixtures/invalid_missing_proof.json
+index 2b2e072..3db12dd 100644
+--- a/schemas/fixtures/invalid_missing_proof.json
++++ b/schemas/fixtures/invalid_missing_proof.json
+@@ -4,6 +4,7 @@
+     "decision_intent": "Corriger un défaut local.",
+     "risk": {
+       "level": "normal",
++      "statement": "Risque principal : la décision « Corriger un défaut local » échoue dans le scope déclaré.",
+       "critical_protection": null
+     },
+     "sources": [
+diff --git a/schemas/fixtures/invalid_profile_decision_missing_evidence.json b/schemas/fixtures/invalid_profile_decision_missing_evidence.json
+index 896682e..64ed397 100644
+--- a/schemas/fixtures/invalid_profile_decision_missing_evidence.json
++++ b/schemas/fixtures/invalid_profile_decision_missing_evidence.json
+@@ -8,6 +8,7 @@
+     "decision_intent": "Faire comprendre la relation entre le produit et son premier geste.",
+     "risk": {
+       "level": "important",
++      "statement": "Risque principal : la décision « Faire comprendre la relation entre le produit et son premier geste » échoue dans le scope déclaré.",
+       "critical_protection": null
+     },
+     "sources": [
+@@ -21,11 +22,13 @@
+       "anti_direction": [
+         "Hero générique sans objet directeur."
+       ],
+-      "first_object": "Objet principal qui rend la relation produit-geste observable."
++      "first_object": "Objet principal qui rend la relation produit-geste observable.",
++      "identity_stake": "normal"
+     },
+     "anchors": [
+       {
+         "role": "direction",
++        "type": "observed",
+         "source": "URL ou référence réellement ouverte",
+         "date": "2026-08-29",
+         "scope": "matière, rythme et hiérarchie de la première scène",
+@@ -44,7 +47,8 @@
+     ],
+     "artifact": {
+       "locator": "chemin-ou-url-local",
+-      "scope": "Viewport desktop et mobile de la première scène, état initial."
++      "scope": "Viewport desktop et mobile de la première scène, état initial.",
++      "rights_status": "not_applicable"
+     },
+     "trace_locator": "ticket-ou-chemin-de-run",
+     "next_proof": "Revue de la scène mobile et test de la première action.",
+@@ -60,7 +64,16 @@
+         "participant non requis pour cette passe"
+       ],
+       "basis": [
+-        "capacité déclarée dans le périmètre et les limites du run"
++        {
++          "capability": "artefact disponible",
++          "kind": "attested_environment",
++          "detail": "capacité déclarée dans le périmètre et les limites du run"
++        },
++        {
++          "capability": "navigateur/capture disponible",
++          "kind": "attested_environment",
++          "detail": "capacité déclarée dans le périmètre et les limites du run"
++        }
+       ]
+     },
+     "proof": {
+@@ -72,6 +85,7 @@
+       ]
+     },
+     "decision_change": {
++      "outcome": "CHANGED",
+       "value": "L’objet directeur a remplacé une composition générique.",
+       "evidence": "Comparaison de la capture initiale et de la capture après édition."
+     },
+@@ -83,6 +97,7 @@
+       "next_polish_action": "Polir la transition mobile et vérifier son comportement dans l’état de contenu long."
+     },
+     "profile_decision": {
++      "phase": "observed",
+       "decision": "La hiérarchie typographique éditoriale renforce la lecture du premier geste.",
+       "dials": "Densité abaissée dans l’entrée, contraste typographique relevé dans l’objet directeur.",
+       "counterindication": "Le profil devient nuisible si une comparaison opérationnelle rapide devient prioritaire."
+diff --git a/schemas/fixtures/invalid_state_held.json b/schemas/fixtures/invalid_state_held.json
+index c495f7e..b8d7e12 100644
+--- a/schemas/fixtures/invalid_state_held.json
++++ b/schemas/fixtures/invalid_state_held.json
+@@ -4,6 +4,7 @@
+     "decision_intent": "Tester une séparation de statuts.",
+     "risk": {
+       "level": "normal",
++      "statement": "Risque principal : la décision « Tester une séparation de statuts » échoue dans le scope déclaré.",
+       "critical_protection": null
+     },
+     "sources": [
+@@ -11,7 +12,8 @@
+     ],
+     "artifact": {
+       "locator": "local",
+-      "scope": "viewport"
++      "scope": "viewport",
++      "rights_status": "not_applicable"
+     },
+     "proof": {
+       "observed": [
+diff --git a/schemas/fixtures/valid_closed_return.json b/schemas/fixtures/valid_closed_return.json
+index 4c424f6..aeb6111 100644
+--- a/schemas/fixtures/valid_closed_return.json
++++ b/schemas/fixtures/valid_closed_return.json
+@@ -4,12 +4,14 @@
+     "decision_intent": "Étendre un composant partagé sans casser les consommateurs existants.",
+     "risk": {
+       "level": "critical",
++      "statement": "Régression clavier ou mobile chez un consommateur du composant partagé.",
+       "critical_protection": {
+         "control": "Validation de compatibilité et de navigation clavier",
+         "owner": "system-owner",
+         "scope": "composant et trois consommateurs représentatifs",
+         "failure_action": "RETURNED",
+-        "evidence_locator": "ticket-ou-commit/accessibility-check"
++        "evidence_locator": "ticket-ou-commit/accessibility-check",
++        "result": "FAIL"
+       }
+     },
+     "sources": [
+@@ -29,6 +31,7 @@
+       ]
+     },
+     "decision_change": {
++      "outcome": "CHANGED",
+       "value": "Retour du changement pour corriger la régression mobile.",
+       "evidence": "Capture et test du consommateur représentatif."
+     },
+diff --git a/schemas/fixtures/valid_direction_exploratory_untransformed.json b/schemas/fixtures/valid_direction_exploratory_untransformed.json
+index 993b451..94110b3 100644
+--- a/schemas/fixtures/valid_direction_exploratory_untransformed.json
++++ b/schemas/fixtures/valid_direction_exploratory_untransformed.json
+@@ -8,6 +8,7 @@
+     "decision_intent": "Construire une scène située.",
+     "risk": {
+       "level": "important",
++      "statement": "Risque principal : la décision « Construire une scène située » échoue dans le scope déclaré.",
+       "critical_protection": null
+     },
+     "sources": [
+@@ -19,11 +20,13 @@
+       "anti_direction": [
+         "Copier la référence."
+       ],
+-      "first_object": "Objet directeur."
++      "first_object": "Objet directeur.",
++      "identity_stake": "normal"
+     },
+     "anchors": [
+       {
+         "role": "direction",
++        "type": "observed",
+         "source": "URL ou référence réellement ouverte",
+         "date": "2026-08-29",
+         "scope": "matière",
+@@ -40,7 +43,8 @@
+     ],
+     "artifact": {
+       "locator": "local-artifact",
+-      "scope": "première scène"
++      "scope": "première scène",
++      "rights_status": "not_applicable"
+     },
+     "trace_locator": "ticket-ou-chemin",
+     "next_proof": "Observer la transformation dans le rendu.",
+@@ -53,6 +57,7 @@
+       ]
+     },
+     "decision_change": {
++      "outcome": "NOT-OBSERVED",
+       "value": "Direction exploratoire.",
+       "evidence": "Capture locale."
+     },
+diff --git a/schemas/fixtures/valid_direction_with_profile_decision.json b/schemas/fixtures/valid_direction_with_profile_decision.json
+index e2dd091..e50af74 100644
+--- a/schemas/fixtures/valid_direction_with_profile_decision.json
++++ b/schemas/fixtures/valid_direction_with_profile_decision.json
+@@ -8,6 +8,7 @@
+     "decision_intent": "Faire comprendre la relation entre le produit et son premier geste.",
+     "risk": {
+       "level": "important",
++      "statement": "La première scène reste générique et ne rend pas observable la relation entre le produit et son premier geste.",
+       "critical_protection": null
+     },
+     "sources": [
+@@ -21,11 +22,13 @@
+       "anti_direction": [
+         "Hero générique sans objet directeur."
+       ],
+-      "first_object": "Objet principal qui rend la relation produit-geste observable."
++      "first_object": "Objet principal qui rend la relation produit-geste observable.",
++      "identity_stake": "normal"
+     },
+     "anchors": [
+       {
+         "role": "direction",
++        "type": "observed",
+         "source": "URL ou référence réellement ouverte",
+         "date": "2026-08-29",
+         "scope": "matière, rythme et hiérarchie de la première scène",
+@@ -44,7 +47,9 @@
+     ],
+     "artifact": {
+       "locator": "chemin-ou-url-local",
+-      "scope": "Viewport desktop et mobile de la première scène, état initial."
++      "scope": "Viewport desktop et mobile de la première scène, état initial.",
++      "rights_status": "not_applicable",
++      "version": "2026-08-29 / V1"
+     },
+     "trace_locator": "ticket-ou-chemin-de-run",
+     "next_proof": "Revue de la scène mobile et test de la première action.",
+@@ -60,7 +65,16 @@
+         "participant non requis pour cette passe"
+       ],
+       "basis": [
+-        "capacité déclarée dans le périmètre et les limites du run"
++        {
++          "capability": "artefact disponible",
++          "kind": "attested_environment",
++          "detail": "Artefact construit localement et ouvert dans le run."
++        },
++        {
++          "capability": "navigateur/capture disponible",
++          "kind": "tool_result",
++          "detail": "Captures du rendu dans les viewports déclarés."
++        }
+       ]
+     },
+     "proof": {
+@@ -74,10 +88,12 @@
+         "artifact_locator": "chemin-ou-url-local",
+         "artifact_version": "2026-08-29 / V1",
+         "method": "Inspection du rendu construit dans les viewports déclarés.",
+-        "observed_at": "2026-08-29"
++        "observed_at": "2026-08-29",
++        "capability": "navigateur/capture disponible"
+       }
+     },
+     "decision_change": {
++      "outcome": "CHANGED",
+       "value": "L’objet directeur a remplacé une composition générique.",
+       "evidence": "Comparaison de la capture initiale et de la capture après édition."
+     },
+@@ -89,6 +105,7 @@
+       "next_polish_action": "Polir la transition mobile et vérifier son comportement dans l’état de contenu long."
+     },
+     "profile_decision": {
++      "phase": "observed",
+       "decision": "La hiérarchie typographique éditoriale renforce la lecture du premier geste.",
+       "dials": "Densité abaissée dans l’entrée, contraste typographique relevé dans l’objet directeur.",
+       "counterindication": "Le profil devient nuisible si une comparaison opérationnelle rapide devient prioritaire.",
+@@ -101,7 +118,33 @@
+       "verdict": "ACCEPTED-WITH-RESERVATION",
+       "limitations": [
+         "La preuve reste limitée au scope déclaré."
+-      ]
++      ],
++      "axes": {
++        "V": "PASS",
++        "U": "NOT-VERIFIED",
++        "A": "NOT-VERIFIED",
++        "T": "PASS"
++      },
++      "reservations": [
++        {
++          "owner": "design-owner",
++          "scope": "Transition mobile de la première scène",
++          "date_version": "2026-08-29 / V1",
++          "impact": "La transition entre découverte et première action reste peu résolue sur mobile.",
++          "next_proof": "Revue de la scène mobile et test de la première action.",
++          "review_date": "2026-09-12",
++          "exit_condition": "Transition mobile observée sans perte du premier geste."
++        }
++      ],
++      "b1b": {
++        "status": "DONE",
++        "pair": {
++          "before_locator": "captures/premiere-scene-v1.png",
++          "after_locator": "captures/premiere-scene-v1-sans-objet.png",
++          "decision": "L’objet directeur porte la relation entre le produit et le premier geste.",
++          "outcome": "confirmed"
++        }
++      }
+     }
+   }
+ }
+diff --git a/schemas/production_contracts.schema.json b/schemas/production_contracts.schema.json
+index 9487b05..b15bde4 100644
+--- a/schemas/production_contracts.schema.json
++++ b/schemas/production_contracts.schema.json
+@@ -2,10 +2,10 @@
+   "$schema": "https://json-schema.org/draft/2020-12/schema",
+   "$id": "https://design-governance.invalid/v1/production-contracts.schema.json",
+   "title": "Design Governance V1 — production contracts",
+-  "type":"object","required":["creative_direction_set","ui_ux_reality_pack","evaluation_case"],"additionalProperties":false,
++  "type":"object","required":[],"additionalProperties":false,
+   "properties":{
+-    "creative_direction_set":{"type":"object","required":["creative_boot","directions","selected_direction","divergence_test","reason_for_convergence"],"additionalProperties":false,"properties":{"creative_boot":{"type":"string","minLength":1},"directions":{"type":"array","minItems":2,"maxItems":3,"items":{"type":"object","required":["id","tension","structural_changes","first_object"],"additionalProperties":false,"properties":{"id":{"type":"string","minLength":1},"tension":{"type":"string","minLength":1},"structural_changes":{"type":"array","minItems":2,"items":{"type":"string","minLength":1}},"first_object":{"type":"string","minLength":1}}}},"selected_direction":{"type":"string","minLength":1},"divergence_test":{"type":"string","minLength":1},"reason_for_convergence":{"type":"string","minLength":1}}},
+-    "ui_ux_reality_pack":{"type":"object","required":["content_model","primary_task","first_gesture","state_matrix","responsive_matrix","accessibility_basis","robustness_basis","proof_scope","coverage_map"],"additionalProperties":false,"properties":{"content_model":{"type":"string","minLength":1},"primary_task":{"type":"string","minLength":1},"first_gesture":{"type":"string","minLength":1},"state_matrix":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}},"responsive_matrix":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}},"accessibility_basis":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}},"robustness_basis":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}},"proof_scope":{"type":"string","minLength":1},"coverage_map":{"type":"array","minItems":1,"items":{"type":"object","required":["requirement","artifact_locator","proof_status"],"additionalProperties":false,"properties":{"requirement":{"type":"string","minLength":1},"artifact_locator":{"type":"string","minLength":1},"proof_status":{"enum":["observed","not_verified","not_applicable"]}}}}}},
++    "creative_direction_set":{"type":"object","required":["creative_boot","directions","selected_direction","divergence_test","reason_for_convergence"],"additionalProperties":false,"properties":{"creative_boot":{"type":"string","minLength":1},"directions":{"type":"array","minItems":2,"maxItems":3,"items":{"type":"object","required":["id","tension","structural_changes","first_object"],"additionalProperties":false,"properties":{"id":{"type":"string","minLength":1},"tension":{"type":"string","minLength":1},"structural_changes":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}},"first_object":{"type":"string","minLength":1}}}},"selected_direction":{"type":"string","minLength":1},"divergence_test":{"type":"string","minLength":1},"reason_for_convergence":{"type":"string","minLength":1}}},
++    "ui_ux_reality_pack":{"type":"object","required":["content_model","primary_task","first_gesture","state_matrix","responsive_matrix","accessibility_basis","robustness_basis","expected_scope","observed_scope","coverage_map"],"additionalProperties":false,"properties":{"content_model":{"type":"string","minLength":1},"primary_task":{"type":"string","minLength":1},"first_gesture":{"type":"string","minLength":1},"state_matrix":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}},"responsive_matrix":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}},"accessibility_basis":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}},"robustness_basis":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}},"expected_scope":{"type":"string","minLength":1},"observed_scope":{"type":["string","null"]},"coverage_map":{"type":"array","minItems":1,"items":{"type":"object","required":["requirement","artifact_locator","proof_status"],"additionalProperties":false,"properties":{"requirement":{"type":"string","minLength":1},"artifact_locator":{"type":"string","minLength":1},"proof_status":{"enum":["OBSERVED","NOT-VERIFIED","N/A-JUSTIFIED"]},"reason":{"type":"string","minLength":1}}}}}},
+     "evaluation_case":{"type":"object","required":["brief","domain","available_capabilities","expected_depth","artifact","observations","task_results","accessibility_results","visual_review","corrections","final_limits"],"additionalProperties":false,"properties":{"brief":{"type":"string","minLength":1},"domain":{"type":"string","minLength":1},"available_capabilities":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}},"expected_depth":{"enum":["minimal","standard","deep"]},"artifact":{"type":"string","minLength":1},"observations":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}},"task_results":{"type":"array","items":{"type":"string","minLength":1}},"accessibility_results":{"type":"array","items":{"type":"string","minLength":1}},"visual_review":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}},"corrections":{"type":"array","items":{"type":"string","minLength":1}},"final_limits":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}}}}
+   }
+ }
+diff --git a/schemas/research_brief.schema.json b/schemas/research_brief.schema.json
+index 7cd8ec0..dfacde0 100644
+--- a/schemas/research_brief.schema.json
++++ b/schemas/research_brief.schema.json
+@@ -14,10 +14,10 @@
+     "uncertainty_after": {"type":"string","minLength":1},
+     "entries": {
+       "type":"array",
+-      "minItems":1,
++      "minItems":0,
+       "items": {
+         "type":"object",
+-        "required":["source","source_class","reliability_basis","observed","retained","rejected","transformed","decision_changed","artifact_consequence","limit"],
++        "required":["source","source_status","source_date","source_class","reliability_basis","observed","retained","rejected","transformed","decision_changed","artifact_consequence","limit"],
+         "additionalProperties":false,
+         "properties": {
+           "source":{"type":"string","minLength":1},
+@@ -29,7 +29,11 @@
+           "transformed":{"type":"string","minLength":1},
+           "decision_changed":{"type":"string","minLength":1},
+           "artifact_consequence":{"type":"string","minLength":1},
+-          "limit":{"type":"string","minLength":1}
++          "limit":{"type":"string","minLength":1},
++          "source_status":{"enum":["verified_in_run","unverified_knowledge","user_source_unverified"]},
++          "source_date":{"type":"string","minLength":1},
++          "source_locator":{"type":"string","minLength":1},
++          "rights_status":{"enum":["not_applicable","cleared","unknown","restricted"]}
+         }
+       }
+     },
+diff --git a/schemas/run_card.example.json b/schemas/run_card.example.json
+index 4e6c36e..0877ea5 100644
+--- a/schemas/run_card.example.json
++++ b/schemas/run_card.example.json
+@@ -8,6 +8,7 @@
+     "decision_intent": "Faire comprendre la relation entre le produit et son premier geste.",
+     "risk": {
+       "level": "important",
++      "statement": "La première scène reste générique et ne rend pas observable la relation entre le produit et son premier geste.",
+       "critical_protection": null
+     },
+     "sources": [
+@@ -21,11 +22,13 @@
+       "anti_direction": [
+         "Hero générique sans objet directeur."
+       ],
+-      "first_object": "Objet principal qui rend la relation produit-geste observable."
++      "first_object": "Objet principal qui rend la relation produit-geste observable.",
++      "identity_stake": "normal"
+     },
+     "anchors": [
+       {
+         "role": "direction",
++        "type": "observed",
+         "source": "URL ou référence réellement ouverte",
+         "date": "2026-08-29",
+         "scope": "matière, rythme et hiérarchie de la première scène",
+@@ -44,7 +47,9 @@
+     ],
+     "artifact": {
+       "locator": "chemin-ou-url-local",
+-      "scope": "Viewport desktop et mobile de la première scène, état initial."
++      "scope": "Viewport desktop et mobile de la première scène, état initial.",
++      "rights_status": "not_applicable",
++      "version": "2026-08-29 / V1"
+     },
+     "trace_locator": "ticket-ou-chemin-de-run",
+     "next_proof": "Revue de la scène mobile et test de la première action.",
+@@ -60,7 +65,16 @@
+         "participant non requis pour cette passe"
+       ],
+       "basis": [
+-        "capacité déclarée dans le périmètre et les limites du run"
++        {
++          "capability": "artefact disponible",
++          "kind": "attested_environment",
++          "detail": "Artefact construit localement et ouvert dans le run."
++        },
++        {
++          "capability": "navigateur/capture disponible",
++          "kind": "tool_result",
++          "detail": "Captures du rendu dans les viewports déclarés."
++        }
+       ]
+     },
+     "proof": {
+@@ -74,10 +88,12 @@
+         "artifact_locator": "chemin-ou-url-local",
+         "artifact_version": "2026-08-29 / V1",
+         "method": "Inspection du rendu construit dans les viewports déclarés.",
+-        "observed_at": "2026-08-29"
++        "observed_at": "2026-08-29",
++        "capability": "navigateur/capture disponible"
+       }
+     },
+     "decision_change": {
++      "outcome": "CHANGED",
+       "value": "L’objet directeur a remplacé une composition générique.",
+       "evidence": "Comparaison de la capture initiale et de la capture après édition."
+     },
+@@ -95,7 +111,33 @@
+       "verdict": "ACCEPTED-WITH-RESERVATION",
+       "limitations": [
+         "La preuve reste limitée au scope déclaré."
+-      ]
++      ],
++      "axes": {
++        "V": "PASS",
++        "U": "NOT-VERIFIED",
++        "A": "NOT-VERIFIED",
++        "T": "PASS"
++      },
++      "reservations": [
++        {
++          "owner": "design-owner",
++          "scope": "Transition mobile de la première scène",
++          "date_version": "2026-08-29 / V1",
++          "impact": "La transition entre découverte et première action reste peu résolue sur mobile.",
++          "next_proof": "Revue de la scène mobile et test de la première action.",
++          "review_date": "2026-09-12",
++          "exit_condition": "Transition mobile observée sans perte du premier geste."
++        }
++      ],
++      "b1b": {
++        "status": "DONE",
++        "pair": {
++          "before_locator": "captures/premiere-scene-v1.png",
++          "after_locator": "captures/premiere-scene-v1-sans-objet.png",
++          "decision": "L’objet directeur porte la relation entre le produit et le premier geste.",
++          "outcome": "confirmed"
++        }
++      }
+     }
+   }
+ }
+diff --git a/schemas/run_card.schema.json b/schemas/run_card.schema.json
+index f63b196..b70fa86 100644
+--- a/schemas/run_card.schema.json
++++ b/schemas/run_card.schema.json
+@@ -20,20 +20,22 @@
+         "decision_intent": {"type": "string", "minLength": 1},
+         "risk": {
+           "type": "object",
+-          "required": ["level", "critical_protection"],
++          "required": ["level", "critical_protection", "statement"],
+           "additionalProperties": false,
+           "properties": {
+             "level": {"enum": ["normal", "important", "critical"]},
++            "statement": {"type": "string", "minLength": 1},
+             "critical_protection": {
+               "type": ["object", "null"],
+               "additionalProperties": false,
+-              "required": ["control", "owner", "scope", "failure_action", "evidence_locator"],
++              "required": ["control", "owner", "scope", "failure_action", "evidence_locator", "result"],
+               "properties": {
+                 "control": {"type": "string", "minLength": 1},
+                 "owner": {"type": "string", "minLength": 1},
+                 "scope": {"type": "string", "minLength": 1},
+                 "failure_action": {"enum": ["RETURNED", "BLOCKED", "ESCALATED"]},
+-                "evidence_locator": {"type": "string", "minLength": 1}
++                "evidence_locator": {"type": "string", "minLength": 1},
++                "result": {"enum": ["PASS", "FAIL", "NOT-VERIFIED"]}
+               }
+             }
+           }
+@@ -51,17 +53,28 @@
+             "anti_direction": {"type": "array", "items": {"type": "string", "minLength": 1}},
+             "first_object": {"type": "string", "minLength": 1},
+             "scope": {"type": "string", "minLength": 1},
+-            "constraint": {"type": "string", "minLength": 1}
++            "constraint": {"type": "string", "minLength": 1},
++            "identity_stake": {"enum": ["high", "normal"]},
++            "calibration": {
++              "type": "object",
++              "required": ["basis", "detail"],
++              "additionalProperties": false,
++              "properties": {
++                "basis": {"enum": ["observed_anchor", "provided_anchor", "real_constraint", "generated_only_reserved"]},
++                "detail": {"type": "string", "minLength": 1}
++              }
++            }
+           }
+         },
+         "anchors": {
+           "type": "array",
+           "items": {
+             "type": "object",
+-            "required": ["role", "source", "date", "scope", "retained", "rejected", "transformation", "transformation_status", "limitation"],
++            "required": ["role", "type", "source", "date", "scope", "retained", "rejected", "transformation", "transformation_status", "limitation"],
+             "additionalProperties": false,
+             "properties": {
+               "role": {"enum": ["direction", "production", "verification"]},
++              "type": {"enum": ["generated", "observed", "provided"]},
+               "source": {"type": "string", "minLength": 1},
+               "date": {"type": "string", "minLength": 1},
+               "scope": {"type": "string", "minLength": 1},
+@@ -79,7 +92,9 @@
+           "additionalProperties": false,
+           "properties": {
+             "locator": {"type": "string", "minLength": 1},
+-            "scope": {"type": "string", "minLength": 1}
++            "scope": {"type": "string", "minLength": 1},
++            "version": {"type": "string", "minLength": 1},
++            "rights_status": {"enum": ["not_applicable", "cleared", "unknown", "restricted"]}
+           }
+         },
+         "trace_locator": {"type": "string", "minLength": 1},
+@@ -92,7 +107,19 @@
+             "available": {"type": "array", "items": {"type": "string", "minLength": 1}},
+             "unavailable": {"type": "array", "items": {"type": "string", "minLength": 1}},
+             "not_required": {"type": "array", "items": {"type": "string", "minLength": 1}},
+-            "basis": {"type": "array", "items": {"type": "string", "minLength": 1}}
++            "basis": {
++              "type": "array",
++              "items": {
++                "type": "object",
++                "required": ["capability", "kind", "detail"],
++                "additionalProperties": false,
++                "properties": {
++                  "capability": {"type": "string", "minLength": 1},
++                  "kind": {"enum": ["tool_result", "attested_environment", "user_source", "unattested_declaration"]},
++                  "detail": {"type": "string", "minLength": 1}
++                }
++              }
++            }
+           }
+         },
+         "proof": {
+@@ -114,7 +141,8 @@
+                 "artifact_locator": {"type": "string", "minLength": 1},
+                 "artifact_version": {"type": "string", "minLength": 1},
+                 "method": {"type": "string", "minLength": 1},
+-                "observed_at": {"type": "string", "minLength": 1}
++                "observed_at": {"type": "string", "minLength": 1},
++                "capability": {"type": "string", "minLength": 1}
+               }
+             }
+           }
+@@ -133,9 +161,10 @@
+         },
+         "profile_decision": {
+           "type": "object",
+-          "required": ["decision", "dials", "counterindication", "evidence"],
++          "required": ["phase", "decision", "dials", "counterindication", "evidence"],
+           "additionalProperties": false,
+           "properties": {
++            "phase": {"enum": ["intended", "observed"]},
+             "decision": {"type": "string", "minLength": 1},
+             "dials": {"type": "string", "minLength": 1},
+             "counterindication": {"type": "string", "minLength": 1},
+@@ -144,9 +173,11 @@
+         },
+         "decision_change": {
+           "type": "object",
+-          "required": ["value", "evidence"],
++          "required": ["outcome", "value", "evidence"],
+           "additionalProperties": false,
+           "properties": {
++            "outcome": {"enum": ["CHANGED", "CONFIRMED", "ABANDONED", "N/A-JUSTIFIED", "NOT-OBSERVED"]},
++            "reason": {"type": "string", "minLength": 1},
+             "value": {"type": "string", "minLength": 1},
+             "evidence": {"type": "string", "minLength": 1}
+           }
+@@ -159,14 +190,120 @@
+             "state": {"enum": ["INTAKE", "CLASSIFIED", "SPECCED", "BUILDING", "CHECKING", "DECIDED", "CLOSED"]},
+             "direction_status": {"enum": ["HELD", "HELD-WITH-ACCEPTED-DIFFERENCE", "PARTIALLY-HELD", "LOST-IN-BUILD"]},
+             "issue": {"enum": ["BLOCKED", "RETURNED", "RECLASSIFIED", "EXPLORATORY", "FAIL-ASSUMED", "ESCALATED", null]},
+-            "verdict": {"enum": ["ACCEPTED", "ACCEPTED-WITH-RESERVATION", "RETURN", "RETURN-DIRECTION", "EXPLORATORY", "SYSTEM-ESCALATION"]},
+-            "limitations": {"type": "array", "items": {"type": "string", "minLength": 1}}
++            "verdict": {"enum": ["ACCEPTED", "ACCEPTED-WITH-RESERVATION", "RETURN", "RETURN-DIRECTION", "EXPLORATORY", "SYSTEM-ESCALATION", null]},
++            "limitations": {"type": "array", "items": {"type": "string", "minLength": 1}},
++            "axes": {
++              "type": "object",
++              "required": ["V", "U", "A", "T"],
++              "additionalProperties": false,
++              "properties": {
++                "V": {"enum": ["PASS", "PASS-WITH-RESERVATION", "RETURN", "N/A-JUSTIFIED", "NOT-VERIFIED"]},
++                "U": {"enum": ["PASS", "PASS-WITH-RESERVATION", "RETURN", "N/A-JUSTIFIED", "NOT-VERIFIED"]},
++                "A": {"enum": ["PASS", "PASS-WITH-RESERVATION", "RETURN", "N/A-JUSTIFIED", "NOT-VERIFIED"]},
++                "T": {"enum": ["PASS", "PASS-WITH-RESERVATION", "RETURN", "N/A-JUSTIFIED", "NOT-VERIFIED"]}
++              }
++            },
++            "reservations": {
++              "type": "array",
++              "items": {
++                "type": "object",
++                "required": ["owner", "scope", "date_version", "impact", "next_proof", "review_date", "exit_condition"],
++                "additionalProperties": false,
++                "properties": {
++                  "owner": {"type": "string", "minLength": 1},
++                  "scope": {"type": "string", "minLength": 1},
++                  "date_version": {"type": "string", "minLength": 1},
++                  "impact": {"type": "string", "minLength": 1},
++                  "next_proof": {"type": "string", "minLength": 1},
++                  "review_date": {"type": "string", "minLength": 1},
++                  "exit_condition": {"type": "string", "minLength": 1}
++                }
++              }
++            },
++            "exception": {
++              "type": "object",
++              "required": ["owner", "scope", "impact", "next_proof", "review_date", "exit_condition", "gate_axis", "failure_evidence", "requested_by", "disposition"],
++              "additionalProperties": false,
++              "properties": {
++                "owner": {"type": "string", "minLength": 1},
++                "scope": {"type": "string", "minLength": 1},
++                "date_version": {"type": "string", "minLength": 1},
++                "impact": {"type": "string", "minLength": 1},
++                "next_proof": {"type": "string", "minLength": 1},
++                "review_date": {"type": "string", "minLength": 1},
++                "exit_condition": {"type": "string", "minLength": 1},
++                "gate_axis": {"type": "string", "minLength": 1},
++                "failure_evidence": {"type": "string", "minLength": 1},
++                "requested_by": {"type": "string", "minLength": 1},
++                "disposition": {"enum": ["NON-DIFFUSÉ", "DIFFUSÉ-LIMITÉ", "RETIRÉ", "ESCALADÉ"]}
++              }
++            },
++            "system_package": {
++              "type": "object",
++              "required": ["impact", "consumers", "owner", "migration", "rollback", "non_regression", "changelog_ref"],
++              "additionalProperties": false,
++              "properties": {
++                "impact": {"type": "string", "minLength": 1},
++                "consumers": {"type": "array", "items": {"type": "string", "minLength": 1}},
++                "owner": {"type": "string", "minLength": 1},
++                "migration": {"type": "string", "minLength": 1},
++                "rollback": {"type": "string", "minLength": 1},
++                "non_regression": {
++                  "type": "object",
++                  "required": ["claim", "baseline"],
++                  "additionalProperties": false,
++                  "properties": {
++                    "claim": {"type": "string", "minLength": 1},
++                    "baseline": {
++                      "type": "object",
++                      "required": ["locator", "version", "state"],
++                      "additionalProperties": false,
++                      "properties": {"locator": {"type": "string", "minLength": 1}, "version": {"type": "string", "minLength": 1}, "state": {"type": "string", "minLength": 1}}
++                    }
++                  }
++                },
++                "changelog_ref": {"type": "string", "minLength": 1}
++              }
++            },
++            "b1b": {
++              "type": "object",
++              "required": ["status"],
++              "additionalProperties": false,
++              "properties": {
++                "status": {"enum": ["DONE", "N/A-JUSTIFIED"]},
++                "pair": {
++                  "type": "object",
++                  "required": ["before_locator", "after_locator", "decision", "outcome"],
++                  "additionalProperties": false,
++                  "properties": {
++                    "before_locator": {"type": "string", "minLength": 1},
++                    "after_locator": {"type": "string", "minLength": 1},
++                    "decision": {"type": "string", "minLength": 1},
++                    "outcome": {"enum": ["confirmed", "modified", "abandoned"]}
++                  }
++                },
++                "reason": {"enum": ["no_editable_decision", "equivalent_pair_valid"]},
++                "covered_decision": {"type": "string", "minLength": 1},
++                "owner": {"type": "string", "minLength": 1},
++                "next_proof": {"type": "string", "minLength": 1},
++                "pair_ref": {"type": "string", "minLength": 1}
++              }
++            },
++            "reclassification": {
++              "type": "object",
++              "required": ["to_mode", "successor_run_ref"],
++              "additionalProperties": false,
++              "properties": {
++                "to_mode": {"enum": ["LITE", "ITER", "STANDARD", "DIRECTION", "SYSTÈME"]},
++                "successor_run_ref": {"type": "string", "minLength": 1}
++              }
++            }
+           }
+         }
+       },
+       "allOf": [
+         {
+-          "if": {"required": ["mode"], "properties": {"mode": {"enum": ["STANDARD", "SYSTÈME"]}}},
++          "if": {"required": ["mode"], "properties": {"mode": {"enum": ["ITER", "STANDARD", "SYSTÈME"]}}},
+           "then": {"required": ["owner", "date_version", "risk", "sources", "next_proof", "trace_locator"]}
+         },
+         {
+diff --git a/scripts/validate_all.py b/scripts/validate_all.py
+index 4676a56..544e614 100644
+--- a/scripts/validate_all.py
++++ b/scripts/validate_all.py
+@@ -65,7 +65,7 @@ def main() -> int:
+     with tempfile.TemporaryDirectory(prefix="design-governance-cli-") as temp_dir:
+         temp = Path(temp_dir)
+         strict_card = temp / "strict_card.json"
+-        strict_card.write_text((ROOT / "schemas/run_card.example.json").read_text(encoding="utf-8").replace("chemin-ou-url-local", "schemas/run_card.example.json").replace("ticket-ou-chemin-de-run", "schemas/run_card.example.json"), encoding="utf-8")
++        strict_card.write_text((ROOT / "schemas/run_card.example.json").read_text(encoding="utf-8").replace("chemin-ou-url-local", (ROOT / "schemas/run_card.example.json").as_posix()).replace("ticket-ou-chemin-de-run", (ROOT / "schemas/run_card.example.json").as_posix()), encoding="utf-8")
+         run([sys.executable, "scripts/validate_run_card.py", "--strict", str(strict_card)])
+         expect_failure(
+             [sys.executable, "scripts/validate_run_card.py", "--strict", "schemas/run_card.example.json"],
+diff --git a/scripts/validate_contracts.py b/scripts/validate_contracts.py
+index fd83cf1..a9d6042 100644
+--- a/scripts/validate_contracts.py
++++ b/scripts/validate_contracts.py
+@@ -10,6 +10,7 @@ from __future__ import annotations
+ import argparse
+ import copy
+ import json
++import re
+ import sys
+ from pathlib import Path
+ from typing import Any
+@@ -97,16 +98,27 @@ def check_schema_keywords(schema: Any, path: str = "$") -> None:
+         check_schema_keywords(schema["items"], f"{path}.items")
+ 
+ 
++# Contrats dont la racine n'exige aucun objet précis mais « au moins un » (INV-C2-2, rectification R-6).
++AT_LEAST_ONE = {"production_contracts": ("creative_direction_set", "ui_ux_reality_pack", "evaluation_case")}
++PLACEHOLDERS = {"?", "tbd", "todo", "inconnu", "n/a", "à définir", "a definir", "à déterminer", "a determiner",
++                "à compléter", "a completer", "placeholder", "lorem ipsum"}
++SOURCE_DATE = re.compile(r"\d{4}(-\d{2}(-\d{2})?)?")
++
++
+ def check_schema_witness(name: str, schema: dict[str, Any], example: Any) -> None:
+     """Témoins négatifs au niveau schéma : rejetés par validate seul, pour leur motif."""
+     if not isinstance(example, dict):
+         raise ValidationError("témoin de schéma impossible : exemple canonique non objet")
+-    first = schema["required"][0]
+-    witnesses = [(
+-        {key: value for key, value in example.items() if key != first},
+-        f"champ obligatoire absent: {first}",
+-        f"le schéma n'impose pas la clé requise {first}",
+-    )]
++    if schema["required"]:
++        first = schema["required"][0]
++        witnesses = [(
++            {key: value for key, value in example.items() if key != first},
++            f"champ obligatoire absent: {first}",
++            f"le schéma n'impose pas la clé requise {first}",
++        )]
++    else:  # racine « au moins un » (R-6) : la première propriété reçoit une valeur de type incompatible
++        first = next(key for key in schema["properties"] if key in example)
++        witnesses = [({**example, first: 0}, f"$.{first}: type attendu", f"le schéma n'impose pas le type de {first}")]
+     if name == "research_brief":  # F-VCT-003
+         witnesses.append(({**example, "depth": "IMPOSSIBLE"}, "$.depth: valeur non canonique", "le schéma n'impose pas l'enum de depth"))
+     for document, motif, failure in witnesses:
+@@ -127,116 +139,246 @@ def load_schema(name: str) -> dict[str, Any]:
+         raise ValidationError("schéma inopérant : la racine doit être un objet non vide")
+     if schema.get("type") != "object":
+         raise ValidationError("schéma inopérant : la racine doit déclarer type object")
+-    if not isinstance(schema.get("required"), list) or not schema["required"]:
++    required = schema.get("required")
++    if not isinstance(required, list):
+         raise ValidationError("schéma incomplet : required racine absent ou vide")
++    if not required:
++        properties = schema.get("properties")
++        declared = AT_LEAST_ONE.get(name, ())
++        if not declared or schema.get("additionalProperties") is not False or not isinstance(properties, dict) \
++                or set(properties) != set(declared):
++            raise ValidationError("schéma incomplet : required racine absent ou vide")
+     check_schema_keywords(schema)
+     check_schema_witness(name, schema, load(example_path))
+     return schema
+ 
+ 
++def norm(value: str) -> str:
++    return " ".join(value.split()).casefold()
++
++
++def filled(value: Any) -> bool:
++    return isinstance(value, str) and bool(value.strip()) and value.strip().casefold() not in PLACEHOLDERS
++
++
++def check_domain_frame(document: dict[str, Any]) -> None:
++    policy = document["policy_profile"]
++    if not {norm(item) for item in document["proof_requirements"]} & {norm(item) for item in policy["required_controls"]}:
++        raise ValidationError("policy_profile.required_controls doit être relié au plan de preuve")
++    risks = {norm(item) for item in document["domain_risks"]}
++    controls = {norm(item) for item in policy["required_controls"]}
++    covered: set[str] = set()
++    for entry in policy["risk_coverage"]:
++        risk = norm(entry["risk"])
++        if risk not in risks:
++            raise ValidationError(f"risk_coverage cite un risque non déclaré : {entry['risk']}")
++        control, review = entry.get("control"), entry.get("review")
++        if control is not None and norm(control) not in controls:
++            raise ValidationError(f"risk_coverage : contrôle inconnu (absent de required_controls) : {control}")
++        if not filled(control) and not filled(review):
++            raise ValidationError(f"risque sans contrôle ni revue : {entry['risk']}")
++        covered.add(risk)
++    for risk in document["domain_risks"]:
++        if norm(risk) not in covered:
++            raise ValidationError(f"risque sans contrôle ni revue : {risk}")
++    for index, item in enumerate(document["evidence_plan"]):
++        for field in ("method", "scope", "artifact", "limit", "next_proof"):
++            if not filled(item.get(field)):
++                raise ValidationError(f"evidence_plan[{index}].{field} vide ou placeholder")
++
++
++def check_research_brief(document: dict[str, Any]) -> None:
++    for field in ("uncertainty_before", "uncertainty_after", "stop_condition"):
++        if not filled(document[field]):
++            raise ValidationError(f"{field} vide ou placeholder")
++    entries = document["entries"]
++    if document["depth"] in {"targeted", "deep"} and not entries:
++        raise ValidationError("recherche activée (depth targeted ou deep) : au moins une entrée exigée")
++    if not entries and document["uncertainty_after"] != document["uncertainty_before"]:
++        raise ValidationError("sans entrée de recherche, l'incertitude ne peut pas changer (uncertainty_after = uncertainty_before)")
++    for entry in entries:
++        if not entry["decision_changed"].strip() or not entry["artifact_consequence"].strip():
++            raise ValidationError("chaque entrée de recherche doit produire une décision et une conséquence d'artefact")
++        if not filled(entry["source"]):
++            raise ValidationError(f"source placeholder : {entry['source']!r}")
++        date = entry["source_date"].strip()
++        if date != "unknown" and not SOURCE_DATE.fullmatch(date):
++            raise ValidationError(f"source_date doit être ISO (AAAA, AAAA-MM ou AAAA-MM-JJ) ou unknown : {date}")
++        if entry["source_status"] == "verified_in_run" and (not filled(entry.get("source_locator")) or date == "unknown"):
++            raise ValidationError("source verified_in_run : exige un locator et une date connue")
++
++
++def check_creative_direction_set(creative: dict[str, Any]) -> None:
++    directions = creative["directions"]
++    ids = [item["id"] for item in directions]
++    if len(ids) != len(set(ids)):
++        raise ValidationError("creative_direction_set.directions exige des ids uniques")
++    if creative["selected_direction"] not in set(ids):
++        raise ValidationError("creative_direction_set.selected_direction doit référencer une direction existante")
++    seen = set()
++    for item in directions:
++        changes = [norm(change) for change in item["structural_changes"]]
++        if len(changes) != len(set(changes)):
++            raise ValidationError(f"changements structurels en double dans la direction {item['id']}")
++        signature = (norm(item["tension"]), frozenset(changes))
++        if signature in seen:
++            raise ValidationError(f"directions non distinctes : {item['id']} reprend la tension et les changements d'une autre direction")
++        seen.add(signature)
++
++
++MATRICES = ("state_matrix", "responsive_matrix", "accessibility_basis", "robustness_basis")
++
++
++def check_ui_ux_reality_pack(reality: dict[str, Any]) -> None:
++    if not reality["coverage_map"]:
++        raise ValidationError("ui_ux_reality_pack.coverage_map doit contenir au moins une exigence rattachée")
++    if not any(item.strip() for name in MATRICES for item in reality[name]):
++        raise ValidationError("UI_UX_REALITY_PACK doit déclarer au moins une exigence vérifiable")
++    if not filled(reality["expected_scope"]):
++        raise ValidationError("ui_ux_reality_pack.expected_scope vide ou placeholder")
++    elements = {name: {norm(item) for item in reality[name]} for name in MATRICES}
++    covered_states: set[str] = set()
++    for entry in reality["coverage_map"]:
++        matrix, _, element = entry["requirement"].partition(":")
++        matrix, element = matrix.strip(), norm(element)
++        if matrix not in elements or element not in elements[matrix]:
++            raise ValidationError(f"coverage_map : exigence absente des matrices déclarées : {entry['requirement']}")
++        if matrix == "state_matrix":
++            covered_states.add(element)
++        if entry["proof_status"] == "N/A-JUSTIFIED" and not filled(entry.get("reason")):
++            raise ValidationError(f"coverage_map : N/A-JUSTIFIED exige une raison ({entry['requirement']})")
++        if entry["proof_status"] == "OBSERVED" and not filled(reality.get("observed_scope")):
++            raise ValidationError(f"coverage_map : une exigence OBSERVED exige observed_scope ({entry['requirement']})")
++    for state in reality["state_matrix"]:
++        if norm(state) not in covered_states:
++            raise ValidationError(f"coverage_map : état non couvert : {state}")
++
++
+ def semantic_check(name: str, document: Any) -> None:
+     if name == "domain_frame":
+-        policy = document["policy_profile"]
+-        if not set(document["domain_risks"]) & set(policy["risk_triggers"]):
+-            raise ValidationError("policy_profile.risk_triggers doit reprendre au moins un risque déclaré")
+-        if not set(document["proof_requirements"]) & set(policy["required_controls"]):
+-            raise ValidationError("policy_profile.required_controls doit être relié au plan de preuve")
+-
++        check_domain_frame(document)
+     if name == "research_brief":
+-        if not document["uncertainty_before"].strip() or not document["uncertainty_after"].strip():
+-            raise ValidationError("uncertainty_before/after ne peuvent pas être vides")
+-        if document["uncertainty_before"] == document["uncertainty_after"]:
+-            raise ValidationError("la recherche doit expliciter une évolution de l'incertitude")
+-        for entry in document["entries"]:
+-            if not entry["decision_changed"].strip() or not entry["artifact_consequence"].strip():
+-                raise ValidationError("chaque entrée de recherche doit produire une décision et une conséquence d'artefact")
+-
++        check_research_brief(document)
+     if name == "production_contracts":
+-        creative = document["creative_direction_set"]
+-        directions = creative["directions"]
+-        ids = [item["id"] for item in directions]
+-        if len(ids) != len(set(ids)):
+-            raise ValidationError("creative_direction_set.directions exige des ids uniques")
+-        if creative["selected_direction"] not in set(ids):
+-            raise ValidationError("creative_direction_set.selected_direction doit référencer une direction existante")
+-        for item in directions:
+-            if len(item["structural_changes"]) < 2:
+-                raise ValidationError("chaque direction doit modifier au moins deux relations structurelles")
+-        reality = document["ui_ux_reality_pack"]
+-        matrices = reality["state_matrix"] + reality["responsive_matrix"] + reality["accessibility_basis"] + reality["robustness_basis"]
+-        requirements = {item.strip() for item in matrices if item.strip()}
+-        covered = {entry["requirement"].strip() for entry in reality["coverage_map"]}
+-        if not covered:
+-            raise ValidationError("ui_ux_reality_pack.coverage_map doit contenir au moins une exigence rattachée")
+-        for requirement in covered:
+-            if ":" not in requirement:
+-                raise ValidationError("coverage_map.requirement doit porter le préfixe de sa matrice")
+-            matrix_name, matrix_value = (part.strip() for part in requirement.split(":", 1))
+-            matrix = {
+-                "state_matrix": reality["state_matrix"],
+-                "responsive_matrix": reality["responsive_matrix"],
+-                "accessibility_basis": reality["accessibility_basis"],
+-                "robustness_basis": reality["robustness_basis"],
+-            }.get(matrix_name)
+-            matrix_text = " ".join(matrix or [])
+-            if matrix is None or not all(token in matrix_text for token in matrix_value.split()):
+-                raise ValidationError("coverage_map contient une exigence absente des matrices déclarées")
+-        if not reality["proof_scope"].strip():
+-            raise ValidationError("ui_ux_reality_pack.proof_scope ne peut pas être vide")
+-        if not requirements:
+-            raise ValidationError("UI_UX_REALITY_PACK doit déclarer au moins une exigence vérifiable")
+-
+-
+-def expect_invalid(name: str, schema: dict[str, Any], document: Any, mutation: Any) -> None:
+-    mutated = mutation(copy.deepcopy(document))
+-    try:
+-        validate(mutated, schema)
+-        semantic_check(name, mutated)
+-    except ValidationError:
+-        return
+-    raise ValidationError(f"mutation négative acceptée à tort: {name}")
+-
+-
+-def check_negative_mutations(schemas: dict[str, dict[str, Any]], documents: dict[str, Any]) -> None:
+-    expect_invalid("domain_frame", schemas["domain_frame"], documents["domain_frame"], lambda value: {**value, "policy_profile": {**value["policy_profile"], "risk_triggers": ["risque absent"]}})
+-    expect_invalid("research_brief", schemas["research_brief"], documents["research_brief"], lambda value: {**value, "uncertainty_after": value["uncertainty_before"]})
+-    expect_invalid("production_contracts", schemas["production_contracts"], documents["production_contracts"], lambda value: {**value, "ui_ux_reality_pack": {**value["ui_ux_reality_pack"], "coverage_map": []}})
+-    expect_invalid("production_contracts", schemas["production_contracts"], documents["production_contracts"], lambda value: {**value, "creative_direction_set": {**value["creative_direction_set"], "directions": [value["creative_direction_set"]["directions"][0], value["creative_direction_set"]["directions"][0]]}})
++        present = [key for key in AT_LEAST_ONE[name] if key in document]
++        if not present:
++            raise ValidationError("production_contracts exige au moins un contrat (creative_direction_set, ui_ux_reality_pack ou evaluation_case)")
++        if "creative_direction_set" in document:
++            check_creative_direction_set(document["creative_direction_set"])
++        if "ui_ux_reality_pack" in document:
++            check_ui_ux_reality_pack(document["ui_ux_reality_pack"])
++
++
++DELETE = object()
++DF, RB, PC = "domain_frame", "research_brief", "production_contracts"
++UI, CS = ("ui_ux_reality_pack",), ("creative_direction_set",)
++# Cas unitaires à faute unique (règle A2) : contrat, UNE faute sur l'exemple canonique valide, motif.
++UNIT_CASES: list[tuple[Any, ...]] = [
++    ("K-02", DF, [(("policy_profile", "required_controls"), ["contrôle sans lien"])], "doit être relié au plan de preuve"),
++    ("K-06", PC, [(CS + ("directions", 1, "id"), "A")], "exige des ids uniques"),
++    ("K-07", PC, [(CS + ("selected_direction",), "Z")], "doit référencer une direction existante"),
++    ("K-09", PC, [(UI + ("coverage_map",), [])], "nombre minimal d'éléments non atteint"),
++    ("C2-2", PC, [(("creative_direction_set",), DELETE), (("ui_ux_reality_pack",), DELETE), (("evaluation_case",), DELETE)], "au moins un contrat"),
++    ("C2-3", PC, [(UI + ("coverage_map", 0, "proof_status"), "N/A-JUSTIFIED")], "N/A-JUSTIFIED exige une raison"),
++    ("C2-4", PC, [(UI + ("observed_scope",), None)], "exige observed_scope"),
++    ("C3-1", PC, [(CS + ("directions", 1, "tension"), None), (CS + ("directions", 1, "structural_changes"), None)], "directions non distinctes"),
++    ("C3-2", PC, [(CS + ("directions", 0, "structural_changes", 1), None)], "changements structurels en double"),
++    ("C9-1", DF, [(("domain_risks",), None)], "risque sans contrôle ni revue"),
++    ("C9-1b", DF, [(("policy_profile", "risk_coverage", 0, "control"), "contrôle inventé")], "contrôle inconnu"),
++    ("C9-3", PC, [(UI + ("coverage_map", 0, "requirement"), "state_matrix: loading des données source")], "exigence absente des matrices"),
++    ("C9-3b", PC, [(UI + ("coverage_map",), None)], "état non couvert"),
++    ("C9-4", RB, [(("entries", 0, "source"), "?")], "source placeholder"),
++    ("C9-4b", RB, [(("entries", 0, "source_status"), "verified_in_run"), (("entries", 0, "source_locator"), DELETE)], "exige un locator"),
++    ("C9-4c", RB, [(("entries", 0, "source_date"), "septembre")], "source_date doit être ISO"),
++    ("E2-1", DF, [(("evidence_plan", 0, "method"), "à déterminer")], "evidence_plan[0].method vide ou placeholder"),
++    ("E2-2", RB, [(("entries",), [])], "au moins une entrée exigée"),
++    ("E2-2b", RB, [(("depth",), "none"), (("entries",), [])], "l'incertitude ne peut pas changer"),
++    ("E2-2c", RB, [(("stop_condition",), "à déterminer")], "stop_condition vide ou placeholder"),
++]
++# Valeurs dépendantes de l'exemple, calculées au moment du cas (None ci-dessus).
++DERIVED = {
++    ("C3-1", 0): lambda d: d["creative_direction_set"]["directions"][0]["tension"],
++    ("C3-1", 1): lambda d: list(d["creative_direction_set"]["directions"][0]["structural_changes"]),
++    ("C3-2", 0): lambda d: d["creative_direction_set"]["directions"][0]["structural_changes"][0].upper(),
++    ("C9-1", 0): lambda d: d["domain_risks"] + ["exposition de données personnelles"],
++    ("C9-3b", 0): lambda d: [e for e in d["ui_ux_reality_pack"]["coverage_map"] if not e["requirement"].startswith("state_matrix: loading")],
++}
+ 
+ 
+-def name_for_path(path: Path) -> str | None:
+-    resolved = path.resolve()
+-    for name, (_, example) in CONTRACTS.items():
+-        if resolved == example.resolve():
+-            return name
+-    return None
++def apply_edit(document: Any, path: tuple[Any, ...], value: Any) -> None:
++    node = document
++    for key in path[:-1]:
++        node = node[key]
++    if value is DELETE:
++        del node[path[-1]]
++    else:
++        node[path[-1]] = copy.deepcopy(value)
+ 
+ 
+-def validate_single_path(path: Path) -> int:
+-    name = name_for_path(path)
+-    if name is None:
+-        print("CONTRACT VALIDATION FAILED")
+-        print(f"- chemin non canonique : {path}")
+-        return 1
++def check_unit_cases(schemas: dict[str, dict[str, Any]], documents: dict[str, Any]) -> list[str]:
++    errors, passed = [], 0
++    for case_id, name, faults, motif in UNIT_CASES:
++        document = copy.deepcopy(documents[name])
++        try:
++            for index, (path, value) in enumerate(faults):
++                apply_edit(document, path, DERIVED[(case_id, index)](document) if value is None and (case_id, index) in DERIVED else value)
++        except (KeyError, IndexError, TypeError) as exc:
++            errors.append(f"cas unitaire {case_id} : chemin de faute introuvable ({exc})")
++            continue
++        try:
++            validate(document, schemas[name])
++            semantic_check(name, document)
++        except ValidationError as exc:
++            if motif in str(exc):
++                passed += 1
++            else:
++                errors.append(f"cas unitaire {case_id} : attendu {motif!r}, obtenu {str(exc)!r}")
++            continue
++        errors.append(f"cas unitaire {case_id} : faute unique acceptée ({motif})")
++    print(f"+ cas unitaires : {passed}/{len(UNIT_CASES)}")
++    return errors
++
++
++def detect_type(document: Any) -> str:
++    """Famille de contrat reconnue par ses clés racines ; une seule doit correspondre."""
++    if not isinstance(document, dict) or not document:
++        raise ValidationError("type indéterminé : document vide ou non objet ; utiliser --type")
++    matches = []
++    for name, (schema_path, _) in CONTRACTS.items():
++        properties = load(schema_path).get("properties", {})
++        if set(document) <= set(properties):
++            matches.append(name)
++    if len(matches) != 1:
++        raise ValidationError(f"type ambigu ou inconnu ({', '.join(matches) or 'aucun'}) : utiliser --type")
++    return matches[0]
++
++
++def validate_single_path(path: Path, name: str | None = None) -> int:
+     try:
+-        schema = load_schema(name)
+         document = load(path)
++        name = name or detect_type(document)
++        schema = load_schema(name)
+         validate(document, schema)
+         semantic_check(name, document)
+     except (OSError, ValidationError) as exc:
+         print("CONTRACT VALIDATION FAILED")
+         print(f"- {exc}")
+         return 1
+-    print(f"CONTRACT VALIDATION PASSED — fichier ciblé : {path}")
++    print(f"CONTRACT VALIDATION PASSED — fichier ciblé ({name}) : {path}")
+     return 0
+ 
+ 
+ def main(argv: list[str] | None = None) -> int:
+-    parser = argparse.ArgumentParser(description="Valide les contrats de production ou un exemple canonique ciblé.")
+-    parser.add_argument("path", nargs="?", type=Path, help="exemple JSON canonique à valider seul ; sans argument, exécute la suite complète")
++    parser = argparse.ArgumentParser(description="Valide les contrats de production, ou un fichier de contrat ciblé.")
++    parser.add_argument("path", nargs="?", type=Path, help="fichier JSON à valider seul (dans ou hors du package) ; sans argument, exécute la suite complète")
++    parser.add_argument("--type", choices=sorted(CONTRACTS), help="famille du contrat ; sans --type, détectée par les clés racines")
+     args = parser.parse_args(argv)
+     if args.path is not None:
+-        return validate_single_path(args.path.expanduser().resolve())
++        return validate_single_path(args.path.expanduser().resolve(), args.type)
++    if args.type is not None:
++        print("CONTRACT VALIDATION FAILED")
++        print("- --type exige un fichier JSON ciblé")
++        return 1
+ 
+     errors: list[str] = []
+     schemas: dict[str, dict[str, Any]] = {}
+@@ -253,11 +395,7 @@ def main(argv: list[str] | None = None) -> int:
+         except ValidationError as exc:
+             errors.append(f"{name}: {exc}")
+     if not errors:
+-        try:
+-            check_negative_mutations(schemas, documents)
+-            print("+ negative mutations: rejected")
+-        except ValidationError as exc:
+-            errors.append(str(exc))
++        errors.extend(check_unit_cases(schemas, documents))
+     if errors:
+         print("CONTRACT VALIDATION FAILED")
+         print("\n".join(f"- {error}" for error in errors))
+@@ -268,4 +406,3 @@ def main(argv: list[str] | None = None) -> int:
+ 
+ if __name__ == "__main__":
+     raise SystemExit(main())
+-
+diff --git a/scripts/validate_run_card.py b/scripts/validate_run_card.py
+index e7a3873..d4d53f1 100644
+--- a/scripts/validate_run_card.py
++++ b/scripts/validate_run_card.py
+@@ -12,6 +12,7 @@ import argparse
+ import json
+ import re
+ import sys
++from datetime import date
+ from pathlib import Path
+ from typing import Any
+ from urllib.parse import urlparse
+@@ -147,8 +148,292 @@ def check_held_message(document: Any) -> None:
+         raise ValidationError("HELD est un statut de direction, pas une valeur de state")
+ 
+ 
++ACCEPTED = {"ACCEPTED", "ACCEPTED-WITH-RESERVATION"}
++PRE_OBSERVATION = {"INTAKE", "CLASSIFIED", "SPECCED", "BUILDING"}
++PLACEHOLDERS = {"todo", "tbd", "à définir", "a definir", "à déterminer", "a determiner", "à compléter", "a completer",
++                "placeholder", "n/a", "?", "inconnu", "lorem ipsum"}
++RESERVATION_FIELDS = ("owner", "scope", "date_version", "impact", "next_proof", "review_date", "exit_condition")
++# L’exception FAIL-ASSUMED étend la réserve commune ; sa date est celle de la carte (date_version non exigée).
++EXCEPTION_FIELDS = ("owner", "scope", "impact", "next_proof", "review_date", "exit_condition", "gate_axis", "failure_evidence", "requested_by")
++SYSTEM_FIELDS = ("impact", "owner", "migration", "rollback", "changelog_ref")
++ISO_DATE = re.compile(r"\d{4}-\d{2}-\d{2}(?:[T ]\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?(?:Z|[+-]\d{2}:\d{2})?)?")
++
++
++def filled(value: Any) -> bool:
++    """Chaîne non vide et non placeholder."""
++    return isinstance(value, str) and bool(value.strip()) and value.strip().lower() not in PLACEHOLDERS
++
++
++def iso_date(value: Any) -> bool:
++    if not isinstance(value, str) or not ISO_DATE.fullmatch(value.strip()):
++        return False
++    try:
++        date.fromisoformat(value.strip()[:10])
++    except ValueError:
++        return False
++    return True
++
++
++def check_critical_protection(card: dict[str, Any], mode: Any) -> dict[str, Any] | None:
++    risk = card.get("risk")
++    if not isinstance(risk, dict):
++        return None
++    if not filled(risk.get("statement")):
++        raise ValidationError("risk.statement requis : énoncé du risque principal, non vide et sans placeholder")
++    if risk.get("level") != "critical":
++        return None
++    if mode in {"LITE", "ITER"}:
++        raise ValidationError("un risque critical interdit le mode LITE ou ITER (DIRECTION 140)")
++    protection = risk.get("critical_protection")
++    if not isinstance(protection, dict):
++        raise ValidationError("un risque critical exige une critical_protection structurée")
++    for field in ("control", "owner", "scope", "failure_action", "evidence_locator"):
++        value = protection.get(field)
++        if not isinstance(value, str) or not value.strip():
++            raise ValidationError(f"critical_protection exige le champ {field}")
++        if not filled(value):
++            raise ValidationError(f"critical_protection.{field} ne peut pas être un placeholder")
++    if protection.get("failure_action") not in {"RETURNED", "BLOCKED", "ESCALATED"}:
++        raise ValidationError("critical_protection.failure_action doit retourner, bloquer ou escalader")
++    if protection.get("result") not in {"PASS", "FAIL", "NOT-VERIFIED"}:
++        raise ValidationError("critical_protection exige result (PASS, FAIL ou NOT-VERIFIED)")
++    return protection
++
++
++def check_protection_outcome(protection: dict[str, Any] | None, verdict: Any, issue: Any) -> None:
++    if protection is None:
++        return
++    if protection["result"] == "NOT-VERIFIED" and verdict == "ACCEPTED":
++        raise ValidationError("protection critique NOT-VERIFIED : verdict ACCEPTED interdit (la réserve reste possible)")
++    if protection["result"] == "FAIL":
++        if verdict in ACCEPTED:
++            raise ValidationError("protection critique en échec : aucun verdict accepté")
++        if issue != protection["failure_action"]:
++            raise ValidationError("protection critique en échec : l’issue doit suivre critical_protection.failure_action")
++
++
++def check_exception(card: dict[str, Any], closure: dict[str, Any]) -> None:
++    if closure.get("issue") != "FAIL-ASSUMED":
++        return
++    exception = closure.get("exception")
++    if not isinstance(exception, dict):
++        raise ValidationError("FAIL-ASSUMED exige closure.exception (réserve commune, gate_axis, failure_evidence, requested_by, disposition)")
++    missing = [field for field in EXCEPTION_FIELDS if not filled(exception.get(field))]
++    if missing:
++        raise ValidationError(f"closure.exception incomplète ou placeholder : {', '.join(missing)}")
++    if not iso_date(exception.get("review_date")):
++        raise ValidationError("closure.exception.review_date doit être une date ISO")
++    proof = card.get("proof") if isinstance(card.get("proof"), dict) else {}
++    if exception["failure_evidence"] not in (proof.get("observed") or []):
++        raise ValidationError("exception : failure_evidence doit figurer dans proof.observed (un échec connu, pas un NOT-VERIFIED)")
++    if exception.get("disposition") not in {"NON-DIFFUSÉ", "DIFFUSÉ-LIMITÉ", "RETIRÉ", "ESCALADÉ"}:
++        raise ValidationError("exception exige disposition (NON-DIFFUSÉ, DIFFUSÉ-LIMITÉ, RETIRÉ ou ESCALADÉ)")
++
++
++def check_time(card: dict[str, Any], closure: dict[str, Any]) -> None:
++    state, verdict = closure.get("state"), closure.get("verdict")
++    if state in PRE_OBSERVATION:
++        if verdict is not None:
++            raise ValidationError(f"state {state} : le verdict doit rester null avant CHECKING")
++        if card.get("decision_change") is not None or card.get("creative_close") is not None:
++            raise ValidationError(f"state {state} : decision_change et creative_close sont des champs après observation, interdits avant observation")
++    if state in {"DECIDED", "CLOSED"} and verdict is None:
++        raise ValidationError(f"state {state} exige un verdict")
++
++
++def check_accepted(card: dict[str, Any], closure: dict[str, Any], mode: Any) -> None:
++    verdict = closure.get("verdict")
++    if verdict not in ACCEPTED:
++        return
++    axes = closure.get("axes")
++    if not isinstance(axes, dict):
++        raise ValidationError("un verdict accepté exige closure.axes (V, U, A, T)")
++    values = [axes.get(axis) for axis in ("V", "U", "A", "T")]
++    if "RETURN" in values:
++        raise ValidationError("un axe RETURN interdit un verdict accepté")
++    if verdict == "ACCEPTED" and "NOT-VERIFIED" in values:
++        raise ValidationError("un axe NOT-VERIFIED interdit ACCEPTED (la réserve reste possible)")
++    if verdict == "ACCEPTED" and "PASS-WITH-RESERVATION" in values:
++        raise ValidationError("une réserve d'axe interdit ACCEPTED (PASS-WITH-RESERVATION)")
++    profile = card.get("capability_profile")
++    if not isinstance(profile, dict):
++        raise ValidationError("un verdict accepté exige capability_profile")
++    proof = card.get("proof") if isinstance(card.get("proof"), dict) else {}
++    provenance = proof.get("provenance") if isinstance(proof.get("provenance"), dict) else {}
++    capability = provenance.get("capability")
++    available = profile.get("available") if isinstance(profile.get("available"), list) else []
++    unavailable = profile.get("unavailable") if isinstance(profile.get("unavailable"), list) else []
++    if provenance and (capability not in available or capability in unavailable):
++        raise ValidationError("proof.provenance.capability doit être disponible (dans available, hors unavailable)")
++    basis = [item for item in (profile.get("basis") or []) if isinstance(item, dict) and item.get("capability") == capability]
++    if provenance and (not basis or any(item.get("kind") == "unattested_declaration" for item in basis)):
++        raise ValidationError("proof.provenance.capability exige une basis attestée (basis déclarative ou absente)")
++    if provenance:
++        artifact = card.get("artifact") if isinstance(card.get("artifact"), dict) else {}
++        if artifact.get("version") != provenance.get("artifact_version"):
++            raise ValidationError("version de preuve différente de la version d'artefact (artifact.version = provenance.artifact_version)")
++        if not iso_date(provenance.get("observed_at")):
++            raise ValidationError("proof.provenance.observed_at doit être une date ISO")
++    if verdict == "ACCEPTED-WITH-RESERVATION":
++        reservations = closure.get("reservations")
++        if not isinstance(reservations, list) or not reservations:
++            raise ValidationError("ACCEPTED-WITH-RESERVATION exige closure.reservations")
++        for reservation in reservations:
++            missing = [field for field in RESERVATION_FIELDS if not isinstance(reservation, dict) or not filled(reservation.get(field))]
++            if missing or not iso_date(reservation.get("review_date")):
++                raise ValidationError(f"réserve incomplète ou placeholder : {', '.join(missing) or 'review_date ISO'}")
++    if mode == "DIRECTION" and verdict == "ACCEPTED" and (card.get("artifact") or {}).get("rights_status") == "unknown":
++        raise ValidationError("droits inconnus interdisent ACCEPTED (rights_status unknown)")
++    decision_change = card.get("decision_change")
++    if closure.get("state") == "CLOSED" and mode in {"ITER", "STANDARD", "DIRECTION", "SYSTÈME"} and not decision_change:
++        raise ValidationError(f"{mode} clos et accepté exige decision_change (LITE : facultatif)")
++    if isinstance(decision_change, dict) and decision_change.get("outcome") == "NOT-OBSERVED" and verdict == "ACCEPTED":
++        raise ValidationError("decision_change NOT-OBSERVED interdit ACCEPTED")
++    profile_decision = card.get("profile_decision")
++    if isinstance(profile_decision, dict) and profile_decision.get("phase") != "observed":
++        raise ValidationError("profil non observé : un verdict accepté exige profile_decision.phase observed")
++
++
++def check_consequence(card: dict[str, Any], closure: dict[str, Any], mode: Any) -> None:
++    decision_change = card.get("decision_change")
++    if decision_change is not None:
++        if not isinstance(decision_change, dict) or decision_change.get("outcome") not in {"CHANGED", "CONFIRMED", "ABANDONED", "N/A-JUSTIFIED", "NOT-OBSERVED"}:
++            raise ValidationError("decision_change exige outcome (CHANGED, CONFIRMED, ABANDONED, N/A-JUSTIFIED ou NOT-OBSERVED)")
++        if decision_change["outcome"] == "N/A-JUSTIFIED" and not filled(decision_change.get("reason")):
++            raise ValidationError("decision_change N/A-JUSTIFIED exige une raison")
++    if closure.get("issue") == "RECLASSIFIED":
++        transition = closure.get("reclassification")
++        if not isinstance(transition, dict) or not filled(transition.get("successor_run_ref")):
++            raise ValidationError("RECLASSIFIED exige closure.reclassification (to_mode, successor_run_ref)")
++        if transition.get("to_mode") == mode:
++            raise ValidationError("reclassification : mode cible identique au mode du run")
++    profile_decision = card.get("profile_decision")
++    if isinstance(profile_decision, dict) and profile_decision.get("phase") not in {"intended", "observed"}:
++        raise ValidationError("profile_decision exige phase (intended ou observed)")
++
++
++def check_system_package(closure: dict[str, Any], mode: Any) -> None:
++    if mode != "SYSTÈME" or closure.get("verdict") not in ACCEPTED:
++        return
++    package = closure.get("system_package")
++    if not isinstance(package, dict):
++        raise ValidationError("SYSTÈME accepté exige closure.system_package")
++    consumers = package.get("consumers")
++    if not isinstance(consumers, list) or not any(filled(item) for item in consumers):
++        raise ValidationError("system_package exige au moins un consumer")
++    missing = [field for field in SYSTEM_FIELDS if not filled(package.get(field))]
++    non_regression = package.get("non_regression") if isinstance(package.get("non_regression"), dict) else {}
++    if not filled(non_regression.get("claim")):
++        missing.append("non_regression.claim")
++    if missing:
++        raise ValidationError(f"system_package incomplet ou placeholder : {', '.join(missing)}")
++    baseline = non_regression.get("baseline") if isinstance(non_regression.get("baseline"), dict) else {}
++    if not all(filled(baseline.get(field)) for field in ("locator", "version", "state")):
++        raise ValidationError("non_regression.baseline exige locator, version et état")
++
++
++def check_b1b(closure: dict[str, Any], mode: Any) -> None:
++    axes = closure.get("axes") if isinstance(closure.get("axes"), dict) else {}
++    if mode != "DIRECTION" or closure.get("verdict") not in ACCEPTED or axes.get("V") not in {"PASS", "PASS-WITH-RESERVATION"}:
++        return
++    b1b = closure.get("b1b")
++    if not isinstance(b1b, dict):
++        raise ValidationError("DIRECTION acceptée avec V PASS exige closure.b1b")
++    if b1b.get("status") == "DONE":
++        pair = b1b.get("pair") if isinstance(b1b.get("pair"), dict) else {}
++        if not all(filled(pair.get(field)) for field in ("before_locator", "after_locator", "decision")) or pair.get("outcome") not in {"confirmed", "modified", "abandoned"}:
++            raise ValidationError("paire B1b incomplète : before_locator, after_locator, decision, outcome")
++        if pair["before_locator"].strip() == pair["after_locator"].strip():
++            raise ValidationError("paire B1b : captures distinctes exigées (before_locator ≠ after_locator)")
++        return
++    if b1b.get("status") == "N/A-JUSTIFIED":
++        if b1b.get("reason") not in {"no_editable_decision", "equivalent_pair_valid"}:
++            raise ValidationError("motif N/A B1b non recevable (no_editable_decision ou equivalent_pair_valid)")
++        if not all(filled(b1b.get(field)) for field in ("covered_decision", "owner", "next_proof")):
++            raise ValidationError("N/A B1b exige covered_decision, owner et next_proof")
++        if b1b["reason"] == "equivalent_pair_valid" and not filled(b1b.get("pair_ref")):
++            raise ValidationError("N/A B1b par paire équivalente exige pair_ref")
++        return
++    raise ValidationError("closure.b1b.status doit être DONE ou N/A-JUSTIFIED")
++
++
++def check_direction(card: dict[str, Any], closure: dict[str, Any]) -> None:
++    verdict = closure.get("verdict")
++    direction = card.get("direction")
++    if not isinstance(direction, dict):
++        raise ValidationError("DIRECTION exige un objet direction avec thèse, anti-direction et premier objet")
++    for field in ("thesis", "anti_direction", "first_object"):
++        value = direction.get(field)
++        if field == "anti_direction":
++            if not isinstance(value, list) or not value or not all(isinstance(item, str) and item.strip() for item in value):
++                raise ValidationError("DIRECTION exige une anti_direction non vide")
++        elif not isinstance(value, str) or not value.strip():
++            raise ValidationError(f"DIRECTION exige le champ direction.{field}")
++    if not card.get("trace_locator"):
++        raise ValidationError("DIRECTION exige trace_locator pour une RUN_CARD persistante")
++    if closure.get("state") in {"DECIDED", "CLOSED"} and not closure.get("direction_status"):
++        raise ValidationError("DIRECTION décidée ou clôturée exige direction_status")
++    artifact = card.get("artifact") if isinstance(card.get("artifact"), dict) else {}
++    if artifact.get("rights_status") not in {"not_applicable", "cleared", "unknown", "restricted"}:
++        raise ValidationError("DIRECTION exige artifact.rights_status (not_applicable, cleared, unknown ou restricted)")
++    if direction.get("identity_stake") not in {"high", "normal"}:
++        raise ValidationError("DIRECTION exige direction.identity_stake (high ou normal)")
++    anchors = card.get("anchors")
++    if not isinstance(anchors, list):
++        raise ValidationError("DIRECTION exige anchors (liste, éventuellement vide)")
++    if not anchors:
++        if verdict in ACCEPTED:
++            raise ValidationError("DIRECTION sans ancrage : verdict accepté interdit")
++        if closure.get("issue") is None:
++            raise ValidationError("DIRECTION sans ancrage exige une issue (sérialisation honnête, ACTION 483)")
++    for anchor in anchors:
++        if not isinstance(anchor, dict):
++            raise ValidationError("chaque ancrage DIRECTION doit être structuré")
++        if "type" not in anchor:
++            raise ValidationError("ancrage exige type (generated, observed ou provided)")
++        if verdict in ACCEPTED and anchor.get("transformation_status") != "transformed":
++            raise ValidationError("un verdict accepté exige transformation_status transformed")
++    calibration = direction.get("calibration")
++    if calibration is not None:
++        if not isinstance(calibration, dict) or calibration.get("basis") not in {"observed_anchor", "provided_anchor", "real_constraint", "generated_only_reserved"}:
++            raise ValidationError("base de calibration non recevable (une revue indépendante n’est pas une calibration)")
++        if calibration["basis"] == "generated_only_reserved" and verdict == "ACCEPTED":
++            raise ValidationError("calibration générée seule interdit ACCEPTED")
++    generated_only = bool(anchors) and all(isinstance(a, dict) and a.get("type") == "generated" for a in anchors)
++    if (direction.get("identity_stake") == "high" and generated_only
++            and closure.get("direction_status") in {"HELD", "HELD-WITH-ACCEPTED-DIFFERENCE"}):
++        if not isinstance(calibration, dict) or calibration.get("basis") not in {"real_constraint", "generated_only_reserved"}:
++            raise ValidationError("enjeu d’identité élevé : ancrage généré seul exige calibration (real_constraint ou generated_only_reserved)")
++    profile_decision = card.get("profile_decision")
++    if profile_decision is not None:
++        if not isinstance(profile_decision, dict):
++            raise ValidationError("profile_decision doit être un objet")
++        for field in ("decision", "dials", "counterindication", "evidence"):
++            value = profile_decision.get(field)
++            if not isinstance(value, str) or not value.strip():
++                raise ValidationError(f"profile_decision : champ obligatoire absent : {field}")
++    creative_close = card.get("creative_close")
++    if closure.get("state") == "CLOSED":
++        if not isinstance(creative_close, dict):
++            raise ValidationError("DIRECTION clôturée exige creative_close")
++        for field in ("presence", "signature", "craft_detail", "dominant_defect", "next_polish_action"):
++            value = creative_close.get(field)
++            if not isinstance(value, str) or not value.strip():
++                raise ValidationError(f"creative_close exige le champ {field}")
++    for anchor in anchors:
++        if not iso_date(anchor.get("date")):
++            raise ValidationError("date d'ancrage ISO exigée (AAAA-MM-JJ)")
++        for field in ("role", "source", "date", "scope", "transformation", "transformation_status", "limitation"):
++            if not isinstance(anchor.get(field), str) or not anchor[field].strip():
++                raise ValidationError(f"ancrage DIRECTION incomplet : {field}")
++        for field in ("retained", "rejected"):
++            value = anchor.get(field)
++            if not isinstance(value, list) or not value or not all(isinstance(item, str) and item.strip() for item in value):
++                raise ValidationError(f"ancrage DIRECTION exige {field} non vide")
++
++
+ def check_semantic_contract(document: Any) -> None:
+-    """Contrôle les invariants métier explicitement documentés par ACTION."""
++    """Contrôle les invariants de la liste close (D-ACT-1) documentés par ACTION et DIRECTION."""
+     if not isinstance(document, dict):
+         return
+     card = document.get("run_card")
+@@ -162,85 +447,32 @@ def check_semantic_contract(document: Any) -> None:
+         basis = capability_profile.get("basis")
+         if isinstance(available, list) and available and (not isinstance(basis, list) or not basis):
+             raise ValidationError("capability_profile exige basis non vide lorsque available contient un élément")
+-    risk = card.get("risk")
+-    if isinstance(risk, dict) and risk.get("level") == "critical":
+-        protection = risk.get("critical_protection")
+-        if not isinstance(protection, dict):
+-            raise ValidationError("un risque critical exige une critical_protection structurée")
+-        required_protection = ("control", "owner", "scope", "failure_action", "evidence_locator")
+-        for field in required_protection:
+-            value = protection.get(field)
+-            if not isinstance(value, str) or not value.strip():
+-                raise ValidationError(f"critical_protection exige le champ {field}")
+-            if value.strip().lower() in {"todo", "tbd", "à définir", "a definir", "placeholder", "n/a"}:
+-                raise ValidationError(f"critical_protection.{field} ne peut pas être un placeholder")
+-        if protection.get("failure_action") not in {"RETURNED", "BLOCKED", "ESCALATED"}:
+-            raise ValidationError("critical_protection.failure_action doit retourner, bloquer ou escalader")
++    protection = check_critical_protection(card, mode)
+     closure = card.get("closure")
+     if not isinstance(closure, dict):
+         return
++    verdict = closure.get("verdict")
++    issue = closure.get("issue")
++    check_time(card, closure)
++    check_protection_outcome(protection, verdict, issue)
++    check_exception(card, closure)
+ 
+     if mode == "DIRECTION":
+-        direction = card.get("direction")
+-        if not isinstance(direction, dict):
+-            raise ValidationError("DIRECTION exige un objet direction avec thèse, anti-direction et premier objet")
+-        for field in ("thesis", "anti_direction", "first_object"):
+-            value = direction.get(field)
+-            if field == "anti_direction":
+-                if not isinstance(value, list) or not value or not all(isinstance(item, str) and item.strip() for item in value):
+-                    raise ValidationError("DIRECTION exige une anti_direction non vide")
+-            elif not isinstance(value, str) or not value.strip():
+-                raise ValidationError(f"DIRECTION exige le champ direction.{field}")
+-        if not card.get("trace_locator"):
+-            raise ValidationError("DIRECTION exige trace_locator pour une RUN_CARD persistante")
+-        if closure.get("state") in {"DECIDED", "CLOSED"} and not closure.get("direction_status"):
+-            raise ValidationError("DIRECTION décidée ou clôturée exige direction_status")
+-        anchors = card.get("anchors")
+-        if not isinstance(anchors, list) or not anchors:
+-            raise ValidationError("DIRECTION exige au moins un ancrage structuré")
+-        for anchor in anchors:
+-            if not isinstance(anchor, dict):
+-                raise ValidationError("chaque ancrage DIRECTION doit être structuré")
+-            status = anchor.get("transformation_status")
+-            if status == "transformed" and closure.get("verdict") in {"EXPLORATORY", "RETURN", "RETURN-DIRECTION"}:
+-                raise ValidationError("transformation_status transformed incompatible avec un verdict exploratoire ou de retour")
+-            if closure.get("verdict") in {"ACCEPTED", "ACCEPTED-WITH-RESERVATION"} and status != "transformed":
+-                raise ValidationError("un verdict accepté exige transformation_status transformed")
+-        profile_decision = card.get("profile_decision")
+-        if profile_decision is not None:
+-            if not isinstance(profile_decision, dict):
+-                raise ValidationError("profile_decision doit être un objet")
+-            for field in ("decision", "dials", "counterindication", "evidence"):
+-                value = profile_decision.get(field)
+-                if not isinstance(value, str) or not value.strip():
+-                    raise ValidationError(f"profile_decision : champ obligatoire absent : {field}")
+-        creative_close = card.get("creative_close")
+-        if closure.get("state") == "CLOSED":
+-            if not isinstance(creative_close, dict):
+-                raise ValidationError("DIRECTION clôturée exige creative_close")
+-            required_creative_fields = ("presence", "signature", "craft_detail", "dominant_defect", "next_polish_action")
+-            for field in required_creative_fields:
+-                value = creative_close.get(field)
+-                if not isinstance(value, str) or not value.strip():
+-                    raise ValidationError(f"creative_close exige le champ {field}")
+-        for anchor in anchors:
+-            for field in ("role", "source", "date", "scope", "transformation", "transformation_status", "limitation"):
+-                if not isinstance(anchor.get(field), str) or not anchor[field].strip():
+-                    raise ValidationError(f"ancrage DIRECTION incomplet : {field}")
+-            for field in ("retained", "rejected"):
+-                value = anchor.get(field)
+-                if not isinstance(value, list) or not value or not all(isinstance(item, str) and item.strip() for item in value):
+-                    raise ValidationError(f"ancrage DIRECTION exige {field} non vide")
+-
+-    if mode in {"STANDARD", "SYSTÈME"} and not card.get("trace_locator"):
++        check_direction(card, closure)
++    if mode in {"ITER", "STANDARD", "SYSTÈME"} and not card.get("trace_locator"):
+         raise ValidationError(f"{mode} exige trace_locator pour une RUN_CARD persistante")
++    if mode == "ITER":
++        direction = card.get("direction")
++        if not isinstance(direction, dict) or not filled(direction.get("thesis")):
++            raise ValidationError("ITER exige un rappel de direction (direction.thesis) ; sinon reclasser (DIRECTION 672)")
+ 
+-    verdict = closure.get("verdict")
+-    issue = closure.get("issue")
+-    if closure.get("direction_status") == "LOST-IN-BUILD" and verdict in {"ACCEPTED", "ACCEPTED-WITH-RESERVATION"}:
++    if closure.get("direction_status") == "LOST-IN-BUILD" and verdict in ACCEPTED:
+         raise ValidationError("LOST-IN-BUILD ne peut pas produire un verdict accepté")
+-    if issue in {"BLOCKED", "FAIL-ASSUMED"} and verdict in {"ACCEPTED", "ACCEPTED-WITH-RESERVATION"}:
+-        raise ValidationError("une issue bloquante ou FAIL-ASSUMED ne peut pas produire un verdict accepté")
++    if issue is not None and verdict in ACCEPTED:
++        detail = " (une issue bloquante ou FAIL-ASSUMED ne peut pas produire un verdict accepté)" if issue in {"BLOCKED", "FAIL-ASSUMED"} else ""
++        raise ValidationError(f"issue non nulle interdit un verdict accepté : {issue}{detail}")
++    if closure.get("direction_status") == "PARTIALLY-HELD" and verdict == "ACCEPTED":
++        raise ValidationError("PARTIALLY-HELD interdit ACCEPTED (HELD-WITH-ACCEPTED-DIFFERENCE pour une différence acceptée)")
+     proof = card.get("proof")
+     if isinstance(proof, dict):
+         observed = proof.get("observed")
+@@ -249,7 +481,7 @@ def check_semantic_contract(document: Any) -> None:
+             overlap = sorted(set(observed) & set(not_verified))
+             if overlap:
+                 raise ValidationError("proof.observed et proof.not_verified ne peuvent pas contenir le même claim")
+-    if verdict in {"ACCEPTED", "ACCEPTED-WITH-RESERVATION"}:
++    if verdict in ACCEPTED:
+         if closure.get("state") not in {"DECIDED", "CLOSED"}:
+             raise ValidationError("un verdict accepté exige state DECIDED ou CLOSED")
+         if not isinstance(proof, dict) or not isinstance(proof.get("observed"), list) or not proof["observed"]:
+@@ -267,14 +499,20 @@ def check_semantic_contract(document: Any) -> None:
+         limitations = closure.get("limitations")
+         if not isinstance(limitations, list) or not limitations:
+             raise ValidationError("un verdict accepté exige une limitation non vide")
++    check_consequence(card, closure, mode)
++    check_accepted(card, closure, mode)
++    check_system_package(closure, mode)
++    check_b1b(closure, mode)
+ 
+-    if closure.get("state") == "CLOSED" and mode == "DIRECTION" and not card.get("decision_change"):
+-        if verdict not in {"EXPLORATORY", "RETURN", "RETURN-DIRECTION", "SYSTEM-ESCALATION"} and closure.get("issue") not in {"BLOCKED", "RETURNED", "EXPLORATORY", "FAIL-ASSUMED", "ESCALATED"}:
+-            raise ValidationError("une DIRECTION clôturée sans decision_change exige N/A-JUSTIFIED, une issue ou un verdict non accepté")
++
++def is_local_locator(locator: str) -> bool:
++    return locator.startswith("file://") or (
++        not re.match(r"^[a-z][a-z0-9+.-]*://", locator, re.I) and (locator.startswith(("/", "./", "../")) or "/" in locator))
+ 
+ 
+ def check_strict_contract(document: Any, source_path: Path) -> None:
+-    """Reject exact placeholders and verify declared local/URL locators."""
++    """Profil strict (INV-C4-2) : mêmes exigences par mode que le profil normal, plus trois contrôles :
++    placeholders exacts, hôtes de démonstration, existence des locators locaux résolus depuis le dossier de la carte."""
+     exact_placeholders = {
+         "lorem ipsum",
+         "chemin-ou-url-local",
+@@ -301,27 +539,29 @@ def check_strict_contract(document: Any, source_path: Path) -> None:
+ 
+     walk(document)
+     card = document.get("run_card") if isinstance(document, dict) else None
+-    artifact = card.get("artifact") if isinstance(card, dict) else None
+-    locator = artifact.get("locator") if isinstance(artifact, dict) else None
+-    if not isinstance(locator, str) or not locator.strip():
++    card = card if isinstance(card, dict) else {}
++    artifact = card.get("artifact") if isinstance(card.get("artifact"), dict) else {}
++    locators = [("artifact.locator", artifact.get("locator")), ("trace_locator", card.get("trace_locator"))]
++    if not isinstance(artifact.get("locator"), str) or not artifact["locator"].strip():
+         raise ValidationError("strict : artifact.locator doit être renseigné")
+-    locator = locator.strip()
+-    trace_locator = card.get("trace_locator") if isinstance(card, dict) else None
+-    if not isinstance(trace_locator, str) or not trace_locator.strip():
+-        raise ValidationError("strict : trace_locator doit être renseigné")
+-    parsed_trace = urlparse(trace_locator.strip())
+-    if parsed_trace.scheme in {"http", "https"} and parsed_trace.hostname in placeholder_hosts:
+-        raise ValidationError(f"strict : trace_locator URL de démonstration interdite : {trace_locator}")
+-    if locator.startswith("file://"):
+-        candidate = Path(locator.removeprefix("file://"))
+-        if not candidate.exists():
+-            raise ValidationError(f"strict : artefact local absent : {locator}")
+-    elif not re.match(r"^[a-z][a-z0-9+.-]*://", locator, re.I) and (locator.startswith(("/", "./", "../")) or "/" in locator):
+-        candidate = Path(locator)
+-        if not candidate.is_absolute():
+-            candidate = ROOT / candidate
+-        if not candidate.exists():
+-            raise ValidationError(f"strict : artefact local absent : {locator}")
++    base = source_path.parent
++    for label, locator in locators:
++        if not isinstance(locator, str) or not locator.strip():
++            continue  # l’exigence de trace suit le mode, comme en profil normal
++        locator = locator.strip()
++        try:
++            parsed = urlparse(locator)
++            host = parsed.hostname
++        except ValueError as exc:
++            raise ValidationError(f"strict : {label} illisible : {locator}") from exc
++        if parsed.scheme in {"http", "https"} and host in placeholder_hosts:
++            raise ValidationError(f"strict : {label} URL de démonstration interdite : {locator}")
++        if is_local_locator(locator):
++            candidate = Path(locator.removeprefix("file://"))
++            if not candidate.is_absolute():
++                candidate = base / candidate
++            if not candidate.exists():
++                raise ValidationError(f"strict : {'artefact' if label == 'artifact.locator' else 'trace'} local absent : {locator}")
+ 
+ 
+ def validate_card(document: Any, schema: dict[str, Any], strict: bool = False, source_path: Path | None = None) -> None:
+@@ -390,11 +630,37 @@ FIXTURE_TABLE: dict[str, str | None] = {
+ }
+ 
+ DELETE = object()
+-CRITICAL = {"level": "critical", "critical_protection": {"control": "Contrôle nommé", "owner": "owner-nommé", "scope": "Scope nommé", "failure_action": "RETURNED", "evidence_locator": "preuve-nommée"}}
+ RC = "run_card"
++PROTECTION = {"control": "Contrôle nommé", "owner": "owner-nommé", "scope": "Scope nommé", "failure_action": "RETURNED", "evidence_locator": "preuve-nommée", "result": "PASS"}
++CRITICAL = {"level": "critical", "statement": "Risque critique nommé", "critical_protection": PROTECTION}
++FAIL_OBS = "Échec observé : contraste insuffisant sur la note secondaire (Gate A)."
++OBSERVED = ["Hiérarchie et premier geste observés dans le viewport inspecté.", FAIL_OBS]
++EXCEPTION = {"owner": "Owner produit", "scope": "Pilote interne", "impact": "Note secondaire moins lisible", "next_proof": "Mesure après correction",
++             "review_date": "2026-10-09", "exit_condition": "Contraste conforme mesuré", "gate_axis": "Gate A / contraste",
++             "failure_evidence": FAIL_OBS, "requested_by": "Owner produit (demande écrite)", "disposition": "DIFFUSÉ-LIMITÉ"}
++SYSTEM_PACKAGE = {"impact": "Token utilisé par trois surfaces", "consumers": ["web/app", "mobile/ios"], "owner": "Owner système",
++                  "migration": "Alias temporaire pendant deux versions", "rollback": "Restaurer la valeur précédente du token",
++                  "non_regression": {"claim": "Aucun écart hors intention", "baseline": {"locator": "baselines/token/", "version": "V1.4.0", "state": "défaut, focus"}},
++                  "changelog_ref": "CHANGELOG — token action"}
++CL = (RC, "closure")
++ACC = [(CL + ("verdict",), "ACCEPTED"), (CL + ("axes",), {"V": "PASS", "U": "PASS", "A": "PASS", "T": "PASS"})]
++FA = [((RC, "proof", "observed"), OBSERVED), (CL + ("issue",), "FAIL-ASSUMED"), (CL + ("verdict",), "RETURN"), (CL + ("exception",), EXCEPTION)]
++FAILED = [((RC, "risk"), {**CRITICAL, "critical_protection": {**PROTECTION, "result": "FAIL"}}), (CL + ("issue",), "RETURNED"), (CL + ("verdict",), "RETURN")]
++SYSTEM = [((RC, "mode"), "SYSTÈME"), (CL + ("system_package",), SYSTEM_PACKAGE)]
++HIGH_GEN = [((RC, "direction", "identity_stake"), "high"), ((RC, "anchors", 0, "type"), "generated"),
++            ((RC, "direction", "calibration"), {"basis": "generated_only_reserved", "detail": "Calibration sur hypothèse générée seule, réservée."})]
++NO_ANCHOR = [((RC, "anchors"), []), (CL + ("issue",), "EXPLORATORY"), (CL + ("verdict",), "EXPLORATORY"), (CL + ("direction_status",), "PARTIALLY-HELD")]
++INTAKE = [(CL + ("state",), "INTAKE"), (CL + ("verdict",), None), ((RC, "creative_close"), DELETE), ((RC, "decision_change"), DELETE)]
++RECLASSIFIED = [(CL + ("issue",), "RECLASSIFIED"), (CL + ("verdict",), "RETURN"), (CL + ("reclassification",), {"to_mode": "STANDARD", "successor_run_ref": "run-043"})]
++NORMAL = ((RC, "risk"), {"level": "normal", "statement": "Troncature du libellé sur mobile", "critical_protection": None})
++ITER = [NORMAL, ((RC, "mode"), "ITER"), ((RC, "direction"), {"thesis": "La hiérarchie existante est conservée."})]
++BUILDING = [NORMAL, (CL + ("state",), "BUILDING"), (CL + ("verdict",), None), (CL + ("issue",), None), ((RC, "decision_change"), DELETE)]
++STRICT_LITE = [NORMAL, ((RC, "mode"), "LITE"), ((RC, "trace_locator"), DELETE), ((RC, "artifact", "locator"), str(EXAMPLE))]
++RETURNED = FIXTURES / "valid_closed_return.json"
++PROFILE = FIXTURES / "valid_direction_with_profile_decision.json"
+ # Cas unitaires à faute unique (A2) : base valide (vérifiée d'abord), éventuelles retouches
+ # qui gardent la base valide, UNE faute, motif attendu. Tout invariant ajouté arrive ici.
+-UNIT_CASES: list[tuple[str, Path, list[tuple[tuple[str, ...], Any]], tuple[tuple[str, ...], Any], str]] = [
++UNIT_CASES: list[tuple[Any, ...]] = [
+     ("U-01", EXAMPLE, [], ((RC, "closure", "state"), "HELD"), "HELD est un statut de direction"),
+     ("U-02", EXAMPLE, [], ((RC, "proof"), DELETE), "un verdict accepté exige au moins une preuve observed"),
+     ("U-03", FIXTURES / "valid_closed_return.json", [], ((RC, "proof"), DELETE), "run_card : champ obligatoire absent : proof"),
+@@ -409,7 +675,7 @@ UNIT_CASES: list[tuple[str, Path, list[tuple[tuple[str, ...], Any]], tuple[tuple
+     ("U-12", EXAMPLE, [], ((RC, "closure", "state"), "CHECKING"), "un verdict accepté exige state DECIDED ou CLOSED"),
+     ("U-13", EXAMPLE, [], ((RC, "proof", "provenance"), DELETE), "un verdict accepté exige proof.provenance"),
+     ("U-14", EXAMPLE, [], ((RC, "closure", "limitations"), []), "verdict accepté exige une limitation non vide"),
+-    ("U-15", EXAMPLE, [], ((RC, "closure", "issue"), "FAIL-ASSUMED"), "issue bloquante ou FAIL-ASSUMED"),
++    ("U-15", EXAMPLE, [((RC, "proof", "observed"), OBSERVED), (CL + ("exception",), EXCEPTION)], ((RC, "closure", "issue"), "FAIL-ASSUMED"), "issue bloquante ou FAIL-ASSUMED"),
+     ("U-16", EXAMPLE, [], ((RC, "closure", "issue"), "BLOCKED"), "issue bloquante ou FAIL-ASSUMED"),
+     ("U-17", EXAMPLE, [], ((RC, "capability_profile", "basis"), []), "capability_profile exige basis non vide"),
+     ("U-18", EXAMPLE, [], ((RC, "capability_profile", "basis"), DELETE), "capability_profile exige basis non vide"),
+@@ -418,6 +684,60 @@ UNIT_CASES: list[tuple[str, Path, list[tuple[tuple[str, ...], Any]], tuple[tuple
+     ("U-21", EXAMPLE, [], ((RC, "closure", "direction_status"), "LOST-IN-BUILD"), "LOST-IN-BUILD ne peut pas produire un verdict accepté"),
+     ("U-22", FIXTURES / "valid_closed_return.json", [], ((RC, "risk"), DELETE), "run_card : champ obligatoire absent : risk"),
+     ("U-23", EXAMPLE, [], ((RC, "anchors", 0, "transformation_status"), "not_transformed"), "un verdict accepté exige transformation_status transformed"),
++    # Invariants nouveaux de la migration (12.04), un cas chacun (règle A2)
++    ("B1-1", EXAMPLE, [((RC, "risk"), CRITICAL)], ((RC, "mode"), "LITE"), "risque critical interdit le mode LITE ou ITER"),
++    ("B1-2", EXAMPLE, [((RC, "risk"), CRITICAL)], ((RC, "risk", "critical_protection", "result"), DELETE), "critical_protection exige result"),
++    ("B1-3a", EXAMPLE, [((RC, "risk"), {**CRITICAL, "critical_protection": {**PROTECTION, "result": "NOT-VERIFIED"}})], (CL + ("verdict",), "ACCEPTED"), "verdict ACCEPTED interdit"),
++    ("B1-3b", EXAMPLE, FAILED, (CL + ("verdict",), "ACCEPTED-WITH-RESERVATION"), "protection critique en échec"),
++    ("B1-3c", EXAMPLE, FAILED, (CL + ("issue",), "BLOCKED"), "issue doit suivre critical_protection.failure_action"),
++    ("B1-4", EXAMPLE, FA, (CL + ("exception",), DELETE), "FAIL-ASSUMED exige closure.exception"),
++    ("B1-5", EXAMPLE, FA, (CL + ("exception", "failure_evidence"), "Échec non observé"), "failure_evidence doit figurer dans proof.observed"),
++    ("B1-6", EXAMPLE, FA, (CL + ("exception", "disposition"), DELETE), "exception exige disposition"),
++    ("B2-1", EXAMPLE, [], (CL + ("issue",), "RETURNED"), "issue non nulle interdit un verdict accepté"),
++    ("B2-2", EXAMPLE, ACC, (CL + ("direction_status",), "PARTIALLY-HELD"), "PARTIALLY-HELD interdit ACCEPTED"),
++    ("B2-3a", EXAMPLE, [], (CL + ("axes",), DELETE), "verdict accepté exige closure.axes"),
++    ("B2-3b", EXAMPLE, [], (CL + ("axes", "U"), "RETURN"), "axe RETURN interdit un verdict accepté"),
++    ("B2-3c", EXAMPLE, ACC, (CL + ("axes", "A"), "NOT-VERIFIED"), "axe NOT-VERIFIED interdit ACCEPTED"),
++    ("B2-3d", EXAMPLE, ACC, (CL + ("axes", "V"), "PASS-WITH-RESERVATION"), "réserve d'axe interdit ACCEPTED"),
++    ("B2-4", EXAMPLE, [], ((RC, "proof", "provenance", "capability"), "clavier/AT non exécuté"), "provenance.capability doit être disponible"),
++    ("B2-5", EXAMPLE, [], ((RC, "capability_profile"), DELETE), "un verdict accepté exige capability_profile"),
++    ("B2-6", EXAMPLE, [], ((RC, "capability_profile", "basis", 1, "kind"), "unattested_declaration"), "basis déclarative"),
++    ("B2-7", EXAMPLE, [], ((RC, "artifact", "version"), "2026-09-25 / V2"), "version de preuve différente de la version d'artefact"),
++    ("B2-8", EXAMPLE, [], ((RC, "proof", "provenance", "observed_at"), "hier"), "observed_at doit être une date ISO"),
++    ("B2-9a", EXAMPLE, [], (CL + ("reservations",), DELETE), "ACCEPTED-WITH-RESERVATION exige closure.reservations"),
++    ("B2-9b", EXAMPLE, [], (CL + ("reservations", 0, "impact"), "à compléter"), "réserve incomplète ou placeholder"),
++    ("B2-10a", EXAMPLE, ACC, ((RC, "artifact", "rights_status"), "unknown"), "droits inconnus interdisent ACCEPTED"),
++    ("B2-10b", EXAMPLE, [], ((RC, "artifact", "rights_status"), DELETE), "DIRECTION exige artifact.rights_status"),
++    ("B3-1a", EXAMPLE, SYSTEM, (CL + ("system_package",), DELETE), "SYSTÈME accepté exige closure.system_package"),
++    ("B3-1b", EXAMPLE, SYSTEM, (CL + ("system_package", "consumers"), []), "system_package exige au moins un consumer"),
++    ("B3-1c", EXAMPLE, SYSTEM, (CL + ("system_package", "rollback"), "à déterminer"), "system_package incomplet ou placeholder"),
++    ("B3-2", EXAMPLE, SYSTEM, (CL + ("system_package", "non_regression", "baseline", "version"), DELETE), "baseline exige locator, version et état"),
++    ("B3-3a", EXAMPLE, [], (CL + ("b1b",), DELETE), "exige closure.b1b"),
++    ("B3-3b", EXAMPLE, [], (CL + ("b1b", "pair", "after_locator"), "captures/premiere-scene-v1.png"), "paire B1b : captures distinctes"),
++    ("B3-4a", EXAMPLE, [], (CL + ("b1b",), {"status": "N/A-JUSTIFIED", "reason": "comparaison inutile", "covered_decision": "d", "owner": "o", "next_proof": "p"}), "motif N/A B1b non recevable"),
++    ("B3-4b", EXAMPLE, [], (CL + ("b1b",), {"status": "N/A-JUSTIFIED", "reason": "equivalent_pair_valid", "covered_decision": "Relief porteur", "owner": "Owner", "next_proof": "Capture V2"}), "exige pair_ref"),
++    ("B4-1", EXAMPLE, [], ((RC, "anchors", 0, "type"), DELETE), "ancrage exige type"),
++    ("B4-2", EXAMPLE, [], ((RC, "anchors", 0, "date"), "récemment"), "date d'ancrage ISO"),
++    ("B4-3", EXAMPLE, [], ((RC, "direction", "identity_stake"), DELETE), "DIRECTION exige direction.identity_stake"),
++    ("B4-4a", EXAMPLE, HIGH_GEN, ((RC, "direction", "calibration"), DELETE), "ancrage généré seul exige calibration"),
++    ("B4-4b", EXAMPLE, HIGH_GEN, ((RC, "direction", "calibration", "basis"), "independent_review"), "base de calibration non recevable"),
++    ("B4-5", EXAMPLE, HIGH_GEN + ACC[1:], (CL + ("verdict",), "ACCEPTED"), "calibration générée seule interdit ACCEPTED"),
++    ("B4-6a", EXAMPLE, [], ((RC, "anchors"), []), "DIRECTION sans ancrage : verdict accepté interdit"),
++    ("B4-6b", EXAMPLE, NO_ANCHOR, (CL + ("issue",), None), "DIRECTION sans ancrage exige une issue"),
++    ("C1-1a", EXAMPLE, [], ((RC, "decision_change", "outcome"), DELETE), "decision_change exige outcome"),
++    ("C1-1b", EXAMPLE, [], ((RC, "decision_change", "outcome"), "N/A-JUSTIFIED"), "N/A-JUSTIFIED exige une raison"),
++    ("C1-2", EXAMPLE, ACC, ((RC, "decision_change", "outcome"), "NOT-OBSERVED"), "NOT-OBSERVED interdit ACCEPTED"),
++    ("C1-3", EXAMPLE, [((RC, "mode"), "STANDARD")], ((RC, "decision_change"), DELETE), "exige decision_change"),
++    ("C1-4a", EXAMPLE, INTAKE, (CL + ("verdict",), "RETURN"), "le verdict doit rester null avant CHECKING"),
++    ("C1-4b", EXAMPLE, [], (CL + ("verdict",), None), "exige un verdict"),
++    ("C1-5a", EXAMPLE, RECLASSIFIED, (CL + ("reclassification",), DELETE), "RECLASSIFIED exige closure.reclassification"),
++    ("C1-5b", EXAMPLE, RECLASSIFIED, (CL + ("reclassification", "to_mode"), "DIRECTION"), "mode cible identique"),
++    ("C1-6", PROFILE, [], ((RC, "profile_decision", "phase"), "intended"), "profil non observé"),
++    ("C2-1", EXAMPLE, [], ((RC, "risk", "statement"), "TBD"), "risk.statement requis"),
++    ("C4-1", RETURNED, ITER, ((RC, "trace_locator"), DELETE), "ITER exige trace_locator"),
++    ("C4-2", RETURNED, STRICT_LITE, ((RC, "artifact", "locator"), "captures/absent.png"), "artefact local absent", True),
++    ("D2-1", RETURNED, BUILDING, ((RC, "decision_change"), {"outcome": "CHANGED", "value": "Conséquence déclarée", "evidence": "Aucune"}), "avant observation"),
++    ("D2-2", RETURNED, ITER, ((RC, "direction"), DELETE), "rappel de direction"),
+ ]
+ 
+ 
+@@ -433,7 +753,8 @@ def apply_edit(document: Any, path: tuple[Any, ...], value: Any) -> None:
+ 
+ def check_unit_cases(schema: dict[str, Any], errors: list[str]) -> None:
+     passed = 0
+-    for case_id, base, edits, (fault_path, fault_value), motif in UNIT_CASES:
++    for case_id, base, edits, (fault_path, fault_value), motif, *options in UNIT_CASES:
++        strict = bool(options and options[0])
+         try:
+             document = load_json(base)
+             for path, value in edits:
+@@ -442,7 +763,7 @@ def check_unit_cases(schema: dict[str, Any], errors: list[str]) -> None:
+             errors.append(f"cas unitaire {case_id} : base illisible ({exc})")
+             continue
+         try:
+-            validate_card(document, schema)
++            validate_card(document, schema, strict=strict, source_path=EXAMPLE)
+         except ValidationError as exc:
+             errors.append(f"cas unitaire {case_id} : base invalide ({exc})")
+             continue
+@@ -452,7 +773,7 @@ def check_unit_cases(schema: dict[str, Any], errors: list[str]) -> None:
+             errors.append(f"cas unitaire {case_id} : chemin de faute introuvable ({exc})")
+             continue
+         try:
+-            validate_card(document, schema)
++            validate_card(document, schema, strict=strict, source_path=EXAMPLE)
+         except ValidationError as exc:
+             if motif in str(exc):
+                 passed += 1
+diff --git a/skills/design-governance-practice/references/machine_projection.md b/skills/design-governance-practice/references/machine_projection.md
+index 576a5fd..9a6be14 100644
+--- a/skills/design-governance-practice/references/machine_projection.md
++++ b/skills/design-governance-practice/references/machine_projection.md
+@@ -19,6 +19,7 @@ run_card:
+   decision_intent: "Décision que le run doit permettre de trancher."
+   risk:
+     level: normal
++    statement: "Risque principal : ce qui coûterait cher si c’était faux."
+     critical_protection: null
+   sources:
+     - DIRECTION/START
+@@ -28,8 +29,10 @@ run_card:
+     anti_direction:
+       - "Pattern générique refusé."
+     first_object: "Objet qui matérialise la décision."
++    identity_stake: normal
+   anchors:
+     - role: direction
++      type: observed
+       source: "URL ou référence réellement ouverte"
+       date: "2026-08-29"
+       scope: "axe ou décision calibré"
+@@ -43,28 +46,34 @@ run_card:
+   artifact:
+     locator: "chemin-ou-url-local"
+     scope: "Périmètre observé."
++    version: "2026-08-29 / V1"
++    rights_status: not_applicable
+   trace_locator: "ticket-ou-chemin-de-run"
+   next_proof: "Preuve suivante attendue."
+   capability_profile:
+     available:
+-      - "artefact disponible"
++      - "navigateur/capture disponible"
+     unavailable:
+       - "préférence humaine non observée"
+     not_required:
+       - "participant non requis pour cette passe"
+     basis:
+-      - "capacité déclarée dans le périmètre et les limites du run"
++      - capability: "navigateur/capture disponible"
++        kind: tool_result
++        detail: "Résultat d’outil qui atteste la capacité."
+   proof:
+     observed:
+       - "Observation réellement obtenue dans le scope déclaré."
+     not_verified:
+       - "Propriété non observée dans le scope."
+     provenance:
+-      artifact_locator: "Artefact réellement inspecté."
+-      artifact_version: "Version ou identifiant observé."
++      artifact_locator: "chemin-ou-url-local"
++      artifact_version: "2026-08-29 / V1"
+       method: "Méthode d’inspection ou de test."
+-      observed_at: "Date ou horodatage de l’observation."
++      observed_at: "2026-08-29"
++      capability: "navigateur/capture disponible"
+   decision_change:
++    outcome: CHANGED
+     value: "Décision effectivement changée, confirmée ou abandonnée."
+     evidence: "Artefact ou observation qui l’établit."
+   creative_close:
+@@ -74,6 +83,7 @@ run_card:
+     dominant_defect: "Défaut créatif restant prioritaire."
+     next_polish_action: "Prochaine action de polish ciblée."
+   profile_decision:
++    phase: observed
+     decision: "Décision réellement modifiée par le profil."
+     dials: "Dials relevés, abaissés ou inchangés."
+     counterindication: "Situation où le profil devient nuisible."
+@@ -85,6 +95,26 @@ run_card:
+     verdict: ACCEPTED-WITH-RESERVATION
+     limitations:
+       - "Limite restante."
++    axes:
++      V: PASS
++      U: NOT-VERIFIED
++      A: NOT-VERIFIED
++      T: PASS
++    reservations:
++      - owner: design-owner
++        scope: "Périmètre de la réserve."
++        date_version: "2026-08-29 / V1"
++        impact: "Effet de la limite sur la livraison."
++        next_proof: "Preuve qui lèvera la réserve."
++        review_date: "2026-09-12"
++        exit_condition: "Condition observable de sortie."
++    b1b:
++      status: DONE
++      pair:
++        before_locator: "capture-avant-edition"
++        after_locator: "capture-apres-edition"
++        decision: "Décision de craft comparée."
++        outcome: confirmed
+ ```
+ 
+ Préserver les distinctions entre `STATE`, `ISSUE`, `VERDICT`, statut de direction, `GATE`, `AXIS` et `DECISION-CHANGE`. Le `closure.verdict` global utilise uniquement les six valeurs d’ACTION. Utiliser `PASS`, `PASS-WITH-RESERVATION`, `NOT-VERIFIED`, `NOT-OBSERVED` et `N/A-JUSTIFIED` pour les axes, les contrôles ou les limites selon leur sens propre ; ils ne deviennent pas des verdicts globaux. `null` ne signifie ni réussite ni preuve absente.

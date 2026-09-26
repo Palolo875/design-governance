@@ -1,0 +1,491 @@
+diff --git a/V1/official/ACTION.md b/V1/official/ACTION.md
+index 9208cf1..56aeabe 100644
+--- a/V1/official/ACTION.md
++++ b/V1/official/ACTION.md
+@@ -4,25 +4,31 @@
+ 
+ ## Responsabilité
+ 
+-`ACTION` est le propriétaire des preuves exécutables, des gates, des statuts de run, des verdicts et de la clôture. Pour une lecture rapide, commencez par `ACTION/RUN`, puis chargez seulement la route du mode et les gates correspondant au risque déclaré. `ACTION/FAST-PATH` est une vue de formalité réduite pour un delta local ; il ne supprime ni la preuve requise ni l’honnêteté du statut.
++`ACTION` est le propriétaire des preuves exécutables, des gates, des statuts de run, des verdicts et de la clôture. Pour une lecture rapide, commencez par `ACTION/STATUS` et `ACTION/PRECONDITION`, puis la route de votre mode `ACTION/RUN-<MODE>`, et chargez seulement les gates correspondant au risque déclaré. `ACTION/FAST-PATH` est une vue de formalité réduite pour un delta local ; il ne supprime ni la preuve requise ni l’honnêteté du statut.
+ 
+ **Capacité positive d’ACTION.** ACTION ne sert pas seulement à filtrer ou accepter un résultat : elle transforme une direction en livraison observable et améliorable. Son chemin positif est **construire → observer → isoler le défaut dominant → corriger ou accepter avec raison → prouver → clôturer avec une limite et une prochaine preuve**. Les gates protègent ce chemin ; ils ne sont pas sa finalité. La qualité du premier rendu, la lisibilité de la décision et la possibilité de reprendre le run font partie de la valeur livrée.
+ 
+ ### Carte de lecture par mode
+ 
+-| Mode | Chargement minimal dans ACTION | Sortie à conserver |
+-|---|---|---|
+-| `LITE` | `STATUS`, `PRECONDITION`, `RUN-LITE`, gates applicables | Artefact, risque, preuve, limite et prochaine action. |
+-| `ITER` | `STATUS`, `PRECONDITION`, `RUN-ITER`, non-régression pertinente | Diff, preuve du risque touché et décision. |
+-| `STANDARD` | `STATUS`, `RUN-STANDARD`, `BIBLIOTHEQUE/SELECT` si la structure est ouverte, gates ciblés | Artefact, hiérarchie, états, preuve et risque restant. |
+-| `DIRECTION` | `RUN-DIRECTION`, `PIPELINE-DIRECTION`, `VISUAL_PROOF`, gates A/B/C | Direction, ancre/spec, capture, écarts, verdict et prochaine preuve. |
+-| `SYSTÈME` | `RUN-SYSTEM`, puis `CHANGELOG` pour adoption ou migration | Décision, consumers, owner, migration, rollback et non-régression. |
++**Socle pour tous les modes :** `ACTION/STATUS` et `ACTION/PRECONDITION`.
++
++| Mode | Chargement propre au mode |
++|---|---|
++| `LITE` | `ACTION/RUN-LITE` ; `ACTION/GATE-A` applicable et `ACTION/GATE-B` du risque dominant |
++| `ITER` | `ACTION/RUN-ITER` ; non-régression pertinente |
++| `STANDARD` | `ACTION/RUN-STANDARD` ; `BIBLIOTHEQUE/SELECT` si la structure est ouverte ; `ACTION/GATE-A`, `ACTION/GATE-B` ou `ACTION/GATE-C` ciblés selon le risque |
++| `DIRECTION` | `ACTION/RUN-DIRECTION`, `ACTION/PIPELINE-DIRECTION`, `ACTION/VISUAL_PROOF`, `ACTION/GATE-A`, `ACTION/GATE-B`, `ACTION/GATE-C` |
++| `SYSTÈME` | `ACTION/RUN-SYSTEM`, puis `CHANGELOG` pour adoption ou migration |
++
++La sortie à conserver de chaque mode est définie une seule fois, par `ACTION/CLOSE-PACKAGE`.
+ 
+ Les sections `RUN_CARD`, `CLOSE-PACKAGE` et `CLOSE-EXIT-CHECK` s’ajoutent lorsque la trace est persistante ou que la clôture l’exige. `FAST-PATH` n’est pas une sixième voie : chaque occurrence de ce nom reste une vue locale du propriétaire qui l’emploie.
+ 
+ ### ACTION/HANDOFF — sortie minimale commune
+ 
+-`ACTION` est propriétaire de la preuve, des gates, des statuts, des verdicts et de la clôture. Les façades peuvent préparer un handoff, mais toute sortie de run doit rendre résolubles les éléments suivants :
++`ACTION` est propriétaire de la preuve, des gates, des statuts, des verdicts et de la clôture. Une sortie de run a deux formes, à ne pas confondre. Les façades peuvent les préparer ou les recopier, jamais les redéfinir.
++
++1. **Handoff**, pour une reprise ou un run persistant : les éléments suivants doivent être résolubles.
+ 
+ ```text
+ MODE — DECISION — RISK — SCOPE — ARTIFACT
+@@ -30,13 +36,23 @@ OBSERVATION/METHOD — PROOF/TRACE-LOCATOR — LIMIT/NOT-VERIFIED
+ DECISION-CHANGE — NEXT-ACTION — OWNER — NEXT-PROOF — EXIT-CONDITION
+ ```
+ 
+-Ce bloc réutilise les champs existants ; il ne crée ni statut, ni gate, ni nouveau schéma. Les champs non applicables sont marqués `N/A-JUSTIFIED`. Un run persistant utilise la projection `RUN_CARD` et son validateur. Une sortie courte qui ne peut pas fournir ces éléments reste une préparation, une clarification ou une décision non clôturée ; elle ne doit pas être présentée comme une preuve complète.
++2. **Réponse visible**, pour un humain, par défaut :
++
++```text
++MODE — DECISION — CHANGE — PROOF — LIMIT — NEXT-ACTION — OWNER
++```
++
++`CHANGE` vaut `DECISION-CHANGE` ou `N/A-JUSTIFIED`. La réponse visible ne remplace jamais le handoff d’un run persistant.
++
++**Formes.** La ligne de run de `DIRECTION` est la mémoire de lancement, sous-ensemble de lancement de ce handoff ; le handoff est la transmission ; `ACTION/CLOSE-PACKAGE` est la clôture par mode ; la `RUN_CARD` JSON est la projection persistante, selon la table de correspondance d’`ACTION/RUN_CARD`. **Forme courte LITE non persistante :** le paquet LITE de `ACTION/CLOSE-PACKAGE` ; les autres champs du handoff sont `N/A-JUSTIFIED` par défaut, avec deux pertes déclarées (METHOD, EXIT-CONDITION) ; TRACE-LOCATOR est alors l’artefact. Une reprise par un autre agent exige OWNER et NEXT-ACTION ; sinon la forme courte reste une préparation.
++
++Le handoff réutilise les champs existants ; il ne crée ni statut, ni gate, ni nouveau schéma. Les champs non applicables sont marqués `N/A-JUSTIFIED`. Un run persistant utilise la projection `RUN_CARD` et son validateur. Une sortie courte qui ne peut pas fournir ces éléments reste une préparation, une clarification ou une décision non clôturée ; elle ne doit pas être présentée comme une preuve complète.
+ 
+ **Condition d’arrêt de lecture :** arrêter lorsque le mode, le risque, la route, la preuve, la limite, le propriétaire et la prochaine action sont connus. Charger un registre, une route ou un gate supplémentaire uniquement s’il peut modifier l’un de ces éléments.
+ 
+ ### Les quatre registres à ne pas mélanger
+ 
+-Pour naviguer dans ACTION, lire dans cet ordre : **route** pour savoir quoi faire ; **preuve** pour savoir ce qui a été observé et peut être affirmé ; **décision** pour savoir quoi changer, accepter, réserver ou retourner ; **persistance** pour rendre la décision, sa limite et sa prochaine preuve inspectables. Ces quatre registres structurent la trace ; ils ne créent ni états ni statuts supplémentaires.
++Pour naviguer dans ACTION : la **route** dit quoi faire ; puis quatre registres, dans cet ordre : **observation**, **interprétation**, **décision**, **persistance**. La preuve réunit observation et interprétation ; elle ne se confond pas avec la décision. Ces quatre registres structurent la trace ; ils ne créent ni états ni statuts supplémentaires.
+ 
+ | Registre | Question | Sortie minimale |
+ |---|---|---|
+@@ -104,10 +120,13 @@ CRITICAL-STATES: états, erreurs, permissions et récupération applicables
+ RESPONSIVE-RELATION: ce qui est préservé, recomposé ou remplacé selon le viewport
+ ACCESSIBILITY-BASIS: sémantique, nom, focus, clavier, contraste et alternative selon le risque
+ ROBUSTNESS-BASIS: contenu extrême, chargement, compatibilité, performance ou non-régression selon le risque
+-PROOF-SCOPE: surface, état, viewport, données, population ou runtime réellement observé
++EXPECTED-SCOPE: scope attendu — surface, état, viewport, données, population ou runtime à observer (avant build)
++OBSERVED-SCOPE: scope observé — surface, état, viewport, données, population ou runtime réellement observé (après observation)
+ ```
+ 
+-Ces lignes décrivent les décisions de construction et la couverture attendue ; elles ne créent pas un nouveau gate ni un formulaire universel. `ACTION` garde les preuves, les limites et le verdict ; `SAVOIR/CONTEXT` et `SAVOIR/TECH` sont chargés seulement lorsque leurs questions peuvent modifier le prochain artefact. Lorsque la capacité nécessaire manque, déclare `NOT-VERIFIED` ou l’issue appropriée au lieu de réduire silencieusement l’ambition de protection.
++La couverture de chaque exigence emploie `OBSERVED`, `NOT-VERIFIED` ou `N/A-JUSTIFIED` avec sa raison. `OBSERVED` n’est pas `PASS` : une observation peut être négative, et son résultat vit dans `EVALUATION_CASE` ou dans la trace. `NOT-OBSERVED` n’y est pas employé : il qualifie une conséquence de décision (`ACTION/STATUS`).
++
++Ces lignes décrivent les décisions de construction et la couverture attendue ; elles ne créent pas un nouveau gate ni un formulaire universel. `ACTION` garde les preuves, les limites et le verdict ; `SAVOIR/CONTEXT` et `SAVOIR/TECH` sont chargés seulement lorsque leurs questions peuvent changer la décision, la preuve ou la limite. Lorsque la capacité nécessaire manque, déclare `NOT-VERIFIED` ou l’issue appropriée au lieu de réduire silencieusement l’ambition de protection.
+ 
+ **Source de classification.** Le mode est classé par `DIRECTION/START`. ACTION ne reclassifie pas silencieusement une tâche parce qu’une capacité, un outil ou une preuve manque. Il déclare alors la limite, le statut et la prochaine preuve.
+ 
+@@ -129,6 +148,8 @@ Cette section définit le vocabulaire canonique d’ACTION. Les documents voisin
+ | `DECIDED` | Le verdict et le compromis sont connus. | La trace est persistée, clôturée, retournée ou escaladée. |
+ | `CLOSED` | Artefact et trace minimale sont persistés. | Une nouvelle demande ou une reprise `ITER` commence. |
+ 
++Le verdict global reste `null` avant `CHECKING` ; il est présent à `DECIDED` et `CLOSED`.
++
+ `CLOSED` décrit la persistance et la clôture de la trace ; il ne signifie ni réussite, ni preuve complète, ni acceptation globale. Il peut coexister avec une issue `RETURNED`, `EXPLORATORY` ou `BLOCKED`, et avec un verdict global `RETURN`, `EXPLORATORY` ou `SYSTEM-ESCALATION` lorsque la limite, la reprise ou l’escalade est conservée dans la trace.
+ 
+ ### Issues et exceptions
+@@ -137,11 +158,15 @@ Cette section définit le vocabulaire canonique d’ACTION. Les documents voisin
+ |---|---|
+ | `BLOCKED` | Une condition nécessaire manque ; l’owner et la prochaine preuve sont nommés. |
+ | `RETURNED` | Le run revient à une étape antérieure pour corriger un écart ou obtenir une preuve dans le même mode. |
+-| `RECLASSIFIED` | Le périmètre ou le risque impose un autre mode. |
++| `RECLASSIFIED` | Le périmètre ou le risque impose un autre mode ; la `RUN_CARD` nomme le mode cible et le run successeur (`closure.reclassification`). |
+ | `EXPLORATORY` | Un rendu observable existe, mais une preuve requise manque encore. |
+ | `FAIL-ASSUMED` | Un échec connu est explicitement journalisé et diffusé dans un périmètre limité et temporaire. |
+ | `ESCALATED` | Une décision, un owner, un droit, une capacité ou un risque dépasse le périmètre du run. |
+ 
++**Compatibilités.** Une issue non nulle interdit un verdict accepté. `LOST-IN-BUILD` interdit un verdict accepté. `PARTIALLY-HELD` interdit `ACCEPTED` ; `HELD-WITH-ACCEPTED-DIFFERENCE` est le statut d’une différence acceptée. Une ancre `transformed` est compatible avec tout verdict ; elle est requise pour l’acceptation.
++
++**Conséquence décisionnelle** (`DECISION-CHANGE`) : changée · confirmée · abandonnée · `N/A-JUSTIFIED` (aucune conséquence applicable, avec raison) · `NOT-OBSERVED` (conséquence attendue absente ; interdit `ACCEPTED`). À ne pas confondre avec `NOT-VERIFIED`, qui qualifie une preuve manquante ou un axe. Dans une `RUN_CARD`, ces valeurs sont `decision_change.outcome` : `CHANGED`, `CONFIRMED`, `ABANDONED`, `N/A-JUSTIFIED`, `NOT-OBSERVED`.
++
+ ### Règle de lecture des statuts
+ 
+ ACTION sépare strictement : **état du run**, **issue**, **verdict V/U/A/T**, **statut de direction** et **verdict global**. Il n’existe pas de plan de « maturité » à renseigner par défaut.
+@@ -197,7 +222,7 @@ Le mode est classé dans `DIRECTION/START`. Le type de tâche et son blast radiu
+ | **ITER** | Direction retrouvable, diff, non-régression du périmètre, Gate A applicable, Gate B du risque touché et Gate C seulement si le craft change. |
+ | **STANDARD** | JTBD, arbitrage, hiérarchie, typographie, états pertinents, Gates A et B ciblés ; ancre ou asset seulement si le risque le requiert. |
+ | **DIRECTION** | Alternative située lorsque nécessaire, ancre utile, cible, build, capture, comparaison, gates A/B/C, trace locale des assets pertinents, statut de direction et V/U/A/T. |
+-| **SYSTÈME** | Impact, consumers, décision, owner, migration, rollback, non-régression et entrée CHANGELOG. |
++| **SYSTÈME** | Impact, consumers, décision, owner, migration, rollback, non-régression et entrée CHANGELOG (dans une `RUN_CARD` acceptée : `closure.system_package`). |
+ 
+ Un gate non applicable est `N/A-JUSTIFIED`. Un gate nécessaire mais non vérifiable est `NOT-VERIFIED`, jamais `PASS` par défaut.
+ 
+@@ -215,7 +240,7 @@ Après une observation qui modifie, confirme ou abandonne effectivement une déc
+ DECISION-CHANGE — décision effectivement changée, confirmée ou abandonnée grâce au run.
+ ```
+ 
+-Si aucune décision ne change, la clôture utilise `N/A-JUSTIFIED` lorsque cela est justifié, avec la raison et la prochaine preuve éventuelle. Ne déclare jamais un changement avant qu’une observation ne l’ait rendu réel.
++Si aucune décision ne change, la clôture utilise `N/A-JUSTIFIED` lorsque cela est justifié, avec la raison et la prochaine preuve éventuelle ; `NOT-OBSERVED` lorsqu’une conséquence attendue n’a pas été observée. Ne déclare jamais un changement avant qu’une observation ne l’ait rendu réel. Dans une `RUN_CARD`, `DECISION-CHANGE` devient `decision_change`, dont `outcome` porte la triade de `ACTION/STATUS` ; `N/A-JUSTIFIED` y exige `reason`. `DECISION-CHANGE` et le creative close sont des champs « après observation » : ils restent absents tant que le run n’a pas atteint `CHECKING`.
+ 
+ ### Trace post-build de `DIRECTION/EXTERNAL-START`
+ 
+@@ -241,7 +266,7 @@ Pour réduire le slop procédural, préfère une proposition principale et une a
+ 
+ ## ACTION/FAST-PATH — preuve minimale sans rituel
+ 
+-Pour `LITE` et les petits `ITER`, arrête le protocole après quatre réponses : décision touchée, risque dominant, preuve la moins coûteuse et conséquence de la preuve.
++Pour `LITE` et les petits `ITER`, arrête le protocole après quatre réponses : décision touchée, risque dominant, preuve la moins coûteuse et conséquence de la preuve ; puis clôture avec la forme courte LITE (`ACTION/CLOSE-PACKAGE`, ligne LITE).
+ 
+ Si aucune décision ne peut changer, n’ajoute pas de capture, comparaison ou route uniquement pour remplir le paquet. Journalise `N/A-JUSTIFIED` lorsque la procédure ne peut rien modifier.
+ 
+@@ -263,19 +288,49 @@ Quel que soit son support, elle conserve au minimum :
+ | `MODE` | Route de run classée par `DIRECTION/START`. |
+ | `STATE` | `INTAKE`, `CLASSIFIED`, `SPECCED`, `BUILDING`, `CHECKING`, `DECIDED` ou `CLOSED`. |
+ | `ISSUE` | `BLOCKED`, `RETURNED`, `RECLASSIFIED`, `EXPLORATORY`, `FAIL-ASSUMED` ou `ESCALATED`, si applicable ; `null` si aucune issue n’est déclarée. |
+-| `VERDICT` | Verdict global uniquement dans la projection `RUN_CARD` : `ACCEPTED`, `ACCEPTED-WITH-RESERVATION`, `RETURN`, `RETURN-DIRECTION`, `EXPLORATORY` ou `SYSTEM-ESCALATION`. Les verdicts V/U/A/T restent dans leur registre d’axes et dans la trace de preuve ; ils ne sont jamais rangés dans ce champ. |
++| `VERDICT` | Verdict global uniquement dans la projection `RUN_CARD` : `ACCEPTED`, `ACCEPTED-WITH-RESERVATION`, `RETURN`, `RETURN-DIRECTION`, `EXPLORATORY` ou `SYSTEM-ESCALATION`. Les verdicts V/U/A/T restent dans leur registre d’axes ; une carte qui accepte les sérialise dans `closure.axes`, jamais dans ce champ. |
+ | `DIRECTION-STATUS` | Statut de fidélité de la direction : `HELD`, `HELD-WITH-ACCEPTED-DIFFERENCE`, `PARTIALLY-HELD` ou `LOST-IN-BUILD`, si applicable. |
+ | `DECISION` | Décision dominante à prendre ou à vérifier. |
+ | `DECISION-INTENT` | Décision que la procédure doit permettre de trancher. |
+ | `DECISION-CHANGE` | Décision effectivement changée, confirmée ou abandonnée ; `N/A-JUSTIFIED` si aucune conséquence n’est obtenue ou attendue. |
+-| `RISK` | Risque principal et impact potentiel. |
++| `RISK` | Risque principal et impact potentiel ; projection : `risk.level` et `risk.statement`. |
+ | `ARTIFACT` | Lien vers rendu, code, capture, test ou diff. |
+-| `TRACE-LOCATOR` | URL, chemin, ticket, commit ou identifiant qui rend la trace et ses artefacts réinspectables. Requis en `STANDARD`, `DIRECTION`, `SYSTÈME` et `ITER` persistant ; en `LITE`, l’artefact localement évident peut servir de locator. |
++| `TRACE-LOCATOR` | URL, chemin, ticket, commit ou identifiant qui rend la trace et ses artefacts réinspectables. Requis en `STANDARD`, `DIRECTION`, `SYSTÈME` et `ITER` (toute `RUN_CARD` sérialisée ; un `ITER` éphémère reste en mémoire locale, sans `RUN_CARD`) ; en `LITE`, l’artefact localement évident peut servir de locator. |
+ | `NEXT-PROOF` | Preuve suivante attendue. |
+ 
+ Dans la projection JSON contrôlable, les noms composés sont sérialisés en `snake_case` : `DATE / VERSION` devient `date_version`, `DIRECTION-STATUS` devient `direction_status`, `TRACE-LOCATOR` devient `trace_locator`, `NEXT-PROOF` devient `next_proof` et `CAPABILITY-PROFILE` devient `capability_profile`. Cette sérialisation ne change pas la signification canonique des champs.
+ 
+-La projection imbrique les champs de run sous `run_card` et regroupe l’état de clôture sous `closure` : `STATE` devient `closure.state`, `ISSUE` devient `closure.issue`, `VERDICT` devient `closure.verdict`, `DIRECTION-STATUS` devient `closure.direction_status` et les limites deviennent `closure.limitations`. `ARTIFACT` devient `artifact.locator` et son périmètre devient `artifact.scope` ; les observations et absences de preuve deviennent `proof.observed` et `proof.not_verified`. Les axes V/U/A/T qui ne sont pas sérialisés dans cette projection restent dans la trace complète référencée par `trace_locator` ou dans le paquet de preuve. Cette table de correspondance est descriptive : le schéma livré et le validateur restent les autorités de structure et de contrôle.
++**Protection critique.** Un risque `critical` porte une protection : contrôle, owner, scope, action en cas d’échec (`RETURNED`, `BLOCKED` ou `ESCALATED`), locator de preuve et **résultat** (`PASS`, `FAIL` ou `NOT-VERIFIED`). Une vérification absente n’est jamais rédigée comme accomplie : sans résultat observé, le résultat est `NOT-VERIFIED`, qui interdit `ACCEPTED`. En cas d’échec, l’issue suit l’action déclarée et aucun verdict n’est accepté. Un risque critique exclut `LITE` et `ITER` (`DIRECTION/START`).
++
++**Table de correspondance.** La projection imbrique les champs de run sous `run_card` et regroupe la clôture sous `closure`. La colonne Phase dit quand un champ est renseigné : `avant build`, `après observation` ou `clôture`. Cette table est descriptive : le schéma livré et le validateur restent les autorités de structure et de contrôle.
++
++| Champ canonique | Phase | Projection `RUN_CARD` | Sinon |
++|---|---|---|---|
++| MODE, DECISION, DECISION-INTENT, OWNER, ID, DATE / VERSION | avant build | `mode`, `decision`, `decision_intent`, `owner`, `id`, `date_version` | — |
++| RISK (risque principal et impact potentiel) | avant build | `risk.level`, `risk.statement` ; protection critique : `risk.critical_protection` | — |
++| AUTHORITY (portée, base, condition de reprise, décideur) | avant build | `owner` = décideur | portée, base et reprise : **trace**. Un reviewer (B3) n’est jamais le décideur par défaut |
++| SCOPE, ARTIFACT | avant build, puis clôture | `artifact.scope`, `artifact.locator`, `artifact.version` | — |
++| OBSERVATION | après observation | `proof.observed` | — |
++| METHOD | après observation | `proof.provenance.method` (+ `capability`, `observed_at`) | — |
++| PROOF / TRACE-LOCATOR | clôture | `trace_locator` | preuve détaillée : trace |
++| LIMIT / NOT-VERIFIED | clôture | `closure.limitations`, `proof.not_verified` ; axes : `closure.axes` | — |
++| STATE, ISSUE, VERDICT, DIRECTION-STATUS | chaque transition | `closure.state`, `.issue`, `.verdict`, `.direction_status` ; reclassement : `closure.reclassification` ; exception : `closure.exception` | — |
++| DECISION-CHANGE | après observation | `decision_change` (`outcome`, `reason`) | — |
++| NEXT-PROOF | clôture | `next_proof` | — |
++| NEXT-ACTION | clôture | DIRECTION : `creative_close.next_polish_action` ; sinon `next_proof` lorsque l’action suivante est une preuve | **hors projection : trace** |
++| EXIT-CONDITION | clôture | `closure.reservations[].exit_condition` lorsqu’une réserve existe | **hors projection : trace** |
++| VISUAL_TARGET : thèse, anti-direction, premier objet, périmètre, contrainte | avant build | `direction.thesis`, `.anti_direction`, `.first_object`, `.scope`, `.constraint` | — |
++| VISUAL_TARGET : ancre | avant build | `anchors[]` (dont `type` et `date`) | — |
++| VISUAL_TARGET : objet de preuve | avant build → après observation | `next_proof` avant, `proof.observed` après | — |
++| VISUAL_TARGET : matière / asset | avant build | droits : `artifact.rights_status` | route, cadrage, fallback : **trace** |
++| VISUAL_TARGET : conséquence observable, silhouette, relations de plans, opération dominante, typographie, résolution initiale | avant build | — | **hors projection : trace** |
++| Enjeu identitaire, calibration | avant build, puis clôture | `direction.identity_stake`, `direction.calibration` | — |
++| Paquet d’alternative (`DIRECTION/VISUAL_TARGET`) | avant build | — | **hors projection : trace** |
++| Creative close, B1b, paquet SYSTÈME, profil de style | clôture | `creative_close.*`, `closure.b1b`, `closure.system_package`, `profile_decision` | — |
++| Sources, statut de source | avant build | `sources[]` (section canonique ou locator) | statut vérifié / non revu : **trace** |
++| Manifeste externe | clôture | résolu par `trace_locator` | — |
++
++**Règle.** Un champ hors projection n’est jamais glissé dans un champ voisin (par exemple NEXT-ACTION dans `limitations`) ; il reste dans la trace, que `trace_locator` rend retrouvable.
+ 
+ `STATUS` peut rester lisible comme alias d’archive ou d’affichage pour compatibilité avec des traces existantes. Il est interdit dans une nouvelle `RUN_CARD` comme champ unificateur : les nouveaux runs utilisent séparément `STATE`, `ISSUE`, `VERDICT` et `DIRECTION-STATUS`. Aucun alias ne remplace cette séparation.
+ 
+@@ -283,6 +338,8 @@ La projection imbrique les champs de run sous `run_card` et regroupe l’état d
+ 
+ Quand une conclusion dépend d’un moyen d’observation, la `RUN_CARD` ajoute un `CAPABILITY-PROFILE` concis : **disponible**, **indisponible** ou **non requis**. Déclare seulement les capacités pertinentes au risque : artefact textuel, inspection DOM/CSS, navigateur/capture, calcul de contraste, clavier/AT, participant/tâche, runtime/données réelles. Toute capacité qui soutient un claim ajoute sa `BASIS` : résultat d’outil, environnement attesté, source utilisateur ou déclaration non attestée.
+ 
++Dans la `RUN_CARD`, chaque `basis` est typée : `capability`, `kind` (`tool_result`, `attested_environment`, `user_source` ou `unattested_declaration`) et `detail`. Pour un verdict accepté, `proof.provenance.capability` nomme la capacité qui soutient l’observation : elle figure parmi les capacités disponibles, et sa basis n’est pas une déclaration non attestée.
++
+ Ce profil n’est ni un score, ni un gate, ni une preuve. Il sert à empêcher qu’une vérification absente soit rédigée comme accomplie. Une `BASIS` déclarative ne vaut pas attestation ; elle interdit seulement de présenter la capacité comme observée. Une capacité indisponible conduit à la preuve disponible la plus faible ou à `NOT-VERIFIED`; elle ne réduit jamais silencieusement le mode, le risque ou le verdict requis.
+ 
+ ### Mode agent seul et preuve dégradée
+@@ -303,6 +360,9 @@ Une auto-comparaison B1b peut soutenir une correction de craft, mais elle ne sat
+ Une `EXECUTION-SNAPSHOT` peut être construite pour démarrer, déléguer ou reprendre un run. C’est une vue locale et éphémère de la `RUN_CARD` et des sections canoniques ; elle ne remplace ni ACTION, ni les sources qu’elle cite. Elle expire lorsqu’un mode, un risque, une capacité ou un artefact change.
+ 
+ ```text
++RUN-ID — identifiant du run
++SOURCE-VERSION / ARTIFACT-VERSION — version des sources chargées et de l’artefact
++GENERATED-AT — instant de génération de la snapshot
+ MODE — valeur classée par DIRECTION/START
+ DECISION / RISK — choix à trancher et coût d’erreur
+ SOURCES — sections canoniques réellement nécessaires
+@@ -314,7 +374,7 @@ LIMIT — ce que la trace ne permet pas d’affirmer
+ TRACE-LOCATOR / NEXT-PROOF — reprise et prochaine vérification
+ ```
+ 
+-Une snapshot ne crée aucun statut, owner, route ou claim. Pour une décision ouverte, elle conserve les alternatives et organise la preuve suivante ; elle ne choisit pas une variante sans artefact applicable.
++Une snapshot est ainsi datable. Elle ne crée aucun statut, owner, route ou claim. Pour une décision ouverte, elle conserve les alternatives et organise la preuve suivante ; elle ne choisit pas une variante sans artefact applicable.
+ 
+ ### Projection machine-readable optionnelle
+ 
+@@ -328,6 +388,10 @@ Les valeurs `state`, `issue`, `verdict`, `gate`, `axis`, `decision_change`, `NOT
+ 
+ La validation JSON, la validation CLI, les fixtures, la compilation, le build et l’intégrité d’une archive établissent seulement que la projection, le package ou l’artefact de distribution respecte les contrôles exécutés. Ils ne prouvent ni que l’artefact est réellement implémenté dans son runtime, ni son usage, ni son accessibilité exécutée, ni sa performance, ni sa qualité visuelle, ni la préférence humaine. Une `RUN_CARD` valide peut donc rester `NOT-VERIFIED` sur un axe ou porter une limitation substantielle.
+ 
++**Ce qu’atteste une `RUN_CARD` validée :** la forme de la projection et les invariants de la liste close (états, issues, verdicts et leur temps, axes, protection critique, exception, capacité et version de la preuve, réserves, droits déclarés, ancres, conséquence décisionnelle, reclassement, paquet SYSTÈME, B1b, trace par mode). **Ce qu’elle n’atteste pas (forme seule) :** que les observations ont réellement eu lieu ; la justesse des jugements V/U/A/T ; l’étendue réelle d’un claim (tâche utilisateur, technologie d’assistance, périmètre de diffusion) ; l’identité de la personne qui autorise ; la réalité des droits, licences et données ; la qualité perceptuelle. Par mode : pour `LITE`, `ITER` et `STANDARD`, le paquet de clôture vit dans la trace et la machine ne le vérifie pas ; pour tous les modes, elle ne vérifie ni que les consumers listés sont tous les consumers réels, ni que la baseline montre ce qu’elle prétend, ni que la décision couverte par une paire équivalente est bien la même. Ces points restent à la trace, à la revue et à l’owner.
++
++Le **profil strict** applique les mêmes exigences par mode que la validation normale. Il ajoute le rejet des placeholders et des hôtes de démonstration, et l’existence des locators locaux, résolus depuis le dossier de la carte.
++
+ Pour chaque claim important, séparer explicitement : **cible de conformité** ou décision visée ; **méthode** ; **scope et runtime observés** ; **résultat** ; **limite** ; **prochaine preuve**. Si l’un de ces éléments manque, ne l’inférer pas depuis la validation de structure : conserver le verdict, l’issue ou `NOT-VERIFIED` approprié selon le contrat existant. La projection machine transporte ces distinctions lorsqu’elle possède les champs correspondants ; les dimensions non sérialisées restent dans la trace complète, le ticket, le manifeste ou le paquet de preuve cité.
+ 
+ ---
+@@ -348,7 +412,7 @@ Les blocs `RUN-*` donnent l’entrée, la sortie et le contrôle minimal de chaq
+ 
+ ### `ACTION/RUN-ITER`
+ 
+-**Entrée.** Direction, composants, tokens et périmètre précédent retrouvables dans la `RUN_CARD`, le manifeste ou le projet.
++**Entrée.** Direction, composants, tokens et périmètre précédent retrouvables dans la `RUN_CARD`, le manifeste ou le projet. Dans une `RUN_CARD`, le rappel de direction est porté par `direction.thesis` et la trace par `trace_locator`.
+ 
+ **Faire.** Rappeler la direction en une phrase, déclarer `DECISION-INTENT`, appliquer le delta et vérifier la non-régression pertinente : visuelle, fonctionnelle, responsive, typographique ou systémique.
+ 
+@@ -382,7 +446,7 @@ Les blocs `RUN-*` donnent l’entrée, la sortie et le contrôle minimal de chaq
+ 
+ **Faire.** Cartographier l’impact et les consumers. Nommer la décision, l’owner, la migration, le rollback et les tests de non-régression. Consulter `CHANGELOG.md` avant adoption, pilotage ou dépréciation.
+ 
+-**Sortie.** Décision de système, plan de migration, preuve de non-régression, réserves, verdict et entrée CHANGELOG.
++**Sortie.** Décision de système, plan de migration, preuve de non-régression, réserves, verdict et entrée CHANGELOG. Dans une `RUN_CARD` acceptée, ces éléments forment `closure.system_package` : impact, consumers, owner, migration, rollback, non-régression (claim et baseline : locator, version, état) et référence CHANGELOG.
+ 
+ **Clôture.** Passer à `DECIDED`, puis `CLOSED` lorsque consumers et réserves sont traçables. Passer à `ESCALATED` si owner, droit, décision externe ou risque externe manque.
+ 
+@@ -392,23 +456,25 @@ Les blocs `RUN-*` donnent l’entrée, la sortie et le contrôle minimal de chaq
+ 
+ Livre d’abord l’artefact ou le lien de rendu. Enregistre ensuite le paquet minimal correspondant dans la ligne de run, la `RUN_CARD`, le ticket ou le manifeste.
+ 
+-| Mode | Paquet minimal |
+-|---|---|
+-| **LITE** | Artefact touché, risque, V/U/A/T touchés, verdict, réserve ou prochaine action, et `DECISION-CHANGE`/`N/A-JUSTIFIED`. |
+-| **ITER** | Direction rappelée, diff, non-régression, verdict touché, risque restant, prochaine action et décision. |
+-| **STANDARD** | Artefact, hiérarchie, typographie, états pertinents, V/U/A/T, verdict, risque restant et prochaine action. |
+-| **DIRECTION** | Artefact, direction, ancre/spec, capture, écarts, revue créative, creative close, gates A/B/C, V/U/A/T, statut de direction, verdict et prochaine preuve. |
+-| **SYSTÈME** | Décision, impact, consumers, owner, migration/rollback, non-régression, verdict et entrée CHANGELOG. |
++| Mode | Paquet minimal | Contrôle machine |
++|---|---|---|
++| **LITE** | Artefact touché, risque, V/U/A/T touchés, verdict, réserve ou prochaine action, et `DECISION-CHANGE`/`N/A-JUSTIFIED`. | Forme seule, dans la trace. |
++| **ITER** | Direction rappelée, diff, non-régression, verdict touché, risque restant, prochaine action et décision. | Forme seule, dans la trace. |
++| **STANDARD** | Artefact, hiérarchie, typographie, états pertinents, V/U/A/T, verdict, risque restant et prochaine action. | Forme seule, dans la trace. |
++| **DIRECTION** | Artefact, direction, ancre/spec, capture, écarts, revue créative, creative close, gates A/B/C, V/U/A/T, statut de direction, verdict et prochaine preuve. | Invariants DIRECTION et B1b (`closure.b1b`). |
++| **SYSTÈME** | Décision, impact, consumers, owner, migration/rollback, non-régression, verdict et entrée CHANGELOG. | `closure.system_package`. |
++
++Un verdict vert ne certifie que ce que la liste close contrôle (voir la frontière de validation d’`ACTION/RUN_CARD`).
+ 
+ Un paquet incomplet ne reçoit pas de `PASS` implicite. Utilise `NOT-VERIFIED`, `EXPLORATORY`, `RETURNED`, `FAIL-ASSUMED` ou `ESCALATED` selon le cas.
+ 
+-Pour un run `DIRECTION`, le paquet comprend aussi un **creative close** bref : présence effectivement produite, signature ou élément spécifique, détail ou état révélant le niveau de craft, défaut dominant restant et prochaine action de polish. Dans une `RUN_CARD` structurée, ces éléments sont transportés par `creative_close.presence`, `creative_close.signature`, `creative_close.craft_detail`, `creative_close.dominant_defect` et `creative_close.next_polish_action`. Ce close cite un artefact ou une observation ; il ne devient ni verdict esthétique, ni score, ni preuve d’usage. Une `RUN_CARD` DIRECTION clôturée qui omet ce bloc est incomplète.
++Pour un run `DIRECTION`, le paquet comprend aussi un **creative close** bref : présence effectivement produite, signature ou élément spécifique, détail ou état révélant le niveau de craft, défaut dominant restant et prochaine action de polish. Dans une `RUN_CARD` structurée, ces éléments sont transportés par `creative_close.presence`, `creative_close.signature`, `creative_close.craft_detail`, `creative_close.dominant_defect` et `creative_close.next_polish_action`. `STOP — [raison]` est une valeur valide de `next_polish_action` : aucune action de polish n’est alors requise. Ce close cite un artefact ou une observation ; il ne devient ni verdict esthétique, ni score, ni preuve d’usage. Une `RUN_CARD` DIRECTION clôturée qui omet ce bloc est incomplète.
+ 
+ ### Fraîcheur de la preuve
+ 
+ Chaque verdict est rattaché à l’artefact, à la version, au scope et à l’état réellement observés. Après un changement substantiel qui touche l’axe couvert, ce verdict revient à `NOT-VERIFIED` jusqu’à réinspection, nouvelle preuve ou justification explicite que la modification est hors scope. Les axes non touchés conservent leur dernière preuve valide.
+ 
+-Une preuve reste réutilisable lorsque l’artefact a seulement été déplacé ou relocalisé et que `TRACE-LOCATOR` permet de constater son identité et son absence de changement pertinent. Une capture, un test, une revue ou un avis portant sur une version antérieure ne peut jamais être cité comme preuve de la version livrée sans ce contrôle de fraîcheur.
++Une preuve reste réutilisable lorsque l’artefact a seulement été déplacé ou relocalisé et que `TRACE-LOCATOR` permet de constater son identité et son absence de changement pertinent. Une capture, un test, une revue ou un avis portant sur une version antérieure ne peut jamais être cité comme preuve de la version livrée sans ce contrôle de fraîcheur. Dans une `RUN_CARD` acceptée, `artifact.version` est égal à `proof.provenance.artifact_version`, et `observed_at` est une date ISO ; un simple déplacement garde la même version.
+ 
+ ### Cycle de vie des réserves
+ 
+@@ -424,19 +490,19 @@ REVIEW-DATE
+ EXIT-CONDITION
+ ```
+ 
+-Cette structure s’applique à `PASS-WITH-RESERVATION`, `ACCEPTED-WITH-RESERVATION`, `REMAINING-RISK` et `FAIL-ASSUMED`.
++Cette structure s’applique à `PASS-WITH-RESERVATION`, `ACCEPTED-WITH-RESERVATION`, `REMAINING-RISK` et `FAIL-ASSUMED`. Dans une `RUN_CARD`, chaque réserve est un élément de `closure.reservations[]` portant ces sept attributs (`owner`, `scope`, `date_version`, `impact`, `next_proof`, `review_date` en date ISO, `exit_condition`), sans placeholder ; `ACCEPTED-WITH-RESERVATION` en exige au moins une. `FAIL-ASSUMED` utilise `closure.exception` (`ACTION/OVERRIDE`).
+ 
+ ### Responsabilité, droits et confidentialité
+ 
+ Chaque run conserve un **owner de décision finale**, même lorsque plusieurs personnes, agents ou prestataires ont contribué à l’artefact, à la direction ou à la preuve. L’owner répond de la décision et de la prochaine action ; il ne peut pas déléguer silencieusement un risque critique au protocole.
+ 
+-Tout asset fourni, curaté, généré ou transformé déclare, lorsque le contexte le requiert, sa provenance, son statut d’autorisation, sa portée d’utilisation, ses restrictions et son fallback. Une provenance tracée ne vaut pas licence d’utilisation. En cas de doute sur un droit, une ressemblance, une marque, une donnée personnelle ou un contenu client, la sortie reste limitée, bloquée ou escaladée selon le risque ; elle ne devient pas acceptable par simple mention dans la trace.
++Tout asset fourni, curaté, généré ou transformé déclare, lorsque le contexte le requiert, sa provenance, son statut d’autorisation, sa portée d’utilisation, ses restrictions et son fallback. Une provenance tracée ne vaut pas licence d’utilisation. En cas de doute sur un droit, une ressemblance, une marque, une donnée personnelle ou un contenu client, la sortie reste limitée, bloquée ou escaladée selon le risque ; elle ne devient pas acceptable par simple mention dans la trace. Dans une `RUN_CARD` `DIRECTION`, `artifact.rights_status` déclare `not_applicable`, `cleared`, `unknown` ou `restricted` ; en cas de doute (`unknown`), pas d’`ACCEPTED`.
+ 
+ Les données sensibles, captures internes, informations personnelles et artefacts confidentiels ne sont utilisés que dans le périmètre autorisé. Si un outil, un agent ou un export ne permet pas de garantir ce périmètre, déclare la limitation et n’envoie pas la donnée vers ce canal. `NOT-VERIFIED` décrit une preuve manquante ; il ne constitue pas une autorisation de partager un contenu sensible.
+ 
+ ### Condition d’arrêt du polish
+ 
+-Le polish s’arrête lorsque le défaut dominant identifié est corrigé ou accepté par l’owner, que les risques applicables sont couverts ou explicitement réservés, et qu’une itération supplémentaire ne promet pas de modifier une relation visible, une tâche, une preuve ou une contrainte importante. Si le défaut persiste mais qu’une nouvelle action est disproportionnée, conserve la réserve avec owner, impact, prochaine preuve et condition de sortie. Ne poursuis pas le polish pour remplir un quota, ajouter des effets ou atteindre une perfection abstraite.
++Le polish s’arrête lorsque le défaut dominant identifié est corrigé ou accepté par l’owner, que les risques applicables sont couverts ou explicitement réservés, et qu’une itération supplémentaire ne promet pas de modifier une relation visible, une tâche, une preuve ou une contrainte importante. Si le défaut persiste mais qu’une nouvelle action est disproportionnée, conserve la réserve avec owner, impact, prochaine preuve et condition de sortie. Ne poursuis pas le polish pour remplir un quota, ajouter des effets ou atteindre une perfection abstraite. Quand le polish s’arrête, `next_polish_action` vaut `STOP — [raison]`.
+ 
+ ---
+ 
+@@ -482,6 +548,8 @@ Une ancre est utile seulement si elle apporte une décision structurelle ou perc
+ 
+ Sans ancre utile et spec exploitable, les axes concernés sont `NOT-VERIFIED`. Le run devient `RETURNED`, `EXPLORATORY`, `FAIL-ASSUMED` ou `ESCALATED` selon le périmètre.
+ 
++Dans une `RUN_CARD`, chaque ancre porte son `type` (`generated`, `observed` ou `provided`) et une date ISO ; `direction.identity_stake` déclare l’enjeu identitaire (`high` ou `normal`). Lorsque l’enjeu est élevé, que toutes les ancres sont générées et que la direction est tenue, `direction.calibration` nomme sa base : `real_constraint`, ou `generated_only_reserved`, qui interdit `ACCEPTED`. Une revue indépendante n’est pas une base de calibration. Une ancre manquante se sérialise par l’issue — ancres vides, issue non nulle, aucun verdict accepté —, jamais par une ancre inventée.
++
+ ### 5. Sourcer et tracer
+ 
+ Trace dans la `RUN_CARD` ou le manifeste les références, requêtes, images ou assets réellement observés, avec leur rôle et leur statut. `BIBLIOTHEQUE.md` fournit des structures de décision ; il ne devient ni ancre visuelle, ni source d’asset, ni preuve de comparaison.
+@@ -502,15 +570,15 @@ Si plusieurs solutions restent plausibles, nomme ce qui distingue le choix reten
+ 
+ En session interactive, demande une validation avant le build lorsque le périmètre n’est pas couvert par une autonomie explicite. L’autonomie doit nommer le périmètre `DIRECTION` couvert. Une nouvelle marque, un nouveau public, une nouvelle surface identitaire autonome ou une nouvelle hypothèse déclenche un nouveau checkpoint, sauf instruction explicite couvrant ce périmètre.
+ 
+-Si aucun regard externe n’est disponible, déclare cette absence dans la `RUN_CARD` et compense par capture, comparaison, réserve et prochaine preuve ; ne transforme pas l’absence en validation implicite.
++Si l’autorisation manque, c’est-à-dire si le checkpoint n’est pas couvert par une autonomie explicite, n’engage pas le build : applique `ACTION/AUTHORITY` (exploratoire, retourné ou escaladé). L’absence de regard externe est une autre question : déclare-la et compense-la par capture, comparaison, réserve et prochaine preuve ; cette compensation n’autorise rien.
+ 
+ ### 8. Vérifier le rendu réel
+ 
+-Après le build, capture le rendu et compare-le à la spec. Pour chaque écart significatif, nomme l’observation, la cause probable, l’effet sur la tâche ou la direction et l’issue : `CORRECTED`, `ACCEPTED-DIFFERENCE` ou `REMAINING-RISK`. Inspecte en priorité la structure, la hiérarchie, la typographie, la composition, la spécificité, la qualité des assets, les composants authored, les états et la cohérence de finition ; ne corrige pas un défaut structurel par un effet décoratif terminal.
++Après le build, capture le rendu et compare-le à la spec. Pour chaque écart significatif, nomme l’observation, la cause probable, l’effet sur la tâche ou la direction et l’issue : `CORRECTED`, `ACCEPTED-DIFFERENCE` ou `REMAINING-RISK`. Ces valeurs sont des résultats locaux de comparaison, pas des statuts : `CORRECTED` se traduit par une conséquence décisionnelle `CHANGED` avec la nouvelle preuve ; `ACCEPTED-DIFFERENCE`, par `HELD-WITH-ACCEPTED-DIFFERENCE` et une réserve ; `REMAINING-RISK`, par une réserve. Inspecte en priorité la structure, la hiérarchie, la typographie, la composition, la spécificité, la qualité des assets, les composants authored, les états et la cohérence de finition ; ne corrige pas un défaut structurel par un effet décoratif terminal.
+ 
+ ### Passe créative et polish
+ 
+-Lorsque la qualité perceptuelle est une décision du run, effectue après la première scène une revue créative courte, puis une repasse ciblée avant la clôture. La revue ne produit ni score esthétique ni statut concurrent ; elle identifie ce qui est présent, ce qui porte le point de vue, ce qui est spécifique au produit, ce qui transforme réellement une référence, ce qui reste générique, ce qui manque de résolution et quel geste de polish modifiera le plus le rendu. Elle vérifie aussi si le premier rendu atteignait déjà la qualité attendue du mode, ou si la boucle est en train de réparer une préparation insuffisante.
++Lorsque la qualité perceptuelle est une décision du run, effectue après la première scène la revue créative définie par `SAVOIR/CRAFT/CFT-00` (Creative Quality Review), puis une repasse ciblée avant la clôture. ACTION en fixe le moment et la trace ; la revue ne produit ni score esthétique ni statut concurrent. Elle vérifie aussi si le premier rendu atteignait déjà la qualité attendue du mode, ou si la boucle est en train de réparer une préparation insuffisante.
+ 
+ La repasse examine les rapports entre masses, vides, échelles, rythme, typographie, matière, lumière ou profondeur, contenu, objet de preuve, états, responsive, transitions et détails de finition. Elle corrige d’abord le défaut dominant. Ajouter des effets, des variantes ou des assets sans améliorer une relation observable ne constitue pas une passe de polish.
+ 
+@@ -524,9 +592,23 @@ Retourne à la direction, à l’ancre, à la spec ou au build lorsque l’écar
+ 
+ ---
+ 
+-## ACTION/STRUCTURED-PROOF — contrats avant build
++## ACTION/STRUCTURED-PROOF — contrats de décision et leur preuve
+ 
+-Ces artefacts rendent les décisions inspectables. Ils sont obligatoires seulement lorsque le mode ou le risque les déclenche.
++Ces artefacts rendent les décisions inspectables. Chacun n’est dû que si son déclencheur est actif ; sinon il est `N/A-JUSTIFIED`, avec sa raison. Zéro contrat est valide lorsqu’aucun déclencheur n’est actif.
++
++| Contrat | Déclencheur |
++|---|---|
++| Carte de hiérarchie | `STANDARD` ou `DIRECTION` ; tout run dont la hiérarchie peut changer la décision |
++| Preuve U structurée | U dominant |
++| Partition typographique | Famille, registre, langue, données ou hiérarchie typographique pouvant changer la décision |
++| Fiche d’asset directeur | Asset ou absence d’asset portant une décision perceptible (`DIRECTION/VISUAL_TARGET`) |
++| Contrat de composant partagé | Pattern réutilisable, composant critique ou partagé : défini dans `BIBLIOTHEQUE/COMPONENTS` |
++| Motion ou scène spatiale | Motion non triviale, animation interactive, scène 3D |
++| `CREATIVE_DIRECTION_SET` | `DIRECTION` à décision ouverte avec alternative plausible |
++| `UI_UX_REALITY_PACK` | Surface UI/UX nouvelle ou substantiellement modifiée (`ACTION/UI-UX-REALITY`) |
++| `EVALUATION_CASE` | Pilote ou série de runs (`ACTION/CLOSE-EXIT-CHECK`, mesure expérimentale) |
++
++**Règle de phase.** Les lignes de preuve sont marquées « après observation ». Avant build, elles restent vides ou `NOT-VERIFIED`, jamais préremplies par l’attendu. Après build, la cible est conservée et l’observation s’ajoute à côté.
+ 
+ ### Carte de hiérarchie
+ 
+@@ -547,17 +629,17 @@ USER / PROFILE
+ TASK
+ CONTEXT
+ SUCCESS-CRITERION
+-OBSERVATION / MEASURE
+-SATISFACTION-OR-QUALITATIVE-RETURN
+-LIMIT
+-NEXT-PROOF
++OBSERVATION / MEASURE — après observation
++SATISFACTION-OR-QUALITATIVE-RETURN — après observation
++LIMIT — après observation
++NEXT-PROOF — après observation
+ ```
+ 
+ Une capture ou une inspection experte peut formuler un risque U ; elle ne doit pas être nommée test d’utilisabilité si aucune tâche représentative n’a été exécutée avec un utilisateur ou un profil concerné.
+ 
+ ### Partition typographique
+ 
+-La partition complète est requise lorsque famille, registre, langue, données ou hiérarchie typographique peuvent changer la décision. Sinon, le système existant et la raison de sa conservation suffisent.
++La partition est requise lorsque famille, registre, langue, données ou hiérarchie typographique peuvent changer la décision ; licence, glyphes nécessaires et coût de chargement sont vérifiés selon `SAVOIR/TYPE`. Sinon, le système existant et la raison de sa conservation suffisent.
+ 
+ | Rôle | Fonction | Famille / registre | Mesure / interligne | Poids / axe | Contextes | Fallback | Justification |
+ |---|---|---|---|---|---|---|---|
+@@ -579,15 +661,15 @@ La partition vérifie aussi reflow, zoom et ajustements d’espacement utilisate
+ - **Usage et intégration :** informatif, décoratif ou mixte ; relation au type, cadrage, grade, masque, composition ou donnée ; alt, description longue ou justification décorative.
+ - **Desktop et mobile :** ratio, crop, focal point, zone sûre, suppression ou alternative.
+ - **Format, poids cible, fallback, mouvement et reduced motion :**
+-- **Preuve V/U/A/T et contre-indication :**
++- **Preuve V/U/A/T (après observation) et contre-indication :**
+ 
+ La provenance informe l’origine ; elle ne constitue pas une autorisation de réemploi. Un droit inconnu ou non autorisé déclenche `RETURNED`, `ESCALATED` ou le statut prévu par le contexte avant diffusion.
+ 
+ ### Contrat de composant et baseline
+ 
+-Pour un nouveau pattern réutilisable ou un composant critique, documente : intention, non-usage, sémantique, clavier, focus, anatomie, slots, tokens, modes, variants, états pertinents, responsive, stories ou captures de baseline.
++Pour un nouveau pattern réutilisable, un composant critique ou un composant partagé, le contrat de structure est défini par `BIBLIOTHEQUE/COMPONENTS` (contrat de composant partagé). ACTION en garde la baseline comme preuve, la migration et le verdict.
+ 
+-Une baseline visuelle est une image versionnée d’un état réel. Elle signale un écart ; elle ne produit pas automatiquement un `PASS`.
++Une baseline visuelle est une image versionnée d’un état réel. Elle signale un écart ; elle ne produit pas automatiquement un `PASS`. Dans un paquet SYSTÈME, la baseline de non-régression est `system_package.non_regression.baseline` : locator, version et état.
+ 
+ Une différence est une régression seulement si elle s’écarte de l’intention, du comportement attendu ou du contrat de compatibilité. Une différence intentionnelle doit être reliée à une décision et à une preuve ; elle ne doit pas être supprimée comme régression visuelle par défaut.
+ 
+@@ -652,7 +734,7 @@ Pour le web, utilise WCAG 2.2 comme base normative actuelle lorsque le projet n
+ 
+ Un `PASS` décrit la preuve obtenue par la méthode, le médium et le périmètre déclarés. Il ne devient pas un `PASS` global par glissement. Ce qui n’existe pas dans le médium est `N/A-JUSTIFIED` ; ce qui le remplace est testé. Une preuve web indisponible n’est jamais simulée : elle devient `NOT-VERIFIED` avec `NEXT-PROOF`, ou est traduite en équivalent du médium.
+ 
+-Pour un verdict global `ACCEPTED` ou `ACCEPTED-WITH-RESERVATION`, la `RUN_CARD` doit rattacher la preuve observée à une provenance minimale : `artifact_locator`, `artifact_version`, `method` et `observed_at`. Cette provenance établit où, sur quelle version, par quelle méthode et à quel moment l’observation a été obtenue ; elle ne prouve pas à elle seule la véracité de l’artefact, la qualité du design ou la réussite d’usage. Si la provenance ne peut pas être établie, le verdict reste non accepté ou la limite est explicitement déclarée selon le mode et le risque.
++Pour un verdict global `ACCEPTED` ou `ACCEPTED-WITH-RESERVATION`, la `RUN_CARD` doit rattacher la preuve observée à une provenance minimale : `artifact_locator`, `artifact_version`, `method` et `observed_at`. Cette provenance établit où, sur quelle version, par quelle méthode et à quel moment l’observation a été obtenue ; elle ne prouve pas à elle seule la véracité de l’artefact, la qualité du design ou la réussite d’usage. Si la provenance ne peut pas être établie, le verdict reste non accepté.
+ 
+ ### Adéquation des preuves
+ 
+@@ -674,7 +756,7 @@ Pour un verdict global `ACCEPTED` ou `ACCEPTED-WITH-RESERVATION`, la `RUN_CARD`
+ | États pertinents | Interaction, sélection, contenu et erreurs sont vérifiés ; événement, conséquence et action suivante sont explicites. | État critique absent, implicite ou dépendant de la couleur seule. |
+ | Contenu honnête | Pas de faux contenu, lorem ou promesse non étayée présenté comme réel. | Contenu de remplissage trompeur. |
+ | Stabilité média | Dimensions, fallback et chargement évitent les déplacements pertinents. | Instabilité visible ou espace non réservé. |
+-| Motion réduite | Alternative sans mouvement prévue lorsque la motion existe. | Motion imposée ou alternative absente. |
++| Motion réduite | L’alternative sans mouvement est implémentée et vérifiée préférence activée, dans le runtime déclaré. Sans motion : `N/A-JUSTIFIED`. | Motion imposée ou alternative absente ; alternative seulement dessinée ou annoncée : `NOT-VERIFIED`. |
+ | Cibles d’interaction | Taille adaptée au device et au contexte selon la politique du projet. | Cible trop petite sans alternative ni justification. |
+ | Information non chromatique | L’information essentielle ne dépend pas de la couleur seule. | Statut ou action incompréhensible sans couleur. |
+ | Focus non masqué | Le composant recevant le focus reste visible selon le contexte applicable. | Focus masqué par contenu ou interface auteur. |
+@@ -713,6 +795,8 @@ Conserver et comparer la capture suivante. La trace nomme le changement, sa dire
+ 
+ `N/A-JUSTIFIED` n’est recevable que si aucune décision principale éditable n’existe dans le périmètre, ou si une paire équivalente, toujours valide après le dernier changement substantiel, couvre déjà exactement la même décision. La justification lie l’artefact concerné, l’owner et la prochaine preuve. Une thèse encore incertaine, un élément producteur introuvable ou une paire qui n’autorise aucune conclusion maintiennent le run en `EXPLORATORY` ; ils ne produisent pas un `PASS` indirect.
+ 
++Dans une `RUN_CARD`, B1b est `closure.b1b`. Statut `DONE` : `pair` avec `before_locator` et `after_locator` (deux captures distinctes), `decision` et `outcome` (`confirmed`, `modified` ou `abandoned`). Statut `N/A-JUSTIFIED` : `reason` prend l’une des deux seules valeurs admises, `no_editable_decision` ou `equivalent_pair_valid` (avec `pair_ref`), plus `covered_decision`, `owner` et `next_proof`. Le validateur exige `closure.b1b` pour une surface `DIRECTION` acceptée avec V en `PASS` ou `PASS-WITH-RESERVATION` ; il ne vérifie pas que la décision couverte par une paire équivalente est bien la même.
++
+ B1b n’est ni un sixième absolu, ni un score esthétique, ni un quota universel. Hors de son scope, il ne s’applique pas. Dans son scope, il ne peut être omis sans la sortie matérielle ci-dessus.
+ 
+ Si l’équipe accepte consciemment l’écart narratif entre la thèse déclarée et le récit implicite de la capture, ne crée pas une nouvelle `ISSUE`. Utilise le statut de direction `HELD-WITH-ACCEPTED-DIFFERENCE` et, lorsque le périmètre permet la clôture, le verdict global `ACCEPTED-WITH-RESERVATION`. La trace doit nommer : `NARRATIVE-DIFFERENCE`, `REASON`, `PRODUCT-OR-PUBLIC-CONSTRAINT`, `OWNER`, `NEXT-PROOF` et `EXIT-CONDITION`. Cette issue n’est acceptable que si l’écart est explicite, assumé, compatible avec U/A/T et révisable ; elle ne convertit pas une preuve manquante en acceptation.
+@@ -734,7 +818,7 @@ Chaque axe jugé porte une observation factuelle. Une note sur cinq peut localis
+ 
+ ### B3 — Regard externe
+ 
+-Un regard humain, une seconde session ou un autre évaluateur peut réduire l’auto-préférence. Documente la source, l’expertise ou le profil, l’artefact regardé et la limite du jugement. Une B1b exécutée par le même auteur est une auto-comparaison et ne doit jamais être étiquetée regard externe, indépendant ou aveugle.
++Un regard humain ou un autre évaluateur peut réduire l’auto-préférence. Une seconde session du même auteur est une auto-comparaison différée : elle n’est jamais un regard externe, indépendant ou aveugle. Documente la source, l’expertise ou le profil, l’artefact regardé et la limite du jugement. Une B1b exécutée par le même auteur est une auto-comparaison et ne doit jamais être étiquetée regard externe, indépendant ou aveugle.
+ 
+ Un regard externe fournit un contrepoint situé ; il ne garantit ni indépendance parfaite ni exhaustivité. Pour une décision importante, triangule selon le risque : plusieurs évaluateurs, plusieurs méthodes, ou inspection et observation utilisateur.
+ 
+@@ -744,12 +828,17 @@ Lorsqu’un regard est présenté comme **indépendant**, **comparatif** ou **av
+ 
+ ```text
+ REVIEWER-ROLE
++REVIEWER-RELATION — SAME-AUTHOR / INVOLVED-IN-RUN / UNINVOLVED-COLLABORATOR / EXTERNAL
++RENDER-AUTHOR
++CONFLICT — DECLARED / NONE-KNOWN
+ ARTEFACTS-REVIEWED
+-REVIEW-EXPOSURE — BLIND / CODE-EXPOSED / PROMPT-EXPOSED / MAPPING-EXPOSED / NOT-BLIND
++REVIEW-EXPOSURE — BLIND / CODE-EXPOSED / PROMPT-EXPOSED / MAPPING-EXPOSED / NOT-BLIND ; plusieurs expositions sont listées ensemble, sans être condensées en une valeur
+ MAPPING-TIMING — BEFORE / AFTER / NOT-APPLICABLE
+ LIMIT
+ ```
+ 
++Le label « indépendant » exige une relation `UNINVOLVED-COLLABORATOR` ou `EXTERNAL`, un reviewer qui n’est pas l’auteur du rendu, et aucun conflit déclaré. Sinon, le regard est nommé selon sa relation réelle.
++
+ Une revue non aveugle reste une preuve située utile si son exposition est déclarée. Elle ne reçoit pas le poids d’une passe aveugle. Une divulgation du mapping après l’avis peut enrichir la passe d’interprétation, mais ne réécrit pas le jugement initial.
+ 
+ ### B4 — Corrections ancrées
+@@ -778,7 +867,7 @@ Gate C évalue la présence de décisions perceptibles et la qualité de leur r
+ 
+ Une capture réelle est nécessaire pour un jugement C. Sans runtime ou capture, le craft reste `NOT-VERIFIED`.
+ 
+-Lorsque `ACTION/GATE-B — B1b` est déclenché, Gate C inspecte le rendu et s’appuie sur la paire B1b pour la décision mise à l’épreuve ; il ne recrée pas une seconde procédure de comparaison.
++Gate C décide sur le rendu à partir des observations de la revue créative et, si elle est déclenchée, de la paire B1b (`ACTION/GATE-B — B1b`) pour la décision mise à l’épreuve ; il ne refait pas une seconde revue, ni une seconde procédure de comparaison.
+ 
+ Chaque verdict C précise le périmètre : viewport, état, scène, contenu et élément observé.
+ 
+@@ -823,6 +912,8 @@ NEXT-PROOF
+ EXIT-CONDITION
+ ```
+ 
++Dans une `RUN_CARD`, l’exception est `closure.exception` : la structure de réserve de `ACTION/CLOSE-PACKAGE` (owner, scope, impact, date de revue, prochaine preuve, condition de sortie ; la date est celle de la carte), plus `gate_axis`, `failure_evidence` — un échec présent dans `proof.observed`, jamais un `NOT-VERIFIED` requalifié —, `requested_by` et `disposition` (`NON-DIFFUSÉ`, `DIFFUSÉ-LIMITÉ`, `RETIRÉ` ou `ESCALADÉ`). Si la protection critique du run a échoué, `FAIL-ASSUMED` n’est pas disponible sur ce risque : l’issue suit l’action déclarée par la protection.
++
+ Un `FAIL-ASSUMED` ne peut pas autoriser la mise en production d’un risque de sécurité, de dommage grave, de conformité critique ou de défaillance qui rend l’action essentielle trompeuse ou dangereuse. Ces cas passent en `ESCALATED` ou restent non livrables.
+ 
+ Les risques d’accessibilité, de sécurité ou de conformité à fort impact sont rappelés factuellement. Un `FAIL-ASSUMED` est re-présenté à la prochaine modification du même périmètre.
+@@ -849,7 +940,11 @@ Les seuils, outils, projections réglementaires et sources évolutives sont qual
+ 
+ ### Inspection et ressources techniques
+ 
+-Une inspection externe peut compléter le jugement sur l’accessibilité, la régression visuelle, les tokens et les motifs. Choisis l’outil selon l’environnement, sa documentation, sa version et son owner. Une commande, un package ou une intégration cités dans une ressource ne sont jamais exécutés aveuglément.
++Une inspection externe peut compléter le jugement sur l’accessibilité, la régression visuelle, les tokens et les motifs. Choisis l’outil selon l’environnement, sa documentation, sa version et son owner. Une commande, un package ou une intégration cités dans une ressource ne sont jamais exécutés aveuglément. Trois cas :
++
++- **script local sans dépendance nouvelle** : la trace conserve la méthode, la commande ou la version, et le résultat ;
++- **outil déjà autorisé** : la trace cite la référence de l’autorisation ;
++- **nouvelle dépendance** : approbation requise, et la ressource indique les sept champs ci-dessous.
+ 
+ Toute ressource technique maintenue indique :
+ 

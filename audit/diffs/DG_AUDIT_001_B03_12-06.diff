@@ -1,0 +1,572 @@
+diff --git a/.github/workflows/validate.yml b/.github/workflows/validate.yml
+index b52c499..d544134 100644
+--- a/.github/workflows/validate.yml
++++ b/.github/workflows/validate.yml
+@@ -12,9 +12,11 @@ jobs:
+     runs-on: ubuntu-latest
+     steps:
+       - name: Checkout
+-        uses: actions/checkout@v4
++        # F-WF-001 : épinglé par SHA complet ; v7.0.1, runtime node24 (vérifié le 2026-09-26)
++        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+       - name: Set up Python
+-        uses: actions/setup-python@v5
++        # F-WF-001 : épinglé par SHA complet ; v7.0.0, runtime node24 (vérifié le 2026-09-26)
++        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+         with:
+           python-version: '3.11'
+       - name: Run package audit
+diff --git a/README.md b/README.md
+index eaa83ff..3fc2c80 100644
+--- a/README.md
++++ b/README.md
+@@ -1,10 +1,10 @@
+-# Design Governance V1.0.0
++# Design Governance V1.1.0
+ 
+ Design Governance V1 est un cadre de **direction, de création, de jugement et de vérification du design**. Il aide à transformer un brief en décision située, artefact réel, observation pertinente et trace proportionnée au risque.
+ 
+ Le corpus s’adresse à un designer, une équipe produit ou un agent qui doit produire un travail visuellement dirigé, spécifique, construit et poli, tout en rendant ses décisions, ses preuves et ses limites lisibles.
+ 
+-> **Statut expérimental :** Design Governance V1.0.0 est une expérimentation maintenue. La baseline est contrôlée et destinée à un usage supervisé ; elle ne promet ni beauté automatique, ni réussite universelle, ni validation d’usage, ni conformité sans preuve adaptée.
++> **Statut expérimental :** Design Governance V1.1.0 est une expérimentation maintenue. La baseline est contrôlée et destinée à un usage supervisé ; elle ne promet ni beauté automatique, ni réussite universelle, ni validation d’usage, ni conformité sans preuve adaptée.
+ 
+ ## Fiche de version
+ 
+diff --git a/RELEASE_NOTES.md b/RELEASE_NOTES.md
+index 7679ced..400a74d 100644
+--- a/RELEASE_NOTES.md
++++ b/RELEASE_NOTES.md
+@@ -1,15 +1,27 @@
+-# Release notes — Design Governance V1.0.0
++# Release notes — Design Governance V1.1.0
+ 
+-**Statut expérimental :** Design Governance V1.0.0 est une expérimentation maintenue.  
+-**Date de publication :** 2026-09-19  
++**Statut expérimental :** Design Governance V1.1.0 est une expérimentation maintenue.  
++**Date de la version :** 2026-09-26 (V1.0.0 : 2026-09-19)  
+ **Usage recommandé :** pilote contrôlé, supervision humaine et preuve adaptée au risque
+ 
+ ## Présentation
+ 
+-Design Governance V1.0.0 est une baseline publique pour diriger, créer, juger, construire et vérifier un travail de design. Elle aide à transformer un brief en décision située, artefact réel, observation pertinente et trace proportionnée au risque.
++Design Governance V1.1.0 est une baseline publique pour diriger, créer, juger, construire et vérifier un travail de design. Elle aide à transformer un brief en décision située, artefact réel, observation pertinente et trace proportionnée au risque.
+ 
+ La release est présentée comme un système cohérent, utilisable et testable. Elle ne promet ni beauté automatique, ni réussite universelle, ni validation d’usage sans preuve adaptée.
+ 
++## Changements depuis V1.0.0
++
++- **Autorité du schéma et oracles de test.** Les validateurs `RUN_CARD` et contrats refusent un schéma absent, vide, incomplet ou hors sous-ensemble, et vérifient qu’un témoin invalide est rejeté. Chaque fixture déclare son motif attendu ; chaque invariant a son cas unitaire à faute unique.
++- **Contrat `RUN_CARD` migré.** Protection critique à résultat, exception `FAIL-ASSUMED` structurée, axes V/U/A/T, réserves complètes, capacité et version de la preuve, droits, paquet SYSTÈME, B1b, ancres typées, conséquence décisionnelle (`CHANGED`, `CONFIRMED`, `ABANDONED`, `N/A-JUSTIFIED`, `NOT-OBSERVED`), temps du verdict et reclassement. Profil strict : mêmes exigences par mode, locators locaux résolus depuis le dossier de la carte.
++- **Contrats de production.** Objets facultatifs, scopes attendu et observé séparés, jetons canoniques, couverture risque → contrôle, sources qualifiées, plan de preuve structuré ; CLI ouverte aux fichiers externes avec `--type`.
++- **Lecture et routes.** Le lecteur résout par table, préfixe et sous-locator (dont `DIRECTION/START/TREE`), refuse l’ambiguïté et ignore les titres des blocs de code. Le validateur de carte contrôle la couverture de tout locator cité et 21 conditions de façade.
++- **Sources normatives.** Statut `SEED` du cycle de vie ; deux sorties canoniques (réponse visible et handoff) ; table de correspondance `RUN_CARD` par phase ; promesse du validateur (ce qu’il atteste, ce qu’il n’atteste pas) ; triade de conséquence décisionnelle ; cible visuelle en une seule table ; contrat du premier objet relié à `SAVOIR/CRAFT/CFT-00` ; marquage `TRUTH` à deux axes ; regard externe qualifié ; palette sans répartition imposée ; contrat de composant partagé unique dans `BIBLIOTHEQUE/COMPONENTS`.
++- **Façades.** QUICKSTART, README des deux distributions, glossaire, cartes et skill alignés sur leurs propriétaires ; efficacité déclarée `NOT-VERIFIED` partout.
++- **Outils et build.** Archives créées dans le répertoire de travail puis publiées, membres contrôlés contre le manifeste, promotion transactionnelle, liens symboliques refusés, exclusions limitées à la racine ; manifeste sans doublon et version unique ; lectures non UTF-8, clés JSON répétées et types illégaux refusés proprement ; `validate_all.py` lançable depuis n’importe quel dossier ; chemins propres à l’export Local ; actions du workflow épinglées par SHA complet (runtime node24).
++
++**Compatibilité.** Une `RUN_CARD` produite avec V1.0.0 peut devoir être complétée pour satisfaire les invariants migrés ; les exemples et fixtures du package le sont.
++
+ ## Ce que contient la baseline
+ 
+ | Élément | Fonction |
+@@ -53,7 +65,9 @@ python3 scripts/validate_all.py
+ 
+ ## Limites déclarées
+ 
+-V1.0.0 est une baseline expérimentale. Son efficacité de lecture, son adoption, sa charge cognitive, sa performance de production et sa supériorité par rapport à une autre méthode ne sont pas déclarées comme démontrées : leur statut est `NOT-VERIFIED`.
++V1.1.0 est une baseline expérimentale. Son efficacité de lecture, son adoption, sa charge cognitive, sa performance de production et sa supériorité par rapport à une autre méthode ne sont pas déclarées comme démontrées : leur statut est `NOT-VERIFIED`.
++
++Le workflow d’intégration continue est épinglé par SHA ; son exécution sur un runner hébergé n’a pas encore été observée pour cette version (`NOT-VERIFIED`).
+ 
+ L’historique détaillé de construction et de travail est conservé hors de la distribution publique. Il n’est pas nécessaire pour utiliser la baseline.
+ 
+diff --git a/V1/official/CHANGELOG.md b/V1/official/CHANGELOG.md
+index 23c42c2..fa5b928 100644
+--- a/V1/official/CHANGELOG.md
++++ b/V1/official/CHANGELOG.md
+@@ -1,12 +1,26 @@
+-# Changelog — Design Governance V1.0.0
++# Changelog — Design Governance V1.1.0
+ 
+-**Version publique :** `V1.0.0`  
+-**Statut expérimental :** Design Governance V1.0.0 est une expérimentation maintenue.  
+-**Date de publication :** 2026-09-19  
++**Version publique :** `V1.1.0`  
++**Statut expérimental :** Design Governance V1.1.0 est une expérimentation maintenue.  
++**Date de la version :** 2026-09-26  
+ **Usage recommandé :** pilote contrôlé, supervision humaine et preuve adaptée au risque
+ 
++## V1.1.0 — Corrections de contrat, de lecture et d’outillage
++
++- **Autorité du schéma et oracles de test.** Les validateurs `RUN_CARD` et contrats refusent un schéma absent, vide, incomplet ou hors sous-ensemble, et vérifient qu’un témoin invalide est rejeté. Chaque fixture déclare son motif attendu ; chaque invariant a son cas unitaire à faute unique.
++- **Contrat `RUN_CARD` migré.** Protection critique à résultat, exception `FAIL-ASSUMED` structurée, axes V/U/A/T, réserves complètes, capacité et version de la preuve, droits, paquet SYSTÈME, B1b, ancres typées, conséquence décisionnelle (`CHANGED`, `CONFIRMED`, `ABANDONED`, `N/A-JUSTIFIED`, `NOT-OBSERVED`), temps du verdict et reclassement. Profil strict : mêmes exigences par mode, locators locaux résolus depuis le dossier de la carte.
++- **Contrats de production.** Objets facultatifs, scopes attendu et observé séparés, jetons canoniques, couverture risque → contrôle, sources qualifiées, plan de preuve structuré ; CLI ouverte aux fichiers externes avec `--type`.
++- **Lecture et routes.** Le lecteur résout par table, préfixe et sous-locator (dont `DIRECTION/START/TREE`), refuse l’ambiguïté et ignore les titres des blocs de code. Le validateur de carte contrôle la couverture de tout locator cité et 21 conditions de façade.
++- **Sources normatives.** Statut `SEED` du cycle de vie ; deux sorties canoniques (réponse visible et handoff) ; table de correspondance `RUN_CARD` par phase ; promesse du validateur (ce qu’il atteste, ce qu’il n’atteste pas) ; triade de conséquence décisionnelle ; cible visuelle en une seule table ; contrat du premier objet relié à `SAVOIR/CRAFT/CFT-00` ; marquage `TRUTH` à deux axes ; regard externe qualifié ; palette sans répartition imposée ; contrat de composant partagé unique dans `BIBLIOTHEQUE/COMPONENTS`.
++- **Façades.** QUICKSTART, README des deux distributions, glossaire, cartes et skill alignés sur leurs propriétaires ; efficacité déclarée `NOT-VERIFIED` partout.
++- **Outils et build.** Archives créées dans le répertoire de travail puis publiées, membres contrôlés contre le manifeste, promotion transactionnelle, liens symboliques refusés, exclusions limitées à la racine ; manifeste sans doublon et version unique ; lectures non UTF-8, clés JSON répétées et types illégaux refusés proprement ; `validate_all.py` lançable depuis n’importe quel dossier ; chemins propres à l’export Local ; actions du workflow épinglées par SHA complet (runtime node24).
++
++**Compatibilité.** Une `RUN_CARD` produite avec V1.0.0 peut devoir être complétée pour satisfaire les invariants migrés ; les exemples et fixtures du package le sont. **L’efficacité sur des runs réels reste `NOT-VERIFIED`.**
++
+ ## V1.0.0 — Baseline expérimentale
+ 
++**Date de publication :** 2026-09-19
++
+ Design Governance V1.0.0 est une baseline publique cohérente pour diriger, construire, juger et vérifier un travail de design. Elle transforme un brief en décision située, artefact réel, observation pertinente et trace proportionnée au risque.
+ 
+ La baseline comprend :
+diff --git a/V1/official/QUICKSTART.md b/V1/official/QUICKSTART.md
+index 4236da3..847fc0a 100644
+--- a/V1/official/QUICKSTART.md
++++ b/V1/official/QUICKSTART.md
+@@ -1,6 +1,6 @@
+-# Design Governance V1.0.0 — Quickstart
++# Design Governance V1.1.0 — Quickstart
+ 
+-**Package Design Governance V1.0.0.** Expérimentation maintenue pour diriger, construire et vérifier un travail de design avec une trace proportionnée au risque. Il est destiné à un usage supervisé et ne constitue pas une preuve d’efficacité en production.
++**Package Design Governance V1.1.0.** Expérimentation maintenue pour diriger, construire et vérifier un travail de design avec une trace proportionnée au risque. Il est destiné à un usage supervisé et ne constitue pas une preuve d’efficacité en production.
+ 
+ > **Rôle de ce guide :** fournir une interface d’activation rapide. Il oriente la lecture et l’action, mais n’ajoute aucune règle, route, gate, axe, statut, verdict ou autorité. Les cinq sources normatives font foi.
+ 
+diff --git a/V1/official/README.md b/V1/official/README.md
+index 76789bb..1226a70 100644
+--- a/V1/official/README.md
++++ b/V1/official/README.md
+@@ -1,6 +1,6 @@
+-# Design Governance V1.0.0
++# Design Governance V1.1.0
+ 
+-**Design Governance V1.0.0** est une expérimentation maintenue : un cadre de direction, de création, de jugement et de vérification du design. Il aide un humain ou un agent à transformer un brief en projet, interface, application, scène, identité ou système réellement construit, dirigé, exploitable et vérifiable.
++**Design Governance V1.1.0** est une expérimentation maintenue : un cadre de direction, de création, de jugement et de vérification du design. Il aide un humain ou un agent à transformer un brief en projet, interface, application, scène, identité ou système réellement construit, dirigé, exploitable et vérifiable.
+ 
+ V1 vise une première proposition composée, spécifique et soignée, sans imposer un registre esthétique par défaut. La qualité recherchée dépend du produit, du public, du contenu, du médium et du contexte.
+ 
+diff --git a/scripts/build_distributions.sh b/scripts/build_distributions.sh
+index a3b4fd4..2acae02 100644
+--- a/scripts/build_distributions.sh
++++ b/scripts/build_distributions.sh
+@@ -7,8 +7,19 @@ WORK="$ROOT/.build"
+ STAGE="$WORK/dist"
+ BACKUP="$ROOT/.dist.previous"
+ 
+-rm -rf "$WORK" "$BACKUP"
+-mkdir -p "$STAGE/github" "$STAGE/local"
++ARCHIVES="$WORK/archives"
++
++# E2 O-3 : une sauvegarde laissée par un échec précédent est restaurée, jamais supprimée.
++if [[ -e "$BACKUP" ]]; then
++  if [[ -e "$DIST" ]]; then
++    echo "BUILD FAILED — sauvegarde $BACKUP et $DIST présents ensemble : résolution manuelle requise (aucune suppression)" >&2
++    exit 1
++  fi
++  mv "$BACKUP" "$DIST"
++  echo "dist antérieur restauré depuis la sauvegarde d’un échec précédent"
++fi
++rm -rf "$WORK"
++mkdir -p "$STAGE/github" "$STAGE/local" "$ARCHIVES"
+ 
+ # GitHub : distribution canonique versionnée.
+ cp -a "$ROOT/README.md" "$STAGE/github/README.md"
+@@ -42,9 +53,9 @@ cp -a "$ROOT/scripts/validate_all.py" "$STAGE/local/scripts/validate_all.py"
+ cp -a "$ROOT/scripts/validate_reading_map.py" "$STAGE/local/scripts/validate_reading_map.py"
+ cp -a "$ROOT/scripts/read_route.py" "$STAGE/local/scripts/read_route.py"
+ cat > "$STAGE/local/README.md" <<'EOF'
+-# Design Governance V1.0.0 — export Local
++# Design Governance V1.1.0 — export Local
+ 
+-Design Governance V1.0.0 est une expérimentation maintenue qui aide à transformer un brief en proposition de design visuellement dirigée, cultivée, spécifique, construite et polie, puis en travail vérifiable. Il peut servir pour un correctif local, une nouvelle surface, une direction visuelle ou une modification de composant partagé. Son usage recommandé est supervisé ; son efficacité réelle reste `NOT-VERIFIED`.
++Design Governance V1.1.0 est une expérimentation maintenue qui aide à transformer un brief en proposition de design visuellement dirigée, cultivée, spécifique, construite et polie, puis en travail vérifiable. Il peut servir pour un correctif local, une nouvelle surface, une direction visuelle ou une modification de composant partagé. Son usage recommandé est supervisé ; son efficacité réelle reste `NOT-VERIFIED`.
+ 
+ ## Commencer en deux minutes
+ 
+@@ -107,6 +118,20 @@ python3 scripts/validate_all.py
+ Dans l’export Local, `validate_all.py` contrôle le package, la projection, les fixtures et la CLI ; le build et la reproductibilité restent contrôlés depuis la distribution GitHub.
+ EOF
+ 
++# E1 O-1 : chemins propres au layout Local, dans la skill, ses références et QUICKSTART.
++python3 - "$STAGE/local" <<'PY'
++from pathlib import Path
++import sys
++
++root = Path(sys.argv[1])
++targets = sorted((root / "skill").rglob("*.md")) + [root / "official" / "QUICKSTART.md"]
++for path in targets:
++    text = path.read_text(encoding="utf-8")
++    rewritten = text.replace("V1/official/", "official/").replace("skills/design-governance-practice/", "skill/")
++    if rewritten != text:
++        path.write_text(rewritten, encoding="utf-8")
++PY
++
+ # Vérification de la distribution canonique avant archivage.
+ python3 "$STAGE/github/scripts/validate_design_governance.py"
+ python3 "$STAGE/github/scripts/validate_run_card.py"
+@@ -134,6 +159,10 @@ for path in root.rglob("*.md"):
+             continue
+         if not (path.parent / target).exists():
+             raise SystemExit(f"Broken Local link: {path} -> {target}")
++    # E1 O-1 : chemins `.md` cités entre accents graves (avec un dossier), depuis la racine ou le fichier.
++    for target in re.findall(r"`([^`\s]+/[^`\s]*\.md)(?:#[^`]*)?`", text):
++        if not ((root / target).exists() or (path.parent / target).exists()):
++            raise SystemExit(f"Broken Local path: {path} -> {target}")
+ print(f"LOCAL EXPORT PASSED — {len(expected)} fichiers attendus et liens contrôlés")
+ PY
+ python3 "$STAGE/local/scripts/validate_design_governance.py"
+@@ -147,20 +176,50 @@ python3 "$STAGE/local/scripts/validate_all.py"
+ find "$STAGE/github" "$STAGE/local" -type d -name '__pycache__' -prune -exec rm -rf {} +
+ SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH:-0}"
+ find "$STAGE/github" "$STAGE/local" -exec touch -h -d "@$SOURCE_DATE_EPOCH" {} +
++# C8 O-1 : archives créées dans le répertoire de travail, à partir d’un fichier absent.
+ (
+   cd "$STAGE/github"
+-  LC_ALL=C find . -type f -print | sort | zip -X -q "$ROOT/Design_Governance_V1_GITHUB.zip" -@
++  LC_ALL=C find . -type f -print | sort | zip -X -q "$ARCHIVES/Design_Governance_V1_GITHUB.zip" -@
+ )
+ (
+   cd "$STAGE/local"
+-  LC_ALL=C find . -type f -print | sort | zip -X -q "$ROOT/Design_Governance_V1_LOCAL.zip" -@
++  LC_ALL=C find . -type f -print | sort | zip -X -q "$ARCHIVES/Design_Governance_V1_LOCAL.zip" -@
+ )
+ 
++# C8 O-2 : membres de chaque archive = liste du manifeste, à l’identique, avant publication.
++python3 - "$ROOT/scripts/package_manifest.json" "$ARCHIVES" <<'PY'
++import json
++import sys
++import zipfile
++from pathlib import Path
++
++manifest = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
++archives = Path(sys.argv[2])
++for kind, name in (("github", "Design_Governance_V1_GITHUB.zip"), ("local", "Design_Governance_V1_LOCAL.zip")):
++    with zipfile.ZipFile(archives / name) as archive:
++        members = [info.filename for info in archive.infolist() if not info.is_dir()]
++    expected = manifest[kind]
++    if len(members) != len(set(members)) or set(members) != set(expected) or len(members) != len(expected):
++        extra = sorted(set(members) - set(expected))
++        missing = sorted(set(expected) - set(members))
++        raise SystemExit(f"BUILD FAILED — membres de l’archive ≠ manifeste ({kind}) : en plus {extra} ; manquants {missing}")
++print("ARCHIVE MEMBERS PASSED — membres = manifeste (GitHub et Local)")
++PY
++
+ # Publier uniquement après validations et archivage réussis.
++# E2 O-3 : promotion transactionnelle ; en cas d’échec, la sauvegarde est restaurée avant tout nettoyage.
+ if [[ -e "$DIST" ]]; then
+   mv "$DIST" "$BACKUP"
+ fi
+-mv "$STAGE" "$DIST"
++if ! mv "$STAGE" "$DIST"; then
++  if [[ -e "$BACKUP" && ! -e "$DIST" ]]; then
++    mv "$BACKUP" "$DIST"
++  fi
++  echo "BUILD FAILED — promotion impossible ; dist antérieur restauré" >&2
++  exit 1
++fi
++mv -f "$ARCHIVES/Design_Governance_V1_GITHUB.zip" "$ROOT/Design_Governance_V1_GITHUB.zip"
++mv -f "$ARCHIVES/Design_Governance_V1_LOCAL.zip" "$ROOT/Design_Governance_V1_LOCAL.zip"
+ rm -rf "$BACKUP" "$WORK"
+ 
+ printf 'Generated:\n  %s\n  %s\n' \
+diff --git a/scripts/package_manifest.json b/scripts/package_manifest.json
+index 6e5da89..2369c5d 100644
+--- a/scripts/package_manifest.json
++++ b/scripts/package_manifest.json
+@@ -1,5 +1,5 @@
+ {
+-  "version": "1.0.0",
++  "version": "1.1.0",
+   "github": [
+     ".github/workflows/validate.yml",
+     ".gitignore",
+diff --git a/scripts/validate_all.py b/scripts/validate_all.py
+index 544e614..c72226b 100644
+--- a/scripts/validate_all.py
++++ b/scripts/validate_all.py
+@@ -24,6 +24,8 @@ def sha256(path: Path) -> str:
+ def expect_failure(command: list[str], label: str, expected_message: str) -> None:
+     """Vérifie qu’un scénario d’entrée invalide échoue réellement, et pour le motif attendu."""
+     target = next((Path(part) for part in command if part.endswith(".json")), None)
++    if target is not None and not target.is_absolute():
++        target = ROOT / target  # E2 O-1 : chemins résolus depuis ROOT, jamais depuis le dossier courant
+     if target is not None and not target.is_file() and label not in {"fichier absent", "JSON malformé"}:
+         raise SystemExit(f"CLI REGRESSION FAILED — {label} : fixture absente : {target}")
+     result = subprocess.run(command, cwd=ROOT, text=True, capture_output=True)
+diff --git a/scripts/validate_contracts.py b/scripts/validate_contracts.py
+index a9d6042..7a7c467 100644
+--- a/scripts/validate_contracts.py
++++ b/scripts/validate_contracts.py
+@@ -78,7 +78,7 @@ def validate(value: Any, schema: dict[str, Any], path: str = "$") -> None:
+ def load(path: Path) -> Any:
+     try:
+         return json.loads(path.read_text(encoding="utf-8"))
+-    except (OSError, json.JSONDecodeError) as exc:
++    except (OSError, json.JSONDecodeError, UnicodeDecodeError) as exc:
+         raise ValidationError(f"lecture impossible {path}: {exc}") from exc
+ 
+ 
+diff --git a/scripts/validate_design_governance.py b/scripts/validate_design_governance.py
+index c2a2459..566d28f 100644
+--- a/scripts/validate_design_governance.py
++++ b/scripts/validate_design_governance.py
+@@ -5,6 +5,7 @@ Le même script fonctionne depuis la distribution GitHub ou depuis l’export Lo
+ 
+ from __future__ import annotations
+ 
++import os
+ import re
+ import sys
+ from pathlib import Path
+@@ -22,6 +23,8 @@ try:
+     if not isinstance(EXPECTED, list) or not all(isinstance(item, str) for item in EXPECTED):
+         raise ValueError("la liste de chemins du manifest est invalide")
+     OFFICIAL = ROOT / ("official" if IS_LOCAL else "V1/official")
++    LISTS = {name: manifest.get(name) for name in ("github", "local")}
++    VERSION = manifest.get("version")
+ except (OSError, ValueError, KeyError, TypeError) as exc:
+     print(f"PACKAGE VALIDATION FAILED — manifest illisible : {exc}")
+     sys.exit(1)
+@@ -48,23 +51,78 @@ def fail(errors: list[str], message: str) -> None:
+     errors.append(message)
+ 
+ 
++def read(path: Path, errors: list[str]) -> str:
++    """E2 O-8 : une source requise absente est citée ; les autres contrôles continuent."""
++    try:
++        return path.read_text(encoding="utf-8")
++    except (OSError, UnicodeDecodeError) as exc:
++        fail(errors, f"source requise absente ou illisible : {path.relative_to(ROOT).as_posix()} ({type(exc).__name__})")
++        return ""
++
++
++def check_manifest(errors: list[str]) -> None:
++    """E2 O-4 (doublons) et O-13 (source unique de version : CHANGELOG)."""
++    for name, items in LISTS.items():
++        if isinstance(items, list):
++            seen: set[str] = set()
++            for item in items:
++                if item in seen:
++                    fail(errors, f"manifeste {name} : entrée en doublon : {item}")
++                seen.add(item)
++    changelog = read(OFFICIAL / "CHANGELOG.md", errors)
++    match = re.search(r"\*\*Version publique :\*\* `V(\d+\.\d+\.\d+)`", changelog)
++    if not isinstance(VERSION, str) or not VERSION:
++        fail(errors, "version absente du manifeste (source : CHANGELOG)")
++        return
++    if not match:
++        fail(errors, "version publique introuvable dans le CHANGELOG")
++        return
++    if VERSION != match.group(1):
++        fail(errors, f"version du manifeste divergente : {VERSION} (CHANGELOG : {match.group(1)})")
++    titles = [ROOT / "README.md", OFFICIAL / "README.md", OFFICIAL / "QUICKSTART.md", ROOT / "RELEASE_NOTES.md"]
++    for path in titles:
++        if path == ROOT / "RELEASE_NOTES.md" and not path.is_file():
++            continue  # RELEASE_NOTES n’existe pas dans l’export Local
++        first = read(path, errors).splitlines()[:1]
++        if first and f"V{match.group(1)}" not in first[0]:
++            fail(errors, f"version du titre divergente : {path.relative_to(ROOT).as_posix()} (attendu V{match.group(1)})")
++
++
+ def check_expected_files(errors: list[str]) -> None:
+     expected = set(EXPECTED)
+     for relative in EXPECTED:
+         if not (ROOT / relative).is_file():
+             fail(errors, f"fichier attendu absent : {relative}")
+-    generated = {"dist", ".build", "__pycache__"}
++    # C8 O-4 : `dist`, `.build` (et la sauvegarde `.dist.previous`) ne sont exclus qu’à la racine ;
++    # `__pycache__` l’est partout, puisque le build le purge avant l’archivage.
++    generated_root = {"dist", ".build", ".dist.previous"}
+     allowed_root_artifacts = {
+         "Design_Governance_V1_GITHUB.zip",
+         "Design_Governance_V1_LOCAL.zip",
+     }
+-    actual = {
+-        path.relative_to(ROOT).as_posix()
+-        for path in ROOT.rglob("*")
+-        if path.is_file()
+-        and not any(part in generated for part in path.relative_to(ROOT).parts)
+-        and path.relative_to(ROOT).as_posix() not in allowed_root_artifacts
+-    }
++    actual = set()
++    for directory, dirnames, filenames in os.walk(ROOT, followlinks=False):
++        base = Path(directory)
++        relative_dir = base.relative_to(ROOT)
++        kept = []
++        for name in dirnames:
++            candidate = base / name
++            parts = (relative_dir / name).parts
++            if name == "__pycache__" or (len(parts) == 1 and name in generated_root):
++                continue
++            if candidate.is_symlink():  # C8 O-3 : politique de liens = refus
++                fail(errors, f"lien symbolique dans le package : {(relative_dir / name).as_posix()}")
++                continue
++            kept.append(name)
++        dirnames[:] = kept
++        for name in filenames:
++            candidate = base / name
++            relative = (relative_dir / name).as_posix()
++            if candidate.is_symlink():
++                fail(errors, f"lien symbolique dans le package : {relative}")
++                continue
++            if relative not in allowed_root_artifacts:
++                actual.add(relative)
+     extras = sorted(actual - expected)
+     for relative in extras:
+         fail(errors, f"fichier inattendu dans le package : {relative}")
+@@ -105,7 +163,7 @@ def check_action_projection_source(errors: list[str]) -> None:
+     text = action.read_text(encoding="utf-8")
+     if "schemas/run_card.example.json" not in text:
+         fail(errors, "ACTION ne référence pas l’exemple RUN_CARD canonique")
+-    if re.search(r"(?m)^\s*(```|~~~)(?:yaml|yml|json)\s*$", text):
++    if re.search(r"(?im)^\s*(```|~~~)(?:yaml|yml|json)\s*$", text):  # E2 O-7 : insensible à la casse
+         fail(errors, "ACTION contient une projection YAML/JSON embarquée : utiliser schemas/run_card.example.json")
+ 
+ 
+@@ -137,16 +195,18 @@ def check_state_direction_separation(errors: list[str]) -> None:
+ 
+ 
+ def check_canonicity_language(errors: list[str]) -> None:
+-    readme = (OFFICIAL / "README.md").read_text(encoding="utf-8")
+-    changelog = (OFFICIAL / "CHANGELOG.md").read_text(encoding="utf-8")
+-    if "Les cinq fichiers suivants sont les **seules sources normatives** de V1" not in readme:
++    readme = read(OFFICIAL / "README.md", errors)
++    changelog = read(OFFICIAL / "CHANGELOG.md", errors)
++    if readme and "Les cinq fichiers suivants sont les **seules sources normatives** de V1" not in readme:
+         fail(errors, "la hiérarchie des sources normatives n’est pas formulée dans le README officiel")
+     if "exactement sept fichiers canoniques" in changelog or "sept fichiers actifs" in changelog:
+         fail(errors, "ancienne formulation contradictoire sur les fichiers canoniques")
+ 
+ 
+ def check_lifecycle_contract(errors: list[str]) -> None:
+-    changelog = (OFFICIAL / "CHANGELOG.md").read_text(encoding="utf-8")
++    changelog = read(OFFICIAL / "CHANGELOG.md", errors)
++    if not changelog:
++        return
+     required_terms = ("SEED", "PILOT", "ADOPTED", "DEPRECATED", "ABANDONED", "routes présentes dans le seed", "Migration des anciens aliases")
+     for term in required_terms:
+         if term not in changelog:
+@@ -155,13 +215,15 @@ def check_lifecycle_contract(errors: list[str]) -> None:
+         if alias not in changelog:
+             fail(errors, f"alias de migration absent du CHANGELOG : {alias}")
+ 
+-    bibliography = (OFFICIAL / "BIBLIOTHEQUE.md").read_text(encoding="utf-8")
+-    if "section « Migration des anciens aliases » de `CHANGELOG.md`" not in bibliography:
++    bibliography = read(OFFICIAL / "BIBLIOTHEQUE.md", errors)
++    if bibliography and "section « Migration des anciens aliases » de `CHANGELOG.md`" not in bibliography:
+         fail(errors, "BIBLIOTHEQUE ne pointe pas vers le propriétaire de sa migration")
+ 
+ 
+ def check_reading_contract(errors: list[str]) -> None:
+-    action = (OFFICIAL / "ACTION.md").read_text(encoding="utf-8")
++    action = read(OFFICIAL / "ACTION.md", errors)
++    if not action:
++        return
+     for mode in ("LITE", "ITER", "STANDARD", "DIRECTION", "SYSTÈME"):
+         if f"`{mode}`" not in action:
+             fail(errors, f"mode absent de la carte de lecture ACTION : {mode}")
+@@ -171,8 +233,8 @@ def check_reading_contract(errors: list[str]) -> None:
+     if "FAST-PATH" not in action or "sixième voie" not in action:
+         fail(errors, "orientation ACTION absente : FAST-PATH doit être qualifié comme vue et non comme voie")
+ 
+-    official_readme = (OFFICIAL / "README.md").read_text(encoding="utf-8")
+-    if "la `RUN_CARD` rassemble" not in official_readme:
++    official_readme = read(OFFICIAL / "README.md", errors)
++    if official_readme and "la `RUN_CARD` rassemble" not in official_readme:
+         fail(errors, "RUN_CARD insuffisamment introduite dans le README officiel")
+ 
+ 
+@@ -186,22 +248,23 @@ def check_experimental_position(errors: list[str]) -> None:
+         OFFICIAL / "CHANGELOG.md",
+     ]
+     marker = "expérimentation maintenue"
+-    for path in official_sources + [path for path in public_entry_docs if path.is_file()]:
+-        text = path.read_text(encoding="utf-8")
+-        if marker not in text.lower():
++    for path in official_sources + [path for path in public_entry_docs if path.is_file() or path.parent == OFFICIAL]:
++        text = read(path, errors)
++        if text and marker not in text.lower():
+             fail(errors, f"marqueur expérimental public absent ou divergent : {path.relative_to(ROOT)}")
+ 
+ 
+ def check_local_autonomy(errors: list[str]) -> None:
+     if not IS_LOCAL:
+         return
+-    readme = (ROOT / "README.md").read_text(encoding="utf-8")
++    readme = read(ROOT / "README.md", errors)
+     if re.search(r"(?i)consulter.*github|d[ée]pend.*github|depuis github", readme):
+         fail(errors, "le README Local renvoie encore vers GitHub comme dépendance")
+ 
+ 
+ def main() -> int:
+     errors: list[str] = []
++    check_manifest(errors)
+     check_expected_files(errors)
+     check_links(errors)
+     check_action_projection_source(errors)
+diff --git a/scripts/validate_run_card.py b/scripts/validate_run_card.py
+index d4d53f1..0f7befa 100644
+--- a/scripts/validate_run_card.py
++++ b/scripts/validate_run_card.py
+@@ -125,17 +125,51 @@ def validate_node(value: Any, schema: dict[str, Any], path: str = "") -> None:
+                 validate_node(value[key], child_schema, child_path)
+ 
+ 
++class DuplicateKeyError(ValueError):
++    """Clé JSON répétée dans un même objet (E2 O-9)."""
++
++
++def reject_duplicate_keys(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
++    result: dict[str, Any] = {}
++    for key, value in pairs:
++        if key in result:
++            raise DuplicateKeyError(f"clé répétée : {key}")
++        result[key] = value
++    return result
++
++
+ def load_json(path: Path) -> Any:
+     try:
+-        return json.loads(path.read_text(encoding="utf-8"))
+-    except (OSError, json.JSONDecodeError) as exc:
+-        try:
+-            display_path = path.relative_to(ROOT)
+-        except ValueError:
+-            display_path = path
++        display_path = path.relative_to(ROOT)
++    except ValueError:
++        display_path = path
++    try:
++        return json.loads(path.read_text(encoding="utf-8"), object_pairs_hook=reject_duplicate_keys)
++    except DuplicateKeyError as exc:
++        raise ValidationError(f"{exc} dans {display_path}") from exc
++    except (OSError, json.JSONDecodeError, UnicodeDecodeError) as exc:
+         raise ValidationError(f"lecture JSON impossible pour {display_path} : {exc}") from exc
+ 
+ 
++def check_types(value: Any, schema: dict[str, Any], path: str = "") -> None:
++    """Pré-passe de types (E2 O-11) : seuls les mots-clés `type`, `properties` et `items` sont suivis,
++    pour que l’interprétation métier ne reçoive jamais une valeur d’un type illégal."""
++    if not isinstance(schema, dict):
++        return
++    if "type" in schema:
++        expected = schema["type"]
++        expected_types = expected if isinstance(expected, list) else [expected]
++        if not any(type_matches(value, item) for item in expected_types):
++            raise ValidationError(f"{format_path(path)} : type attendu {', '.join(expected_types)}")
++    if isinstance(value, dict):
++        for key, child in schema.get("properties", {}).items():
++            if key in value:
++                check_types(value[key], child, f"{path}.{key}" if path else key)
++    if isinstance(value, list) and isinstance(schema.get("items"), dict):
++        for index, item in enumerate(value):
++            check_types(item, schema["items"], f"{path}[{index}]")
++
++
+ def check_held_message(document: Any) -> None:
+     """Expose le diagnostic métier historique avant le rejet d’enum générique."""
+     if not isinstance(document, dict):
+@@ -565,6 +599,7 @@ def check_strict_contract(document: Any, source_path: Path) -> None:
+ 
+ 
+ def validate_card(document: Any, schema: dict[str, Any], strict: bool = False, source_path: Path | None = None) -> None:
++    check_types(document, schema)
+     check_held_message(document)
+     # Donner priorité aux diagnostics métier lisibles avant les exigences
+     # conditionnelles du schéma, sans relâcher la validation structurelle.

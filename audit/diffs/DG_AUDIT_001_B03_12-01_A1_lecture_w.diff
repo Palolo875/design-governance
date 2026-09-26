@@ -1,0 +1,169 @@
+diff --git a/scripts/validate_contracts.py b/scripts/validate_contracts.py
+index 7e00c01..fd83cf1 100644
+--- a/scripts/validate_contracts.py
++++ b/scripts/validate_contracts.py
+@@ -81,6 +81,59 @@ def load(path: Path) -> Any:
+         raise ValidationError(f"lecture impossible {path}: {exc}") from exc
+ 
+ 
++def check_schema_keywords(schema: Any, path: str = "$") -> None:
++    """Parcours statique : un mot-clé non supporté est refusé même dans une branche que l'exemple ne visite pas."""
++    if not isinstance(schema, dict):
++        raise ValidationError(f"{path}: sous-schéma non objet")
++    unknown = set(schema) - SUPPORTED_KEYS
++    if unknown:
++        raise ValidationError(f"{path}: mots-clés de schéma non supportés : {', '.join(sorted(unknown))}")
++    properties = schema.get("properties", {})
++    if not isinstance(properties, dict):
++        raise ValidationError(f"{path}.properties: doit être un objet")
++    for key, child in properties.items():
++        check_schema_keywords(child, f"{path}.properties.{key}")
++    if "items" in schema:
++        check_schema_keywords(schema["items"], f"{path}.items")
++
++
++def check_schema_witness(name: str, schema: dict[str, Any], example: Any) -> None:
++    """Témoins négatifs au niveau schéma : rejetés par validate seul, pour leur motif."""
++    if not isinstance(example, dict):
++        raise ValidationError("témoin de schéma impossible : exemple canonique non objet")
++    first = schema["required"][0]
++    witnesses = [(
++        {key: value for key, value in example.items() if key != first},
++        f"champ obligatoire absent: {first}",
++        f"le schéma n'impose pas la clé requise {first}",
++    )]
++    if name == "research_brief":  # F-VCT-003
++        witnesses.append(({**example, "depth": "IMPOSSIBLE"}, "$.depth: valeur non canonique", "le schéma n'impose pas l'enum de depth"))
++    for document, motif, failure in witnesses:
++        try:
++            validate(document, schema)
++        except ValidationError as exc:
++            if motif in str(exc):
++                continue
++            raise ValidationError(f"témoin de schéma non concluant : rejet pour un autre motif ({exc})") from exc
++        raise ValidationError(failure)
++
++
++def load_schema(name: str) -> dict[str, Any]:
++    """Chargement gouverné : aucun document n'est jugé avec un schéma vide, incomplet ou hors sous-ensemble."""
++    schema_path, example_path = CONTRACTS[name]
++    schema = load(schema_path)
++    if not isinstance(schema, dict) or not schema:
++        raise ValidationError("schéma inopérant : la racine doit être un objet non vide")
++    if schema.get("type") != "object":
++        raise ValidationError("schéma inopérant : la racine doit déclarer type object")
++    if not isinstance(schema.get("required"), list) or not schema["required"]:
++        raise ValidationError("schéma incomplet : required racine absent ou vide")
++    check_schema_keywords(schema)
++    check_schema_witness(name, schema, load(example_path))
++    return schema
++
++
+ def semantic_check(name: str, document: Any) -> None:
+     if name == "domain_frame":
+         policy = document["policy_profile"]
+@@ -166,7 +219,7 @@ def validate_single_path(path: Path) -> int:
+         print(f"- chemin non canonique : {path}")
+         return 1
+     try:
+-        schema = load(CONTRACTS[name][0])
++        schema = load_schema(name)
+         document = load(path)
+         validate(document, schema)
+         semantic_check(name, document)
+@@ -188,9 +241,9 @@ def main(argv: list[str] | None = None) -> int:
+     errors: list[str] = []
+     schemas: dict[str, dict[str, Any]] = {}
+     documents: dict[str, Any] = {}
+-    for name, (schema_path, example_path) in CONTRACTS.items():
++    for name, (_, example_path) in CONTRACTS.items():
+         try:
+-            schema = load(schema_path)
++            schema = load_schema(name)
+             document = load(example_path)
+             schemas[name] = schema
+             documents[name] = document
+diff --git a/scripts/validate_run_card.py b/scripts/validate_run_card.py
+index 332fc92..ca57bdd 100644
+--- a/scripts/validate_run_card.py
++++ b/scripts/validate_run_card.py
+@@ -367,6 +367,39 @@ def check_schema_authority(schema: dict[str, Any], errors: list[str]) -> None:
+         errors.append(f"le validateur n’utilise pas l’enum du schéma : {exc}")
+ 
+ 
++SCHEMA_WITNESS_MODE = "SCHEMA-WITNESS-INVALID-MODE"
++
++
++def load_schema() -> dict[str, Any]:
++    """Chargement gouverné : aucun PASS n’est possible avec un schéma absent, vide ou incomplet."""
++    if not SCHEMA.is_file():
++        raise ValidationError("schéma absent : schemas/run_card.schema.json")
++    schema = load_json(SCHEMA)
++    if not isinstance(schema, dict) or not schema:
++        raise ValidationError("schéma inopérant : la racine doit être un objet non vide")
++    node: Any = schema
++    for key in ("properties", "run_card", "properties", "mode", "enum"):
++        node = node.get(key) if isinstance(node, dict) else None
++    if not isinstance(node, list) or not node:
++        raise ValidationError("schéma incomplet : properties.run_card.properties.mode.enum absent ou vide")
++    return schema
++
++
++def check_schema_witness(schema: dict[str, Any]) -> None:
++    """Témoin négatif avant tout PASS : un mode inventé doit être rejeté par le schéma seul."""
++    document = load_json(EXAMPLE)
++    if not isinstance(document, dict) or not isinstance(document.get("run_card"), dict):
++        raise ValidationError("témoin de schéma impossible : exemple canonique sans objet run_card")
++    document["run_card"]["mode"] = SCHEMA_WITNESS_MODE
++    try:
++        validate_node(document, schema)
++    except ValidationError as exc:
++        if "run_card.mode" in str(exc):
++            return
++        raise ValidationError(f"témoin de schéma non concluant : rejet pour un autre motif que le mode ({exc})") from exc
++    raise ValidationError("le schéma n’impose pas l’enum de mode")
++
++
+ def validate_single_path(path: Path, schema: dict[str, Any], strict: bool = False) -> int:
+     """Valide uniquement le fichier demandé par l’utilisateur ou un pipeline."""
+     try:
+@@ -396,28 +429,26 @@ def main(argv: list[str] | None = None) -> int:
+     )
+     args = parser.parse_args(argv)
+     errors: list[str] = []
+-    if not SCHEMA.is_file():
+-        errors.append("schéma absent : schemas/run_card.schema.json")
+-    else:
+-        try:
+-            schema = load_json(SCHEMA)
+-            if not isinstance(schema, dict):
+-                raise ValidationError("le schéma racine doit être un objet")
+-        except ValidationError as exc:
+-            errors.append(str(exc))
+-            schema = {}
+-
+     if args.strict and args.path is None:
+         print("RUN_CARD VALIDATION FAILED")
+         print("- --strict exige un fichier JSON ciblé")
+         return 1
+-    if schema and args.path is not None:
++    # Avant toute branche, suite ou ciblée : schéma opérant et témoin négatif rejeté.
++    try:
++        schema = load_schema()
++        check_schema_witness(schema)
++    except ValidationError as exc:
++        print("RUN_CARD VALIDATION FAILED")
++        print(f"- {exc}")
++        return 1
++    # Une demande ciblée ne retombe jamais sur la suite.
++    if args.path is not None:
+         path = args.path.expanduser()
+         if not path.is_absolute():
+             path = Path.cwd() / path
+         return validate_single_path(path.resolve(), schema, strict=args.strict)
+ 
+-    if schema:
++    # Suite intégrée : le schéma est garanti opérant par le chargement gouverné.
+     check_fixture(EXAMPLE, schema, True, errors)
+     check_fixture(FIXTURES / "valid_closed_return.json", schema, True, errors)
+     check_fixture(
