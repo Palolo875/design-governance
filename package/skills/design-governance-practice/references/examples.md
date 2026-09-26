@@ -36,7 +36,8 @@ MODE: DIRECTION
 DECISION-INTENT: choisir une direction située pour le premier geste de découverte
 THESIS: la ville se découvre par couches d’écoute
 FIRST-OBJECT: topographie sonore interactive
-ANTI-DIRECTION: carte plate à pins et hero centré interchangeable
+MODAL: carte plate à pins, titre centré, cartes de fonctionnalités
+PARTI: s’écarter de la carte à pins ; l’écoute par couches porte la scène
 ARTIFACT: hero construite avec objet, contenu et geste
 OBSERVED: hiérarchie, matière et premier geste dans le viewport inspecté
 NOT-VERIFIED: préférence, utilisabilité générale, accessibilité exécutée

@@ -56,7 +56,8 @@ def main() -> int:
     grid = between(B, "### Contrat de grille", "\n### ")
     legend = between(D, "### Légende", "\n### ")
     boot_tension = line(D, "STRUCTURAL-TENSION:")
-    boot_anti = line(D, "ANTI-DIRECTIONS:")
+    # Rectification déclarée V12-03 : depuis V1.2 (candidate), PARTI remplace ANTI-DIRECTIONS dans le boot.
+    boot_anti = line(D, "PARTI:") or line(D, "ANTI-DIRECTIONS:")
     daily_lite = line(D, "| **LITE** | `ACTION/RUN-LITE`.")
     dfast = between(D, "### DIRECTION/FAST-PATH", "## DIRECTION/EXTERNAL-START")
     routes = between(D, "| Route | À retenir lorsque |", "La génération ne reçoit")

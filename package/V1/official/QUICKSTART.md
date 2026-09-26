@@ -42,7 +42,7 @@ Avant les routes détaillées, notez seulement le **mode**, le **risque dominant
 
 **Bénéfice attendu.** Charge `DIRECTION` pour obtenir une position située et un premier objet plus fort ; `SAVOIR` pour transformer une impression en jugement et en choix de craft ; `BIBLIOTHEQUE` pour rendre la structure habitable, compatible et maintenable ; `ACTION` pour transformer la décision en livraison observable, corrigible et prouvable. Si aucun de ces gains ne peut modifier la prochaine décision, reste sur le chemin court ; si un risque critique est actif, ne confonds pas chemin court et profondeur insuffisante.
 
-Pour une décision visuelle ouverte, utilise le **Creative Boot** de `DIRECTION` avant le premier pixel : promesse, objet de preuve, geste, anti-directions concrètes, tension et signature structurelles (nombre d’axes : `BIBLIOTHEQUE/TENSION`), jusqu’à trois cibles créatives `SAVOIR/CRAFT`, la base et la limite de l’ancre, le premier objet et le défaut dominant. Le boot est une vue de cadrage, pas un nouveau formulaire ou une obligation pour les deltas locaux ; il doit modifier la construction ou rester omis.
+Pour une décision visuelle ouverte, utilise le **Creative Boot** de `DIRECTION` avant le premier pixel : promesse, objet de preuve, geste, anti-directions concrètes, tension et signature structurelles (nombre d’axes : `BIBLIOTHEQUE/TENSION`), jusqu’à trois cibles créatives `SAVOIR/CRAFT`, `MODAL`/`PARTI` (d’où viennent les anti-directions), bilan de fabrication (`FABRICATION`), le premier objet et le défaut dominant. Le boot est une vue de cadrage, pas un nouveau formulaire ou une obligation pour les deltas locaux ; il doit modifier la construction ou rester omis. Sur brief vague, la prise de brief de `DIRECTION/EXTERNAL-START` demande au plus trois intrants, dans cet ordre : contenu réel, marque, asset principal, destination ; le rendu est construit dans tous les cas.
 
 Si le domaine, le public, la confiance, la culture, la convention ou l’ambition peuvent changer le résultat, active `DIRECTION/DOMAIN-FRAME`, puis `SAVOIR/SOURCE` pour une recherche orientée décision. Augmente la profondeur seulement lorsqu’un déclencheur est nommé ; la recherche doit revenir dans le contenu, la structure, le geste ou la preuve. Pour une UI/UX nouvelle, ajoute le contrat de réalité d’ACTION : tâche, contenu, états, responsive, accessibilité, robustesse et scope de preuve.
 
@@ -55,7 +55,7 @@ Avant toute route détaillée, garde en tête les cinq absolus de `DIRECTION` : 
 | 30 secondes | Décision, risque, preuve, capacité et ligne de run. | `DIRECTION/START`. |
 | 5 minutes | Classification, sources minimales, premier objet, observation et suite. | `DIRECTION`, `ACTION` et la route du mode. |
 | Un agent à activer | Objectif, périmètre, autonomie, confirmation et format de sortie. | Skill pratique, `RUN_CARD` et références conditionnelles. |
-| Une direction visuelle ouverte | Creative Boot : promesse, objet, geste, anti-directions, tension, signature, cibles CFT et premier objet. | `DIRECTION/CREATIVE-BOOT`, `DIRECTION/VISUAL_TARGET`, `DIRECTION/FIRST-OBJECT`, `DIRECTION/DOUBLE-LOOP`, `SAVOIR/CRAFT/CFT-00`, `ACTION/RUN-DIRECTION`. |
+| Une direction visuelle ouverte | Creative Boot : promesse, objet, geste, modal et parti, tension, signature, cibles CFT, fabrication et premier objet. | `DIRECTION/CREATIVE-BOOT`, `DIRECTION/VISUAL_TARGET`, `DIRECTION/FIRST-OBJECT`, `DIRECTION/DOUBLE-LOOP`, `SAVOIR/CRAFT/CFT-00`, `ACTION/RUN-DIRECTION`. |
 | Un run à persister | Scope, artefact, preuve, limite, owner et projection validable. | `ACTION`, schéma `RUN_CARD` et validateur. |
 
 ## 2. Le chemin en trente secondes
@@ -234,9 +234,11 @@ La page doit donner une présence éditoriale forte tout en faisant comprendre
 le bénéfice principal avant le premier geste.
 
 DIRECTION:
-Thèse : une entrée éditoriale dense mais lisible, où un objet visuel propriétaire
-porte la promesse au lieu d’un hero générique.
-Anti-direction : hero SaaS interchangeable avec gradient décoratif et cartes répétées.
+Thèse : la preuve du produit porte la première scène ; la promesse se lit
+avant le premier geste.
+Modal : titre centré, sous-titre, deux boutons, trois cartes de bénéfices.
+Parti : s’écarter pour la première scène seulement, où la preuve remplace le titre ;
+garder la structure attendue pour le reste de la page.
 First object : titre, objet visuel propriétaire et CTA principal dans la première scène.
 
 ARTIFACT:

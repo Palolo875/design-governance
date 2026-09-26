@@ -5,6 +5,14 @@
 **Date de la version :** 2026-09-26  
 **Usage recommandé :** pilote contrôlé, supervision humaine et preuve adaptée au risque
 
+## Non publié — candidate V1.2 (B05), chantiers A, B et D
+
+- **Bilan de fabrication.** `FABRICATION` remplace `ANCHOR-BASIS` et `ANCHOR-LIMIT` dans le Creative Boot ; `CONSTRAINT` inclut la destination ; en produit réel, jamais de faux asset ; capacités absentes : plafond déclaré, rendu livré. Trace seule, schéma `RUN_CARD` inchangé.
+- **Prise de brief minimale.** `DIRECTION/EXTERNAL-START` : au plus trois demandes, dans l’ordre contenu réel, marque, asset principal, destination ; construire dans tous les cas.
+- **Anti-slop vivant.** `MODAL` / `PARTI` remplacent `ANTI-DIRECTIONS` (projetés dans `direction.anti_direction`) ; marqueurs de vague datés dans `SAVOIR` (`[VEILLE 2026-09]`), pour nommer, jamais pour interdire.
+- **Validateur de carte.** La liste close des conditions de façade passe de 42 à 46 conditions (LCF-43 à LCF-46).
+- **Efficacité.** `NOT-VERIFIED` : l’épreuve de référence donne V1.1.1 ≈ sans système sur la qualité perçue ; l’effet de ces chantiers reste à éprouver (G4).
+
 ## V1.1.1 — Retour d’audit : alignements de textes et de façades
 
 Aucun changement de schéma, d’invariant machine ni de fixture. Les cartes valides en V1.1.0 le restent.

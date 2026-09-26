@@ -45,7 +45,7 @@ Les modules ci-dessous ne sont pas des formulaires à remplir en parallèle. Ils
 | Vue | Rôle | Déclencheur | Sortie à transmettre |
 |---|---|---|---|
 | `START` | Classer | Démarrage de tout run ; si mode ou risque est incertain, ouvrir une clarification ou une reclassification | `MODE`, `RISK`, `DECISION`, `OWNER`, `NEXT-PROOF`, `CAPABILITY-BASIS` |
-| `CREATIVE-BOOT` | Ouvrir la boucle créative | Décision visuelle ouverte | Promesse, objet de preuve, geste, anti-directions et défaut recherché |
+| `CREATIVE-BOOT` | Ouvrir la boucle créative | Décision visuelle ouverte | Promesse, objet de preuve, geste, `MODAL`/`PARTI`, `FABRICATION` et défaut recherché |
 | `VISUAL_TARGET` | Rendre la position pilotable | Première scène ou identité à définir | Thèse, relation, ancre, composition, preuve et rendu attendu |
 | `DIRECTION-ATELIER` | Approfondir une position située | Tension, geste, confiance culturelle ou exclusion pouvant modifier la scène | Moment, tension, geste, position, contre-choix et limite |
 | `FIRST-OBJECT` | Rendre la première proposition jugeable | Premier rendu à produire ou comparer | Objet complet et dimensions à inspecter |
@@ -153,7 +153,7 @@ Avant toute construction, vérifie que l’entrée courte rend retrouvables les 
 DECISION — ce qui doit être tranché
 RISK — coût d’erreur dominant
 SCOPE — surface, état, viewport, consumer ou périmètre concerné
-CONSTRAINT — contrainte réelle qui peut changer la décision
+CONSTRAINT — contrainte réelle qui peut changer la décision, dont la destination (démo, prototype ou produit réel) et l’enjeu identitaire
 NEXT-PROOF — observation ou test qui permettra de trancher
 OWNER — responsable de la décision et de la prochaine action
 ```
@@ -162,7 +162,7 @@ Ce gabarit est une vue d’activation, pas un second schéma : `ACTION/RUN_CARD`
 
 ### DIRECTION/CREATIVE-BOOT — activer la boucle avant le premier pixel
 
-Pour une décision visuelle ouverte, active avant le build un **Creative Boot** court. Il ne crée ni mode, ni route, ni gate, ni statut, ni score esthétique, ni champ obligatoire concurrent de `RUN_CARD`. C’est une vue de cadrage qui relie `DIRECTION` à `BIBLIOTHEQUE`, `SAVOIR` et `ACTION` afin que le jugement créatif puisse modifier la construction plutôt que commenter seulement le résultat.
+Pour une décision visuelle ouverte, active avant le build un **Creative Boot** court. Il ne crée ni mode, ni route, ni gate, ni statut, ni score esthétique, ni champ obligatoire concurrent de `RUN_CARD`.
 
 Le boot tient au maximum les décisions suivantes :
 
@@ -171,21 +171,21 @@ DECISION: décision que le premier rendu doit permettre de prendre
 PROMISE: promesse à rendre perceptible
 PROOF-OBJECT: objet, état, donnée ou relation qui rend la promesse crédible
 GESTURE: premier geste ou action attendu
-ANTI-DIRECTIONS: patterns visuels concrets à ne pas reproduire
+MODAL: ce que n’importe quelle IA produirait ici (structure, palette, typo, assets)
+PARTI: garder ou s’écarter — où et pourquoi au regard de la thèse ; projeté dans `direction.anti_direction`
 STRUCTURAL-TENSION: axe(s) de tension selon BIBLIOTHEQUE (un ou deux, `BIBLIOTHEQUE/TENSION`)
 STRUCTURAL-SIGNATURE: relation que cette structure rend possible au-delà de l’héritage
 CFT-TARGETS: jusqu’à trois qualités créatives prioritaires pour la construction
-ANCHOR-BASIS: référence observée, contrainte produit, hypothèse générée ou système hérité
-ANCHOR-LIMIT: ce que cette base ne permet pas d’affirmer
+FABRICATION: moyens réels (assets, marque, polices, composants, génération, sources, contenu) → plafond par couche (structure, typo, couleur, assets, contenu) → construire, construire avec plafond déclaré, demander X ou changer de route ; inclut la base de l’ancre et ce qu’elle ne permet pas d’affirmer
 FIRST-OBJECT: artefact complet construit pour rendre les choix jugeables
 DOMINANT-DEFECT: défaut perceptuel ou structurel recherché en premier
 ```
 
-`DIRECTION` possède la promesse, l’objet, le geste et les anti-directions ; `BIBLIOTHEQUE` possède la tension et la signature structurelles ; `SAVOIR/CRAFT` possède le jugement des qualités de présence et de fabrication ; `ACTION` possède l’observation, la preuve, la correction et la clôture. Les `CFT-TARGETS` sont un foyer de construction, pas un score : les autres dimensions restent applicables lorsqu’un risque ou une décision les active et ne deviennent `N/A-JUSTIFIED` que si elles sont réellement hors périmètre.
+`DIRECTION` possède la promesse, l’objet, le geste, `MODAL`/`PARTI` et `FABRICATION` ; `BIBLIOTHEQUE` possède la tension et la signature structurelles ; `SAVOIR/CRAFT` possède le jugement des qualités de présence et de fabrication ; `ACTION` possède l’observation, la preuve, la correction et la clôture. Les `CFT-TARGETS` sont un foyer de construction, pas un score : les autres dimensions restent applicables lorsqu’un risque ou une décision les active et ne deviennent `N/A-JUSTIFIED` que si elles sont réellement hors périmètre.
 
-Avant le premier rendu, le boot doit conduire à un artefact complet, crédible et observable — jamais à un wireframe volontairement creux lorsque les capacités sont disponibles. Après observation, conserve dans la trace : ce qui est effectivement visible, les qualités prioritaires observées ou non observées, **un défaut dominant** et, si une correction utile existe, la modification réelle apportée et la ré-observation attendue ; sinon, la raison de l’arrêt (`DIRECTION/DOUBLE-LOOP`, one-shot). Une hypothèse générée peut orienter une exploration ; elle ne devient pas une ancre culturelle ou une preuve par simple déclaration.
+Avant le premier rendu, le boot doit conduire à un artefact complet, crédible et observable — jamais à un wireframe volontairement creux lorsque les capacités sont disponibles ; lorsqu’elles manquent, `FABRICATION` déclare le plafond avant le build et le rendu sort avec la meilleure route de `DIRECTION/VISUAL_TARGET`. Après observation, conserve dans la trace : ce qui est effectivement visible, les qualités prioritaires observées ou non observées, **un défaut dominant** et, si une correction utile existe, la modification réelle apportée et la ré-observation attendue ; sinon, la raison de l’arrêt (`DIRECTION/DOUBLE-LOOP`, one-shot).
 
-Le Creative Boot est recommandé lorsque la décision visuelle est ouverte et peut rester condensé ou omis pour un delta strictement local. Sa valeur doit être jugée par la conséquence sur le premier objet et la décision, non par la complétude du formulaire.
+Sa valeur se juge à sa conséquence sur le premier objet, non à la complétude du formulaire ; il peut être omis pour un delta strictement local.
 
 ### DIRECTION/DOMAIN-FRAME — adapter le design au domaine
 
@@ -281,7 +281,7 @@ Si la réponse à la quatrième question est « rien », ne lance pas un nouveau
 
 ## DIRECTION/EXTERNAL-START — activation portable sur brief vague
 
-Cette vue rend V1 activable lorsqu’un agent externe reçoit un brief court, une skill ou les fichiers du package dans une conversation. Elle s’applique aussi lorsqu’un brief interne est suffisamment vague pour que la première scène, le grounding ou le réemploi puisse changer la décision ; elle ne remplace pas le fast path de `LITE` ou `ITER`. Elle n’impose aucun profil ou style : les profils disponibles sont des hypothèses conditionnelles, et l’absence de profil est une sortie valide. Elle est une **vue de démarrage**, pas un nouveau mode, gate, statut, owner, score, questionnaire ni une seconde `RUN_CARD`. `ACTION` reste propriétaire de la preuve et de la clôture ; `SAVOIR` du jugement ; `BIBLIOTHEQUE` des structures. `DIRECTION-ATELIER`, `GROUNDING-DECISION`, `REUSE-CHALLENGE` et la section `DESIGN-ATLAS` de `SAVOIR.md` sont des modules indépendants : chacun n’est activé que si sa décision à modifier est identifiée ; plusieurs peuvent coexister seulement si leurs décisions sont distinctes et utiles.
+Cette vue rend V1 activable lorsqu’un agent externe reçoit un brief court, une skill ou les fichiers du package dans une conversation. Elle s’applique aussi lorsqu’un brief interne est suffisamment vague pour que la première scène, le grounding ou le réemploi puisse changer la décision ; elle ne remplace pas le fast path de `LITE` ou `ITER`. Elle n’impose aucun profil ni style. Elle est une **vue de démarrage**, pas un nouveau mode, gate, statut, owner, score, questionnaire ni une seconde `RUN_CARD`. Propriétaires et modules : ordre de lecture minimal de `DIRECTION/START`.
 
 Après `DIRECTION/START`, avant le premier code ou le premier rendu d’une surface `DIRECTION`, l’agent tient seulement les décisions qui peuvent changer l’artefact :
 
@@ -301,7 +301,7 @@ NO-GO — faux réalisme, dashboard décoratif, cartes avant mécanisme, ou reto
         automatique au dernier style, asset ou rendu disponible.
 ```
 
-La personne reçoit directement une proposition principale ; cette vue reste interne. Si une ligne ne peut modifier ni artefact, claim, preuve, limite ou décision, elle est omise ; `N/A-JUSTIFIED` reste réservé à une non-applicabilité réelle et justifiée selon ACTION.
+**Prise de brief.** Au plus trois demandes, en un seul échange, par gain de plafond : contenu réel (textes, chiffres, preuves, noms), marque, asset principal ou route autorisée, destination si elle n’est pas évidente. Brief riche : aucune. Humain absent : hypothèses nommées, plafond déclaré, demandes listées à la livraison. Le rendu est construit dans tous les cas. La personne reçoit directement une proposition principale ; cette vue reste interne. Si une ligne ne peut modifier ni artefact, claim, preuve, limite ou décision, elle est omise ; `N/A-JUSTIFIED` reste réservé à une non-applicabilité réelle et justifiée selon ACTION.
 
 ### Traduction humaine minimale de DIRECTION/START
 
@@ -397,11 +397,11 @@ Cette table est la seule représentation canonique de la cible. L’opération d
 
 ### Compilation de la première proposition
 
-Pour une surface visuelle ouverte, ne traite pas les champs de `VISUAL_TARGET` comme une liste indépendante. Cette compilation est un ordre de travail sur les champs de la table, pas une seconde liste. Compile-les dans cet ordre : **contexte réel → promesse → tension → relation perceptible → objet de preuve → geste → composition → matière, typographie et asset → états et contraintes → premier rendu jugeable**. La sortie attendue est une relation visible dans l’artefact, pas un dossier complet autour d’un artefact générique.
+Pour une surface visuelle ouverte, ne traite pas les champs de `VISUAL_TARGET` comme une liste indépendante. Compile-les dans cet ordre : **contexte réel → promesse → tension → relation perceptible → objet de preuve → geste → composition → matière, typographie et asset → états et contraintes → premier rendu jugeable**. La sortie attendue est une relation visible dans l’artefact, pas un dossier complet autour d’un artefact générique.
 
 Les décisions de compilation se lisent dans la table : promesse = thèse + conséquence observable ; relation = opération dominante + relations de plans ; composition = silhouette + relations de plans ; résolution initiale = ligne du même nom.
 
-Une proposition de haute qualité n’est pas obtenue en ajoutant séparément une belle police, une image ou une texture. Elle apparaît lorsque la composition, le contenu, le type, l’objet de preuve, la matière ou sa retenue, les états et le comportement se renforcent mutuellement. Si l’un de ces éléments ne change aucune relation visible, retire-le ou nomme sa limite.
+La qualité ne vient pas d’une police, d’une image ou d’une texture ajoutées séparément, mais du renforcement mutuel de la composition, du contenu, du type, de l’objet de preuve, de la matière, des états et du comportement ; un élément sans relation visible est retiré ou sa limite nommée.
 
 Un registre naturel, organique, éditorial, architectural, tactile ou technique est une hypothèse située, non un preset. Il peut modifier la matière, la respiration, la profondeur, la typographie, la donnée ou le geste lorsque cette relation appartient au produit. Dans une surface de qualité, l’agent peut aussi composer un composant authored : un objet visible dont la silhouette, le contenu, la hiérarchie, la matière et le comportement sont pensés pour le contexte, sans rendre les primitives critiques inhabituelles par principe.
 
@@ -421,7 +421,7 @@ Une image jolie mais sans conséquence de décision est décorative et ne suffit
 
 Lorsqu’un asset ou son absence porte une décision perceptible, nomme **une route de production initiale** avant le build. Cette route peut être révisée sur preuve si la décision de direction reste stable et si la révision réduit un risque de droits, de performance, de fidélité, de maintenance ou d’intégration.
 
-Ce n’est ni un statut, ni un classement de qualité, ni une préférence d’outil : c’est une réponse située au rôle de l’asset, aux droits, au délai, à la performance et au niveau de singularité attendu.
+Ce n’est ni un statut, ni une préférence d’outil : c’est une réponse située au rôle de l’asset, aux droits, au délai et à la **destination**. En produit réel, un asset manquant devient une route `CODE-NATIVE` ou `SANS-ASSET` ou un emplacement marqué, jamais un faux asset ; en démo, une approximation marquée illustrative ; un contenu absent, un emplacement illustratif.
 
 | Route | À retenir lorsque | À déclarer honnêtement |
 |---|---|---|

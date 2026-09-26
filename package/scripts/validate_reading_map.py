@@ -426,6 +426,45 @@ def lcf_42(t: dict[str, str]) -> bool:
             and not after[1].startswith("CHANGED"))
 
 
+# ---------- V1.2 (PATCH-DECISION A, B, D) : LCF-43 à LCF-46 ----------
+BRIEF_ORDER = re.compile(r"contenu réel.{0,80}?marque.{0,120}?asset principal.{0,120}?destination")
+WAVE_MARKERS = re.compile(r"hero SaaS|gradient décoratif|\bviolet\b|\bInter\b|\bhalos?\b|\bbeige\b|\bcrème\b|serif italique|"
+                          r"orange rouille|bandeau défilant|illustration peinte|\btramage\b")
+
+
+def boot_block(t: dict[str, str]) -> list[str]:
+    return fenced_after(t["D"], "Le boot tient au maximum les décisions suivantes").splitlines()
+
+
+def lcf_43(t: dict[str, str]) -> bool:
+    entry = fenced_after(t["D"], "### Entrée minimale").splitlines()
+    boot = boot_block(t)
+    vt = t["D"][t["D"].find("### Décider la route de production"):t["D"].find("### Réserve `ANCHOR-GENERATED`")]
+    return (any(l.startswith("CONSTRAINT —") and "destination" in l for l in entry) and any(l.startswith("FABRICATION:") for l in boot)
+            and not any(l.startswith(("ANCHOR-BASIS:", "ANCHOR-LIMIT:")) for l in boot)
+            and "jamais un faux asset" in vt and "bilan `FABRICATION`" in t["A"]
+            and all("`FABRICATION`" in t[k] for k in ("Q", "SK")))
+
+
+def lcf_44(t: dict[str, str]) -> bool:
+    ext = t["D"][t["D"].find("## DIRECTION/EXTERNAL-START"):t["D"].find("### Traduction humaine minimale")]
+    return all(BRIEF_ORDER.search(x) and "au plus trois" in x.lower() for x in (ext, t["Q"], t["SK"]))
+
+
+def lcf_45(t: dict[str, str]) -> bool:
+    boot = boot_block(t)
+    return (any(l.startswith("MODAL:") for l in boot) and any(l.startswith("PARTI:") for l in boot)
+            and not any(l.startswith("ANTI-DIRECTIONS:") for l in boot)
+            and all("`MODAL`/`PARTI`" in t[k] for k in ("Q", "SK")) and "MODAL:" in t["EX"])
+
+
+def lcf_46(t: dict[str, str]) -> bool:
+    keys = ("D", "A", "S", "B", "G", "Q", "RM", "OM", "README", "SK", "EX")
+    stray = [l for k in keys for l in t[k].splitlines() if WAVE_MARKERS.search(l) and not l.startswith("[VEILLE 20")]
+    dated = [l for l in t["S"].splitlines() if l.startswith("[VEILLE 20") and WAVE_MARKERS.search(l)]
+    return not stray and bool(dated)
+
+
 def check_facades(errors: list[str]) -> None:
     t = load_texts()
     rm33, rm49 = row(t["RM"], "Direction identitaire"), row(t["RM"], "Accessibilité")
@@ -491,6 +530,10 @@ def check_facades(errors: list[str]) -> None:
         ("LCF-40", "GLOSSAIRE, exemple CLOSED : réserve à sept attributs", "ACTION (réserve) ; RESERVATION_FIELDS ; Q-10", lcf_40(t)),
         ("LCF-41", "ACTION et machine_projection : champs admettant null", "schemas/run_card.schema.json ; O-1", lcf_41(t)),
         ("LCF-42", "QUICKSTART §9 : DECISION-CHANGE selon la triade", "ACTION/STATUS ; ACTION/HANDOFF ; Q-05", lcf_42(t)),
+        ("LCF-43", "DIRECTION (entrée, boot, route de production), ACTION, QUICKSTART, skill : bilan de fabrication", "DIRECTION/CREATIVE-BOOT (FABRICATION) ; V1.2-A", lcf_43(t)),
+        ("LCF-44", "EXTERNAL-START, QUICKSTART, skill : prise de brief, même ordre", "DIRECTION/EXTERNAL-START (prise de brief) ; V1.2-B", lcf_44(t)),
+        ("LCF-45", "boot, QUICKSTART, skill, exemples : MODAL / PARTI", "DIRECTION/CREATIVE-BOOT (MODAL, PARTI) ; V1.2-D", lcf_45(t)),
+        ("LCF-46", "textes et façades : marqueurs de vague seulement en [VEILLE] daté", "SAVOIR ([VEILLE] daté) ; V1.2-D", lcf_46(t)),
     ]
     for lcf_id, facade, source, held in table:
         if not held:

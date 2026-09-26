@@ -104,7 +104,7 @@ Le premier rendu n’est pas une simple ébauche destinée à être rendue prés
 | `DIRECTION` | La première scène porte déjà la présence, le point de vue, la composition, la typographie, la matière ou la retenue, l’objet de preuve et l’intégration d’asset nécessaires à la décision. |
 | `SYSTÈME` | Le composant ou token est montré dans ses usages réels, avec baseline, états, consommateurs et risque de régression identifiables. |
 
-Un rendu peut rester `EXPLORATORY` lorsqu’une preuve manque, mais ce statut ne justifie pas un artefact volontairement creux lorsque les capacités nécessaires sont disponibles. La qualité initiale est une cible de construction, non un score et non un verdict esthétique.
+Un rendu peut rester `EXPLORATORY` lorsqu’une preuve manque, mais ce statut ne justifie pas un artefact volontairement creux lorsque les capacités nécessaires sont disponibles ; sinon, plafond déclaré avant le build (`FABRICATION`). La qualité initiale est une cible de construction, non un score et non un verdict esthétique.
 
 ### ACTION/UI-UX-REALITY — construire l’interface et la tâche ensemble
 
@@ -337,7 +337,7 @@ Dans la projection JSON contrôlable, les noms composés sont sérialisés en `s
 
 ### Profil de capacités
 
-Quand une conclusion dépend d’un moyen d’observation, la `RUN_CARD` ajoute un `CAPABILITY-PROFILE` concis : **disponible**, **indisponible** ou **non requis**. Déclare seulement les capacités pertinentes au risque : artefact textuel, inspection DOM/CSS, navigateur/capture, calcul de contraste, clavier/AT, participant/tâche, runtime/données réelles. Toute capacité qui soutient un claim ajoute sa `BASIS` : résultat d’outil, environnement attesté, source utilisateur ou déclaration non attestée.
+Quand une conclusion dépend d’un moyen d’observation, la `RUN_CARD` ajoute un `CAPABILITY-PROFILE` concis : **disponible**, **indisponible** ou **non requis**. Déclare seulement les capacités pertinentes au risque : artefact textuel, inspection DOM/CSS, navigateur/capture, calcul de contraste, clavier/AT, participant/tâche, runtime/données réelles. Toute capacité qui soutient un claim ajoute sa `BASIS` : résultat d’outil, environnement attesté, source utilisateur ou déclaration non attestée. Le profil décrit l’**observation** ; ce que le run peut **fabriquer** relève du bilan `FABRICATION` de `DIRECTION/CREATIVE-BOOT`, en trace.
 
 Dans la `RUN_CARD`, chaque `basis` est typée : `capability`, `kind` (`tool_result`, `attested_environment`, `user_source` ou `unattested_declaration`) et `detail`. Pour un verdict accepté, `proof.provenance.capability` nomme la capacité qui soutient l’observation : elle figure parmi les capacités disponibles, et sa basis n’est pas une déclaration non attestée.
 

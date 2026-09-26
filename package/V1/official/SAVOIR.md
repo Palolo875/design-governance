@@ -827,6 +827,8 @@ Le sourcing de `DIRECTION` sépare trois rôles : **ancrage de direction** — p
 
 [VEILLE] Les listes de produits contemporains, tendances, registres culturels et snapshots ne sont pas neutres. Chaque élément mobilisé dans un run porte source, date, portée et limite dans sa trace locale.
 
+[VEILLE 2026-09] **Marqueurs de vague**, pour nommer `MODAL` (`DIRECTION/CREATIVE-BOOT`), jamais pour interdire : un marqueur gardé par décision reste valide. Vague 1 : violet, police Inter, halos et gradient décoratif, hero SaaS à cartes répétées. Vague 2 : fond beige ou crème, brun, serif de caractère ou serif italique, orange rouille, bandeau défilant, illustration peinte, tramage. Source : épreuve de référence interne V1.2 (26-09-2026), 6 rendus sur 6 sur fond crème et brun, avec ou sans système. À revoir avant 2027-03.
+
 Une tendance est une hypothèse de direction. Avant de l’utiliser, vérifie qu’elle sert le JTBD, améliore la compréhension, reste accessible et performante et survit lorsque son nom marketing disparaît.
 
 Distingue :
