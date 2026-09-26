@@ -1,6 +1,6 @@
 # Protocole — Épreuve de référence avant V1.2 (phase 0, en parallèle)
 
-**Date :** 2026-09-26 · **Owner :** Junior (Kamel) · **Statut :** brouillon, à valider par l'owner avant toute production de rendu
+**Date :** 2026-09-26 · **Owner :** Junior (Kamel) · **Statut :** v2 — choix délégués par l'owner (§11) ; production suspendue à l'accès aux assets (§11.3)
 **Base :** V1.1.1 (`package/`, étiquette `v1.1.1-import`), plan `plans/Plan_V1.2_Qualite_senior_gouvernance.md` §9 et §11.
 
 ---
@@ -111,3 +111,32 @@ Pas de test de significativité : l'échantillon ne le permet pas. On lit des ta
 2. Briefs riches B-DLA et B-SAAS, et leurs assets.
 3. Noms et relation des juges (le recrutement peut commencer tout de suite).
 4. Modèle producteur retenu, et 3 ou 2 répétitions.
+
+## 11. Amendement v2 — choix délégués par l'owner (26-09-2026)
+
+L'owner n'a ni juges à recruter ni assets à fournir, et délègue les choix. Ils sont faits ici et **remplacent** les passages cités ; tout le reste du protocole est inchangé.
+
+### 11.1 Juges (remplace §5 « Cible » et « Minimum viable »)
+
+| Juge | Ce qu'il juge | Aveugle ? | Statut |
+|---|---|---|---|
+| **J1 — l'owner** (designer, humain) | Les 12 paires, mais **seules les paires C1-C4 comptent** pour lui | C1 contre C4 : oui, par consigne (il ne lit pas la clé). C2 : **non**, il connaît le protocole et reconnaît les vraies photos | Conflit déclaré : auteur du système |
+| **J2 — modèle juge** (Sonnet 5, différent du modèle producteur, sans contexte) | Les 12 paires | Oui : ne connaît ni le protocole ni les conditions | Auto-comparaison déclarée (même famille de modèles, règle 7) |
+| **J3 — facultatif** | Toute personne extérieure que l'owner croise ; une page de jugement partageable pourra être fournie | Oui | D3 si relation externe |
+
+**Conséquence (certain) :** sans J3, l'épreuve n'a **aucun juge répondant aux critères D3**. Elle devient une **orientation déclarée** : la décision G3 reste celle de l'owner, éclairée par elle ; elle ne lève pas la réserve n° 1. Le critère d'arrêt §9 « aucune personne extérieure » est levé par décision de l'owner, sous cette qualification.
+
+### 11.2 Volume (remplace §4 « Volume »)
+
+**2 répétitions** : 2 briefs × 3 conditions × 2 = **12 rendus**, pour ménager les limites d'usage. La diversité (M2) devient indicative. Ordre : **B-DLA d'abord** (6 rendus), lecture, puis B-SAAS. M1 : 6 paires par brief, 12 par juge.
+
+### 11.3 Assets (précise §3)
+
+- Sources retenues : photos réelles sous licence libre (Wikimedia Commons), avec auteur, licence et lien consignés dans `plans/epreuve_reference/assets/SOURCES.md`. **Aucune image générée.**
+- **Bloquant :** la politique réseau de la session refuse `upload.wikimedia.org` et `commons.wikimedia.org`. L'owner doit les autoriser (réglages de l'environnement → Network access).
+- **Repli déclaré si refus :** C2 = brief riche **sans** assets figuratifs (« C2-partiel »). Q2 ne teste alors que la richesse du brief ; la part « assets » de l'hypothèse reste `NOT-VERIFIED`.
+- Les faits des briefs riches sont **fictifs mais plausibles**, écrits par l'auteur du protocole ; M3 compte comme « inventé » tout fait absent du brief riche.
+
+### 11.4 Briefs riches
+
+Voir `plans/epreuve_reference/briefs.md`. B-DLA est rédigé ; B-SAAS est défini, ses captures dépendent de §11.3.
