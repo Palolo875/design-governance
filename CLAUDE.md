@@ -39,6 +39,8 @@ Ne rien modifier dans `package/` pendant l'initialisation.
   - placeholders dans les champs libres ;
   - mineurs transmis ;
   - publication.
+- **Épreuve de référence B-DLA (unité V1.2-00) : close sans juge humain**, orientation déclarée : `audit/reports/V12_00_EPREUVE_REFERENCE_B-DLA.md`.
+- **Porte G1 franchie** (26-09-2026) : `audit/reports/V12_01_DECISIONS_G1.md`.
 - **Chantier en cours : plan V1.2**, `plans/Plan_V1.2_Qualite_senior_gouvernance.md`. Objectif : un premier rendu de niveau designer senior dès le one-shot, gouvernance conservée (bilan de fabrication, prise de brief minimale, matériaux, anti-slop vivant, atlas d'ancres, épreuve à l'aveugle).
 
 ## 3. Arborescence
@@ -102,7 +104,7 @@ python3 scripts/read_route.py ACTION/RUN_CARD  # lire une route
 
 ## 6. Prochaine étape
 
-1. **Porte G1 du plan V1.2 :** l'owner tranche les sept décisions du §12 de `plans/Plan_V1.2_Qualite_senior_gouvernance.md`. Ne rien construire avant.
+1. ~~Porte G1 du plan V1.2~~ : franchie le 26-09-2026 (`audit/reports/V12_01_DECISIONS_G1.md`).
 2. Ensuite : créer **B05**, une copie de `package/` sur une branche dédiée, puis rédiger la **PATCH-DECISION des chantiers A, B et D**, avec textes exacts, gardes et mesure du budget de lecture avant/après.
 3. Suivre le séquencement du plan : G2 (gardes rouges puis vertes) → G3 (non-régression, budget tenu) → G4 (épreuve à l'aveugle avec juges extérieurs) → publication V1.2.0.
 

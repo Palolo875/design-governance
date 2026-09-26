@@ -1,6 +1,6 @@
 # Protocole — Épreuve de référence avant V1.2 (phase 0, en parallèle)
 
-**Date :** 2026-09-26 · **Owner :** Junior (Kamel) · **Statut :** v2 — choix délégués par l'owner (§11) ; assets B-DLA prêts ; production en attente du feu vert
+**Date :** 2026-09-26 · **Owner :** Junior (Kamel) · **Statut :** B-DLA produit et clôturé sans J1 (décision de l'owner) ; rapport `audit/reports/V12_00_EPREUVE_REFERENCE_B-DLA.md` ; B-LOG non produit
 **Base :** V1.1.1 (`package/`, étiquette `v1.1.1-import`), plan `plans/Plan_V1.2_Qualite_senior_gouvernance.md` §9 et §11.
 
 ---
