@@ -13,7 +13,7 @@
 | 6 | Juges de l'épreuve | Pas de juges extérieurs disponibles ; montage de l'épreuve de référence (J1 owner, J2 modèle, J3 facultatif) ; G4 reste une **orientation déclarée** tant qu'aucun juge D3 n'existe |
 | 7 | Briefs de l'épreuve | 4 briefs, dont au moins un ancré à Douala (B-DLA déjà produit) |
 
-**Contraintes proposées par l'auteur, issues de l'unité 00 (`V12_00_EPREUVE_REFERENCE_B-DLA.md`), non encore validées par l'owner :**
+**Contraintes issues de l'unité 00 (`V12_00_EPREUVE_REFERENCE_B-DLA.md`), validées par l'owner le 26-09-2026 :**
 - la PATCH-DECISION A, B, D doit **réduire** le budget de lecture d'un run `DIRECTION` (mesuré : 805 et 965 lignes), pas seulement le tenir ;
 - elle ne doit pas affaiblir le signalement du contenu d'exemple, seul gain constant observé ;
 - le chantier D prend pour réponse modale observée : fond crème et brun, serif de caractère.
