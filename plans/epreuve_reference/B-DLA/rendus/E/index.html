@@ -1,0 +1,1042 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fournil Wouri — Boulangerie-pâtisserie à Douala</title>
+<meta name="description" content="Boulangerie-pâtisserie artisanale à Bonapriso, Douala. Pain chaud dès 5 h 30, viennoiseries pur beurre, gâteaux de fête sur commande via WhatsApp.">
+<!-- Contenu fictif : nom, adresse et numéro (+237 600 00 00 00) sont des hypothèses à remplacer, voir questions.txt -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --flour:#F5EDE0;
+  --flour-2:#ECDFCB;
+  --flour-3:#E2D1B8;
+  --ink:#24160F;
+  --ink-soft:#5A4538;
+  --crust:#B4541E;
+  --crust-deep:#8A3B10;
+  --butter:#EFC36A;
+  --crumb:#F6DDAE;
+  --wouri:#2E5A4C;
+  --night:#1A100B;
+  --night-2:#2A1911;
+  --line:rgba(36,22,15,.16);
+  --serif:"Young Serif", Georgia, "Times New Roman", serif;
+  --sans:"Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --wrap:1180px;
+  --gutter:clamp(16px, 4vw, 40px);
+  --radius:14px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{
+  margin:0;background:var(--flour);color:var(--ink);
+  font-family:var(--sans);font-size:17px;line-height:1.6;
+  font-feature-settings:"tnum" 0;
+  overflow-x:hidden;
+}
+/* grain de farine */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:100;opacity:.35;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .33 0 0 0 0 .22 0 0 0 .18 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.08;margin:0;letter-spacing:-.01em}
+p{margin:0}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--gutter)}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:3px solid var(--butter);outline-offset:3px;border-radius:4px}
+.eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--crust-deep)}
+.num{font-variant-numeric:tabular-nums}
+
+/* ---------- boutons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:.6em;justify-content:center;
+  font:600 1rem/1 var(--sans);text-decoration:none;cursor:pointer;
+  padding:.95em 1.35em;border-radius:999px;border:1.5px solid transparent;
+  transition:transform .15s ease, background-color .15s ease, color .15s ease;
+}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--butter);color:var(--night)}
+.btn-primary:hover{background:#F6D183}
+.btn-ghost{border-color:rgba(245,237,224,.45);color:var(--flour)}
+.btn-ghost:hover{background:rgba(245,237,224,.08)}
+.btn-dark{background:var(--ink);color:var(--flour)}
+.btn-dark:hover{background:var(--crust-deep)}
+.btn svg{width:18px;height:18px;flex:none}
+
+/* ---------- en-tête ---------- */
+.top{
+  position:absolute;top:0;left:0;right:0;z-index:20;color:var(--flour);
+}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-top:22px;padding-bottom:22px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand svg{width:40px;height:40px}
+.brand b{font:400 1.35rem/1 var(--serif);display:block}
+.brand small{display:block;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;opacity:.7;margin-top:4px}
+.nav{display:flex;align-items:center;gap:28px;font-size:.95rem}
+.nav a{text-decoration:none;opacity:.85}
+.nav a:hover{opacity:1;text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1px}
+.nav .btn{opacity:1;padding:.7em 1.1em;font-size:.92rem}
+@media (max-width:860px){.nav a:not(.btn){display:none}}
+@media (max-width:420px){.nav .btn span{display:none}.nav .btn{padding:.7em}}
+
+/* ---------- hero : la nuit du fournil ---------- */
+.hero{
+  position:relative;overflow:hidden;color:var(--flour);
+  background:
+    radial-gradient(60% 70% at 78% 62%, rgba(232,120,40,.42) 0%, rgba(160,60,20,.18) 38%, rgba(26,16,11,0) 70%),
+    radial-gradient(40% 40% at 10% 10%, rgba(46,90,76,.28), rgba(26,16,11,0) 70%),
+    var(--night);
+  padding:150px 0 0;
+}
+.hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:40px;align-items:end}
+.hero h1{font-size:clamp(2.6rem, 6.2vw, 5.3rem);line-height:1;letter-spacing:-.02em}
+.hero h1 em{font-style:normal;color:var(--butter)}
+.hero .eyebrow{color:var(--butter);opacity:.9;margin-bottom:22px;display:block}
+.hero .lead{font-size:clamp(1.05rem,1.5vw,1.2rem);max-width:34em;color:rgba(245,237,224,.82);margin-top:26px}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+.hero-copy{padding-bottom:64px}
+.hero-art{position:relative;align-self:stretch;display:flex;align-items:flex-end;justify-content:center;min-height:420px}
+.hero-art svg{width:min(640px,100%);height:auto;filter:drop-shadow(0 30px 40px rgba(0,0,0,.45))}
+
+/* ticket en direct */
+.ticket{
+  margin-top:40px;display:inline-grid;grid-template-columns:auto 1fr;gap:4px 16px;align-items:center;
+  background:rgba(245,237,224,.06);border:1px solid rgba(245,237,224,.14);border-radius:var(--radius);
+  padding:16px 20px;max-width:30em;backdrop-filter:blur(4px);
+}
+.ticket .clock{grid-row:span 2;font:400 2rem/1 var(--serif);color:var(--butter);font-variant-numeric:tabular-nums}
+.ticket .state{font-weight:600;display:flex;align-items:center;gap:8px}
+.ticket .state i{width:9px;height:9px;border-radius:50%;background:#7BC47F;box-shadow:0 0 0 4px rgba(123,196,127,.18)}
+.ticket.closed .state i{background:#D9826A;box-shadow:0 0 0 4px rgba(217,130,106,.18)}
+.ticket .oven{font-size:.93rem;color:rgba(245,237,224,.75)}
+
+/* bande des grignes */
+.scoring{height:34px;color:var(--night);background:var(--flour)}
+.scoring svg{width:100%;height:34px}
+
+@media (max-width:900px){
+  .hero{padding-top:120px}
+  .hero-grid{grid-template-columns:1fr}
+  .hero-copy{padding-bottom:0}
+  .hero-art{min-height:0;margin-top:10px}
+  .hero-art svg{width:min(520px,100%)}
+}
+
+/* ---------- sections ---------- */
+section{scroll-margin-top:20px}
+.sec{padding:clamp(72px,10vw,128px) 0}
+.sec-head{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:end;margin-bottom:clamp(40px,6vw,64px)}
+.sec-head h2{font-size:clamp(2rem,4.4vw,3.4rem)}
+.sec-head p{color:var(--ink-soft);max-width:32em;justify-self:end}
+.sec-head .eyebrow{display:block;margin-bottom:14px}
+@media (max-width:760px){.sec-head{grid-template-columns:1fr}.sec-head p{justify-self:start}}
+
+/* ---------- signatures ---------- */
+.sig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.4vw,28px)}
+.sig{
+  background:var(--flour-2);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;
+  border:1px solid var(--line);
+}
+.sig-art{aspect-ratio:4/3;display:grid;place-items:center;position:relative;
+  background:radial-gradient(70% 70% at 50% 60%, #F3E6D1 0%, var(--flour-3) 100%)}
+.sig-art svg{width:78%;height:auto;filter:drop-shadow(0 14px 14px rgba(70,35,10,.22))}
+.sig-art .origin{
+  position:absolute;left:14px;top:14px;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--flour);color:var(--wouri);padding:6px 10px;border-radius:999px;border:1px solid rgba(46,90,76,.25)
+}
+.sig-body{padding:22px 22px 24px;display:flex;flex-direction:column;gap:10px;flex:1}
+.sig h3{font-size:1.5rem}
+.sig p{color:var(--ink-soft);font-size:.98rem}
+.sig .price{margin-top:auto;padding-top:12px;display:flex;justify-content:space-between;align-items:baseline;border-top:1px dashed var(--line);font-weight:600}
+.sig .price span:last-child{font:400 1.25rem/1 var(--serif);color:var(--crust-deep)}
+@media (max-width:900px){.sig-grid{grid-template-columns:1fr 1fr}.sig:last-child{grid-column:span 2}.sig:last-child .sig-art{aspect-ratio:16/7}}
+@media (max-width:600px){.sig-grid{grid-template-columns:1fr}.sig:last-child{grid-column:auto}.sig:last-child .sig-art{aspect-ratio:4/3}}
+
+/* ---------- journée du fournil ---------- */
+.day{background:var(--ink);color:var(--flour)}
+.day .eyebrow{color:var(--butter)}
+.day .sec-head p{color:rgba(245,237,224,.72)}
+.timeline{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,1fr);position:relative}
+.timeline::before{content:"";position:absolute;left:0;right:0;top:27px;height:2px;
+  background:repeating-linear-gradient(90deg, rgba(245,237,224,.35) 0 8px, transparent 8px 14px)}
+.slot{position:relative;padding:0 16px 0 0}
+.slot .dot{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;position:relative;z-index:1;
+  background:var(--night-2);border:1.5px solid rgba(245,237,224,.25);font:400 .95rem/1 var(--serif);color:var(--flour);font-variant-numeric:tabular-nums}
+.slot h3{font-size:1.15rem;margin:22px 0 8px}
+.slot p{font-size:.92rem;color:rgba(245,237,224,.7)}
+.slot .tag{display:inline-block;margin-top:12px;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:4px 9px;border-radius:999px;visibility:hidden}
+.slot.is-now .dot{background:var(--butter);color:var(--night);border-color:var(--butter);box-shadow:0 0 0 8px rgba(239,195,106,.16),0 0 40px rgba(232,120,40,.55)}
+.slot.is-now .tag{visibility:visible;background:var(--butter);color:var(--night)}
+.slot.is-next .dot{border-color:var(--butter);color:var(--butter)}
+.slot.is-next .tag{visibility:visible;border:1px solid rgba(239,195,106,.5);color:var(--butter)}
+.slot.is-past{opacity:.55}
+.day-note{margin-top:48px;padding-top:24px;border-top:1px solid rgba(245,237,224,.14);display:flex;flex-wrap:wrap;gap:12px 40px;font-size:.95rem;color:rgba(245,237,224,.75)}
+.day-note strong{color:var(--flour);font-weight:600}
+@media (max-width:980px){
+  .timeline{grid-template-columns:1fr;gap:0}
+  .timeline::before{left:27px;right:auto;top:0;bottom:0;width:2px;height:auto;
+    background:repeating-linear-gradient(180deg, rgba(245,237,224,.35) 0 8px, transparent 8px 14px)}
+  .slot{display:grid;grid-template-columns:56px 1fr;column-gap:20px;padding:0 0 28px}
+  .slot .dot{grid-row:span 3}
+  .slot h3{margin:6px 0 4px}
+  .slot .tag{justify-self:start;margin-top:8px}
+  .slot .tag:empty{display:none}
+}
+
+/* ---------- carte ---------- */
+.menu-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px}
+.menu-tabs button{
+  font:600 .95rem/1 var(--sans);padding:.8em 1.2em;border-radius:999px;cursor:pointer;
+  background:transparent;color:var(--ink);border:1.5px solid var(--line);
+}
+.menu-tabs button[aria-selected="true"]{background:var(--ink);color:var(--flour);border-color:var(--ink)}
+.menu-tabs button:hover:not([aria-selected="true"]){border-color:var(--ink)}
+.menu-panel{display:grid;grid-template-columns:1fr 1fr;gap:0 64px}
+.menu-panel[hidden]{display:none}
+.item{display:grid;grid-template-columns:auto 1fr auto;gap:0 12px;align-items:baseline;padding:18px 0;border-bottom:1px solid var(--line)}
+.item b{font:400 1.2rem/1.25 var(--serif)}
+.item .lead-dots{border-bottom:1.5px dotted rgba(36,22,15,.3);transform:translateY(-5px)}
+.item .p{font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.item .p small{font-weight:500;color:var(--ink-soft);font-size:.8em}
+.item p{grid-column:1 / -1;color:var(--ink-soft);font-size:.93rem;margin-top:4px}
+.item .badge{font:700 .66rem/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--wouri);margin-left:8px;vertical-align:middle;
+  border:1px solid rgba(46,90,76,.35);border-radius:999px;padding:3px 7px;white-space:nowrap}
+.menu-foot{margin-top:32px;display:flex;flex-wrap:wrap;gap:10px 28px;color:var(--ink-soft);font-size:.92rem}
+.menu-foot span{display:inline-flex;align-items:center;gap:8px}
+.menu-foot span::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--crust)}
+@media (max-width:800px){.menu-panel{grid-template-columns:1fr}}
+
+/* ---------- commandes ---------- */
+.order{background:var(--flour-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.order-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(32px,5vw,72px);align-items:start}
+.order h2{font-size:clamp(2rem,4.4vw,3.4rem)}
+.order .intro{color:var(--ink-soft);margin-top:18px;max-width:30em}
+.steps{list-style:none;padding:0;margin:36px 0 0;display:grid;gap:22px;counter-reset:s}
+.steps li{display:grid;grid-template-columns:44px 1fr;gap:16px;counter-increment:s}
+.steps li::before{content:counter(s);width:44px;height:44px;border-radius:50%;display:grid;place-items:center;
+  font:400 1.1rem/1 var(--serif);background:var(--flour);border:1.5px solid var(--crust);color:var(--crust-deep)}
+.steps b{display:block;font-weight:700}
+.steps span{color:var(--ink-soft);font-size:.95rem}
+.heat{margin-top:36px;padding:18px 20px;border-radius:var(--radius);background:rgba(46,90,76,.08);border:1px solid rgba(46,90,76,.22);
+  display:grid;grid-template-columns:28px 1fr;gap:14px;font-size:.93rem;color:#274A3F}
+.heat svg{width:28px;height:28px}
+
+.form{background:var(--flour);border-radius:calc(var(--radius) + 6px);padding:clamp(22px,3.5vw,38px);border:1px solid var(--line);
+  box-shadow:0 1px 0 rgba(255,255,255,.6) inset, 0 30px 60px -30px rgba(70,35,10,.35)}
+.form h3{font-size:1.6rem;margin-bottom:6px}
+.form .sub{color:var(--ink-soft);font-size:.93rem;margin-bottom:26px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.field{display:flex;flex-direction:column;gap:7px;min-width:0}
+.field.full{grid-column:1 / -1}
+.field label,.field legend{font-size:.85rem;font-weight:700}
+.field .hint{font-size:.8rem;color:var(--ink-soft);font-weight:400}
+.form input,.form select{
+  font:500 1rem/1.3 var(--sans);color:var(--ink);background:#FFFBF4;
+  border:1.5px solid var(--flour-3);border-radius:10px;padding:.8em .9em;width:100%;min-width:0;
+  appearance:none;-webkit-appearance:none;
+}
+.form select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%2324160F' stroke-width='1.8'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right .9em center;padding-right:2.4em}
+.form input:focus,.form select:focus{border-color:var(--crust);outline:none;box-shadow:0 0 0 3px rgba(180,84,30,.18)}
+fieldset.field{border:0;padding:0;margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips label{position:relative;cursor:pointer}
+.chips input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.chips span{display:inline-block;padding:.55em .95em;border-radius:999px;border:1.5px solid var(--flour-3);background:#FFFBF4;font-size:.9rem;font-weight:500}
+.chips input:checked + span{background:var(--ink);border-color:var(--ink);color:var(--flour)}
+.chips input:focus-visible + span{outline:3px solid var(--butter);outline-offset:2px}
+.range-row{display:flex;align-items:center;gap:14px}
+.range-row input[type=range]{padding:0;border:0;background:transparent;height:28px;accent-color:var(--crust);flex:1}
+.range-row output{font:400 1.4rem/1 var(--serif);min-width:3.2ch;text-align:right;font-variant-numeric:tabular-nums}
+.estimate{margin-top:26px;padding:18px 0 0;border-top:1px dashed var(--line);display:grid;grid-template-columns:1fr auto;gap:6px 16px;align-items:baseline}
+.estimate .total{font:400 clamp(1.6rem,3vw,2rem)/1 var(--serif);color:var(--crust-deep);font-variant-numeric:tabular-nums}
+.estimate small{grid-column:1 / -1;color:var(--ink-soft);font-size:.83rem}
+.warn{grid-column:1 / -1;font-size:.86rem;color:#8A2E12;font-weight:600;min-height:0}
+.form .btn{width:100%;margin-top:20px;padding:1.05em}
+@media (max-width:900px){.order-grid{grid-template-columns:1fr}}
+@media (max-width:520px){.fields{grid-template-columns:1fr}}
+
+/* ---------- nous trouver ---------- */
+.find-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(28px,5vw,64px);align-items:start}
+.map{background:var(--flour-2);border:1px solid var(--line);border-radius:var(--radius);padding:12px;position:relative}
+.map svg{width:100%;height:auto}
+.map figcaption{font-size:.8rem;color:var(--ink-soft);padding:6px 6px 2px}
+.info{display:grid;gap:28px}
+.info h3{font-size:1.35rem;margin-bottom:10px}
+.hours{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.hours td{padding:9px 0;border-bottom:1px solid var(--line)}
+.hours td:last-child{text-align:right;font-weight:600}
+.hours tr.today td{color:var(--crust-deep)}
+.hours tr.today td:first-child::after{content:" · aujourd’hui";font-weight:500;font-size:.85em}
+.zones{list-style:none;margin:0;padding:0;display:grid;gap:10px;font-size:.95rem}
+.zones li{display:grid;grid-template-columns:14px 1fr auto;gap:12px;align-items:baseline}
+.zones li::before{content:"";width:12px;height:12px;border-radius:50%;transform:translateY(1px)}
+.zones li:nth-child(1)::before{background:var(--crust)}
+.zones li:nth-child(2)::before{background:#D99A5B}
+.zones li:nth-child(3)::before{background:var(--flour-3);border:1px solid #C9B494}
+.zones b{font-weight:700;white-space:nowrap}
+.zones span{color:var(--ink-soft)}
+.contact-line{display:flex;flex-wrap:wrap;gap:10px}
+@media (max-width:900px){.find-grid{grid-template-columns:1fr}}
+
+/* ---------- pied ---------- */
+footer{background:var(--night);color:rgba(245,237,224,.7);padding:56px 0 40px;font-size:.92rem}
+.foot{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px}
+.foot .brand{color:var(--flour);margin-bottom:14px}
+.foot h4{font:700 .75rem/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--butter);margin:0 0 14px}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.foot a{text-decoration:none}
+.foot a:hover{color:var(--flour);text-decoration:underline}
+.foot-bottom{margin-top:44px;padding-top:20px;border-top:1px solid rgba(245,237,224,.12);display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;font-size:.82rem}
+@media (max-width:760px){.foot{grid-template-columns:1fr}}
+
+/* sortie du four */
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.hero-copy > *{animation:rise .7s cubic-bezier(.2,.7,.2,1) both}
+.hero-copy > *:nth-child(2){animation-delay:.08s}
+.hero-copy > *:nth-child(3){animation-delay:.16s}
+.hero-copy > *:nth-child(4){animation-delay:.24s}
+.hero-copy > *:nth-child(5){animation-delay:.32s}
+@keyframes glow{0%,100%{opacity:.75}50%{opacity:1}}
+.oven-glow{animation:glow 4s ease-in-out infinite}
+</style>
+</head>
+<body>
+
+<!-- définitions partagées (dégradés de croûte) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <radialGradient id="g-boule" cx="42%" cy="36%" r="70%">
+      <stop offset="0" stop-color="#F2BD7A"/>
+      <stop offset=".42" stop-color="#D38743"/>
+      <stop offset=".78" stop-color="#A9571F"/>
+      <stop offset="1" stop-color="#6A2F11"/>
+    </radialGradient>
+    <linearGradient id="g-bag" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#EDB06A"/>
+      <stop offset=".45" stop-color="#CD7E38"/>
+      <stop offset="1" stop-color="#83401A"/>
+    </linearGradient>
+    <linearGradient id="g-cut" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FBE6BE"/>
+      <stop offset="1" stop-color="#E9B876"/>
+    </linearGradient>
+    <radialGradient id="g-seg" cx="45%" cy="35%" r="75%">
+      <stop offset="0" stop-color="#F4C37F"/>
+      <stop offset=".55" stop-color="#D08A44"/>
+      <stop offset="1" stop-color="#8E4619"/>
+    </radialGradient>
+    <radialGradient id="g-coco" cx="50%" cy="45%" r="60%">
+      <stop offset="0" stop-color="#FFF7E6"/>
+      <stop offset="1" stop-color="#F0DDB9"/>
+    </radialGradient>
+    <linearGradient id="g-choc" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5A2E1C"/>
+      <stop offset="1" stop-color="#2B130B"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#" aria-label="Fournil Wouri, accueil">
+      <svg viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="18.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M11 24c3-7 7-10 12-11.5M15 28c3-6 7-9.5 12-11" fill="none" stroke="#EFC36A" stroke-width="2.2" stroke-linecap="round"/>
+      </svg>
+      <span><b>Fournil Wouri</b><small>Boulangerie · Pâtisserie</small></span>
+    </a>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="#fournil">Le fournil</a>
+      <a href="#carte">La carte</a>
+      <a href="#commandes">Gâteaux de fête</a>
+      <a href="#trouver">Nous trouver</a>
+      <a class="btn btn-primary" href="https://wa.me/237600000000" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.7-.3Z"/></svg>
+        <span>Commander</span>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<!-- ================= HERO ================= -->
+<section class="hero" aria-labelledby="h-hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow">Boulangerie-pâtisserie · Bonapriso, Douala</span>
+      <h1 id="h-hero">Le four s’allume à 3&nbsp;h. Le pain est chaud à <em>5&nbsp;h&nbsp;30.</em></h1>
+      <p class="lead">Baguettes de tradition, viennoiseries pur beurre et gâteaux de fête, pétris et cuits sur place chaque jour, avec le cacao, le café et le poivre de Penja du Cameroun.</p>
+      <div class="ctas">
+        <a class="btn btn-primary" href="#carte">Voir la carte du jour</a>
+        <a class="btn btn-ghost" href="#commandes">Commander un gâteau</a>
+      </div>
+      <div class="ticket" id="ticket" aria-live="polite">
+        <span class="clock num" id="t-clock">--:--</span>
+        <span class="state"><i aria-hidden="true"></i><span id="t-state">Horaires à Douala</span></span>
+        <span class="oven" id="t-oven">Lun–sam 5&nbsp;h&nbsp;30–20&nbsp;h · dim 6&nbsp;h&nbsp;30–13&nbsp;h</span>
+      </div>
+    </div>
+
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 640 500">
+        <!-- lueur du four -->
+        <ellipse class="oven-glow" cx="330" cy="330" rx="300" ry="170" fill="#E07A2C" opacity=".22"/>
+        <!-- planche -->
+        <path d="M40 470 L600 470 L560 420 L80 420 Z" fill="#3A2216"/>
+        <path d="M80 420 L560 420 L600 470 L40 470 Z" fill="none" stroke="#5B3624" stroke-width="2"/>
+        <rect x="40" y="470" width="560" height="14" fill="#24150E"/>
+
+        <!-- baguette arrière -->
+        <g transform="translate(300 300) rotate(-16)">
+          <rect x="-250" y="-30" width="500" height="60" rx="30" fill="url(#g-bag)"/>
+          <g fill="url(#g-cut)">
+            <path d="M-205 -4 Q-170 -26 -130 -8 Q-170 -12 -205 -4Z"/>
+            <path d="M-120 -4 Q-85 -26 -45 -8 Q-85 -12 -120 -4Z"/>
+            <path d="M-35 -4 Q0 -26 40 -8 Q0 -12 -35 -4Z"/>
+            <path d="M50 -4 Q85 -26 125 -8 Q85 -12 50 -4Z"/>
+            <path d="M135 -4 Q170 -26 210 -8 Q170 -12 135 -4Z"/>
+          </g>
+          <rect x="-250" y="-30" width="500" height="60" rx="30" fill="none" stroke="#6A2F11" stroke-opacity=".35"/>
+        </g>
+
+        <!-- boule -->
+        <g transform="translate(360 300)">
+          <ellipse cx="0" cy="112" rx="150" ry="16" fill="#000" opacity=".35"/>
+          <path d="M-150 40 C-150 -70 -80 -120 0 -120 C80 -120 150 -70 150 40 C150 95 90 118 0 118 C-90 118 -150 95 -150 40Z" fill="url(#g-boule)"/>
+          <!-- grignes en carré -->
+          <g fill="url(#g-cut)">
+            <path d="M-78 -62 Q0 -96 78 -62 Q0 -76 -78 -62Z"/>
+            <path d="M-78 64 Q0 90 78 64 Q0 76 -78 64Z" opacity=".9"/>
+            <path d="M-96 -48 Q-124 4 -96 58 Q-108 4 -96 -48Z"/>
+            <path d="M96 -48 Q124 4 96 58 Q108 4 96 -48Z"/>
+          </g>
+          <!-- farine -->
+          <g fill="#FFF6E6">
+            <ellipse cx="0" cy="-2" rx="70" ry="48" opacity=".18"/>
+            <ellipse cx="-10" cy="-8" rx="42" ry="28" opacity=".18"/>
+            <circle cx="-30" cy="-20" r="2" opacity=".6"/><circle cx="18" cy="-30" r="1.6" opacity=".6"/>
+            <circle cx="36" cy="6" r="1.8" opacity=".5"/><circle cx="-12" cy="18" r="1.4" opacity=".5"/>
+            <circle cx="-48" cy="6" r="1.2" opacity=".5"/><circle cx="8" cy="-4" r="1.2" opacity=".5"/>
+          </g>
+        </g>
+
+        <!-- croissant devant -->
+        <g transform="translate(170 410) rotate(-6)">
+          <ellipse cx="0" cy="40" rx="118" ry="12" fill="#000" opacity=".35"/>
+          <g fill="url(#g-seg)" stroke="#7A3715" stroke-opacity=".45" stroke-width="1.5">
+            <ellipse cx="-104" cy="24" rx="16" ry="11" transform="rotate(-30 -104 24)"/>
+            <ellipse cx="104" cy="24" rx="16" ry="11" transform="rotate(30 104 24)"/>
+            <ellipse cx="-80" cy="8" rx="26" ry="20" transform="rotate(-40 -80 8)"/>
+            <ellipse cx="80" cy="8" rx="26" ry="20" transform="rotate(40 80 8)"/>
+            <ellipse cx="-44" cy="-6" rx="34" ry="30" transform="rotate(-20 -44 -6)"/>
+            <ellipse cx="44" cy="-6" rx="34" ry="30" transform="rotate(20 44 -6)"/>
+            <ellipse cx="0" cy="-12" rx="40" ry="36"/>
+          </g>
+          <g fill="none" stroke="#FBE3B8" stroke-opacity=".55" stroke-width="2" stroke-linecap="round">
+            <path d="M-20 -36 Q0 -44 20 -36"/>
+            <path d="M-60 -20 Q-46 -30 -30 -28"/>
+            <path d="M60 -20 Q46 -30 30 -28"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+  </div>
+  <div class="scoring" aria-hidden="true">
+    <svg preserveAspectRatio="none" viewBox="0 0 1200 34">
+      <rect width="1200" height="34" fill="#1A100B"/>
+      <path d="M0 34 Q300 6 600 20 T1200 12 V34Z" fill="#F5EDE0"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ================= SIGNATURES ================= -->
+<section class="sec" aria-labelledby="h-sig">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow">Nos signatures</span>
+        <h2 id="h-sig">Trois recettes qui disent d’où l’on vient.</h2>
+      </div>
+      <p>La technique est française, les goûts sont d’ici. Poivre blanc du Moungo, fèves de cacao camerounaises, noix de coco râpée le matin même.</p>
+    </div>
+
+    <div class="sig-grid">
+      <article class="sig">
+        <div class="sig-art">
+          <span class="origin">Penja · Moungo</span>
+          <svg viewBox="0 0 320 200" aria-hidden="true">
+            <g transform="translate(160 100) rotate(-12)">
+              <rect x="-150" y="-26" width="300" height="52" rx="26" fill="url(#g-bag)"/>
+              <g fill="url(#g-cut)">
+                <path d="M-118 -3 Q-92 -22 -62 -7 Q-92 -10 -118 -3Z"/>
+                <path d="M-48 -3 Q-22 -22 8 -7 Q-22 -10 -48 -3Z"/>
+                <path d="M22 -3 Q48 -22 78 -7 Q48 -10 22 -3Z"/>
+                <path d="M92 -3 Q112 -18 132 -8 Q112 -10 92 -3Z"/>
+              </g>
+              <g fill="#3A2418">
+                <circle cx="-130" cy="8" r="1.8"/><circle cx="-100" cy="12" r="1.5"/><circle cx="-70" cy="6" r="1.7"/>
+                <circle cx="-40" cy="14" r="1.4"/><circle cx="-10" cy="8" r="1.8"/><circle cx="20" cy="13" r="1.5"/>
+                <circle cx="50" cy="7" r="1.6"/><circle cx="80" cy="12" r="1.4"/><circle cx="110" cy="8" r="1.7"/>
+                <circle cx="-85" cy="-14" r="1.3"/><circle cx="-15" cy="-15" r="1.3"/><circle cx="60" cy="-14" r="1.3"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <div class="sig-body">
+          <h3>Baguette au poivre de Penja</h3>
+          <p>Une tradition au levain, mie crème, relevée de poivre blanc de Penja moulu à la commande. Avec un avocat et une pincée de sel, c’est déjà un repas.</p>
+          <div class="price"><span>La baguette</span><span class="num">400&nbsp;F</span></div>
+        </div>
+      </article>
+
+      <article class="sig">
+        <div class="sig-art">
+          <span class="origin">Cacao · Centre &amp; Sud-Ouest</span>
+          <svg viewBox="0 0 320 200" aria-hidden="true">
+            <g transform="translate(160 104)">
+              <rect x="-112" y="-50" width="36" height="22" rx="4" fill="url(#g-choc)" transform="translate(-6 34)"/>
+              <rect x="82" y="-50" width="36" height="22" rx="4" fill="url(#g-choc)" transform="translate(-6 12)"/>
+              <rect x="-104" y="-58" width="208" height="112" rx="26" fill="url(#g-bag)"/>
+              <g fill="none" stroke="#FBE3B8" stroke-opacity=".5" stroke-width="2" stroke-linecap="round">
+                <path d="M-86 -30 Q0 -44 86 -30"/>
+                <path d="M-92 -2 Q0 -14 92 -2"/>
+                <path d="M-86 26 Q0 16 86 26"/>
+              </g>
+              <g fill="none" stroke="#7A3715" stroke-opacity=".4" stroke-width="1.5">
+                <path d="M-90 -16 Q0 -28 90 -16"/>
+                <path d="M-90 12 Q0 0 90 12"/>
+              </g>
+              <path d="M-40 -46 Q0 -54 40 -46" stroke="#FFF1D6" stroke-opacity=".6" stroke-width="3" fill="none" stroke-linecap="round"/>
+            </g>
+          </svg>
+        </div>
+        <div class="sig-body">
+          <h3>Pain au chocolat cacao du Cameroun</h3>
+          <p>Feuilletage pur beurre, deux barres de chocolat noir 70&nbsp;% issu de fèves camerounaises. Il sort à 6&nbsp;h&nbsp;30 et rarement après 9&nbsp;h.</p>
+          <div class="price"><span>La pièce</span><span class="num">600&nbsp;F</span></div>
+        </div>
+      </article>
+
+      <article class="sig">
+        <div class="sig-art">
+          <span class="origin">Coco · Ananas du Littoral</span>
+          <svg viewBox="0 0 320 200" aria-hidden="true">
+            <g transform="translate(160 100)">
+              <ellipse cx="0" cy="0" rx="118" ry="80" fill="#B96A2C"/>
+              <g fill="url(#g-seg)">
+                <!-- bord cannelé -->
+                <circle cx="118" cy="0" r="9"/><circle cx="112" cy="24" r="9"/><circle cx="96" cy="46" r="9"/><circle cx="72" cy="63" r="9"/>
+                <circle cx="42" cy="74" r="9"/><circle cx="10" cy="80" r="9"/><circle cx="-22" cy="78" r="9"/><circle cx="-54" cy="70" r="9"/>
+                <circle cx="-82" cy="56" r="9"/><circle cx="-104" cy="36" r="9"/><circle cx="-116" cy="12" r="9"/><circle cx="-116" cy="-14" r="9"/>
+                <circle cx="-104" cy="-38" r="9"/><circle cx="-82" cy="-58" r="9"/><circle cx="-54" cy="-72" r="9"/><circle cx="-22" cy="-79" r="9"/>
+                <circle cx="10" cy="-80" r="9"/><circle cx="42" cy="-75" r="9"/><circle cx="72" cy="-63" r="9"/><circle cx="96" cy="-46" r="9"/><circle cx="112" cy="-24" r="9"/>
+              </g>
+              <ellipse cx="0" cy="0" rx="102" ry="66" fill="url(#g-coco)"/>
+              <!-- ananas rôti -->
+              <g fill="#F2B640" stroke="#C9801E" stroke-width="1.2">
+                <path d="M-6 -10 L22 -30 L34 -8 Z"/>
+                <path d="M-44 -22 L-18 -40 L-8 -18 Z"/>
+                <path d="M30 10 L60 -4 L64 22 Z"/>
+                <path d="M-40 12 L-12 2 L-14 28 Z"/>
+                <path d="M4 22 L30 30 L10 46 Z"/>
+                <path d="M-70 -6 L-52 -16 L-56 6 Z"/>
+              </g>
+              <!-- coco râpée -->
+              <g stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity=".9">
+                <path d="M-20 -48 l6 2"/><path d="M40 -40 l5 -3"/><path d="M70 -20 l3 5"/><path d="M-80 20 l6 1"/>
+                <path d="M-30 40 l4 4"/><path d="M50 40 l5 -1"/><path d="M-60 -36 l5 3"/><path d="M80 18 l2 5"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <div class="sig-body">
+          <h3>Tarte coco-ananas</h3>
+          <p>Pâte sablée, crème de coco fraîchement râpée, ananas rôti au sucre roux. Celle qu’on nous réserve pour les déjeuners du dimanche.</p>
+          <div class="price"><span>La part · entière (8 parts)</span><span class="num">1&nbsp;200&nbsp;F · 9&nbsp;000&nbsp;F</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= JOURNÉE DU FOURNIL ================= -->
+<section class="sec day" id="fournil" aria-labelledby="h-day">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow">La journée du fournil</span>
+        <h2 id="h-day">Venez à la bonne fournée.</h2>
+      </div>
+      <p>Ce qui sort du four, heure par heure. Le repère lumineux suit l’heure de Douala&#8239;: vous savez ce qui est chaud avant de sortir de chez vous.</p>
+    </div>
+
+    <ol class="timeline" id="timeline">
+      <li class="slot" data-t="330">
+        <span class="dot">5&nbsp;h&nbsp;30</span>
+        <h3>Premières baguettes</h3>
+        <p>Tradition, baguette Penja, pain de mie, pain sucré pour le petit-déjeuner.</p>
+        <span class="tag"></span>
+      </li>
+      <li class="slot" data-t="390">
+        <span class="dot">6&nbsp;h&nbsp;30</span>
+        <h3>Viennoiseries</h3>
+        <p>Croissants, pains au chocolat, chaussons coco, beignets soufflés.</p>
+        <span class="tag"></span>
+      </li>
+      <li class="slot" data-t="630">
+        <span class="dot">10&nbsp;h&nbsp;30</span>
+        <h3>Le salé</h3>
+        <p>Pâtés viande, feuilletés au poisson fumé, pains garnis, quiche du jour.</p>
+        <span class="tag"></span>
+      </li>
+      <li class="slot" data-t="780">
+        <span class="dot">13&nbsp;h</span>
+        <h3>Pâtisseries du jour</h3>
+        <p>Tartes, éclairs au café de l’Ouest, mille-feuilles, entremets mangue-passion.</p>
+        <span class="tag"></span>
+      </li>
+      <li class="slot" data-t="960">
+        <span class="dot">16&nbsp;h</span>
+        <h3>Baguettes du soir</h3>
+        <p>Seconde fournée, pour le dîner et la sortie des bureaux.</p>
+        <span class="tag"></span>
+      </li>
+      <li class="slot" data-t="1200">
+        <span class="dot">20&nbsp;h</span>
+        <h3>Fermeture</h3>
+        <p>Le four refroidit. Le levain, lui, travaille pour demain.</p>
+        <span class="tag"></span>
+      </li>
+    </ol>
+
+    <div class="day-note">
+      <span><strong>Dimanche&#8239;:</strong> 6&nbsp;h&nbsp;30–13&nbsp;h, fournées du matin uniquement.</span>
+      <span><strong>Pain de campagne au levain&#8239;:</strong> mardi, jeudi et samedi.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CARTE ================= -->
+<section class="sec" id="carte" aria-labelledby="h-menu">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow">La carte</span>
+        <h2 id="h-menu">Du pain à 250&nbsp;F au gâteau de mariage.</h2>
+      </div>
+      <p>Prix en francs CFA, à emporter. Tout est fait au fournil, sauf le beurre, qui vient de Normandie, et les fruits, qui viennent du marché de Deido.</p>
+    </div>
+
+    <div class="menu-tabs" role="tablist" aria-label="Catégories de la carte">
+      <button role="tab" id="tab-pains" aria-controls="p-pains" aria-selected="true">Pains</button>
+      <button role="tab" id="tab-vien" aria-controls="p-vien" aria-selected="false" tabindex="-1">Viennoiseries</button>
+      <button role="tab" id="tab-sale" aria-controls="p-sale" aria-selected="false" tabindex="-1">Salé</button>
+      <button role="tab" id="tab-pat" aria-controls="p-pat" aria-selected="false" tabindex="-1">Pâtisseries</button>
+      <button role="tab" id="tab-bois" aria-controls="p-bois" aria-selected="false" tabindex="-1">Boissons</button>
+    </div>
+
+    <div class="menu-panel" role="tabpanel" id="p-pains" aria-labelledby="tab-pains">
+      <div class="item"><b>Baguette tradition</b><span class="lead-dots"></span><span class="p">250&nbsp;F</span><p>Farine de tradition, 24&nbsp;h de fermentation. Croûte fine, mie alvéolée.</p></div>
+      <div class="item"><b>Baguette au poivre de Penja<span class="badge">Signature</span></b><span class="lead-dots"></span><span class="p">400&nbsp;F</span><p>Poivre blanc moulu à la commande.</p></div>
+      <div class="item"><b>Pain de mie</b><span class="lead-dots"></span><span class="p">1&nbsp;000&nbsp;F</span><p>Nature ou complet, tranché sur demande.</p></div>
+      <div class="item"><b>Pain sucré</b><span class="lead-dots"></span><span class="p">300&nbsp;F</span><p>Le classique du petit-déjeuner, moelleux et légèrement doré.</p></div>
+      <div class="item"><b>Pains au lait <small>(×4)</small></b><span class="lead-dots"></span><span class="p">800&nbsp;F</span><p>Pour le goûter des enfants.</p></div>
+      <div class="item"><b>Pain de campagne au levain</b><span class="lead-dots"></span><span class="p">2&nbsp;000&nbsp;F</span><p>800&nbsp;g, se garde quatre jours. Mardi, jeudi, samedi.</p></div>
+    </div>
+
+    <div class="menu-panel" role="tabpanel" id="p-vien" aria-labelledby="tab-vien" hidden>
+      <div class="item"><b>Croissant pur beurre</b><span class="lead-dots"></span><span class="p">500&nbsp;F</span><p>Feuilletage trois jours, 27 couches.</p></div>
+      <div class="item"><b>Pain au chocolat<span class="badge">Signature</span></b><span class="lead-dots"></span><span class="p">600&nbsp;F</span><p>Chocolat noir 70&nbsp;%, fèves camerounaises.</p></div>
+      <div class="item"><b>Chausson coco</b><span class="lead-dots"></span><span class="p">600&nbsp;F</span><p>Noix de coco râpée, sucre de canne, zeste de citron vert.</p></div>
+      <div class="item"><b>Brioche tressée</b><span class="lead-dots"></span><span class="p">1&nbsp;500&nbsp;F</span><p>Pour quatre, parfumée à la vanille.</p></div>
+      <div class="item"><b>Beignets soufflés <small>(sachet de 5)</small></b><span class="lead-dots"></span><span class="p">500&nbsp;F</span><p>Comme au coin de la rue, frits le matin même.</p></div>
+      <div class="item"><b>Pain aux raisins</b><span class="lead-dots"></span><span class="p">600&nbsp;F</span><p>Crème pâtissière à la vanille.</p></div>
+    </div>
+
+    <div class="menu-panel" role="tabpanel" id="p-sale" aria-labelledby="tab-sale" hidden>
+      <div class="item"><b>Pâté viande</b><span class="lead-dots"></span><span class="p">500&nbsp;F</span><p>Bœuf épicé, pâte feuilletée maison.</p></div>
+      <div class="item"><b>Feuilleté au poisson fumé</b><span class="lead-dots"></span><span class="p">700&nbsp;F</span><p>Maquereau fumé, oignon, piment doux.</p></div>
+      <div class="item"><b>Pain garni omelette-avocat</b><span class="lead-dots"></span><span class="p">1&nbsp;000&nbsp;F</span><p>Demi-baguette tradition, omelette aux oignons, avocat.</p></div>
+      <div class="item"><b>Pain garni haricots</b><span class="lead-dots"></span><span class="p">800&nbsp;F</span><p>Haricots rouges mijotés, pointe de piment.</p></div>
+      <div class="item"><b>Quiche du jour <small>(part)</small></b><span class="lead-dots"></span><span class="p">1&nbsp;500&nbsp;F</span><p>Demandez au comptoir.</p></div>
+      <div class="item"><b>Pizza du fournil <small>(part)</small></b><span class="lead-dots"></span><span class="p">1&nbsp;000&nbsp;F</span><p>Pâte au levain, cuite dans le four à pain.</p></div>
+    </div>
+
+    <div class="menu-panel" role="tabpanel" id="p-pat" aria-labelledby="tab-pat" hidden>
+      <div class="item"><b>Tarte coco-ananas <small>(part)</small><span class="badge">Signature</span></b><span class="lead-dots"></span><span class="p">1&nbsp;200&nbsp;F</span><p>Entière, 8 parts&#8239;: 9&nbsp;000&nbsp;F.</p></div>
+      <div class="item"><b>Éclair au café</b><span class="lead-dots"></span><span class="p">1&nbsp;000&nbsp;F</span><p>Crème au café arabica de l’Ouest.</p></div>
+      <div class="item"><b>Mille-feuille</b><span class="lead-dots"></span><span class="p">1&nbsp;200&nbsp;F</span><p>Vanille, feuilletage caramélisé.</p></div>
+      <div class="item"><b>Entremets mangue-passion <small>(part)</small></b><span class="lead-dots"></span><span class="p">1&nbsp;500&nbsp;F</span><p>Mousse légère, biscuit coco. Selon la saison des mangues.</p></div>
+      <div class="item"><b>Flan pâtissier <small>(part)</small></b><span class="lead-dots"></span><span class="p">900&nbsp;F</span><p>Vanille, pâte brisée.</p></div>
+      <div class="item"><b>Chin-chin maison <small>(200&nbsp;g)</small></b><span class="lead-dots"></span><span class="p">700&nbsp;F</span><p>Croquant, à la muscade. Parfait en cadeau.</p></div>
+    </div>
+
+    <div class="menu-panel" role="tabpanel" id="p-bois" aria-labelledby="tab-bois" hidden>
+      <div class="item"><b>Café arabica de l’Ouest</b><span class="lead-dots"></span><span class="p">800&nbsp;F</span><p>Torréfié à Douala, servi court ou allongé.</p></div>
+      <div class="item"><b>Café au lait</b><span class="lead-dots"></span><span class="p">1&nbsp;000&nbsp;F</span><p>Chaud ou glacé.</p></div>
+      <div class="item"><b>Chocolat chaud</b><span class="lead-dots"></span><span class="p">1&nbsp;200&nbsp;F</span><p>Cacao du Cameroun, lait entier.</p></div>
+      <div class="item"><b>Jus de foléré</b><span class="lead-dots"></span><span class="p">600&nbsp;F</span><p>Bissap glacé, menthe fraîche.</p></div>
+      <div class="item"><b>Jus de gingembre</b><span class="lead-dots"></span><span class="p">600&nbsp;F</span><p>Pressé chaque matin, bien relevé.</p></div>
+      <div class="item"><b>Eau minérale <small>(50&nbsp;cl)</small></b><span class="lead-dots"></span><span class="p">300&nbsp;F</span><p>Bien fraîche.</p></div>
+    </div>
+
+    <div class="menu-foot">
+      <span>Espèces, Orange Money, MTN MoMo</span>
+      <span>Commandes de viennoiseries pour bureaux&#8239;: la veille avant 17&nbsp;h</span>
+      <span>Allergènes&#8239;: demandez au comptoir</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COMMANDES ================= -->
+<section class="sec order" id="commandes" aria-labelledby="h-order">
+  <div class="wrap order-grid">
+    <div>
+      <span class="eyebrow">Gâteaux de fête</span>
+      <h2 id="h-order" style="margin-top:14px">Anniversaire, dot, mariage, baptême&#8239;: donnez la date, on fait le reste.</h2>
+      <p class="intro">Chaque gâteau est monté à la main, la veille ou le jour même. Composez votre demande ici&#8239;; elle part directement sur notre WhatsApp, et nous vous répondons avec un devis dans l’heure, aux heures d’ouverture.</p>
+
+      <ol class="steps">
+        <li><div><b>Vous écrivez</b><span>Occasion, nombre de parts, parfum, date. Une photo d’inspiration est la bienvenue.</span></div></li>
+        <li><div><b>Nous confirmons</b><span>Devis détaillé, puis acompte de 50&nbsp;% par Orange Money ou MTN MoMo pour bloquer la date.</span></div></li>
+        <li><div><b>Vous récupérez</b><span>En boutique, ou livré en boîte isotherme à Douala et Bonabéri.</span></div></li>
+      </ol>
+
+      <div class="heat">
+        <svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M14 2v4M14 22v4M2 14h4M22 14h4M5.5 5.5l2.8 2.8M19.7 19.7l2.8 2.8M5.5 22.5l2.8-2.8M19.7 8.3l2.8-2.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <p><strong>La chantilly n’aime pas la chaleur de Douala.</strong> Gardez votre gâteau au réfrigérateur et sortez-le un quart d’heure avant de souffler les bougies.</p>
+      </div>
+    </div>
+
+    <form class="form" id="order-form" novalidate>
+      <h3>Votre demande</h3>
+      <p class="sub">Estimation indicative. Le prix final est confirmé par écrit.</p>
+
+      <div class="fields">
+        <fieldset class="field full">
+          <legend>Occasion</legend>
+          <div class="chips" id="occasion">
+            <label><input type="radio" name="occ" value="Anniversaire" checked><span>Anniversaire</span></label>
+            <label><input type="radio" name="occ" value="Mariage"><span>Mariage</span></label>
+            <label><input type="radio" name="occ" value="Dot"><span>Dot</span></label>
+            <label><input type="radio" name="occ" value="Baptême"><span>Baptême</span></label>
+            <label><input type="radio" name="occ" value="Communion"><span>Communion</span></label>
+            <label><input type="radio" name="occ" value="Bureau"><span>Bureau</span></label>
+          </div>
+        </fieldset>
+
+        <div class="field full">
+          <label for="parts">Nombre de parts <span class="hint">· de 6 à 150</span></label>
+          <div class="range-row">
+            <input type="range" id="parts" min="6" max="150" step="2" value="20" aria-describedby="parts-out">
+            <output id="parts-out" for="parts" class="num">20</output>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="flavor">Parfum</label>
+          <select id="flavor">
+            <option value="2000">Chocolat, cacao du Cameroun</option>
+            <option value="1800">Vanille-mangue</option>
+            <option value="1800">Coco-ananas</option>
+            <option value="2000">Café arabica de l’Ouest</option>
+            <option value="2200">Forêt-noire</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="date">Date de la fête</label>
+          <input type="date" id="date" required>
+        </div>
+
+        <div class="field">
+          <label for="where">Retrait ou livraison</label>
+          <select id="where">
+            <option value="0">Retrait à Bonapriso</option>
+            <option value="1000">Zone 1 · Bonapriso, Bonanjo, Akwa, Bali</option>
+            <option value="1500">Zone 2 · Deido, New Bell, Makepe, Logpom</option>
+            <option value="2000">Zone 3 · Bonamoussadi, Kotto, Logbessou, Bonabéri</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="name">Votre prénom</label>
+          <input type="text" id="name" autocomplete="given-name" placeholder="ex. Mireille">
+        </div>
+      </div>
+
+      <div class="estimate" aria-live="polite">
+        <span>Estimation</span>
+        <span class="total" id="total">40&nbsp;000&nbsp;F</span>
+        <small id="detail">20 parts × 2 000 F · acompte 50 % : 20 000 F</small>
+        <p class="warn" id="warn"></p>
+      </div>
+
+      <button class="btn btn-dark" type="submit">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg>
+        Envoyer ma demande sur WhatsApp
+      </button>
+    </form>
+  </div>
+</section>
+
+<!-- ================= NOUS TROUVER ================= -->
+<section class="sec" id="trouver" aria-labelledby="h-find">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow">Nous trouver</span>
+        <h2 id="h-find">Rue Njo-Njo, Bonapriso.</h2>
+      </div>
+      <p>À deux pas du rond-point, côté ombre. Stationnement facile le matin&#8239;; livraison dans tout Douala, et jusqu’à Bonabéri de l’autre côté du pont.</p>
+    </div>
+
+    <div class="find-grid">
+      <figure class="map" style="margin:0">
+        <svg viewBox="0 0 520 400" role="img" aria-labelledby="map-t map-d">
+          <title id="map-t">Schéma des zones de livraison</title>
+          <desc id="map-d">La boutique est à Bonapriso. Zone 1 proche : Bonanjo, Akwa, Bali. Zone 2 : Deido, New Bell, Makepe, Logpom. Zone 3 : Bonamoussadi, Kotto, Logbessou, et Bonabéri de l'autre côté du Wouri.</desc>
+          <rect width="520" height="400" rx="8" fill="#EFE3CF"/>
+          <!-- zones -->
+          <circle cx="250" cy="250" r="250" fill="#E6D5BA"/>
+          <circle cx="250" cy="250" r="170" fill="#E8B886" opacity=".55"/>
+          <circle cx="250" cy="250" r="90" fill="#C9763A" opacity=".45"/>
+          <!-- le Wouri -->
+          <path d="M150 -10 C140 60 120 110 128 150 C136 200 118 250 70 300 C40 330 10 350 -10 360 L-10 410 L0 410 C60 380 130 330 168 280 C196 240 176 190 180 150 C186 100 200 50 214 -10 Z" fill="#2E5A4C"/>
+          <path d="M150 -10 C140 60 120 110 128 150 C136 200 118 250 70 300" fill="none" stroke="#5E8A7B" stroke-width="1.5" stroke-dasharray="4 6"/>
+          <text x="96" y="230" transform="rotate(-62 96 230)" font-family="Young Serif, Georgia, serif" font-size="17" fill="#CFE0D8" letter-spacing="6">WOURI</text>
+          <!-- pont -->
+          <rect x="112" y="104" width="100" height="7" rx="2" fill="#F5EDE0" transform="rotate(-8 162 108)"/>
+          <text x="214" y="98" font-family="Hanken Grotesk, sans-serif" font-size="10.5" fill="#5A4538">Pont du Wouri</text>
+          <!-- quartiers -->
+          <g font-family="Hanken Grotesk, sans-serif" font-size="12.5" fill="#24160F">
+            <circle cx="72" cy="112" r="4" fill="#24160F"/><text x="30" y="96">Bonabéri</text>
+            <circle cx="236" cy="130" r="4"/><text x="246" y="134">Deido</text>
+            <circle cx="222" cy="178" r="4"/><text x="232" y="182">Akwa</text>
+            <circle cx="196" cy="222" r="4"/><text x="206" y="226">Bonanjo</text>
+            <circle cx="292" cy="212" r="4"/><text x="302" y="216">Bali</text>
+            <circle cx="320" cy="270" r="4"/><text x="330" y="274">New Bell</text>
+            <circle cx="336" cy="120" r="4"/><text x="346" y="124">Makepe</text>
+            <circle cx="380" cy="170" r="4"/><text x="390" y="174">Logpom</text>
+            <circle cx="410" cy="78" r="4"/><text x="420" y="82">Bonamoussadi</text>
+            <circle cx="440" cy="130" r="4"/><text x="450" y="134">Kotto</text>
+            <circle cx="470" cy="40" r="4"/><text x="430" y="28">Logbessou</text>
+          </g>
+          <!-- boutique -->
+          <g transform="translate(250 262)">
+            <circle r="22" fill="#EFC36A" opacity=".45"/>
+            <path d="M0 -26 C-11 -26 -18 -18 -18 -9 C-18 4 0 16 0 16 C0 16 18 4 18 -9 C18 -18 11 -26 0 -26Z" fill="#24160F" transform="translate(0 -6)"/>
+            <circle cx="0" cy="-15" r="6" fill="#EFC36A"/>
+            <text x="0" y="36" text-anchor="middle" font-family="Young Serif, Georgia, serif" font-size="15" fill="#24160F">Fournil Wouri</text>
+            <text x="0" y="52" text-anchor="middle" font-family="Hanken Grotesk, sans-serif" font-size="11.5" fill="#5A4538">Bonapriso</text>
+          </g>
+        </svg>
+        <figcaption>Schéma indicatif, pas à l’échelle.</figcaption>
+      </figure>
+
+      <div class="info">
+        <div>
+          <h3>Horaires</h3>
+          <table class="hours" id="hours">
+            <tbody>
+              <tr data-d="1"><td>Lundi</td><td>5&nbsp;h&nbsp;30 – 20&nbsp;h</td></tr>
+              <tr data-d="2"><td>Mardi</td><td>5&nbsp;h&nbsp;30 – 20&nbsp;h</td></tr>
+              <tr data-d="3"><td>Mercredi</td><td>5&nbsp;h&nbsp;30 – 20&nbsp;h</td></tr>
+              <tr data-d="4"><td>Jeudi</td><td>5&nbsp;h&nbsp;30 – 20&nbsp;h</td></tr>
+              <tr data-d="5"><td>Vendredi</td><td>5&nbsp;h&nbsp;30 – 20&nbsp;h</td></tr>
+              <tr data-d="6"><td>Samedi</td><td>5&nbsp;h&nbsp;30 – 20&nbsp;h</td></tr>
+              <tr data-d="0"><td>Dimanche</td><td>6&nbsp;h&nbsp;30 – 13&nbsp;h</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <h3>Livraison</h3>
+          <ul class="zones">
+            <li><b>Zone 1</b><span>Bonapriso, Bonanjo, Akwa, Bali</span><b class="num">1&nbsp;000&nbsp;F</b></li>
+            <li><b>Zone 2</b><span>Deido, New Bell, Makepe, Logpom</span><b class="num">1&nbsp;500&nbsp;F</b></li>
+            <li><b>Zone 3</b><span>Bonamoussadi, Kotto, Logbessou, Bonabéri</span><b class="num">2&nbsp;000&nbsp;F</b></li>
+          </ul>
+        </div>
+        <div class="contact-line">
+          <a class="btn btn-dark" href="https://wa.me/237600000000" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="btn btn-dark" href="tel:+237600000000" style="background:transparent;color:var(--ink);border-color:var(--ink)">+237 600 00 00 00</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a class="brand" href="#">
+          <svg viewBox="0 0 40 40" aria-hidden="true">
+            <circle cx="20" cy="20" r="18.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M11 24c3-7 7-10 12-11.5M15 28c3-6 7-9.5 12-11" fill="none" stroke="#EFC36A" stroke-width="2.2" stroke-linecap="round"/>
+          </svg>
+          <span><b>Fournil Wouri</b><small>Boulangerie · Pâtisserie</small></span>
+        </a>
+        <p style="max-width:26em">Pain au levain, viennoiseries pur beurre et gâteaux de fête, faits à Bonapriso pour tout Douala.</p>
+      </div>
+      <div>
+        <h4>Le site</h4>
+        <ul>
+          <li><a href="#fournil">La journée du fournil</a></li>
+          <li><a href="#carte">La carte</a></li>
+          <li><a href="#commandes">Gâteaux de fête</a></li>
+          <li><a href="#trouver">Nous trouver</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>Rue Njo-Njo, Bonapriso, Douala</li>
+          <li><a href="tel:+237600000000">+237 600 00 00 00</a></li>
+          <li><a href="https://wa.me/237600000000" target="_blank" rel="noopener">WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year">2026</span> Fournil Wouri</span>
+      <span>Paiement&#8239;: espèces · Orange Money · MTN MoMo</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var PHONE = "237600000000"; // à remplacer
+  var OPEN = {0:[390,780],1:[330,1200],2:[330,1200],3:[330,1200],4:[330,1200],5:[330,1200],6:[330,1200]};
+  var DAYS = ["dimanche","lundi","mardi","mercredi","jeudi","vendredi","samedi"];
+
+  function fmtMin(m){ var h=Math.floor(m/60), mm=m%60; return h+" h"+(mm? " "+String(mm).padStart(2,"0") : ""); }
+  function fcfa(n){ return n.toLocaleString("fr-FR").replace(/ |\s/g," ")+" F"; }
+
+  /* Heure de Douala, quel que soit le fuseau du visiteur */
+  function doualaNow(){
+    var d = new Date(), wd, h, m;
+    try{
+      var parts = new Intl.DateTimeFormat("en-GB",{timeZone:"Africa/Douala",weekday:"short",hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).formatToParts(d);
+      var o={}; parts.forEach(function(p){o[p.type]=p.value;});
+      wd = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].indexOf(o.weekday);
+      h = parseInt(o.hour,10)%24; m = parseInt(o.minute,10);
+    }catch(e){ var u=new Date(d.getTime()+3600000); wd=u.getUTCDay(); h=u.getUTCHours(); m=u.getUTCMinutes(); }
+    return {wd:wd, min:h*60+m, h:h, m:m};
+  }
+
+  var slots = [].slice.call(document.querySelectorAll("#timeline .slot"));
+  function update(){
+    var n = doualaNow(), win = OPEN[n.wd], open = n.min>=win[0] && n.min<win[1];
+    document.getElementById("t-clock").textContent = String(n.h).padStart(2,"0")+":"+String(n.m).padStart(2,"0");
+    var ticket = document.getElementById("ticket"), st = document.getElementById("t-state"), ov = document.getElementById("t-oven");
+    ticket.classList.toggle("closed", !open);
+
+    var times = slots.map(function(s){return +s.dataset.t;});
+    var cur=-1, next=-1;
+    // dimanche : seules les fournées du matin
+    var usable = function(t){ return n.wd!==0 || t<=780; };
+    times.forEach(function(t,i){ if(usable(t) && t<=n.min && t<win[1]) cur=i; });
+    for(var i=0;i<times.length;i++){ if(usable(times[i]) && times[i]>n.min && times[i]<win[1]){ next=i; break; } }
+
+    if(open){
+      st.textContent = "Ouvert à Douala · jusqu’à "+fmtMin(win[1]);
+      var parts=[];
+      if(cur>=0) parts.push("Sorti du four à "+fmtMin(times[cur])+" : "+slots[cur].querySelector("h3").textContent.toLowerCase());
+      if(next>=0) parts.push("prochaine fournée à "+fmtMin(times[next]));
+      ov.textContent = parts.join(" · ") || "Le four chauffe.";
+    }else{
+      var tomorrow = OPEN[(n.wd+1)%7][0];
+      if(n.min < win[0]){ st.textContent = "Fermé · ouverture à "+fmtMin(win[0]); ov.textContent = "Le four est allumé depuis 3 h, les premières baguettes arrivent."; }
+      else { st.textContent = "Fermé · réouverture "+DAYS[(n.wd+1)%7]+" à "+fmtMin(tomorrow); ov.textContent = "Commandez votre gâteau sur WhatsApp, on vous répond dès l’ouverture."; }
+    }
+
+    slots.forEach(function(s,i){
+      s.classList.remove("is-now","is-next","is-past");
+      var tag=s.querySelector(".tag"); tag.textContent="";
+      if(!open) return;
+      if(i===cur){ s.classList.add("is-now"); tag.textContent="En ce moment"; }
+      else if(i===next){ s.classList.add("is-next"); tag.textContent="Prochaine"; }
+      else if(i<cur){ s.classList.add("is-past"); }
+    });
+
+    var rows = document.querySelectorAll("#hours tr");
+    rows.forEach(function(r){ r.classList.toggle("today", +r.dataset.d===n.wd); });
+  }
+  update(); setInterval(update, 30000);
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  /* Onglets de la carte */
+  var tabs = [].slice.call(document.querySelectorAll('[role="tab"]'));
+  function select(tab){
+    tabs.forEach(function(t){
+      var on = t===tab;
+      t.setAttribute("aria-selected", on); t.tabIndex = on?0:-1;
+      document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+    });
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener("click", function(){ select(t); });
+    t.addEventListener("keydown", function(e){
+      var j = e.key==="ArrowRight" ? (i+1)%tabs.length : e.key==="ArrowLeft" ? (i-1+tabs.length)%tabs.length : e.key==="Home" ? 0 : e.key==="End" ? tabs.length-1 : -1;
+      if(j<0) return; e.preventDefault(); select(tabs[j]); tabs[j].focus();
+    });
+  });
+
+  /* Demande de gâteau → WhatsApp */
+  var form = document.getElementById("order-form");
+  var parts = document.getElementById("parts"), out = document.getElementById("parts-out");
+  var flavor = document.getElementById("flavor"), where = document.getElementById("where"), date = document.getElementById("date");
+  var total = document.getElementById("total"), detail = document.getElementById("detail"), warn = document.getElementById("warn");
+
+  function iso(d){ return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+  function leadDays(){ return +parts.value > 40 ? 3 : 2; }
+  function minDate(){ var d=new Date(); d.setHours(0,0,0,0); d.setDate(d.getDate()+leadDays()); return d; }
+
+  function occasion(){ return form.querySelector('input[name="occ"]:checked').value; }
+  function calc(){
+    var n=+parts.value, unit=+flavor.value, extra = occasion()==="Mariage" ? 300 : 0, del=+where.value;
+    var sum = n*(unit+extra) + del;
+    out.textContent = n;
+    total.textContent = fcfa(sum);
+    detail.textContent = n+" parts × "+fcfa(unit+extra)+(del? " + livraison "+fcfa(del) : "")+" · acompte 50 % : "+fcfa(Math.round(sum/2/100)*100);
+    var md = minDate(); date.min = iso(md);
+    if(date.value && new Date(date.value+"T00:00:00") < md){
+      warn.textContent = "Pour "+n+" parts, il nous faut "+(leadDays()*24)+" h. Choisissez le "+md.toLocaleDateString("fr-FR",{day:"numeric",month:"long"})+" ou après.";
+    } else warn.textContent = "";
+  }
+  form.addEventListener("input", calc); form.addEventListener("change", calc);
+  if(!date.value){ var d0=minDate(); d0.setDate(d0.getDate()+5); date.value = iso(d0); }
+  calc();
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault(); calc();
+    if(!date.value){ warn.textContent="Indiquez la date de la fête."; date.focus(); return; }
+    if(warn.textContent){ date.focus(); return; }
+    var d = new Date(date.value+"T00:00:00").toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+    var name = document.getElementById("name").value.trim();
+    var msg = "Bonjour Fournil Wouri, je souhaite commander un gâteau.\n"
+      + "• Occasion : "+occasion()+"\n"
+      + "• Parts : "+parts.value+"\n"
+      + "• Parfum : "+flavor.options[flavor.selectedIndex].text+"\n"
+      + "• Date : "+d+"\n"
+      + "• "+where.options[where.selectedIndex].text+"\n"
+      + "• Estimation vue sur le site : "+total.textContent.replace(/ /g," ")
+      + (name? "\n\nMerci, "+name : "");
+    window.open("https://wa.me/"+PHONE+"?text="+encodeURIComponent(msg), "_blank", "noopener");
+  });
+})();
+</script>
+</body>
+</html>

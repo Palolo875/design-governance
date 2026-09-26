@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pain d'Ici · Boulangerie à Bonamoussadi</title>
+<meta name="description" content="Pain d'Ici, boulangerie-pâtisserie de quartier à Bonamoussadi (Douala). Baguette 150 FCFA, ouvert dès 6 h. Gâteaux d'anniversaire sur commande par WhatsApp, 48 h à l'avance.">
+<meta name="theme-color" content="#F6EDDD">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/web/panier-de-pain.jpg">
+<style>
+:root{
+  --farine:#F6EDDD;      /* fond */
+  --mie:#FFF8EC;         /* cartes */
+  --croute:#A4441A;      /* terre de Douala, croûte */
+  --croute-fonce:#7A3010;
+  --encre:#24160E;
+  --encre-2:#5A4334;
+  --trait:#E3D3BA;
+  --soleil:#F1B23A;
+  --vert:#17693F;        /* action WhatsApp */
+  --vert-fonce:#0F5231;
+  --nuit:#2A1A11;
+  --rayon:14px;
+  --display:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --texte:ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--farine);color:var(--encre);font:17px/1.55 var(--texte);padding-bottom:84px}
+@media (min-width:860px){body{padding-bottom:0}}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:800;line-height:1.02;letter-spacing:-.02em;margin:0}
+p{margin:0}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:3px solid var(--soleil);outline-offset:3px;border-radius:6px}
+
+/* ---------- Boutons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.55em;min-height:52px;padding:0 22px;border-radius:999px;font:700 16px/1 var(--texte);text-decoration:none;border:2px solid transparent;cursor:pointer;white-space:nowrap}
+.btn svg{width:20px;height:20px;flex:none}
+.btn-wa{background:var(--vert);color:#fff}
+.btn-wa:hover{background:var(--vert-fonce)}
+.btn-ligne{border-color:var(--encre);color:var(--encre);background:transparent}
+.btn-ligne:hover{background:var(--encre);color:var(--farine)}
+
+/* ---------- En-tête ---------- */
+.top{position:sticky;top:0;z-index:20;background:rgba(246,237,221,.94);backdrop-filter:saturate(1.2) blur(8px);-webkit-backdrop-filter:saturate(1.2) blur(8px);border-bottom:1px solid var(--trait)}
+.top .wrap{display:flex;align-items:center;gap:14px;min-height:60px}
+.marque{display:flex;align-items:center;gap:9px;text-decoration:none;font:800 21px/1 var(--display);letter-spacing:-.02em}
+.marque svg{width:30px;height:30px;flex:none}
+.nav{display:none;gap:22px;margin-left:auto;font-weight:600;font-size:15px}
+.nav a{text-decoration:none}
+.nav a:hover{text-decoration:underline;text-underline-offset:4px}
+.statut{margin-left:auto;display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:700;padding:6px 11px;border-radius:999px;background:var(--mie);border:1px solid var(--trait);white-space:nowrap}
+.statut i{width:9px;height:9px;border-radius:50%;background:#9A8B7C;flex:none}
+.statut[data-etat="ouvert"] i{background:#1F9D55;box-shadow:0 0 0 3px rgba(31,157,85,.18)}
+.statut[data-etat="ferme"] i{background:var(--croute)}
+.statut:empty{display:none}
+.top .btn{display:none;min-height:42px;font-size:15px;padding:0 16px}
+@media (min-width:860px){
+  .nav{display:flex}
+  .statut{margin-left:0}
+  .top .btn{display:inline-flex}
+}
+
+/* ---------- Accueil ---------- */
+.hero{padding:26px 0 38px}
+.hero .wrap{display:grid;gap:26px}
+.hello{display:inline-block;font:600 15px/1.3 var(--display);color:var(--croute-fonce);background:#F3DDBF;padding:6px 12px;border-radius:8px;margin-bottom:16px}
+.hero h1{font-size:clamp(42px,11.5vw,84px)}
+.hero h1 span{color:var(--croute)}
+.chapo{margin-top:16px;font-size:18px;color:var(--encre-2);max-width:32em}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.actions .btn{flex:1 1 220px}
+.faits{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:24px;border-top:1px solid var(--trait)}
+.faits div{padding:12px 0;border-bottom:1px solid var(--trait)}
+.faits div:nth-child(odd){padding-right:12px;border-right:1px solid var(--trait)}
+.faits div:nth-child(even){padding-left:14px}
+.faits b{display:block;font:800 20px/1.1 var(--display)}
+.faits small{font-size:13.5px;color:var(--encre-2)}
+.hero-photo{position:relative;margin:0}
+.hero-photo img{width:100%;aspect-ratio:4/4.4;object-fit:cover;object-position:50% 45%;border-radius:var(--rayon)}
+.pastille{position:absolute;left:-6px;top:18px;width:112px;height:112px;border-radius:50%;background:var(--soleil);color:var(--encre);display:grid;place-content:center;text-align:center;transform:rotate(-8deg);box-shadow:0 6px 18px rgba(60,30,10,.22)}
+.pastille small{font:700 12px/1.1 var(--texte);text-transform:uppercase;letter-spacing:.06em}
+.pastille b{font:800 40px/.95 var(--display);letter-spacing:-.03em}
+.credit{font-size:12px;line-height:1.4;color:var(--encre-2);margin-top:7px}
+.credit a{color:inherit}
+@media (min-width:860px){
+  .hero{padding:56px 0 70px}
+  .hero .wrap{grid-template-columns:1.15fr .85fr;align-items:center;gap:56px}
+  .pastille{left:-40px;top:34px;width:132px;height:132px}
+  .pastille b{font-size:48px}
+}
+
+/* ---------- Sections ---------- */
+section{scroll-margin-top:70px}
+.bloc{padding:50px 0}
+.surtitre{font:700 13px/1 var(--texte);text-transform:uppercase;letter-spacing:.12em;color:var(--croute);margin-bottom:12px}
+.bloc h2{font-size:clamp(34px,8.4vw,56px)}
+.intro{margin-top:12px;color:var(--encre-2);max-width:34em}
+
+/* ---------- Prix du comptoir ---------- */
+.ardoise{margin-top:26px;background:var(--mie);border:1px solid var(--trait);border-radius:var(--rayon);padding:6px 18px}
+.ligne{display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:4px 14px;padding:15px 0;border-bottom:1px dashed var(--trait)}
+.ligne:last-child{border-bottom:0}
+.ligne h3{font:700 18px/1.25 var(--texte);letter-spacing:0}
+.ligne p{grid-column:1/-1;font-size:14.5px;color:var(--encre-2);margin-top:-2px}
+.prix{font:800 30px/1 var(--display);font-variant-numeric:tabular-nums;letter-spacing:-.02em;white-space:nowrap}
+.prix small{font:700 12px/1 var(--texte);letter-spacing:.04em;margin-left:4px;color:var(--encre-2)}
+.prix.mot{font-size:18px;color:var(--croute)}
+.ligne.vedette .prix{font-size:44px;color:var(--croute)}
+.ligne.vedette h3{font-size:21px}
+.tag{display:inline-block;font:700 11.5px/1 var(--texte);text-transform:uppercase;letter-spacing:.06em;background:var(--soleil);padding:4px 7px;border-radius:5px;vertical-align:3px;margin-left:6px}
+.tag[hidden]{display:none}
+.note{margin-top:14px;font-size:14.5px;color:var(--encre-2)}
+@media (min-width:860px){
+  .prix-grille{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px;align-items:start}
+  .ardoise{margin-top:0;padding:10px 30px}
+}
+
+/* ---------- Samedi ---------- */
+.samedi{background:var(--nuit);color:#F8EBD8}
+.samedi .wrap{display:grid;gap:26px}
+.samedi .surtitre{color:var(--soleil)}
+.samedi .intro{color:#D9C6AE}
+.samedi figure{margin:0}
+.samedi img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:30% 50%;border-radius:var(--rayon)}
+.samedi .credit{color:#BFA98E}
+.jour{display:flex;gap:6px;margin-top:22px;flex-wrap:wrap}
+.jour span{font:700 13px/1 var(--texte);padding:9px 10px;border-radius:8px;border:1px solid #5A4334;color:#BFA98E}
+.jour span.sam{background:var(--soleil);border-color:var(--soleil);color:var(--encre)}
+@media (min-width:860px){.samedi .wrap{grid-template-columns:1fr 1fr;align-items:center;gap:56px}}
+
+/* ---------- Gâteaux ---------- */
+.gateaux .wrap{display:grid;gap:30px}
+.chiffres{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap}
+.chiffre{flex:1 1 140px;background:var(--mie);border:1px solid var(--trait);border-radius:var(--rayon);padding:14px 16px}
+.chiffre b{display:block;font:800 30px/1 var(--display);letter-spacing:-.02em;color:var(--croute)}
+.chiffre span{font-size:14px;color:var(--encre-2)}
+.etapes{list-style:none;margin:24px 0 0;padding:0;counter-reset:e}
+.etapes li{counter-increment:e;display:grid;grid-template-columns:34px 1fr;gap:12px;padding:10px 0}
+.etapes li::before{content:counter(e);width:34px;height:34px;border-radius:50%;background:var(--encre);color:var(--farine);display:grid;place-content:center;font:800 16px/1 var(--display)}
+.etapes b{display:block}
+.etapes span{font-size:15px;color:var(--encre-2)}
+
+.bon{background:var(--mie);border:1px solid var(--trait);border-radius:18px;padding:22px 18px 20px;box-shadow:0 1px 0 var(--trait),0 14px 30px -18px rgba(70,35,10,.35)}
+.bon h3{font-size:26px}
+.bon .sous{font-size:14.5px;color:var(--encre-2);margin:6px 0 16px}
+.champ{margin-bottom:15px}
+.champ label,.champ legend{display:block;font-weight:700;font-size:15px;margin-bottom:6px;padding:0}
+.champ .aide{font-weight:400;color:var(--encre-2);font-size:13.5px}
+.champ input[type=text],.champ input[type=date],.champ input[type=number],.champ textarea{width:100%;font:16px/1.4 var(--texte);color:var(--encre);background:#fff;border:1.5px solid #D5C2A5;border-radius:10px;padding:12px 13px;min-height:50px}
+.champ textarea{min-height:88px;resize:vertical}
+.champ input:focus,.champ textarea:focus{outline:none;border-color:var(--croute);box-shadow:0 0 0 3px rgba(164,68,26,.18)}
+fieldset.champ{border:0;margin:0 0 15px;padding:0}
+.choix{display:grid;gap:8px}
+.choix label{display:flex;gap:10px;align-items:flex-start;font-weight:600;font-size:15px;background:#fff;border:1.5px solid #D5C2A5;border-radius:10px;padding:12px 13px;cursor:pointer;margin:0}
+.choix label .opt span{font-weight:400;color:var(--encre-2);display:block;font-size:13.5px}
+.choix input{margin-top:3px;accent-color:var(--croute);width:18px;height:18px;flex:none}
+.choix label:has(input:checked){border-color:var(--croute);background:#FFF1E2}
+.alerte{font-size:13.5px;color:var(--croute-fonce);margin-top:6px;min-height:0}
+.alerte:empty{display:none}
+.bon .btn{width:100%;margin-top:4px}
+.bon .apres{font-size:13px;color:var(--encre-2);margin-top:10px;text-align:center}
+@media (min-width:860px){
+  .gateaux .wrap{grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+  .bon{padding:30px 28px 26px}
+}
+
+/* ---------- Fournil ---------- */
+.fournil{border-top:1px solid var(--trait)}
+.photos{display:grid;gap:14px;margin-top:26px}
+.photos figure{margin:0}
+.photos img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:var(--rayon)}
+.photos figcaption b{display:block;font-size:15px;margin-top:8px}
+.photos .credit{display:block;margin-top:2px}
+@media (min-width:640px){.photos{grid-template-columns:repeat(3,1fr)}.photos img{aspect-ratio:4/5}}
+
+/* ---------- Infos pratiques ---------- */
+.infos{background:#EFE2CC}
+.infos-grille{display:grid;gap:18px;margin-top:26px}
+.carte{background:var(--mie);border:1px solid var(--trait);border-radius:var(--rayon);padding:20px 18px}
+.carte h3{font-size:22px;margin-bottom:12px}
+.horaires{width:100%;border-collapse:collapse;font-size:16px}
+.horaires th{text-align:left;font-weight:600}
+.horaires th,.horaires td{padding:10px 0;border-bottom:1px solid var(--trait)}
+.horaires tr:last-child th,.horaires tr:last-child td{border-bottom:0}
+.horaires td{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+.horaires tr.auj th,.horaires tr.auj td{color:var(--croute)}
+.horaires tr.auj th::after{content:" · aujourd'hui";font-weight:400;font-size:13px}
+.adresse{font:800 24px/1.1 var(--display);margin-bottom:6px}
+.carte p+p{margin-top:8px}
+.carte .btn{margin-top:14px;width:100%}
+.petit{font-size:14.5px;color:var(--encre-2)}
+.moyens{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0;padding:0}
+.moyens li{font-weight:700;font-size:15px;padding:9px 13px;border-radius:9px;background:#fff;border:1.5px solid #D5C2A5}
+.livraison{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-top:16px;padding-top:14px;border-top:1px solid var(--trait)}
+.livraison b{font:800 26px/1 var(--display);white-space:nowrap}
+.tel{font:800 22px/1.2 var(--display);letter-spacing:.01em;white-space:nowrap}
+@media (min-width:860px){.infos-grille{grid-template-columns:repeat(3,1fr)}.carte{padding:26px 24px}}
+
+/* ---------- Pied ---------- */
+.pied{background:var(--nuit);color:#D9C6AE;padding:40px 0 30px;font-size:14px}
+.pied .marque{color:#F8EBD8;margin-bottom:10px}
+.pied h2{font:700 13px/1 var(--texte);text-transform:uppercase;letter-spacing:.12em;color:var(--soleil);margin:26px 0 10px}
+.pied ul{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.pied a{color:#F8EBD8}
+
+/* ---------- Barre mobile ---------- */
+.barre{position:fixed;left:0;right:0;bottom:0;z-index:30;display:grid;grid-template-columns:1fr auto;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(246,237,221,.97);border-top:1px solid var(--trait);box-shadow:0 -6px 20px rgba(60,30,10,.08)}
+.barre .btn{min-height:50px;padding:0 16px}
+.barre .btn-ligne{padding:0 14px}
+@media (min-width:860px){.barre{display:none}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="marque" href="#accueil" aria-label="Pain d'Ici, accueil">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#A4441A"/><path d="M8 20.5 13 11M13.5 22.5 18.5 13M19 23 23.5 14.5" stroke="#F6EDDD" stroke-width="2.6" stroke-linecap="round"/></svg>
+      Pain d'Ici
+    </a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#comptoir">Prix</a>
+      <a href="#gateaux">Gâteaux</a>
+      <a href="#infos">Horaires et adresse</a>
+    </nav>
+    <p class="statut" id="statut" role="status"></p>
+    <a class="btn btn-wa lien-wa" href="https://wa.me/2376XXXXXXXX" data-msg="Bonjour Pain d'Ici !">
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"/></svg>WhatsApp
+    </a>
+  </div>
+</header>
+
+<main id="accueil">
+
+  <!-- ===== Accueil ===== -->
+  <section class="hero" aria-labelledby="titre">
+    <div class="wrap">
+      <div>
+        <p class="hello" lang="en">Good morning, neighbour! Fresh bread from 6 a.m.</p>
+        <h1 id="titre">Le pain chaud de <span>Bonamoussadi.</span></h1>
+        <p class="chapo">Boulangerie-pâtisserie du quartier depuis 2019. On ouvre à 6 h : vous prenez votre baguette avant le travail. Pour l'anniversaire des enfants, commandez le gâteau sur WhatsApp.</p>
+        <div class="actions">
+          <a class="btn btn-wa lien-wa" href="https://wa.me/2376XXXXXXXX" data-msg="Bonjour Pain d'Ici ! Je voudrais commander un gâteau d'anniversaire.">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"/></svg>Commander un gâteau
+          </a>
+          <a class="btn btn-ligne" href="#infos">Adresse et horaires</a>
+        </div>
+        <div class="faits">
+          <div><b>6 h – 20 h</b><small>du lundi au samedi</small></div>
+          <div><b>7 h – 13 h</b><small>le dimanche</small></div>
+          <div><b>1 000 FCFA</b><small>livraison moto, Bonamoussadi et Kotto</small></div>
+          <div><b>48 h</b><small>pour commander un gâteau</small></div>
+        </div>
+      </div>
+      <figure class="hero-photo">
+        <img src="assets/web/panier-de-pain.jpg" width="675" height="900" alt="Un panier rempli de baguettes et de pains dorés, posé sur la terre rouge." fetchpriority="high">
+        <div class="pastille" aria-hidden="true"><small>Baguette</small><b>150</b><small>FCFA</small></div>
+        <figcaption class="credit">Photo d'illustration : Sid Mbog, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr" rel="license">CC BY-SA 4.0</a>, <a href="https://commons.wikimedia.org/wiki/File:Panier_de_Pain_Local.jpg">Wikimedia Commons</a> (redimensionnée).</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ===== Prix ===== -->
+  <section class="bloc" id="comptoir" aria-labelledby="t-prix">
+    <div class="wrap prix-grille">
+      <div>
+        <p class="surtitre">Au comptoir</p>
+        <h2 id="t-prix">Les prix, affichés.</h2>
+        <p class="intro">Le pain de tous les jours, au prix du quartier. Vous payez en espèces, par Orange Money ou par MTN MoMo.</p>
+      </div>
+      <div class="ardoise" role="list">
+        <div class="ligne vedette" role="listitem">
+          <h3>Baguette</h3><p class="prix">150<small>FCFA</small></p>
+        </div>
+        <div class="ligne" role="listitem">
+          <h3>Pain complet</h3><p class="prix">500<small>FCFA</small></p>
+        </div>
+        <div class="ligne" role="listitem">
+          <h3>Croissant</h3><p class="prix">300<small>FCFA</small></p>
+        </div>
+        <div class="ligne" role="listitem">
+          <h3>Pain au chocolat</h3><p class="prix">350<small>FCFA</small></p>
+        </div>
+        <div class="ligne" role="listitem">
+          <h3>Beignets-haricots <span class="tag" id="tag-samedi" hidden>Ce matin</span></h3><p class="prix mot">samedi matin</p>
+          <p>Seulement le samedi, le matin.</p>
+        </div>
+        <div class="ligne" role="listitem">
+          <h3>Gâteau d'anniversaire</h3><p class="prix">12 000 – 30 000<small>FCFA</small></p>
+          <p>Sur commande, 48 h à l'avance. Le prix dépend de la taille. <a href="#gateaux">Commander</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Samedi ===== -->
+  <section class="bloc samedi" aria-labelledby="t-samedi">
+    <div class="wrap">
+      <div>
+        <p class="surtitre">Le rendez-vous de la semaine</p>
+        <h2 id="t-samedi">Samedi matin, beignets-haricots.</h2>
+        <p class="intro">Un seul jour dans la semaine, le samedi, et seulement le matin. Passez à la boutique.</p>
+        <div class="jour" aria-label="Jours de la semaine : les beignets-haricots, c'est le samedi">
+          <span>Lun</span><span>Mar</span><span>Mer</span><span>Jeu</span><span>Ven</span><span class="sam">Sam</span><span>Dim</span>
+        </div>
+      </div>
+      <figure>
+        <img src="assets/web/beignets-bouillie-haricots.jpg" width="900" height="675" loading="lazy" decoding="async" alt="Assiette de beignets dorés avec des haricots rouges, à côté d'un bol de bouillie, sur une table en bois.">
+        <figcaption class="credit">Photo d'illustration : Sid Mbog, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr" rel="license">CC BY-SA 4.0</a>, <a href="https://commons.wikimedia.org/wiki/File:Beignets_-_Bouillie_-_haricots.jpg">Wikimedia Commons</a> (redimensionnée).</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ===== Gâteaux ===== -->
+  <section class="bloc gateaux" id="gateaux" aria-labelledby="t-gateaux">
+    <div class="wrap">
+      <div>
+        <p class="surtitre">Gâteaux d'anniversaire</p>
+        <h2 id="t-gateaux">Le gâteau, on s'en occupe.</h2>
+        <p class="intro">Dites-nous pour quand et pour combien de personnes. On vous répond sur WhatsApp avec la taille et le prix.</p>
+        <div class="chiffres">
+          <div class="chiffre"><b>48 h</b><span>minimum avant le jour J</span></div>
+          <div class="chiffre"><b>12 000 – 30 000</b><span>FCFA, selon la taille</span></div>
+        </div>
+        <ol class="etapes">
+          <li><div><b>Vous écrivez sur WhatsApp</b><span>Au moins 48 heures avant. Le formulaire prépare le message pour vous.</span></div></li>
+          <li><div><b>On confirme la taille et le prix</b><span>Entre 12 000 et 30 000 FCFA.</span></div></li>
+          <li><div><b>Vous récupérez le gâteau</b><span>À la boutique, ou livré à moto dans Bonamoussadi et Kotto (1 000 FCFA).</span></div></li>
+        </ol>
+      </div>
+
+      <form class="bon" id="bon" action="https://wa.me/2376XXXXXXXX" method="get" novalidate>
+        <h3>Préparer ma commande</h3>
+        <p class="sous">Rien n'est payé ici. Le bouton ouvre WhatsApp avec votre message déjà écrit.</p>
+
+        <div class="champ">
+          <label for="f-date">Pour quel jour ?</label>
+          <input type="date" id="f-date" name="date" required>
+          <p class="alerte" id="alerte-date" aria-live="polite"></p>
+        </div>
+
+        <div class="champ">
+          <label for="f-pers">Pour combien de personnes ? <span class="aide">(à peu près)</span></label>
+          <input type="number" id="f-pers" name="personnes" inputmode="numeric" min="1" max="200" placeholder="Par exemple 15">
+        </div>
+
+        <fieldset class="champ">
+          <legend>Retrait ou livraison ?</legend>
+          <div class="choix">
+            <label><input type="radio" name="mode" value="retrait" checked><span class="opt">Je passe le chercher<span>À la boutique, Bonamoussadi</span></span></label>
+            <label><input type="radio" name="mode" value="livraison"><span class="opt">Livraison à moto<span>Bonamoussadi ou Kotto, 1 000 FCFA</span></span></label>
+          </div>
+        </fieldset>
+
+        <div class="champ">
+          <label for="f-texte">Vos envies <span class="aide">(parfum, couleur, prénom à écrire…)</span></label>
+          <textarea id="f-texte" name="envies" placeholder="Par exemple : chocolat, « Joyeux anniversaire Maëlle »"></textarea>
+        </div>
+
+        <div class="champ">
+          <label for="f-nom">Votre prénom <span class="aide">(facultatif)</span></label>
+          <input type="text" id="f-nom" name="nom" autocomplete="given-name">
+        </div>
+
+        <button class="btn btn-wa" type="submit">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"/></svg>Envoyer sur WhatsApp
+        </button>
+        <p class="apres">Au +237 6XX XX XX XX. On confirme le prix avant de lancer le gâteau.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===== Le fournil ===== -->
+  <section class="bloc fournil" aria-labelledby="t-fournil">
+    <div class="wrap">
+      <p class="surtitre">Depuis 2019</p>
+      <h2 id="t-fournil">Deux fours, six personnes, un quartier.</h2>
+      <p class="intro">Pain d'Ici a ouvert à Bonamoussadi en 2019. Le pain sort de nos deux fours pour les familles d'ici, pour ceux qui passent avant le travail, et pour les parents qui fêtent un anniversaire.</p>
+      <div class="photos">
+        <figure>
+          <img src="assets/web/petrissage.jpg" width="800" height="600" loading="lazy" decoding="async" alt="Un boulanger pose la main sur une grosse boule de pâte, sur un plan de travail en bois." style="object-position:62% 50%">
+          <figcaption><b>La pâte</b><span class="credit">Photo d'illustration : Myblueberet, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr" rel="license">CC BY-SA 4.0</a>, <a href="https://commons.wikimedia.org/wiki/File:Bakery_man_preparing_to_knead_bread_dough.jpg">Wikimedia Commons</a> (redimensionnée).</span></figcaption>
+        </figure>
+        <figure>
+          <img src="assets/web/four-enfournement.jpg" width="900" height="600" loading="lazy" decoding="async" alt="Un boulanger en gants enfourne une plaque de petits pains ronds dans un four à étages." style="object-position:48% 50%">
+          <figcaption><b>Le four</b><span class="credit">Photo d'illustration : Minette Lontsie, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr" rel="license">CC BY-SA 4.0</a>, <a href="https://commons.wikimedia.org/wiki/File:Boulanger_01.jpg">Wikimedia Commons</a> (redimensionnée).</span></figcaption>
+        </figure>
+        <figure>
+          <img src="assets/web/pains-sur-table.jpg" width="900" height="600" loading="lazy" decoding="async" alt="Des pains dorés alignés sur une table en bois, dans un atelier de boulangerie." style="object-position:55% 60%">
+          <figcaption><b>La sortie du four</b><span class="credit">Photo d'illustration : Minette Lontsie, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr" rel="license">CC BY-SA 4.0</a>, <a href="https://commons.wikimedia.org/wiki/File:Boulanger_03.jpg">Wikimedia Commons</a> (redimensionnée).</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Infos pratiques ===== -->
+  <section class="bloc infos" id="infos" aria-labelledby="t-infos">
+    <div class="wrap">
+      <p class="surtitre">Infos pratiques</p>
+      <h2 id="t-infos">Passez nous voir.</h2>
+      <div class="infos-grille">
+
+        <div class="carte">
+          <h3>Horaires</h3>
+          <table class="horaires">
+            <caption class="sr">Horaires d'ouverture</caption>
+            <tbody>
+              <tr data-j="1"><th scope="row">Lundi</th><td>6 h – 20 h</td></tr>
+              <tr data-j="2"><th scope="row">Mardi</th><td>6 h – 20 h</td></tr>
+              <tr data-j="3"><th scope="row">Mercredi</th><td>6 h – 20 h</td></tr>
+              <tr data-j="4"><th scope="row">Jeudi</th><td>6 h – 20 h</td></tr>
+              <tr data-j="5"><th scope="row">Vendredi</th><td>6 h – 20 h</td></tr>
+              <tr data-j="6"><th scope="row">Samedi</th><td>6 h – 20 h</td></tr>
+              <tr data-j="0"><th scope="row">Dimanche</th><td>7 h – 13 h</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="carte">
+          <h3>Adresse</h3>
+          <p class="adresse">Bonamoussadi, Douala</p>
+          <p class="petit">Livraison à moto dans Bonamoussadi et Kotto.</p>
+          <a class="btn btn-ligne" href="https://www.google.com/maps/search/?api=1&amp;query=Bonamoussadi%2C%20Douala" target="_blank" rel="noopener">Voir sur la carte ↗</a>
+        </div>
+
+        <div class="carte">
+          <h3>WhatsApp et paiement</h3>
+          <p class="tel">+237 6XX XX XX XX</p>
+          <a class="btn btn-wa lien-wa" href="https://wa.me/2376XXXXXXXX" data-msg="Bonjour Pain d'Ici !">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"/></svg>Écrire sur WhatsApp
+          </a>
+          <p class="petit" style="margin:18px 0 10px">On accepte :</p>
+          <ul class="moyens">
+            <li>Espèces</li><li>Orange Money</li><li>MTN MoMo</li>
+          </ul>
+          <div class="livraison"><span class="petit">Livraison à moto</span><b>1 000 FCFA</b></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="pied">
+  <div class="wrap">
+    <p class="marque">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#A4441A"/><path d="M8 20.5 13 11M13.5 22.5 18.5 13M19 23 23.5 14.5" stroke="#F6EDDD" stroke-width="2.6" stroke-linecap="round"/></svg>
+      Pain d'Ici
+    </p>
+    <p>Boulangerie-pâtisserie de quartier, Bonamoussadi, Douala. Ouverte depuis 2019.<br>Lundi – samedi 6 h – 20 h · dimanche 7 h – 13 h · WhatsApp +237 6XX XX XX XX</p>
+
+    <h2>Crédits photo</h2>
+    <p style="margin-bottom:10px">Photos d'illustration issues de Wikimedia Commons, sous licence <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr" rel="license">Creative Commons BY-SA 4.0</a>. Elles ont été redimensionnées pour ce site ; elles ne montrent pas la boutique.</p>
+    <ul>
+      <li>Panier de pain : Sid Mbog, <a href="https://commons.wikimedia.org/wiki/File:Panier_de_Pain_Local.jpg">Panier de Pain Local</a></li>
+      <li>Beignets, bouillie, haricots : Sid Mbog, <a href="https://commons.wikimedia.org/wiki/File:Beignets_-_Bouillie_-_haricots.jpg">Beignets - Bouillie - haricots</a></li>
+      <li>Pétrissage : Myblueberet, <a href="https://commons.wikimedia.org/wiki/File:Bakery_man_preparing_to_knead_bread_dough.jpg">Bakery man preparing to knead bread dough</a></li>
+      <li>Enfournement : Minette Lontsie, <a href="https://commons.wikimedia.org/wiki/File:Boulanger_01.jpg">Boulanger 01</a></li>
+      <li>Pains sur table : Minette Lontsie, <a href="https://commons.wikimedia.org/wiki/File:Boulanger_03.jpg">Boulanger 03</a></li>
+    </ul>
+  </div>
+</footer>
+
+<nav class="barre" aria-label="Actions rapides">
+  <a class="btn btn-wa lien-wa" href="https://wa.me/2376XXXXXXXX" data-msg="Bonjour Pain d'Ici ! Je voudrais commander un gâteau d'anniversaire.">
+    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"/></svg>Commander un gâteau
+  </a>
+  <a class="btn btn-ligne" href="https://www.google.com/maps/search/?api=1&amp;query=Bonamoussadi%2C%20Douala" target="_blank" rel="noopener" aria-label="Itinéraire vers la boutique">Itinéraire</a>
+</nav>
+
+<script>
+(function(){
+  /* Numéro WhatsApp : remplacer par le vrai numéro, chiffres seulement (ex. 2376XXXXXXXX). */
+  var WA_NUMERO = "2376XXXXXXXX";
+  var wa = function(msg){ return "https://wa.me/" + WA_NUMERO + (msg ? "?text=" + encodeURIComponent(msg) : ""); };
+
+  document.querySelectorAll(".lien-wa").forEach(function(a){ a.href = wa(a.getAttribute("data-msg")); });
+
+  /* Heure de Douala (UTC+1), quel que soit le fuseau du téléphone */
+  var jour, heure, minute, auj;
+  try {
+    var p = {};
+    new Intl.DateTimeFormat("en-GB",{timeZone:"Africa/Douala",weekday:"short",hour:"2-digit",minute:"2-digit",year:"numeric",month:"2-digit",day:"2-digit",hourCycle:"h23"})
+      .formatToParts(new Date()).forEach(function(x){ p[x.type] = x.value; });
+    jour = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].indexOf(p.weekday);
+    heure = +p.hour; minute = +p.minute;
+    auj = new Date(Date.UTC(+p.year, +p.month - 1, +p.day));
+  } catch(e) {
+    var d = new Date(); jour = d.getDay(); heure = d.getHours(); minute = d.getMinutes();
+    auj = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+  }
+
+  /* Statut ouvert / fermé */
+  var plage = function(j){ return j === 0 ? [7,13] : [6,20]; };
+  var h = heure + minute/60, pl = plage(jour), el = document.getElementById("statut"), txt, etat;
+  if (h >= pl[0] && h < pl[1]) { etat = "ouvert"; txt = "Ouvert · jusqu'à " + pl[1] + " h"; }
+  else if (h < pl[0]) { etat = "ferme"; txt = "Fermé · ouvre à " + pl[0] + " h"; }
+  else { etat = "ferme"; txt = "Fermé · ouvre demain à " + plage((jour + 1) % 7)[0] + " h"; }
+  el.setAttribute("data-etat", etat);
+  el.innerHTML = "<i aria-hidden=\"true\"></i>" + txt;
+
+  var ligne = document.querySelector('.horaires tr[data-j="' + jour + '"]');
+  if (ligne) ligne.className = "auj";
+  if (jour === 6 && h < 12) document.getElementById("tag-samedi").hidden = false;
+
+  /* Commande de gâteau : 48 h minimum */
+  var iso = function(d){ return d.toISOString().slice(0,10); };
+  var min = new Date(auj.getTime() + 2*864e5);
+  var champDate = document.getElementById("f-date"), alerte = document.getElementById("alerte-date");
+  champDate.min = iso(min);
+  var jours = ["dimanche","lundi","mardi","mercredi","jeudi","vendredi","samedi"];
+  var mois = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+  var joli = function(d){ return jours[d.getUTCDay()] + " " + d.getUTCDate() + " " + mois[d.getUTCMonth()]; };
+
+  function verifier(){
+    var v = champDate.value;
+    if (!v) { alerte.textContent = ""; return true; }
+    var d = new Date(v + "T00:00:00Z");
+    if (d < min) { alerte.textContent = "Il faut 48 h pour préparer un gâteau : le premier jour possible est le " + joli(min) + "."; return false; }
+    alerte.textContent = d.getUTCDay() === 0 ? "Le dimanche, la boutique ferme à 13 h." : "";
+    return true;
+  }
+  champDate.addEventListener("change", verifier);
+
+  document.getElementById("bon").addEventListener("submit", function(e){
+    e.preventDefault();
+    if (!champDate.value) { alerte.textContent = "Indiquez le jour de l'anniversaire, s'il vous plaît."; champDate.focus(); return; }
+    if (!verifier()) { champDate.focus(); return; }
+    var f = e.target, lignes = ["Bonjour Pain d'Ici ! Je voudrais commander un gâteau d'anniversaire."];
+    var d = new Date(champDate.value + "T00:00:00Z");
+    lignes.push("• Pour le : " + joli(d));
+    if (f.personnes.value) lignes.push("• Pour environ " + f.personnes.value + " personnes");
+    lignes.push(f.mode.value === "livraison" ? "• Livraison à moto (Bonamoussadi / Kotto), adresse : " : "• Je passe le chercher à la boutique");
+    if (f.envies.value.trim()) lignes.push("• Mes envies : " + f.envies.value.trim());
+    if (f.nom.value.trim()) lignes.push("", "C'est " + f.nom.value.trim() + ".");
+    lignes.push("Merci de me confirmer la taille et le prix.");
+    window.location.href = wa(lignes.join("\n"));
+  });
+})();
+</script>
+</body>
+</html>

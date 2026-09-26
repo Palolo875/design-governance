@@ -1,0 +1,732 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fournil d'Akwa · Boulangerie-pâtisserie à Douala</title>
+<meta name="description" content="Boulangerie-pâtisserie à Akwa, Douala. Les heures de fournée du jour, la vitrine et ses prix, les gâteaux de fête sur commande.">
+<!--
+  MAQUETTE. Le nom, l'adresse, les horaires, les fournées, la carte, les prix
+  et les tarifs de gâteaux sont des exemples à remplacer par ceux de la boutique.
+  Aucun numéro de téléphone n'est inventé : renseigner SHOP.whatsapp dans le script.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --farine:#F5EEE1;
+  --farine-2:#EDE3D1;
+  --cacao:#2A160E;
+  --cacao-2:#5B4033;
+  --four:#22120B;
+  --braise:#C23D17;
+  --braise-vif:#FF7A45;
+  --soleil:#F2B33D;
+  --wouri:#163B58;
+  --papier:#FFFDF8;
+  --ok:#1E6B3A;
+  --err:#7F1D07;
+  --display:"Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
+  --text:"Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"DM Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --gutter:clamp(16px, 4vw, 48px);
+  --max:1240px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--farine);color:var(--cacao);font-family:var(--text);font-size:1.0625rem;line-height:1.55;font-variation-settings:"opsz" 14;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--braise);outline-offset:3px;border-radius:4px}
+.wrap{max-width:var(--max);margin-inline:auto;padding-inline:var(--gutter)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip{position:absolute;left:12px;top:-60px;background:var(--cacao);color:var(--farine);padding:10px 14px;border-radius:8px;z-index:50;text-decoration:none}
+.skip:focus{top:12px}
+.mono{font-family:var(--mono);font-feature-settings:"tnum" 1}
+
+/* ---------- En-tête ---------- */
+.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--farine) 94%,transparent);backdrop-filter:saturate(1.2) blur(6px);border-bottom:2px solid var(--cacao)}
+.top .wrap{display:flex;align-items:center;gap:20px;min-height:64px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;flex:none}
+.brand svg{width:30px;height:30px}
+.brand b{font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 75,"opsz" 48;font-size:1.55rem;letter-spacing:.01em;text-transform:uppercase;line-height:1}
+.status{display:inline-flex;align-items:center;gap:8px;font-size:.85rem;font-weight:600;padding:5px 11px;border-radius:999px;border:1.5px solid currentColor;white-space:nowrap}
+.status i{width:8px;height:8px;border-radius:50%;background:currentColor}
+.status[data-open="true"]{color:var(--ok)}
+.status[data-open="false"]{color:var(--cacao-2)}
+.nav{margin-left:auto;display:flex;align-items:center;gap:22px}
+.nav a{text-decoration:none;font-weight:600;font-size:.95rem}
+.nav a:not(.btn):hover{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+@media (max-width:860px){.nav a:not(.btn){display:none}}
+.top .btn{gap:0}
+section[id]{scroll-margin-top:72px}
+@media (max-width:520px){.top .status{display:none}.top .long{display:none}.top .btn{padding:10px 14px;font-size:.9rem}}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:12px 22px;border-radius:999px;font:700 1rem/1.1 var(--text);text-decoration:none;border:2px solid var(--cacao);cursor:pointer;transition:transform .15s ease, background .15s ease}
+.btn-primary{background:var(--braise);border-color:var(--braise);color:#fff}
+.btn-primary:hover{background:#A8330F;border-color:#A8330F}
+.btn-ghost{background:transparent;color:var(--cacao)}
+.btn-ghost:hover{background:var(--cacao);color:var(--farine)}
+.btn:active{transform:translateY(1px)}
+@media (prefers-reduced-motion: reduce){.btn{transition:none}}
+
+/* ---------- Scène d'entrée ---------- */
+.hero{padding-block:clamp(28px,5vw,72px) clamp(48px,7vw,96px)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);gap:clamp(28px,5vw,72px);align-items:center}
+.kicker{display:inline-block;font-weight:700;font-size:.9rem;letter-spacing:.08em;text-transform:uppercase;color:var(--braise);margin:0 0 18px}
+.hero h1{font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 75,"opsz" 96;font-size:clamp(3.1rem,8.2vw,7.4rem);line-height:.88;letter-spacing:-.005em;text-transform:uppercase;margin:0 0 26px;text-wrap:balance}
+.hero h1 em{font-style:normal;color:var(--braise);display:block}
+.lede{font-size:clamp(1.08rem,1.5vw,1.25rem);max-width:34em;margin:0 0 30px;color:var(--cacao)}
+.lede strong{font-weight:700;font-variant-numeric:tabular-nums;background:var(--soleil);padding:0 .28em;border-radius:3px;white-space:nowrap}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px}
+
+/* Le four : tableau des fournées */
+.four{position:relative;isolation:isolate;background:var(--four);color:var(--farine);border-radius:50% 50% 18px 18px / 30% 30% 18px 18px;padding:clamp(92px,11vw,128px) clamp(22px,3vw,40px) clamp(26px,3vw,36px);box-shadow:0 0 0 7px var(--farine),0 0 0 10px var(--cacao);overflow:hidden;max-width:520px;justify-self:end;width:100%}
+.four::after{content:"";position:absolute;inset:auto -10% -30% -10%;height:70%;background:radial-gradient(ellipse at 50% 100%, rgba(255,122,69,.55), rgba(194,61,23,.22) 45%, transparent 70%);z-index:-1;transition:opacity .6s ease}
+.four[data-state="waiting"]::after{opacity:.45}
+.four[data-state="closed"]::after{opacity:0}
+.four[data-state="hot"]::after{animation:braise 3.6s ease-in-out infinite}
+@keyframes braise{0%,100%{opacity:1}50%{opacity:.72}}
+@media (prefers-reduced-motion: reduce){.four[data-state="hot"]::after{animation:none}.four::after{transition:none}}
+.clock{position:absolute;top:clamp(30px,4vw,44px);left:50%;transform:translateX(-50%);text-align:center;white-space:nowrap}
+.clock small{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#CBB9A6}
+.clock output{font-family:var(--mono);font-size:1.7rem;color:var(--soleil);line-height:1.1}
+.now-label{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:#CBB9A6;margin:0 0 6px;font-weight:600}
+.now-title{font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 80,"opsz" 60;font-size:clamp(1.9rem,3.2vw,2.6rem);line-height:.98;margin:0 0 10px;text-transform:uppercase;text-wrap:balance}
+.now-meta{margin:0 0 22px;color:#EFE2CF;font-size:1rem}
+.now-meta .mono{color:var(--soleil)}
+.batches{list-style:none;margin:0;padding:0;border-top:1px solid rgba(245,238,225,.22)}
+.batches li{display:grid;grid-template-columns:4.2em 1fr auto;gap:12px;align-items:baseline;padding:10px 0;border-bottom:1px solid rgba(245,238,225,.14);font-size:.98rem}
+.batches time{font-family:var(--mono);color:var(--soleil)}
+.batches .tag{font-size:.74rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#CBB9A6}
+.batches li[data-s="past"]{color:#A8978A}
+.batches li[data-s="past"] time{color:#A8978A}
+.batches li[data-s="hot"] .tag{color:var(--four);background:var(--braise-vif);padding:2px 7px;border-radius:4px}
+.batches li[data-s="next"] .tag{color:var(--soleil)}
+.batches li[data-s="next"]{color:#fff;font-weight:600}
+.four-note{margin:16px 0 0;font-size:.82rem;color:#BFAE9C}
+
+/* ---------- Titres de section ---------- */
+.sec{padding-block:clamp(56px,8vw,112px)}
+.sec-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:12px 32px;margin-bottom:clamp(28px,4vw,48px)}
+.sec-head h2{font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 75,"opsz" 96;font-size:clamp(2.4rem,5.4vw,4.6rem);line-height:.9;text-transform:uppercase;margin:0}
+.sec-head p{margin:0;max-width:30em;color:var(--cacao-2)}
+
+/* ---------- Vitrine ---------- */
+.vitrine{border-top:2px solid var(--cacao)}
+.board{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border:2px solid var(--cacao);background:var(--papier)}
+.shelf{padding:clamp(20px,3vw,34px);border-bottom:2px solid var(--cacao)}
+.shelf:nth-child(odd){border-right:2px solid var(--cacao)}
+.shelf:nth-last-child(-n+2){border-bottom:0}
+.shelf header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.shelf h3{font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 80,"opsz" 40;font-size:1.7rem;text-transform:uppercase;margin:0;line-height:1}
+.out{font-family:var(--mono);font-size:.82rem;padding:4px 9px;border-radius:999px;border:1.5px solid var(--cacao);white-space:nowrap}
+.out[data-s="hot"]{background:var(--braise);border-color:var(--braise);color:#fff}
+.out[data-s="past"]{background:var(--cacao);color:var(--farine)}
+.menu{list-style:none;margin:0;padding:0}
+.menu li{display:flex;align-items:baseline;gap:10px;padding:9px 0;border-bottom:1px dashed #CDBFA8}
+.menu li:last-child{border-bottom:0}
+.menu .n{font-weight:600}
+.menu .d{display:block;font-weight:400;font-size:.88rem;color:var(--cacao-2)}
+.menu .lead{flex:1;border-bottom:2px dotted #B9A78E;transform:translateY(-4px);min-width:16px}
+.menu .p{font-family:var(--mono);font-weight:500;white-space:nowrap}
+.menu .p small{font-size:.72em;color:var(--cacao-2)}
+.board-foot{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;margin-top:14px;font-size:.9rem;color:var(--cacao-2)}
+
+/* ---------- Gâteaux ---------- */
+.gateaux{background:var(--soleil);border-block:2px solid var(--cacao)}
+.gateaux .sec-head p{color:var(--cacao)}
+.order{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(24px,4vw,56px);align-items:start}
+fieldset{border:0;margin:0 0 26px;padding:0;min-width:0}
+legend{font-weight:800;font-size:1.02rem;margin-bottom:10px;padding:0;display:flex;gap:10px;align-items:baseline}
+legend .step{font-family:var(--mono);font-weight:500;font-size:.85rem}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.chip span{display:inline-flex;flex-direction:column;justify-content:center;min-height:46px;padding:9px 16px;border:2px solid var(--cacao);border-radius:12px;background:var(--farine);font-weight:600;line-height:1.2;cursor:pointer}
+.chip span small{font-family:var(--mono);font-weight:400;font-size:.78rem;color:var(--cacao-2)}
+.chip input:checked + span{background:var(--cacao);color:var(--farine)}
+.chip input:checked + span small{color:#E5D3BD}
+.chip input:focus-visible + span{outline:3px solid var(--wouri);outline-offset:3px}
+.flavours{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.flavours .chip span{width:100%;align-items:flex-start;min-height:74px}
+.flavours .chip span em{font-style:normal;font-weight:400;font-size:.86rem;color:var(--cacao-2)}
+.flavours .chip input:checked + span em{color:#E5D3BD}
+.row2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.field label{display:block;font-weight:700;font-size:.95rem;margin-bottom:6px}
+.field input,.field select{width:100%;min-height:48px;padding:10px 12px;border:2px solid var(--cacao);border-radius:10px;background:var(--papier);color:var(--cacao);font:500 1rem var(--text)}
+.field input:focus-visible,.field select:focus-visible{outline:3px solid var(--wouri);outline-offset:2px}
+.field[data-invalid="true"] input,.field[data-invalid="true"] select{border-color:var(--err);background:#FFF1EC}
+.hint{font-size:.85rem;color:var(--cacao);margin-top:5px;display:flex;justify-content:space-between;gap:10px}
+.err{display:none;margin-top:6px;font-size:.88rem;font-weight:700;color:var(--err)}
+.err::before{content:"! ";}
+.field[data-invalid="true"] .err{display:block}
+
+.ticket{position:sticky;top:88px;background:var(--papier);border:2px solid var(--cacao);border-radius:4px;padding:26px 24px 22px;box-shadow:8px 8px 0 var(--cacao)}
+.ticket::before{content:"";position:absolute;left:-2px;right:-2px;top:-12px;height:12px;background:radial-gradient(circle at 8px 12px,var(--soleil) 6px,transparent 6.5px) 0 0/16px 12px repeat-x}
+.ticket h3{font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 80,"opsz" 40;text-transform:uppercase;font-size:1.5rem;margin:0 0 4px;line-height:1}
+.ticket .sub{margin:0 0 16px;font-size:.86rem;color:var(--cacao-2)}
+.ticket dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:8px 16px;font-size:.95rem}
+.ticket dt{color:var(--cacao-2)}
+.ticket dd{margin:0;text-align:right;font-weight:600;overflow-wrap:anywhere}
+.ticket dd.missing{color:var(--err);font-weight:600}
+.cake-msg{margin:16px 0 0;padding:14px;border:1.5px dashed var(--cacao-2);border-radius:50% 50% 12px 12px / 38% 38% 12px 12px;text-align:center;font-family:var(--display);font-weight:700;font-variation-settings:"wdth" 90;font-size:1.25rem;min-height:64px;display:flex;align-items:center;justify-content:center;overflow-wrap:anywhere;padding-top:22px}
+.cake-msg[data-empty="true"]{color:#6F5E52;font-weight:500;font-size:.95rem}
+.total{margin:18px 0 0;padding-top:14px;border-top:2px solid var(--cacao);display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.total b{font-family:var(--mono);font-weight:500;font-size:1.6rem;white-space:nowrap}
+.deposit{margin:4px 0 18px;font-size:.88rem;color:var(--cacao-2);text-align:right}
+.ticket .btn{width:100%}
+.ticket .how{font-size:.85rem;margin:10px 0 0;color:var(--cacao-2)}
+.feedback{margin:12px 0 0;font-size:.92rem;font-weight:600;min-height:1.4em}
+.feedback[data-kind="ok"]{color:var(--ok)}
+.feedback[data-kind="err"]{color:var(--err)}
+.fallback{display:none;width:100%;margin-top:10px;min-height:140px;font:.85rem/1.4 var(--mono);border:1.5px solid var(--cacao);border-radius:6px;padding:8px;background:var(--farine)}
+.fallback[data-show="true"]{display:block}
+
+/* ---------- La maison ---------- */
+.maison .statement{font-family:var(--display);font-weight:600;font-variation-settings:"wdth" 88,"opsz" 60;font-size:clamp(1.6rem,3.3vw,2.75rem);line-height:1.12;margin:0;max-width:24em;text-wrap:pretty}
+.maison .statement mark{background:none;color:inherit;box-shadow:inset 0 -.26em 0 var(--soleil)}
+.maison .statement .ember{color:var(--braise)}
+.maison .aside{margin-top:clamp(24px,3vw,40px);display:flex;flex-wrap:wrap;gap:10px 28px;font-size:.95rem;color:var(--cacao-2)}
+
+/* ---------- Venir ---------- */
+.venir{background:var(--wouri);color:var(--farine)}
+.venir .sec-head p{color:#D9E2EA}
+.infos{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:clamp(20px,3vw,40px)}
+.infos h3{font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;margin:0 0 12px;color:var(--soleil)}
+.hours{width:100%;border-collapse:collapse;font-size:1rem}
+.hours th,.hours td{text-align:left;padding:8px 0;border-bottom:1px solid rgba(245,238,225,.25);font-weight:500}
+.hours td{text-align:right;font-family:var(--mono)}
+.hours tr[data-today="true"] th,.hours tr[data-today="true"] td{color:var(--soleil);font-weight:700}
+.hours tr[data-today="true"] th::after{content:" · aujourd'hui";font-weight:500;font-size:.85em}
+.infos p{margin:0 0 10px}
+.pending{display:inline-block;border:1.5px dashed rgba(245,238,225,.6);border-radius:6px;padding:1px 8px;font-size:.9rem}
+.pay{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.pay li{display:flex;gap:10px;align-items:center}
+.pay li::before{content:"";width:10px;height:10px;border-radius:2px;background:var(--soleil);flex:none}
+
+/* ---------- Pied ---------- */
+.foot{background:var(--four);color:#D8CBBB;padding-block:40px;font-size:.9rem}
+.foot .wrap{display:flex;flex-wrap:wrap;gap:16px 40px;justify-content:space-between;align-items:center}
+.foot .brand b{color:var(--farine)}
+.foot .note{max-width:44em;margin:0}
+
+/* ---------- Responsive ---------- */
+@media (max-width:980px){
+  .hero .wrap{grid-template-columns:1fr}
+  .four{justify-self:stretch;max-width:560px;margin-inline:auto}
+  .order{grid-template-columns:1fr}
+  .ticket{position:static}
+  .infos{grid-template-columns:1fr 1fr}
+  .infos > :first-child{grid-column:1/-1}
+}
+@media (max-width:720px){
+  .board{grid-template-columns:1fr}
+  .shelf:nth-child(odd){border-right:0}
+  .shelf:nth-last-child(2){border-bottom:2px solid var(--cacao)}
+  .flavours{grid-template-columns:1fr}
+  .infos{grid-template-columns:1fr}
+}
+@media (max-width:420px){
+  .row2{grid-template-columns:1fr}
+  .four{border-radius:50% 50% 16px 16px / 22% 22% 16px 16px}
+  .batches li{grid-template-columns:3.4em 1fr auto;gap:8px;font-size:.92rem}
+  .batches .tag{font-size:.66rem}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#" aria-label="Fournil d'Akwa, accueil">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 29V17a13 13 0 0 1 26 0v12z" fill="#2A160E"/><path d="M9 29v-9a7 7 0 0 1 14 0v9z" fill="#C23D17"/><path d="M11.5 29c1.2-3 3-4.4 4.5-4.4s3.3 1.4 4.5 4.4z" fill="#F2B33D"/></svg>
+      <b>Fournil d'Akwa</b>
+    </a>
+    <span class="status" id="status" data-open="true" role="status"><i aria-hidden="true"></i><span id="status-text">Heure de Douala…</span></span>
+    <nav class="nav" aria-label="Sections">
+      <a href="#fournees">Fournées</a>
+      <a href="#vitrine">Vitrine</a>
+      <a href="#maison">La maison</a>
+      <a href="#venir">Venir</a>
+      <a class="btn btn-primary" href="#gateaux">Commander<span class="long">&nbsp;un gâteau</span></a>
+    </nav>
+  </div>
+</header>
+
+<main id="contenu">
+  <section class="hero" id="fournees" aria-labelledby="hero-title">
+    <div class="wrap">
+      <div>
+        <p class="kicker">Boulangerie-pâtisserie · Akwa, Douala</p>
+        <h1 id="hero-title">Douala se lève tôt. <em>Le four, avant.</em></h1>
+        <p class="lede">Baguettes à <strong>5 h 30</strong>, croissants à <strong>6 h 15</strong>, pains chargés à <strong>11 h 30</strong>, seconde fournée à <strong>16 h 30</strong> pour la sortie des bureaux. Passez à l'heure de ce que vous aimez chaud. Pour vos fêtes, les gâteaux se commandent deux jours avant.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#gateaux">Commander un gâteau</a>
+          <a class="btn btn-ghost" href="#vitrine">Voir la vitrine et les prix</a>
+        </div>
+      </div>
+
+      <div class="four" id="four" data-state="waiting" aria-labelledby="four-title">
+        <div class="clock"><small>Heure de Douala</small><output id="clock" class="mono" aria-label="Heure actuelle à Douala">--:--</output></div>
+        <h2 id="four-title" class="sr-only">Les fournées du jour</h2>
+        <div aria-live="polite">
+          <p class="now-label" id="now-label">Prochaine sortie</p>
+          <p class="now-title" id="now-title">Les fournées du jour</p>
+          <p class="now-meta" id="now-meta">&nbsp;</p>
+        </div>
+        <ol class="batches" id="batches"></ol>
+        <p class="four-note">Chaque fournée reste en vitrine jusqu'à épuisement.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec vitrine" id="vitrine" aria-labelledby="vitrine-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="vitrine-title">La vitrine</h2>
+        <p>Chaque rayon porte l'heure de sa fournée. Les prix sont en francs CFA, à la pièce sauf mention.</p>
+      </div>
+      <div class="board" id="board"></div>
+      <div class="board-foot">
+        <span>Espèces, MTN MoMo et Orange Money acceptés.</span>
+        <span>Commande de viennoiseries pour un bureau : la veille avant 18 h.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec gateaux" id="gateaux" aria-labelledby="gateaux-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="gateaux-title">Gâteaux de fête</h2>
+        <p>Anniversaire, mariage, baptême, dot ou pot de départ. Composez votre gâteau, gardez l'estimation, envoyez-nous la commande sur WhatsApp. Nous confirmons le prix et l'acompte.</p>
+      </div>
+
+      <form class="order" id="order" novalidate>
+        <div>
+          <fieldset>
+            <legend><span class="step">01</span> L'occasion</legend>
+            <div class="chips" id="occasions"></div>
+          </fieldset>
+          <fieldset>
+            <legend><span class="step">02</span> Le nombre de parts</legend>
+            <div class="chips" id="sizes"></div>
+          </fieldset>
+          <fieldset>
+            <legend><span class="step">03</span> Le parfum</legend>
+            <div class="flavours" id="flavours"></div>
+          </fieldset>
+          <fieldset>
+            <legend><span class="step">04</span> Le retrait et le message</legend>
+            <div class="row2">
+              <div class="field" id="f-date">
+                <label for="date">Jour de retrait</label>
+                <input type="date" id="date" name="date" required aria-describedby="date-hint date-err">
+                <div class="hint" id="date-hint">Au plus tôt dans deux jours.</div>
+                <div class="err" id="date-err"></div>
+              </div>
+              <div class="field" id="f-slot">
+                <label for="slot">Créneau</label>
+                <select id="slot" name="slot" aria-describedby="slot-err">
+                  <option value="matin">Matin, 7 h – 12 h</option>
+                  <option value="apres-midi">Après-midi, 14 h – 19 h</option>
+                </select>
+                <div class="err" id="slot-err"></div>
+              </div>
+            </div>
+            <div class="row2" style="margin-top:14px">
+              <div class="field" id="f-name">
+                <label for="name">Votre prénom</label>
+                <input type="text" id="name" name="name" autocomplete="given-name" maxlength="40" required aria-describedby="name-err">
+                <div class="err" id="name-err"></div>
+              </div>
+              <div class="field" id="f-msg">
+                <label for="msg">Message sur le gâteau <span style="font-weight:400">(facultatif)</span></label>
+                <input type="text" id="msg" name="msg" maxlength="40" aria-describedby="msg-hint">
+                <div class="hint" id="msg-hint"><span>Écrit au chocolat.</span><span class="mono" id="msg-count">0/40</span></div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
+        <aside class="ticket" aria-labelledby="ticket-title">
+          <h3 id="ticket-title">Bon de commande</h3>
+          <p class="sub">Estimation. La boutique confirme le prix final.</p>
+          <dl id="summary"></dl>
+          <div class="cake-msg" id="cake-msg" data-empty="true">Pas de message</div>
+          <div class="total"><span>Estimation</span><b id="total">0 FCFA</b></div>
+          <p class="deposit" id="deposit"></p>
+          <button type="submit" class="btn btn-primary" id="send">Copier la commande</button>
+          <p class="how" id="how">Collez-la ensuite dans WhatsApp, au numéro de la boutique.</p>
+          <p class="feedback" id="feedback" role="status" aria-live="polite"></p>
+          <textarea class="fallback" id="fallback" aria-label="Texte de la commande à copier" readonly></textarea>
+        </aside>
+      </form>
+    </div>
+  </section>
+
+  <section class="sec maison" id="maison" aria-labelledby="maison-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="maison-title">La maison</h2>
+      </div>
+      <p class="statement">Le four s'allume à <span class="ember">4 h</span>. Les pains au chocolat sont au <mark>cacao du Cameroun</mark>, les tartes à la <mark>coco</mark> et à l'<mark>ananas du marché Sandaga</mark>, la ganache du gâteau signature prend une pointe de <mark>poivre de Penja</mark>. Le reste tient en quatre mots : farine, beurre, levain, patience.</p>
+      <div class="aside">
+        <span>Pas de livraison : tout se retire en boutique.</span>
+        <span>Les invendus du soir partent à prix réduit à partir de 19 h 30.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec venir" id="venir" aria-labelledby="venir-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="venir-title">Venir</h2>
+        <p>À Akwa, à deux pas du boulevard de la Liberté.</p>
+      </div>
+      <div class="infos">
+        <div>
+          <h3>Horaires</h3>
+          <table class="hours" id="hours">
+            <caption class="sr-only">Horaires d'ouverture</caption>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div>
+          <h3>Adresse et contact</h3>
+          <p>Fournil d'Akwa<br>Akwa, Douala</p>
+          <p>Adresse précise : <span class="pending">à renseigner</span></p>
+          <p>WhatsApp : <span class="pending" id="wa-display">à renseigner</span></p>
+        </div>
+        <div>
+          <h3>Paiement</h3>
+          <ul class="pay">
+            <li>Espèces</li>
+            <li>MTN Mobile Money</li>
+            <li>Orange Money</li>
+          </ul>
+          <p style="margin-top:14px">Gâteaux : acompte de 50 % à la commande, le solde au retrait.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <a class="brand" href="#" aria-label="Retour en haut">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 29V17a13 13 0 0 1 26 0v12z" fill="#F5EEE1"/><path d="M9 29v-9a7 7 0 0 1 14 0v9z" fill="#C23D17"/><path d="M11.5 29c1.2-3 3-4.4 4.5-4.4s3.3 1.4 4.5 4.4z" fill="#F2B33D"/></svg>
+      <b>Fournil d'Akwa</b>
+    </a>
+    <p class="note">Maquette : le nom, les horaires, les fournées, la carte, les prix, les tarifs de gâteaux et la provenance des ingrédients sont des exemples à remplacer par ceux de la boutique.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  /* ---------- Configuration de la boutique (exemples à remplacer) ---------- */
+  var SHOP = {
+    whatsapp: "",           /* ex. "2376XXXXXXXX" : active l'envoi direct sur WhatsApp */
+    week:   { open: "05:30", close: "20:30", batches: [
+      { t: "05:30", n: "Baguettes et pain de campagne", k: "pains" },
+      { t: "06:15", n: "Croissants, pains au chocolat", k: "vienno" },
+      { t: "07:00", n: "Beignets soufflés, pain de mie", k: "vienno2" },
+      { t: "11:30", n: "Pains chargés du midi", k: "midi" },
+      { t: "15:00", n: "Tartes et gâteaux du jour", k: "patis" },
+      { t: "16:30", n: "Baguettes, seconde fournée", k: "pains2" }
+    ]},
+    sunday: { open: "06:00", close: "13:00", batches: [
+      { t: "06:00", n: "Baguettes et pain de campagne", k: "pains" },
+      { t: "06:30", n: "Croissants, pains au chocolat", k: "vienno" },
+      { t: "07:00", n: "Beignets soufflés, pain de mie", k: "vienno2" }
+    ]}
+  };
+  var SHELVES = [
+    { title: "Pains", keys: ["pains","pains2"], items: [
+      ["Baguette", "", 150], ["Pain de campagne", "au levain, 500 g", 600],
+      ["Pain complet", "", 700], ["Pain de mie", "tranché, fournée de 7 h", 1000] ]},
+    { title: "Viennoiseries", keys: ["vienno"], items: [
+      ["Croissant au beurre", "", 400], ["Pain au chocolat", "cacao du Cameroun", 500],
+      ["Chausson à l'ananas", "", 500], ["Brioche à la coco", "", 600] ]},
+    { title: "Le midi", keys: ["midi"], items: [
+      ["Pain chargé omelette-spaghetti", "", 700], ["Pain chargé avocat-sardine", "", 800],
+      ["Pain chargé haricots", "", 500], ["Beignets soufflés", "le sachet de 5, fournée de 7 h", 250] ]},
+    { title: "Pâtisseries", keys: ["patis"], items: [
+      ["Tarte à la coco", "la part", 1200], ["Éclair au cacao", "", 1000],
+      ["Tartelette goyave", "", 1200], ["Gâteau ananas-passion", "la part", 1500] ]}
+  ];
+  var OCCASIONS = ["Anniversaire","Mariage","Baptême","Dot","Pot de bureau"];
+  var SIZES = [[8,12000],[12,16000],[20,25000],[30,36000],[50,58000]];
+  var FLAVOURS = [
+    ["penja","Cacao et poivre de Penja","Ganache au cacao du Cameroun, pointe de poivre blanc. Le gâteau de la maison.",0.15],
+    ["coco","Coco-vanille","Génoise vanille, crème à la coco râpée.",0],
+    ["ananas","Ananas-passion","Mousse légère aux fruits, biscuit moelleux.",0],
+    ["foret","Forêt-noire","Chocolat, chantilly, cerises.",0]
+  ];
+  var DAYS = ["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"];
+  var MONTHS = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+
+  /* ---------- Heure de Douala (UTC+1, sans heure d'été) ---------- */
+  var params = new URLSearchParams(location.search);
+  function douala(){
+    var d = new Date(Date.now() + 3600e3);
+    var r = { y: d.getUTCFullYear(), mo: d.getUTCMonth(), da: d.getUTCDate(), wd: d.getUTCDay(), m: d.getUTCHours()*60 + d.getUTCMinutes() };
+    /* ?t=HH:MM&j=0..6 : forcer une heure pour vérifier les états */
+    if (params.get("t")) { var p = params.get("t").split(":"); r.m = (+p[0])*60 + (+p[1]||0); }
+    if (params.get("j")) { r.wd = +params.get("j"); }
+    return r;
+  }
+  function toMin(s){ var p = s.split(":"); return (+p[0])*60 + (+p[1]); }
+  function hhmm(m){ return String(Math.floor(m/60)).padStart(2,"0") + ":" + String(m%60).padStart(2,"0"); }
+  function spoken(s){ var p = s.split(":"); return (+p[0]) + " h" + (p[1] !== "00" ? " " + p[1] : ""); }
+  function sched(wd){ return wd === 0 ? SHOP.sunday : SHOP.week; }
+  function fcfa(n){ return n.toLocaleString("fr-FR").replace(/ | /g, " ") + " FCFA"; }
+  var HOT = 40; /* minutes pendant lesquelles une fournée est « tout juste sortie » */
+
+  function batchState(b, m){
+    var t = toMin(b.t);
+    if (m < t) return "future";
+    if (m < t + HOT) return "hot";
+    return "past";
+  }
+
+  var $ = function(id){ return document.getElementById(id); };
+
+  function renderFour(){
+    var now = douala(), s = sched(now.wd), m = now.m;
+    var open = toMin(s.open), close = toMin(s.close);
+    var isOpen = m >= open && m < close;
+    $("clock").textContent = hhmm(m);
+
+    var st = $("status");
+    st.dataset.open = String(isOpen);
+    var tomorrow = sched((now.wd + 1) % 7);
+    $("status-text").textContent = isOpen ? "Ouvert · jusqu'à " + spoken(s.close)
+      : (m < open ? "Fermé · ouvre à " + spoken(s.open) : "Fermé · demain " + spoken(tomorrow.open));
+
+    var next = null, hot = null;
+    var list = $("batches"); list.innerHTML = "";
+    /* après la fermeture, le tableau montre déjà les fournées du lendemain */
+    var shown = m >= close ? tomorrow : s, mm = m >= close ? -1 : m;
+    list.setAttribute("aria-label", m >= close ? "Fournées de demain" : "Fournées du jour");
+    shown.batches.forEach(function(b){
+      var bs = batchState(b, mm);
+      if (bs === "hot") hot = b;
+      if (bs === "future" && !next) next = b;
+      var li = document.createElement("li");
+      var tag = bs === "hot" ? "Tout chaud" : bs === "past" ? "Sorti" : "";
+      li.dataset.s = bs === "future" ? (next === b ? "next" : "future") : bs;
+      if (next === b && bs === "future") tag = "Prochaine";
+      li.innerHTML = '<time datetime="' + b.t + '">' + b.t + '</time><span>' + b.n + '</span><span class="tag">' + tag + '</span>';
+      list.appendChild(li);
+    });
+
+    var four = $("four"), label = $("now-label"), title = $("now-title"), meta = $("now-meta");
+    if (!isOpen) {
+      four.dataset.state = "closed";
+      var first = (m < open ? s : tomorrow).batches[0];
+      label.textContent = "Four éteint";
+      title.textContent = "Fermé pour l'instant";
+      meta.innerHTML = (m < open ? "Ouverture à " : "Demain, ouverture à ") + '<span class="mono">' + (m < open ? s.open : tomorrow.open) + '</span>. Première fournée : ' + first.n.toLowerCase() + ".";
+    } else if (hot) {
+      four.dataset.state = "hot";
+      label.textContent = "Tout juste sorti du four";
+      title.textContent = hot.n;
+      meta.innerHTML = 'Sorti à <span class="mono">' + hot.t + '</span>' + (next ? ' · ensuite ' + next.n.toLowerCase() + ' à <span class="mono">' + next.t + '</span>' : "") + ".";
+    } else if (next) {
+      four.dataset.state = "waiting";
+      var wait = toMin(next.t) - m;
+      label.textContent = "Prochaine sortie";
+      title.textContent = next.n;
+      meta.innerHTML = 'À <span class="mono">' + next.t + '</span>, dans ' + (wait >= 60 ? Math.floor(wait/60) + " h " + String(wait%60).padStart(2,"0") : wait + " min") + ".";
+    } else {
+      four.dataset.state = "waiting";
+      var last = s.batches[s.batches.length - 1];
+      label.textContent = "Dernière fournée du jour";
+      title.textContent = "En vitrine jusqu'à épuisement";
+      meta.innerHTML = 'Sortie à <span class="mono">' + last.t + '</span>. Fermeture à <span class="mono">' + s.close + '</span>.';
+    }
+    renderShelvesState(now);
+    renderHoursToday(now);
+  }
+
+  /* ---------- Vitrine ---------- */
+  function buildBoard(){
+    var board = $("board");
+    SHELVES.forEach(function(sh, i){
+      var el = document.createElement("section");
+      el.className = "shelf";
+      el.setAttribute("aria-labelledby", "shelf-" + i);
+      var html = '<header><h3 id="shelf-' + i + '">' + sh.title + '</h3><span class="out" data-shelf="' + i + '"></span></header><ul class="menu">';
+      sh.items.forEach(function(it){
+        html += '<li><span class="n">' + it[0] + (it[1] ? '<span class="d">' + it[1] + '</span>' : "") + '</span><span class="lead" aria-hidden="true"></span><span class="p">' + fcfa(it[2]) + '</span></li>';
+      });
+      el.innerHTML = html + "</ul>";
+      board.appendChild(el);
+    });
+  }
+  function renderShelvesState(now){
+    var s = sched(now.wd), m = now.m, open = toMin(s.open), close = toMin(s.close);
+    SHELVES.forEach(function(sh, i){
+      var tag = document.querySelector('[data-shelf="' + i + '"]');
+      var bs = s.batches.filter(function(b){ return sh.keys.indexOf(b.k) !== -1; });
+      if (!bs.length) { tag.textContent = "pas le dimanche"; tag.dataset.s = ""; return; }
+      var hot = bs.filter(function(b){ return batchState(b, m) === "hot"; })[0];
+      var fut = bs.filter(function(b){ return batchState(b, m) === "future"; })[0];
+      var closed = m < open || m >= close;
+      if (closed) { tag.textContent = "fournée " + bs.map(function(b){return b.t;}).join(" · "); tag.dataset.s = ""; }
+      else if (hot) { tag.textContent = "tout chaud · " + hot.t; tag.dataset.s = "hot"; }
+      else if (fut && bs.indexOf(fut) > 0) { tag.textContent = "sorti à " + bs[bs.indexOf(fut)-1].t + " · puis " + fut.t; tag.dataset.s = "past"; }
+      else if (fut) { tag.textContent = "sort à " + fut.t; tag.dataset.s = ""; }
+      else { tag.textContent = "sorti à " + bs[bs.length-1].t; tag.dataset.s = "past"; }
+    });
+  }
+
+  /* ---------- Horaires ---------- */
+  function buildHours(){
+    var body = $("hours").querySelector("tbody");
+    [1,2,3,4,5,6,0].forEach(function(d){
+      var s = sched(d);
+      var tr = document.createElement("tr"); tr.dataset.day = d;
+      tr.innerHTML = '<th scope="row">' + DAYS[d] + '</th><td>' + s.open + " – " + s.close + "</td>";
+      body.appendChild(tr);
+    });
+  }
+  function renderHoursToday(now){
+    document.querySelectorAll("#hours tr").forEach(function(tr){ tr.dataset.today = String(+tr.dataset.day === now.wd); });
+  }
+
+  /* ---------- Commande de gâteau ---------- */
+  function chip(name, value, label, sub, checked, extra){
+    var id = name + "-" + value;
+    return '<label class="chip" for="' + id + '"><input type="radio" id="' + id + '" name="' + name + '" value="' + value + '"' + (checked ? " checked" : "") + '><span>' + label + (extra ? "<em>" + extra + "</em>" : "") + (sub ? "<small>" + sub + "</small>" : "") + "</span></label>";
+  }
+  function buildForm(){
+    $("occasions").innerHTML = OCCASIONS.map(function(o, i){ return chip("occasion", o, o, "", i === 0); }).join("");
+    $("sizes").innerHTML = SIZES.map(function(s, i){ return chip("size", s[0], s[0] + " parts", "dès " + fcfa(s[1]), i === 1); }).join("");
+    $("flavours").innerHTML = FLAVOURS.map(function(f, i){ return chip("flavour", f[0], f[1], f[3] ? "+15 %" : "", i === 0, f[2]); }).join("");
+    var t = douala();
+    var min = new Date(Date.UTC(t.y, t.mo, t.da + 2));
+    $("date").min = min.toISOString().slice(0,10);
+  }
+  function val(name){ var el = document.querySelector('input[name="' + name + '"]:checked'); return el ? el.value : ""; }
+  function parseDate(v){ if (!v) return null; var p = v.split("-"); return new Date(Date.UTC(+p[0], +p[1]-1, +p[2])); }
+  function longDate(d){ return DAYS[d.getUTCDay()].toLowerCase() + " " + d.getUTCDate() + " " + MONTHS[d.getUTCMonth()]; }
+
+  function compute(){
+    var size = +val("size"), fl = val("flavour");
+    var base = (SIZES.filter(function(s){ return s[0] === size; })[0] || SIZES[1])[1];
+    var f = FLAVOURS.filter(function(x){ return x[0] === fl; })[0] || FLAVOURS[0];
+    var total = Math.round(base * (1 + f[3]) / 500) * 500;
+    return { occasion: val("occasion"), size: size, flavour: f, total: total };
+  }
+
+  function checkDate(show){
+    var fd = $("f-date"), fs = $("f-slot"), v = $("date").value, d = parseDate(v);
+    var err = "", serr = "";
+    if (!d) err = "Choisissez le jour de retrait.";
+    else if (d < parseDate($("date").min)) err = "Il nous faut deux jours : au plus tôt le " + longDate(parseDate($("date").min)) + ".";
+    else if (d.getUTCDay() === 0 && $("slot").value === "apres-midi") serr = "Le dimanche, la boutique ferme à 13 h : retrait le matin.";
+    if (show || v) { fd.dataset.invalid = String(!!err); $("date-err").textContent = err; }
+    fs.dataset.invalid = String(!!serr); $("slot-err").textContent = serr;
+    return !err && !serr;
+  }
+  function checkName(show){
+    var ok = $("name").value.trim().length > 0;
+    if (show) { $("f-name").dataset.invalid = String(!ok); $("name-err").textContent = ok ? "" : "Indiquez un prénom pour la commande."; }
+    else if (ok) { $("f-name").dataset.invalid = "false"; }
+    return ok;
+  }
+
+  function orderText(c){
+    var d = parseDate($("date").value);
+    var lines = [
+      "Bonjour Fournil d'Akwa, je souhaite commander un gâteau.",
+      "Occasion : " + c.occasion,
+      "Taille : " + c.size + " parts",
+      "Parfum : " + c.flavour[1],
+      "Retrait : " + (d ? longDate(d) : "?") + ", " + ($("slot").value === "matin" ? "le matin (7 h – 12 h)" : "l'après-midi (14 h – 19 h)"),
+      "Message sur le gâteau : " + ($("msg").value.trim() ? "« " + $("msg").value.trim() + " »" : "aucun"),
+      "Estimation affichée : " + fcfa(c.total).replace(/ /g, " "),
+      "Prénom : " + $("name").value.trim()
+    ];
+    return lines.join("\n");
+  }
+
+  function renderTicket(){
+    var c = compute(), d = parseDate($("date").value);
+    var slot = $("slot").value === "matin" ? "matin" : "après-midi";
+    var rows = [
+      ["Occasion", c.occasion],
+      ["Taille", c.size + " parts"],
+      ["Parfum", c.flavour[1]],
+      ["Retrait", d ? longDate(d) + ", " + slot : null],
+      ["Au nom de", $("name").value.trim() || null]
+    ];
+    $("summary").innerHTML = rows.map(function(r){
+      return "<dt>" + r[0] + "</dt><dd" + (r[1] ? "" : ' class="missing"') + ">" + (r[1] ? escapeHtml(r[1]) : "à compléter") + "</dd>";
+    }).join("");
+    var msg = $("msg").value.trim();
+    var cm = $("cake-msg");
+    cm.dataset.empty = String(!msg);
+    cm.textContent = msg || "Pas de message";
+    $("msg-count").textContent = $("msg").value.length + "/40";
+    $("total").textContent = fcfa(c.total);
+    $("deposit").textContent = "Acompte de 50 % : " + fcfa(c.total / 2).replace("FCFA", "FCFA, par MoMo ou Orange Money");
+  }
+  function escapeHtml(s){ return String(s).replace(/[&<>"]/g, function(ch){ return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[ch]; }); }
+
+  function feedback(kind, text){ var f = $("feedback"); f.dataset.kind = kind; f.textContent = text; }
+
+  function submit(e){
+    e.preventDefault();
+    var okD = checkDate(true), okN = checkName(true);
+    if (!okD || !okN) {
+      var probs = [];
+      if (!okD) probs.push($("f-slot").dataset.invalid === "true" ? "le créneau (retrait le matin le dimanche)" : "le jour de retrait");
+      if (!okN) probs.push("votre prénom");
+      feedback("err", "À corriger : " + probs.join(" et ") + ".");
+      (!okD ? ($("f-slot").dataset.invalid === "true" ? $("slot") : $("date")) : $("name")).focus();
+      return;
+    }
+    var text = orderText(compute());
+    if (SHOP.whatsapp) {
+      window.open("https://wa.me/" + SHOP.whatsapp + "?text=" + encodeURIComponent(text), "_blank", "noopener");
+      feedback("ok", "WhatsApp s'ouvre avec votre commande. Il reste à l'envoyer.");
+      return;
+    }
+    var fb = $("fallback");
+    var done = function(){ fb.dataset.show = "false"; feedback("ok", "Commande copiée. Collez-la dans WhatsApp au numéro de la boutique."); };
+    var fail = function(){ fb.value = text; fb.dataset.show = "true"; fb.focus(); fb.select(); feedback("err", "Copie automatique impossible : le texte est sélectionné ci-dessous, copiez-le."); };
+    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, fail);
+    else fail();
+  }
+
+  function init(){
+    buildBoard(); buildHours(); buildForm();
+    if (SHOP.whatsapp) {
+      $("send").textContent = "Envoyer sur WhatsApp";
+      $("how").textContent = "WhatsApp s'ouvre avec le message prêt. Rien n'est envoyé sans vous.";
+      $("wa-display").textContent = "+" + SHOP.whatsapp; $("wa-display").className = "mono";
+    }
+    renderFour(); renderTicket();
+    setInterval(renderFour, 30000);
+    var form = $("order");
+    form.addEventListener("input", function(e){
+      if (e.target.id === "date" || e.target.id === "slot") checkDate(false);
+      if (e.target.id === "name") checkName(false);
+      renderTicket();
+      if ($("feedback").dataset.kind === "ok") feedback("", "");
+    });
+    form.addEventListener("change", function(e){ if (e.target.id === "slot" || e.target.id === "date") checkDate(false); renderTicket(); });
+    form.addEventListener("submit", submit);
+  }
+  init();
+})();
+</script>
+</body>
+</html>
