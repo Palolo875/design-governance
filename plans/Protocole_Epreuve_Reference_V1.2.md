@@ -1,6 +1,6 @@
 # Protocole — Épreuve de référence avant V1.2 (phase 0, en parallèle)
 
-**Date :** 2026-09-26 · **Owner :** Junior (Kamel) · **Statut :** v2 — choix délégués par l'owner (§11) ; production suspendue à l'accès aux assets (§11.3)
+**Date :** 2026-09-26 · **Owner :** Junior (Kamel) · **Statut :** v2 — choix délégués par l'owner (§11) ; assets B-DLA prêts ; production en attente du feu vert
 **Base :** V1.1.1 (`package/`, étiquette `v1.1.1-import`), plan `plans/Plan_V1.2_Qualite_senior_gouvernance.md` §9 et §11.
 
 ---
@@ -133,7 +133,8 @@ L'owner n'a ni juges à recruter ni assets à fournir, et délègue les choix. I
 ### 11.3 Assets (précise §3)
 
 - Sources retenues : photos réelles sous licence libre (Wikimedia Commons), avec auteur, licence et lien consignés dans `plans/epreuve_reference/assets/SOURCES.md`. **Aucune image générée.**
-- **Bloquant :** la politique réseau de la session refuse `upload.wikimedia.org` et `commons.wikimedia.org`. L'owner doit les autoriser (réglages de l'environnement → Network access).
+- **Accès réseau :** ouvert par l'owner le 26-09-2026. Assets B-DLA obtenus : 5 photos réelles, dont 3 d'une boulangerie de Douala (`plans/epreuve_reference/assets/B-DLA/`). Aucune vraie photo de gâteau n'existe dans les sources : le manque est laissé tel quel, et M3 relèvera tout gâteau représenté par une fausse image.
+- **B-LOG :** captures libres insuffisantes ; reporté après la lecture de B-DLA (voir `briefs.md`).
 - **Repli déclaré si refus :** C2 = brief riche **sans** assets figuratifs (« C2-partiel »). Q2 ne teste alors que la richesse du brief ; la part « assets » de l'hypothèse reste `NOT-VERIFIED`.
 - Les faits des briefs riches sont **fictifs mais plausibles**, écrits par l'auteur du protocole ; M3 compte comme « inventé » tout fait absent du brief riche.
 

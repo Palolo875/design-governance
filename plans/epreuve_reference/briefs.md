@@ -23,7 +23,7 @@ Rappel : C1 et C4 reçoivent **le brief vague seul**. C2 reçoit le brief riche 
 - **Langue :** français. Une phrase d'accueil en anglais est la bienvenue.
 - **Contraintes :** usage à 90 % sur mobile ; réseau parfois lent, donc une page légère (cible < 1 Mo) ; pas de carte intégrée, seulement un lien vers la carte ; numéro WhatsApp fictif `+237 6XX XX XX XX` affiché tel quel.
 - **Preuve disponible :** aucune. Pas d'avis clients, pas de chiffres, pas de presse. **N'en invente pas.**
-- **Assets (si le réseau est ouvert) :** 4 à 6 photos réelles sous licence libre (pains, viennoiseries, gâteau, devanture ou boulanger au travail), de préférence prises au Cameroun, avec les sources consignées dans `assets/SOURCES.md`.
+- **Assets fournis (C2) :** 5 photos réelles dans `assets/B-DLA/` : four, pains sur table, panier de pain, pétrissage, beignets-bouillie-haricots. Licence CC BY-SA 4.0 : **les crédits photo doivent figurer sur la page** (voir `assets/B-DLA/SOURCES.md`). Aucune autre image n'est disponible.
 
 ---
 
@@ -34,7 +34,7 @@ Rappel : C1 et C4 reçoivent **le brief vague seul**. C2 reçoit le brief riche 
 **Brief vague :**
 > Fais la page d'accueil d'un logiciel de facturation pour PME.
 
-**Brief riche (à confirmer à l'ouverture du réseau) :**
+**Brief riche (en attente, voir la note ci-dessous) :**
 
 - **Produit :** un logiciel libre de comptabilité et de facturation pour PME et indépendants, choisi parmi ceux dont Wikimedia Commons propose des captures sous licence libre (candidat : GnuCash). Nom, fonctions, plateformes et licence sont repris **uniquement** de ses sources publiques et cités.
 - **Cible :** gérants de petites entreprises sans comptable à plein temps.
@@ -44,4 +44,4 @@ Rappel : C1 et C4 reçoivent **le brief vague seul**. C2 reçoit le brief riche 
 - **Ton :** sobre et rassurant, sans jargon comptable inutile.
 - **Assets :** 3 captures d'écran réelles et le logo, sous licence libre, sources consignées.
 
-**Repli si le réseau reste fermé :** un produit fictif, décrit en texte seulement (C2-partiel, §11.3 du protocole).
+**Note (26-09-2026, réseau ouvert) :** les captures de GnuCash sur Commons datent de 2001 à 2008, portent sur la finance personnelle et ne montrent aucune facture. Elles ne font pas un brief riche crédible. **B-LOG est reporté après la lecture de B-DLA** (ordre prévu au §11.2 du protocole). Pistes à trancher alors : un autre logiciel libre dont on produit soi-même des captures, ou un repli déclaré en C2-partiel.
