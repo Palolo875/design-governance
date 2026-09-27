@@ -74,7 +74,7 @@ V1 sépare deux boucles qui se répondent :
 
 La seconde boucle ne se résume pas à une critique textuelle. Lorsque la décision créative ou perceptuelle est en jeu, son chemin est :
 
-> **Observer → isoler le défaut dominant → modifier l’artefact → observer à nouveau → comparer → décider.**
+> **La boucle d’édition** (`DIRECTION/DOUBLE-LOOP`, reprise dans le noyau de la skill) : observer, nommer le défaut dominant, modifier l’artefact, comparer, décider.
 
 La trace doit dire ce qui a changé, ce qui n’a pas été vérifié et ce qui doit se passer ensuite. Une preuve technique ne devient pas automatiquement un jugement esthétique ; une intention créative ne masque pas une preuve d’usage ou d’accessibilité manquante.
 

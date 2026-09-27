@@ -15,7 +15,7 @@
    - auto-comparaison déclarée comme telle.
 4. **Décisions en attente** (plan maître §8) : 3, 6, 8, 9 et 10. **Ne pas appliquer un contenu qui en dépend avant la décision** ; préparer le texte et poser la question.
 
-## 2. État (après R5d)
+## 2. État (après R6a)
 
 | Fait | Rapport |
 |---|---|
@@ -27,6 +27,7 @@
 | R8a : convergence typographique (D-21) dans la question de convergence du noyau | `V12R_09` |
 | R5c (hors ancre) : un seul modèle de niveaux (D-16), boucle et one-shot en renvoi, exemption SAVOIR retirée | `V12R_10` |
 | R5d : boucle et one-shot de BIBLIOTHEQUE en renvoi, F22 atteignable depuis Gate C (PRC-01) | `V12R_11` |
+| R6a : boucle du README en renvoi (dernière exemption levée), glossaire des termes de la refonte | `V12R_12` |
 
 - **Mesures :**
   - chemin prescrit 12 076 mots (trace légère), 16 687 en trace complète ;
@@ -67,7 +68,15 @@ git checkout claude/init-repo-claude-md-gm6njm
    - commit (lignes d'attribution), push sur les deux branches.
 9. **Critère d'arrêt commun** : si un lot demande plus de rectifications de harnais que de changements de texte, on s'arrête, on déclare et on revient à l'owner.
 
-## 4. Lots restants, dans l'ordre recommandé
+## 4. Prochaines unités (ordre recommandé au 27-09-2026, après R6a)
+
+1. **R8b — Matériaux et atlas** (M, le plus direct sur le rendu) : carte des moyens consolidée ; atlas d'ancres annotées v1 en référence de la skill, chargée seulement si la décision visuelle est ouverte ; arrêt si l'atlas pousse vers un style unique.
+2. **R11 — Réserves et mineurs** (M) : tri un par un (voir plus bas).
+3. **R6b — Façades** (M) : voir plus bas.
+4. **Restes des lots R5** : champs de trace de SAVOIR vers ACTION (lecture dédiée) ; annexe de maintenance de BIBLIOTHEQUE, `PRINT_FIELD` relié aux marqueurs ; doublons inter-fichiers (alternative située, `ANCHOR-GENERATED`).
+5. **Décisions à obtenir de l'owner** avant R7, R9 et R10 : 3, 6, 8, 9, 10 (tableau plus bas).
+
+## 4 bis. Détail des lots (périmètres d'origine et état)
 
 Chaque lot : **périmètre**, **gardes à ajouter**, **réussite**, **arrêt**.
 
@@ -116,7 +125,9 @@ Chaque lot : **périmètre**, **gardes à ajouter**, **réussite**, **arrêt**.
   - `PRINT_FIELD` relié aux marqueurs de vague ;
   - boucle structurelle (l.211) → renvoi, puis **retirer l'exemption `BIBLIOTHEQUE.md`**.
 
-### R6 — Façades (S–M) · sans décision en attente
+### R6 — Façades : R6a fait (`V12R_12`). **R6b reste** : fusion des README (rectification déclarée de `validate_design_governance.py` et des LCF concernées), QUICKSTART humain, READING_MAP réduit, ORCHESTRATION_MAP.
+
+#### (périmètre d'origine)
 
 - **Périmètre :**
   - un seul README : fusion de `README.md` et `V1/official/README.md` ; attention au contrôle « la `RUN_CARD` rassemble » dans `validate_design_governance.py` ;

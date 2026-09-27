@@ -57,6 +57,7 @@ Ne rien modifier dans `package/` pendant l'initialisation.
 - **R8a appliqué** (`V12R_09_R8a_CONVERGENCE_TYPO.md`) : question de convergence étendue à la police de titre (deux voix comparées sur le vrai titre) ; signal de veille P1 (Archivo sur blanc neutre, à confirmer) ; suivi vert.
 - **R5c appliqué, hors ancre** (`V12R_10_R5c_SAVOIR.md`) : un seul modèle de niveaux (D-16), boucle et one-shot de SAVOIR en renvoi ; doublons 145 ; suivi vert.
 - **R5d appliqué** (`V12R_11_R5d_BIBLIOTHEQUE.md`) : boucle et one-shot de BIBLIOTHEQUE en renvoi (exemptions retirées) ; F22 : tests perceptifs `PRC-01` appelés depuis Gate C ; suivi vert.
+- **R6a appliqué** (`V12R_12_R6a_FACADES.md`) : boucle du README en renvoi (la garde « boucle unique » n'a plus d'exemption provisoire), 5 termes au glossaire ; suivi vert ; doublons 144.
 - **Chantier en cours : plan V1.2**, `plans/Plan_V1.2_Qualite_senior_gouvernance.md`. Objectif : un premier rendu de niveau designer senior dès le one-shot, gouvernance conservée (bilan de fabrication, prise de brief minimale, matériaux, anti-slop vivant, atlas d'ancres, épreuve à l'aveugle).
 
 ## 3. Arborescence
@@ -127,7 +128,7 @@ python3 scripts/read_route.py ACTION/RUN_CARD  # lire une route
 ## 6. Prochaine étape
 
 1. ~~Porte G1 du plan V1.2~~ : franchie le 26-09-2026 (`audit/reports/V12_01_DECISIONS_G1.md`).
-2. ~~B05, lot 1 (A, B, D), addendum, lot 2 (G, H, I, D')~~ : faits (`V12_02` à `V12_04`). Lectures `V12_05` à `V12_11` faites. Mini-épreuve **reportée par l'owner** (27-09-2026). **Refonte (`plans/Plan_V1.2_Refonte.md`) : décisions 1, 2, 4, 7 prises ; R1, R2, R3 et R4 faits. P1 fait (orientation positive). R5b-1, R5b-2 et R5a faits. Prochaine : R6 (façades), R8b (carte des moyens, atlas), R11 — voir `plans/Plan_V1.2_Suite_Reprise.md`**, puis G4.
+2. ~~B05, lot 1 (A, B, D), addendum, lot 2 (G, H, I, D')~~ : faits (`V12_02` à `V12_04`). Lectures `V12_05` à `V12_11` faites. Mini-épreuve **reportée par l'owner** (27-09-2026). **Refonte (`plans/Plan_V1.2_Refonte.md`) : décisions 1, 2, 4, 7 prises ; R1, R2, R3 et R4 faits. P1 fait (orientation positive). R5b-1, R5b-2 et R5a faits. Prochaine : R8b (carte des moyens, atlas), R11, R6b (README, QUICKSTART, READING_MAP) ; décisions 3, 6, 8, 9, 10 à obtenir — voir `plans/Plan_V1.2_Suite_Reprise.md`**, puis G4.
 **Plan de reprise (à lire en premier pour continuer) : `plans/Plan_V1.2_Suite_Reprise.md`** — consignes en vigueur (pas de run ni d'épreuve dans cette phase ; qualité avant nombre de mots), recette d'une unité, lots restants avec périmètre, gardes, réussite et arrêt, décisions en attente.
 3. Suivre le séquencement du plan : G2 (gardes rouges puis vertes) → G3 (non-régression, budget tenu) → G4 (épreuve à l'aveugle avec juges extérieurs) → publication V1.2.0.
 
