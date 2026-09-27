@@ -15,7 +15,7 @@
    - auto-comparaison déclarée comme telle.
 4. **Décisions en attente** (plan maître §8) : 3, 6, 8, 9 et 10. **Ne pas appliquer un contenu qui en dépend avant la décision** ; préparer le texte et poser la question.
 
-## 2. État (après R5c)
+## 2. État (après R5d)
 
 | Fait | Rapport |
 |---|---|
@@ -26,6 +26,7 @@
 | R5a : DIRECTION (rôle, posture et récapitulatif en tête ; entrée unique ; doublons ; D-17, D-19) | `V12R_08` |
 | R8a : convergence typographique (D-21) dans la question de convergence du noyau | `V12R_09` |
 | R5c (hors ancre) : un seul modèle de niveaux (D-16), boucle et one-shot en renvoi, exemption SAVOIR retirée | `V12R_10` |
+| R5d : boucle et one-shot de BIBLIOTHEQUE en renvoi, F22 atteignable depuis Gate C (PRC-01) | `V12R_11` |
 
 - **Mesures :**
   - chemin prescrit 12 076 mots (trace légère), 16 687 en trace complète ;
@@ -105,7 +106,9 @@ Chaque lot : **périmètre**, **gardes à ajouter**, **réussite**, **arrêt**.
   - **Lois de SAVOIR** (retenue) : inchangées (décision 8).
 - **Gardes :** retrait de l'exemption ; concept pour le modèle à trois niveaux.
 
-### R5d — BIBLIOTHEQUE (M) · sans décision en attente
+### R5d — BIBLIOTHEQUE : fait (`V12R_11`). Reste : instrumentation de lecture et contrats de promotion en annexe de maintenance ; `PRINT_FIELD` relié aux marqueurs de vague.
+
+#### (périmètre d'origine)
 
 - **Périmètre :**
   - instrumentation de lecture et contrats de promotion en annexe de maintenance ;

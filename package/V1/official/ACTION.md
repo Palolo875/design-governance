@@ -900,7 +900,7 @@ Une capture réelle est nécessaire pour un jugement C. Sans runtime ou capture,
 
 Gate C décide sur le rendu à partir des observations de la revue créative et, si elle est déclenchée, de la paire B1b (`ACTION/GATE-B — B1b`) pour la décision mise à l’épreuve ; il ne refait pas une seconde revue, ni une seconde procédure de comparaison.
 
-Chaque verdict C précise le périmètre : viewport, état, scène, contenu et élément observé.
+Chaque verdict C précise le périmètre : viewport, état, scène, contenu et élément observé. Lorsque la structure est ouverte, applique sur la même capture les tests perceptifs de `BIBLIOTHEQUE/GATE` (non-généricité, silhouette, grille) ; ils nourrissent C3 et C4 sans verdict propre.
 
 | Critère | Présent si… | Retour ou réserve si… | Geste si absent (noyau, §) |
 |---|---|---|---|

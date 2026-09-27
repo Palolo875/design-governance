@@ -206,9 +206,9 @@ La sélection structurelle est persistée dans la `RUN_CARD` ou la trace canoniq
 
 ### One-shot et boucle structurelle
 
-Le `one-shot` est une stratégie de préparation, pas une absence de jugement. Après sélection, compose un premier objet complet, observe-le réellement et ferme seulement si la thèse structurelle, la composition, la spécificité, les états et les risques applicables tiennent déjà. Il ne contourne ni les gates, ni les statuts, ni `ACTION/CLOSE-EXIT-CHECK` ; une observation positive de craft ne prouve pas à elle seule usage, technique, accessibilité ou performance. Si une relation dominante échoue, retourne ou corrige ; ne produis pas une seconde version décorative lorsque l’observation ne promet aucun gain réel.
+Le `one-shot` suit la branche one-shot d’`ACTION/PIPELINE-DIRECTION`. Après sélection, il ne ferme que si la thèse structurelle, la composition, la spécificité, les états et les risques applicables tiennent déjà ; si une relation dominante échoue, retourne ou corrige, sans seconde version décorative.
 
-La boucle structurelle est : **sélectionner → composer → observer → isoler la relation dominante → modifier la structure ou la composition → réobserver → comparer → décider**. Toute correction doit changer une relation de foyer, de rythme, de hiérarchie, de preuve, de comportement ou de robustesse. Une nouvelle rationale, une route supplémentaire ou une variante nominale ne constitue pas une amélioration.
+La boucle structurelle est la boucle d’édition de `DIRECTION/DOUBLE-LOOP` appliquée à la structure : toute correction change une relation de foyer, de rythme, de hiérarchie, de preuve, de comportement ou de robustesse ; une route supplémentaire ou une variante nominale ne constitue pas une amélioration.
 
 ### Garde-fou de dérivation
 
@@ -738,6 +738,7 @@ Ce contrôle appartient au périmètre de BIBLIOTHEQUE. Il ne constitue pas un q
 
 Il s’agit d’un **contrôle structurel complémentaire**, pas d’une route de clôture concurrente. BIBLIOTHEQUE peut décrire le parti structurel et sa limite ; `ACTION` reste propriétaire du scope, de la méthode, de la preuve, des statuts, des issues, du verdict de livraison et de la clôture. `BIBLIOTHEQUE/GATE` ne possède ni statut ni verdict propres.
 
+<!-- concept:PRC-01 -->
 Le contrôle de module vérifie support, grille, scène, objet, états, mobile et accessibilité structurelle, pas seulement code ou conformité d’une primitive. Il vérifie également que la thèse structurelle est visible dans le premier objet habitable et que la relation déclarée reste observable lorsque le contenu, le viewport ou l’état changent. Pour une micro-interface d’identification, de santé, de permission ou de récupération, reviens à `DIRECTION/START` pour la classification et à `ACTION` pour la preuve, le scope et le verdict ; le contrat structurel seul ne suffit jamais.
 
 | Test | Question | Type possible |

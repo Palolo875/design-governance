@@ -20,6 +20,7 @@
 - **DIRECTION restructurée (refonte, R5a).** Rôle, posture et récapitulatif de protection en tête ; rôle défini une seule fois ; entrée unique (classer : `START`, charger : `CHARGE`, fabriquer : le noyau) ; doublons de lecture et de passage retirés ; phrase hors contexte du bloc de prise de brief corrigée. Aucun locator renommé.
 - **Convergence typographique (refonte, R8a).** La question de convergence du noyau porte sur la palette et sur la police de titre (comparer au moins deux voix typographiques sur le vrai titre) ; la veille note un signal à confirmer (grotesque large sur blanc neutre, P1).
 - **SAVOIR alignée (refonte, R5c, hors ancre).** Un seul modèle de niveaux (`Correction`, `Précision`, `Intention`) ; la triade visée / observée / prouvée devient « trois moments de la qualité » ; boucle et one-shot renvoient à leur lieu propriétaire.
+- **BIBLIOTHEQUE alignée (refonte, R5d).** Boucle structurelle et one-shot renvoient à leur lieu propriétaire en gardant leurs critères de structure ; les tests perceptifs de `BIBLIOTHEQUE/GATE` sont appelés depuis Gate C.
 - **Efficacité.** `NOT-VERIFIED` : l’épreuve de référence donne V1.1.1 ≈ sans système sur la qualité perçue ; l’effet de ces chantiers reste à éprouver (G4).
 
 ## V1.1.1 — Retour d’audit : alignements de textes et de façades
