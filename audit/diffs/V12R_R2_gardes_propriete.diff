@@ -1,0 +1,300 @@
+diff --git a/package/V1/official/ACTION.md b/package/V1/official/ACTION.md
+index 45e175e..c90cc3e 100644
+--- a/package/V1/official/ACTION.md
++++ b/package/V1/official/ACTION.md
+@@ -224,6 +224,7 @@ Le mode est classé dans `DIRECTION/START`. Le type de tâche et son blast radiu
+ | **DIRECTION** | Alternative située lorsque nécessaire, ancre utile, cible, build, capture, comparaison, gates A/B/C, trace locale des assets pertinents, statut de direction et V/U/A/T. |
+ | **SYSTÈME** | Impact, consumers, décision, owner, migration, rollback, non-régression et entrée CHANGELOG (dans une `RUN_CARD` acceptée : `closure.system_package`). |
+ 
++<!-- concept:HON-06 -->
+ Un gate non applicable est `N/A-JUSTIFIED`. Un gate nécessaire mais non vérifiable est `NOT-VERIFIED`, jamais `PASS` par défaut.
+ 
+ ### Contrat de décision et de preuve
+@@ -345,6 +346,7 @@ Ce profil n’est ni un score, ni un gate, ni une preuve. Il sert à empêcher q
+ 
+ ### Mode agent seul et preuve dégradée
+ 
++<!-- concept:HON-05 -->
+ Lorsque le run est exécuté par un agent sans regard indépendant, sans capture réelle ou sans runtime vérifiable, applique les limites suivantes. Ce mode ne constitue ni un nouveau mode de run, ni une permission de réduire le niveau de protection ; il rend seulement explicite le niveau de conclusion atteignable avec les capacités présentes.
+ 
+ | Capacité disponible | Ce que l’agent peut faire | Ce qu’il ne peut pas conclure seul |
+@@ -387,6 +389,7 @@ Les valeurs `state`, `issue`, `verdict`, `gate`, `axis`, `decision_change`, `NOT
+ 
+ ### Frontière de validation et de preuve
+ 
++<!-- concept:HON-04 -->
+ La validation JSON, la validation CLI, les fixtures, la compilation, le build et l’intégrité d’une archive établissent seulement que la projection, le package ou l’artefact de distribution respecte les contrôles exécutés. Ils ne prouvent ni que l’artefact est réellement implémenté dans son runtime, ni son usage, ni son accessibilité exécutée, ni sa performance, ni sa qualité visuelle, ni la préférence humaine. Une `RUN_CARD` valide peut donc rester `NOT-VERIFIED` sur un axe ou porter une limitation substantielle.
+ 
+ **Ce qu’atteste une `RUN_CARD` validée :** la forme de la projection et les invariants de la liste close (états, issues, verdicts et leur temps, axes, protection critique, exception, capacité et version de la preuve, réserves, droits déclarés, ancres, conséquence décisionnelle, reclassement, paquet SYSTÈME, B1b, trace par mode). **Ce qu’elle n’atteste pas (forme seule) :** que les observations ont réellement eu lieu ; la justesse des jugements V/U/A/T ; l’étendue réelle d’un claim (tâche utilisateur, technologie d’assistance, périmètre de diffusion) ; l’identité de la personne qui autorise ; la réalité des droits, licences et données ; la fraîcheur d’une ancre, dont seule la date ISO est contrôlée ; la qualité perceptuelle. Par mode : pour `LITE`, `ITER` et `STANDARD`, le paquet de clôture vit dans la trace et la machine ne le vérifie pas ; pour tous les modes, elle ne vérifie ni que les consumers listés sont tous les consumers réels, ni que la baseline montre ce qu’elle prétend, ni que la décision couverte par une paire équivalente est bien la même. Ces points restent à la trace, à la revue et à l’owner.
+@@ -664,6 +667,7 @@ La partition vérifie aussi reflow, zoom et ajustements d’espacement utilisate
+ - **Format, poids cible, fallback, mouvement et reduced motion :**
+ - **Preuve V/U/A/T (après observation) et contre-indication :**
+ 
++<!-- concept:HON-08 -->
+ La provenance informe l’origine ; elle ne constitue pas une autorisation de réemploi. Un droit inconnu (`rights_status` : `unknown`) interdit `ACCEPTED` ; `ACCEPTED-WITH-RESERVATION` reste possible avec une réserve structurée dont le scope couvre les droits et dont la condition de sortie est leur clearance, et la diffusion attend cette clearance. Un droit non autorisé déclenche `RETURNED`, `ESCALATED` ou le statut prévu par le contexte avant diffusion. La machine ne contrôle cette exclusion que pour une `RUN_CARD` `DIRECTION`, où `artifact.rights_status` est requis ; dans les autres modes, comme pour la réserve sur les droits, le contrôle reste à la trace.
+ 
+ ### Contrat de composant et baseline
+@@ -699,6 +703,7 @@ Avant la preuve, déclare le périmètre : viewport, états, scènes, contenu, d
+ | État significatif | Loading, empty, error, focus, contenu long ou état dominant. | U/A/T `NOT-VERIFIED` sur l’état absent. |
+ | Comparaison d’écarts | Spec/ancre face au build sur les axes touchés. | `EXPLORATORY` ou `RETURN-DIRECTION`. |
+ 
++<!-- concept:HON-07 -->
+ Une capture prouve le rendu, pas l’indépendance du jugement, l’accessibilité complète ou la réussite d’une tâche. Un regard humain ou externe prouve un avis situé, pas une mesure technique. Un asset généré est une ancre possible, jamais une preuve de rendu.
+ 
+ ---
+diff --git a/package/V1/official/CHANGELOG.md b/package/V1/official/CHANGELOG.md
+index ca34815..a7243e5 100644
+--- a/package/V1/official/CHANGELOG.md
++++ b/package/V1/official/CHANGELOG.md
+@@ -12,6 +12,7 @@
+ - **Anti-slop vivant.** `MODAL` / `PARTI` remplacent `ANTI-DIRECTIONS` (projetés dans `direction.anti_direction`) ; marqueurs de vague datés dans `SAVOIR` (`[VEILLE 2026-09]`), pour nommer, jamais pour interdire.
+ - **Niveau senior (lot 2).** Objet de preuve codé de préférence (`DIRECTION/FIRST-OBJECT`) ; carte des moyens par couche et vague 3 datées (`SAVOIR`, `[VEILLE 2026-09]`) ; traitement des assets moyens (`SAVOIR`, section `DESIGN-ATLAS`).
+ - **Validateur de carte.** La liste close des conditions de façade passe de 42 à 50 conditions (LCF-43 à LCF-50) ; LCF-46 couvre aussi la vague 3.
++- **Gardes de propriété (refonte, R2).** `scripts/validate_structure.py` : huit concepts d’honnêteté balisés à leur lieu propriétaire (`<!-- concept:HON-01 -->` à `HON-08`), chacun unique, non vide et dans son fichier ; `read_route.py` retire les balises à la lecture.
+ - **Efficacité.** `NOT-VERIFIED` : l’épreuve de référence donne V1.1.1 ≈ sans système sur la qualité perçue ; l’effet de ces chantiers reste à éprouver (G4).
+ 
+ ## V1.1.1 — Retour d’audit : alignements de textes et de façades
+diff --git a/package/V1/official/DIRECTION.md b/package/V1/official/DIRECTION.md
+index 23b6550..124bb7a 100644
+--- a/package/V1/official/DIRECTION.md
++++ b/package/V1/official/DIRECTION.md
+@@ -183,6 +183,7 @@ DOMINANT-DEFECT: défaut perceptuel ou structurel recherché en premier
+ 
+ `DIRECTION` possède la promesse, l’objet, le geste, `MODAL`/`PARTI` et `FABRICATION` ; `BIBLIOTHEQUE` possède la tension et la signature structurelles ; `SAVOIR/CRAFT` possède le jugement des qualités de présence et de fabrication ; `ACTION` possède l’observation, la preuve, la correction et la clôture. Les `CFT-TARGETS` sont un foyer de construction, pas un score : les autres dimensions restent applicables lorsqu’un risque ou une décision les active et ne deviennent `N/A-JUSTIFIED` que si elles sont réellement hors périmètre.
+ 
++<!-- concept:HON-03 -->
+ Avant le premier rendu, le boot doit conduire à un artefact complet, crédible et observable — jamais à un wireframe volontairement creux lorsque les capacités sont disponibles ; lorsqu’elles manquent, `FABRICATION` déclare le plafond avant le build et le rendu sort avec la meilleure route de `DIRECTION/VISUAL_TARGET`. Après observation, conserve dans la trace : ce qui est effectivement visible, les qualités prioritaires observées ou non observées, **un défaut dominant** et, si une correction utile existe, la modification réelle apportée et la ré-observation attendue ; sinon, la raison de l’arrêt (`DIRECTION/DOUBLE-LOOP`, one-shot).
+ 
+ Sa valeur se juge à sa conséquence sur le premier objet, non à la complétude du formulaire ; il peut être omis pour un delta strictement local.
+@@ -467,6 +468,7 @@ Lorsque le choix est ouvert, formule des familles internes réellement distincte
+ 
+ ### Vérité de la scène et clôture de craft
+ 
++<!-- concept:HON-01 -->
+ Place un **marquage local de vérité** à proximité du claim ou de l’objet concerné. Ce marquage n’est ni un statut ACTION, ni une voie d’ancrage, ni un verdict. Il a deux axes : la **factualité**, `OBSERVED` ou `ILLUSTRATIVE`, obligatoire et exclusive ; la **nature**, `MECHANISM`, qui se cumule avec la factualité. La fiction l’emporte : un élément illustratif rend le tout `ILLUSTRATIVE`.
+ 
+ | Label local | Signification exacte |
+diff --git a/package/V1/official/SAVOIR.md b/package/V1/official/SAVOIR.md
+index 0f66cf6..3b04a53 100644
+--- a/package/V1/official/SAVOIR.md
++++ b/package/V1/official/SAVOIR.md
+@@ -899,6 +899,7 @@ Lorsque la règle est satisfaite par le texte mais qu’aucun objet ou changemen
+ 
+ Une capacité disponible modifie le type de preuve possible ; elle ne permet jamais d’affirmer une qualité sans examen du résultat. Toute délégation conserve délégataire, rôle, capacité déclarée, méthode, scope, artefact/résultat consulté, date/version, limite, owner de décision finale, `NEXT-PROOF` et condition de reprise ou d’escalade.
+ 
++<!-- concept:HON-02 -->
+ Ne fais jamais passer abstraction CSS, SVG, image générée ou placeholder pour photo, illustration, logomark, son ou asset authentique. Une abstraction assumée est autorisée si son rôle est honnête, son contenu non trompeur et son effet approprié. Un faux asset de marque ne l’est pas.
+ 
+ Le modèle, le prompt ou l’outil de génération ne constituent jamais, à eux seuls, une preuve de qualité, de droit ou d’adéquation au contexte.
+diff --git a/package/scripts/build_distributions.sh b/package/scripts/build_distributions.sh
+index afe9811..8a22515 100644
+--- a/package/scripts/build_distributions.sh
++++ b/package/scripts/build_distributions.sh
+@@ -37,6 +37,7 @@ cp -a "$ROOT/scripts/package_manifest.json" "$STAGE/github/scripts/package_manif
+ cp -a "$ROOT/scripts/validate_all.py" "$STAGE/github/scripts/validate_all.py"
+ cp -a "$ROOT/scripts/validate_reading_map.py" "$STAGE/github/scripts/validate_reading_map.py"
+ cp -a "$ROOT/scripts/read_route.py" "$STAGE/github/scripts/read_route.py"
++cp -a "$ROOT/scripts/validate_structure.py" "$STAGE/github/scripts/validate_structure.py"
+ mkdir -p "$STAGE/github/.github/workflows"
+ cp -a "$ROOT/.github/workflows/validate.yml" "$STAGE/github/.github/workflows/validate.yml"
+ 
+@@ -52,6 +53,7 @@ cp -a "$ROOT/scripts/package_manifest.json" "$STAGE/local/scripts/package_manife
+ cp -a "$ROOT/scripts/validate_all.py" "$STAGE/local/scripts/validate_all.py"
+ cp -a "$ROOT/scripts/validate_reading_map.py" "$STAGE/local/scripts/validate_reading_map.py"
+ cp -a "$ROOT/scripts/read_route.py" "$STAGE/local/scripts/read_route.py"
++cp -a "$ROOT/scripts/validate_structure.py" "$STAGE/local/scripts/validate_structure.py"
+ cat > "$STAGE/local/README.md" <<'EOF'
+ # Design Governance V1.1.1 — export Local
+ 
+@@ -111,6 +113,7 @@ Les contrôles disponibles sont :
+ python3 scripts/validate_design_governance.py
+ python3 scripts/validate_run_card.py
+ python3 scripts/validate_reading_map.py
++python3 scripts/validate_structure.py
+ python3 scripts/read_route.py DIRECTION/START
+ python3 scripts/validate_all.py
+ ```
+@@ -137,6 +140,7 @@ python3 "$STAGE/github/scripts/validate_design_governance.py"
+ python3 "$STAGE/github/scripts/validate_run_card.py"
+ python3 "$STAGE/github/scripts/validate_contracts.py"
+ python3 "$STAGE/github/scripts/validate_reading_map.py"
++python3 "$STAGE/github/scripts/validate_structure.py"
+ 
+ # Valider les chemins relatifs du Local indépendamment, sans exiger la structure GitHub.
+ python3 - "$STAGE/local" <<'PY'
+@@ -169,6 +173,7 @@ python3 "$STAGE/local/scripts/validate_design_governance.py"
+ python3 "$STAGE/local/scripts/validate_run_card.py"
+ python3 "$STAGE/local/scripts/validate_contracts.py"
+ python3 "$STAGE/local/scripts/validate_reading_map.py"
++python3 "$STAGE/local/scripts/validate_structure.py"
+ python3 "$STAGE/local/scripts/validate_all.py"
+ 
+ # Archives déterministes du contenu, sans répertoire de travail caché.
+diff --git a/package/scripts/package_manifest.json b/package/scripts/package_manifest.json
+index 749a2bb..6ac2487 100644
+--- a/package/scripts/package_manifest.json
++++ b/package/scripts/package_manifest.json
+@@ -56,6 +56,7 @@
+     "scripts/validate_design_governance.py",
+     "scripts/validate_run_card.py",
+     "scripts/read_route.py",
++    "scripts/validate_structure.py",
+     "skills/design-governance-practice/SKILL.md",
+     "skills/design-governance-practice/references/canonical_minimum.md",
+     "skills/design-governance-practice/references/examples.md",
+@@ -114,6 +115,7 @@
+     "scripts/validate_design_governance.py",
+     "scripts/validate_run_card.py",
+     "scripts/read_route.py",
++    "scripts/validate_structure.py",
+     "skill/SKILL.md",
+     "skill/references/canonical_minimum.md",
+     "skill/references/examples.md",
+@@ -121,4 +123,3 @@
+     "skill/references/machine_projection.md"
+   ]
+ }
+-
+diff --git a/package/scripts/read_route.py b/package/scripts/read_route.py
+index 9a468fd..31ab603 100644
+--- a/package/scripts/read_route.py
++++ b/package/scripts/read_route.py
+@@ -140,6 +140,9 @@ def resolve(locator: str, routes: dict[str, tuple[str, list[str]]] | None = None
+     raise RouteError(f"locator inconnu : {locator}")
+ 
+ 
++CONCEPT_MARKER = re.compile(r"^\s*<!-- concept:[A-Z0-9\-]+ -->\s*$")
++
++
+ def extract(lines: list[str], index: int) -> list[str]:
+     """Bloc du titre servi, sans les sous-blocs porteurs de leur propre locator."""
+     heads = headings(lines)
+@@ -154,6 +157,8 @@ def extract(lines: list[str], index: int) -> list[str]:
+             served.append(f"> `{own}` : servi séparément")
+             skip_until = block_end(lines, heads, i)
+             continue
++        if CONCEPT_MARKER.match(lines[i]):
++            continue
+         served.append(lines[i])
+     return served
+ 
+diff --git a/package/scripts/validate_all.py b/package/scripts/validate_all.py
+index c72226b..97084a3 100644
+--- a/package/scripts/validate_all.py
++++ b/package/scripts/validate_all.py
+@@ -40,11 +40,12 @@ def expect_failure(command: list[str], label: str, expected_message: str) -> Non
+     print(f"+ expected failure ({label})")
+ 
+ def main() -> int:
+-    run([sys.executable, "-m", "py_compile", "scripts/validate_design_governance.py", "scripts/validate_run_card.py", "scripts/validate_all.py", "scripts/validate_contracts.py", "scripts/validate_reading_map.py", "scripts/read_route.py"])
++    run([sys.executable, "-m", "py_compile", "scripts/validate_design_governance.py", "scripts/validate_run_card.py", "scripts/validate_all.py", "scripts/validate_contracts.py", "scripts/validate_reading_map.py", "scripts/read_route.py", "scripts/validate_structure.py"])
+     run([sys.executable, "scripts/validate_design_governance.py"])
+     run([sys.executable, "scripts/validate_run_card.py"])
+     run([sys.executable, "scripts/validate_contracts.py"])
+     run([sys.executable, "scripts/validate_reading_map.py"])
++    run([sys.executable, "scripts/validate_structure.py"])
+     run([sys.executable, "scripts/read_route.py", "DIRECTION/START"])
+     expect_failure(
+         [sys.executable, "scripts/read_route.py", "DIRECTION/UNKNOWN"],
+diff --git a/package/scripts/validate_structure.py b/package/scripts/validate_structure.py
+new file mode 100644
+index 0000000..3578110
+--- /dev/null
++++ b/package/scripts/validate_structure.py
+@@ -0,0 +1,96 @@
++#!/usr/bin/env python3
++"""Validateur de structure : gardes de propriété « une chose, un lieu ».
++
++Un concept protégé est repéré par une balise invisible `<!-- concept:ID -->` placée juste avant sa
++définition, dans son fichier propriétaire. La garde vérifie, pour chaque concept du registre :
++  1. la balise existe une seule fois dans l'ensemble des textes du package ;
++  2. elle se trouve dans le fichier propriétaire ;
++  3. le bloc qui la suit (jusqu'à la ligne vide) n'est pas vide (au moins 12 mots).
++Elle refuse aussi toute balise dont l'identifiant n'est pas au registre.
++
++Une reformulation du concept ne casse pas la garde ; sa suppression, son déplacement ou sa copie la
++cassent. `scripts/read_route.py` retire les balises à la lecture.
++
++Usage : python3 scripts/validate_structure.py
++"""
++from __future__ import annotations
++
++import re
++import sys
++from pathlib import Path
++
++ROOT = Path(__file__).resolve().parents[1]
++OFFICIAL = ROOT / "V1" / "official" if (ROOT / "V1" / "official").is_dir() else ROOT / "official"
++SKILL_DIR = ROOT / "skills" / "design-governance-practice" if (ROOT / "skills").is_dir() else ROOT / "skill"
++MARKER = re.compile(r"^\s*<!-- concept:([A-Z0-9][A-Z0-9\-]*) -->\s*$")
++MIN_WORDS = 12
++
++# Registre des concepts protégés : identifiant, fichier propriétaire, propriété.
++CONCEPTS: list[tuple[str, str, str]] = [
++    ("HON-01", "DIRECTION.md", "vérité de scène : exemples marqués, divulgation en langage produit"),
++    ("HON-02", "SAVOIR.md", "aucun faux asset présenté comme authentique"),
++    ("HON-03", "DIRECTION.md", "plafond déclaré quand une capacité manque (FABRICATION)"),
++    ("HON-04", "ACTION.md", "frontière de validation : ce que la machine atteste et n'atteste pas"),
++    ("HON-05", "ACTION.md", "agent seul : preuve dégradée et conclusions interdites"),
++    ("HON-06", "ACTION.md", "NOT-VERIFIED plutôt qu'un PASS sans preuve"),
++    ("HON-07", "ACTION.md", "une capture prouve un rendu, pas une tâche"),
++    ("HON-08", "ACTION.md", "droit inconnu : ACCEPTED interdit"),
++]
++
++
++def texts() -> dict[Path, list[str]]:
++    files = sorted(OFFICIAL.glob("*.md")) + sorted(SKILL_DIR.rglob("*.md"))
++    readme = ROOT / "README.md"
++    if readme.is_file():
++        files.append(readme)
++    return {p: p.read_text(encoding="utf-8").splitlines() for p in files}
++
++
++def check() -> list[str]:
++    errors: list[str] = []
++    found: dict[str, list[tuple[Path, int]]] = {}
++    corpus = texts()
++    for path, lines in corpus.items():
++        for i, line in enumerate(lines):
++            m = MARKER.match(line)
++            if m:
++                found.setdefault(m.group(1), []).append((path, i))
++    known = {cid for cid, _, _ in CONCEPTS}
++    for cid in sorted(set(found) - known):
++        errors.append(f"balise hors registre : {cid}")
++    for cid, owner, prop in CONCEPTS:
++        places = found.get(cid, [])
++        if not places:
++            errors.append(f"{cid} absent ({prop})")
++            continue
++        if len(places) > 1:
++            where = ", ".join(f"{p.name}:{i + 1}" for p, i in places)
++            errors.append(f"{cid} défini {len(places)} fois : {where}")
++            continue
++        path, i = places[0]
++        if path.name != owner or path.parent != OFFICIAL:
++            errors.append(f"{cid} hors de son fichier propriétaire ({owner}) : {path.name}")
++            continue
++        block = []
++        for line in corpus[path][i + 1:]:
++            if not line.strip():
++                break
++            block.append(line)
++        if len(" ".join(block).split()) < MIN_WORDS:
++            errors.append(f"{cid} : bloc vide ou trop court après la balise ({owner}:{i + 1})")
++    return errors
++
++
++def main() -> int:
++    errors = check()
++    if errors:
++        print("STRUCTURE VALIDATION FAILED — gardes de propriété")
++        for e in errors:
++            print(f"- {e}")
++        return 1
++    print(f"STRUCTURE VALIDATION PASSED — {len(CONCEPTS)} concepts protégés, uniques et à leur lieu propriétaire")
++    return 0
++
++
++if __name__ == "__main__":
++    sys.exit(main())

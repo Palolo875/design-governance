@@ -1,0 +1,390 @@
+harnais;cas;categorie_R1;fichiers_sensibles;voie;statut;garde_remplacement;lot;justification;libelle
+A1;T-POS-1;STRUCTURE;;-;MAINTENU;;R1;;B01 : suite RUN_CARD verte [code 0 · RUN_CARD VALIDATION PASSED — projection validée contre le schéma et fixtures con]
+A1;T-POS-2;STRUCTURE;;-;MAINTENU;;R1;;B01 : exemple RUN_CARD ciblé vert [code 0 · RUN_CARD VALIDATION PASSED — fichier ciblé : /tmp/tmp7ydhfohy/pkg/schemas/run_ca]
+A1;T-POS-3;STRUCTURE;;-;MAINTENU;;R1;;B01 : carte invalide ciblée rejetée [code 1 · - un verdict accepté exige au moins une preuve observed]
+A1;T-POS-4;STRUCTURE;;-;MAINTENU;;R1;;B01 : suite des contrats verte [code 0 · CONTRACT VALIDATION PASSED — domain, research, creative, UI/UX and evaluation co]
+A1;A1-01;STRUCTURE;;-;MAINTENU;;R1;;schéma RUN_CARD {} → suite en échec gouverné [code 1 · - schéma inopérant : la racine doit être un objet non vide]
+A1;A1-02;STRUCTURE;;-;MAINTENU;;R1;;schéma RUN_CARD {} → carte invalide ciblée JAMAIS en succès [code 1 · - schéma inopérant : la racine doit être un objet non vide]
+A1;A1-03;STRUCTURE;;-;MAINTENU;;R1;;schéma RUN_CARD absent → échec gouverné (sans traceback) [code 1 · - schéma absent : schemas/run_card.schema.json]
+A1;A1-04;STRUCTURE;;-;MAINTENU;;R1;;schéma RUN_CARD {"type":"object"} → suite en échec gouverné [code 1 · - schéma incomplet : properties.run_card.properties.mode.enum absent ou vide]
+A1;A1-05;STRUCTURE;;-;MAINTENU;;R1;;enum mode retiré du schéma → suite rouge [code 1 · - schéma incomplet : properties.run_card.properties.mode.enum absent ou vide]
+A1;A1-06;STRUCTURE;;-;MAINTENU;;R1;;enum mode retiré + carte BOGUS-MODE ciblée → échec gouverné [code 1 · - schéma incomplet : properties.run_card.properties.mode.enum absent ou vide]
+A1;A1-07;STRUCTURE;;-;MAINTENU;;R1;;schéma domain_frame {} → suite des contrats en échec gouverné [code 1 · - domain_frame: schéma inopérant : la racine doit être un objet non vide]
+A1;A1-08;STRUCTURE;;-;MAINTENU;;R1;;schéma research_brief {} → suite des contrats en échec gouverné [code 1 · - research_brief: schéma inopérant : la racine doit être un objet non vide]
+A1;A1-09;STRUCTURE;;-;MAINTENU;;R1;;schéma production_contracts {} → suite des contrats en échec gouverné [code 1 · - production_contracts: schéma inopérant : la racine doit être un objet non vide
+A1;A1-10;STRUCTURE;;-;MAINTENU;;R1;;mot-clé non supporté dans une branche non visitée → échec gouverné [code 1 · - domain_frame: $.properties.zz_non_visite: mots-clés de schéma non supportés : ]
+A1;A1-11;STRUCTURE;;-;MAINTENU;;R1;;enum research_brief.depth retiré → suite des contrats rouge [code 1 · - research_brief: le schéma n'impose pas l'enum de depth]
+A2;T-POS-1;STRUCTURE;;-;MAINTENU;;R1;;suite RUN_CARD verte [code 0 · RUN_CARD VALIDATION PASSED — projection validée contre le schéma et fixtures contrôlés]
+A2;T-POS-2;PROSE;DIRECTION+ACTION+SAVOIR+BIBLIOTHEQUE_CHANGELOG+FACADES+SKILL;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;validate_all complet vert (build et reproductibilité) [code 0 · FULL VALIDATION PASSED — package, RUN_CARD, build et reproductibilité]
+A2;A2-01;STRUCTURE;;-;MAINTENU;;R1;;F-FIX-003 : négatif réparé de sa faute mais invalide autrement → suite rouge [code 1 · - diagnostic inattendu — schemas/fixtures/invalid_missing_proof.json : at
+A2;A2-02;STRUCTURE;;-;MAINTENU;;R1;;F-FIX-001 : fixture orpheline rendue valide → suite rouge [code 1 · - fixture invalide acceptée — schemas/fixtures/invalid_capability_profile_missing_basis.js]
+A2;A2-03;STRUCTURE;;-;MAINTENU;;R1;;F-FIX-001 : fichier de fixture non déclaré → suite rouge [code 1 · - fixture non déclarée : schemas/fixtures/invalid_zz_non_declaree.json]
+A2;A2-04;STRUCTURE;;-;MAINTENU;;R1;;F-ALL-001 : échec pour un motif étranger → rejeté par l'orchestrateur [code 1 · rejet du mauvais motif : CLI REGRESSION FAILED — basis absent a échoué pour un a
+A2;A2-05;STRUCTURE;;-;MAINTENU;;R1;;F-FIX-002 : cas unitaires à faute unique exécutés (ligne « + cas unitaires : N/N », N ≥ 20) [code 0 · RUN_CARD VALIDATION PASSED — projection validée contre le 
+B1;T-POS-1;STRUCTURE;;-;MAINTENU;;R1;;B01 exemple canonique accepté [acceptée]
+B1;B1-01;STRUCTURE;;-;MAINTENU;;R1;;F-DIR-007 LITE + risque critical → rejet [un risque critical interdit le mode LITE ou ITER (DIRECTION 140)]
+B1;B1-02;STRUCTURE;;-;MAINTENU;;R1;;F-DIR-007 ITER + risque critical → rejet [un risque critical interdit le mode LITE ou ITER (DIRECTION 140)]
+B1;B1-03;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-017 protection critique sans result → rejet [critical_protection exige result (PASS, FAIL ou NOT-VERIFIED)]
+B1;B1-04;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-017 protection NOT-VERIFIED + ACCEPTED → rejet [protection critique NOT-VERIFIED : verdict ACCEPTED interdit (la réserve reste possib]
+B1;B1-05;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-017 protection FAIL + verdict accepté → rejet [protection critique en échec : aucun verdict accepté]
+B1;B1-06;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-017/038 protection FAIL (BLOCKED) + issue FAIL-ASSUMED → rejet [protection critique en échec : l’issue doit suivre critical_protection.failure_action]
+B1;B1-07;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-038 FAIL-ASSUMED sans exception structurée → rejet [FAIL-ASSUMED exige closure.exception (réserve commune, gate_axis, failure_evidence, r]
+B1;B1-08;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-038 FAIL-ASSUMED dont l'échec n'est pas observé → rejet [exception : failure_evidence doit figurer dans proof.observed (un échec connu, pas un]
+B1;B1-09;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-039 FAIL-ASSUMED sans disposition → rejet [exception exige disposition (NON-DIFFUSÉ, DIFFUSÉ-LIMITÉ, RETIRÉ ou ESCALADÉ)]
+B1;B1-P1;STRUCTURE;;-;MAINTENU;;R1;;F-DIR-007/017 STANDARD + critical + result PASS + AWR → acceptée [acceptée]
+B1;B1-P2;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-017 critical FAIL + issue BLOCKED (= failure_action) + RETURN → acceptée [acceptée]
+B1;B1-P3;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-038/039 FAIL-ASSUMED complet, échec observé, disposition → acceptée [acceptée]
+B2;T-POS-1;STRUCTURE;;-;MAINTENU;;R1;;B01 exemple canonique accepté [acceptée]
+B2;B2-01;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-010 issue RETURNED + ACCEPTED [issue non nulle interdit un verdict accepté : RETURNED]
+B2;B2-02;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-010 issue RECLASSIFIED + AWR [issue non nulle interdit un verdict accepté : RECLASSIFIED]
+B2;B2-03;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-010 issue ESCALATED + AWR [issue non nulle interdit un verdict accepté : ESCALATED]
+B2;B2-04;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-010 PARTIALLY-HELD + ACCEPTED [PARTIALLY-HELD interdit ACCEPTED (HELD-WITH-ACCEPTED-DIFFERENCE pour une différe]
+B2;B2-06;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-012 verdict accepté sans axes [un verdict accepté exige closure.axes (V, U, A, T)]
+B2;B2-07;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-012 axe A NOT-VERIFIED + ACCEPTED [un axe NOT-VERIFIED interdit ACCEPTED (la réserve reste possible)]
+B2;B2-08;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-012 axe U RETURN + AWR [un axe RETURN interdit un verdict accepté]
+B2;B2-09;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-012/023 axe V PASS-WITH-RESERVATION + ACCEPTED [une réserve d'axe interdit ACCEPTED (PASS-WITH-RESERVATION)]
+B2;B2-10;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-018 capacité de provenance déclarée indisponible [proof.provenance.capability doit être disponible (dans available, hors unavailab]
+B2;B2-11;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-018 basis déclarative pour la capacité de provenance [proof.provenance.capability exige une basis attestée (basis déclarative ou absen]
+B2;B2-12;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-022 preuve V1, artefact V2 [version de preuve différente de la version d'artefact (artifact.version = proven]
+B2;B2-13;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-022 observed_at non daté [proof.provenance.observed_at doit être une date ISO]
+B2;B2-14;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-023 AWR sans réserve structurée [ACCEPTED-WITH-RESERVATION exige closure.reservations]
+B2;B2-15;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-023 réserve avec impact « à compléter » [réserve incomplète ou placeholder : impact]
+B2;B2-16;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-024 droits inconnus + ACCEPTED [droits inconnus interdisent ACCEPTED (rights_status unknown)]
+B2;B2-17;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-024 DIRECTION sans rights_status [DIRECTION exige artifact.rights_status (not_applicable, cleared, unknown ou rest]
+B2;B2-P1;STRUCTURE;;-;MAINTENU;;R1;;tous carte AWR conforme au contrat B2 → acceptée [acceptée]
+B2;B2-P2;STRUCTURE;;-;MAINTENU;;R1;;proportion fixture valid_closed_return (retour simple, aucun champ B2) → acceptée [acceptée]
+B2;B2-P3;STRUCTURE;;-;MAINTENU;;R1;;F-RC-001 ancre transformed + issue RETURNED + RETURN → acceptée [acceptée]
+B3;T-POS-1;STRUCTURE;;-;MAINTENU;;R1;;B01 exemple canonique accepté [acceptée]
+B3;B3-01;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-015 SYSTÈME accepté sans paquet [SYSTÈME accepté exige closure.system_package]
+B3;B3-02;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-015 SYSTÈME sans consumer [system_package exige au moins un consumer]
+B3;B3-03;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-015 rollback « à déterminer » [system_package incomplet ou placeholder : rollback]
+B3;B3-04;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-031 non-régression sans version de baseline [non_regression.baseline exige locator, version et état]
+B3;B3-05;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-036 DIRECTION acceptée, V PASS, sans B1b [DIRECTION acceptée avec V PASS exige closure.b1b]
+B3;B3-06;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-036 paire B1b à captures identiques [paire B1b : captures distinctes exigées (before_locator ≠ after_locator)]
+B3;B3-07;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-036/BIB-001 N/A B1b pour « comparaison inutile » [motif N/A B1b non recevable (no_editable_decision ou equivalent_pair_valid)]
+B3;B3-08;STRUCTURE;;-;MAINTENU;;R1;;F-BIB-001 N/A par paire équivalente sans référence de paire [N/A B1b par paire équivalente exige pair_ref]
+B3;B3-P1;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-015/031 SYSTÈME AWR avec paquet complet → acceptée [acceptée]
+B3;B3-P2;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-036 DIRECTION AWR avec B1b réalisée → acceptée [acceptée]
+B3;B3-P3;STRUCTURE;;-;MAINTENU;;R1;;proportion fixture valid_closed_return (SYSTÈME, RETURN, sans paquet) → acceptée [acceptée]
+B3;B3-P4;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-021 LITE AWR sans paquet de mode (forme seule) → acceptée [acceptée]
+B4;T-POS-1;STRUCTURE;;-;MAINTENU;;R1;;B01 exemple canonique accepté [acceptée]
+B4;B4-01;STRUCTURE;;-;MAINTENU;;R1;;F-DIR-027 ancrage sans type [ancrage exige type (generated, observed ou provided)]
+B4;B4-02;STRUCTURE;;-;MAINTENU;;R1;;F-SAV-003 type « independent_review » (une revue n'est pas une ancre) [run_card.anchors[0].type : valeur non canonique : independent_review]
+B4;B4-03;STRUCTURE;;-;MAINTENU;;R1;;F-DIR-027 enjeu élevé, ancrage généré seul, HELD, sans calibration [enjeu d’identité élevé : ancrage généré seul exige calibration (real_constr]
+B4;B4-04;STRUCTURE;;-;MAINTENU;;R1;;F-SAV-003 calibration par « revue indépendante » [base de calibration non recevable (une revue indépendante n’est pas une cal]
+B4;B4-05;STRUCTURE;;-;MAINTENU;;R1;;F-DIR-027 généré seul réservé + ACCEPTED [calibration générée seule interdit ACCEPTED]
+B4;B4-06;STRUCTURE;;-;MAINTENU;;R1;;F-DIR-027 DIRECTION sans ancrage + verdict accepté [DIRECTION sans ancrage : verdict accepté interdit]
+B4;B4-07;STRUCTURE;;-;MAINTENU;;R1;;F-DIR-027 DIRECTION sans ancrage, sans issue [DIRECTION sans ancrage exige une issue (sérialisation honnête, ACTION 483)]
+B4;B4-08;STRUCTURE;;-;MAINTENU;;R1;;F-DIR-027 date d'ancrage « récemment » [date d'ancrage ISO exigée (AAAA-MM-JJ)]
+B4;B4-P1;STRUCTURE;;-;MAINTENU;;R1;;F-DIR-027 enjeu élevé, généré + observé, HELD, AWR → acceptée [acceptée]
+B4;B4-P2;STRUCTURE;;-;MAINTENU;;R1;;F-DIR-027 enjeu élevé, généré seul avec réserve de calibration, AWR → acceptée [acceptée]
+B4;B4-P3;STRUCTURE;;-;MAINTENU;;R1;;F-DIR-027 DIRECTION sans ancrage, EXPLORATORY honnête → acceptée (sérialisable sans mentir) [acceptée]
+B4;B4-P4;STRUCTURE;;-;MAINTENU;;R1;;proportion enjeu normal, généré seul, HELD, AWR, sans calibration → acceptée [acceptée]
+B5;T-POS-1;STRUCTURE;;-;MAINTENU;;R1;;témoin COMPONENTS existe et définit les couches
+B5;B5-01;STRUCTURE;;-;MAINTENU;;R1;;F-BIB-004 COMPONENTS porte un « contrat de composant partagé » (hors BRAND_GRAMMAR)
+B5;B5-02;STRUCTURE;;-;MAINTENU;;R1;;F-BIB-004 ce contrat nomme les 12 responsabilités promises par SAVOIR 704
+B5;B5-03;STRUCTURE;;-;MAINTENU;;R1;;F-BIB-004 (fusion) ACTION « Contrat de composant » renvoie à BIBLIOTHEQUE/COMPONENTS au lieu d'une liste concurrente
+B5;B5-04;STRUCTURE;;-;MAINTENU;;R1;;F-SAV-007 SAVOIR/SYSTEM n'ordonne plus « Reclassifie en SYSTÈME »
+B5;B5-05;PROSE;SAVOIR;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-SAV-007 SAVOIR/SYSTEM renvoie le signal à DIRECTION/START (objet direct ou run dépendant)
+C1;T-POS-1;STRUCTURE;;-;MAINTENU;;R1;;B01 exemple canonique accepté [acceptée]
+C1;C1-01;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-013/014 decision_change sans outcome [decision_change exige outcome (CHANGED, CONFIRMED, ABANDONED, N/A-JUST]
+C1;C1-02;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-014 outcome NOT-OBSERVED + ACCEPTED [decision_change NOT-OBSERVED interdit ACCEPTED]
+C1;C1-03;STRUCTURE;;-;MAINTENU;;R1;;F-DIR-011 outcome N/A-JUSTIFIED sans raison [decision_change N/A-JUSTIFIED exige une raison]
+C1;C1-04;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-013 STANDARD clos et accepté sans decision_change [STANDARD clos et accepté exige decision_change (LITE : facultatif)]
+C1;C1-05;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-009 state BUILDING avec verdict [state BUILDING : le verdict doit rester null avant CHECKING]
+C1;C1-06;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-009 state CLOSED sans verdict [state CLOSED exige un verdict]
+C1;C1-07;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-011 RECLASSIFIED sans transition [RECLASSIFIED exige closure.reclassification (to_mode, successor_run_re]
+C1;C1-08;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-011 reclassement vers le même mode [reclassification : mode cible identique au mode du run]
+C1;C1-09;STRUCTURE;;-;MAINTENU;;R1;;F-SAV-005 profil seulement visé dans une carte acceptée [profil non observé : un verdict accepté exige profile_decision.phase o]
+C1;C1-P1;STRUCTURE;;-;MAINTENU;;R1;;tous carte acceptée avec decision_change CONFIRMED → acceptée [acceptée]
+C1;C1-P2;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-009 carte INTAKE sans verdict prématuré → acceptée [acceptée]
+C1;C1-P3;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-025 next_polish_action « STOP — raison » (convention texte, champ inchangé) → acceptée [acceptée]
+C1;C1-P4;STRUCTURE;;-;MAINTENU;;R1;;proportion LITE clos et accepté sans decision_change → acceptée [acceptée]
+C1;G-01;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-014 ACTION/STATUS place NOT-OBSERVED (conséquence décisionnelle)
+C1;G-02;STRUCTURE;;-;MAINTENU;;R1;;F-DIR-011/019 DIRECTION emploie la triade (NOT-OBSERVED aux trois occurrences au moins)
+C1;G-03;PROSE;DIRECTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-029 les labels TRUTH se cumulent (factualité × nature)
+C1;G-04;PROSE;DIRECTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-021 règle d'audience : pas de label interne dans l'interface , divulgation en langage produit
+C1;G-05;PROSE;DIRECTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-024 la ligne « Preuve » de VISUAL_TARGET devient « Objet de preuve »
+C1;G-06;PROSE;DIRECTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-032 ABSOLU 5 renvoie le choix de méthode à ACTION ou SAVOIR
+C1;G-07;STRUCTURE;;-;MAINTENU;;R1;;F-DIR-033 la troisième taxonomie « trois niveaux de preuve » est supprimée
+C1;G-08;PROSE;ACTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-ACT-027 ACTION 509 déclare CORRECTED / ACCEPTED-DIFFERENCE / REMAINING-RISK comme résultats locaux avec correspondance
+C1;G-10;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-025 ACTION documente « STOP — raison » comme valeur valide de next_polish_action
+C1;G-09;PROSE;SAVOIR;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-SAV-005 STYLE sépare l'intention de profil et l'effet observé
+C2;T-POS-1;STRUCTURE;;-;MAINTENU;;R1;;B01 exemple canonique RUN_CARD accepté [acceptée]
+C2;T-POS-2;STRUCTURE;;-;MAINTENU;;R1;;B01 exemple canonique des contrats accepté [accepté]
+C2;T-CONS;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-002 champ HANDOFF next_action hors projection → rejeté (champs inconnus) [run_card : champs inconnus : next_action]
+C2;C2-01;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-017 (1) risque sans énoncé (niveau seul) [risk.statement requis : énoncé du risque principal, non vide et sans p]
+C2;C2-02;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-017 (1) énoncé de risque placeholder « TBD » [risk.statement requis : énoncé du risque principal, non vide et sans p]
+C2;C2-03;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-017 (1) énoncé de risque blanc [risk.statement requis : énoncé du risque principal, non vide et sans p]
+C2;C2-P1;STRUCTURE;;-;MAINTENU;;R1;;tous carte DIRECTION acceptée avec énoncé de risque → acceptée [acceptée]
+C2;C2-P2;STRUCTURE;;-;MAINTENU;;R1;;proportion fixture valid_closed_return + énoncé de risque → acceptée [acceptée]
+C2;C2-P3;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-002 LITE clos sans decision_change, EXIT-CONDITION portée par la réserve → acceptée [acceptée]
+C2;K-01;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-007 proof_status taxonomie parallèle « observed » [$.ui_ux_reality_pack.coverage_map[0].proof_status: valeur non canoniqu]
+C2;K-02;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-007 N/A-JUSTIFIED sans raison [coverage_map : N/A-JUSTIFIED exige une raison (state_matrix: unavailab]
+C2;K-03;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-005 exigence OBSERVED sans observed_scope [coverage_map : une exigence OBSERVED exige observed_scope (state_matri]
+C2;K-04;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-005 ancien proof_scope unique (cible ou observation ?) [$.ui_ux_reality_pack: champs inconnus: proof_scope]
+C2;K-05;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-006 document sans aucun contrat [production_contracts exige au moins un contrat (creative_direction_set]
+C2;K-P1;STRUCTURE;;-;MAINTENU;;R1;;tous trois contrats conformes → acceptés [accepté]
+C2;K-P2;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-006 UI_UX_REALITY_PACK seul → accepté [accepté]
+C2;K-P3;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-006 CREATIVE_DIRECTION_SET seul → accepté [accepté]
+C2;K-P4;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-030 pack avant build : tout NOT-VERIFIED, observed_scope null → accepté [accepté]
+C2;K-P5;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-007 N/A-JUSTIFIED avec raison → accepté [accepté]
+C2;G-01;PROSE;ACTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-ACT-002 ACTION/RUN_CARD : table de correspondance couvrant NEXT-ACTION, EXIT-CONDITION et « hors projection »
+C2;G-02;STRUCTURE;;-;MAINTENU;;R1;;F-DIR-006 la table couvre les vues DIRECTION (VISUAL_TARGET, creative close)
+C2;G-03;PROSE;DIRECTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-039 DIRECTION 716 déclare le transport du paquet d'alternative (trace), plus « la RUN_CARD nomme » seule
+C2;G-04;PROSE;ACTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-ACT-002 HANDOFF déclare la forme courte LITE par renvoi à CLOSE-PACKAGE
+C2;G-05;PROSE;ACTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-010 HANDOFF situe les formes (ligne de run, HANDOFF, CLOSE-PACKAGE, projection)
+C2;G-06;PROSE;DIRECTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-013 DAILY : colonne « Clôture minimale » remplacée par un renvoi à ACTION/CLOSE-PACKAGE
+C2;G-07;STRUCTURE;;-;MAINTENU;;R1;;F-DIR-034/035 section 0 : preuve minimale et condition d'arrêt renvoyées à ACTION (PRECONDITION, CLOSE-EXIT-CHECK)
+C2;G-08;PROSE;DIRECTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-023 VISUAL_TARGET : table canonique avec « Résolution initiale » , la table des quatre décisions disparaît
+C2;G-09;PROSE;DIRECTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-023 passage à SPECCED défini par renvoi à la table (et non par une énumération concurrente)
+C2;G-10;PROSE;ACTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-ACT-029 STRUCTURED-PROOF ouvre sur une matrice d'activation avec N/A-JUSTIFIED
+C2;G-11;PROSE;ACTION;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-ACT-030 STRUCTURED-PROOF marque la phase des champs (avant / après build)
+C2;G-12;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-005/007 UI-UX-REALITY sépare scope attendu et scope observé et nomme les jetons canoniques
+C3;T-POS-1;STRUCTURE;;-;MAINTENU;;R1;;B01 exemple canonique des contrats accepté [accepté]
+C3;T-CONS;STRUCTURE;;-;MAINTENU;;R1;;F-PC-001 ensemble à une seule direction → rejeté (définition, pas quota) [$.creative_direction_set.directions: nombre minimal d'éléments non att]
+C3;C3-01;STRUCTURE;;-;MAINTENU;;R1;;F-PC-001 deux IDs, textes identiques [directions non distinctes : B reprend la tension et les changements d']
+C3;C3-02;STRUCTURE;;-;MAINTENU;;R1;;F-PC-001 deux IDs, textes identiques à la casse et aux espaces près [directions non distinctes : B reprend la tension et les changements d']
+C3;C3-03;STRUCTURE;;-;MAINTENU;;R1;;F-PC-001 un même changement structurel compté deux fois [changements structurels en double dans la direction A]
+C3;C3-P1;STRUCTURE;;-;MAINTENU;;R1;;F-PC-001 directions à un seul levier structurel chacune → acceptées (pas de quota) [accepté]
+C3;C3-P2;STRUCTURE;;-;MAINTENU;;R1;;F-PC-001 aucune alternative plausible : ensemble non activé, UI/UX seul → accepté (via INV-C2-2) [accepté]
+C3;C3-P3;STRUCTURE;;-;MAINTENU;;R1;;tous deux directions distinctes (exemple après C2) → acceptées [accepté]
+C3;G-01;PROSE;BIBLIOTHEQUE_CHANGELOG;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-BIB-002 CONTRACTS : contrat réduit unique (décision, responsabilité, contre-indication, preuve attendue, limite)
+C3;G-02;PROSE;BIBLIOTHEQUE_CHANGELOG;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-BIB-002 table des niveaux : la ligne Local renvoie au contrat réduit de CONTRACTS
+C3;G-03;STRUCTURE;;-;MAINTENU;;R1;;F-BIB-002 DERIVE : champs rangés par phase (départ / après objet / promotion)
+C3;G-04;PROSE;ACTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-SK-001 ACTION/HANDOFF nomme deux sorties : réponse visible et handoff
+C3;G-05;PROSE;SKILL;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-SK-001 skill : plus de liste de onze champs « au minimum » , les deux sorties renvoient à ACTION/HANDOFF
+C3;G-06;STRUCTURE;;-;MAINTENU;;R1;;F-SK-001 skill : la copie du handoff porte les treize champs canoniques (14 libellés, composites séparés)
+C3;G-07;STRUCTURE;;-;MAINTENU;;R1;;F-SK-001 QUICKSTART : plus de « sortie minimale d'un handoff » à onze champs , renvoi à ACTION/HANDOFF
+C3;G-08;PROSE;FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-SK-001 la réponse visible de QUICKSTART est marquée « voir ACTION/HANDOFF » et identique au canon
+C4;T-POS-1;STRUCTURE;;-;MAINTENU;;R1;;B01 exemple canonique RUN_CARD accepté (normal) [acceptée]
+C4;T-POS-2;STRUCTURE;;-;MAINTENU;;R1;;B01 DIRECTION/START servi par le lecteur [76 lignes]
+C4;C4-01;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-020 normal : ITER sans trace_locator [ITER exige trace_locator pour une RUN_CARD persistante]
+C4;C4-02;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-020 strict : LITE sans trace, artefact local absent [strict : artefact local absent : captures/absent.png]
+C4;C4-P1;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-020 normal : LITE sans trace_locator (l'artefact sert de locator) → acceptée [acceptée]
+C4;C4-P2;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-020 strict : même LITE sans trace_locator, artefact présent → acceptée [acceptée]
+C4;C4-P3;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-020 strict : STANDARD, locator relatif résolu depuis le dossier de la carte → acceptée [acceptée]
+C4;C4-P4;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-020 normal : ITER avec trace_locator → acceptée [acceptée]
+C4;T-POS-3;PROSE;DIRECTION+ACTION+SAVOIR+BIBLIOTHEQUE_CHANGELOG+FACADES+SKILL;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;témoin carte non modifiée → PASS [READING MAP VALIDATION PASSED — carte dérivée, propriétaires, locators]
+C4;V-01;PROSE;FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-VRM-001 RUN-LITE ouvre le titre de RUN-ITER [- destination ne correspond pas au locator : ACTION/RUN-LITE → ### `AC]
+C4;V-02;PROSE;FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-VRM-001 même locator listé deux fois [- locator en double : ACTION/RUN-LITE]
+C4;V-03;PROSE;FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-VRM-001 titre propriétaire renommé : ACTION/STATUS cité mais plus résoluble [- locator cité non résolu : ACTION/STATUS (locator inconnu : ACTION/ST]
+C4;V-04;PROSE;FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-VRM-001 locator ACTION/… pointant vers DIRECTION.md [- propriétaire incohérent : ACTION/FIRST-RENDER → DIRECTION.md]
+C4;R-01;PROSE;FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-028 tout locator cité est servi (64/64)
+C4;R-02;PROSE;FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-ACT-001 carte de chargement d'ACTION résoluble (15/15)
+C4;R-03;STRUCTURE;;-;MAINTENU;;R1;;F-RM-003 DIRECTION/START/TREE servi en ≤ 25 lignes (23)
+C4;R-04;STRUCTURE;;-;MAINTENU;;R1;;F-RM-003 DIRECTION/START n'embarque plus CREATIVE-BOOT ni DOMAIN-FRAME (≤ 76 lignes , 76)
+C4;R-05;PROSE;FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-RM-003 route LITE servie en ≤ 60 lignes (51)
+C4;R-06;STRUCTURE;;-;MAINTENU;;R1;;F-RM-003 sous-locator hiérarchique SAVOIR/CRAFT/CFT-01 servi seul
+C4;R-07;STRUCTURE;;-;MAINTENU;;R1;;F-VRM-001 aucun locator porté par deux titres
+C4;G-01;PROSE;ACTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-ACT-001 carte d'ACTION : STATUS et PRECONDITION chargés pour les cinq modes
+C4;G-02;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-001 « commencez par `ACTION/RUN` » (locator sans titre) remplacé par des locators résolubles
+C4;G-03;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-001 / C2 carte d'ACTION : la colonne « Sortie à conserver » cède la place au renvoi CLOSE-PACKAGE
+C4;G-04;STRUCTURE;;-;MAINTENU;;R1;;F-RM-003 READING_MAP liste le sous-locator DIRECTION/START/TREE
+C4;G-05;STRUCTURE;;-;MAINTENU;;R1;;F-RM-003 skill : « arbre seulement » exprimé par le locator DIRECTION/START/TREE
+C4;G-06;PROSE;FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-028 READING_MAP décrit la résolution par préfixe, sous-locator et refus d'ambiguïté
+C4;G-07;PROSE;ACTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-ACT-020 ACTION documente le profil strict (mêmes exigences par mode , contrôles ajoutés)
+C5;T-POS-1;PROSE;DIRECTION+ACTION+SAVOIR+BIBLIOTHEQUE_CHANGELOG+FACADES+SKILL;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;témoin validate_reading_map sur la copie non modifiée → PASS [READING MAP VALIDATION PASSED — carte dérivée, propriétaires]
+C5;T-POS-2;STRUCTURE;;-;MAINTENU;;R1;;témoin lecteur de routes opérationnel [DIRECTION/START]
+C5;M-1;PROSE;FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-RM-001 / F-VRM-003 RUN-DIRECTION [FORCÉ] redevient facultative dans READING_MAP [- LCF-01 : condition de façade non tenue — READING_MAP, lign]
+C5;M-2;PROSE;FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-RM-002 le non-chargement d'accessibilité redevient N/A-JUSTIFIED [- LCF-02 : condition de façade non tenue — READING_MAP, lign]
+C5;M-3;PROSE;FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-OM-001 Gate A repasse en « renforcement seulement si nécessaire » [- LCF-03 : condition de façade non tenue — ORCHESTRATION_MAP]
+C5;M-4;PROSE;FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-QS-002 le craft redevient critère du mode DIRECTION (QUICKSTART) [- LCF-04 : condition de façade non tenue — QUICKSTART et REA]
+C5;M-5;PROSE;FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-RDR-001 ITER perd la condition de direction retrouvable (README) [- LCF-05 : condition de façade non tenue — README, ligne ITE]
+C5;M-6;PROSE;FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-SK-001 (C3) une copie du handoff perd un champ (skill) [- LCF-C1 : condition de façade non tenue — READING_MAP et sk]
+C5;LCF-01;PROSE;FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-RM-001 READING_MAP : ACTION/RUN-DIRECTION dans la première lecture de « Direction identitaire », pas dans l'optionnel
+C5;LCF-02;PROSE;FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-RM-002 READING_MAP : le non-chargement d'accessibilité ne produit pas de N/A et renvoie aux contrôles ACTION/GATE-A
+C5;LCF-03;PROSE;FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-OM-001 ORCHESTRATION_MAP : Gate A, gate du risque et paquet SYSTÈME dans le noyau, pas dans le renforcement
+C5;LCF-04;PROSE;FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-QS-002 QUICKSTART et README : le mode DIRECTION n'est pas classé par le craft , critère de START (autonome)
+C5;LCF-05;PROSE;FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-RDR-001 README : ITER exige une direction existante et retrouvable
+C5;LCF-06;PROSE;DIRECTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-041 DIRECTION, index : aucune présélection de STANDARD pour une nouvelle structure
+C5;LCF-07;PROSE;DIRECTION+FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-001 séquence causale cible → premier objet (DIRECTION 72, RUN-PRIORITY, READING_MAP, ORCHESTRATION_MAP, skill)
+C5;LCF-08;PROSE;DIRECTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-008 OWNER et SCOPE exclus de la règle d'omission (START, FAST-PATH)
+C5;LCF-09;STRUCTURE;;-;MAINTENU;;R1;;F-DIR-018 RUN-PRIORITY : premier objet avant le générique, sauf si navigation, recherche ou cartes sont l'objet de preuve
+C5;LCF-10;PROSE;FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;D-FAC-1 tables de mode (QUICKSTART, README) marquées « classement : voir DIRECTION/START »
+C5;LCF-C1;STRUCTURE;;-;MAINTENU;;R1;;F-SK-001 (C3) copies du handoff = canon ACTION/HANDOFF (canon 14 jetons , READING_MAP 14, même ordre , skill : tous présents)
+C5;LCF-C2;STRUCTURE;;-;MAINTENU;;R1;;F-SK-001 (C3) réponse visible : canon dans ACTION/HANDOFF, copies identiques (QUICKSTART, skill)
+C6;T-POS-1;PROSE;DIRECTION+ACTION+SAVOIR+BIBLIOTHEQUE_CHANGELOG+FACADES+SKILL;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;témoin validate_reading_map sur la copie non modifiée → PASS [READING MAP VALIDATION PASSED — carte dérivée, propriétaires]
+C6;M-7;PROSE;FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-EX-001 DECISION-CHANGE redevient une liste de propriétés [- LCF-11 : condition de façade non tenue — exemples de la sk]
+C6;M-8;PROSE;FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-GLO-002 l'exemple CLOSED redevient une réserve sans attributs [- LCF-40 : condition de façade non tenue — GLOSSAIRE, exempl]
+C6;M-9;PROSE;FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;C1 NOT-OBSERVED redevient un champ de scope non vérifié [- LCF-13 : condition de façade non tenue — exemples de la sk]
+C6;M-10;PROSE;FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-EX-002 la paire de captures redevient preuve de mémorisation et de tâche [- LCF-14 : condition de façade non tenue — exemples de la sk]
+C6;LCF-11;PROSE;FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-EX-001 DECISION-CHANGE d'exemple = issue + décision + observation (4 lignes d'exemple + GLOSSAIRE)
+C6;LCF-12;PROSE;FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-GLO-002 ACCEPTED-WITH-RESERVATION d'exemple ⇒ réserve complète (1 bloc(s), 1 ligne(s) GLOSSAIRE)
+C6;LCF-13;STRUCTURE;;-;MAINTENU;;R1;;C1 (triade) NOT-OBSERVED réservé à DECISION-CHANGE , STATE CLOSED ⇒ VERDICT dans chaque exemple
+C6;LCF-14;STRUCTURE;;-;MAINTENU;;R1;;F-EX-002 une paire de captures ne porte pas de claim de mémorisation ou de tâche sans protocole
+C6;G-01;PROSE;FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-GLO-002 l'exemple CLOSED sépare l'état du verdict (un run clos peut être RETURN)
+C7;T-1;STRUCTURE;;-;MAINTENU;;R1;;témoin CFT-05 présent
+C7;T-2;PROSE;SAVOIR;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;témoin test de style présent (SAVOIR/STYLE)
+C7;T-3;PROSE;BIBLIOTHEQUE_CHANGELOG;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;témoin test de non-généricité présent (BIBLIOTHEQUE/GATE)
+C7;G-01;PROSE;BIBLIOTHEQUE_CHANGELOG;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-BIB-005 non-généricité : l'ablation révèle une dépendance , refonte seulement si elle est décorative, jugée sur rendu entier, tâche et Gate C
+C7;G-02;PROSE;SAVOIR;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-SAV-006 test de style : un médium masqué peut porter légitimement le profil (dépendance + fallback), l'ablation seule ne conclut pas
+C7;G-03;STRUCTURE;;-;MAINTENU;;R1;;F-SAV-002 CFT-05 ne prescrit plus la répartition « neutres + accent » sous le tag requis
+C7;C-01;PROSE;SAVOIR;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-SAV-002 conservation : CFT-05 garde l'exigence fonctionnelle (rôles, contraste calculé, information critique non portée par la seule couleur)
+C7;G-04;PROSE;SAVOIR;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-SAV-002 CFT-05 admet plusieurs registres (accent unique, multicolore structurelle, codage par zones)
+C7;G-05;PROSE;SAVOIR;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-SAV-002 CFT-05 pose la question de convergence (palette par défaut du modèle, justification produit)
+C8;T-1;PROSE;DIRECTION+ACTION+SAVOIR+BIBLIOTHEQUE_CHANGELOG+FACADES+SKILL;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;conservation build propre : code 0 et membres = manifeste (60/56) [code 0]
+C8;R-1;PROSE;DIRECTION+ACTION+SAVOIR+BIBLIOTHEQUE_CHANGELOG+FACADES+SKILL;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-BLD-001 archive ancienne avec membre périmé, sources propres → membres = manifeste [code 0]
+C8;R-2;STRUCTURE;;-;MAINTENU;;R1;;F-BLD-004 fichier normatif remplacé par un lien → build refusé (motif « lien symbolique ») [code 1 , GLOSSAIRE dans les archives : {'github': False, 'local': Fa
+C8;R-3;STRUCTURE;;-;MAINTENU;;R1;;F-VDG-001 fichier non déclaré sous V1/official/.build/ → build refusé (« fichier inattendu ») et absent des archives [code 1 , fichier dans une archive : False]
+C9;T-1;STRUCTURE;;-;MAINTENU;;R1;;témoin suite validate_contracts sur B01 → PASS [CONTRACT VALIDATION PASSED — domain, research, creative, UI/UX and eva]
+C9;T-2;STRUCTURE;;-;MAINTENU;;R1;;témoin chemin canonique ciblé → PASS [CONTRACT VALIDATION PASSED — fichier ciblé (domain_frame) : /tmp/tmpr_]
+C9;D-01;STRUCTURE;;-;MAINTENU;;R1;;F-DF-001 risque nouveau (données personnelles) sans contrôle ni revue [risque sans contrôle ni revue : exposition de données personnelles]
+C9;D-02;STRUCTURE;;-;MAINTENU;;R1;;F-DF-001 couverture qui cite un contrôle absent de required_controls, sans revue [risk_coverage : contrôle inconnu (absent de required_controls) : contr]
+C9;D-P1;STRUCTURE;;-;MAINTENU;;R1;;F-DF-001 libellé équivalent (casse, espaces) → accepté [accepté]
+C9;D-P2;STRUCTURE;;-;MAINTENU;;R1;;F-DF-001 un même contrôle couvre deux risques → accepté [accepté]
+C9;P-01;STRUCTURE;;-;MAINTENU;;R1;;F-PC-002 exigence fabriquée à partir de deux lignes (mots réutilisés) [coverage_map : exigence absente des matrices déclarées : state_matrix:]
+C9;P-02;STRUCTURE;;-;MAINTENU;;R1;;F-PC-002 état critique de state_matrix omis de la couverture [coverage_map : état non couvert : error source indisponible]
+C9;P-P1;STRUCTURE;;-;MAINTENU;;R1;;F-PC-002 liaison exacte, tous les états couverts → accepté [accepté]
+C9;R-01;STRUCTURE;;-;MAINTENU;;R1;;F-RB-001 source « ? » [source placeholder : '?']
+C9;R-02;STRUCTURE;;-;MAINTENU;;R1;;F-RB-001 source vérifiée dans le run sans locator [source verified_in_run : exige un locator et une date connue]
+C9;R-03;STRUCTURE;;-;MAINTENU;;R1;;F-RB-001 statut de source hors fiche SOURCE [$.entries[0].source_status: valeur non canonique: fiable]
+C9;R-P1;STRUCTURE;;-;MAINTENU;;R1;;F-RB-001 connaissance non revérifiée, sans locator, date inconnue → acceptée (déclarée comme telle) [accepté]
+C9;L-01;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-008 fichier externe valide, --type explicite, chemin absolu → code 0 [CONTRACT VALIDATION PASSED — fichier ciblé (domain_frame) : /tmp/tmpr_]
+C9;L-02;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-008 fichier externe valide, type détecté, chemin relatif → code 0 [CONTRACT VALIDATION PASSED — fichier ciblé (research_brief) : /tmp/tmp]
+C9;L-03;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-008 fichier externe invalide → code 1, motif métier (pas « chemin non canonique ») [- risque sans contrôle ni revue : exposition de données personnelles]
+D1;T-1;PROSE;DIRECTION+ACTION+SAVOIR+BIBLIOTHEQUE_CHANGELOG+FACADES+SKILL;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;témoin validate_reading_map sur la copie non modifiée → PASS [READING MAP VALIDATION PASSED — carte dérivée, propriétaires]
+D1;M-11;PROSE;FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-020 QUICKSTART réintroduit une dimension hors FIRST-OBJECT [- LCF-30 : condition de façade non tenue — QUICKSTART §6, co]
+D1;M-12;PROSE;DIRECTION+FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-042 déclencheur « motif générique » renvoyé à ACTION pour la méthode [- LCF-17 : condition de façade non tenue — DIRECTION, déclen]
+D1;LCF-15;PROSE;DIRECTION+FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-020 QUICKSTART §6 = projection exacte de FIRST-OBJECT (8 vs 8 dimensions)
+D1;LCF-16;PROSE;DIRECTION+SAVOIR;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-030 contrat du premier objet : colonne « Dimension CFT-00 » ne citant que CFT-00 (ou « — »)
+D1;LCF-17;PROSE;DIRECTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-042 déclencheurs : motif → SAVOIR/CRAFT/CFT-01 (+ ACTION/ANTI-SLOP) , scène → BIBLIOTHEQUE , densité → SAVOIR/CRAFT
+D1;G-01;STRUCTURE;;-;MAINTENU;;R1;;F-DIR-030 DOUBLE-LOOP : plus de grille propre ni de section « contrôle compact » (addendum 11.19), renvoi au contrat du premier objet
+D1;G-02;PROSE;ACTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-030 ACTION, passe créative : exécute la revue définie par SAVOIR/CRAFT (Creative Quality Review), sans liste concurrente
+D1;G-03;PROSE;ACTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-030 Gate C : critères de gate, s'appuie sur la revue créative, aucune seconde revue
+D1;G-04;PROSE;DIRECTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-030 ATELIER : la critique par verbes s'inscrit dans la revue créative unique
+D2;T-1;STRUCTURE;;-;MAINTENU;;R1;;B01 exemple canonique accepté [acceptée]
+D2;D2-01;STRUCTURE;;-;MAINTENU;;R1;;F-DIR-003 state BUILDING avec decision_change (conséquence déclarée avant observation) [state BUILDING : decision_change et creative_close sont des champs apr]
+D2;D2-02;STRUCTURE;;-;MAINTENU;;R1;;F-DIR-003 state SPECCED avec creative_close [state SPECCED : decision_change et creative_close sont des champs aprè]
+D2;D2-P1;STRUCTURE;;-;MAINTENU;;R1;;F-DIR-003 state CHECKING avec decision_change → acceptée [acceptée]
+D2;D2-03;STRUCTURE;;-;MAINTENU;;R1;;F-DIR-036 ITER sans rappel de direction (trace présente) [ITER exige un rappel de direction (direction.thesis) , sinon reclasser]
+D2;D2-P2;STRUCTURE;;-;MAINTENU;;R1;;F-DIR-036 ITER avec direction.thesis et trace → acceptée [acceptée]
+D2;D2-P3;STRUCTURE;;-;MAINTENU;;R1;;proportion LITE sans direction → acceptée (aucune exigence nouvelle) [acceptée]
+D2;G-01;PROSE;DIRECTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-009 Boot : modification et ré-observation seulement si une correction utile existe , sinon la raison de l'arrêt
+D2;G-02;PROSE;DIRECTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-003 DIRECTION 27 renvoie à la colonne Phase de la table de correspondance d'ACTION/RUN_CARD
+D2;G-03;PROSE;DIRECTION;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-003 contrat HANDOFF : sorties rangées « avant build » et « après observation »
+D2;G-04;STRUCTURE;;-;MAINTENU;;R1;;F-DIR-036 RUN-ITER : le rappel de direction est porté par direction.thesis dans une RUN_CARD
+D3;T-1;STRUCTURE;;-;MAINTENU;;R1;;témoin étape 7 du pipeline DIRECTION présente
+D3;T-2;PROSE;ACTION;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;témoin contrôle « Motion réduite » présent (Gate A)
+D3;T-3;STRUCTURE;;-;MAINTENU;;R1;;témoin B3 présent
+D3;T-4;STRUCTURE;;-;MAINTENU;;R1;;témoin politique des ressources techniques présente (ACTION/POLICIES)
+D3;G-01;PROSE;ACTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-ACT-026 étape 7 : l'autorisation manquante renvoie à ACTION/AUTHORITY , la compensation vaut pour le seul regard externe et n'autorise rien
+D3;G-02;PROSE;ACTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-ACT-026 table de correspondance RUN_CARD : AUTHORITY (portée, base, reprise, décideur) → owner + trace , reviewer ≠ décideur
+D3;G-03;PROSE;ACTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-ACT-033 motion réduite : alternative implémentée et vérifiée préférence activée , sinon NOT-VERIFIED
+D3;G-04;PROSE;ACTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-ACT-037 B3 : une seconde session du même auteur est une auto-comparaison différée, jamais un regard externe
+D3;G-05;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-037 B3 : critères d'indépendance tracés (relation, auteur du rendu, conflit) , expositions multiples
+D3;G-06;PROSE;SAVOIR;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-SAV-009 SAVOIR/TECH : l'approbation vise une nouvelle dépendance , renvoi à la politique d'ACTION
+D3;G-07;PROSE;ACTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-SAV-009 ACTION : trois branches (script local sans dépendance, outil déjà autorisé, nouvelle dépendance) , exécution aveugle interdite
+D4;T-1;PROSE;DIRECTION+ACTION+SAVOIR+BIBLIOTHEQUE_CHANGELOG+FACADES+SKILL;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;témoin validate_reading_map sur la copie non modifiée → PASS [READING MAP VALIDATION PASSED — carte dérivée, propriétaires]
+D4;M-13;PROSE;BIBLIOTHEQUE_CHANGELOG+FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-CHG-001 BIBLIOTHEQUE 762 oublie SEED [- LCF-20 : condition de façade non tenue — BIBLIOTHEQUE, lis]
+D4;M-14;PROSE;DIRECTION+FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-002 DIRECTION 74 redevient un claim d'efficacité non borné [- LCF-21 : condition de façade non tenue — DIRECTION, README]
+D4;G-01;STRUCTURE;;-;MAINTENU;;R1;;F-CHG-001 statut SEED (bootstrap du seed, sans gain mesuré) → ADOPTED (contrat de gain) ou DEPRECATED
+D4;G-02;STRUCTURE;;-;MAINTENU;;R1;;F-CHG-001 PILOT utilisé par des consumers → DEPRECATED possible (pas seulement ADOPTED / ABANDONED)
+D4;G-03;PROSE;BIBLIOTHEQUE_CHANGELOG;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-CHG-001 le seed a le statut SEED , ADOPTED exige le contrat de gain réel (BIBLIOTHEQUE/EVOLUTION)
+D4;G-04;STRUCTURE;;-;MAINTENU;;R1;;F-CHG-001 DEPRECATED : aucun nouvel usage, migration par ACTION/RUN-SYSTEM
+D4;G-05;PROSE;DIRECTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-046 DIRECTION 817 : BIBLIOTHEQUE/EVOLUTION seulement si la route est structurelle , sinon la source propriétaire
+D4;G-06;STRUCTURE;;-;MAINTENU;;R1;;F-CHG-001 validateur de package : SEED parmi les termes requis du cycle de vie
+D4;LCF-20;STRUCTURE;;-;MAINTENU;;R1;;F-CHG-001 statuts listés par BIBLIOTHEQUE = statuts du CHANGELOG (['ABANDONED', 'ADOPTED', 'DEPRECATED', 'PILOT', 'SEED'])
+D4;LCF-21;STRUCTURE;;-;MAINTENU;;R1;;F-DIR-002 efficacité NOT-VERIFIED partout , pas de « augmente la probabilité / la qualité » non borné dans DIRECTION
+E1;T-1;STRUCTURE;;-;MAINTENU;;R1;;témoin sources lues
+E1;E1-01;PROSE;ACTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-ACT-003 ACTION : la phrase d'entrée nomme les registres du tableau (observation, interprétation)
+E1;E1-02;PROSE;ACTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-ACT-004 ACTION 110 : chargement si la question peut changer la décision, la preuve ou la limite
+E1;E1-03;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-016 FAST-PATH d'ACTION : après les quatre réponses, forme courte LITE (CLOSE-PACKAGE)
+E1;E1-04;PROSE;ACTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-ACT-032 partition typographique : plus « complète » , licence, glyphes et chargement selon SAVOIR/TYPE
+E1;E1-05;PROSE;ACTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-ACT-034 provenance absente ⇒ verdict non accepté (le « ou » est levé)
+E1;E1-06;PROSE;BIBLIOTHEQUE_CHANGELOG;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-BIB-003 contrat de grille : familles MOBILE-* conditionnées au mobile dans le scope ou à un risque responsive
+E1;E1-07;PROSE;DIRECTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-005 légende déclarée commune à DIRECTION et SAVOIR
+E1;E1-08;STRUCTURE;;-;MAINTENU;;R1;;F-DIR-012 Boot : cardinalité des axes renvoyée à BIBLIOTHEQUE , anti-directions sans nombre fixe
+E1;E1-09;PROSE;DIRECTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-014 DAILY : la reclassification depuis LITE inclut ITER
+E1;E1-10;PROSE;DIRECTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-015 FAST-PATH de DIRECTION : triade canonique « changée, confirmée ou abandonnée »
+E1;E1-11;PROSE;DIRECTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-025 routes de production : valeur pour l'absence intentionnelle d'asset
+E1;E1-12;PROSE;DIRECTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-026 GÉNÉRÉ-DIRIGÉ : condition bornée aux sources observées dans le scope, le délai et les droits
+E1;E1-13;PROSE;DIRECTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-031 ABSOLU 4 : « avant toute action qui engage artefact, preuve, état, diffusion ou persistance »
+E1;E1-14;PROSE;DIRECTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-037 capacité : « construire, décider, observer ou tenir une contrainte »
+E1;E1-15;PROSE;DIRECTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-040 « direction modale » remplacé par « direction retenue »
+E1;E1-16;STRUCTURE;;-;MAINTENU;;R1;;F-DIR-043 l'« entrée prioritaire » de DIRECTION est requalifiée en récapitulatif de protection
+E1;E1-17;PROSE;DIRECTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-018 (coord.) récapitulatif, point 4 : exception « sauf si la navigation est l'objet de preuve »
+E1;E1-18;STRUCTURE;;-;MAINTENU;;R1;;F-DIR-045 DIRECTION : `limitations` écrit avec son chemin `closure.limitations`
+E1;E1-19;STRUCTURE;;-;MAINTENU;;R1;;F-EX-003 exemple SYSTÈME : NOT-VERIFIED pour l'inspecté manquant , échec localisé (absorbé par C6)
+E1;E1-20;STRUCTURE;;-;MAINTENU;;R1;;F-FLOW-001 flow.md : les branches risque critique et NOT-VERIFIED reviennent vers reclassification et owner / prochaine preuve
+E1;E1-21;PROSE;FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-GLO-001 GLOSSAIRE : RUN_CARD définie par la persistance exigée, avec renvoi à ACTION/RUN_CARD
+E1;E1-22;STRUCTURE;;-;MAINTENU;;R1;;F-MP-001 YAML : provenance.artifact_locator = artifact.locator
+E1;E1-23;PROSE;FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-QS-001 QUICKSTART : parcours qualifié par mode , COMPONENTS seulement si un composant change
+E1;E1-24;STRUCTURE;;-;MAINTENU;;R1;;F-QS-004 QUICKSTART : chemins explicites vers les références de la skill
+E1;E1-25;PROSE;SAVOIR;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-SAV-001 SAVOIR 38 : « typiquement zéro à deux , une route par question active »
+E1;E1-26;PROSE;SAVOIR;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-SAV-004 ATLAS 541 : SAVOIR/SYSTEM ajouté pour le composant partagé
+E1;E1-27;PROSE;SAVOIR;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-SAV-010 règle d'or 6 : spec toujours requise en DIRECTION , ancre selon DIRECTION
+E1;E1-28;PROSE;DIRECTION+ACTION+SAVOIR+BIBLIOTHEQUE_CHANGELOG+FACADES+SKILL;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-SK-002 export Local : chemins propres au layout (aucun « V1/official/ » dans la skill Local)
+E2;T-1;PROSE;DIRECTION+ACTION+SAVOIR+BIBLIOTHEQUE_CHANGELOG+FACADES+SKILL;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;témoin validate_all depuis la racine → FULL VALIDATION PASSED [FULL VALIDATION PASSED — package, RUN_CARD, build et reproductibilité]
+E2;E2-01;PROSE;DIRECTION+ACTION+SAVOIR+BIBLIOTHEQUE_CHANGELOG+FACADES+SKILL;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-ALL-002 validate_all lancé depuis un dossier externe → même résultat [FULL VALIDATION PASSED — package, RUN_CARD, build et reproductibilité]
+E2;E2-02;STRUCTURE;;-;MAINTENU;;R1;;F-BLD-002 échec du zip Local → archive GitHub et dist antérieurs intacts [code 12 , archive GitHub inchangée , dist intact]
+E2;E2-03;STRUCTURE;;-;MAINTENU;;R1;;F-BLD-003 échec du déplacement de promotion → dist antérieur restauré [code 1 , dist restauré]
+E2;E2-04;STRUCTURE;;-;MAINTENU;;R1;;F-DF-002 plan de preuve « à déterminer » → rejeté (motif : placeholder) [evidence_plan[0].method vide ou placeholder]
+E2;E2-05;STRUCTURE;;-;MAINTENU;;R1;;F-DF-002 plan de preuve à cinq composantes, artefact attendu → accepté [accepté]
+E2;E2-06;STRUCTURE;;-;MAINTENU;;R1;;F-RB-002 recherche non déclenchée (depth none, aucune entrée) → acceptée [accepté]
+E2;E2-07;STRUCTURE;;-;MAINTENU;;R1;;F-RB-002 condition d'arrêt « à déterminer » → rejetée [stop_condition vide ou placeholder]
+E2;E2-08;STRUCTURE;;-;MAINTENU;;R1;;F-RB-002 incertitude restante (avant = après), déclarée → acceptée [accepté]
+E2;E2-09;STRUCTURE;;-;MAINTENU;;R1;;F-MAN-001 entrée dupliquée dans le manifeste → rejet [- manifeste github : entrée en doublon : .github/workflows/validate.yml]
+E2;E2-10;STRUCTURE;;-;MAINTENU;;R1;;F-MAN-002 version du manifeste divergente (9.9.9) → rejet [- version du manifeste divergente : 9.9.9 (CHANGELOG : 1.1.1)]
+E2;E2-11;STRUCTURE;;-;MAINTENU;;R1;;F-MAN-002 version du manifeste absente → rejet [- version absente du manifeste (source : CHANGELOG)]
+E2;E2-12;PROSE;ACTION+FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-RRT-001 titre factice dans un bloc de code ignoré , « # » de code ne tronque pas le bloc [code 0]
+E2;C-01;STRUCTURE;;-;MAINTENU;;R1;;F-VCT-002 conservation : racine [] → échec contrôlé (déjà vrai sur B01) [- type indéterminé : document vide ou non objet , utiliser --type]
+E2;E2-14;STRUCTURE;;-;MAINTENU;;R1;;F-VCT-002 octets non UTF-8 → échec contrôlé [- lecture impossible /tmp/tmpmyjccu1x/vct/schemas/examples/domain_frame.example.]
+E2;E2-15;STRUCTURE;;-;MAINTENU;;R1;;F-VDG-002 bloc ```JSON (majuscules) reconnu comme projection embarquée [- ACTION contient une projection YAML/JSON embarquée : utiliser schemas/run_card]
+E2;E2-16;STRUCTURE;;-;MAINTENU;;R1;;F-VDG-004 README officiel absent → chemin cité, échec contrôlé [- source requise absente ou illisible : V1/official/README.md (FileNotFoundError]
+E2;E2-17;STRUCTURE;;-;MAINTENU;;R1;;F-VRC-001 clé JSON répétée → rejet [- clé répétée : mode dans dup.json]
+E2;E2-18;STRUCTURE;;-;MAINTENU;;R1;;F-VRC-002 octet non UTF-8 → échec contrôlé [- lecture JSON impossible pour bad.json : 'utf-8' codec can't decode byte 0xff i]
+E2;E2-19;STRUCTURE;;-;MAINTENU;;R1;;F-VRC-003 types illégaux (objet dans observed, issue = []) → rejet propre [- run_card.proof.observed[0] : type attendu string]
+E2;E2-20;STRUCTURE;;-;MAINTENU;;R1;;F-VRC-003 URL mal formée en strict → rejet propre [- strict : trace_locator illisible : https://[]
+E2;E2-21;STRUCTURE;;-;MAINTENU;;R1;;F-VRC-004 hôte de démonstration dans artifact.locator (strict) → même refus que pour la trace [- strict : artifact.locator URL de démonstration interdite : http
+E2;E2-22;PROSE;FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-VRM-002 section handoff de READING_MAP vidée → rouge (LCF-C1, C5) [- LCF-C1 : condition de façade non tenue — READING_MAP et skill, copies du hando]
+E2;E2-23;STRUCTURE;;-;MAINTENU;;R1;;F-WF-001 actions du workflow épinglées par SHA complet (versions natives Node 24, run hébergé en phase 12) [actions/checkout@3d3c42e5aac5ba805825da76410c181273b
+R03;R3-01;PROSE;ACTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;Q-01 droits inconnus : contrôle machine borné à la RUN_CARD DIRECTION
+R03;R3-02;PROSE;ACTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;Q-02 CLOSE-PACKAGE : les cinq paquets portent la conséquence décisionnelle (triade)
+R03;R3-03;PROSE;SAVOIR;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;Q-03 « aucune décision … » + N/A-JUSTIFIED : NOT-OBSERVED présent, non-applicabilité qualifiée ou renvoi au contrat ACTION
+R03;R3-04;STRUCTURE;;-;MAINTENU;;R1;;Q-06 QUICKSTART §5 : Gate B chargé en LITE et ITER
+R03;R3-05;PROSE;ACTION+FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;Q-10 GLOSSAIRE CLOSED : réserve à sept attributs (date ou version)
+R03;R3-06;PROSE;ACTION+SKILL;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;O-1 null : champs du schéma qui l'admettent nommés , sinon omission
+R03;R3-07;STRUCTURE;;-;MAINTENU;;R1;;Q-05 QUICKSTART §9 : plus de « CHANGE: » , DECISION-CHANGE selon la triade
+R03;R3-08;PROSE;ACTION+FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;Q-01 LCF-36 dans la liste close et rouge sous mutation (P-37 inversé)
+R03;R3-09;PROSE;ACTION+FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;Q-02 LCF-37 dans la liste close et rouge sous mutation (P-38 inversé)
+R03;R3-10;PROSE;SAVOIR+FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;Q-03 LCF-38 dans la liste close et rouge sous mutation (P-40 inversé)
+R03;R3-11;PROSE;FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;Q-06 LCF-39 dans la liste close et rouge sous mutation (P-44 inversé)
+R03;R3-12;PROSE;FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;Q-10 LCF-40 dans la liste close et rouge sous mutation (P-45 inversé)
+R03;R3-13;PROSE;ACTION+FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;O-1 LCF-41 dans la liste close et rouge sous mutation (P-46 inversé)
+R03;R3-14;PROSE;FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;Q-05 LCF-42 dans la liste close et rouge sous mutation (P-42 inversé)
+R03;R3-15;PROSE;FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;2e passe LCF-42 rouge sous mutation de la seconde passe (P-53 inversé)
+R03;R3-16;PROSE;ACTION+FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;2e passe LCF-41 rouge sous mutation de la seconde passe (P-54 inversé)
+R03;R3-17;PROSE;SAVOIR+FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;2e passe LCF-38 rouge sous mutation de la seconde passe (P-56 inversé)
+R03;R3-18;PROSE;ACTION+FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;2e passe LCF-40 rouge sous mutation de la seconde passe (P-58 inversé)
+R;T-1;PROSE;DIRECTION+ACTION+SAVOIR+BIBLIOTHEQUE_CHANGELOG+FACADES+SKILL;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;témoin validate_all sur la racine (copie)
+R;R-01;STRUCTURE;;-;MAINTENU;;R1;;RET-1 DECISION-CHANGE : toute énumération avec N/A-JUSTIFIED porte aussi NOT-OBSERVED , « obtenue ou attendue » retiré
+R;R-02;PROSE;ACTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;RET-2 B1b : portée écrite = condition de check_b1b (DIRECTION acceptée, V PASS ou PASS-WITH-RESERVATION)
+R;R-03;STRUCTURE;;-;MAINTENU;;R1;;RET-3 Creative Boot des façades sans nombre fixe d'anti-directions ni de tension
+R;R-04;STRUCTURE;;-;MAINTENU;;R1;;RET-4 skill et carte d'ACTION : Gate B chargé en LITE et ITER, retiré du « non chargé »
+R;R-05;PROSE;SKILL;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;RET-5 machine_projection : valeurs d'axes et champs de profile_decision = schéma
+R;R-06;PROSE;BIBLIOTHEQUE_CHANGELOG;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;RET-6 « alignés sur leurs propriétaires » retiré , portée bornée à la liste close
+R;R-07;PROSE;DIRECTION+ACTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;R-08 table de correspondance : chaque champ attribué à VISUAL_TARGET existe dans sa table
+R;R-08;PROSE;DIRECTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;Légende légende : chaque tag dit partagé existe dans SAVOIR, ou est déclaré absent
+R;R-09;PROSE;DIRECTION+FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;QS §6 QUICKSTART §6 : colonne « Retour si… » identique à DIRECTION/FIRST-OBJECT
+R;R-10;PROSE;SKILL;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;Imitation exemples : renvoi à run_card.example.json, machine_projection et validate_run_card
+R;R-11;PROSE;ACTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;R-12 droits inconnus : ACCEPTED interdit, réserve possible, diffusion après clearance
+R;R-12;PROSE;ACTION+SAVOIR;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;R-13 ressource technique : une seule liste (ACTION/POLICIES, sept champs)
+R;R-13;PROSE;ACTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;R-14 blocs RUN-* : la sortie renvoie au paquet de CLOSE-PACKAGE
+R;R-14;PROSE;FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;GLOSS×B1 GLOSSAIRE CLOSED : NOT-VERIFIED critique exclut ACCEPTED, pas la réserve
+R;R-15;PROSE;ACTION+FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;RET-1 LCF-22 dans la liste close et rouge sous mutation (P-01 inversé)
+R;R-16;PROSE;ACTION+FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;RET-2 LCF-23 dans la liste close et rouge sous mutation (P-04 inversé)
+R;R-17;PROSE;FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;RET-3 LCF-24 dans la liste close et rouge sous mutation (P-06 inversé)
+R;R-18;PROSE;FACADES+SKILL;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;RET-4 LCF-25 dans la liste close et rouge sous mutation (P-08 inversé)
+R;R-19;PROSE;FACADES+SKILL;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;RET-5 LCF-26 dans la liste close et rouge sous mutation (P-11 inversé)
+R;R-20;PROSE;BIBLIOTHEQUE_CHANGELOG+FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;RET-6 LCF-27 dans la liste close et rouge sous mutation (P-13 inversé)
+R;R-21;PROSE;ACTION+FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;R-08 LCF-28 dans la liste close et rouge sous mutation (P-15 inversé)
+R;R-22;PROSE;DIRECTION+FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;Légende LCF-29 dans la liste close et rouge sous mutation (P-29 inversé)
+R;R-23;PROSE;FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;QS §6 LCF-30 dans la liste close et rouge sous mutation (P-31 inversé)
+R;R-24;PROSE;FACADES+SKILL;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;Imitation LCF-31 dans la liste close et rouge sous mutation (P-32 inversé)
+R;R-25;PROSE;ACTION+FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;R-12 LCF-32 dans la liste close et rouge sous mutation (P-17 inversé)
+R;R-26;PROSE;SAVOIR+FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;R-13 LCF-33 dans la liste close et rouge sous mutation (P-18 inversé)
+R;R-27;PROSE;ACTION+FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;R-14 LCF-34 dans la liste close et rouge sous mutation (P-20 inversé)
+R;R-28;PROSE;FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;GLOSS×B1 LCF-35 dans la liste close et rouge sous mutation (P-30 inversé)
+R;R-29;STRUCTURE;;-;MAINTENU;;R1;;RET-2 check_b1b inchangé : DIRECTION ACCEPTED-WITH-RESERVATION, V PASS ou PWR, sans b1b → refusée
+R;R-30;STRUCTURE;;-;MAINTENU;;R1;;R-12 droits unknown : AWR admise , ACCEPTED refusée pour ce seul motif (exemple DIRECTION)

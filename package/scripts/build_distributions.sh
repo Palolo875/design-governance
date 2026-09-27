@@ -37,6 +37,7 @@ cp -a "$ROOT/scripts/package_manifest.json" "$STAGE/github/scripts/package_manif
 cp -a "$ROOT/scripts/validate_all.py" "$STAGE/github/scripts/validate_all.py"
 cp -a "$ROOT/scripts/validate_reading_map.py" "$STAGE/github/scripts/validate_reading_map.py"
 cp -a "$ROOT/scripts/read_route.py" "$STAGE/github/scripts/read_route.py"
+cp -a "$ROOT/scripts/validate_structure.py" "$STAGE/github/scripts/validate_structure.py"
 mkdir -p "$STAGE/github/.github/workflows"
 cp -a "$ROOT/.github/workflows/validate.yml" "$STAGE/github/.github/workflows/validate.yml"
 
@@ -52,6 +53,7 @@ cp -a "$ROOT/scripts/package_manifest.json" "$STAGE/local/scripts/package_manife
 cp -a "$ROOT/scripts/validate_all.py" "$STAGE/local/scripts/validate_all.py"
 cp -a "$ROOT/scripts/validate_reading_map.py" "$STAGE/local/scripts/validate_reading_map.py"
 cp -a "$ROOT/scripts/read_route.py" "$STAGE/local/scripts/read_route.py"
+cp -a "$ROOT/scripts/validate_structure.py" "$STAGE/local/scripts/validate_structure.py"
 cat > "$STAGE/local/README.md" <<'EOF'
 # Design Governance V1.1.1 — export Local
 
@@ -111,6 +113,7 @@ Les contrôles disponibles sont :
 python3 scripts/validate_design_governance.py
 python3 scripts/validate_run_card.py
 python3 scripts/validate_reading_map.py
+python3 scripts/validate_structure.py
 python3 scripts/read_route.py DIRECTION/START
 python3 scripts/validate_all.py
 ```
@@ -137,6 +140,7 @@ python3 "$STAGE/github/scripts/validate_design_governance.py"
 python3 "$STAGE/github/scripts/validate_run_card.py"
 python3 "$STAGE/github/scripts/validate_contracts.py"
 python3 "$STAGE/github/scripts/validate_reading_map.py"
+python3 "$STAGE/github/scripts/validate_structure.py"
 
 # Valider les chemins relatifs du Local indépendamment, sans exiger la structure GitHub.
 python3 - "$STAGE/local" <<'PY'
@@ -169,6 +173,7 @@ python3 "$STAGE/local/scripts/validate_design_governance.py"
 python3 "$STAGE/local/scripts/validate_run_card.py"
 python3 "$STAGE/local/scripts/validate_contracts.py"
 python3 "$STAGE/local/scripts/validate_reading_map.py"
+python3 "$STAGE/local/scripts/validate_structure.py"
 python3 "$STAGE/local/scripts/validate_all.py"
 
 # Archives déterministes du contenu, sans répertoire de travail caché.

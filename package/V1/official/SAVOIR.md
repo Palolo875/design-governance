@@ -899,6 +899,7 @@ Lorsque la règle est satisfaite par le texte mais qu’aucun objet ou changemen
 
 Une capacité disponible modifie le type de preuve possible ; elle ne permet jamais d’affirmer une qualité sans examen du résultat. Toute délégation conserve délégataire, rôle, capacité déclarée, méthode, scope, artefact/résultat consulté, date/version, limite, owner de décision finale, `NEXT-PROOF` et condition de reprise ou d’escalade.
 
+<!-- concept:HON-02 -->
 Ne fais jamais passer abstraction CSS, SVG, image générée ou placeholder pour photo, illustration, logomark, son ou asset authentique. Une abstraction assumée est autorisée si son rôle est honnête, son contenu non trompeur et son effet approprié. Un faux asset de marque ne l’est pas.
 
 Le modèle, le prompt ou l’outil de génération ne constituent jamais, à eux seuls, une preuve de qualité, de droit ou d’adéquation au contexte.

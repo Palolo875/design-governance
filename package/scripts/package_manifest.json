@@ -56,6 +56,7 @@
     "scripts/validate_design_governance.py",
     "scripts/validate_run_card.py",
     "scripts/read_route.py",
+    "scripts/validate_structure.py",
     "skills/design-governance-practice/SKILL.md",
     "skills/design-governance-practice/references/canonical_minimum.md",
     "skills/design-governance-practice/references/examples.md",
@@ -114,6 +115,7 @@
     "scripts/validate_design_governance.py",
     "scripts/validate_run_card.py",
     "scripts/read_route.py",
+    "scripts/validate_structure.py",
     "skill/SKILL.md",
     "skill/references/canonical_minimum.md",
     "skill/references/examples.md",
@@ -121,4 +123,3 @@
     "skill/references/machine_projection.md"
   ]
 }
-

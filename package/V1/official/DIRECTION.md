@@ -183,6 +183,7 @@ DOMINANT-DEFECT: défaut perceptuel ou structurel recherché en premier
 
 `DIRECTION` possède la promesse, l’objet, le geste, `MODAL`/`PARTI` et `FABRICATION` ; `BIBLIOTHEQUE` possède la tension et la signature structurelles ; `SAVOIR/CRAFT` possède le jugement des qualités de présence et de fabrication ; `ACTION` possède l’observation, la preuve, la correction et la clôture. Les `CFT-TARGETS` sont un foyer de construction, pas un score : les autres dimensions restent applicables lorsqu’un risque ou une décision les active et ne deviennent `N/A-JUSTIFIED` que si elles sont réellement hors périmètre.
 
+<!-- concept:HON-03 -->
 Avant le premier rendu, le boot doit conduire à un artefact complet, crédible et observable — jamais à un wireframe volontairement creux lorsque les capacités sont disponibles ; lorsqu’elles manquent, `FABRICATION` déclare le plafond avant le build et le rendu sort avec la meilleure route de `DIRECTION/VISUAL_TARGET`. Après observation, conserve dans la trace : ce qui est effectivement visible, les qualités prioritaires observées ou non observées, **un défaut dominant** et, si une correction utile existe, la modification réelle apportée et la ré-observation attendue ; sinon, la raison de l’arrêt (`DIRECTION/DOUBLE-LOOP`, one-shot).
 
 Sa valeur se juge à sa conséquence sur le premier objet, non à la complétude du formulaire ; il peut être omis pour un delta strictement local.
@@ -467,6 +468,7 @@ Lorsque le choix est ouvert, formule des familles internes réellement distincte
 
 ### Vérité de la scène et clôture de craft
 
+<!-- concept:HON-01 -->
 Place un **marquage local de vérité** à proximité du claim ou de l’objet concerné. Ce marquage n’est ni un statut ACTION, ni une voie d’ancrage, ni un verdict. Il a deux axes : la **factualité**, `OBSERVED` ou `ILLUSTRATIVE`, obligatoire et exclusive ; la **nature**, `MECHANISM`, qui se cumule avec la factualité. La fiction l’emporte : un élément illustratif rend le tout `ILLUSTRATIVE`.
 
 | Label local | Signification exacte |

@@ -40,11 +40,12 @@ def expect_failure(command: list[str], label: str, expected_message: str) -> Non
     print(f"+ expected failure ({label})")
 
 def main() -> int:
-    run([sys.executable, "-m", "py_compile", "scripts/validate_design_governance.py", "scripts/validate_run_card.py", "scripts/validate_all.py", "scripts/validate_contracts.py", "scripts/validate_reading_map.py", "scripts/read_route.py"])
+    run([sys.executable, "-m", "py_compile", "scripts/validate_design_governance.py", "scripts/validate_run_card.py", "scripts/validate_all.py", "scripts/validate_contracts.py", "scripts/validate_reading_map.py", "scripts/read_route.py", "scripts/validate_structure.py"])
     run([sys.executable, "scripts/validate_design_governance.py"])
     run([sys.executable, "scripts/validate_run_card.py"])
     run([sys.executable, "scripts/validate_contracts.py"])
     run([sys.executable, "scripts/validate_reading_map.py"])
+    run([sys.executable, "scripts/validate_structure.py"])
     run([sys.executable, "scripts/read_route.py", "DIRECTION/START"])
     expect_failure(
         [sys.executable, "scripts/read_route.py", "DIRECTION/UNKNOWN"],

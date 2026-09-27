@@ -140,6 +140,9 @@ def resolve(locator: str, routes: dict[str, tuple[str, list[str]]] | None = None
     raise RouteError(f"locator inconnu : {locator}")
 
 
+CONCEPT_MARKER = re.compile(r"^\s*<!-- concept:[A-Z0-9\-]+ -->\s*$")
+
+
 def extract(lines: list[str], index: int) -> list[str]:
     """Bloc du titre servi, sans les sous-blocs porteurs de leur propre locator."""
     heads = headings(lines)
@@ -153,6 +156,8 @@ def extract(lines: list[str], index: int) -> list[str]:
         if own:
             served.append(f"> `{own}` : servi séparément")
             skip_until = block_end(lines, heads, i)
+            continue
+        if CONCEPT_MARKER.match(lines[i]):
             continue
         served.append(lines[i])
     return served

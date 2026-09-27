@@ -47,6 +47,7 @@ Ne rien modifier dans `package/` pendant l'initialisation.
 - **Plan de refonte proposé** (27-09-2026) : `plans/Plan_V1.2_Refonte.md` — architecture cible (noyau de run compilé, une chose un lieu, gardes de propriété), lots R1 à R12 en cinq vagues, point de contrôle P1 (mini-épreuve après le noyau), 11 décisions de l'owner (§8). Il remplace le séquencement du plan V1.2 et de l'addendum, dont il reprend les chantiers.
 - **Refonte, décisions 1, 2, 4 et 7 prises** (27-09-2026, `audit/reports/V12R_00_DECISIONS_REFONTE.md`) : noyau compilé depuis les sources, gardes de propriété + table de correspondance, sortie en langage produit, marqueurs de vague dans le noyau.
 - **R1 fait** (`V12R_01_OUTILS_MESURE.md`) : `audit/tools/V12R_Mesures.py` (budget ACTUEL/TABLE/LETTRE : 9 591 / 16 339 / 23 891 mots ; atteignabilité 3 / 7 / 10 outils sur 25 ; 863 négations ; 79 amas de doublons ; 5 listes de chargement distinctes sur 6) et `V12R_Carto_harnais.py` (389 cas : 233 structurels, 156 sensibles à la prose dont 58 via les LCF).
+- **R2 appliqué** (`V12R_02_R2_GARDES_PROPRIETE.md`, méthode M1–M4 validée) : `scripts/validate_structure.py` (8 concepts d'honnêteté balisés `<!-- concept:HON-0x -->`, uniques, à leur lieu propriétaire ; `read_route` retire les balises) ; table `audit/data/V12R/V12R_Correspondance_harnais.csv` (389 cas) ; **suivi de refonte `audit/tools/V12R_Suivi.py`** : 389/389, cliquets = référence B05, validate_all vert, 13.01 6/6 et 5/5, 13.02 38/38.
 - **Chantier en cours : plan V1.2**, `plans/Plan_V1.2_Qualite_senior_gouvernance.md`. Objectif : un premier rendu de niveau designer senior dès le one-shot, gouvernance conservée (bilan de fabrication, prise de brief minimale, matériaux, anti-slop vivant, atlas d'ancres, épreuve à l'aveugle).
 
 ## 3. Arborescence
@@ -88,6 +89,10 @@ Depuis `audit/tools/` :
 # Suivi des 22 harnais (environ 5 à 10 minutes), comparé au dernier instantané
 python3 DG_AUDIT_001_Suivi_harnais.py ../../package --compare ../snapshots/DG_AUDIT_001_Instantane_harnais_B04_R03.json  # sur B05 : V12_Instantane_harnais_B05_Lot2.json [--out ../snapshots/<nouvel_instantane>.json]
 
+# Suivi de refonte (englobe les 22 harnais, R et R03 ; table de correspondance ; cliquets ; validate_all sur copie)
+python3 V12R_Suivi.py ../../package [--out ../snapshots/<instantane>.json]   # attendu : SUIVI VERT
+python3 V12R_Mesures.py ../../package      # budget, atteignabilité, indicateurs, doublons, listes de chargement
+
 # Harnais du retour
 python3 R_harnais_non_regression.py ../../package      # attendu : Témoin 1/1 ; cas R 30/30
 python3 R03_harnais_non_regression.py ../../package    # attendu : Cas R03 18/18
@@ -103,6 +108,7 @@ Depuis `package/` :
 ```bash
 python3 -B scripts/validate_all.py        # validation complète, build des deux distributions
 python3 -B scripts/validate_reading_map.py  # 42 conditions (V1.1.1) ; 50 sur B05
+python3 -B scripts/validate_structure.py   # gardes de propriété (concepts balisés) ; 8 après R2
 python3 scripts/read_route.py ACTION/RUN_CARD  # lire une route
 ```
 
@@ -111,7 +117,7 @@ python3 scripts/read_route.py ACTION/RUN_CARD  # lire une route
 ## 6. Prochaine étape
 
 1. ~~Porte G1 du plan V1.2~~ : franchie le 26-09-2026 (`audit/reports/V12_01_DECISIONS_G1.md`).
-2. ~~B05, lot 1 (A, B, D), addendum, lot 2 (G, H, I, D')~~ : faits (`V12_02` à `V12_04`). Lectures `V12_05` à `V12_11` faites. Mini-épreuve **reportée par l'owner** (27-09-2026). **Refonte (`plans/Plan_V1.2_Refonte.md`) : décisions 1, 2, 4, 7 prises ; R1 fait ; prochaine : PATCH-DECISION R2 (registre des concepts, gardes de propriété, table de correspondance des 389 cas), à soumettre à l’owner → → R3 → R4 → P1** ; la mini-épreuve V1.2 devient le point P1 (addendum §5-§6 : C3 ×2, C3r ×1, juge neuf avec brief riche intégral), puis G4.
+2. ~~B05, lot 1 (A, B, D), addendum, lot 2 (G, H, I, D')~~ : faits (`V12_02` à `V12_04`). Lectures `V12_05` à `V12_11` faites. Mini-épreuve **reportée par l'owner** (27-09-2026). **Refonte (`plans/Plan_V1.2_Refonte.md`) : décisions 1, 2, 4, 7 prises ; R1 et R2 faits ; prochaine : PATCH-DECISION R3 (alignements D-01, D-02, D-07, D-08, D-12, D-13, D-16) → → R3 → R4 → P1** ; la mini-épreuve V1.2 devient le point P1 (addendum §5-§6 : C3 ×2, C3r ×1, juge neuf avec brief riche intégral), puis G4.
 3. Suivre le séquencement du plan : G2 (gardes rouges puis vertes) → G3 (non-régression, budget tenu) → G4 (épreuve à l'aveugle avec juges extérieurs) → publication V1.2.0.
 
 Travail par branche : une branche par unité (`v1.2/patch-decision-abd`, …) ; étiquettes aux points de contrôle ; rapport de l'unité dans `audit/reports/`.
