@@ -1,0 +1,12 @@
+OK   T-1    témoin     validate_reading_map sur la copie non modifiée → PASS  [READING MAP VALIDATION PASSED — carte dérivée, propriétaires]
+OK   M-11   F-DIR-020  QUICKSTART réintroduit une dimension hors FIRST-OBJECT  [- LCF-30 : condition de façade non tenue — QUICKSTART §6, co]
+OK   M-12   F-DIR-042  déclencheur « motif générique » renvoyé à ACTION pour la méthode  [- LCF-17 : condition de façade non tenue — DIRECTION, déclen]
+OK   LCF-15 F-DIR-020  QUICKSTART §6 = projection exacte de FIRST-OBJECT (8 vs 8 dimensions)
+OK   LCF-16 F-DIR-030  contrat du premier objet : colonne « Dimension CFT-00 » ne citant que CFT-00 (ou « — »)
+OK   LCF-17 F-DIR-042  déclencheurs : motif → SAVOIR/CRAFT/CFT-01 (+ ACTION/ANTI-SLOP) ; scène → BIBLIOTHEQUE ; densité → SAVOIR/CRAFT
+OK   G-01   F-DIR-030  DOUBLE-LOOP : plus de grille propre ni de section « contrôle compact » (addendum 11.19), renvoi au contrat du premier objet
+OK   G-02   F-DIR-030  ACTION, passe créative : exécute la revue définie par SAVOIR/CRAFT (Creative Quality Review), sans liste concurrente
+OK   G-03   F-DIR-030  Gate C : critères de gate, s'appuie sur la revue créative, aucune seconde revue
+OK   G-04   F-DIR-030  ATELIER : la critique par verbes s'inscrit dans la revue créative unique
+
+Témoin : 1/1 ; LCF : 3/3 ; gardes : 4/4 ; mutations au rouge : 2/2

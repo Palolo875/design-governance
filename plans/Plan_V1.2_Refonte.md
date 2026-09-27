@@ -26,9 +26,9 @@ Le levier (probable, `V12_11` §2) : **placer le savoir-faire existant sur le ch
 
 | Indicateur | Initial (B05) | Cible V1.2.0 | Nature de la cible |
 |---|---|---|---|
-| Chemin prescrit d'un run `DIRECTION` (lu à la lettre) | ≈ 23 600 mots, ≈ 1 650 lignes | **≤ 14 000 mots** (−40 %) ; objectif haut ≤ 12 000 | Hypothèse, mesurée à chaque lot |
+| Chemin prescrit d'un run `DIRECTION` (lu à la lettre, périmètre LETTRE de R1) | 23 891 mots, 1 662 lignes | **≤ 14 000 mots** (−40 %) ; objectif haut ≤ 12 000 | Hypothèse, mesurée à chaque lot |
 | Outils de fabrication sur le chemin (`V12_11` §3) | 7 / 25 | **25 / 25 atteignables**, dont ≥ 15 dans le noyau | Mesurable |
-| Listes de chargement `DIRECTION` | 6, divergentes | **1**, les autres générées ou remplacées par un renvoi | Mesurable |
+| Listes de chargement `DIRECTION` | 6, dont 5 distinctes | **1**, les autres générées ou remplacées par un renvoi | Mesurable |
 | Descriptions de la boucle | 9 | 1 (+ renvois) | Mesurable |
 | Copies du handoff, de la constitution | 7 ; 6 | 1 chacune (+ renvois) | Mesurable |
 | Défauts signalés ouverts (D-01 à D-18) | 18 | 0 ouvert sans décision | Mesurable |

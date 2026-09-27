@@ -1,0 +1,13 @@
+OK   T-1   témoin     étape 7 du pipeline DIRECTION présente
+OK   T-2   témoin     contrôle « Motion réduite » présent (Gate A)
+OK   T-3   témoin     B3 présent
+OK   T-4   témoin     politique des ressources techniques présente (ACTION/POLICIES)
+OK   G-01  F-ACT-026  étape 7 : l'autorisation manquante renvoie à ACTION/AUTHORITY ; la compensation vaut pour le seul regard externe et n'autorise rien
+OK   G-02  F-ACT-026  table de correspondance RUN_CARD : AUTHORITY (portée, base, reprise, décideur) → owner + trace ; reviewer ≠ décideur
+OK   G-03  F-ACT-033  motion réduite : alternative implémentée et vérifiée préférence activée ; sinon NOT-VERIFIED
+OK   G-04  F-ACT-037  B3 : une seconde session du même auteur est une auto-comparaison différée, jamais un regard externe
+OK   G-05  F-ACT-037  B3 : critères d'indépendance tracés (relation, auteur du rendu, conflit) ; expositions multiples
+OK   G-06  F-SAV-009  SAVOIR/TECH : l'approbation vise une nouvelle dépendance ; renvoi à la politique d'ACTION
+OK   G-07  F-SAV-009  ACTION : trois branches (script local sans dépendance, outil déjà autorisé, nouvelle dépendance) ; exécution aveugle interdite
+
+Témoins : 4/4 ; gardes : 7/7

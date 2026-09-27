@@ -1,0 +1,8 @@
+OK   T-POS-1 témoin               COMPONENTS existe et définit les couches
+OK   B5-01   F-BIB-004            COMPONENTS porte un « contrat de composant partagé » (hors BRAND_GRAMMAR)
+OK   B5-02   F-BIB-004            ce contrat nomme les 12 responsabilités promises par SAVOIR 704
+OK   B5-03   F-BIB-004 (fusion)   ACTION « Contrat de composant » renvoie à BIBLIOTHEQUE/COMPONENTS au lieu d'une liste concurrente
+OK   B5-04   F-SAV-007            SAVOIR/SYSTEM n'ordonne plus « Reclassifie en SYSTÈME »
+OK   B5-05   F-SAV-007            SAVOIR/SYSTEM renvoie le signal à DIRECTION/START (objet direct ou run dépendant)
+
+Témoin : 1/1 ; gardes B5 : 5/5

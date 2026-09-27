@@ -1,0 +1,18 @@
+OK   T-1   témoin     suite validate_contracts sur B01 → PASS  [CONTRACT VALIDATION PASSED — domain, research, creative, UI/UX and eva]
+OK   T-2   témoin     chemin canonique ciblé → PASS  [CONTRACT VALIDATION PASSED — fichier ciblé (domain_frame) : /tmp/tmpr_]
+OK   D-01  F-DF-001   risque nouveau (données personnelles) sans contrôle ni revue  [risque sans contrôle ni revue : exposition de données personnelles]
+OK   D-02  F-DF-001   couverture qui cite un contrôle absent de required_controls, sans revue  [risk_coverage : contrôle inconnu (absent de required_controls) : contr]
+OK   D-P1  F-DF-001   libellé équivalent (casse, espaces) → accepté  [accepté]
+OK   D-P2  F-DF-001   un même contrôle couvre deux risques → accepté  [accepté]
+OK   P-01  F-PC-002   exigence fabriquée à partir de deux lignes (mots réutilisés)  [coverage_map : exigence absente des matrices déclarées : state_matrix:]
+OK   P-02  F-PC-002   état critique de state_matrix omis de la couverture  [coverage_map : état non couvert : error source indisponible]
+OK   P-P1  F-PC-002   liaison exacte, tous les états couverts → accepté  [accepté]
+OK   R-01  F-RB-001   source « ? »  [source placeholder : '?']
+OK   R-02  F-RB-001   source vérifiée dans le run sans locator  [source verified_in_run : exige un locator et une date connue]
+OK   R-03  F-RB-001   statut de source hors fiche SOURCE  [$.entries[0].source_status: valeur non canonique: fiable]
+OK   R-P1  F-RB-001   connaissance non revérifiée, sans locator, date inconnue → acceptée (déclarée comme telle)  [accepté]
+OK   L-01  F-ACT-008  fichier externe valide, --type explicite, chemin absolu → code 0  [CONTRACT VALIDATION PASSED — fichier ciblé (domain_frame) : /tmp/tmpr_]
+OK   L-02  F-ACT-008  fichier externe valide, type détecté, chemin relatif → code 0  [CONTRACT VALIDATION PASSED — fichier ciblé (research_brief) : /tmp/tmp]
+OK   L-03  F-ACT-008  fichier externe invalide → code 1, motif métier (pas « chemin non canonique »)  [- risque sans contrôle ni revue : exposition de données personnelles]
+
+Témoins : 2/2 ; contrats C9 : 11/11 ; CLI : 3/3

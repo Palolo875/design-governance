@@ -1,0 +1,33 @@
+OK   T-1   témoin     validate_all sur la racine (copie)
+OK   R-01  RET-1      DECISION-CHANGE : toute énumération avec N/A-JUSTIFIED porte aussi NOT-OBSERVED ; « obtenue ou attendue » retiré
+OK   R-02  RET-2      B1b : portée écrite = condition de check_b1b (DIRECTION acceptée, V PASS ou PASS-WITH-RESERVATION)
+OK   R-03  RET-3      Creative Boot des façades sans nombre fixe d'anti-directions ni de tension
+OK   R-04  RET-4      skill et carte d'ACTION : Gate B chargé en LITE et ITER, retiré du « non chargé »
+OK   R-05  RET-5      machine_projection : valeurs d'axes et champs de profile_decision = schéma
+OK   R-06  RET-6      « alignés sur leurs propriétaires » retiré ; portée bornée à la liste close
+OK   R-07  R-08       table de correspondance : chaque champ attribué à VISUAL_TARGET existe dans sa table
+OK   R-08  Légende    légende : chaque tag dit partagé existe dans SAVOIR, ou est déclaré absent
+OK   R-09  QS §6      QUICKSTART §6 : colonne « Retour si… » identique à DIRECTION/FIRST-OBJECT
+OK   R-10  Imitation  exemples : renvoi à run_card.example.json, machine_projection et validate_run_card
+OK   R-11  R-12       droits inconnus : ACCEPTED interdit, réserve possible, diffusion après clearance
+OK   R-12  R-13       ressource technique : une seule liste (ACTION/POLICIES, sept champs)
+OK   R-13  R-14       blocs RUN-* : la sortie renvoie au paquet de CLOSE-PACKAGE
+OK   R-14  GLOSS×B1   GLOSSAIRE CLOSED : NOT-VERIFIED critique exclut ACCEPTED, pas la réserve
+OK   R-15  RET-1      LCF-22 dans la liste close et rouge sous mutation (P-01 inversé)
+OK   R-16  RET-2      LCF-23 dans la liste close et rouge sous mutation (P-04 inversé)
+OK   R-17  RET-3      LCF-24 dans la liste close et rouge sous mutation (P-06 inversé)
+OK   R-18  RET-4      LCF-25 dans la liste close et rouge sous mutation (P-08 inversé)
+OK   R-19  RET-5      LCF-26 dans la liste close et rouge sous mutation (P-11 inversé)
+OK   R-20  RET-6      LCF-27 dans la liste close et rouge sous mutation (P-13 inversé)
+OK   R-21  R-08       LCF-28 dans la liste close et rouge sous mutation (P-15 inversé)
+OK   R-22  Légende    LCF-29 dans la liste close et rouge sous mutation (P-29 inversé)
+OK   R-23  QS §6      LCF-30 dans la liste close et rouge sous mutation (P-31 inversé)
+OK   R-24  Imitation  LCF-31 dans la liste close et rouge sous mutation (P-32 inversé)
+OK   R-25  R-12       LCF-32 dans la liste close et rouge sous mutation (P-17 inversé)
+OK   R-26  R-13       LCF-33 dans la liste close et rouge sous mutation (P-18 inversé)
+OK   R-27  R-14       LCF-34 dans la liste close et rouge sous mutation (P-20 inversé)
+OK   R-28  GLOSS×B1   LCF-35 dans la liste close et rouge sous mutation (P-30 inversé)
+OK   R-29  RET-2      check_b1b inchangé : DIRECTION ACCEPTED-WITH-RESERVATION, V PASS ou PWR, sans b1b → refusée
+OK   R-30  R-12       droits unknown : AWR admise ; ACCEPTED refusée pour ce seul motif (exemple DIRECTION)
+
+Témoin : 1/1 ; cas R : 30/30

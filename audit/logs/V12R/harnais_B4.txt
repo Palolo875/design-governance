@@ -1,0 +1,15 @@
+OK   T-POS-1 B01        exemple canonique accepté  [acceptée]
+OK   B4-01  F-DIR-027  ancrage sans type  [ancrage exige type (generated, observed ou provided)]
+OK   B4-02  F-SAV-003  type « independent_review » (une revue n'est pas une ancre)  [run_card.anchors[0].type : valeur non canonique : independent_review]
+OK   B4-03  F-DIR-027  enjeu élevé, ancrage généré seul, HELD, sans calibration  [enjeu d’identité élevé : ancrage généré seul exige calibration (real_constr]
+OK   B4-04  F-SAV-003  calibration par « revue indépendante »  [base de calibration non recevable (une revue indépendante n’est pas une cal]
+OK   B4-05  F-DIR-027  généré seul réservé + ACCEPTED  [calibration générée seule interdit ACCEPTED]
+OK   B4-06  F-DIR-027  DIRECTION sans ancrage + verdict accepté  [DIRECTION sans ancrage : verdict accepté interdit]
+OK   B4-07  F-DIR-027  DIRECTION sans ancrage, sans issue  [DIRECTION sans ancrage exige une issue (sérialisation honnête, ACTION 483)]
+OK   B4-08  F-DIR-027  date d'ancrage « récemment »  [date d'ancrage ISO exigée (AAAA-MM-JJ)]
+OK   B4-P1  F-DIR-027  enjeu élevé, généré + observé, HELD, AWR → acceptée  [acceptée]
+OK   B4-P2  F-DIR-027  enjeu élevé, généré seul avec réserve de calibration, AWR → acceptée  [acceptée]
+OK   B4-P3  F-DIR-027  DIRECTION sans ancrage, EXPLORATORY honnête → acceptée (sérialisable sans mentir)  [acceptée]
+OK   B4-P4  proportion enjeu normal, généré seul, HELD, AWR, sans calibration → acceptée  [acceptée]
+
+Témoin : 1/1 ; tests B4 : 12/12

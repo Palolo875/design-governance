@@ -1,0 +1,130 @@
+{
+  "_doc": "Inventaire des 25 outils de fabrication (V12_11 §3). Chaque outil est repéré par une citation distinctive ; il est « sur le chemin » si la citation figure dans le texte du périmètre lu.",
+  "outils": [
+    {
+      "id": "F01",
+      "nom": "Premier objet, 8 dimensions et « Retour si… »",
+      "ancre": "Résilience visible"
+    },
+    {
+      "id": "F02",
+      "nom": "Qualité initiale attendue (FIRST-RENDER)",
+      "ancre": "Le premier rendu n’est pas une simple ébauche"
+    },
+    {
+      "id": "F03",
+      "nom": "Grille CFT-00 et revue créative",
+      "ancre": "le geste de polish le plus rentable"
+    },
+    {
+      "id": "F04",
+      "nom": "Atelier d'édition B1b (retrait, réduction, transformation)",
+      "ancre": "retrait, réduction ou transformation"
+    },
+    {
+      "id": "F05",
+      "nom": "Critères Gate C (C1 à C6)",
+      "ancre": "C1 — Stratégie de surface"
+    },
+    {
+      "id": "F06",
+      "nom": "Passe créative",
+      "ancre": "Passe créative et polish"
+    },
+    {
+      "id": "F07",
+      "nom": "Traitement des assets moyens",
+      "ancre": "asset moyen"
+    },
+    {
+      "id": "F08",
+      "nom": "Axes de tension",
+      "ancre": "PROOF-POSITION"
+    },
+    {
+      "id": "F09",
+      "nom": "Grammaire positive de composition",
+      "ancre": "intention → tension → foyer"
+    },
+    {
+      "id": "F10",
+      "nom": "Test de singularité",
+      "ancre": "si le logo et le nom disparaissent"
+    },
+    {
+      "id": "F11",
+      "nom": "Forme située et test de retrait",
+      "ancre": "Forme située = tâche"
+    },
+    {
+      "id": "F12",
+      "nom": "Composition CFT-03 (compensation optique, recomposition)",
+      "ancre": "compensation optique"
+    },
+    {
+      "id": "F13",
+      "nom": "Question de convergence (palette)",
+      "ancre": "celle que le modèle produirait sans brief"
+    },
+    {
+      "id": "F14",
+      "nom": "Vocabulaire perceptuel avec « diff possible »",
+      "ancre": "Diff possible"
+    },
+    {
+      "id": "F15",
+      "nom": "Calibrations croisées",
+      "ancre": "cinéma pour lumière"
+    },
+    {
+      "id": "F16",
+      "nom": "Repasse : ce qui est resté par défaut",
+      "ancre": "Cherche ce qui est resté par défaut"
+    },
+    {
+      "id": "F17",
+      "nom": "Marqueurs de vague datés",
+      "ancre": "Marqueurs de vague"
+    },
+    {
+      "id": "F18",
+      "nom": "Carte des moyens par couche",
+      "ancre": "Carte des moyens par couche"
+    },
+    {
+      "id": "F19",
+      "nom": "Où elle vit, comment le regard circule, quelle preuve, comment on agit",
+      "ancre": "où elle vit"
+    },
+    {
+      "id": "F20",
+      "nom": "Signaux de convergence structurelle",
+      "ancre": "Trois cartes égales sous un titre centré"
+    },
+    {
+      "id": "F21",
+      "nom": "Lecture expressive de la structure",
+      "ancre": "intimité ou monumentalité"
+    },
+    {
+      "id": "F22",
+      "nom": "Tests perceptifs (cinquante produits, silhouette, scène)",
+      "ancre": "appartenir à cinquante produits"
+    },
+    {
+      "id": "F23",
+      "nom": "Table de diagnostic (défaut → geste)",
+      "ancre": "Défaut local et direction intacte"
+    },
+    {
+      "id": "F24",
+      "nom": "Six questions de revue créative",
+      "ancre": "quel détail ou quelle relation porte la spécificité"
+    },
+    {
+      "id": "F25",
+      "nom": "Un axe situé à la fois",
+      "ancre": "un axe situé à la fois"
+    }
+  ]
+}

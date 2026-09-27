@@ -1,0 +1,29 @@
+OK   T-POS-1 B01            exemple canonique RUN_CARD accepté (normal)  [acceptée]
+OK   T-POS-2 B01            DIRECTION/START servi par le lecteur  [76 lignes]
+OK   C4-01   F-ACT-020      normal : ITER sans trace_locator  [ITER exige trace_locator pour une RUN_CARD persistante]
+OK   C4-02   F-ACT-020      strict : LITE sans trace, artefact local absent  [strict : artefact local absent : captures/absent.png]
+OK   C4-P1   F-ACT-020      normal : LITE sans trace_locator (l'artefact sert de locator) → acceptée  [acceptée]
+OK   C4-P2   F-ACT-020      strict : même LITE sans trace_locator, artefact présent → acceptée  [acceptée]
+OK   C4-P3   F-ACT-020      strict : STANDARD, locator relatif résolu depuis le dossier de la carte → acceptée  [acceptée]
+OK   C4-P4   F-ACT-020      normal : ITER avec trace_locator → acceptée  [acceptée]
+OK   T-POS-3 témoin         carte non modifiée → PASS  [READING MAP VALIDATION PASSED — carte dérivée, propriétaires, locators]
+OK   V-01    F-VRM-001      RUN-LITE ouvre le titre de RUN-ITER  [- destination ne correspond pas au locator : ACTION/RUN-LITE → ### `AC]
+OK   V-02    F-VRM-001      même locator listé deux fois  [- locator en double : ACTION/RUN-LITE]
+OK   V-03    F-VRM-001      titre propriétaire renommé : ACTION/STATUS cité mais plus résoluble  [- locator cité non résolu : ACTION/STATUS (locator inconnu : ACTION/ST]
+OK   V-04    F-VRM-001      locator ACTION/… pointant vers DIRECTION.md  [- propriétaire incohérent : ACTION/FIRST-RENDER → DIRECTION.md]
+OK   R-01    F-DIR-028      tout locator cité est servi (64/64)
+OK   R-02    F-ACT-001      carte de chargement d'ACTION résoluble (15/15)
+OK   R-03    F-RM-003       DIRECTION/START/TREE servi en ≤ 25 lignes (23)
+OK   R-04    F-RM-003       DIRECTION/START n'embarque plus CREATIVE-BOOT ni DOMAIN-FRAME (≤ 76 lignes ; 76)
+OK   R-05    F-RM-003       route LITE servie en ≤ 60 lignes (51)
+OK   R-06    F-RM-003       sous-locator hiérarchique SAVOIR/CRAFT/CFT-01 servi seul
+OK   R-07    F-VRM-001      aucun locator porté par deux titres
+OK   G-01    F-ACT-001      carte d'ACTION : STATUS et PRECONDITION chargés pour les cinq modes
+OK   G-02    F-ACT-001      « commencez par `ACTION/RUN` » (locator sans titre) remplacé par des locators résolubles
+OK   G-03    F-ACT-001 / C2 carte d'ACTION : la colonne « Sortie à conserver » cède la place au renvoi CLOSE-PACKAGE
+OK   G-04    F-RM-003       READING_MAP liste le sous-locator DIRECTION/START/TREE
+OK   G-05    F-RM-003       skill : « arbre seulement » exprimé par le locator DIRECTION/START/TREE
+OK   G-06    F-DIR-028      READING_MAP décrit la résolution par préfixe, sous-locator et refus d'ambiguïté
+OK   G-07    F-ACT-020      ACTION documente le profil strict (mêmes exigences par mode ; contrôles ajoutés)
+
+Témoins : 3/3 ; RUN_CARD C4 : 6/6 ; résolution : 7/7 ; validateur de carte : 4/4 ; gardes : 7/7

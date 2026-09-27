@@ -1,0 +1,15 @@
+OK   T-POS-1 B01            exemple canonique accepté  [acceptée]
+OK   B1-01  F-DIR-007      LITE + risque critical → rejet  [un risque critical interdit le mode LITE ou ITER (DIRECTION 140)]
+OK   B1-02  F-DIR-007      ITER + risque critical → rejet  [un risque critical interdit le mode LITE ou ITER (DIRECTION 140)]
+OK   B1-03  F-ACT-017      protection critique sans result → rejet  [critical_protection exige result (PASS, FAIL ou NOT-VERIFIED)]
+OK   B1-04  F-ACT-017      protection NOT-VERIFIED + ACCEPTED → rejet  [protection critique NOT-VERIFIED : verdict ACCEPTED interdit (la réserve reste possib]
+OK   B1-05  F-ACT-017      protection FAIL + verdict accepté → rejet  [protection critique en échec : aucun verdict accepté]
+OK   B1-06  F-ACT-017/038  protection FAIL (BLOCKED) + issue FAIL-ASSUMED → rejet  [protection critique en échec : l’issue doit suivre critical_protection.failure_action]
+OK   B1-07  F-ACT-038      FAIL-ASSUMED sans exception structurée → rejet  [FAIL-ASSUMED exige closure.exception (réserve commune, gate_axis, failure_evidence, r]
+OK   B1-08  F-ACT-038      FAIL-ASSUMED dont l'échec n'est pas observé → rejet  [exception : failure_evidence doit figurer dans proof.observed (un échec connu, pas un]
+OK   B1-09  F-ACT-039      FAIL-ASSUMED sans disposition → rejet  [exception exige disposition (NON-DIFFUSÉ, DIFFUSÉ-LIMITÉ, RETIRÉ ou ESCALADÉ)]
+OK   B1-P1  F-DIR-007/017  STANDARD + critical + result PASS + AWR → acceptée  [acceptée]
+OK   B1-P2  F-ACT-017      critical FAIL + issue BLOCKED (= failure_action) + RETURN → acceptée  [acceptée]
+OK   B1-P3  F-ACT-038/039  FAIL-ASSUMED complet, échec observé, disposition → acceptée  [acceptée]
+
+Témoin : 1/1 ; tests B1 : 12/12

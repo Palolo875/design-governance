@@ -1,0 +1,17 @@
+OK   T-POS-1  B01 : suite RUN_CARD verte  [code 0 · RUN_CARD VALIDATION PASSED — projection validée contre le schéma et fixtures con]
+OK   T-POS-2  B01 : exemple RUN_CARD ciblé vert  [code 0 · RUN_CARD VALIDATION PASSED — fichier ciblé : /tmp/tmp7ydhfohy/pkg/schemas/run_ca]
+OK   T-POS-3  B01 : carte invalide ciblée rejetée  [code 1 · - un verdict accepté exige au moins une preuve observed]
+OK   T-POS-4  B01 : suite des contrats verte  [code 0 · CONTRACT VALIDATION PASSED — domain, research, creative, UI/UX and evaluation co]
+OK   A1-01    schéma RUN_CARD {} → suite en échec gouverné  [code 1 · - schéma inopérant : la racine doit être un objet non vide]
+OK   A1-02    schéma RUN_CARD {} → carte invalide ciblée JAMAIS en succès  [code 1 · - schéma inopérant : la racine doit être un objet non vide]
+OK   A1-03    schéma RUN_CARD absent → échec gouverné (sans traceback)  [code 1 · - schéma absent : schemas/run_card.schema.json]
+OK   A1-04    schéma RUN_CARD {"type":"object"} → suite en échec gouverné  [code 1 · - schéma incomplet : properties.run_card.properties.mode.enum absent ou vide]
+OK   A1-05    enum mode retiré du schéma → suite rouge  [code 1 · - schéma incomplet : properties.run_card.properties.mode.enum absent ou vide]
+OK   A1-06    enum mode retiré + carte BOGUS-MODE ciblée → échec gouverné  [code 1 · - schéma incomplet : properties.run_card.properties.mode.enum absent ou vide]
+OK   A1-07    schéma domain_frame {} → suite des contrats en échec gouverné  [code 1 · - domain_frame: schéma inopérant : la racine doit être un objet non vide]
+OK   A1-08    schéma research_brief {} → suite des contrats en échec gouverné  [code 1 · - research_brief: schéma inopérant : la racine doit être un objet non vide]
+OK   A1-09    schéma production_contracts {} → suite des contrats en échec gouverné  [code 1 · - production_contracts: schéma inopérant : la racine doit être un objet non vide]
+OK   A1-10    mot-clé non supporté dans une branche non visitée → échec gouverné  [code 1 · - domain_frame: $.properties.zz_non_visite: mots-clés de schéma non supportés : ]
+OK   A1-11    enum research_brief.depth retiré → suite des contrats rouge  [code 1 · - research_brief: le schéma n'impose pas l'enum de depth]
+
+Témoins positifs : 4/4 ; tests A1 : 11/11

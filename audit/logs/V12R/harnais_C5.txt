@@ -1,0 +1,22 @@
+OK   T-POS-1 témoin                 validate_reading_map sur la copie non modifiée → PASS  [READING MAP VALIDATION PASSED — carte dérivée, propriétaires]
+OK   T-POS-2 témoin                 lecteur de routes opérationnel  [DIRECTION/START]
+OK   M-1     F-RM-001 / F-VRM-003   RUN-DIRECTION [FORCÉ] redevient facultative dans READING_MAP  [- LCF-01 : condition de façade non tenue — READING_MAP, lign]
+OK   M-2     F-RM-002               le non-chargement d'accessibilité redevient N/A-JUSTIFIED  [- LCF-02 : condition de façade non tenue — READING_MAP, lign]
+OK   M-3     F-OM-001               Gate A repasse en « renforcement seulement si nécessaire »  [- LCF-03 : condition de façade non tenue — ORCHESTRATION_MAP]
+OK   M-4     F-QS-002               le craft redevient critère du mode DIRECTION (QUICKSTART)  [- LCF-04 : condition de façade non tenue — QUICKSTART et REA]
+OK   M-5     F-RDR-001              ITER perd la condition de direction retrouvable (README)  [- LCF-05 : condition de façade non tenue — README, ligne ITE]
+OK   M-6     F-SK-001 (C3)          une copie du handoff perd un champ (skill)  [- LCF-C1 : condition de façade non tenue — READING_MAP et sk]
+OK   LCF-01  F-RM-001               READING_MAP : ACTION/RUN-DIRECTION dans la première lecture de « Direction identitaire », pas dans l'optionnel
+OK   LCF-02  F-RM-002               READING_MAP : le non-chargement d'accessibilité ne produit pas de N/A et renvoie aux contrôles ACTION/GATE-A
+OK   LCF-03  F-OM-001               ORCHESTRATION_MAP : Gate A, gate du risque et paquet SYSTÈME dans le noyau, pas dans le renforcement
+OK   LCF-04  F-QS-002               QUICKSTART et README : le mode DIRECTION n'est pas classé par le craft ; critère de START (autonome)
+OK   LCF-05  F-RDR-001              README : ITER exige une direction existante et retrouvable
+OK   LCF-06  F-DIR-041              DIRECTION, index : aucune présélection de STANDARD pour une nouvelle structure
+OK   LCF-07  F-DIR-001              séquence causale cible → premier objet (DIRECTION 72, RUN-PRIORITY, READING_MAP, ORCHESTRATION_MAP, skill)
+OK   LCF-08  F-DIR-008              OWNER et SCOPE exclus de la règle d'omission (START, FAST-PATH)
+OK   LCF-09  F-DIR-018              RUN-PRIORITY : premier objet avant le générique, sauf si navigation, recherche ou cartes sont l'objet de preuve
+OK   LCF-10  D-FAC-1                tables de mode (QUICKSTART, README) marquées « classement : voir DIRECTION/START »
+OK   LCF-C1  F-SK-001 (C3)          copies du handoff = canon ACTION/HANDOFF (canon 14 jetons ; READING_MAP 14, même ordre ; skill : tous présents)
+OK   LCF-C2  F-SK-001 (C3)          réponse visible : canon dans ACTION/HANDOFF, copies identiques (QUICKSTART, skill)
+
+Témoins : 2/2 ; conditions LCF : 12/12 ; mutations au rouge : 6/6

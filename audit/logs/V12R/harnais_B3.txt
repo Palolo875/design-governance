@@ -1,0 +1,15 @@
+OK   T-POS-1 B01                exemple canonique accepté  [acceptée]
+OK   B3-01  F-ACT-015          SYSTÈME accepté sans paquet  [SYSTÈME accepté exige closure.system_package]
+OK   B3-02  F-ACT-015          SYSTÈME sans consumer  [system_package exige au moins un consumer]
+OK   B3-03  F-ACT-015          rollback « à déterminer »  [system_package incomplet ou placeholder : rollback]
+OK   B3-04  F-ACT-031          non-régression sans version de baseline  [non_regression.baseline exige locator, version et état]
+OK   B3-05  F-ACT-036          DIRECTION acceptée, V PASS, sans B1b  [DIRECTION acceptée avec V PASS exige closure.b1b]
+OK   B3-06  F-ACT-036          paire B1b à captures identiques  [paire B1b : captures distinctes exigées (before_locator ≠ after_locator)]
+OK   B3-07  F-ACT-036/BIB-001  N/A B1b pour « comparaison inutile »  [motif N/A B1b non recevable (no_editable_decision ou equivalent_pair_valid)]
+OK   B3-08  F-BIB-001          N/A par paire équivalente sans référence de paire  [N/A B1b par paire équivalente exige pair_ref]
+OK   B3-P1  F-ACT-015/031      SYSTÈME AWR avec paquet complet → acceptée  [acceptée]
+OK   B3-P2  F-ACT-036          DIRECTION AWR avec B1b réalisée → acceptée  [acceptée]
+OK   B3-P3  proportion         fixture valid_closed_return (SYSTÈME, RETURN, sans paquet) → acceptée  [acceptée]
+OK   B3-P4  F-ACT-021          LITE AWR sans paquet de mode (forme seule) → acceptée  [acceptée]
+
+Témoin : 1/1 ; tests B3 : 12/12

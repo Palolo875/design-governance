@@ -1,0 +1,36 @@
+{
+  "_doc": "Périmètres de lecture d'un run DIRECTION. Chaque élément porte sa justification : un fichier et une citation qui doit exister telle quelle (sinon l'élément est signalé PÉRIMÉ). ACTUEL = périmètre de V12_Budget_lecture.py ; TABLE = table de charge de la skill + renvois impératifs de RUN-DIRECTION ; LETTRE = TABLE + lectures que la skill prescrit en plus (README, QUICKSTART, ORCHESTRATION_MAP, DOUBLE-LOOP).",
+  "ACTUEL": [
+    {"file": "skills/design-governance-practice/SKILL.md"},
+    {"file": "V1/official/READING_MAP.md"},
+    {"route": "DIRECTION/START"}, {"route": "DIRECTION/CREATIVE-BOOT"}, {"route": "DIRECTION/EXTERNAL-START"},
+    {"route": "DIRECTION/VISUAL_TARGET"}, {"route": "DIRECTION/FIRST-OBJECT"}, {"route": "ACTION/RUN-DIRECTION"},
+    {"route": "ACTION/FIRST-RENDER"}
+  ],
+  "TABLE": [
+    {"file": "skills/design-governance-practice/SKILL.md", "why": ["skills/design-governance-practice/SKILL.md", "name: design-governance-practice"]},
+    {"file": "V1/official/READING_MAP.md", "why": ["skills/design-governance-practice/SKILL.md", "utilisez `V1/official/READING_MAP.md`"]},
+    {"route": "DIRECTION/START", "why": ["skills/design-governance-practice/SKILL.md", "| `DIRECTION` | `DIRECTION/START`, `DIRECTION/VISUAL_TARGET`, `DIRECTION/FIRST-OBJECT`, `ACTION/ROUTING`, `ACTION/FIRST-RENDER`, `ACTION/RUN-DIRECTION`, `SAVOIR/CRAFT/CFT-00` et gates A/B/C."]},
+    {"route": "DIRECTION/VISUAL_TARGET", "why": "idem"},
+    {"route": "DIRECTION/FIRST-OBJECT", "why": "idem"},
+    {"route": "ACTION/ROUTING", "why": "idem"},
+    {"route": "ACTION/FIRST-RENDER", "why": "idem"},
+    {"route": "ACTION/RUN-DIRECTION", "why": "idem"},
+    {"route": "SAVOIR/CRAFT/CFT-00", "why": "idem"},
+    {"route": "ACTION/GATE-A", "why": "idem"},
+    {"route": "ACTION/GATE-B", "why": "idem"},
+    {"route": "ACTION/GATE-C", "why": "idem"},
+    {"route": "DIRECTION/CREATIVE-BOOT", "why": ["skills/design-governance-practice/SKILL.md", "activer `DIRECTION/CREATIVE-BOOT` pour une décision visuelle ouverte"]},
+    {"route": "DIRECTION/EXTERNAL-START", "why": ["skills/design-governance-practice/SKILL.md", "(`DIRECTION/EXTERNAL-START`) ; construire dans tous les cas"]},
+    {"route": "ACTION/PIPELINE-DIRECTION", "why": ["V1/official/ACTION.md", "Exécuter le pipeline `ACTION/PIPELINE-DIRECTION`"]},
+    {"route": "ACTION/VISUAL_PROOF", "why": ["V1/official/ACTION.md", "build de la première scène significative, `ACTION/VISUAL_PROOF`"]},
+    {"route": "ACTION/CLOSE-PACKAGE", "why": ["V1/official/ACTION.md", "Paquet `DIRECTION` d’`ACTION/CLOSE-PACKAGE`"]},
+    {"route": "ACTION/HANDOFF", "why": ["skills/design-governance-practice/SKILL.md", "(copie de façade, voir `ACTION/HANDOFF`)"]}
+  ],
+  "LETTRE_EN_PLUS": [
+    {"file": "README.md", "why": ["skills/design-governance-practice/SKILL.md", "Lire `README.md` et `QUICKSTART.md` pour l’orientation"]},
+    {"file": "V1/official/QUICKSTART.md", "why": "idem"},
+    {"file": "V1/official/ORCHESTRATION_MAP.md", "why": ["skills/design-governance-practice/SKILL.md", "lire `ORCHESTRATION_MAP.md` si plusieurs capacités ou un résultat créatif ambitieux doivent être composés"]},
+    {"route": "DIRECTION/DOUBLE-LOOP", "why": ["skills/design-governance-practice/SKILL.md", "charger `DIRECTION/FIRST-OBJECT` et `DIRECTION/DOUBLE-LOOP`"]}
+  ]
+}

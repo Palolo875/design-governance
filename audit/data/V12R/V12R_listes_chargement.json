@@ -1,0 +1,11 @@
+{
+  "_doc": "Listes « première lecture » d'un run DIRECTION dans chaque façade : fichier, début de ligne de table, index de colonne (split sur '|', 1 = première cellule). Les jetons `PRÉFIXE/ROUTE` de la cellule forment la liste.",
+  "listes": [
+    {"lieu": "SKILL, table de charge", "file": "skills/design-governance-practice/SKILL.md", "row": "| `DIRECTION` |", "col": 2},
+    {"lieu": "QUICKSTART §5", "file": "V1/official/QUICKSTART.md", "row": "| `DIRECTION` | `DIRECTION/START`", "col": 2},
+    {"lieu": "QUICKSTART §4", "file": "V1/official/QUICKSTART.md", "row": "| Identité, premier contact ou direction visuelle autonome | `DIRECTION` |", "col": 3},
+    {"lieu": "QUICKSTART §1", "file": "V1/official/QUICKSTART.md", "row": "| Une direction visuelle ouverte |", "col": 3},
+    {"lieu": "READING_MAP", "file": "V1/official/READING_MAP.md", "row": "| Direction identitaire |", "col": 2},
+    {"lieu": "ORCHESTRATION_MAP", "file": "V1/official/ORCHESTRATION_MAP.md", "row": "| **Direction forte et spécifique** |", "col": 2}
+  ]
+}

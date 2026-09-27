@@ -1,0 +1,6 @@
+OK   T-1  conservation build propre : code 0 et membres = manifeste (60/56)  [code 0]
+OK   R-1  F-BLD-001    archive ancienne avec membre périmé, sources propres → membres = manifeste  [code 0]
+OK   R-2  F-BLD-004    fichier normatif remplacé par un lien → build refusé (motif « lien symbolique »)  [code 1 ; GLOSSAIRE dans les archives : {'github': False, 'local': False}]
+OK   R-3  F-VDG-001    fichier non déclaré sous V1/official/.build/ → build refusé (« fichier inattendu ») et absent des archives  [code 1 ; fichier dans une archive : False]
+
+Conservation : 1/1 ; release C8 : 3/3

@@ -1,0 +1,12 @@
+OK   T-POS-1 témoin     validate_reading_map sur la copie non modifiée → PASS  [READING MAP VALIDATION PASSED — carte dérivée, propriétaires]
+OK   M-7     F-EX-001   DECISION-CHANGE redevient une liste de propriétés  [- LCF-11 : condition de façade non tenue — exemples de la sk]
+OK   M-8     F-GLO-002  l'exemple CLOSED redevient une réserve sans attributs  [- LCF-40 : condition de façade non tenue — GLOSSAIRE, exempl]
+OK   M-9     C1         NOT-OBSERVED redevient un champ de scope non vérifié  [- LCF-13 : condition de façade non tenue — exemples de la sk]
+OK   M-10    F-EX-002   la paire de captures redevient preuve de mémorisation et de tâche  [- LCF-14 : condition de façade non tenue — exemples de la sk]
+OK   LCF-11  F-EX-001   DECISION-CHANGE d'exemple = issue + décision + observation (4 lignes d'exemple + GLOSSAIRE)
+OK   LCF-12  F-GLO-002  ACCEPTED-WITH-RESERVATION d'exemple ⇒ réserve complète (1 bloc(s), 1 ligne(s) GLOSSAIRE)
+OK   LCF-13  C1 (triade) NOT-OBSERVED réservé à DECISION-CHANGE ; STATE CLOSED ⇒ VERDICT dans chaque exemple
+OK   LCF-14  F-EX-002   une paire de captures ne porte pas de claim de mémorisation ou de tâche sans protocole
+OK   G-01    F-GLO-002  l'exemple CLOSED sépare l'état du verdict (un run clos peut être RETURN)
+
+Témoin : 1/1 ; conditions LCF : 4/4 ; mutations au rouge : 4/4 ; garde : 1/1

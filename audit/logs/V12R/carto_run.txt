@@ -1,0 +1,7 @@
+cas : 389 ; sensibles à la prose : 156 ; structure seule : 233
+  DIRECTION                46
+  ACTION                   53
+  SAVOIR                   29
+  BIBLIOTHEQUE_CHANGELOG   21
+  FACADES                  78
+  SKILL                    19

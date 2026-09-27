@@ -1,0 +1,119 @@
+== 1. BUDGET (run DIRECTION)
+  ACTUEL     614 lignes    9591 mots
+  TABLE     1069 lignes   16339 mots
+  LETTRE    1662 lignes   23891 mots
+== 2. ATTEIGNABILITÉ des 25 outils de fabrication
+  ACTUEL   3/25 : F01 F02 F07
+  TABLE    7/25 : F01 F02 F03 F04 F05 F06 F07
+  LETTRE  10/25 : F01 F02 F03 F04 F05 F06 F07 F23 F24 F25
+== 3. INDICATEURS
+  fichier                                                      mots   nég  auto   jet champs  beau
+  V1/official/DIRECTION.md                                    13782   186    42   140     27    11
+  V1/official/ACTION.md                                       14545   183    43   163     40     3
+  V1/official/SAVOIR.md                                       14504   172    39   123     22     6
+  V1/official/BIBLIOTHEQUE.md                                  9343   104    29   175     22     2
+  V1/official/CHANGELOG.md                                     1578    11     3    59      0     0
+  V1/official/QUICKSTART.md                                    3849    38    15    58     23     3
+  V1/official/README.md                                         711    11     7    22      0     1
+  README.md                                                    1887    24    13    29      1     2
+  V1/official/GLOSSAIRE.md                                     1411    25     8    40      0     0
+  V1/official/READING_MAP.md                                   1412    14     7    66     13     2
+  V1/official/ORCHESTRATION_MAP.md                              829    14     7    30      0     2
+  skills/design-governance-practice/SKILL.md                   3191    48    11    82      3     2
+  skills/design-governance-practice/references/examples.md      964    11     4    13     26     1
+  skills/design-governance-practice/references/flow.md          232     0     0     3      0     1
+  skills/design-governance-practice/references/canonical_minimum.md    259    11     3    16      0     0
+  skills/design-governance-practice/references/machine_projection.md    960    11     3    34      0     0
+  TOTAL                                                       69457   863   234  1053    177    36
+== 4. DOUBLONS (phrases ou lignes de table ≥ 8 mots ; Jaccard ≥ 0,5 ou inclusion ≥ 0,8) : 79 amas, 190 occurrences
+  ×7  ACTION.md,CHANGELOG.md,DIRECTION.md,GLOSSAIRE.md,SAVOIR.md « - **Conséquence décisionnelle.** La table `RUN_CARD`, le glossaire, la réponse visible et les p »
+  ×6  ACTION.md,BIBLIOTHEQUE.md,READING_MAP.md,SAVOIR.md,SKILL.md « La sélection structurelle est persistée dans la `RUN_CARD` ou la trace canonique du run référen »
+  ×4  ACTION.md,BIBLIOTHEQUE.md,DIRECTION.md,SAVOIR.md « **Design Governance V1 — expérimentation maintenue.** Cette V1 est un cadre de travail en évalu »
+  ×4  DIRECTION.md,README.md,SAVOIR.md              « La boucle de jugement est : **préparer → construire → observer → isoler le défaut dominant → mo »
+  ×4  ACTION.md,BIBLIOTHEQUE.md,DIRECTION.md,SAVOIR.md « Ses limites, preuves et conditions d’usage restent explicites. »
+  ×4  ACTION.md,DIRECTION.md,GLOSSAIRE.md           « | **`DECISION-INTENT`** | La décision que la procédure doit permettre de trancher au lancement  »
+  ×4  ACTION.md,DIRECTION.md,README.md,SAVOIR.md    « | `BIBLIOTHEQUE.md` | Structures, supports, grilles, scènes, objets, micro-interfaces et compos »
+  ×3  ACTION.md,README.md,machine_projection.md     « **Ce qu’atteste une `RUN_CARD` validée :** la forme de la projection et les invariants de la li »
+  ×3  ACTION.md,README.md,machine_projection.md     « **Ce qu’elle n’atteste pas (forme seule) :** que les observations ont réellement eu lieu ; la j »
+  ×3  GLOSSAIRE.md,QUICKSTART.md,README.md          « Avant les routes détaillées, notez seulement le **mode**, le **risque dominant**, la **décision »
+  ×3  ACTION.md,README.md,machine_projection.md     « Ces points restent à la trace, à la revue et à l’owner. »
+  ×3  ACTION.md,DIRECTION.md,SAVOIR.md              « La correction doit changer une relation visible, une tâche, une preuve, une contrainte ou une p »
+  ×3  ACTION.md,DIRECTION.md,SAVOIR.md              « Lorsque l’enjeu identitaire est élevé, accompagne-la d’une référence observée, d’une contrainte »
+  ×3  ACTION.md,DIRECTION.md                        « Matérialise l’alternative seulement au niveau nécessaire pour comparer la décision : phrase, sc »
+  ×3  QUICKSTART.md,READING_MAP.md,SKILL.md         « Ouvrir `ACTION` dès qu’un artefact, une observation, une preuve, un état ou une clôture est con »
+  ×3  ACTION.md,README.md,machine_projection.md     « Par mode : pour `LITE`, `ITER` et `STANDARD`, le paquet de clôture vit dans la trace et la mach »
+  ×3  ACTION.md,QUICKSTART.md,SKILL.md              « ```text MODE — DECISION — CHANGE — PROOF — LIMIT — NEXT-ACTION — OWNER ``` »
+  ×3  ACTION.md,GLOSSAIRE.md,QUICKSTART.md          « | **Owner** | La personne ou l’équipe responsable de la décision, de la reprise ou de l’escalad »
+  ×3  ACTION.md,DIRECTION.md,SAVOIR.md              « | `CHANGELOG.md` | État de release, changements futurs, pilotes optionnels et décisions de gouv »
+  ×3  ACTION.md,QUICKSTART.md,SKILL.md              « | `LITE` | `DIRECTION/START`, `ACTION/RUN-LITE`, `ACTION/FAST-PATH`, `ACTION/GATE-A` applicable »
+  ×2  README.md                                     « **Design Governance V1.1.1** est une expérimentation maintenue : un cadre de direction, de créa »
+  ×2  CHANGELOG.md,README.md                        « **Version publique :** `V1.1.1` **Statut expérimental :** Design Governance V1.1.1 est une expé »
+  ×2  ACTION.md,DIRECTION.md                        « > `DECISION-CHANGE — [décision effectivement changée, confirmée ou abandonnée grâce à la procéd »
+  ×2  ACTION.md,DIRECTION.md                        « Après une observation qui modifie, confirme ou abandonne effectivement une décision, la trace c »
+  ×2  BIBLIOTHEQUE.md,DIRECTION.md                  « Avant de parcourir les sections détaillées, retiens ces décisions de protection : »
+  ×2  DIRECTION.md                                  « Avant le build, la trace du run (retrouvable par `trace_locator`) nomme la position retenue, l’ »
+  ×2  ACTION.md,BIBLIOTHEQUE.md                     « C’est la seule définition de la structure d’un composant : `ACTION` en garde la baseline comme  »
+  ×2  ACTION.md,DIRECTION.md                        « Elle peut vivre dans un ticket, un manifeste de projet, un espace de travail ou un fichier loca »
+  ×2  DIRECTION.md                                  « En `DIRECTION`, considère une **alternative située** lorsque la décision est ouverte et qu’une  »
+  ×2  CHANGELOG.md,README.md                        « Il aide à transformer un brief en décision située, artefact réel, observation pertinente et tra »
+  ×2  QUICKSTART.md,SKILL.md                        « Il demande confirmation avant toute action externe, irréversible, publique, destructive, financ »
+  ×2  CHANGELOG.md,README.md                        « Ils ne remplacent ni l’observation d’un rendu, ni un test utilisateur, ni une vérification d’ac »
+  ×2  QUICKSTART.md,README.md                       « La baseline est contrôlée et destinée à un usage supervisé ; elle ne promet ni beauté automatiq »
+  ×2  BIBLIOTHEQUE.md                               « La chaîne `support → grille → scène → objet → primitive` décrit des responsabilités, pas un ord »
+  ×2  ACTION.md,machine_projection.md               « La projection ne doit jamais introduire `SELF-DECLARED`, `ATLAS-PASS`, `POLISHED`, `SLOP-FREE`  »
+  ×2  ACTION.md                                     « La réserve, si elle existe, possède-t-elle owner, périmètre, date ou version, impact, date de r »
+  ×2  BIBLIOTHEQUE.md,SAVOIR.md                     « Le `one-shot` est une stratégie de préparation, pas une absence de jugement. »
+  ×2  QUICKSTART.md,SKILL.md                        « Le polish est la résolution cohérente de la structure, du contenu, de la typographie, de la mat »
+  ×2  DIRECTION.md,SAVOIR.md                        « Le système ne connaît ni la stack, ni les contraintes techniques, ni les délais tant qu’ils ne  »
+  ×2  ACTION.md,SKILL.md                            « Les champs non applicables sont marqués `N/A-JUSTIFIED`. »
+  ×2  QUICKSTART.md,SKILL.md                        « Lisez une source détaillée uniquement si elle peut modifier une décision, un artefact, une preu »
+  ×2  ACTION.md,DIRECTION.md                        « Ne déclare jamais un changement avant qu’une observation ne l’ait rendu réel. »
+  ×2  READING_MAP.md,flow.md                        « Pour composer plusieurs capacités selon un résultat recherché — direction, beauté située, créat »
+  ×2  QUICKSTART.md,SKILL.md                        « Pour une décision visuelle ouverte, utilise le **Creative Boot** de `DIRECTION` avant le premie »
+  ×2  ACTION.md,SKILL.md                            « Seul un résultat observé dans le scope déclaré peut alimenter `DECISION-CHANGE` ou un verdict. »
+  ×2  ACTION.md,DIRECTION.md                        « Si aucune alternative située ne change raisonnablement le choix, note cette condition et passe  »
+  ×2  ACTION.md,DIRECTION.md                        « Sinon, s’agit-il d’un écran ou flow nouveau sans charge identitaire autonome ni blast radius sy »
+  ×2  DIRECTION.md,QUICKSTART.md                    « Sur brief vague, la prise de brief de `DIRECTION/EXTERNAL-START` demande au plus trois intrants »
+  ×2  CHANGELOG.md,README.md                        « Toute conclusion d’usage doit préciser ce qui a été observé, par quelle méthode, dans quel scop »
+  ×2  ACTION.md,DIRECTION.md                        « Un gate nécessaire mais non vérifiable est `NOT-VERIFIED`, jamais `PASS` par défaut. »
+  ×2  ACTION.md,DIRECTION.md                        « Un référentiel de conformité ne valide ni la direction visuelle, ni l’utilisabilité globale, ni »
+  ×2  QUICKSTART.md,README.md                       « Une capture prouve un rendu dans son scope ; elle ne prouve pas à elle seule une tâche utilisat »
+  ×2  DIRECTION.md,SAVOIR.md                        « Une image jolie mais sans conséquence de décision est décorative et ne suffit pas comme ancre. »
+  ×2  QUICKSTART.md,canonical_minimum.md            « Une proposition créative peut rester explicitement hypothétique, mais elle ne doit pas être pré »
+  ×2  QUICKSTART.md,README.md                       « Une trace complète sans conséquence est du slop procédural : si une étape, une variante, une ré »
+  ×2  CHANGELOG.md,README.md                        « Une validation de package ou de `RUN_CARD` confirme uniquement les contrôles exécutés ; elle ne »
+  ×2  DIRECTION.md                                  « `ACTION` des preuves exécutables, gates, statuts et verdicts ; »
+  ×2  QUICKSTART.md,SKILL.md                        « `ACTION` pour transformer la décision en livraison observable, corrigible et prouvable. »
+  ×2  ACTION.md,DIRECTION.md                        « `ANCHOR-GENERATED` reste une hypothèse visuelle comparable, non une calibration externe suffisa »
+  ×2  BIBLIOTHEQUE.md                               « `BIBLIOTHEQUE/GATE` ne possède ni statut ni verdict propres. »
+  ×2  QUICKSTART.md,SKILL.md                        « `BIBLIOTHEQUE` intervient si la structure, le composant ou la micro-interface peut changer la d »
+  ×2  QUICKSTART.md,SKILL.md                        « `BIBLIOTHEQUE` pour rendre la structure habitable, compatible et maintenable ; »
+  ×2  QUICKSTART.md,SKILL.md                        « `SAVOIR` intervient si le jugement, le craft, la source ou le contexte peut changer la décision »
+  ×2  QUICKSTART.md,SKILL.md                        « `SAVOIR` pour transformer une impression en jugement et en choix de craft ; »
+  ×2  QUICKSTART.md,machine_projection.md           « `STATE: CLOSED` signifie que la trace et les artefacts sont persistés. »
+  ×2  SAVOIR.md,machine_projection.md               « ```yaml run_card: id: DIRECTION-PREMIUM-001 owner: design-owner date_version: "2026-08-29 / V1" »
+  ×2  DIRECTION.md,QUICKSTART.md                    « | **Désirabilité située** | La beauté ou l’attrait provient d’une relation au produit, au conte »
+  ×2  QUICKSTART.md                                 « | **Quel risque domine ?** | Identité, usage, accessibilité, technique, système ou autre risque »
+  ×2  DIRECTION.md,QUICKSTART.md                    « | **Résilience visible** | La direction tient dans les transformations pertinentes pour le risq »
+  ×2  ACTION.md,DIRECTION.md                        « | Contexte critique, responsive, performance ou motion | `SAVOIR/CONTEXT`. | »
+  ×2  DIRECTION.md,SAVOIR.md                        « | Structure | Grille stricte ↔ tension sur grille ↔ hors grille | Où la lecture est-elle stabil »
+  ×2  DIRECTION.md,SAVOIR.md                        « | Texte / image | Texte souverain ↔ preuve souveraine ↔ relation équilibrée | Quel élément port »
+  ×2  QUICKSTART.md,README.md                       « | [`SAVOIR.md`](./SAVOIR.md) | Jugement, craft, contenu, contexte, sources et intégrité. | »
+  ×2  ACTION.md,READING_MAP.md                      « | `ACTION/ROUTING` | `ACTION.md` — `## ACTION/ROUTING — prérequis de jugement et de structure`  »
+  ×2  ACTION.md,READING_MAP.md                      « | `ACTION/UI-UX-REALITY` | `ACTION.md` — `### ACTION/UI-UX-REALITY — construire l’interface et  »
+  ×2  ACTION.md,SAVOIR.md                           « | `DIRECTION.md` | Rôle, cinq absolus, classification, routage général et cadrage de capacité.  »
+  ×2  DIRECTION.md,READING_MAP.md                   « | `DIRECTION/FIRST-OBJECT` | `DIRECTION.md` — `## DIRECTION/FIRST-OBJECT — compiler le brief et »
+  ×2  BIBLIOTHEQUE.md                               « | `OBJECT/<NAME>` | Preuve, sélection, comparaison, mémoire, contrôle ou action locale. | »
+  ×2  ACTION.md,DIRECTION.md                        « | `SAVOIR.md` | Principes de jugement, craft, styles, contexte, outils et intégrité. | »
+== 5. LISTES DE CHARGEMENT « première lecture » d'un run DIRECTION
+  listes : 6 ; distinctes : 5 ; introuvables : []
+  route                        SKILL, table QUICKSTART § QUICKSTART § QUICKSTART §  READING_MAP ORCHESTRATIO
+  ACTION/FIRST-RENDER                     x            ·            ·            ·            ·            ·
+  ACTION/ROUTING                          x            ·            ·            ·            ·            ·
+  ACTION/RUN-DIRECTION                    x            x            x            x            x            x
+  DIRECTION/CREATIVE-BOOT                 ·            ·            ·            x            ·            ·
+  DIRECTION/DOUBLE-LOOP                   ·            x            ·            x            ·            ·
+  DIRECTION/FIRST-OBJECT                  x            x            ·            x            x            x
+  DIRECTION/START                         x            x            x            ·            x            x
+  DIRECTION/VISUAL_TARGET                 x            x            x            x            x            x
+  SAVOIR/CRAFT/CFT-00                     x            x            x            x            ·            ·

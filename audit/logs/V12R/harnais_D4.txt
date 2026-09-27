@@ -1,0 +1,13 @@
+OK   T-1    témoin     validate_reading_map sur la copie non modifiée → PASS  [READING MAP VALIDATION PASSED — carte dérivée, propriétaires]
+OK   M-13   F-CHG-001  BIBLIOTHEQUE 762 oublie SEED  [- LCF-20 : condition de façade non tenue — BIBLIOTHEQUE, lis]
+OK   M-14   F-DIR-002  DIRECTION 74 redevient un claim d'efficacité non borné  [- LCF-21 : condition de façade non tenue — DIRECTION, README]
+OK   G-01   F-CHG-001  statut SEED (bootstrap du seed, sans gain mesuré) → ADOPTED (contrat de gain) ou DEPRECATED
+OK   G-02   F-CHG-001  PILOT utilisé par des consumers → DEPRECATED possible (pas seulement ADOPTED / ABANDONED)
+OK   G-03   F-CHG-001  le seed a le statut SEED ; ADOPTED exige le contrat de gain réel (BIBLIOTHEQUE/EVOLUTION)
+OK   G-04   F-CHG-001  DEPRECATED : aucun nouvel usage, migration par ACTION/RUN-SYSTEM
+OK   G-05   F-DIR-046  DIRECTION 817 : BIBLIOTHEQUE/EVOLUTION seulement si la route est structurelle ; sinon la source propriétaire
+OK   G-06   F-CHG-001  validateur de package : SEED parmi les termes requis du cycle de vie
+OK   LCF-20 F-CHG-001  statuts listés par BIBLIOTHEQUE = statuts du CHANGELOG (['ABANDONED', 'ADOPTED', 'DEPRECATED', 'PILOT', 'SEED'])
+OK   LCF-21 F-DIR-002  efficacité NOT-VERIFIED partout ; pas de « augmente la probabilité / la qualité » non borné dans DIRECTION
+
+Témoin : 1/1 ; gardes : 6/6 ; LCF : 2/2 ; mutations au rouge : 2/2

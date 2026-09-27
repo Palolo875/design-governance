@@ -1,0 +1,18 @@
+OK   T-POS-1 B01        exemple canonique des contrats accepté  [accepté]
+OK   T-CONS  F-PC-001   ensemble à une seule direction → rejeté (définition, pas quota)  [$.creative_direction_set.directions: nombre minimal d'éléments non att]
+OK   C3-01   F-PC-001   deux IDs, textes identiques  [directions non distinctes : B reprend la tension et les changements d']
+OK   C3-02   F-PC-001   deux IDs, textes identiques à la casse et aux espaces près  [directions non distinctes : B reprend la tension et les changements d']
+OK   C3-03   F-PC-001   un même changement structurel compté deux fois  [changements structurels en double dans la direction A]
+OK   C3-P1   F-PC-001   directions à un seul levier structurel chacune → acceptées (pas de quota)  [accepté]
+OK   C3-P2   F-PC-001   aucune alternative plausible : ensemble non activé, UI/UX seul → accepté (via INV-C2-2)  [accepté]
+OK   C3-P3   tous       deux directions distinctes (exemple après C2) → acceptées  [accepté]
+OK   G-01    F-BIB-002  CONTRACTS : contrat réduit unique (décision, responsabilité, contre-indication, preuve attendue, limite)
+OK   G-02    F-BIB-002  table des niveaux : la ligne Local renvoie au contrat réduit de CONTRACTS
+OK   G-03    F-BIB-002  DERIVE : champs rangés par phase (départ / après objet / promotion)
+OK   G-04    F-SK-001   ACTION/HANDOFF nomme deux sorties : réponse visible et handoff
+OK   G-05    F-SK-001   skill : plus de liste de onze champs « au minimum » ; les deux sorties renvoient à ACTION/HANDOFF
+OK   G-06    F-SK-001   skill : la copie du handoff porte les treize champs canoniques (14 libellés, composites séparés)
+OK   G-07    F-SK-001   QUICKSTART : plus de « sortie minimale d'un handoff » à onze champs ; renvoi à ACTION/HANDOFF
+OK   G-08    F-SK-001   la réponse visible de QUICKSTART est marquée « voir ACTION/HANDOFF » et identique au canon
+
+Témoins : 2/2 ; contrats C3 : 6/6 ; gardes : 8/8

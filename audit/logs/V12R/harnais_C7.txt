@@ -1,0 +1,11 @@
+OK   T-1   témoin     CFT-05 présent
+OK   T-2   témoin     test de style présent (SAVOIR/STYLE)
+OK   T-3   témoin     test de non-généricité présent (BIBLIOTHEQUE/GATE)
+OK   G-01  F-BIB-005  non-généricité : l'ablation révèle une dépendance ; refonte seulement si elle est décorative, jugée sur rendu entier, tâche et Gate C
+OK   G-02  F-SAV-006  test de style : un médium masqué peut porter légitimement le profil (dépendance + fallback), l'ablation seule ne conclut pas
+OK   G-03  F-SAV-002  CFT-05 ne prescrit plus la répartition « neutres + accent » sous le tag requis
+OK   C-01  F-SAV-002  conservation : CFT-05 garde l'exigence fonctionnelle (rôles, contraste calculé, information critique non portée par la seule couleur)
+OK   G-04  F-SAV-002  CFT-05 admet plusieurs registres (accent unique, multicolore structurelle, codage par zones)
+OK   G-05  F-SAV-002  CFT-05 pose la question de convergence (palette par défaut du modèle, justification produit)
+
+Témoins et conservation : 4/4 ; gardes : 5/5

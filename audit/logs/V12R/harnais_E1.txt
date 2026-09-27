@@ -1,0 +1,31 @@
+OK   T-1    témoin             sources lues
+OK   E1-01  F-ACT-003          ACTION : la phrase d'entrée nomme les registres du tableau (observation, interprétation)
+OK   E1-02  F-ACT-004          ACTION 110 : chargement si la question peut changer la décision, la preuve ou la limite
+OK   E1-03  F-ACT-016          FAST-PATH d'ACTION : après les quatre réponses, forme courte LITE (CLOSE-PACKAGE)
+OK   E1-04  F-ACT-032          partition typographique : plus « complète » ; licence, glyphes et chargement selon SAVOIR/TYPE
+OK   E1-05  F-ACT-034          provenance absente ⇒ verdict non accepté (le « ou » est levé)
+OK   E1-06  F-BIB-003          contrat de grille : familles MOBILE-* conditionnées au mobile dans le scope ou à un risque responsive
+OK   E1-07  F-DIR-005          légende déclarée commune à DIRECTION et SAVOIR
+OK   E1-08  F-DIR-012          Boot : cardinalité des axes renvoyée à BIBLIOTHEQUE ; anti-directions sans nombre fixe
+OK   E1-09  F-DIR-014          DAILY : la reclassification depuis LITE inclut ITER
+OK   E1-10  F-DIR-015          FAST-PATH de DIRECTION : triade canonique « changée, confirmée ou abandonnée »
+OK   E1-11  F-DIR-025          routes de production : valeur pour l'absence intentionnelle d'asset
+OK   E1-12  F-DIR-026          GÉNÉRÉ-DIRIGÉ : condition bornée aux sources observées dans le scope, le délai et les droits
+OK   E1-13  F-DIR-031          ABSOLU 4 : « avant toute action qui engage artefact, preuve, état, diffusion ou persistance »
+OK   E1-14  F-DIR-037          capacité : « construire, décider, observer ou tenir une contrainte »
+OK   E1-15  F-DIR-040          « direction modale » remplacé par « direction retenue »
+OK   E1-16  F-DIR-043          l'« entrée prioritaire » de DIRECTION est requalifiée en récapitulatif de protection
+OK   E1-17  F-DIR-018 (coord.) récapitulatif, point 4 : exception « sauf si la navigation est l'objet de preuve »
+OK   E1-18  F-DIR-045          DIRECTION : `limitations` écrit avec son chemin `closure.limitations`
+OK   E1-19  F-EX-003           exemple SYSTÈME : NOT-VERIFIED pour l'inspecté manquant ; échec localisé (absorbé par C6)
+OK   E1-20  F-FLOW-001         flow.md : les branches risque critique et NOT-VERIFIED reviennent vers reclassification et owner / prochaine preuve
+OK   E1-21  F-GLO-001          GLOSSAIRE : RUN_CARD définie par la persistance exigée, avec renvoi à ACTION/RUN_CARD
+OK   E1-22  F-MP-001           YAML : provenance.artifact_locator = artifact.locator
+OK   E1-23  F-QS-001           QUICKSTART : parcours qualifié par mode ; COMPONENTS seulement si un composant change
+OK   E1-24  F-QS-004           QUICKSTART : chemins explicites vers les références de la skill
+OK   E1-25  F-SAV-001          SAVOIR 38 : « typiquement zéro à deux ; une route par question active »
+OK   E1-26  F-SAV-004          ATLAS 541 : SAVOIR/SYSTEM ajouté pour le composant partagé
+OK   E1-27  F-SAV-010          règle d'or 6 : spec toujours requise en DIRECTION ; ancre selon DIRECTION
+OK   E1-28  F-SK-002           export Local : chemins propres au layout (aucun « V1/official/ » dans la skill Local)
+
+Témoin : 1/1 ; gardes E1 : 28/28

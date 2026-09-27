@@ -1,0 +1,26 @@
+OK   T-POS-1 B01            exemple canonique accepté  [acceptée]
+OK   C1-01  F-ACT-013/014  decision_change sans outcome  [decision_change exige outcome (CHANGED, CONFIRMED, ABANDONED, N/A-JUST]
+OK   C1-02  F-ACT-014      outcome NOT-OBSERVED + ACCEPTED  [decision_change NOT-OBSERVED interdit ACCEPTED]
+OK   C1-03  F-DIR-011      outcome N/A-JUSTIFIED sans raison  [decision_change N/A-JUSTIFIED exige une raison]
+OK   C1-04  F-ACT-013      STANDARD clos et accepté sans decision_change  [STANDARD clos et accepté exige decision_change (LITE : facultatif)]
+OK   C1-05  F-ACT-009      state BUILDING avec verdict  [state BUILDING : le verdict doit rester null avant CHECKING]
+OK   C1-06  F-ACT-009      state CLOSED sans verdict  [state CLOSED exige un verdict]
+OK   C1-07  F-ACT-011      RECLASSIFIED sans transition  [RECLASSIFIED exige closure.reclassification (to_mode, successor_run_re]
+OK   C1-08  F-ACT-011      reclassement vers le même mode  [reclassification : mode cible identique au mode du run]
+OK   C1-09  F-SAV-005      profil seulement visé dans une carte acceptée  [profil non observé : un verdict accepté exige profile_decision.phase o]
+OK   C1-P1  tous           carte acceptée avec decision_change CONFIRMED → acceptée  [acceptée]
+OK   C1-P2  F-ACT-009      carte INTAKE sans verdict prématuré → acceptée  [acceptée]
+OK   C1-P3  F-ACT-025      next_polish_action « STOP — raison » (convention texte, champ inchangé) → acceptée  [acceptée]
+OK   C1-P4  proportion     LITE clos et accepté sans decision_change → acceptée  [acceptée]
+OK   G-01   F-ACT-014      ACTION/STATUS place NOT-OBSERVED (conséquence décisionnelle)
+OK   G-02   F-DIR-011/019  DIRECTION emploie la triade (NOT-OBSERVED aux trois occurrences au moins)
+OK   G-03   F-DIR-029      les labels TRUTH se cumulent (factualité × nature)
+OK   G-04   F-DIR-021      règle d'audience : pas de label interne dans l'interface ; divulgation en langage produit
+OK   G-05   F-DIR-024      la ligne « Preuve » de VISUAL_TARGET devient « Objet de preuve »
+OK   G-06   F-DIR-032      ABSOLU 5 renvoie le choix de méthode à ACTION ou SAVOIR
+OK   G-07   F-DIR-033      la troisième taxonomie « trois niveaux de preuve » est supprimée
+OK   G-08   F-ACT-027      ACTION 509 déclare CORRECTED / ACCEPTED-DIFFERENCE / REMAINING-RISK comme résultats locaux avec correspondance
+OK   G-10   F-ACT-025      ACTION documente « STOP — raison » comme valeur valide de next_polish_action
+OK   G-09   F-SAV-005      STYLE sépare l'intention de profil et l'effet observé
+
+Témoin : 1/1 ; machine C1 : 13/13 ; gardes : 10/10

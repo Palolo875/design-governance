@@ -1,0 +1,9 @@
+OK   T-POS-1  suite RUN_CARD verte  [code 0 · RUN_CARD VALIDATION PASSED — projection validée contre le schéma et fixtures contrôlés]
+OK   T-POS-2  validate_all complet vert (build et reproductibilité)  [code 0 · FULL VALIDATION PASSED — package, RUN_CARD, build et reproductibilité]
+OK   A2-01    F-FIX-003 : négatif réparé de sa faute mais invalide autrement → suite rouge  [code 1 · - diagnostic inattendu — schemas/fixtures/invalid_missing_proof.json : attendu 'un verdict]
+OK   A2-02    F-FIX-001 : fixture orpheline rendue valide → suite rouge  [code 1 · - fixture invalide acceptée — schemas/fixtures/invalid_capability_profile_missing_basis.js]
+OK   A2-03    F-FIX-001 : fichier de fixture non déclaré → suite rouge  [code 1 · - fixture non déclarée : schemas/fixtures/invalid_zz_non_declaree.json]
+OK   A2-04    F-ALL-001 : échec pour un motif étranger → rejeté par l'orchestrateur  [code 1 · rejet du mauvais motif : CLI REGRESSION FAILED — basis absent a échoué pour un autre motif]
+OK   A2-05    F-FIX-002 : cas unitaires à faute unique exécutés (ligne « + cas unitaires : N/N », N ≥ 20)  [code 0 · RUN_CARD VALIDATION PASSED — projection validée contre le schéma et fixtures contrôlés]
+
+Témoins positifs : 2/2 ; tests A2 : 5/5

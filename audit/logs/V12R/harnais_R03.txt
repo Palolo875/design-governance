@@ -1,0 +1,20 @@
+OK   R3-01  Q-01   droits inconnus : contrôle machine borné à la RUN_CARD DIRECTION
+OK   R3-02  Q-02   CLOSE-PACKAGE : les cinq paquets portent la conséquence décisionnelle (triade)
+OK   R3-03  Q-03   « aucune décision … » + N/A-JUSTIFIED : NOT-OBSERVED présent, non-applicabilité qualifiée ou renvoi au contrat ACTION
+OK   R3-04  Q-06   QUICKSTART §5 : Gate B chargé en LITE et ITER
+OK   R3-05  Q-10   GLOSSAIRE CLOSED : réserve à sept attributs (date ou version)
+OK   R3-06  O-1    null : champs du schéma qui l'admettent nommés ; sinon omission
+OK   R3-07  Q-05   QUICKSTART §9 : plus de « CHANGE: » ; DECISION-CHANGE selon la triade
+OK   R3-08  Q-01   LCF-36 dans la liste close et rouge sous mutation (P-37 inversé)
+OK   R3-09  Q-02   LCF-37 dans la liste close et rouge sous mutation (P-38 inversé)
+OK   R3-10  Q-03   LCF-38 dans la liste close et rouge sous mutation (P-40 inversé)
+OK   R3-11  Q-06   LCF-39 dans la liste close et rouge sous mutation (P-44 inversé)
+OK   R3-12  Q-10   LCF-40 dans la liste close et rouge sous mutation (P-45 inversé)
+OK   R3-13  O-1    LCF-41 dans la liste close et rouge sous mutation (P-46 inversé)
+OK   R3-14  Q-05   LCF-42 dans la liste close et rouge sous mutation (P-42 inversé)
+OK   R3-15  2e passe LCF-42 rouge sous mutation de la seconde passe (P-53 inversé)
+OK   R3-16  2e passe LCF-41 rouge sous mutation de la seconde passe (P-54 inversé)
+OK   R3-17  2e passe LCF-38 rouge sous mutation de la seconde passe (P-56 inversé)
+OK   R3-18  2e passe LCF-40 rouge sous mutation de la seconde passe (P-58 inversé)
+
+Cas R03 : 18/18

@@ -1,0 +1,33 @@
+OK   T-POS-1 B01            exemple canonique RUN_CARD accepté  [acceptée]
+OK   T-POS-2 B01            exemple canonique des contrats accepté  [accepté]
+OK   T-CONS  F-ACT-002      champ HANDOFF next_action hors projection → rejeté (champs inconnus)  [run_card : champs inconnus : next_action]
+OK   C2-01   F-ACT-017 (1)  risque sans énoncé (niveau seul)  [risk.statement requis : énoncé du risque principal, non vide et sans p]
+OK   C2-02   F-ACT-017 (1)  énoncé de risque placeholder « TBD »  [risk.statement requis : énoncé du risque principal, non vide et sans p]
+OK   C2-03   F-ACT-017 (1)  énoncé de risque blanc  [risk.statement requis : énoncé du risque principal, non vide et sans p]
+OK   C2-P1   tous           carte DIRECTION acceptée avec énoncé de risque → acceptée  [acceptée]
+OK   C2-P2   proportion     fixture valid_closed_return + énoncé de risque → acceptée  [acceptée]
+OK   C2-P3   F-ACT-002      LITE clos sans decision_change, EXIT-CONDITION portée par la réserve → acceptée  [acceptée]
+OK   K-01    F-ACT-007      proof_status taxonomie parallèle « observed »  [$.ui_ux_reality_pack.coverage_map[0].proof_status: valeur non canoniqu]
+OK   K-02    F-ACT-007      N/A-JUSTIFIED sans raison  [coverage_map : N/A-JUSTIFIED exige une raison (state_matrix: unavailab]
+OK   K-03    F-ACT-005      exigence OBSERVED sans observed_scope  [coverage_map : une exigence OBSERVED exige observed_scope (state_matri]
+OK   K-04    F-ACT-005      ancien proof_scope unique (cible ou observation ?)  [$.ui_ux_reality_pack: champs inconnus: proof_scope]
+OK   K-05    F-ACT-006      document sans aucun contrat  [production_contracts exige au moins un contrat (creative_direction_set]
+OK   K-P1    tous           trois contrats conformes → acceptés  [accepté]
+OK   K-P2    F-ACT-006      UI_UX_REALITY_PACK seul → accepté  [accepté]
+OK   K-P3    F-ACT-006      CREATIVE_DIRECTION_SET seul → accepté  [accepté]
+OK   K-P4    F-ACT-030      pack avant build : tout NOT-VERIFIED, observed_scope null → accepté  [accepté]
+OK   K-P5    F-ACT-007      N/A-JUSTIFIED avec raison → accepté  [accepté]
+OK   G-01    F-ACT-002      ACTION/RUN_CARD : table de correspondance couvrant NEXT-ACTION, EXIT-CONDITION et « hors projection »
+OK   G-02    F-DIR-006      la table couvre les vues DIRECTION (VISUAL_TARGET, creative close)
+OK   G-03    F-DIR-039      DIRECTION 716 déclare le transport du paquet d'alternative (trace), plus « la RUN_CARD nomme » seule
+OK   G-04    F-ACT-002      HANDOFF déclare la forme courte LITE par renvoi à CLOSE-PACKAGE
+OK   G-05    F-DIR-010      HANDOFF situe les formes (ligne de run, HANDOFF, CLOSE-PACKAGE, projection)
+OK   G-06    F-DIR-013      DAILY : colonne « Clôture minimale » remplacée par un renvoi à ACTION/CLOSE-PACKAGE
+OK   G-07    F-DIR-034/035  section 0 : preuve minimale et condition d'arrêt renvoyées à ACTION (PRECONDITION, CLOSE-EXIT-CHECK)
+OK   G-08    F-DIR-023      VISUAL_TARGET : table canonique avec « Résolution initiale » ; la table des quatre décisions disparaît
+OK   G-09    F-DIR-023      passage à SPECCED défini par renvoi à la table (et non par une énumération concurrente)
+OK   G-10    F-ACT-029      STRUCTURED-PROOF ouvre sur une matrice d'activation avec N/A-JUSTIFIED
+OK   G-11    F-ACT-030      STRUCTURED-PROOF marque la phase des champs (avant / après build)
+OK   G-12    F-ACT-005/007  UI-UX-REALITY sépare scope attendu et scope observé et nomme les jetons canoniques
+
+Témoins : 3/3 ; RUN_CARD C2 : 6/6 ; contrats C2 : 10/10 ; gardes : 12/12

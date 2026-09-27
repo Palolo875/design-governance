@@ -1,0 +1,1522 @@
+{
+ "budget": {
+  "ACTUEL": {
+   "elements": [
+    [
+     "skills/design-governance-practice/SKILL.md",
+     165,
+     3191,
+     true
+    ],
+    [
+     "V1/official/READING_MAP.md",
+     130,
+     1412,
+     true
+    ],
+    [
+     "DIRECTION/START",
+     76,
+     1189,
+     true
+    ],
+    [
+     "DIRECTION/CREATIVE-BOOT",
+     31,
+     415,
+     true
+    ],
+    [
+     "DIRECTION/EXTERNAL-START",
+     43,
+     527,
+     true
+    ],
+    [
+     "DIRECTION/VISUAL_TARGET",
+     75,
+     1444,
+     true
+    ],
+    [
+     "DIRECTION/FIRST-OBJECT",
+     61,
+     883,
+     true
+    ],
+    [
+     "ACTION/RUN-DIRECTION",
+     14,
+     238,
+     true
+    ],
+    [
+     "ACTION/FIRST-RENDER",
+     19,
+     292,
+     true
+    ]
+   ],
+   "lignes": 614,
+   "mots": 9591,
+   "introuvables": [],
+   "perimes": []
+  },
+  "TABLE": {
+   "elements": [
+    [
+     "skills/design-governance-practice/SKILL.md",
+     165,
+     3191,
+     true
+    ],
+    [
+     "V1/official/READING_MAP.md",
+     130,
+     1412,
+     true
+    ],
+    [
+     "DIRECTION/START",
+     76,
+     1189,
+     true
+    ],
+    [
+     "DIRECTION/VISUAL_TARGET",
+     75,
+     1444,
+     true
+    ],
+    [
+     "DIRECTION/FIRST-OBJECT",
+     61,
+     883,
+     true
+    ],
+    [
+     "ACTION/ROUTING",
+     25,
+     204,
+     true
+    ],
+    [
+     "ACTION/FIRST-RENDER",
+     19,
+     292,
+     true
+    ],
+    [
+     "ACTION/RUN-DIRECTION",
+     14,
+     238,
+     true
+    ],
+    [
+     "SAVOIR/CRAFT/CFT-00",
+     35,
+     774,
+     true
+    ],
+    [
+     "ACTION/GATE-A",
+     71,
+     972,
+     true
+    ],
+    [
+     "ACTION/GATE-B",
+     96,
+     1435,
+     true
+    ],
+    [
+     "ACTION/GATE-C",
+     27,
+     367,
+     true
+    ],
+    [
+     "DIRECTION/CREATIVE-BOOT",
+     31,
+     415,
+     true
+    ],
+    [
+     "DIRECTION/EXTERNAL-START",
+     43,
+     527,
+     true
+    ],
+    [
+     "ACTION/PIPELINE-DIRECTION",
+     90,
+     1527,
+     true
+    ],
+    [
+     "ACTION/VISUAL_PROOF",
+     23,
+     256,
+     true
+    ],
+    [
+     "ACTION/CLOSE-PACKAGE",
+     58,
+     864,
+     true
+    ],
+    [
+     "ACTION/HANDOFF",
+     30,
+     349,
+     true
+    ]
+   ],
+   "lignes": 1069,
+   "mots": 16339,
+   "introuvables": [],
+   "perimes": []
+  },
+  "LETTRE": {
+   "elements": [
+    [
+     "skills/design-governance-practice/SKILL.md",
+     165,
+     3191,
+     true
+    ],
+    [
+     "V1/official/READING_MAP.md",
+     130,
+     1412,
+     true
+    ],
+    [
+     "DIRECTION/START",
+     76,
+     1189,
+     true
+    ],
+    [
+     "DIRECTION/VISUAL_TARGET",
+     75,
+     1444,
+     true
+    ],
+    [
+     "DIRECTION/FIRST-OBJECT",
+     61,
+     883,
+     true
+    ],
+    [
+     "ACTION/ROUTING",
+     25,
+     204,
+     true
+    ],
+    [
+     "ACTION/FIRST-RENDER",
+     19,
+     292,
+     true
+    ],
+    [
+     "ACTION/RUN-DIRECTION",
+     14,
+     238,
+     true
+    ],
+    [
+     "SAVOIR/CRAFT/CFT-00",
+     35,
+     774,
+     true
+    ],
+    [
+     "ACTION/GATE-A",
+     71,
+     972,
+     true
+    ],
+    [
+     "ACTION/GATE-B",
+     96,
+     1435,
+     true
+    ],
+    [
+     "ACTION/GATE-C",
+     27,
+     367,
+     true
+    ],
+    [
+     "DIRECTION/CREATIVE-BOOT",
+     31,
+     415,
+     true
+    ],
+    [
+     "DIRECTION/EXTERNAL-START",
+     43,
+     527,
+     true
+    ],
+    [
+     "ACTION/PIPELINE-DIRECTION",
+     90,
+     1527,
+     true
+    ],
+    [
+     "ACTION/VISUAL_PROOF",
+     23,
+     256,
+     true
+    ],
+    [
+     "ACTION/CLOSE-PACKAGE",
+     58,
+     864,
+     true
+    ],
+    [
+     "ACTION/HANDOFF",
+     30,
+     349,
+     true
+    ],
+    [
+     "README.md",
+     161,
+     1887,
+     true
+    ],
+    [
+     "V1/official/QUICKSTART.md",
+     320,
+     3849,
+     true
+    ],
+    [
+     "V1/official/ORCHESTRATION_MAP.md",
+     53,
+     829,
+     true
+    ],
+    [
+     "DIRECTION/DOUBLE-LOOP",
+     59,
+     987,
+     true
+    ]
+   ],
+   "lignes": 1662,
+   "mots": 23891,
+   "introuvables": [],
+   "perimes": []
+  }
+ },
+ "atteignabilite": "SAVOIR/CRAFT/CFT-00",
+ "indicateurs": {
+  "V1/official/DIRECTION.md": {
+   "lignes": 800,
+   "mots": 13782,
+   "negations": 186,
+   "auto_limitation": 42,
+   "jetons": 140,
+   "champs_trace": 27,
+   "beau": 11
+  },
+  "V1/official/ACTION.md": {
+   "lignes": 1031,
+   "mots": 14545,
+   "negations": 183,
+   "auto_limitation": 43,
+   "jetons": 163,
+   "champs_trace": 40,
+   "beau": 3
+  },
+  "V1/official/SAVOIR.md": {
+   "lignes": 949,
+   "mots": 14504,
+   "negations": 172,
+   "auto_limitation": 39,
+   "jetons": 123,
+   "champs_trace": 22,
+   "beau": 6
+  },
+  "V1/official/BIBLIOTHEQUE.md": {
+   "lignes": 818,
+   "mots": 9343,
+   "negations": 104,
+   "auto_limitation": 29,
+   "jetons": 175,
+   "champs_trace": 22,
+   "beau": 2
+  },
+  "V1/official/CHANGELOG.md": {
+   "lignes": 101,
+   "mots": 1578,
+   "negations": 11,
+   "auto_limitation": 3,
+   "jetons": 59,
+   "champs_trace": 0,
+   "beau": 0
+  },
+  "V1/official/QUICKSTART.md": {
+   "lignes": 320,
+   "mots": 3849,
+   "negations": 38,
+   "auto_limitation": 15,
+   "jetons": 58,
+   "champs_trace": 23,
+   "beau": 3
+  },
+  "V1/official/README.md": {
+   "lignes": 52,
+   "mots": 711,
+   "negations": 11,
+   "auto_limitation": 7,
+   "jetons": 22,
+   "champs_trace": 0,
+   "beau": 1
+  },
+  "README.md": {
+   "lignes": 161,
+   "mots": 1887,
+   "negations": 24,
+   "auto_limitation": 13,
+   "jetons": 29,
+   "champs_trace": 1,
+   "beau": 2
+  },
+  "V1/official/GLOSSAIRE.md": {
+   "lignes": 71,
+   "mots": 1411,
+   "negations": 25,
+   "auto_limitation": 8,
+   "jetons": 40,
+   "champs_trace": 0,
+   "beau": 0
+  },
+  "V1/official/READING_MAP.md": {
+   "lignes": 130,
+   "mots": 1412,
+   "negations": 14,
+   "auto_limitation": 7,
+   "jetons": 66,
+   "champs_trace": 13,
+   "beau": 2
+  },
+  "V1/official/ORCHESTRATION_MAP.md": {
+   "lignes": 53,
+   "mots": 829,
+   "negations": 14,
+   "auto_limitation": 7,
+   "jetons": 30,
+   "champs_trace": 0,
+   "beau": 2
+  },
+  "skills/design-governance-practice/SKILL.md": {
+   "lignes": 165,
+   "mots": 3191,
+   "negations": 48,
+   "auto_limitation": 11,
+   "jetons": 82,
+   "champs_trace": 3,
+   "beau": 2
+  },
+  "skills/design-governance-practice/references/examples.md": {
+   "lignes": 98,
+   "mots": 964,
+   "negations": 11,
+   "auto_limitation": 4,
+   "jetons": 13,
+   "champs_trace": 26,
+   "beau": 1
+  },
+  "skills/design-governance-practice/references/flow.md": {
+   "lignes": 25,
+   "mots": 232,
+   "negations": 0,
+   "auto_limitation": 0,
+   "jetons": 3,
+   "champs_trace": 0,
+   "beau": 1
+  },
+  "skills/design-governance-practice/references/canonical_minimum.md": {
+   "lignes": 25,
+   "mots": 259,
+   "negations": 11,
+   "auto_limitation": 3,
+   "jetons": 16,
+   "champs_trace": 0,
+   "beau": 0
+  },
+  "skills/design-governance-practice/references/machine_projection.md": {
+   "lignes": 129,
+   "mots": 960,
+   "negations": 11,
+   "auto_limitation": 3,
+   "jetons": 34,
+   "champs_trace": 0,
+   "beau": 0
+  },
+  "TOTAL": {
+   "lignes": 4928,
+   "mots": 69457,
+   "negations": 863,
+   "auto_limitation": 234,
+   "jetons": 1053,
+   "champs_trace": 177,
+   "beau": 36
+  }
+ },
+ "doublons": [
+  {
+   "occurrences": 7,
+   "fichiers": [
+    "ACTION.md",
+    "CHANGELOG.md",
+    "DIRECTION.md",
+    "GLOSSAIRE.md",
+    "SAVOIR.md"
+   ],
+   "lieux": [
+    "V1/official/ACTION.md:243",
+    "V1/official/ACTION.md:261",
+    "V1/official/CHANGELOG.md:21",
+    "V1/official/DIRECTION.md:235",
+    "V1/official/DIRECTION.md:329",
+    "V1/official/GLOSSAIRE.md:38",
+    "V1/official/SAVOIR.md:30"
+   ],
+   "extrait": "- **Conséquence décisionnelle.** La table `RUN_CARD`, le glossaire, la réponse visible et les paquets de clôture renvoie"
+  },
+  {
+   "occurrences": 6,
+   "fichiers": [
+    "ACTION.md",
+    "BIBLIOTHEQUE.md",
+    "READING_MAP.md",
+    "SAVOIR.md",
+    "SKILL.md"
+   ],
+   "lieux": [
+    "V1/official/ACTION.md:33",
+    "V1/official/BIBLIOTHEQUE.md:199",
+    "V1/official/BIBLIOTHEQUE.md:39",
+    "V1/official/READING_MAP.md:62",
+    "V1/official/SAVOIR.md:185",
+    "skills/design-governance-practice/SKILL.md:26"
+   ],
+   "extrait": "La sélection structurelle est persistée dans la `RUN_CARD` ou la trace canonique du run référencée par `trace_locator`, "
+  },
+  {
+   "occurrences": 4,
+   "fichiers": [
+    "ACTION.md",
+    "BIBLIOTHEQUE.md",
+    "DIRECTION.md",
+    "SAVOIR.md"
+   ],
+   "lieux": [
+    "V1/official/ACTION.md:3",
+    "V1/official/BIBLIOTHEQUE.md:3",
+    "V1/official/DIRECTION.md:3",
+    "V1/official/SAVOIR.md:3"
+   ],
+   "extrait": "**Design Governance V1 — expérimentation maintenue.** Cette V1 est un cadre de travail en évaluation ; elle n’est pas pr"
+  },
+  {
+   "occurrences": 4,
+   "fichiers": [
+    "DIRECTION.md",
+    "README.md",
+    "SAVOIR.md"
+   ],
+   "lieux": [
+    "README.md:77",
+    "V1/official/DIRECTION.md:486",
+    "V1/official/DIRECTION.md:500",
+    "V1/official/SAVOIR.md:207"
+   ],
+   "extrait": "La boucle de jugement est : **préparer → construire → observer → isoler le défaut dominant → modifier l’artefact ou la d"
+  },
+  {
+   "occurrences": 4,
+   "fichiers": [
+    "ACTION.md",
+    "BIBLIOTHEQUE.md",
+    "DIRECTION.md",
+    "SAVOIR.md"
+   ],
+   "lieux": [
+    "V1/official/ACTION.md:3",
+    "V1/official/BIBLIOTHEQUE.md:3",
+    "V1/official/DIRECTION.md:3",
+    "V1/official/SAVOIR.md:3"
+   ],
+   "extrait": "Ses limites, preuves et conditions d’usage restent explicites."
+  },
+  {
+   "occurrences": 4,
+   "fichiers": [
+    "ACTION.md",
+    "DIRECTION.md",
+    "GLOSSAIRE.md"
+   ],
+   "lieux": [
+    "V1/official/ACTION.md:233",
+    "V1/official/ACTION.md:294",
+    "V1/official/DIRECTION.md:229",
+    "V1/official/GLOSSAIRE.md:37"
+   ],
+   "extrait": "| **`DECISION-INTENT`** | La décision que la procédure doit permettre de trancher au lancement du run. |"
+  },
+  {
+   "occurrences": 4,
+   "fichiers": [
+    "ACTION.md",
+    "DIRECTION.md",
+    "README.md",
+    "SAVOIR.md"
+   ],
+   "lieux": [
+    "README.md:97",
+    "V1/official/ACTION.md:74",
+    "V1/official/DIRECTION.md:16",
+    "V1/official/SAVOIR.md:19"
+   ],
+   "extrait": "| `BIBLIOTHEQUE.md` | Structures, supports, grilles, scènes, objets, micro-interfaces et composants. |"
+  },
+  {
+   "occurrences": 3,
+   "fichiers": [
+    "ACTION.md",
+    "README.md",
+    "machine_projection.md"
+   ],
+   "lieux": [
+    "README.md:145",
+    "V1/official/ACTION.md:392",
+    "skills/design-governance-practice/references/machine_projection.md:128"
+   ],
+   "extrait": "**Ce qu’atteste une `RUN_CARD` validée :** la forme de la projection et les invariants de la liste close (états, issues,"
+  },
+  {
+   "occurrences": 3,
+   "fichiers": [
+    "ACTION.md",
+    "README.md",
+    "machine_projection.md"
+   ],
+   "lieux": [
+    "README.md:145",
+    "V1/official/ACTION.md:392",
+    "skills/design-governance-practice/references/machine_projection.md:128"
+   ],
+   "extrait": "**Ce qu’elle n’atteste pas (forme seule) :** que les observations ont réellement eu lieu ; la justesse des jugements V/U"
+  },
+  {
+   "occurrences": 3,
+   "fichiers": [
+    "GLOSSAIRE.md",
+    "QUICKSTART.md",
+    "README.md"
+   ],
+   "lieux": [
+    "V1/official/GLOSSAIRE.md:63",
+    "V1/official/QUICKSTART.md:41",
+    "V1/official/README.md:17"
+   ],
+   "extrait": "Avant les routes détaillées, notez seulement le **mode**, le **risque dominant**, la **décision à changer**, la **procha"
+  },
+  {
+   "occurrences": 3,
+   "fichiers": [
+    "ACTION.md",
+    "README.md",
+    "machine_projection.md"
+   ],
+   "lieux": [
+    "README.md:145",
+    "V1/official/ACTION.md:392",
+    "skills/design-governance-practice/references/machine_projection.md:128"
+   ],
+   "extrait": "Ces points restent à la trace, à la revue et à l’owner."
+  },
+  {
+   "occurrences": 3,
+   "fichiers": [
+    "ACTION.md",
+    "DIRECTION.md",
+    "SAVOIR.md"
+   ],
+   "lieux": [
+    "V1/official/ACTION.md:518",
+    "V1/official/DIRECTION.md:500",
+    "V1/official/SAVOIR.md:207"
+   ],
+   "extrait": "La correction doit changer une relation visible, une tâche, une preuve, une contrainte ou une propriété de robustesse ; "
+  },
+  {
+   "occurrences": 3,
+   "fichiers": [
+    "ACTION.md",
+    "DIRECTION.md",
+    "SAVOIR.md"
+   ],
+   "lieux": [
+    "V1/official/ACTION.md:544",
+    "V1/official/DIRECTION.md:583",
+    "V1/official/SAVOIR.md:479"
+   ],
+   "extrait": "Lorsque l’enjeu identitaire est élevé, accompagne-la d’une référence observée, d’une contrainte réelle ou d’une réserve "
+  },
+  {
+   "occurrences": 3,
+   "fichiers": [
+    "ACTION.md",
+    "DIRECTION.md"
+   ],
+   "lieux": [
+    "V1/official/ACTION.md:538",
+    "V1/official/DIRECTION.md:595",
+    "V1/official/DIRECTION.md:698"
+   ],
+   "extrait": "Matérialise l’alternative seulement au niveau nécessaire pour comparer la décision : phrase, schéma, cible ou rendu."
+  },
+  {
+   "occurrences": 3,
+   "fichiers": [
+    "QUICKSTART.md",
+    "READING_MAP.md",
+    "SKILL.md"
+   ],
+   "lieux": [
+    "V1/official/QUICKSTART.md:41",
+    "V1/official/READING_MAP.md:13",
+    "skills/design-governance-practice/SKILL.md:105"
+   ],
+   "extrait": "Ouvrir `ACTION` dès qu’un artefact, une observation, une preuve, un état ou une clôture est concerné. 6."
+  },
+  {
+   "occurrences": 3,
+   "fichiers": [
+    "ACTION.md",
+    "README.md",
+    "machine_projection.md"
+   ],
+   "lieux": [
+    "README.md:145",
+    "V1/official/ACTION.md:392",
+    "skills/design-governance-practice/references/machine_projection.md:128"
+   ],
+   "extrait": "Par mode : pour `LITE`, `ITER` et `STANDARD`, le paquet de clôture vit dans la trace et la machine ne le vérifie pas ; p"
+  },
+  {
+   "occurrences": 3,
+   "fichiers": [
+    "ACTION.md",
+    "QUICKSTART.md",
+    "SKILL.md"
+   ],
+   "lieux": [
+    "V1/official/ACTION.md:41",
+    "V1/official/QUICKSTART.md:212",
+    "skills/design-governance-practice/SKILL.md:20"
+   ],
+   "extrait": "```text MODE — DECISION — CHANGE — PROOF — LIMIT — NEXT-ACTION — OWNER ```"
+  },
+  {
+   "occurrences": 3,
+   "fichiers": [
+    "ACTION.md",
+    "GLOSSAIRE.md",
+    "QUICKSTART.md"
+   ],
+   "lieux": [
+    "V1/official/ACTION.md:286",
+    "V1/official/GLOSSAIRE.md:19",
+    "V1/official/QUICKSTART.md:25"
+   ],
+   "extrait": "| **Owner** | La personne ou l’équipe responsable de la décision, de la reprise ou de l’escalade. |"
+  },
+  {
+   "occurrences": 3,
+   "fichiers": [
+    "ACTION.md",
+    "DIRECTION.md",
+    "SAVOIR.md"
+   ],
+   "lieux": [
+    "V1/official/ACTION.md:75",
+    "V1/official/DIRECTION.md:17",
+    "V1/official/SAVOIR.md:20"
+   ],
+   "extrait": "| `CHANGELOG.md` | État de release, changements futurs, pilotes optionnels et décisions de gouvernance. |"
+  },
+  {
+   "occurrences": 3,
+   "fichiers": [
+    "ACTION.md",
+    "QUICKSTART.md",
+    "SKILL.md"
+   ],
+   "lieux": [
+    "V1/official/ACTION.md:17",
+    "V1/official/QUICKSTART.md:153",
+    "skills/design-governance-practice/SKILL.md:95"
+   ],
+   "extrait": "| `LITE` | `DIRECTION/START`, `ACTION/RUN-LITE`, `ACTION/FAST-PATH`, `ACTION/GATE-A` applicable et `ACTION/GATE-B` du ri"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "README.md"
+   ],
+   "lieux": [
+    "README.md:3",
+    "V1/official/README.md:3"
+   ],
+   "extrait": "**Design Governance V1.1.1** est une expérimentation maintenue : un cadre de direction, de création, de jugement et de v"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "CHANGELOG.md",
+    "README.md"
+   ],
+   "lieux": [
+    "README.md:7",
+    "V1/official/CHANGELOG.md:3"
+   ],
+   "extrait": "**Version publique :** `V1.1.1` **Statut expérimental :** Design Governance V1.1.1 est une expérimentation maintenue."
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "ACTION.md",
+    "DIRECTION.md"
+   ],
+   "lieux": [
+    "V1/official/ACTION.md:239",
+    "V1/official/DIRECTION.md:233"
+   ],
+   "extrait": "> `DECISION-CHANGE — [décision effectivement changée, confirmée ou abandonnée grâce à la procédure].`"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "ACTION.md",
+    "DIRECTION.md"
+   ],
+   "lieux": [
+    "V1/official/ACTION.md:237",
+    "V1/official/DIRECTION.md:231"
+   ],
+   "extrait": "Après une observation qui modifie, confirme ou abandonne effectivement une décision, la trace contient :"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "BIBLIOTHEQUE.md",
+    "DIRECTION.md"
+   ],
+   "lieux": [
+    "V1/official/BIBLIOTHEQUE.md:24",
+    "V1/official/DIRECTION.md:778"
+   ],
+   "extrait": "Avant de parcourir les sections détaillées, retiens ces décisions de protection :"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "DIRECTION.md"
+   ],
+   "lieux": [
+    "V1/official/DIRECTION.md:595",
+    "V1/official/DIRECTION.md:698"
+   ],
+   "extrait": "Avant le build, la trace du run (retrouvable par `trace_locator`) nomme la position retenue, l’alternative considérée, l"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "ACTION.md",
+    "BIBLIOTHEQUE.md"
+   ],
+   "lieux": [
+    "V1/official/ACTION.md:671",
+    "V1/official/BIBLIOTHEQUE.md:631"
+   ],
+   "extrait": "C’est la seule définition de la structure d’un composant : `ACTION` en garde la baseline comme preuve, la migration et l"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "ACTION.md",
+    "DIRECTION.md"
+   ],
+   "lieux": [
+    "V1/official/ACTION.md:279",
+    "V1/official/DIRECTION.md:239"
+   ],
+   "extrait": "Elle peut vivre dans un ticket, un manifeste de projet, un espace de travail ou un fichier local."
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "DIRECTION.md"
+   ],
+   "lieux": [
+    "V1/official/DIRECTION.md:595",
+    "V1/official/DIRECTION.md:698"
+   ],
+   "extrait": "En `DIRECTION`, considère une **alternative située** lorsque la décision est ouverte et qu’une position différente peut "
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "CHANGELOG.md",
+    "README.md"
+   ],
+   "lieux": [
+    "README.md:3",
+    "V1/official/CHANGELOG.md:47"
+   ],
+   "extrait": "Il aide à transformer un brief en décision située, artefact réel, observation pertinente et trace proportionnée au risqu"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "QUICKSTART.md",
+    "SKILL.md"
+   ],
+   "lieux": [
+    "V1/official/QUICKSTART.md:216",
+    "skills/design-governance-practice/SKILL.md:81"
+   ],
+   "extrait": "Il demande confirmation avant toute action externe, irréversible, publique, destructive, financière ou persistante hors "
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "CHANGELOG.md",
+    "README.md"
+   ],
+   "lieux": [
+    "README.md:143",
+    "V1/official/CHANGELOG.md:98"
+   ],
+   "extrait": "Ils ne remplacent ni l’observation d’un rendu, ni un test utilisateur, ni une vérification d’accessibilité exécutée, ni "
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "QUICKSTART.md",
+    "README.md"
+   ],
+   "lieux": [
+    "README.md:7",
+    "V1/official/QUICKSTART.md:7"
+   ],
+   "extrait": "La baseline est contrôlée et destinée à un usage supervisé ; elle ne promet ni beauté automatique, ni réussite universel"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "BIBLIOTHEQUE.md"
+   ],
+   "lieux": [
+    "V1/official/BIBLIOTHEQUE.md:37",
+    "V1/official/BIBLIOTHEQUE.md:74"
+   ],
+   "extrait": "La chaîne `support → grille → scène → objet → primitive` décrit des responsabilités, pas un ordre obligatoire de chargem"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "ACTION.md",
+    "machine_projection.md"
+   ],
+   "lieux": [
+    "V1/official/ACTION.md:386",
+    "skills/design-governance-practice/references/machine_projection.md:126"
+   ],
+   "extrait": "La projection ne doit jamais introduire `SELF-DECLARED`, `ATLAS-PASS`, `POLISHED`, `SLOP-FREE` ou un score esthétique."
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "ACTION.md"
+   ],
+   "lieux": [
+    "V1/official/ACTION.md:1003",
+    "V1/official/ACTION.md:1015"
+   ],
+   "extrait": "La réserve, si elle existe, possède-t-elle owner, périmètre, date ou version, impact, date de revue, prochaine preuve et"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "BIBLIOTHEQUE.md",
+    "SAVOIR.md"
+   ],
+   "lieux": [
+    "V1/official/BIBLIOTHEQUE.md:203",
+    "V1/official/SAVOIR.md:205"
+   ],
+   "extrait": "Le `one-shot` est une stratégie de préparation, pas une absence de jugement."
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "QUICKSTART.md",
+    "SKILL.md"
+   ],
+   "lieux": [
+    "V1/official/QUICKSTART.md:291",
+    "skills/design-governance-practice/SKILL.md:149"
+   ],
+   "extrait": "Le polish est la résolution cohérente de la structure, du contenu, de la typographie, de la matière, de l’action et des "
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "DIRECTION.md",
+    "SAVOIR.md"
+   ],
+   "lieux": [
+    "V1/official/DIRECTION.md:668",
+    "V1/official/SAVOIR.md:778"
+   ],
+   "extrait": "Le système ne connaît ni la stack, ni les contraintes techniques, ni les délais tant qu’ils ne sont pas déclarés ; une c"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "ACTION.md",
+    "SKILL.md"
+   ],
+   "lieux": [
+    "V1/official/ACTION.md:49",
+    "skills/design-governance-practice/SKILL.md:32"
+   ],
+   "extrait": "Les champs non applicables sont marqués `N/A-JUSTIFIED`."
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "QUICKSTART.md",
+    "SKILL.md"
+   ],
+   "lieux": [
+    "V1/official/QUICKSTART.md:319",
+    "skills/design-governance-practice/SKILL.md:59"
+   ],
+   "extrait": "Lisez une source détaillée uniquement si elle peut modifier une décision, un artefact, une preuve, une limite ou la proc"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "ACTION.md",
+    "DIRECTION.md"
+   ],
+   "lieux": [
+    "V1/official/ACTION.md:243",
+    "V1/official/DIRECTION.md:235"
+   ],
+   "extrait": "Ne déclare jamais un changement avant qu’une observation ne l’ait rendu réel."
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "READING_MAP.md",
+    "flow.md"
+   ],
+   "lieux": [
+    "V1/official/READING_MAP.md:9",
+    "skills/design-governance-practice/references/flow.md:24"
+   ],
+   "extrait": "Pour composer plusieurs capacités selon un résultat recherché — direction, beauté située, créativité, usage, preuve, vit"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "QUICKSTART.md",
+    "SKILL.md"
+   ],
+   "lieux": [
+    "V1/official/QUICKSTART.md:45",
+    "skills/design-governance-practice/SKILL.md:119"
+   ],
+   "extrait": "Pour une décision visuelle ouverte, utilise le **Creative Boot** de `DIRECTION` avant le premier pixel : promesse, objet"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "ACTION.md",
+    "SKILL.md"
+   ],
+   "lieux": [
+    "V1/official/ACTION.md:261",
+    "skills/design-governance-practice/SKILL.md:139"
+   ],
+   "extrait": "Seul un résultat observé dans le scope déclaré peut alimenter `DECISION-CHANGE` ou un verdict."
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "ACTION.md",
+    "DIRECTION.md"
+   ],
+   "lieux": [
+    "V1/official/ACTION.md:538",
+    "V1/official/DIRECTION.md:698"
+   ],
+   "extrait": "Si aucune alternative située ne change raisonnablement le choix, note cette condition et passe à la spec après avoir nom"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "ACTION.md",
+    "DIRECTION.md"
+   ],
+   "lieux": [
+    "V1/official/ACTION.md:426",
+    "V1/official/DIRECTION.md:133"
+   ],
+   "extrait": "Sinon, s’agit-il d’un écran ou flow nouveau sans charge identitaire autonome ni blast radius systémique ? → `ACTION/RUN-"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "DIRECTION.md",
+    "QUICKSTART.md"
+   ],
+   "lieux": [
+    "V1/official/DIRECTION.md:304",
+    "V1/official/QUICKSTART.md:45"
+   ],
+   "extrait": "Sur brief vague, la prise de brief de `DIRECTION/EXTERNAL-START` demande au plus trois intrants, dans cet ordre : conten"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "CHANGELOG.md",
+    "README.md"
+   ],
+   "lieux": [
+    "V1/official/CHANGELOG.md:100",
+    "V1/official/README.md:51"
+   ],
+   "extrait": "Toute conclusion d’usage doit préciser ce qui a été observé, par quelle méthode, dans quel scope et avec quelle limite."
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "ACTION.md",
+    "DIRECTION.md"
+   ],
+   "lieux": [
+    "V1/official/ACTION.md:227",
+    "V1/official/DIRECTION.md:593"
+   ],
+   "extrait": "Un gate nécessaire mais non vérifiable est `NOT-VERIFIED`, jamais `PASS` par défaut."
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "ACTION.md",
+    "DIRECTION.md"
+   ],
+   "lieux": [
+    "V1/official/ACTION.md:725",
+    "V1/official/DIRECTION.md:626"
+   ],
+   "extrait": "Un référentiel de conformité ne valide ni la direction visuelle, ni l’utilisabilité globale, ni l’adéquation du position"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "QUICKSTART.md",
+    "README.md"
+   ],
+   "lieux": [
+    "README.md:149",
+    "V1/official/QUICKSTART.md:280"
+   ],
+   "extrait": "Une capture prouve un rendu dans son scope ; elle ne prouve pas à elle seule une tâche utilisateur, un lecteur d’écran, "
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "DIRECTION.md",
+    "SAVOIR.md"
+   ],
+   "lieux": [
+    "V1/official/DIRECTION.md:418",
+    "V1/official/SAVOIR.md:489"
+   ],
+   "extrait": "Une image jolie mais sans conséquence de décision est décorative et ne suffit pas comme ancre."
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "QUICKSTART.md",
+    "canonical_minimum.md"
+   ],
+   "lieux": [
+    "V1/official/QUICKSTART.md:81",
+    "skills/design-governance-practice/references/canonical_minimum.md:7"
+   ],
+   "extrait": "Une proposition créative peut rester explicitement hypothétique, mais elle ne doit pas être présentée comme un run V1 co"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "QUICKSTART.md",
+    "README.md"
+   ],
+   "lieux": [
+    "README.md:149",
+    "V1/official/QUICKSTART.md:307"
+   ],
+   "extrait": "Une trace complète sans conséquence est du slop procédural : si une étape, une variante, une référence ou un tag ne chan"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "CHANGELOG.md",
+    "README.md"
+   ],
+   "lieux": [
+    "V1/official/CHANGELOG.md:98",
+    "V1/official/README.md:47"
+   ],
+   "extrait": "Une validation de package ou de `RUN_CARD` confirme uniquement les contrôles exécutés ; elle ne prouve ni l’usage, ni l’"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "DIRECTION.md"
+   ],
+   "lieux": [
+    "V1/official/DIRECTION.md:265",
+    "V1/official/DIRECTION.md:799"
+   ],
+   "extrait": "`ACTION` des preuves exécutables, gates, statuts et verdicts ;"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "QUICKSTART.md",
+    "SKILL.md"
+   ],
+   "lieux": [
+    "V1/official/QUICKSTART.md:43",
+    "skills/design-governance-practice/SKILL.md:109"
+   ],
+   "extrait": "`ACTION` pour transformer la décision en livraison observable, corrigible et prouvable."
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "ACTION.md",
+    "DIRECTION.md"
+   ],
+   "lieux": [
+    "V1/official/ACTION.md:544",
+    "V1/official/DIRECTION.md:583"
+   ],
+   "extrait": "`ANCHOR-GENERATED` reste une hypothèse visuelle comparable, non une calibration externe suffisante par défaut."
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "BIBLIOTHEQUE.md"
+   ],
+   "lieux": [
+    "V1/official/BIBLIOTHEQUE.md:728",
+    "V1/official/BIBLIOTHEQUE.md:750"
+   ],
+   "extrait": "`BIBLIOTHEQUE/GATE` ne possède ni statut ni verdict propres."
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "QUICKSTART.md",
+    "SKILL.md"
+   ],
+   "lieux": [
+    "V1/official/QUICKSTART.md:41",
+    "skills/design-governance-practice/SKILL.md:105"
+   ],
+   "extrait": "`BIBLIOTHEQUE` intervient si la structure, le composant ou la micro-interface peut changer la décision."
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "QUICKSTART.md",
+    "SKILL.md"
+   ],
+   "lieux": [
+    "V1/official/QUICKSTART.md:43",
+    "skills/design-governance-practice/SKILL.md:109"
+   ],
+   "extrait": "`BIBLIOTHEQUE` pour rendre la structure habitable, compatible et maintenable ;"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "QUICKSTART.md",
+    "SKILL.md"
+   ],
+   "lieux": [
+    "V1/official/QUICKSTART.md:41",
+    "skills/design-governance-practice/SKILL.md:105"
+   ],
+   "extrait": "`SAVOIR` intervient si le jugement, le craft, la source ou le contexte peut changer la décision ;"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "QUICKSTART.md",
+    "SKILL.md"
+   ],
+   "lieux": [
+    "V1/official/QUICKSTART.md:43",
+    "skills/design-governance-practice/SKILL.md:109"
+   ],
+   "extrait": "`SAVOIR` pour transformer une impression en jugement et en choix de craft ;"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "QUICKSTART.md",
+    "machine_projection.md"
+   ],
+   "lieux": [
+    "V1/official/QUICKSTART.md:305",
+    "skills/design-governance-practice/references/machine_projection.md:122"
+   ],
+   "extrait": "`STATE: CLOSED` signifie que la trace et les artefacts sont persistés."
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "SAVOIR.md",
+    "machine_projection.md"
+   ],
+   "lieux": [
+    "V1/official/SAVOIR.md:590",
+    "skills/design-governance-practice/references/machine_projection.md:12"
+   ],
+   "extrait": "```yaml run_card: id: DIRECTION-PREMIUM-001 owner: design-owner date_version: \"2026-08-29 / V1\" mode: DIRECTION decision"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "DIRECTION.md",
+    "QUICKSTART.md"
+   ],
+   "lieux": [
+    "V1/official/DIRECTION.md:338",
+    "V1/official/QUICKSTART.md:174"
+   ],
+   "extrait": "| **Désirabilité située** | La beauté ou l’attrait provient d’une relation au produit, au contexte et au public, pas d’u"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "QUICKSTART.md"
+   ],
+   "lieux": [
+    "V1/official/QUICKSTART.md:22",
+    "V1/official/QUICKSTART.md:68"
+   ],
+   "extrait": "| **Quel risque domine ?** | Identité, usage, accessibilité, technique, système ou autre risque déclaré. |"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "DIRECTION.md",
+    "QUICKSTART.md"
+   ],
+   "lieux": [
+    "V1/official/DIRECTION.md:340",
+    "V1/official/QUICKSTART.md:176"
+   ],
+   "extrait": "| **Résilience visible** | La direction tient dans les transformations pertinentes pour le risque : mobile, contenu long"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "ACTION.md",
+    "DIRECTION.md"
+   ],
+   "lieux": [
+    "V1/official/ACTION.md:975",
+    "V1/official/DIRECTION.md:739"
+   ],
+   "extrait": "| Contexte critique, responsive, performance ou motion | `SAVOIR/CONTEXT`. |"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "DIRECTION.md",
+    "SAVOIR.md"
+   ],
+   "lieux": [
+    "V1/official/DIRECTION.md:691",
+    "V1/official/SAVOIR.md:287"
+   ],
+   "extrait": "| Structure | Grille stricte ↔ tension sur grille ↔ hors grille | Où la lecture est-elle stabilisée puis décalée ? |"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "DIRECTION.md",
+    "SAVOIR.md"
+   ],
+   "lieux": [
+    "V1/official/DIRECTION.md:696",
+    "V1/official/SAVOIR.md:292"
+   ],
+   "extrait": "| Texte / image | Texte souverain ↔ preuve souveraine ↔ relation équilibrée | Quel élément porte la crédibilité ? |"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "QUICKSTART.md",
+    "README.md"
+   ],
+   "lieux": [
+    "V1/official/QUICKSTART.md:315",
+    "V1/official/README.md:33"
+   ],
+   "extrait": "| [`SAVOIR.md`](./SAVOIR.md) | Jugement, craft, contenu, contexte, sources et intégrité. |"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "ACTION.md",
+    "READING_MAP.md"
+   ],
+   "lieux": [
+    "V1/official/ACTION.md:966",
+    "V1/official/READING_MAP.md:117"
+   ],
+   "extrait": "| `ACTION/ROUTING` | `ACTION.md` — `## ACTION/ROUTING — prérequis de jugement et de structure` |"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "ACTION.md",
+    "READING_MAP.md"
+   ],
+   "lieux": [
+    "V1/official/ACTION.md:109",
+    "V1/official/READING_MAP.md:114"
+   ],
+   "extrait": "| `ACTION/UI-UX-REALITY` | `ACTION.md` — `### ACTION/UI-UX-REALITY — construire l’interface et la tâche ensemble` |"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "ACTION.md",
+    "SAVOIR.md"
+   ],
+   "lieux": [
+    "V1/official/ACTION.md:72",
+    "V1/official/SAVOIR.md:17"
+   ],
+   "extrait": "| `DIRECTION.md` | Rôle, cinq absolus, classification, routage général et cadrage de capacité. |"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "DIRECTION.md",
+    "READING_MAP.md"
+   ],
+   "lieux": [
+    "V1/official/DIRECTION.md:321",
+    "V1/official/READING_MAP.md:103"
+   ],
+   "extrait": "| `DIRECTION/FIRST-OBJECT` | `DIRECTION.md` — `## DIRECTION/FIRST-OBJECT — compiler le brief et produire le premier obje"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "BIBLIOTHEQUE.md"
+   ],
+   "lieux": [
+    "V1/official/BIBLIOTHEQUE.md:136",
+    "V1/official/BIBLIOTHEQUE.md:532"
+   ],
+   "extrait": "| `OBJECT/<NAME>` | Preuve, sélection, comparaison, mémoire, contrôle ou action locale. |"
+  },
+  {
+   "occurrences": 2,
+   "fichiers": [
+    "ACTION.md",
+    "DIRECTION.md"
+   ],
+   "lieux": [
+    "V1/official/ACTION.md:73",
+    "V1/official/DIRECTION.md:15"
+   ],
+   "extrait": "| `SAVOIR.md` | Principes de jugement, craft, styles, contexte, outils et intégrité. |"
+  }
+ ],
+ "listes_chargement": {
+  "SKILL, table de charge": [
+   "ACTION/FIRST-RENDER",
+   "ACTION/ROUTING",
+   "ACTION/RUN-DIRECTION",
+   "DIRECTION/FIRST-OBJECT",
+   "DIRECTION/START",
+   "DIRECTION/VISUAL_TARGET",
+   "SAVOIR/CRAFT/CFT-00"
+  ],
+  "QUICKSTART §5": [
+   "ACTION/RUN-DIRECTION",
+   "DIRECTION/DOUBLE-LOOP",
+   "DIRECTION/FIRST-OBJECT",
+   "DIRECTION/START",
+   "DIRECTION/VISUAL_TARGET",
+   "SAVOIR/CRAFT/CFT-00"
+  ],
+  "QUICKSTART §4": [
+   "ACTION/RUN-DIRECTION",
+   "DIRECTION/START",
+   "DIRECTION/VISUAL_TARGET",
+   "SAVOIR/CRAFT/CFT-00"
+  ],
+  "QUICKSTART §1": [
+   "ACTION/RUN-DIRECTION",
+   "DIRECTION/CREATIVE-BOOT",
+   "DIRECTION/DOUBLE-LOOP",
+   "DIRECTION/FIRST-OBJECT",
+   "DIRECTION/VISUAL_TARGET",
+   "SAVOIR/CRAFT/CFT-00"
+  ],
+  "READING_MAP": [
+   "ACTION/RUN-DIRECTION",
+   "DIRECTION/FIRST-OBJECT",
+   "DIRECTION/START",
+   "DIRECTION/VISUAL_TARGET"
+  ],
+  "ORCHESTRATION_MAP": [
+   "ACTION/RUN-DIRECTION",
+   "DIRECTION/FIRST-OBJECT",
+   "DIRECTION/START",
+   "DIRECTION/VISUAL_TARGET"
+  ]
+ }
+}
