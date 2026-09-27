@@ -1,0 +1,62 @@
+diff --git a/package/V1/official/CHANGELOG.md b/package/V1/official/CHANGELOG.md
+index 2414a8b..32ca014 100644
+--- a/package/V1/official/CHANGELOG.md
++++ b/package/V1/official/CHANGELOG.md
+@@ -18,6 +18,7 @@
+ - **Trace et checkpoint (refonte, R5b-1).** Trace légère par défaut, complète si le run est persistant, partagé, audité ou si une acceptation est demandée (`ACTION/HANDOFF`) ; Gate B, `RUN_CARD` et paquet de clôture chargés en trace complète ; la première proposition vaut checkpoint, sauf action irréversible ou coûteuse ; destination réelle sans contenu : exemple marqué plutôt qu’emplacements vides ; test de trame dans les signaux de convergence. Schéma `RUN_CARD` inchangé.
+ - **ACTION restructurée (refonte, R5b-2).** Gate A par profil de surface (contrôles d’office et selon le contenu) ; Gate C relie chaque critère à son geste de correction dans le noyau et sert, en trace légère, de contrôle de craft sans verdict ; une seule description de la boucle (`DIRECTION/DOUBLE-LOOP`) ; promesse du validateur tenue en un seul lieu (`ACTION/RUN_CARD`). Schéma `RUN_CARD` inchangé.
+ - **DIRECTION restructurée (refonte, R5a).** Rôle, posture et récapitulatif de protection en tête ; rôle défini une seule fois ; entrée unique (classer : `START`, charger : `CHARGE`, fabriquer : le noyau) ; doublons de lecture et de passage retirés ; phrase hors contexte du bloc de prise de brief corrigée. Aucun locator renommé.
++- **Convergence typographique (refonte, R8a).** La question de convergence du noyau porte sur la palette et sur la police de titre (comparer au moins deux voix typographiques sur le vrai titre) ; la veille note un signal à confirmer (grotesque large sur blanc neutre, P1).
+ - **Efficacité.** `NOT-VERIFIED` : l’épreuve de référence donne V1.1.1 ≈ sans système sur la qualité perçue ; l’effet de ces chantiers reste à éprouver (G4).
+ 
+ ## V1.1.1 — Retour d’audit : alignements de textes et de façades
+diff --git a/package/V1/official/SAVOIR.md b/package/V1/official/SAVOIR.md
+index 09c9656..ab8b6c1 100644
+--- a/package/V1/official/SAVOIR.md
++++ b/package/V1/official/SAVOIR.md
+@@ -383,7 +383,7 @@ Formule le compromis : ce qui gagne entre compréhension immédiate et juste dis
+ [REQUIS PAR LE MODULE — couleur, thème, statut ou surface identitaire] Conçois une palette par rôles : surfaces, textes, actions, états et frontières. La répartition entre neutres et couleurs est une décision de direction, pas un défaut : une structure neutre à accent, une identité multicolore structurelle ou un codage par zones sont recevables si les rôles, les états, le contraste calculé et un indice non chromatique pour toute information critique tiennent. Une couleur sémantique n’est pas une décoration.
+ 
+ <!-- noyau:début COMP-CONVERGENCE -->
+-**Question de convergence.** Cette palette est-elle celle que le modèle produirait sans brief (neutres et un seul accent, sombre et doré, dégradé froid) ? Si oui, nomme ce qui, dans le produit, la justifie. Sinon, reconsidère-la. La question ne prescrit aucun écart : une palette convergente justifiée reste valide.
++**Question de convergence.** Cette palette et cette police de titre sont-elles celles que le modèle produirait sans brief (palette : neutres et un seul accent, sombre et doré, dégradé froid ; police : la grotesque large ou la serif de caractère prise par réflexe) ? Si oui, nomme ce qui, dans le produit, les justifie. Sinon, reconsidère-les. Pour la police de titre, compare au moins deux voix typographiques distinctes (par exemple grotesque, serif, mécane, manuscrite ou vernaculaire du lieu) sur le vrai titre avant de choisir. La question ne prescrit aucun écart : un choix convergent justifié reste valide.
+ <!-- noyau:fin COMP-CONVERGENCE -->
+ 
+ La palette est conditionnelle : elle est documentée lorsqu’elle peut changer la décision, le thème, le statut ou la direction. Si le système existant est conservé et qu’aucun choix de couleur ne change le run, note cette conservation et sa raison.
+@@ -859,7 +859,7 @@ Le sourcing de `DIRECTION` sépare trois rôles : **ancrage de direction** — p
+ 
+ <!-- noyau:début COMP-VAGUES -->
+ <!-- concept:ANT-01 -->
+-[VEILLE 2026-09] **Marqueurs de vague**, pour nommer `MODAL` (`DIRECTION/CREATIVE-BOOT`), jamais pour interdire : un marqueur gardé par décision reste valide. Vague 1 : violet, police Inter, halos et gradient décoratif, hero SaaS à cartes répétées. Vague 2 : fond beige ou crème, brun, serif de caractère ou serif italique, orange rouille, bandeau défilant, illustration peinte, tramage. Vague 3 : dithering, logos pixel, ASCII, hachures de plan, gravures, bleu Klein, libellés mono en capitales, repères de recadrage, paysage peint en fond. Source : épreuve de référence interne V1.2 (26-09-2026) et revue de références de designers (27-09-2026), 6 rendus sur 6 sur fond crème et brun, avec ou sans système. À revoir avant 2027-03.
++[VEILLE 2026-09] **Marqueurs de vague**, pour nommer `MODAL` (`DIRECTION/CREATIVE-BOOT`), jamais pour interdire : un marqueur gardé par décision reste valide. Vague 1 : violet, police Inter, halos et gradient décoratif, hero SaaS à cartes répétées. Vague 2 : fond beige ou crème, brun, serif de caractère ou serif italique, orange rouille, bandeau défilant, illustration peinte, tramage. Vague 3 : dithering, logos pixel, ASCII, hachures de plan, gravures, bleu Klein, libellés mono en capitales, repères de recadrage, paysage peint en fond. Source : épreuve de référence interne V1.2 (26-09-2026) et revue de références de designers (27-09-2026), 6 rendus sur 6 sur fond crème et brun, avec ou sans système. Signal à confirmer (P1, 27-09-2026, 3 rendus sur 3, même auteur) : grotesque large ou condensée (Archivo) sur fond blanc neutre avec un seul accent vif. À revoir avant 2027-03.
+ <!-- noyau:fin COMP-VAGUES -->
+ 
+ <!-- noyau:début MOY-CARTE -->
+diff --git a/package/scripts/validate_structure.py b/package/scripts/validate_structure.py
+index 0f55d97..501abe3 100644
+--- a/package/scripts/validate_structure.py
++++ b/package/scripts/validate_structure.py
+@@ -96,6 +96,7 @@ ORDER: list[tuple[str, str]] = [("## Rôle", "## DIRECTION/START"),
+ FIDELITY: list[tuple[str, str, str]] = [
+     ("prise de brief", r"au plus trois", "destination si elle est incertaine"),
+     ("checkpoint", r"checkpoint[^.]{0,60}avant (?:le )?build|avant (?:le )?build[^.]{0,60}checkpoint", "irréversible ou coûteuse"),
++    ("question de convergence", r"Question de convergence", "police de titre"),
+ ]
+ 
+ # 5. Termes du vocabulaire de fabrication présents dans GLOSSAIRE.md (première cellule d'une ligne de table).
+diff --git a/package/skills/design-governance-practice/SKILL.md b/package/skills/design-governance-practice/SKILL.md
+index 8cdea72..7a0fa10 100644
+--- a/package/skills/design-governance-practice/SKILL.md
++++ b/package/skills/design-governance-practice/SKILL.md
+@@ -107,9 +107,9 @@ Les contrôles principaux sont : alignements nets, compensation optique, proximi
+ | Surface | Profondeur, lumière ou planéité sont-elles cohérentes ? | Élévations, frontières, lumière ou planéité revues. |
+ | États | Loading, empty, error et récupération sont-ils compréhensibles ? | États et sorties de récupération dessinés. |
+ 
+-**Question de convergence.** Cette palette est-elle celle que le modèle produirait sans brief (neutres et un seul accent, sombre et doré, dégradé froid) ? Si oui, nomme ce qui, dans le produit, la justifie. Sinon, reconsidère-la. La question ne prescrit aucun écart : une palette convergente justifiée reste valide.
++**Question de convergence.** Cette palette et cette police de titre sont-elles celles que le modèle produirait sans brief (palette : neutres et un seul accent, sombre et doré, dégradé froid ; police : la grotesque large ou la serif de caractère prise par réflexe) ? Si oui, nomme ce qui, dans le produit, les justifie. Sinon, reconsidère-les. Pour la police de titre, compare au moins deux voix typographiques distinctes (par exemple grotesque, serif, mécane, manuscrite ou vernaculaire du lieu) sur le vrai titre avant de choisir. La question ne prescrit aucun écart : un choix convergent justifié reste valide.
+ 
+-[VEILLE 2026-09] **Marqueurs de vague**, pour nommer `MODAL` (`DIRECTION/CREATIVE-BOOT`), jamais pour interdire : un marqueur gardé par décision reste valide. Vague 1 : violet, police Inter, halos et gradient décoratif, hero SaaS à cartes répétées. Vague 2 : fond beige ou crème, brun, serif de caractère ou serif italique, orange rouille, bandeau défilant, illustration peinte, tramage. Vague 3 : dithering, logos pixel, ASCII, hachures de plan, gravures, bleu Klein, libellés mono en capitales, repères de recadrage, paysage peint en fond. Source : épreuve de référence interne V1.2 (26-09-2026) et revue de références de designers (27-09-2026), 6 rendus sur 6 sur fond crème et brun, avec ou sans système. À revoir avant 2027-03.
++[VEILLE 2026-09] **Marqueurs de vague**, pour nommer `MODAL` (`DIRECTION/CREATIVE-BOOT`), jamais pour interdire : un marqueur gardé par décision reste valide. Vague 1 : violet, police Inter, halos et gradient décoratif, hero SaaS à cartes répétées. Vague 2 : fond beige ou crème, brun, serif de caractère ou serif italique, orange rouille, bandeau défilant, illustration peinte, tramage. Vague 3 : dithering, logos pixel, ASCII, hachures de plan, gravures, bleu Klein, libellés mono en capitales, repères de recadrage, paysage peint en fond. Source : épreuve de référence interne V1.2 (26-09-2026) et revue de références de designers (27-09-2026), 6 rendus sur 6 sur fond crème et brun, avec ou sans système. Signal à confirmer (P1, 27-09-2026, 3 rendus sur 3, même auteur) : grotesque large ou condensée (Archivo) sur fond blanc neutre avec un seul accent vif. À revoir avant 2027-03.
+ 
+ ### 6. Moyens et vérité
+ 

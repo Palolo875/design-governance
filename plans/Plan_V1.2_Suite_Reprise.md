@@ -15,7 +15,7 @@
    - auto-comparaison déclarée comme telle.
 4. **Décisions en attente** (plan maître §8) : 3, 6, 8, 9 et 10. **Ne pas appliquer un contenu qui en dépend avant la décision** ; préparer le texte et poser la question.
 
-## 2. État (après R5a)
+## 2. État (après R8a)
 
 | Fait | Rapport |
 |---|---|
@@ -24,6 +24,7 @@
 | R5b-1 : trace légère, première proposition = checkpoint, contenu d'exemple marqué, test de trame | `V12R_06` |
 | R5b-2 : Gate A par profil, Gate C en gestes, boucle unique, promesse du validateur unique | `V12R_07` |
 | R5a : DIRECTION (rôle, posture et récapitulatif en tête ; entrée unique ; doublons ; D-17, D-19) | `V12R_08` |
+| R8a : convergence typographique (D-21) dans la question de convergence du noyau | `V12R_09` |
 
 - **Mesures :**
   - chemin prescrit 12 076 mots (trace légère), 16 687 en trace complète ;
@@ -125,7 +126,7 @@ Chaque lot : **périmètre**, **gardes à ajouter**, **réussite**, **arrêt**.
 - **Périmètre :**
   - carte des moyens consolidée (critères, sources datées `[VEILLE]`) ;
   - atlas d'ancres annotées v1, en **référence de la skill** chargée seulement si la décision visuelle est ouverte ;
-  - **D-21** (convergence Archivo et fond blanc neutre) : étendre la « question de convergence » du noyau (§5) à la **typographie** (familles que le modèle choisit sans brief) avec la même règle : nommer, justifier ou reconsidérer, jamais interdire.
+  - ~~**D-21**~~ fait en R8a (`V12R_09`). Rappel de l'ancien périmètre : étendre la « question de convergence » du noyau (§5) à la **typographie** (familles que le modèle choisit sans brief) avec la même règle : nommer, justifier ou reconsidérer, jamais interdire.
 - **Arrêt :** si l'atlas pousse vers un seul style, ne garder que les critères.
 
 ### R11 — Réserves et mineurs (M) · sans décision en attente
@@ -149,5 +150,5 @@ Chaque lot : **périmètre**, **gardes à ajouter**, **réussite**, **arrêt**.
 
 - **Exemptions de la garde « boucle unique »** : SAVOIR, BIBLIOTHEQUE et README, à retirer en R5c, R5d et R6.
 - **Carte de lecture d'ACTION** : conservée (C4, 13.02 et `validate_design_governance` en dépendent), gardée par CHG-09. Sa fusion demande une rectification déclarée de ces outils.
-- **D-19** → R5a ; **D-21** → R8 ; **D-16** → R5c ; **F22** → R5d.
+- ~~D-19~~ (R5a) ; ~~D-21~~ (R8a) ; **D-16** → R5c ; **F22** → R5d.
 - **Coût d'un run** (D-23) : l'effet de la trace légère n'a pas été mesuré, ce sera en R10.
