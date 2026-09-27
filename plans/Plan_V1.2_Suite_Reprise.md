@@ -15,7 +15,7 @@
    - auto-comparaison déclarée comme telle.
 4. **Décisions en attente** (plan maître §8) : 3, 6, 8, 9 et 10. **Ne pas appliquer un contenu qui en dépend avant la décision** ; préparer le texte et poser la question.
 
-## 2. État (après R6a)
+## 2. État (après R11a)
 
 | Fait | Rapport |
 |---|---|
@@ -28,14 +28,15 @@
 | R5c (hors ancre) : un seul modèle de niveaux (D-16), boucle et one-shot en renvoi, exemption SAVOIR retirée | `V12R_10` |
 | R5d : boucle et one-shot de BIBLIOTHEQUE en renvoi, F22 atteignable depuis Gate C (PRC-01) | `V12R_11` |
 | R6a : boucle du README en renvoi (dernière exemption levée), glossaire des termes de la refonte | `V12R_12` |
+| R11a : résidu `DAILY` retiré ; ancre de mesure F13 rectifiée ; carte des moyens v0 alignée sur D-20 | `V12R_13` |
 
 - **Mesures :**
-  - chemin prescrit 12 076 mots (trace légère), 16 687 en trace complète ;
-  - noyau 3 222 mots ;
-  - 24/25 outils de fabrication sur le chemin ;
+  - chemin prescrit 12 187 mots (trace légère), 16 798 en trace complète ;
+  - noyau 3 302 mots ;
+  - 24/25 outils de fabrication sur le chemin ; l'outil manquant est **F22** (tests perceptifs), atteignable en un renvoi conditionnel depuis Gate C (`PRC-01`), non compté car la mesure ne suit que les lectures impératives ;
   - 1 liste de chargement.
 - **Gardes :**
-  - `validate_structure.py` : 17 concepts, 6 vocabulaires retirés, CHG-01 à CHG-09 ;
+  - `validate_structure.py` : 19 concepts, 3 renvois, 12 vocabulaires retirés, 3 résumés fidèles, 16 termes de glossaire, CHG-01 à CHG-09, ORD-01 ;
   - `validate_reading_map.py` : 50 conditions.
 - **Suivi :** vert (372 cas maintenus, 17 migrés).
 
@@ -165,7 +166,9 @@ Chaque lot : **périmètre**, **gardes à ajouter**, **réussite**, **arrêt**.
 
 ## 5. Dette déclarée à solder
 
-- **Exemptions de la garde « boucle unique »** : SAVOIR, BIBLIOTHEQUE et README, à retirer en R5c, R5d et R6.
+- ~~Exemptions de la garde « boucle unique »~~ : toutes levées (R5c, R5d, R6a).
 - **Carte de lecture d'ACTION** : conservée (C4, 13.02 et `validate_design_governance` en dépendent), gardée par CHG-09. Sa fusion demande une rectification déclarée de ces outils.
-- ~~D-19~~ (R5a) ; ~~D-21~~ (R8a) ; **D-16** → R5c ; **F22** → R5d.
+- ~~D-19~~ (R5a) ; ~~D-21~~ (R8a) ; ~~D-16~~ (R5c) ; ~~F22~~ (R5d, atteignable depuis Gate C).
+- **Mesure d'atteignabilité** : elle repose sur des ancres textuelles (`audit/data/V12R/V12R_outils_fabrication.json`) ; une reformulation peut faire « disparaître » un outil encore présent (cas F13 en R8a, rectifié en R11a). Proposition : cliquet d'atteignabilité dans `V12R_Suivi.py` (à décider).
+- **Plan consolidé (proposition du 27-09-2026)** : `plans/propositions/Plan_consolide_V1.2_2026-09-27.md`. Non actif : ses arbitrages seront intégrés à ce plan après décision de l'owner, sans second plan concurrent.
 - **Coût d'un run** (D-23) : l'effet de la trace légère n'a pas été mesuré, ce sera en R10.

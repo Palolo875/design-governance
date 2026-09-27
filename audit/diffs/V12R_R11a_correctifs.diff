@@ -1,0 +1,37 @@
+diff --git a/package/V1/official/CHANGELOG.md b/package/V1/official/CHANGELOG.md
+index ccc3041..b0bf0d3 100644
+--- a/package/V1/official/CHANGELOG.md
++++ b/package/V1/official/CHANGELOG.md
+@@ -22,6 +22,7 @@
+ - **SAVOIR alignée (refonte, R5c, hors ancre).** Un seul modèle de niveaux (`Correction`, `Précision`, `Intention`) ; la triade visée / observée / prouvée devient « trois moments de la qualité » ; boucle et one-shot renvoient à leur lieu propriétaire.
+ - **BIBLIOTHEQUE alignée (refonte, R5d).** Boucle structurelle et one-shot renvoient à leur lieu propriétaire en gardant leurs critères de structure ; les tests perceptifs de `BIBLIOTHEQUE/GATE` sont appelés depuis Gate C.
+ - **Façades (refonte, R6a).** README : la boucle renvoie à `DIRECTION/DOUBLE-LOOP` ; glossaire : trace légère, trace complète, première proposition, trame modale, profil de surface.
++- **Correctif (refonte, R11a).** L’ordre de lecture minimal de `DIRECTION/START` renvoie à `CHARGE` (dernier résidu de l’ancienne vue `DAILY`).
+ - **Efficacité.** `NOT-VERIFIED` : l’épreuve de référence donne V1.1.1 ≈ sans système sur la qualité perçue ; l’effet de ces chantiers reste à éprouver (G4).
+ 
+ ## V1.1.1 — Retour d’audit : alignements de textes et de façades
+diff --git a/package/V1/official/DIRECTION.md b/package/V1/official/DIRECTION.md
+index 4ba43ac..f2a8457 100644
+--- a/package/V1/official/DIRECTION.md
++++ b/package/V1/official/DIRECTION.md
+@@ -152,7 +152,7 @@ Cette proposition nomme toute hypothèse qui change sa direction. Elle ne peut j
+ 
+ **Source normative de classification.** `DIRECTION/START` est la source normative unique des modes et du risque dominant. `DIRECTION/CHARGE` est la liste de chargement par mode ; `FAST-PATH` est un raccourci pour un delta local ; `EXTERNAL-START` est une vue de transport pour un brief vague. Aucun de ces encadrés ne crée une classification concurrente. En cas de différence, `START` prévaut et le conflit est inscrit dans `CHANGELOG`.
+ 
+-> **Ordre de lecture minimal.** 1) `START` classe le mode et le risque. 2) La protection de niveau interdit toute baisse silencieuse face à un risque critique. 3) `DAILY` choisit la plus petite route utile ; `FAST-PATH` n’est qu’un encadré pour un correctif local ou une décision presque tranchée. 4) Une capacité n’est chargée que si elle change la construction ou la preuve. 5) `ACTION` porte la preuve et la clôture ; `SAVOIR` le jugement ; `BIBLIOTHEQUE` la structure. 6) Les modules `ATELIER`, grounding, réemploi et atlas restent silencieux tant qu’aucune décision ne peut être modifiée ; chacun n’est activé que si sa décision à modifier est identifiée, et plusieurs ne coexistent que si leurs décisions sont distinctes et utiles.
++> **Ordre de lecture minimal.** 1) `START` classe le mode et le risque. 2) La protection de niveau interdit toute baisse silencieuse face à un risque critique. 3) `CHARGE` choisit la plus petite route utile ; `FAST-PATH` n’est qu’un encadré pour un correctif local ou une décision presque tranchée. 4) Une capacité n’est chargée que si elle change la construction ou la preuve. 5) `ACTION` porte la preuve et la clôture ; `SAVOIR` le jugement ; `BIBLIOTHEQUE` la structure. 6) Les modules `ATELIER`, grounding, réemploi et atlas restent silencieux tant qu’aucune décision ne peut être modifiée ; chacun n’est activé que si sa décision à modifier est identifiée, et plusieurs ne coexistent que si leurs décisions sont distinctes et utiles.
+ 
+ ### Arbre de classification
+ 
+diff --git a/package/scripts/validate_structure.py b/package/scripts/validate_structure.py
+index e833e5c..fed89c6 100644
+--- a/package/scripts/validate_structure.py
++++ b/package/scripts/validate_structure.py
+@@ -90,6 +90,7 @@ RETIRED: list[tuple[str, str, set[str]]] = [
+     (r"cette vue reste interne", "la prise de brief reste dans la trace (D-19)", {"CHANGELOG.md"}),
+     (r"Mandat de fonctionnement|Adopte le niveau d’exigence", "rôle unique (ROL-01)", {"CHANGELOG.md"}),
+     (r"`VISUAL_TARGET` la spécifie", "chaîne de lecture interne unique (DIRECTION)", {"CHANGELOG.md"}),
++    (r"`DAILY`", "DIRECTION/CHARGE (R4 ; résidu retiré en R11a)", {"CHANGELOG.md"}),
+ ]
+ 
+ # 10. Ordre de DIRECTION (D-17) : rôle, posture et récapitulatif de protection avant les sections détaillées.

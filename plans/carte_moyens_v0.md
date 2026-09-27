@@ -12,6 +12,6 @@
 | Photographie | Non sans intrant | Client (même au téléphone, lumière du jour) ; banques sous licence (Wikimedia Commons, Unsplash) | `FOURNI`, `CURATÉ` |
 | Illustration, 3D | Non sans intrant | Commande, packs sous licence ; génération dirigée avec références ; 3D (par exemple Spline) | `FOURNI`, `CURATÉ`, `GÉNÉRÉ-DIRIGÉ` |
 | Fichiers de design, marque | Non sans intrant | Figma ou kit de marque par connecteur | `FOURNI` |
-| Contenu réel | Non sans le client | Client ; sinon emplacements marqués | — |
+| Contenu réel | Non sans le client | Client ; sinon contenu d’exemple marqué et liste de ce qu’il faut fournir (D-20, `CNT-01`, R5b-1) | — |
 
 **Traitement des assets moyens (chantier I) :** un seul traitement cohérent (recadrage, étalonnage, duotone, grain ou trame), justifié par la thèse ; la trame est un marqueur de la vague 3, à décider, pas à suivre.
