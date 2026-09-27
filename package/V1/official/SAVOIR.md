@@ -557,6 +557,8 @@ Les familles ci-dessous orientent la recherche ; elles ne sont ni des quotas, ni
 
 Un effet est retenu seulement s’il modifie une relation observable. Une ombre, un blur, un gradient, une texture, une animation ou une transition peuvent être légitimes, mais leur présence seule ne prouve rien. `DÉCORATIF-SANS-CONSEQUENCE` est une catégorie de retrait, jamais une technique à promouvoir.
 
+**Traitement des assets moyens.** Quand les assets disponibles sont moyens (photos de téléphone, banque d’images), applique un traitement unique et cohérent — recadrage, étalonnage, duotone, grain ou trame — justifié par la thèse, plutôt que de les poser bruts ou de les remplacer par un dessin. Le traitement unifie la série ; il ne masque ni un droit inconnu, ni une image hors sujet.
+
 ### Rôles d’asset
 
 Un asset peut servir de **preuve produit**, **contenu**, **identité**, **orientation**, **contexte**, **atmosphère**, **matière**, **signal d’état**, **donnée**, **média temporel** ou **modèle spatial**. Son rôle doit être observable dans la scène. `DIRECTION/VISUAL_TARGET` possède le rôle et la route de production ; `SAVOIR/SOURCE` possède la provenance, la transformation et la contre-indication ; `ACTION` observe l’intégration, le fallback, le scope, les droits selon le contrat du run, le statut et la clôture.
@@ -827,7 +829,9 @@ Le sourcing de `DIRECTION` sépare trois rôles : **ancrage de direction** — p
 
 [VEILLE] Les listes de produits contemporains, tendances, registres culturels et snapshots ne sont pas neutres. Chaque élément mobilisé dans un run porte source, date, portée et limite dans sa trace locale.
 
-[VEILLE 2026-09] **Marqueurs de vague**, pour nommer `MODAL` (`DIRECTION/CREATIVE-BOOT`), jamais pour interdire : un marqueur gardé par décision reste valide. Vague 1 : violet, police Inter, halos et gradient décoratif, hero SaaS à cartes répétées. Vague 2 : fond beige ou crème, brun, serif de caractère ou serif italique, orange rouille, bandeau défilant, illustration peinte, tramage. Source : épreuve de référence interne V1.2 (26-09-2026), 6 rendus sur 6 sur fond crème et brun, avec ou sans système. À revoir avant 2027-03.
+[VEILLE 2026-09] **Marqueurs de vague**, pour nommer `MODAL` (`DIRECTION/CREATIVE-BOOT`), jamais pour interdire : un marqueur gardé par décision reste valide. Vague 1 : violet, police Inter, halos et gradient décoratif, hero SaaS à cartes répétées. Vague 2 : fond beige ou crème, brun, serif de caractère ou serif italique, orange rouille, bandeau défilant, illustration peinte, tramage. Vague 3 : dithering, logos pixel, ASCII, hachures de plan, gravures, bleu Klein, libellés mono en capitales, repères de recadrage, paysage peint en fond. Source : épreuve de référence interne V1.2 (26-09-2026) et revue de références de designers (27-09-2026), 6 rendus sur 6 sur fond crème et brun, avec ou sans système. À revoir avant 2027-03.
+
+[VEILLE 2026-09] **Carte des moyens par couche**, des sources et jamais des styles, droits vérifiés à chaque usage. Typographie : polices de la marque, Google Fonts, Fontshare. Icônes : une seule famille (par exemple Lucide, Phosphor). Composants : design system fourni, sinon bibliothèque éprouvée (par exemple shadcn, Radix). Photographie : client, banques sous licence (Wikimedia Commons, Unsplash). Illustration et 3D : commande, packs sous licence, génération dirigée avec références (`GÉNÉRÉ-DIRIGÉ`). Fichiers et marque : Figma ou kit de marque par connecteur. En HTML seul, les assets figuratifs et le contenu réel restent hors plafond (`FABRICATION`). À revoir avant 2027-03.
 
 Une tendance est une hypothèse de direction. Avant de l’utiliser, vérifie qu’elle sert le JTBD, améliore la compréhension, reste accessible et performante et survit lorsque son nom marketing disparaît.
 

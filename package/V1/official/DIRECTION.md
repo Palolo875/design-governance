@@ -320,7 +320,7 @@ Cette traduction n’ajoute ni formulaire ni mode. Elle rend seulement le chemin
 
 ## DIRECTION/FIRST-OBJECT — compiler le brief et produire le premier objet
 
-Cette vue compacte référence `RUN-PRIORITY`, `VISUAL_TARGET` et `DIRECTION-ATELIER` ; elle ne recopie ni leurs champs, ni une seconde trace. Lorsqu’ils peuvent modifier la première scène, rends retrouvables seulement **situation**, **tension**, **geste produit**, **objet de preuve**, **marquage de vérité**, **position/exclusion** et **contre-choix situé**. Sur une surface `DIRECTION`, convertis ensuite le brief vague avec la chaîne **promesse → objet de preuve → geste**. L’objet arrive avant les bénéfices et rend le mécanisme plus clair que le texte seul. Toute démonstration générée ou hypothétique porte près de l’objet le marquage local `TRUTH/ILLUSTRATIVE`, cumulé avec `TRUTH/MECHANISM` lorsqu’elle matérialise un mécanisme (`DIRECTION/DIRECTION-ATELIER`) ; un exemple ne devient jamais une preuve de client, de performance, de disponibilité, d’intégration, de sécurité ou de résultat réel.
+Lorsque `RUN-PRIORITY`, `VISUAL_TARGET` ou `DIRECTION-ATELIER` peuvent modifier la première scène, rends retrouvables seulement **situation**, **tension**, **geste produit**, **objet de preuve**, **marquage de vérité**, **position/exclusion** et **contre-choix situé**. Sur une surface `DIRECTION`, convertis ensuite le brief vague avec la chaîne **promesse → objet de preuve → geste**. L’objet arrive avant les bénéfices et rend le mécanisme plus clair que le texte seul ; il est de préférence **codé** (composant, donnée, état ou interaction du produit), une illustration ne le portant que fournie, curatée ou générée dirigée. Toute démonstration générée ou hypothétique porte près de l’objet le marquage local `TRUTH/ILLUSTRATIVE`, cumulé avec `TRUTH/MECHANISM` lorsqu’elle matérialise un mécanisme (`DIRECTION/DIRECTION-ATELIER`) ; un exemple ne devient jamais une preuve de client, de performance, de disponibilité, d’intégration, de sécurité ou de résultat réel.
 
 Un CTA doit soit déclencher un comportement local réellement implémenté, soit mener à une action réellement disponible, soit déclarer sa limite. Un lien vide, une inscription fictive ou une démo qui simule une conséquence externe ne peut pas être présenté comme une action disponible.
 
@@ -341,7 +341,7 @@ Le premier objet est suffisant lorsqu’il permet de juger la direction comme un
 
 Un retour déclenché par cette table renvoie à la décision responsable — cible, structure, asset, contenu, type, état ou build — et non à un score esthétique. La table complète le contrôle de premier objet d’ACTION ; elle ne crée ni gate, ni verdict, ni quota.
 
-La colonne « Dimension CFT-00 » relie chaque dimension à la revue définie par `SAVOIR/CRAFT/CFT-00`. La vérité de scène relève de DIRECTION (marquage `TRUTH`, `DIRECTION/DIRECTION-ATELIER`). **Perte déclarée :** « Culture visuelle » n’a pas de seuil au premier objet ; elle est jugée par la revue créative (ce qui est culturellement transformé), et vaut `N/A-JUSTIFIED` sans référence.
+La vérité de scène relève de DIRECTION (marquage `TRUTH`, `DIRECTION/DIRECTION-ATELIER`). **Perte déclarée :** « Culture visuelle » n’a pas de seuil au premier objet ; elle est jugée par la revue créative (ce qui est culturellement transformé), et vaut `N/A-JUSTIFIED` sans référence.
 
 ### Grounding contestable
 
@@ -434,7 +434,7 @@ Ce n’est ni un statut, ni une préférence d’outil : c’est une réponse si
 
 La génération ne reçoit ni le rôle de défaut, ni celui de rattrapage décoratif. Une image générée est une **hypothèse visuelle comparable**, non une autorité esthétique. Une référence observée est un calibrateur, non un modèle à reproduire. La recherche ne vaut pas accumulation : elle explore seulement lorsqu’une source, un médium ou un registre peut modifier la direction.
 
-Une route est insuffisante si elle n’explique pas pourquoi l’asset, à son crop réel et dans son contexte réel, augmente la preuve, la compréhension ou la singularité de la surface.
+Une route est insuffisante si elle n’explique pas pourquoi l’asset, à son crop réel et dans son contexte réel, augmente la preuve, la compréhension ou la singularité de la surface. Sources par couche : carte des moyens (`SAVOIR`, `[VEILLE]`) ; un asset moyen reçoit un traitement unique et justifié (`SAVOIR`, section `DESIGN-ATLAS`), jamais un dessin de remplacement.
 
 ### Réserve `ANCHOR-GENERATED` en enjeu identitaire élevé
 

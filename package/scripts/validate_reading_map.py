@@ -429,7 +429,8 @@ def lcf_42(t: dict[str, str]) -> bool:
 # ---------- V1.2 (PATCH-DECISION A, B, D) : LCF-43 à LCF-46 ----------
 BRIEF_ORDER = re.compile(r"contenu réel.{0,80}?marque.{0,120}?asset principal.{0,120}?destination")
 WAVE_MARKERS = re.compile(r"hero SaaS|gradient décoratif|\bviolet\b|\bInter\b|\bhalos?\b|\bbeige\b|\bcrème\b|serif italique|"
-                          r"orange rouille|bandeau défilant|illustration peinte|\btramage\b")
+                          r"orange rouille|bandeau défilant|illustration peinte|\btramage\b|"
+                          r"\bdithering\b|logos? pixel|\bASCII\b|hachures de plan|bleu Klein|paysage peint")
 
 
 def boot_block(t: dict[str, str]) -> list[str]:
@@ -463,6 +464,32 @@ def lcf_46(t: dict[str, str]) -> bool:
     stray = [l for k in keys for l in t[k].splitlines() if WAVE_MARKERS.search(l) and not l.startswith("[VEILLE 20")]
     dated = [l for l in t["S"].splitlines() if l.startswith("[VEILLE 20") and WAVE_MARKERS.search(l)]
     return not stray and bool(dated)
+
+
+# ---------- V1.2 lot 2 (G, H, I, D') : LCF-47 à LCF-50 ----------
+def savoir_section(t: dict[str, str], start: str, stop: str) -> str:
+    return t["S"][t["S"].find(start):t["S"].find(stop)]
+
+
+def lcf_47(t: dict[str, str]) -> bool:
+    fo = t["D"][t["D"].find("## DIRECTION/FIRST-OBJECT"):t["D"].find("### Contrat positif du premier objet")]
+    return "de préférence **codé**" in fo and "de préférence codé" in t["SK"]
+
+
+def lcf_48(t: dict[str, str]) -> bool:
+    vt = t["D"][t["D"].find("### Décider la route de production"):t["D"].find("### Réserve `ANCHOR-GENERATED`")]
+    carte = [l for l in t["S"].splitlines() if l.startswith("[VEILLE 20") and "Carte des moyens par couche" in l]
+    return bool(carte) and "jamais des styles" in carte[0] and "carte des moyens" in vt
+
+
+def lcf_49(t: dict[str, str]) -> bool:
+    atlas = savoir_section(t, "# SAVOIR/DESIGN-ATLAS", "# SAVOIR/STYLE")
+    vt = t["D"][t["D"].find("### Décider la route de production"):t["D"].find("### Réserve `ANCHOR-GENERATED`")]
+    return "**Traitement des assets moyens.**" in atlas and "jamais un dessin de remplacement" in vt
+
+
+def lcf_50(t: dict[str, str]) -> bool:
+    return any(l.startswith("[VEILLE 20") and "Vague 3 :" in l for l in t["S"].splitlines())
 
 
 def check_facades(errors: list[str]) -> None:
@@ -534,6 +561,10 @@ def check_facades(errors: list[str]) -> None:
         ("LCF-44", "EXTERNAL-START, QUICKSTART, skill : prise de brief, même ordre", "DIRECTION/EXTERNAL-START (prise de brief) ; V1.2-B", lcf_44(t)),
         ("LCF-45", "boot, QUICKSTART, skill, exemples : MODAL / PARTI", "DIRECTION/CREATIVE-BOOT (MODAL, PARTI) ; V1.2-D", lcf_45(t)),
         ("LCF-46", "textes et façades : marqueurs de vague seulement en [VEILLE] daté", "SAVOIR ([VEILLE] daté) ; V1.2-D", lcf_46(t)),
+        ("LCF-47", "FIRST-OBJECT et skill : objet de preuve codé, de préférence", "DIRECTION/FIRST-OBJECT ; V1.2-G", lcf_47(t)),
+        ("LCF-48", "SAVOIR ([VEILLE] daté) et route de production : carte des moyens", "SAVOIR ([VEILLE]) ; V1.2-H", lcf_48(t)),
+        ("LCF-49", "SAVOIR (DESIGN-ATLAS) et route de production : traitement des assets moyens", "SAVOIR (DESIGN-ATLAS) ; V1.2-I", lcf_49(t)),
+        ("LCF-50", "SAVOIR, [VEILLE] daté : vague 3", "SAVOIR ([VEILLE]) ; V1.2-D'", lcf_50(t)),
     ]
     for lcf_id, facade, source, held in table:
         if not held:

@@ -42,6 +42,7 @@ Ne rien modifier dans `package/` pendant l'initialisation.
 - **Épreuve de référence B-DLA (unité V1.2-00) : close sans juge humain**, orientation déclarée : `audit/reports/V12_00_EPREUVE_REFERENCE_B-DLA.md`.
 - **Porte G1 franchie** (26-09-2026) : `audit/reports/V12_01_DECISIONS_G1.md`.
 - **PATCH-DECISION A, B, D appliquée sur B05 (G3)** : `audit/reports/V12_03_G3_APPLICATION_B05.md`. Sur la branche `v1.2/patch-decision-abd` (et la branche de session), `package/` est la **candidate V1.2** (version affichée V1.1.1, CHANGELOG « Non publié ») ; `main` reste V1.1.1. Contrôles B05 : 300/300, témoins 40/40, R 30/30, R03 18/18, 13.02 38/38, 46 conditions de façade. Instantané de référence : `audit/snapshots/V12_Instantane_harnais_B05_G3.json`.
+- **Lot 2 (G, H, I, D') appliqué sur B05** : `audit/reports/V12_04_LOT2_G_H_I_D.md` ; 50 conditions de façade ; instantané `V12_Instantane_harnais_B05_Lot2.json` ; budget 9 591 mots.
 - **Chantier en cours : plan V1.2**, `plans/Plan_V1.2_Qualite_senior_gouvernance.md`. Objectif : un premier rendu de niveau designer senior dès le one-shot, gouvernance conservée (bilan de fabrication, prise de brief minimale, matériaux, anti-slop vivant, atlas d'ancres, épreuve à l'aveugle).
 
 ## 3. Arborescence
@@ -81,7 +82,7 @@ Depuis `audit/tools/` :
 
 ```bash
 # Suivi des 22 harnais (environ 5 à 10 minutes), comparé au dernier instantané
-python3 DG_AUDIT_001_Suivi_harnais.py ../../package --compare ../snapshots/DG_AUDIT_001_Instantane_harnais_B04_R03.json  # sur B05 : V12_Instantane_harnais_B05_G3.json [--out ../snapshots/<nouvel_instantane>.json]
+python3 DG_AUDIT_001_Suivi_harnais.py ../../package --compare ../snapshots/DG_AUDIT_001_Instantane_harnais_B04_R03.json  # sur B05 : V12_Instantane_harnais_B05_Lot2.json [--out ../snapshots/<nouvel_instantane>.json]
 
 # Harnais du retour
 python3 R_harnais_non_regression.py ../../package      # attendu : Témoin 1/1 ; cas R 30/30
@@ -97,7 +98,7 @@ Depuis `package/` :
 
 ```bash
 python3 -B scripts/validate_all.py        # validation complète, build des deux distributions
-python3 -B scripts/validate_reading_map.py  # 42 conditions (V1.1.1) ; 46 sur B05
+python3 -B scripts/validate_reading_map.py  # 42 conditions (V1.1.1) ; 50 sur B05
 python3 scripts/read_route.py ACTION/RUN_CARD  # lire une route
 ```
 
@@ -106,7 +107,7 @@ python3 scripts/read_route.py ACTION/RUN_CARD  # lire une route
 ## 6. Prochaine étape
 
 1. ~~Porte G1 du plan V1.2~~ : franchie le 26-09-2026 (`audit/reports/V12_01_DECISIONS_G1.md`).
-2. ~~B05, PATCH-DECISION A, B, D et G3~~ : faits (`V12_02`, `V12_03`). **Addendum au plan** (`plans/Plan_V1.2_Addendum_Niveau_senior.md`) : décisions §7 attendues de l'owner ; puis étape 1 (atlas, vague 3, carte des moyens dans `plans/`), étape 2 (mini-épreuve C3 et C3r), étape 3 (PATCH-DECISION lot 2 : G, H, I, D'), étape 4 (G4).
+2. ~~B05, lot 1 (A, B, D), addendum, lot 2 (G, H, I, D')~~ : faits (`V12_02` à `V12_04`). **Prochaine action : mini-épreuve V1.2** (addendum §5-§6 : C3 ×2, C3r ×1, juge neuf avec brief riche intégral), puis G4.
 3. Suivre le séquencement du plan : G2 (gardes rouges puis vertes) → G3 (non-régression, budget tenu) → G4 (épreuve à l'aveugle avec juges extérieurs) → publication V1.2.0.
 
 Travail par branche : une branche par unité (`v1.2/patch-decision-abd`, …) ; étiquettes aux points de contrôle ; rapport de l'unité dans `audit/reports/`.
