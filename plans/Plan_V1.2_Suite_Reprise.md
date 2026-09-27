@@ -15,7 +15,7 @@
    - auto-comparaison déclarée comme telle.
 4. **Décisions en attente** (plan maître §8) : 3, 6, 8, 9 et 10. **Ne pas appliquer un contenu qui en dépend avant la décision** ; préparer le texte et poser la question.
 
-## 2. État (après R5b-2)
+## 2. État (après R5a)
 
 | Fait | Rapport |
 |---|---|
@@ -23,6 +23,7 @@
 | P1 mini-épreuve (orientation positive, D-20 à D-23) | `V12R_05` |
 | R5b-1 : trace légère, première proposition = checkpoint, contenu d'exemple marqué, test de trame | `V12R_06` |
 | R5b-2 : Gate A par profil, Gate C en gestes, boucle unique, promesse du validateur unique | `V12R_07` |
+| R5a : DIRECTION (rôle, posture et récapitulatif en tête ; entrée unique ; doublons ; D-17, D-19) | `V12R_08` |
 
 - **Mesures :**
   - chemin prescrit 12 076 mots (trace légère), 16 687 en trace complète ;
@@ -67,7 +68,9 @@ git checkout claude/init-repo-claude-md-gm6njm
 
 Chaque lot : **périmètre**, **gardes à ajouter**, **réussite**, **arrêt**.
 
-### R5a — DIRECTION (M) · sans décision en attente
+### ~~R5a — DIRECTION~~ : fait (`V12R_08`). Reste : doublons inter-fichiers (alternative située, `ANCHOR-GENERATED`) à traiter avec R5c, R5d et R6.
+
+#### (archive du périmètre R5a)
 
 - **Périmètre :**
   - **D-19** : dans le bloc noyau `BRIEF`, « cette vue reste interne » perd son contexte une fois compilé ; reformuler en « la personne reçoit une proposition, pas cette liste de décisions ».

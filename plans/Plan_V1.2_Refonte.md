@@ -1,6 +1,6 @@
 # Plan V1.2 — Refonte : fabrication, structure, trace et preuve
 
-**Date :** 2026-09-27 · **Owner :** Junior (Kamel) · **Statut :** en cours. R1 à R4 appliqués, P1 fait, R5b-1 et R5b-2 appliqués (27-09-2026, `audit/reports/V12R_01` à `V12R_07`) ; décisions 1, 2, 4, 5, 7 et 11 prises, D-20 et D-22 tranchés. Chemin prescrit 12 076 mots en trace légère (16 687 en trace complète) ; 24/25 outils sur le chemin ; noyau 3 222 mots. Consigne de l’owner : la qualité du résultat prime sur le nombre de mots (pas de plafond de coupe ; on ne retire que doublons et texte sans effet). Prochaine étape : R5a, puis R5c, R5d, R6.
+**Date :** 2026-09-27 · **Owner :** Junior (Kamel) · **Statut :** en cours. R1 à R4 appliqués, P1 fait, R5b-1, R5b-2 et R5a appliqués (27-09-2026, `audit/reports/V12R_01` à `V12R_08` ; reprise : `plans/Plan_V1.2_Suite_Reprise.md`) ; décisions 1, 2, 4, 5, 7 et 11 prises, D-20 et D-22 tranchés. Chemin prescrit 12 076 mots en trace légère (16 687 en trace complète) ; 24/25 outils sur le chemin ; noyau 3 222 mots. Consigne de l’owner : la qualité du résultat prime sur le nombre de mots (pas de plafond de coupe ; on ne retire que doublons et texte sans effet). Prochaine étape : R5c, R5d, R6, R8, R11.
 **Base :** B05, candidate V1.2 (lots 1 et 2 appliqués).
 **Sources du plan :**
 - lectures `V12_05` à `V12_10` et synthèse `V12_11` (registre D-01 à D-18) ;

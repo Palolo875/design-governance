@@ -1,0 +1,247 @@
+diff --git a/package/V1/official/CHANGELOG.md b/package/V1/official/CHANGELOG.md
+index b45ed94..2414a8b 100644
+--- a/package/V1/official/CHANGELOG.md
++++ b/package/V1/official/CHANGELOG.md
+@@ -17,6 +17,7 @@
+ - **Noyau de fabrication (refonte, R4).** Les gestes de fabrication (structure, composition, moyens et vérité, boucle d’édition) sont balisés dans leurs sources et compilés dans la skill par `scripts/build_core.py` ; la vue de chargement quotidienne devient `DIRECTION/CHARGE`, seule liste de chargement (Gates A et B en `LITE` et `ITER`) ; la réponse visible passe en langage produit (`ACTION/HANDOFF`) ; la table de diagnostic et les six questions de revue passent de QUICKSTART à `DIRECTION/DOUBLE-LOOP`, la variation « un axe à la fois » d’ORCHESTRATION_MAP à `SAVOIR/CRAFT/CFT-02`.
+ - **Trace et checkpoint (refonte, R5b-1).** Trace légère par défaut, complète si le run est persistant, partagé, audité ou si une acceptation est demandée (`ACTION/HANDOFF`) ; Gate B, `RUN_CARD` et paquet de clôture chargés en trace complète ; la première proposition vaut checkpoint, sauf action irréversible ou coûteuse ; destination réelle sans contenu : exemple marqué plutôt qu’emplacements vides ; test de trame dans les signaux de convergence. Schéma `RUN_CARD` inchangé.
+ - **ACTION restructurée (refonte, R5b-2).** Gate A par profil de surface (contrôles d’office et selon le contenu) ; Gate C relie chaque critère à son geste de correction dans le noyau et sert, en trace légère, de contrôle de craft sans verdict ; une seule description de la boucle (`DIRECTION/DOUBLE-LOOP`) ; promesse du validateur tenue en un seul lieu (`ACTION/RUN_CARD`). Schéma `RUN_CARD` inchangé.
++- **DIRECTION restructurée (refonte, R5a).** Rôle, posture et récapitulatif de protection en tête ; rôle défini une seule fois ; entrée unique (classer : `START`, charger : `CHARGE`, fabriquer : le noyau) ; doublons de lecture et de passage retirés ; phrase hors contexte du bloc de prise de brief corrigée. Aucun locator renommé.
+ - **Efficacité.** `NOT-VERIFIED` : l’épreuve de référence donne V1.1.1 ≈ sans système sur la qualité perçue ; l’effet de ces chantiers reste à éprouver (G4).
+ 
+ ## V1.1.1 — Retour d’audit : alignements de textes et de façades
+diff --git a/package/V1/official/DIRECTION.md b/package/V1/official/DIRECTION.md
+index f4c4db1..4ba43ac 100644
+--- a/package/V1/official/DIRECTION.md
++++ b/package/V1/official/DIRECTION.md
+@@ -2,6 +2,31 @@
+ 
+ **Design Governance V1 — expérimentation maintenue.** Cette V1 est un cadre de travail en évaluation ; elle n’est pas présentée comme une release publique stabilisée. Ses limites, preuves et conditions d’usage restent explicites. DIRECTION est le point d’entrée de la gouvernance : il cadre le rôle, les absolus, le mode, la direction visuelle, le niveau de preuve et la capacité nécessaire pour un run situé.
+ 
++## Rôle
++
++<!-- noyau:début ROLE -->
++<!-- concept:ROL-01 -->
++Tu es un·e directeur·rice artistique et product designer senior. Tu ne remplis pas un écran : tu résous un problème, construis une hiérarchie, défends un point de vue et livres un système cohérent. Lorsque la décision le justifie, tu conçois des scènes, assets et composants visibles pour le produit au lieu d’assembler des primitives sans direction.
++
++Tu vises l’excellence appropriée au produit, au public, au risque et au contexte — jamais l’imitation d’un canon SaaS ou d’une esthétique « premium ». Le haut de gamme vient de la relation tenue entre silhouette, proportion, typographie, matière, contenu, donnée, action et états ; il ne vient pas d’une accumulation d’effets.
++<!-- noyau:fin ROLE -->
++
++Une solution senior rend la tâche prioritaire plus claire, la direction visuelle formulable et les compromis défendables. Tu peux requalifier la demande, refuser un effet qui nuit à l’usage et escalader un risque que le périmètre initial masque. Toute requalification nomme la décision touchée, le risque dominant et la prochaine preuve. Ce rôle décrit un comportement attendu ; il ne confère ni expérience biographique, ni autorité de preuve, ni permission externe.
++
++---
++
++## Posture — à lire avant toute action
++
++<!-- noyau:début POSTURE -->
++**Première idée.** Traite ta première idée comme une hypothèse à tester contre le risque de convergence. Nomme ce qui est conventionnel ou interchangeable, puis conserve-la, infléchis-la ou remplace-la selon la décision qu’elle sert. Ne remplace pas un biais de conformité par une obligation de nouveauté.
++<!-- noyau:fin POSTURE -->
++
++**Limite structurelle.** Ces mécanismes réduisent certains biais sans produire un juge impartial ni transférer automatiquement le goût. Le craft n’est pas une direction ; un gate garantit un plancher, jamais une vision. Un regard humain ou externe peut apporter un contrepoint situé, sans garantir l’exhaustivité ni l’absence de biais.
++
++**Piège de conformité.** Ce système est plus facile à satisfaire qu’à honorer. Si tu es en train de passer le gate plutôt que de concevoir, reviens aux ABSOLUS 1 et 5 : direction perceptible, tâche prioritaire, contenu réel et contraintes d’usage.
++
++---
++
+ ## Constitution du document
+ 
+ `DIRECTION` est le **seul document canonique de cadrage chargé au démarrage d’un run**. Il fixe le rôle, les cinq absolus, la classification, le niveau de preuve à protéger, le routage et le cadrage de capacité. `ACTION` définit ensuite les preuves exécutables, les gates, les statuts et les verdicts. Les artefacts de run et les modules nécessaires sont chargés selon le mode et le risque.
+@@ -16,6 +41,18 @@ Les responsabilités sont séparées :
+ | `BIBLIOTHEQUE.md` | Supports, grilles, scènes, objets, micro-interfaces et composants. |
+ | `CHANGELOG.md` | État de V1, changements futurs, pilotes optionnels et décisions de gouvernance. |
+ 
++### Récapitulatif de protection
++
++Avant de parcourir les sections détaillées, retiens ces décisions de protection :
++
++1. **Rôle :** DIRECTION cadre, hiérarchise et rend une première direction située pilotable ; `ACTION` porte la preuve et la clôture, `SAVOIR` le jugement, `BIBLIOTHEQUE` la structure et `CHANGELOG` le cycle de vie.
++2. **Absolus :** une surface identitaire doit avoir une direction perceptible ; son ancrage doit être observable ou explicitement limité ; aucune livraison ne se clôt sans les preuves applicables ; le mode, le scope, la capacité, la preuve, la limite et la prochaine action sont déclarés avant l’action ; le réel et le beau restent liés.
++3. **Routage :** décision partagée → `SYSTÈME` ; identité ou premier contact → `DIRECTION` ; surface existante à direction retrouvable → `ITER` ; delta local sans risque critique → `LITE` ; écran ou flow nouveau sans charge identitaire → `STANDARD` ; sinon, une clarification ciblée.
++4. **Premier objet :** formule `PROMESSE → OBJET DE PREUVE → GESTE` avant les éléments génériques ou décoratifs (bénéfices, navigation, polish), sauf si la navigation est l’objet de preuve.
++5. **Preuve :** `DECISION-CHANGE` reste vide jusqu’à une observation réelle ; une capture, une validation de package ou une rationale ne devient pas automatiquement une preuve d’usage, d’accessibilité, de performance ou de qualité visuelle.
++
++Ce récapitulatif est un **résumé de protection**, pas une nouvelle source, un nouveau gate ou un second schéma. En cas de différence, les sections normatives et les propriétaires indiqués plus bas prévalent.
++
+ ### Frontière de responsabilité
+ 
+ Les sections détaillées ci-dessous restent intégralement actives. Lorsque ce document présente une ligne ou une table de `RUN_CARD`, il s’agit d’une **vue de cadrage** utile à la classification ; `ACTION/RUN_CARD` demeure le seul schéma canonique des champs, statuts, preuves et clôtures. De la même façon, DIRECTION définit les modes et la cible visuelle, mais ne redéfinit ni les gates d’ACTION, ni les heuristiques de SAVOIR, ni la structure de BIBLIOTHEQUE, ni les statuts de gouvernance de CHANGELOG.
+@@ -52,18 +89,11 @@ Les modules ci-dessous ne sont pas des formulaires à remplir en parallèle. Ils
+ | `DOUBLE-LOOP` | Organiser l’apprentissage | Observation d’un rendu réel | Défaut dominant, correction visible, réobservation et décision |
+ | `HANDOFF` | Transmettre à `ACTION` | Construction, preuve ou clôture à engager | Projection complète `ACTION/HANDOFF`, sans statut ni verdict concurrent |
+ 
+-`CREATIVE-BOOT` ouvre la décision ; `VISUAL_TARGET` la spécifie ; `DIRECTION-ATELIER` l’approfondit seulement si nécessaire ; `FIRST-OBJECT` la matérialise ; `DOUBLE-LOOP` l’apprend ; `ACTION` la vérifie et la ferme. Une seule vue peut suffire pour un delta local. La complétude d’une vue n’est jamais un objectif autonome.
++Une seule vue peut suffire pour un delta local. La complétude d’une vue n’est jamais un objectif autonome.
+ 
+ ### Carte de lecture canonique et chemin en trente secondes
+ 
+-| Besoin immédiat | Lire d’abord |
+-|---|---|
+-| Classer une demande | `DIRECTION/START` |
+-| Choisir rapidement une route | `DIRECTION/CHARGE` ou `DIRECTION/FAST-PATH` |
+-| Préparer une surface identitaire | `DIRECTION/VISUAL_TARGET`, puis `ACTION/RUN-DIRECTION` |
+-| Produire une direction forte dès le premier rendu | `DIRECTION/FIRST-OBJECT`, puis `SAVOIR/CRAFT` |
+-| Choisir une structure | `BIBLIOTHEQUE/SELECT` après classification |
+-| Vérifier, corriger ou clôturer | `ACTION`, jamais DIRECTION seule |
++Classer : `DIRECTION/START`. Charger : `DIRECTION/CHARGE`, seule liste de chargement. Fabriquer : le noyau de la skill, compilé depuis les blocs « noyau » des sources. Vérifier, corriger ou clôturer : `ACTION`, jamais DIRECTION seule.
+ 
+ En trente secondes, nomme : **la décision à changer, le risque dominant, le mode, la capacité minimale et le premier objet que la preuve devra inspecter**. Cette vue accélère l’entrée ; elle ne remplace ni `START`, ni les contrats d’ACTION, ni le jugement situé.
+ 
+@@ -73,8 +103,6 @@ Cette carte est la vue de lecture interne canonique de DIRECTION. `CHARGE`, `FAS
+ 
+ **Périmètre.** Le système vise à aider une personne, un agent ou une équipe à produire des interfaces et frontends de haute qualité visuelle, sur le web comme sur des plateformes natives telles que Flutter, Swift, Kotlin ou équivalentes. Il vise un premier rendu spécifique, composé, crédible et résolu plutôt qu’un résultat générique ou décoratif. Il vise à augmenter la probabilité d’un travail de niveau expert en rendant explicites des décisions que les meilleures équipes prennent souvent implicitement ; cette efficacité reste `NOT-VERIFIED` (`CHANGELOG`) et s’éprouve par les pilotes. Il ne remplace ni la compétence, ni le jugement situé, ni la revue humaine, et ne garantit ni l’excellence universelle, ni la réussite d’une tâche, ni l’adéquation à tous les publics. Ces propriétés dépendent du contenu réel, du contexte, de la preuve et du jugement situé. Les exemples et runtimes de référence sont souvent web, mais les décisions de hiérarchie, composition, typographie, matière, états et interaction sont portables. L’implémentation traduit ces décisions dans les idiomes réels de la plateforme ; elle ne copie pas mécaniquement des conventions web.
+ 
+-**Mandat de fonctionnement.** Adopte le niveau d’exigence d’un·e directeur·rice artistique et product designer senior : résous le problème, construis une hiérarchie, défends une direction située et livre un système cohérent plutôt qu’un assemblage de primitives. Cette posture décrit un comportement attendu ; elle ne confère ni expérience biographique, ni autorité de preuve, ni permission externe. Pour l’appliquer, rends retrouvables la décision, le risque dominant, le premier objet attendu et la prochaine preuve ; `SAVOIR` reste propriétaire du jugement de craft, `ACTION` de la preuve et de la clôture, et `BIBLIOTHEQUE` de la structure.
+-
+ **Capacité positive de DIRECTION.** DIRECTION ne sert pas seulement à éviter une proposition générique : elle vise à augmenter la qualité du cadrage, de la position, de la première scène et de la boucle créative. Elle transforme un brief en relation perceptible entre produit, public, contenu, geste, matière et contrainte ; elle peut requalifier une demande lorsque cela améliore la décision, sans se substituer aux owners de preuve, de structure ou de clôture.
+ 
+ **Priorité.** `P0` porte la direction et le craft visuel ; `P1` protège compréhension, usage et accessibilité ; `P2` traduit la direction dans la plateforme et le runtime réels ; `P3` couvre robustesse, performance, compatibilité et maintien lorsque le risque le requiert. P1 est un plancher non négociable, mais P1–P3 ne doivent jamais servir à justifier une interface générique ou à effacer la signature visuelle de P0. Cette hiérarchie ne permet jamais de retarder un risque critique de tâche, de santé, de sécurité, de confidentialité, de permission ou d’accessibilité au profit du craft : dans ce cas, la protection critique devient la prochaine décision et la prochaine preuve.
+@@ -311,7 +339,7 @@ NO-GO — faux réalisme, dashboard décoratif, cartes avant mécanisme, ou reto
+ ```
+ 
+ <!-- noyau:début BRIEF -->
+-**Prise de brief.** Au plus trois demandes, en un seul échange, par gain de plafond : contenu réel (textes, chiffres, preuves, noms), marque, asset principal ou route autorisée, destination si elle est incertaine. Brief riche : aucune. Humain absent : hypothèses nommées, plafond déclaré, demandes listées à la livraison. Le rendu est construit dans tous les cas. La personne reçoit directement une proposition principale ; cette vue reste interne. Si une ligne ne peut modifier ni artefact, claim, preuve, limite ou décision, elle est omise ; `N/A-JUSTIFIED` reste réservé à une non-applicabilité réelle et justifiée selon ACTION.
++**Prise de brief.** Au plus trois demandes, en un seul échange, par gain de plafond : contenu réel (textes, chiffres, preuves, noms), marque, asset principal ou route autorisée, destination si elle est incertaine. Brief riche : aucune. Humain absent : hypothèses nommées, plafond déclaré, demandes listées à la livraison. Le rendu est construit dans tous les cas. La personne reçoit directement une proposition principale ; le raisonnement de cadrage reste dans la trace. Si une ligne ne peut modifier ni artefact, claim, preuve, limite ou décision, elle est omise ; `N/A-JUSTIFIED` reste réservé à une non-applicabilité réelle et justifiée selon ACTION.
+ <!-- noyau:fin BRIEF -->
+ 
+ <!-- noyau:début CONTENU -->
+@@ -587,18 +615,6 @@ La réponse documente l’observation et la limite ; elle ne transforme pas un t
+ 
+ Lorsque le projet est suivi comme pilote, conserve dans la trace existante le défaut dominant du premier rendu, sa cause probable, la correction choisie, le gain visible, la régression éventuelle et la capacité manquante. Ces signaux servent à améliorer V1 au niveau de la série de runs ; ils ne deviennent ni score esthétique, ni verdict, ni quota.
+ 
+-## Rôle
+-
+-<!-- noyau:début ROLE -->
+-Tu es un·e directeur·rice artistique et product designer senior. Tu ne remplis pas un écran : tu résous un problème, construis une hiérarchie, défends un point de vue et livres un système cohérent. Lorsque la décision le justifie, tu conçois des scènes, assets et composants visibles pour le produit au lieu d’assembler des primitives sans direction.
+-
+-Tu vises l’excellence appropriée au produit, au public, au risque et au contexte — jamais l’imitation d’un canon SaaS ou d’une esthétique « premium ». Le haut de gamme vient de la relation tenue entre silhouette, proportion, typographie, matière, contenu, donnée, action et états ; il ne vient pas d’une accumulation d’effets.
+-<!-- noyau:fin ROLE -->
+-
+-Une solution senior rend la tâche prioritaire plus claire, la direction visuelle formulable et les compromis défendables. Tu peux requalifier la demande, refuser un effet qui nuit à l’usage et escalader un risque que le périmètre initial masque. Toute requalification nomme la décision touchée, le risque dominant et la prochaine preuve.
+-
+----
+-
+ ## LES CINQ RÈGLES ABSOLUES
+ 
+ Il y en a cinq. Elles sont les seuls **absolus transversaux de DIRECTION**. Une obligation spécialisée reste la propriété du module qui la définit ; `DIRECTION` la route sans lui voler son statut ni dupliquer sa procédure.
+@@ -684,18 +700,6 @@ Une capture, une lecture perceptuelle ou une comparaison peut établir une obser
+ 
+ ---
+ 
+-## Posture — à lire avant toute action
+-
+-<!-- noyau:début POSTURE -->
+-**Première idée.** Traite ta première idée comme une hypothèse à tester contre le risque de convergence. Nomme ce qui est conventionnel ou interchangeable, puis conserve-la, infléchis-la ou remplace-la selon la décision qu’elle sert. Ne remplace pas un biais de conformité par une obligation de nouveauté.
+-<!-- noyau:fin POSTURE -->
+-
+-**Limite structurelle.** Ces mécanismes réduisent certains biais sans produire un juge impartial ni transférer automatiquement le goût. Le craft n’est pas une direction ; un gate garantit un plancher, jamais une vision. Un regard humain ou externe peut apporter un contrepoint situé, sans garantir l’exhaustivité ni l’absence de biais.
+-
+-**Piège de conformité.** Ce système est plus facile à satisfaire qu’à honorer. Si tu es en train de passer le gate plutôt que de concevoir, reviens aux ABSOLUS 1 et 5 : direction perceptible, tâche prioritaire, contenu réel et contraintes d’usage.
+-
+----
+-
+ ## 0. Classification du mode, preuve et capacité
+ 
+ `START` est la source normative de classification. Cette section est une vue contractuelle des capacités, de la preuve minimale et de la condition d’arrêt ; elle ne redéfinit pas l’ordre de routage. Pour `DIRECTION`, `ACTION` renseigne séparément `closure.state`, `closure.issue`, `closure.direction_status`, `closure.verdict` et `closure.limitations` ; `HELD` n’équivaut jamais à `ACCEPTED`.
+@@ -828,18 +832,6 @@ Les gates, verdicts, exceptions, preuves exécutables et statuts restent canoniq
+ 
+ `DIRECTION` ne ferme pas un run à la place d’`ACTION`. Il vérifie seulement que la direction déclarée est encore identifiable, que sa preuve attendue est nommée et que les limites de preuve ne sont pas dissimulées.
+ 
+-### Récapitulatif de protection
+-
+-Avant de parcourir les sections détaillées, retiens ces décisions de protection :
+-
+-1. **Rôle :** DIRECTION cadre, hiérarchise et rend une première direction située pilotable ; `ACTION` porte la preuve et la clôture, `SAVOIR` le jugement, `BIBLIOTHEQUE` la structure et `CHANGELOG` le cycle de vie.
+-2. **Absolus :** une surface identitaire doit avoir une direction perceptible ; son ancrage doit être observable ou explicitement limité ; aucune livraison ne se clôt sans les preuves applicables ; le mode, le scope, la capacité, la preuve, la limite et la prochaine action sont déclarés avant l’action ; le réel et le beau restent liés.
+-3. **Routage :** décision partagée → `SYSTÈME` ; identité ou premier contact → `DIRECTION` ; surface existante à direction retrouvable → `ITER` ; delta local sans risque critique → `LITE` ; écran ou flow nouveau sans charge identitaire → `STANDARD` ; sinon, une clarification ciblée.
+-4. **Premier objet :** formule `PROMESSE → OBJET DE PREUVE → GESTE` avant les éléments génériques ou décoratifs (bénéfices, navigation, polish), sauf si la navigation est l’objet de preuve.
+-5. **Preuve :** `DECISION-CHANGE` reste vide jusqu’à une observation réelle ; une capture, une validation de package ou une rationale ne devient pas automatiquement une preuve d’usage, d’accessibilité, de performance ou de qualité visuelle.
+-
+-Ce récapitulatif est un **résumé de protection**, pas une nouvelle source, un nouveau gate ou un second schéma. En cas de différence, les sections normatives et les propriétaires indiqués plus bas prévalent.
+-
+ ### Lecture instrumentée et règle de passage
+ 
+ Pour éviter de présenter une hypothèse de proportion comme un gain démontré, distingue dans la trace :
+@@ -849,7 +841,7 @@ Pour éviter de présenter une hypothèse de proportion comme un gain démontré
+ - `AUDIT-READ` — fichiers ouverts pour contrôler le corpus ou le protocole, sans être nécessaires au run ;
+ - `ACTUAL-READ` — fichiers effectivement lus dans un run instrumenté.
+ 
+-La chaîne de lecture est définie dans `Architecture d’activation` ci-dessus. Déclare dans la trace la catégorie de lecture applicable ; ne compte jamais un `AUDIT-READ` comme une lecture nécessaire au run. La règle de lecture proportionnelle décrit un chemin nominal : elle ne constitue pas une mesure de temps, de volume, de charge cognitive ou de qualité. Toute affirmation de réduction doit préciser la méthode, le périmètre et la limite.
++La chaîne de lecture est définie une seule fois : « Chaîne de lecture interne », dans la constitution du document. Déclare dans la trace la catégorie de lecture applicable ; ne compte jamais un `AUDIT-READ` comme une lecture nécessaire au run. La règle de lecture proportionnelle décrit un chemin nominal : elle ne constitue pas une mesure de temps, de volume, de charge cognitive ou de qualité. Toute affirmation de réduction doit préciser la méthode, le périmètre et la limite.
+ 
+-Le passage entre propriétaires reste : `DIRECTION` décide du mode et du risque dominant ; `ACTION` des preuves exécutables, gates, statuts et verdicts ; `SAVOIR` du jugement ; `BIBLIOTHEQUE` de la structure ; `CHANGELOG` de la gouvernance du système. Pour une route partagée ou candidate à la promotion, l’ordre de décision est `DIRECTION/START` → `ACTION/RUN-SYSTEM` → `BIBLIOTHEQUE/EVOLUTION` si la route est structurelle, sinon la source normative propriétaire (`SAVOIR` pour une heuristique de jugement, `ACTION` pour un gate ou un champ de `RUN_CARD`) → `CHANGELOG`. Cet ordre ne constitue ni une promotion, ni un nouveau gate, ni une nouvelle source d’autorité.
++Le passage entre propriétaires reste celui de la règle de passage de `DIRECTION/CHARGE`. Pour une route partagée ou candidate à la promotion, l’ordre de décision est `DIRECTION/START` → `ACTION/RUN-SYSTEM` → `BIBLIOTHEQUE/EVOLUTION` si la route est structurelle, sinon la source normative propriétaire (`SAVOIR` pour une heuristique de jugement, `ACTION` pour un gate ou un champ de `RUN_CARD`) → `CHANGELOG`. Cet ordre ne constitue ni une promotion, ni un nouveau gate, ni une nouvelle source d’autorité.
+ 
+diff --git a/package/scripts/validate_structure.py b/package/scripts/validate_structure.py
+index 739e32e..0f55d97 100644
+--- a/package/scripts/validate_structure.py
++++ b/package/scripts/validate_structure.py
+@@ -14,6 +14,7 @@ Gardes :
+   7. REGISTRE — les façades humaines vouvoient (formes de tutoiement impératif refusées dans QUICKSTART).
+   8. NOYAU — les blocs `<!-- noyau:début ID -->` / `<!-- noyau:fin ID -->` sont appariés, uniques et placés
+      dans les sources normatives ; la section compilée de la skill est identique à `scripts/build_core.py`.
++ 10. ORDRE — dans DIRECTION, rôle, posture et récapitulatif de protection précèdent les sections détaillées (D-17).
+   9. CHARGEMENT — une seule table de chargement (`DIRECTION/CHARGE`, et sa copie compilée dans la skill) ;
+      les façades y renvoient ; la ligne `DIRECTION` garde le build et l'ordre cible → premier objet ;
+      Gate B n'y est chargée qu'en trace complète (décision 11), comme dans la carte de lecture d'ACTION.
+@@ -58,6 +59,7 @@ CONCEPTS: list[tuple[str, str, str]] = [
+     ("CNT-01", "DIRECTION.md", "destination réelle sans contenu : exemple marqué plutôt qu'emplacements vides"),
+     ("TRM-01", "BIBLIOTHEQUE.md", "test de trame : nommer la trame modale du brief, la rompre ou la justifier"),
+     ("GTA-01", "ACTION.md", "Gate A par profil de surface : contrôles d'office et contrôles selon le contenu"),
++    ("ROL-01", "DIRECTION.md", "rôle de directeur·rice artistique senior, défini une seule fois, en tête de DIRECTION"),
+     ("VAL-01", "ACTION.md", "promesse du validateur : ce qu'atteste et n'atteste pas une RUN_CARD validée, texte unique"),
+ ]
+ 
+@@ -80,8 +82,16 @@ RETIRED: list[tuple[str, str, set[str]]] = [
+     # à retirer par R5c (SAVOIR), R5d (BIBLIOTHEQUE) et R6 (README).
+     (r"→ isoler|observer, isoler", "boucle d'édition de DIRECTION/DOUBLE-LOOP (noyau)",
+      {"DIRECTION.md", "SKILL.md", "CHANGELOG.md", "SAVOIR.md", "BIBLIOTHEQUE.md", "README.md"}),
++    (r"cette vue reste interne", "la prise de brief reste dans la trace (D-19)", {"CHANGELOG.md"}),
++    (r"Mandat de fonctionnement|Adopte le niveau d’exigence", "rôle unique (ROL-01)", {"CHANGELOG.md"}),
++    (r"`VISUAL_TARGET` la spécifie", "chaîne de lecture interne unique (DIRECTION)", {"CHANGELOG.md"}),
+ ]
+ 
++# 10. Ordre de DIRECTION (D-17) : rôle, posture et récapitulatif de protection avant les sections détaillées.
++ORDER: list[tuple[str, str]] = [("## Rôle", "## DIRECTION/START"),
++                                ("## Posture — à lire avant toute action", "## DIRECTION/START"),
++                                ("### Récapitulatif de protection", "## DIRECTION/START")]
++
+ # 4. Fidélité des résumés : tout paragraphe qui contient le déclencheur contient la condition canonique.
+ FIDELITY: list[tuple[str, str, str]] = [
+     ("prise de brief", r"au plus trois", "destination si elle est incertaine"),
+@@ -336,6 +346,15 @@ def check_load(corpus: dict[Path, list[str]], errors: list[str]) -> None:
+             errors.append(f"[CHG-04] chargement : en {mode}, Gate A applicable et Gate B du risque sont chargés d'abord")
+ 
+ 
++def check_order(errors: list[str]) -> None:
++    lines = (OFFICIAL / "DIRECTION.md").read_text(encoding="utf-8").splitlines()
++    for first, then in ORDER:
++        a = [i for i, l in enumerate(lines) if l.strip() == first or l.startswith(first + " —")]
++        b = [i for i, l in enumerate(lines) if l.strip() == then or l.startswith(then + " —")]
++        if len(a) != 1 or len(b) != 1 or a[0] > b[0]:
++            errors.append(f"[ORD-01] ordre de DIRECTION : « {first} » doit exister une fois, avant « {then} »")
++
++
+ def check() -> list[str]:
+     errors: list[str] = []
+     corpus = texts()
+@@ -348,6 +367,7 @@ def check() -> list[str]:
+     check_register(errors)
+     check_noyau(corpus, errors)
+     check_load(corpus, errors)
++    check_order(errors)
+     return errors
+ 
+ 
+diff --git a/package/skills/design-governance-practice/SKILL.md b/package/skills/design-governance-practice/SKILL.md
+index 611da96..8cdea72 100644
+--- a/package/skills/design-governance-practice/SKILL.md
++++ b/package/skills/design-governance-practice/SKILL.md
+@@ -36,7 +36,7 @@ La clôture de chaque mode est `ACTION/CLOSE-PACKAGE`, en trace complète ; en t
+ 
+ ### 3. Prendre le brief et viser le premier objet
+ 
+-**Prise de brief.** Au plus trois demandes, en un seul échange, par gain de plafond : contenu réel (textes, chiffres, preuves, noms), marque, asset principal ou route autorisée, destination si elle est incertaine. Brief riche : aucune. Humain absent : hypothèses nommées, plafond déclaré, demandes listées à la livraison. Le rendu est construit dans tous les cas. La personne reçoit directement une proposition principale ; cette vue reste interne. Si une ligne ne peut modifier ni artefact, claim, preuve, limite ou décision, elle est omise ; `N/A-JUSTIFIED` reste réservé à une non-applicabilité réelle et justifiée selon ACTION.
++**Prise de brief.** Au plus trois demandes, en un seul échange, par gain de plafond : contenu réel (textes, chiffres, preuves, noms), marque, asset principal ou route autorisée, destination si elle est incertaine. Brief riche : aucune. Humain absent : hypothèses nommées, plafond déclaré, demandes listées à la livraison. Le rendu est construit dans tous les cas. La personne reçoit directement une proposition principale ; le raisonnement de cadrage reste dans la trace. Si une ligne ne peut modifier ni artefact, claim, preuve, limite ou décision, elle est omise ; `N/A-JUSTIFIED` reste réservé à une non-applicabilité réelle et justifiée selon ACTION.
+ 
+ **Destination réelle sans contenu.** Si la surface sert un vrai commerce, service ou personne mais que ses contenus manquent (nom, offre, prix, horaires, photos, adresse), remplis-la d’un contenu plausible **marqué comme exemple** plutôt que d’emplacements vides : elle doit se lire comme une page, pas comme un gabarit. Le marquage est discret dans l’interface (« exemple », « à confirmer ») et explicite dans la réponse, qui liste ce qu’il faut fournir. Le marquage de vérité s’applique sans exception.
+ 
