@@ -106,7 +106,7 @@ python3 scripts/read_route.py ACTION/RUN_CARD  # lire une route
 ## 6. Prochaine étape
 
 1. ~~Porte G1 du plan V1.2~~ : franchie le 26-09-2026 (`audit/reports/V12_01_DECISIONS_G1.md`).
-2. ~~B05, PATCH-DECISION A, B, D et G3~~ : faits (`V12_02`, `V12_03`). **Prochaine action proposée : mini-épreuve C3 sur B-DLA** (`V12_03` §5), puis décision sur un chantier « budget », puis G4.
+2. ~~B05, PATCH-DECISION A, B, D et G3~~ : faits (`V12_02`, `V12_03`). **Addendum au plan** (`plans/Plan_V1.2_Addendum_Niveau_senior.md`) : décisions §7 attendues de l'owner ; puis étape 1 (atlas, vague 3, carte des moyens dans `plans/`), étape 2 (mini-épreuve C3 et C3r), étape 3 (PATCH-DECISION lot 2 : G, H, I, D'), étape 4 (G4).
 3. Suivre le séquencement du plan : G2 (gardes rouges puis vertes) → G3 (non-régression, budget tenu) → G4 (épreuve à l'aveugle avec juges extérieurs) → publication V1.2.0.
 
 Travail par branche : une branche par unité (`v1.2/patch-decision-abd`, …) ; étiquettes aux points de contrôle ; rapport de l'unité dans `audit/reports/`.

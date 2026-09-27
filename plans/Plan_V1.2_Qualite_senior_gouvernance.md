@@ -2,6 +2,7 @@
 
 **Date :** 2026-09-26 · **Owner :** Junior (Kamel)
 **Base :** Design Governance V1.1.1 (B04, commit `f157dca`), statut d'audit `AUDIT-PASS-WITH-RESERVATION`.
+**Addendum (27-09-2026) :** `plans/Plan_V1.2_Addendum_Niveau_senior.md` (chantiers G, H, I, E', D' ; mini-épreuve ; décisions §7).
 
 ---
 
