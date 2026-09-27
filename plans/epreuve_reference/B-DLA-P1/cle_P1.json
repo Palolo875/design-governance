@@ -1,0 +1,21 @@
+{
+ "date": "2026-09-27",
+ "modele_producteur": "hérité de la session",
+ "cle": {
+  "PF0803": {
+   "brief": "B-DLA",
+   "condition": "C3",
+   "rep": 1
+  },
+  "PB6E96": {
+   "brief": "B-DLA",
+   "condition": "C3",
+   "rep": 2
+  },
+  "PBD5B1": {
+   "brief": "B-DLA",
+   "condition": "C3r",
+   "rep": 1
+  }
+ }
+}

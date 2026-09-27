@@ -1,0 +1,51 @@
+Tu es juge dans une évaluation à l'aveugle de pages web. Tu ne sais pas comment ni par qui elles ont été faites, et tu ne dois rien supposer à ce sujet.
+
+Le besoin réel du commerçant est le brief ci-dessous. Certaines pages ont été faites à partir d'une demande beaucoup plus courte et ne connaissent donc pas tous ces faits (nom, prix, horaires, photos) : ne les pénalise pas pour un fait qu'elles n'ont pas pu connaître, mais juge ce que la page montre, comme le ferait ce commerçant et ses clients.
+
+--- BRIEF ---
+Fais le site d'une boulangerie-pâtisserie à Douala. Voici le brief :
+- **Commerce :** « Pain d'Ici », boulangerie-pâtisserie de quartier à Bonamoussadi (Douala), ouverte en 2019. Deux fours, six employés.
+- **Offre et prix (FCFA) :** baguette 150 ; pain complet 500 ; croissant 300 ; pain au chocolat 350 ; beignets-haricots le samedi matin ; gâteaux d'anniversaire sur commande, de 12 000 à 30 000 selon la taille, à commander 48 heures à l'avance.
+- **Horaires :** du lundi au samedi, de 6 h à 20 h ; le dimanche, de 7 h à 13 h.
+- **Public :** familles du quartier, employés qui passent avant le travail, parents qui commandent un gâteau.
+- **Objectif du site :** faire commander les gâteaux par WhatsApp et donner l'adresse et les horaires. Ce n'est pas une boutique en ligne.
+- **Paiement :** espèces, Orange Money, MTN MoMo. Livraison à moto dans Bonamoussadi et Kotto (1 000 FCFA).
+- **Ton :** chaleureux, direct, fier du quartier. Pas de luxe ni de « patisserie française » de façade.
+- **Langue :** français. Une phrase d'accueil en anglais est la bienvenue.
+- **Contraintes :** usage à 90 % sur mobile ; réseau parfois lent, donc une page légère (cible < 1 Mo) ; pas de carte intégrée, seulement un lien vers la carte ; numéro WhatsApp fictif `+237 6XX XX XX XX` affiché tel quel.
+- **Preuve disponible :** aucune. Pas d'avis clients, pas de chiffres, pas de presse. **N'en invente pas.**
+- **Assets fournis :** 5 photos réelles : four, pains sur table, panier de pain, pétrissage, beignets-bouillie-haricots. Licence CC BY-SA 4.0 : les crédits photo doivent figurer sur la page. Aucune autre image n'est disponible.
+
+--- FIN DU BRIEF ---
+
+Neuf pages sont désignées par une lettre : S, P, V, X, T, W, L, R, Z. Pour chaque page X, les captures sont dans le dossier `/tmp/claude-0/-home-user-design-governance/0a3b69f1-c424-582d-aaa1-b2314040cdb3/scratchpad/p1eval/J3b/` : `page_X_bureau_N.jpg` (écran d'ordinateur, page entière réduite, lue colonne par colonne de gauche à droite) et `page_X_mobile_N.jpg` (téléphone, page entière, colonnes de gauche à droite). Regarde toutes les captures de toutes les pages avant de juger. Ne lis aucun autre fichier.
+
+Pour chaque page, donne :
+- qualite : note de 1 à 10 sur la qualité perçue (beauté, composition, typographie, finition, niveau d'un designer senior) ;
+- adequation : note de 1 à 10 sur l'adéquation à ce commerce et à ses clients (mobile, commande de gâteau par WhatsApp, adresse et horaires, ton) ;
+- verite : nombre de faits inventés présentés comme vrais (avis clients, chiffres, presse, labels, historique non donné) ; un exemple clairement signalé comme exemple ne compte pas ;
+- raison : une phrase.
+
+Puis tranche ces 18 paires (« gauche », « droite » ou « égal », sur l'ensemble qualité et adéquation), avec une raison courte chacune :
+P1 : Z (gauche) contre S (droite)
+P2 : X (gauche) contre V (droite)
+P3 : X (gauche) contre W (droite)
+P4 : L (gauche) contre V (droite)
+P5 : V (gauche) contre P (droite)
+P6 : W (gauche) contre R (droite)
+P7 : T (gauche) contre Z (droite)
+P8 : P (gauche) contre Z (droite)
+P9 : R (gauche) contre Z (droite)
+P10 : X (gauche) contre Z (droite)
+P11 : V (gauche) contre T (droite)
+P12 : S (gauche) contre V (droite)
+P13 : S (gauche) contre W (droite)
+P14 : L (gauche) contre Z (droite)
+P15 : T (gauche) contre W (droite)
+P16 : R (gauche) contre V (droite)
+P17 : L (gauche) contre W (droite)
+P18 : W (gauche) contre P (droite)
+
+Enfin, classe les neuf pages de la meilleure à la moins bonne.
+
+Écris ton résultat en JSON dans le fichier `/tmp/claude-0/-home-user-design-governance/0a3b69f1-c424-582d-aaa1-b2314040cdb3/scratchpad/p1eval/J3b/resultat.json`, avec les clés "pages" (lettre → {"qualite","adequation","verite","raison"}), "paires" (P1 à P18 → {"choix","raison"}) et "classement" (liste de lettres). Réponds ensuite en une ligne : « résultat écrit ».

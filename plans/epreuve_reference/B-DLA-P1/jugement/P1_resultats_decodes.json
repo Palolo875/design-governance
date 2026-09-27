@@ -1,0 +1,336 @@
+{
+ "J3a": {
+  "pages": {
+   "D": {
+    "qualite": 9,
+    "adequation": 9,
+    "verite": 0,
+    "raison": "Site fidèle aux faits réels du commerce (nom, adresse, prix, photos créditées), chaleureux et clair, avec une expérience de commande WhatsApp bien pensée."
+   },
+   "F": {
+    "qualite": 7,
+    "adequation": 8,
+    "verite": 0,
+    "raison": "Autre version tout aussi fidèle aux faits réels (Pain d'Ici, Bonamoussadi, photos créditées), un peu plus sage dans la mise en page mais tout aussi juste dans le ton."
+   },
+   "B": {
+    "qualite": 8,
+    "adequation": 7,
+    "verite": 0,
+    "raison": "Maquette assumée avec beaucoup d'honnêteté (numéro explicitement signalé comme fictif), bien conçue pour la commande de gâteau par WhatsApp, avec une tonalité chaleureuse adaptée."
+   },
+   "PB6E96": {
+    "qualite": 8,
+    "adequation": 7,
+    "verite": 0,
+    "raison": "Maquette élégante et minimaliste, avec un bon suivi des fournées en temps réel et un configurateur de gâteau soigné, mais sans aucune photo et un ton un peu froid."
+   },
+   "C": {
+    "qualite": 7,
+    "adequation": 7,
+    "verite": 0,
+    "raison": "Maquette honnête (mentions « à renseigner » pour l'adresse et le WhatsApp), bien structurée pour la commande de gâteau, mais un peu générique."
+   },
+   "PF0803": {
+    "qualite": 7,
+    "adequation": 6,
+    "verite": 0,
+    "raison": "Maquette très épurée et honnête sur son statut d'exemple, mais glaciale : aucune photo, aucune chaleur, plus proche d'un tableau de bord que d'une boulangerie de quartier."
+   },
+   "A": {
+    "qualite": 7,
+    "adequation": 5,
+    "verite": 2,
+    "raison": "Construit une identité de boulangerie fictive assez détaillée (« technique française », provenances précises, coordonnées) sans jamais signaler qu'il s'agit d'un exemple, et s'éloigne du ton demandé."
+   },
+   "PBD5B1": {
+    "qualite": 8,
+    "adequation": 4,
+    "verite": 0,
+    "raison": "Gabarit générique bien dessiné graphiquement, clairement signalé comme exemple, mais qui installe un vrai panier d'achat en ligne pour le pain quotidien, ce qui contredit l'objectif affiché du site (pas de boutique en ligne)."
+   },
+   "E": {
+    "qualite": 7,
+    "adequation": 4,
+    "verite": 3,
+    "raison": "Invente une histoire de boulangerie complète (adresse précise, numéro d'aspect réel, zones de livraison tarifées dans tout Douala, « technique française ») sans aucun signalement d'exemple, ce qui est le plus éloigné de la consigne « ne pas inventer »."
+   }
+  },
+  "classement": [
+   "D",
+   "F",
+   "B",
+   "PB6E96",
+   "C",
+   "PF0803",
+   "A",
+   "PBD5B1",
+   "E"
+  ],
+  "paires": {
+   "C2": [
+    [
+     "PBD5B1",
+     "F",
+     "ANCIEN"
+    ],
+    [
+     "PF0803",
+     "F",
+     "ANCIEN"
+    ],
+    [
+     "PB6E96",
+     "F",
+     "ANCIEN"
+    ],
+    [
+     "PBD5B1",
+     "D",
+     "ANCIEN"
+    ],
+    [
+     "PB6E96",
+     "D",
+     "ANCIEN"
+    ],
+    [
+     "PF0803",
+     "D",
+     "ANCIEN"
+    ]
+   ],
+   "C4": [
+    [
+     "PB6E96",
+     "C",
+     "NOUVEAU"
+    ],
+    [
+     "PF0803",
+     "B",
+     "ANCIEN"
+    ],
+    [
+     "PBD5B1",
+     "C",
+     "ANCIEN"
+    ],
+    [
+     "PBD5B1",
+     "B",
+     "ANCIEN"
+    ],
+    [
+     "PB6E96",
+     "B",
+     "ANCIEN"
+    ],
+    [
+     "PF0803",
+     "C",
+     "ANCIEN"
+    ]
+   ],
+   "C1": [
+    [
+     "PB6E96",
+     "A",
+     "NOUVEAU"
+    ],
+    [
+     "PBD5B1",
+     "E",
+     "NOUVEAU"
+    ],
+    [
+     "PF0803",
+     "A",
+     "NOUVEAU"
+    ],
+    [
+     "PF0803",
+     "E",
+     "NOUVEAU"
+    ],
+    [
+     "PB6E96",
+     "E",
+     "NOUVEAU"
+    ],
+    [
+     "PBD5B1",
+     "A",
+     "ANCIEN"
+    ]
+   ]
+  }
+ },
+ "J3b": {
+  "pages": {
+   "F": {
+    "qualite": 9,
+    "adequation": 10,
+    "verite": 0,
+    "raison": "Le seul site pleinement fidèle au commerce réel : Bonamoussadi, prix et horaires exacts, les cinq photos fournies créditées, numéro WhatsApp affiché tel quel — fabrication soignée et honnête (dont un aveu explicite que les photos ne montrent pas la boutique)."
+   },
+   "D": {
+    "qualite": 8,
+    "adequation": 9,
+    "verite": 0,
+    "raison": "Même fidélité totale au brief que L (Bonamoussadi, photos créditées, prix et horaires exacts, WhatsApp affiché tel quel), avec une mise en page un peu plus sobre et un contenu légèrement moins riche."
+   },
+   "PB6E96": {
+    "qualite": 8,
+    "adequation": 5,
+    "verite": 0,
+    "raison": "Maquette générique très soignée typographiquement (minimalisme noir/blanc/rouge, clairement signalée comme exemple), mais sans aucune photo, avec des prix inventés et une pâtisserie à étages qui évoque plus la grande pâtisserie que le quartier."
+   },
+   "PF0803": {
+    "qualite": 9,
+    "adequation": 4,
+    "verite": 0,
+    "raison": "Prouesse de mise en scène (chronologie des fournées, curseur horaire, zones de livraison) au niveau d'un designer senior, mais site sophistiqué et lourd pour une simple boulangerie de quartier, sans photo réelle et sur un mauvais quartier ; clairement signalé comme maquette."
+   },
+   "B": {
+    "qualite": 7,
+    "adequation": 4,
+    "verite": 0,
+    "raison": "Maquette propre et bien exécutée (jauge horaire, bon de commande simulé), mais générique : quartier et menu inventés, aucune photo réelle, sans le rendez-vous du samedi beignets-haricots ; numéro explicitement signalé comme fictif."
+   },
+   "E": {
+    "qualite": 7,
+    "adequation": 4,
+    "verite": 1,
+    "raison": "Belle identité illustrée et chaleureuse, mais revendique une « technique française » et une histoire de provenance non signalées comme exemple, à l'exact opposé du ton demandé par ce commerce ; aucune photo réelle utilisée."
+   },
+   "A": {
+    "qualite": 7,
+    "adequation": 4,
+    "verite": 1,
+    "raison": "Structure proche d'un vrai site de boulangerie (vitrine par onglets, compte à rebours de fournée), mais même défaut que X : ton « technique française », adresse et numéro inventés présentés sans aucune réserve d'exemple."
+   },
+   "C": {
+    "qualite": 6,
+    "adequation": 3,
+    "verite": 0,
+    "raison": "Identité visuelle plaisante et bien rangée, mais l'objectif même du site échoue : adresse et numéro WhatsApp restent « à renseigner », rendant la commande de gâteau impossible telle quelle."
+   },
+   "PBD5B1": {
+    "qualite": 5,
+    "adequation": 2,
+    "verite": 0,
+    "raison": "Reste à l'état de gabarit vide (« Nom de l'enseigne », bandeau générique non personnalisé) et installe un vrai panier d'achat en ligne avec totaux, ce que le commerçant a explicitement écarté."
+   }
+  },
+  "classement": [
+   "F",
+   "D",
+   "PB6E96",
+   "PF0803",
+   "B",
+   "E",
+   "A",
+   "C",
+   "PBD5B1"
+  ],
+  "paires": {
+   "C1": [
+    [
+     "PBD5B1",
+     "A",
+     "ANCIEN"
+    ],
+    [
+     "PB6E96",
+     "E",
+     "NOUVEAU"
+    ],
+    [
+     "PF0803",
+     "E",
+     "NOUVEAU"
+    ],
+    [
+     "PBD5B1",
+     "E",
+     "ANCIEN"
+    ],
+    [
+     "PB6E96",
+     "A",
+     "NOUVEAU"
+    ],
+    [
+     "PF0803",
+     "A",
+     "NOUVEAU"
+    ]
+   ],
+   "C2": [
+    [
+     "PB6E96",
+     "F",
+     "ANCIEN"
+    ],
+    [
+     "PF0803",
+     "D",
+     "ANCIEN"
+    ],
+    [
+     "PBD5B1",
+     "D",
+     "ANCIEN"
+    ],
+    [
+     "PBD5B1",
+     "F",
+     "ANCIEN"
+    ],
+    [
+     "PB6E96",
+     "D",
+     "ANCIEN"
+    ],
+    [
+     "PF0803",
+     "F",
+     "ANCIEN"
+    ]
+   ],
+   "C4": [
+    [
+     "PB6E96",
+     "C",
+     "NOUVEAU"
+    ],
+    [
+     "PBD5B1",
+     "B",
+     "ANCIEN"
+    ],
+    [
+     "PBD5B1",
+     "C",
+     "ANCIEN"
+    ],
+    [
+     "PB6E96",
+     "B",
+     "NOUVEAU"
+    ],
+    [
+     "PF0803",
+     "B",
+     "NOUVEAU"
+    ],
+    [
+     "PF0803",
+     "C",
+     "NOUVEAU"
+    ]
+   ]
+  }
+ }
+}

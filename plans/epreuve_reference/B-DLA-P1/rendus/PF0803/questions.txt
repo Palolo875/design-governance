@@ -1,0 +1,10 @@
+Questions pour la maison (personne n'a pu répondre ; le site est construit sur les hypothèses indiquées entre crochets)
+
+1. Contenu réel : nom de la maison, adresse exacte et quartier, numéro de téléphone / WhatsApp, horaires d'ouverture, heures réelles des fournées, liste des produits et prix.
+   [Hypothèse : nom de travail « Fournil du Wouri », Bonapriso, ouvert 6:00–21:30 tous les jours, cinq fournées de pain par jour, prix indicatifs en FCFA. Tout est signalé comme exemple sur la page.]
+
+2. Marque et photos : existe-t-il un logo, des couleurs, et des photos des produits et de la boutique (même prises au téléphone) ?
+   [Hypothèse : aucune marque ni photo. Le site repose sur la typographie et sur le tableau des fournées ; aucun dessin ne remplace les photos. Les vraies photos sont le premier ajout attendu.]
+
+3. Commandes de gâteaux : quels canaux et modalités (WhatsApp, délai minimum, acompte par Orange Money / MTN MoMo, livraison en moto et quartiers desservis, tarifs) ?
+   [Hypothèse : commande par WhatsApp, 48 h de délai, acompte à la confirmation, livraison dans une douzaine de quartiers. L'estimation affichée est indicative ; le bouton ouvre WhatsApp sans destinataire tant que le numéro n'est pas connu.]

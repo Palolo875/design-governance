@@ -1,0 +1,41 @@
+RUN — PF0803 — DIRECTION — site d'une boulangerie-pâtisserie à Douala (premier contact, identité) — convergence générique + contenu inventé pris pour réel — captures 1440/390 + paire B1b — CLOSED (EXPLORATORY sur la marque)
+OWNER : owner du projet (non joignable pendant le run ; questions dans questions.txt)
+SCOPE : index.html, page unique, desktop 1440×900 et mobile 390×844, heure simulée ?h=16:12 (+ états 04:30, 06:10, 18:00 scrub, 22:40)
+DECISION-INTENT : quelle première scène rend cette boulangerie propre à Douala et utile avant de se déplacer.
+
+CREATIVE BOOT
+PROMISE : « le pain sort du four à heures fixes ; voyez ce qui est chaud avant de prendre le taxi ».
+PROOF-OBJECT : tableau des fournées codé (heure de Douala, Africa/Douala) : prochaine fournée en chiffre monumental, liste « chaud en ce moment » avec jauge de tiédeur (< 40 min), ruban de la journée 5h–22h. TRUTH/ILLUSTRATIVE + TRUTH/MECHANISM (horaires d'exemple) ; divulgation produit : bandeau « maquette », mention « horaires de fournée d'exemple » sous le ruban, « prix indicatifs », « tarifs d'exemple ».
+GESTURE : glisser « Je passe à… » pour voir ce qui sera chaud à l'heure de passage ; second geste : composer un gâteau de fête → estimation → message WhatsApp (wa.me sans destinataire, limite déclarée) ou copie.
+MODAL : vague 2 (fond crème, brun, serif italique, orange rouille, photo hero de croissants, trois cartes Pains/Viennoiseries/Pâtisseries) ; cliché « africain » (motifs wax, drapeau vert-rouge-jaune).
+PARTI : s'écarter des deux. Fond carrelage froid #F3F4F1, encre vert-noir, un seul accent vermillon réservé à l'état « chaud » (couleur = donnée ; palette « neutres + un accent » gardée pour cette raison). Archivo (axe de chasse : 62 condensé pour les heures, 100 pour le texte, 125 pour la marque) au lieu d'un serif. Aucun motif « ethnique ».
+STRUCTURAL-TENSION : TEMPORALITY immédiate ↔ séquencée ; FIELD-MATERIAL typographie.
+STRUCTURAL-SIGNATURE : la page est réglée sur l'horloge du four ; la vitrine reprend l'état de chaque produit (chaud / prochaine fournée).
+CFT-TARGETS : présence (chiffre monumental), spécificité située (heure de Douala, taxi, chaleur, pluie, quartiers, FCFA, ananas/coco/forêt-noire, Orange Money/MTN MoMo), résolution (états fermé, avant ouverture, après dernière fournée, vide).
+FABRICATION : structure, typo, couleur : au plafond. Assets : SANS-ASSET / CODE-NATIVE (aucune photo fournie, réseau interdit pour les images ; aucun dessin ne remplace les photos) → plafond déclaré : la photographie des produits manque. Contenu : inventé et marqué (nom de travail, horaires, prix, adresse, zones). Google Fonts chargée (vérifié : document.fonts.check = true).
+DOMINANT-DEFECT recherché : foyer et lisibilité du ruban.
+
+OBSERVATIONS (captures .cap/)
+v1 : ruban cassé (rangées Pains/Viennoiseries empilées hors piste, placement auto de grille) ; colonne droite du hero vide ; débordement horizontal mobile de 7 px ; étiquette « chaud » de la vitrine cassée → cause commune : la classe .hot du bloc latéral s'appliquait aussi aux repères et aux étiquettes.
+Corrections : ruban reconstruit en pistes absolues ; classe renommée .hotbox ; ajout « Ensuite aujourd'hui » (données du mécanisme, pas de décor) ; étiquettes du ruban réduites à l'heure sauf fournée suivante et fournée chaude (chevauchements 6:00/7:00) ; mobile sans étiquettes, avec le détail dans la liste ; aiguille masquée derrière les étiquettes ; texte des fournées passées assombri (2,83 → env. 4,7:1).
+final : pas de débordement (scrollWidth 390 = 390), pas d'erreur console.
+
+B1b (auto-comparaison, même auteur ; pas une revue indépendante)
+Lecture légère : « une boulangerie de quartier qui affiche l'heure de sa prochaine fournée ; données d'exemple ».
+Décision mise à l'épreuve : le chiffre monumental comme foyer. Variante : réduction (19vw/280px → 12,5vw/184px), qui fait entrer tout le ruban au-dessus de la ligne de flottaison.
+Paire : .cap/b1b_A.png (avant) / .cap/b1b_B.png (après). Résultat : confirmed. B fait entrer le ruban mais le chiffre pèse alors autant que le titre et la page se lit comme un tableau de bord ; A garde la présence. Original conservé.
+
+GATE A (EXPERT + AUTOMATED partiel, WCAG 2.2 AA, Web) : contrastes calculés (texte secondaire 7,4:1 ; vermillon foncé 4,9:1 ; blanc sur bouton 5,4:1 ; texte clair sur fond nuit 9,4:1) ; boutons radio, curseur et select natifs avec libellés ; valeur textuelle du curseur (aria-valuetext) ; région aria-live polie ; focus visible ; cibles ≥ 44 px ; « chaud » porté aussi par le texte ; mouvement limité à prefers-reduced-motion: no-preference (alternative NOT-VERIFIED en runtime). Lecteur d'écran et clavier réel : NOT-VERIFIED.
+GATE B : ancre ANCHOR-GENERATED seulement (mémoire, pas de référence observée) → réserve : « Direction calibrée uniquement sur hypothèse générée, sans référence observée ni contrainte réelle. » Pas de regard externe.
+GATE C (1440 et 390, 16:12) : C1 matière typographique et donnée en place de la photo (présent, plafond déclaré) ; C2 Archivo, axe de chasse utilisé par rôle (présent) ; C3 foyer unique → ruban → vitrine → commande (présent) ; C4 hero droit encore aéré sous « Ensuite » à 1440 (réserve) ; C5 planéité assumée, seul relief : le ticket de commande (présent) ; C6 conseils chaleur/pluie, délai de 48 h, états fermé/vide (présent).
+V : PASS-WITH-RESERVATION (auto-comparaison). U : NOT-VERIFIED (pas de test utilisateur). A : PASS-WITH-RESERVATION (partiel). T : PASS pour la vérité (tout contenu inventé est marqué).
+Statut de direction : EXPLORATORY (calibration générée seulement, contenu réel absent). Verdict : non accepté ; rights_status : not_applicable (aucun asset tiers ; police Archivo sous licence OFL).
+
+CREATIVE CLOSE
+presence : chiffre condensé de la prochaine fournée (16:30) sur fond carrelage, sans image.
+signature : le ruban des fournées et l'état « chaud » en vermillon, repris dans la vitrine.
+craft_detail : jauge de tiédeur qui décroît sur 40 min ; ticket de commande dentelé qui recompose le message WhatsApp en direct.
+dominant_defect : absence de photographie réelle des produits ; la gourmandise ne passe que par les mots.
+next_polish_action : STOP — la prochaine amélioration demande les vraies photos et les vrais horaires (questions.txt).
+DECISION-CHANGE : confirmé : chiffre monumental comme foyer (B1b). Modifié : le latéral du hero devient « chaud + ensuite ».
+NEXT-PROOF : vrais contenus et photos de la maison, puis test auprès de 3 à 5 clients à Douala (trouver ce qui est chaud, envoyer une commande).

@@ -1,0 +1,17 @@
+Questions pour la vraie version (le rendu a été construit sur des hypothèses nommées, sans attendre les réponses)
+
+1. Contenu réel — le plus important
+   - Nom exact de la boulangerie (et logo ou enseigne peinte s'il en existe).
+   - Quartier et repère pour vous trouver (ex. « face à … », « carrefour … »), et lien Google Maps si vous en avez un.
+   - Horaires d'ouverture par jour, et heures réelles des fournées (hypothèse : 6 h, 11 h 30 et 17 h ; dimanche 6 h et 11 h 30, fermeture 13 h).
+   - Liste des produits et prix réels en FCFA (les prix affichés sont indicatifs).
+   - Numéro WhatsApp qui reçoit les commandes (le bouton prépare le message ; il manque le destinataire).
+   - Moyens de paiement acceptés (hypothèse : espèces, Orange Money, MTN MoMo).
+
+2. Photos
+   - Avez-vous des photos de vos produits, de la vitrine ou du four (même prises au téléphone) ? Elles peuvent être traitées de façon uniforme et remplaceraient les pictogrammes.
+
+3. Destination et périmètre
+   - Délai minimum pour un gâteau sur commande (hypothèse : 48 h), acompte éventuel, prix de base par part.
+   - Faites-vous la livraison (quartiers, frais) ou seulement le retrait en boutique ?
+   - Le site doit-il aussi exister en anglais ?

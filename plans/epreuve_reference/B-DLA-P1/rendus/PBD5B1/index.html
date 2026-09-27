@@ -1,0 +1,784 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Boulangerie Pâtisserie — Douala</title>
+<meta name="description" content="Pain chaud à 6 h, 11 h 30 et 17 h. Viennoiseries, pâtisseries et gâteaux sur commande à Douala. Mettez de côté sur WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,300..900;1,62..125,400..700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --farine:#F8F7F3;      /* fond : blanc farine, pas crème */
+  --farine-2:#ECE9E2;    /* bandes, plan de travail */
+  --papier:#FFFFFF;
+  --four:#16120E;        /* encre : bouche du four */
+  --four-2:#4A443D;      /* texte secondaire */
+  --four-3:#6E675E;
+  --enseigne:#C2301A;    /* rouge d'enseigne peinte */
+  --enseigne-sombre:#9E2412;
+  /* échelle de cuisson : réservée à la donnée « four » */
+  --pate:#EFE3C8;
+  --blonde:#E8C27A;
+  --doree:#D08A2E;
+  --cuite:#8E4F17;
+  --ok:#1F6B45;
+  --r:6px;
+  --gut:clamp(16px,4vw,48px);
+  --max:1240px;
+  --sans:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--farine);color:var(--four);font-family:var(--sans);font-size:17px;line-height:1.5;font-variant-numeric:tabular-nums;overflow-x:hidden}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gut)}
+.cond{font-stretch:68%;font-weight:800;letter-spacing:-.01em}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:3px solid var(--enseigne);outline-offset:2px;border-radius:2px}
+
+/* ---------- Bandeau d'aperçu (divulgation en langage produit) ---------- */
+.apercu{background:var(--four);color:#EDE8DF;font-size:13.5px;line-height:1.4}
+.apercu .wrap{display:flex;gap:10px;align-items:center;padding-top:8px;padding-bottom:8px}
+.apercu b{color:#fff;font-weight:600}
+.apercu .pastille{flex:none;width:8px;height:8px;border-radius:50%;background:var(--blonde)}
+
+/* ---------- En-tête ---------- */
+header.top{position:sticky;top:0;z-index:20;background:rgba(248,247,243,.94);backdrop-filter:saturate(1.4) blur(6px);border-bottom:1px solid var(--farine-2)}
+header.top .wrap{display:flex;align-items:center;gap:24px;height:64px}
+.marque{display:flex;flex-direction:column;line-height:1;text-decoration:none}
+.marque .l1{font-stretch:68%;font-weight:850;font-size:clamp(16px,4.4vw,21px);white-space:nowrap;letter-spacing:.01em;text-transform:uppercase}
+.marque .l1 span{color:var(--enseigne)}
+.marque .l2{font-size:12px;color:var(--four-3);margin-top:3px;letter-spacing:.02em}
+nav.menu{display:flex;gap:22px;margin-left:auto;font-size:15px}
+nav.menu a{text-decoration:none;color:var(--four-2)}
+nav.menu a:hover{color:var(--four)}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:var(--r);padding:12px 18px;font-weight:650;font-size:15.5px;text-decoration:none;cursor:pointer;line-height:1.1}
+.btn-rouge{background:var(--enseigne);color:#fff}
+.btn-rouge:hover{background:var(--enseigne-sombre)}
+.btn-four{background:var(--four);color:#fff}
+.btn-four:hover{background:#000}
+.btn-ligne{background:transparent;box-shadow:inset 0 0 0 1.5px currentColor}
+.btn svg{width:18px;height:18px;flex:none}
+@media (max-width:860px){nav.menu{display:none} header.top .btn{margin-left:auto;padding:10px 14px;font-size:14.5px}}
+
+/* ---------- Emplacements à compléter ---------- */
+.slot{border-bottom:1.5px dashed var(--enseigne);color:var(--enseigne-sombre);padding:0 1px}
+.slot-on-dark{border-bottom-color:var(--blonde);color:var(--blonde)}
+
+/* ---------- Scène 1 : le four ---------- */
+.four-scene{padding:clamp(28px,5vw,64px) 0 clamp(36px,5vw,72px)}
+.kicker{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;font-size:15px;color:var(--four-2);margin-bottom:clamp(14px,2vw,22px)}
+.horloge{font-weight:650;color:var(--four)}
+.horloge i{font-style:normal;display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--enseigne);margin-right:8px;vertical-align:1px;animation:battement 2s ease-in-out infinite}
+@keyframes battement{50%{opacity:.25}}
+h1.titre{margin:0;font-stretch:66%;font-weight:850;font-size:clamp(52px,10.6vw,156px);line-height:.86;letter-spacing:-.015em;text-transform:none;max-width:12.5ch}
+h1.titre em{font-style:normal;color:var(--enseigne);white-space:nowrap}
+.chapo{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px 48px;align-items:end;margin-top:clamp(18px,2.4vw,30px)}
+.chapo p{margin:0;max-width:44ch;font-size:clamp(17px,1.5vw,20px);color:var(--four-2)}
+@media (max-width:760px){.chapo{grid-template-columns:1fr}}
+
+/* la bande du jour */
+.jour{margin-top:clamp(28px,4vw,48px)}
+.etat{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;margin-bottom:14px}
+.etat .gros{font-stretch:72%;font-weight:800;font-size:clamp(26px,3.2vw,40px);line-height:1}
+.etat .gros b{color:var(--enseigne)}
+.etat .fin{color:var(--four-2);font-size:15.5px;flex:1 1 20ch}
+.etat .btn{margin-left:auto}
+@media (max-width:760px){.etat .btn{width:100%;justify-content:center;margin-top:8px}}
+.bande{position:relative;height:84px;background:var(--farine-2);border-radius:var(--r);overflow:hidden}
+.bande .h{position:absolute;top:0;bottom:0;width:1px;background:rgba(22,18,14,.08)}
+.bande .ferme{position:absolute;top:0;bottom:0;background:repeating-linear-gradient(135deg,rgba(22,18,14,.07) 0 2px,transparent 2px 8px)}
+.cuisson{position:absolute;top:10px;bottom:10px;border-radius:4px;background:linear-gradient(90deg,var(--pate) 0%,var(--blonde) 45%,var(--doree) 80%,var(--cuite) 100%)}
+.chaud{position:absolute;top:10px;bottom:10px;border-radius:0 4px 4px 0;background:linear-gradient(90deg,rgba(208,138,46,.55),rgba(208,138,46,0))}
+.cuisson.en-cours{box-shadow:0 0 0 2px var(--four)}
+.cuisson.en-cours::after{content:"";position:absolute;inset:0;border-radius:4px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);background-size:50% 100%;background-repeat:no-repeat;animation:chaleur 2.4s linear infinite}
+@keyframes chaleur{from{background-position:-50% 0}to{background-position:150% 0}}
+.maintenant{position:absolute;top:0;bottom:0;width:2px;background:var(--enseigne);z-index:3}
+.maintenant::before{content:"";position:absolute;top:-1px;left:-5px;width:12px;height:12px;border-radius:50%;background:var(--enseigne);box-shadow:0 0 0 3px var(--farine-2)}
+.graduation{position:relative;height:26px;font-size:12.5px;color:var(--four-3)}
+.graduation span{position:absolute;top:6px;transform:translateX(-50%);white-space:nowrap}
+.fournees{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:10px}
+.fournee{display:block;width:100%;text-align:left;background:var(--papier);border:1px solid var(--farine-2);border-radius:var(--r);padding:14px 16px 16px;cursor:pointer;position:relative}
+.fournee:hover{border-color:var(--four-3)}
+.fournee[aria-pressed="true"]{border-color:var(--four);box-shadow:inset 0 0 0 1px var(--four)}
+.fournee .heure{font-stretch:68%;font-weight:850;font-size:34px;line-height:1}
+.fournee .statut{display:inline-block;margin-left:10px;font-size:13px;font-weight:600;padding:3px 8px;border-radius:99px;background:var(--farine-2);color:var(--four-2);vertical-align:6px}
+.fournee .statut.four-on{background:var(--four);color:#fff}
+.fournee .statut.chaud-on{background:var(--doree);color:var(--four)}
+.fournee .quoi{margin-top:8px;font-size:14.5px;color:var(--four-2);line-height:1.4}
+.fournee .voir{margin-top:10px;font-size:13.5px;font-weight:600;color:var(--enseigne-sombre)}
+.legende{display:flex;flex-wrap:wrap;gap:6px 20px;margin-top:12px;font-size:13px;color:var(--four-3)}
+.legende span::before{content:"";display:inline-block;width:18px;height:9px;border-radius:2px;margin-right:7px;vertical-align:0}
+.legende .l-c::before{background:linear-gradient(90deg,var(--pate),var(--doree),var(--cuite))}
+.legende .l-h::before{background:linear-gradient(90deg,rgba(208,138,46,.55),rgba(208,138,46,0))}
+.legende .l-f::before{background:repeating-linear-gradient(135deg,rgba(22,18,14,.18) 0 2px,transparent 2px 6px)}
+@media (max-width:760px){
+  .fournees{grid-template-columns:1fr;gap:8px}
+  .fournee{display:grid;grid-template-columns:92px 1fr;gap:2px 14px;align-items:center;padding:12px 14px}
+  .fournee .heure{font-size:28px;grid-row:span 2}
+  .fournee .statut{margin-left:0;vertical-align:0;justify-self:start}
+  .fournee .quoi{margin-top:0;font-size:14px}
+  .fournee .voir{display:none}
+  .bande{height:64px}
+}
+
+/* ---------- Section générique ---------- */
+section.bloc{padding:clamp(48px,7vw,96px) 0}
+.entete{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:16px 32px;margin-bottom:clamp(20px,3vw,36px)}
+h2{margin:0;font-stretch:66%;font-weight:850;font-size:clamp(40px,6vw,84px);line-height:.9;letter-spacing:-.01em}
+.entete p{margin:0;max-width:46ch;color:var(--four-2)}
+
+/* ---------- Vitrine ---------- */
+.vitrine{background:var(--papier);border-top:1px solid var(--farine-2);border-bottom:1px solid var(--farine-2)}
+.filtres{display:flex;flex-wrap:wrap;gap:8px}
+.filtre{border:1px solid var(--farine-2);background:var(--farine);border-radius:99px;padding:8px 14px;font-size:14.5px;cursor:pointer}
+.filtre[aria-pressed="true"]{background:var(--four);border-color:var(--four);color:#fff}
+.comptoir{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:clamp(24px,4vw,56px);align-items:start}
+@media (max-width:980px){.comptoir{grid-template-columns:1fr}}
+.tableau{display:block}
+.rayon{display:grid;grid-template-columns:150px minmax(0,1fr);gap:0 24px;border-top:2px solid var(--four);padding-top:4px;margin-bottom:28px}
+.rayon[hidden]{display:none}
+.rayon h3{margin:0;padding-top:12px;font-stretch:70%;font-weight:800;font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--enseigne)}
+.rayon .liste{min-width:0}
+.rayon .article:last-child{border-bottom:0}
+@media (max-width:720px){.rayon{grid-template-columns:1fr}.rayon h3{padding:10px 0 2px}}
+.article{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 14px;padding:12px 0;border-bottom:1px solid var(--farine-2);align-items:center}
+.article[hidden]{display:none}
+.article .ligne{display:flex;align-items:baseline;gap:8px;min-width:0}
+.article .nom{font-weight:600;font-size:17px;line-height:1.25}
+.article .points{flex:1;min-width:16px;border-bottom:1.5px dotted #BDB6AA;transform:translateY(-4px)}
+.article .prix{font-weight:650;white-space:nowrap}
+.article .prix small{font-weight:500;font-size:12.5px;color:var(--four-3)}
+.article .desc{grid-column:1;font-size:14px;color:var(--four-3);line-height:1.35;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center}
+.tag{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--four-2);background:var(--farine);border-radius:99px;padding:2px 8px 2px 6px;white-space:nowrap}
+.tag::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--doree)}
+.tag.tag-jour::before{background:var(--four-3)}
+.pas{grid-column:2;grid-row:1 / span 2;display:flex;align-items:center;gap:0;border:1px solid var(--farine-2);border-radius:99px;background:var(--farine)}
+.pas button{width:38px;height:38px;border:0;background:transparent;border-radius:50%;cursor:pointer;font-size:20px;line-height:1;display:grid;place-items:center}
+.pas button:hover{background:var(--farine-2)}
+.pas button:disabled{opacity:.3;cursor:default;background:transparent}
+.pas output{min-width:22px;text-align:center;font-weight:650}
+.article.choisi .nom{color:var(--enseigne-sombre)}
+.article.choisi .pas{background:var(--four);border-color:var(--four);color:#fff}
+.article.choisi .pas button:hover{background:rgba(255,255,255,.12)}
+.note-prix{font-size:13.5px;color:var(--four-3);margin-top:4px}
+
+/* ticket */
+.ticket{position:sticky;top:84px;background:var(--farine);border-radius:var(--r) var(--r) 0 0;padding:22px 22px 30px;
+  -webkit-mask:linear-gradient(#000 0 0) top/100% calc(100% - 10px) no-repeat,radial-gradient(circle 6px at 8px 100%,transparent 5.5px,#000 6px) bottom left/16px 10px repeat-x;
+          mask:linear-gradient(#000 0 0) top/100% calc(100% - 10px) no-repeat,radial-gradient(circle 6px at 8px 100%,transparent 5.5px,#000 6px) bottom left/16px 10px repeat-x}
+.ticket h3{margin:0;font-stretch:70%;font-weight:850;font-size:28px;line-height:1}
+.ticket .sous{font-size:14px;color:var(--four-3);margin:4px 0 14px}
+.ticket ul{list-style:none;margin:0;padding:0;border-top:1.5px dashed #C9C2B6}
+.ticket li{display:grid;grid-template-columns:28px 1fr auto;gap:8px;padding:9px 0;border-bottom:1px solid var(--farine-2);font-size:15px}
+.ticket li .q{font-weight:700}
+.ticket .vide{padding:18px 0;color:var(--four-3);font-size:15px;border-bottom:1.5px dashed #C9C2B6}
+.total{display:flex;justify-content:space-between;align-items:baseline;padding:12px 0 4px;font-weight:700}
+.total .v{font-stretch:72%;font-weight:850;font-size:30px}
+.total small{display:block;font-weight:500;font-size:12.5px;color:var(--four-3)}
+.champ{margin-top:14px}
+.champ label,.champ .lab{display:block;font-size:13.5px;font-weight:600;margin-bottom:6px}
+.champ select,.champ input[type=text],.champ input[type=date],.champ textarea{width:100%;background:var(--papier);border:1px solid #D4CEC4;border-radius:var(--r);padding:11px 12px;font-size:16px}
+.bascule{display:grid;grid-template-columns:1fr 1fr;background:var(--papier);border:1px solid #D4CEC4;border-radius:var(--r);padding:3px}
+.bascule input{position:absolute;opacity:0;pointer-events:none}
+.bascule label{margin:0;text-align:center;padding:8px 6px;border-radius:4px;cursor:pointer;font-weight:550;font-size:14.5px;display:flex;align-items:center;justify-content:center;gap:8px}
+.bascule label i{width:12px;height:12px;border-radius:50%;flex:none}
+.bascule input:checked+label{background:var(--four);color:#fff}
+.bascule input:focus-visible+label{outline:3px solid var(--enseigne);outline-offset:1px}
+.ticket .btn{width:100%;justify-content:center;margin-top:16px;padding:14px}
+.ticket .btn[aria-disabled="true"]{background:#B9B2A7;cursor:not-allowed}
+.apercu-msg{margin-top:14px;background:var(--papier);border-radius:var(--r);padding:12px 14px;font-size:14px;white-space:pre-wrap;line-height:1.45;border-left:3px solid var(--ok)}
+.apercu-msg .t{display:block;font-size:12px;font-weight:600;color:var(--ok);margin-bottom:4px;white-space:normal}
+.limite{font-size:13px;color:var(--four-3);margin-top:10px;line-height:1.4}
+.copier{margin-top:8px;background:none;border:0;padding:0;font-weight:650;color:var(--enseigne-sombre);cursor:pointer;text-decoration:underline;text-underline-offset:3px;font-size:14px}
+
+/* barre mobile */
+.barre{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--four);color:#fff;display:none;padding:10px 16px calc(10px + env(safe-area-inset-bottom))}
+.barre a{display:flex;justify-content:space-between;align-items:center;text-decoration:none;font-weight:600}
+.barre .btn{padding:10px 14px}
+@media (max-width:980px){.barre.on{display:block} .ticket{position:static}}
+
+/* ---------- Gâteaux ---------- */
+.gateaux{background:var(--four);color:#F3EFE8}
+.gateaux h2{color:#fff}
+.gateaux .entete p{color:#C9C1B5}
+.atelier{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(24px,5vw,72px);align-items:center}
+@media (max-width:900px){.atelier{grid-template-columns:1fr}}
+.etape{padding:18px 0;border-top:1px solid rgba(255,255,255,.14)}
+.etape:first-child{border-top:0;padding-top:0}
+.etape .lab{display:flex;gap:12px;align-items:baseline;font-weight:650;margin-bottom:10px}
+.etape .lab b{font-stretch:70%;font-weight:850;color:var(--blonde);font-size:18px}
+.puces{display:flex;flex-wrap:wrap;gap:8px}
+.puces input{position:absolute;opacity:0;pointer-events:none}
+.puces label{border:1px solid rgba(255,255,255,.25);border-radius:99px;padding:8px 14px;cursor:pointer;font-size:15px;display:inline-flex;gap:8px;align-items:center}
+.puces label:hover{border-color:rgba(255,255,255,.6)}
+.puces input:checked+label{background:#fff;color:var(--four);border-color:#fff;font-weight:600}
+.puces input:focus-visible+label{outline:3px solid var(--blonde);outline-offset:2px}
+.puces label small{color:inherit;opacity:.7;font-size:13px}
+.gateaux .champ input,.gateaux .champ textarea{background:#221D18;border-color:rgba(255,255,255,.2);color:#fff}
+.gateaux .champ input::placeholder{color:#8E857A}
+.compte{font-size:13px;color:#A69D90;margin-top:6px}
+.erreur{margin-top:8px;font-size:14.5px;color:#FFB4A6;display:flex;gap:8px}
+.erreur[hidden]{display:none}
+.plateau{position:relative;display:grid;place-items:center}
+.plateau svg{width:100%;max-width:520px;height:auto;display:block}
+.plateau .cap{margin-top:8px;font-size:13.5px;color:#A69D90;text-align:center}
+.recap-gateau{display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px;margin-top:22px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
+.recap-gateau .prix-g{font-stretch:72%;font-weight:850;font-size:34px;line-height:1;color:#fff}
+.recap-gateau .prix-g small{display:block;font-stretch:100%;font-weight:500;font-size:12.5px;color:#A69D90;margin-top:6px}
+.gateaux .apercu-msg{background:#221D18;color:#EDE8DF}
+.gateaux .limite{color:#A69D90}
+.gateaux .copier{color:var(--blonde)}
+.conseil{font-size:14px;color:#C9C1B5;border-left:2px solid var(--blonde);padding-left:12px;margin-top:18px;max-width:52ch}
+
+/* ---------- Venir ---------- */
+.venir-grille{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:clamp(20px,4vw,56px)}
+@media (max-width:860px){.venir-grille{grid-template-columns:1fr}}
+.venir-grille h3{margin:0 0 10px;font-stretch:70%;font-weight:800;font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--enseigne)}
+.repere{font-stretch:72%;font-weight:800;font-size:clamp(28px,3vw,38px);line-height:1.05}
+.venir-grille p{margin:10px 0 0;color:var(--four-2)}
+table.horaires{width:100%;border-collapse:collapse;font-size:16px}
+table.horaires td{padding:9px 0;border-bottom:1px solid var(--farine-2)}
+table.horaires td:last-child{text-align:right;font-weight:600}
+table.horaires tr.auj td{color:var(--enseigne-sombre)}
+table.horaires tr.auj td:first-child::after{content:" · aujourd’hui";font-weight:500;font-size:13px}
+.paiements{list-style:none;margin:0;padding:0}
+.paiements li{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--farine-2)}
+.paiements li i{width:30px;height:20px;border-radius:3px;flex:none;display:grid;place-items:center;font-style:normal;font-size:10px;font-weight:800;color:var(--four)}
+
+/* ---------- Pied : l'enseigne ---------- */
+footer.pied{background:var(--farine-2);padding:clamp(36px,5vw,64px) 0 28px;overflow:hidden}
+.enseigne{font-stretch:62%;font-weight:900;text-transform:uppercase;line-height:.8;letter-spacing:-.01em;color:var(--enseigne);font-size:clamp(46px,12.2vw,172px);white-space:nowrap}
+.enseigne span{display:block}
+.pied .bas{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;margin-top:26px;font-size:14px;color:var(--four-2)}
+@media (max-width:980px){body.avec-barre footer.pied{padding-bottom:88px}}
+</style>
+</head>
+<body>
+
+<div class="apercu" role="note">
+  <div class="wrap"><span class="pastille" aria-hidden="true"></span>
+    <span><b>Aperçu de votre site.</b> Le nom, le repère, les horaires, les prix et le numéro WhatsApp sont des exemples à remplacer par les vôtres.</span>
+  </div>
+</div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="marque" href="#" aria-label="Accueil">
+      <span class="l1">Boulangerie <span>·</span> Pâtisserie</span>
+      <span class="l2"><span class="slot">Nom de l’enseigne</span> — Douala</span>
+    </a>
+    <nav class="menu" aria-label="Sections">
+      <a href="#four">Le four</a>
+      <a href="#vitrine">La vitrine</a>
+      <a href="#gateaux">Gâteaux sur commande</a>
+      <a href="#venir">Nous trouver</a>
+    </nav>
+    <a class="btn btn-rouge" href="#vitrine">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21l1.7-5A8.5 8.5 0 1 1 8 19.3z"/><path d="M9 10c0 3 2 5 5 5l1.2-1.2-2-1-1 .8c-1-.4-1.6-1-2-2l.8-1-1-2z" /></svg>
+      Commander
+    </a>
+  </div>
+</header>
+
+<main>
+<!-- =========================================================
+     SCÈNE 1 — LE FOUR : la promesse (pain chaud) rendue vérifiable
+     par l'heure du jour à Douala et l'état de chaque fournée.
+     ========================================================= -->
+<section class="four-scene" id="four" aria-labelledby="titre">
+  <div class="wrap">
+    <div class="kicker">
+      <span class="horloge" id="horloge"><i aria-hidden="true"></i><span>Douala, —</span></span>
+      <span><span class="slot">Quartier</span> · ouvert tous les jours dès 5 h 30</span>
+    </div>
+    <h1 class="titre" id="titre">Pain chaud à <em>6 h</em>, <em>11 h 30</em> et <em>17 h</em>.</h1>
+
+    <div class="jour" aria-labelledby="etat-titre">
+      <div class="etat" aria-live="polite">
+        <span class="gros" id="etat-titre">—</span>
+        <span class="fin" id="etat-fin"></span>
+        <a class="btn btn-four" id="cta-fournee" href="#vitrine">Réserver sur la prochaine fournée</a>
+      </div>
+      <div class="bande" id="bande" aria-hidden="true"></div>
+      <div class="graduation" id="graduation" aria-hidden="true"></div>
+      <div class="fournees" id="fournees" role="group" aria-label="Les fournées du jour — choisir une fournée filtre la vitrine"></div>
+      <div class="legende" aria-hidden="true"><span class="l-c">au four : de la pâte à la croûte</span><span class="l-h">encore chaud</span><span class="l-f">boutique fermée</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     LA VITRINE — tableau des prix + ticket de commande
+     ========================================================= -->
+<section class="bloc vitrine" id="vitrine" aria-labelledby="t-vitrine">
+  <div class="wrap">
+    <div class="entete">
+      <div>
+        <h2 id="t-vitrine">La vitrine</h2>
+        <p class="note-prix">Prix indicatifs en FCFA, à confirmer en boutique.</p>
+      </div>
+      <div class="filtres" id="filtres" role="group" aria-label="Filtrer par fournée"></div>
+    </div>
+    <div class="comptoir">
+      <div class="tableau" id="tableau"></div>
+
+      <aside class="ticket" id="ticket" aria-labelledby="t-ticket">
+        <h3 id="t-ticket">À mettre de côté</h3>
+        <p class="sous">Payez au retrait, en boutique.</p>
+        <ul id="lignes"></ul>
+        <div class="total"><span>Total<small>indicatif</small></span><span class="v" id="total">0 FCFA</span></div>
+
+        <div class="champ">
+          <label for="passage">Je passe</label>
+          <select id="passage"></select>
+        </div>
+        <div class="champ" id="champ-cuisson">
+          <span class="lab" id="lab-cuisson">Mes baguettes</span>
+          <div class="bascule" role="radiogroup" aria-labelledby="lab-cuisson">
+            <input type="radio" name="cuisson" id="c-doree" value="dorées" checked><label for="c-doree"><i style="background:var(--blonde)"></i>Dorées</label>
+            <input type="radio" name="cuisson" id="c-cuite" value="bien cuites"><label for="c-cuite"><i style="background:var(--cuite)"></i>Bien cuites</label>
+          </div>
+        </div>
+        <div class="champ">
+          <label for="nom">À quel nom ?</label>
+          <input type="text" id="nom" autocomplete="given-name" placeholder="Votre prénom">
+        </div>
+        <a class="btn btn-rouge" id="envoyer" href="#" aria-disabled="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21l1.7-5A8.5 8.5 0 1 1 8 19.3z"/></svg>
+          <span>Choisissez au moins un article</span>
+        </a>
+        <div id="msg-zone" hidden>
+          <div class="apercu-msg" id="msg"><span class="t">Message préparé pour WhatsApp</span><span id="msg-texte"></span></div>
+          <button class="copier" type="button" id="copier">Copier le message</button>
+          <p class="limite" id="limite"></p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     GÂTEAUX SUR COMMANDE — l'inscription et les parts, visibles
+     ========================================================= -->
+<section class="bloc gateaux" id="gateaux" aria-labelledby="t-gateaux">
+  <div class="wrap">
+    <div class="entete">
+      <h2 id="t-gateaux">Gâteaux<br>sur commande</h2>
+      <p>Anniversaire, mariage, baptême, communion. Composez-le ici : vous voyez les parts et l’inscription avant de nous l’envoyer.</p>
+    </div>
+    <div class="atelier">
+      <form id="form-gateau" novalidate onsubmit="return false">
+        <div class="etape">
+          <div class="lab"><b>1</b> Pour quelle occasion ?</div>
+          <div class="puces" id="occasions"></div>
+        </div>
+        <div class="etape">
+          <div class="lab"><b>2</b> Combien de parts ?</div>
+          <div class="puces" id="parts"></div>
+        </div>
+        <div class="etape">
+          <div class="lab"><b>3</b> Quel parfum ?</div>
+          <div class="puces" id="parfums"></div>
+        </div>
+        <div class="etape">
+          <div class="lab"><b>4</b> L’inscription et la date</div>
+          <div class="champ" style="margin-top:0">
+            <label for="inscription" class="sr">Inscription sur le gâteau</label>
+            <input type="text" id="inscription" maxlength="28" value="Joyeux anniversaire Maman" aria-describedby="compte">
+            <div class="compte" id="compte">28 caractères au plus</div>
+          </div>
+          <div class="champ">
+            <label for="date">Pour le</label>
+            <input type="date" id="date" aria-describedby="err-date">
+            <div class="erreur" id="err-date" hidden></div>
+          </div>
+        </div>
+      </form>
+
+      <div>
+        <div class="plateau">
+          <svg id="svg-gateau" viewBox="0 0 520 440" role="img" aria-labelledby="svg-t">
+            <title id="svg-t">Vue de dessus du gâteau : parts et inscription</title>
+          </svg>
+          <div class="cap">Vue de dessus, schéma de découpe : la décoration finale se discute avec le pâtissier.</div>
+        </div>
+        <div class="recap-gateau">
+          <div class="prix-g" id="prix-g">—</div>
+          <a class="btn btn-rouge" id="envoyer-g" href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21l1.7-5A8.5 8.5 0 1 1 8 19.3z"/></svg>
+            <span>Envoyer la demande</span>
+          </a>
+        </div>
+        <div id="msg-zone-g" hidden>
+          <div class="apercu-msg"><span class="t">Message préparé pour WhatsApp</span><span id="msg-texte-g"></span></div>
+          <button class="copier" type="button" id="copier-g">Copier le message</button>
+          <p class="limite">Le numéro WhatsApp de la boutique sera ajouté ici. Le pâtissier confirme le prix et l’acompte par retour de message.</p>
+        </div>
+        <p class="conseil">Avec la chaleur de Douala, un gâteau à la crème voyage mal : prévoyez un carton bien fermé, la voiture climatisée ou un retrait juste avant la fête.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     NOUS TROUVER — repère plutôt qu'adresse
+     ========================================================= -->
+<section class="bloc" id="venir" aria-labelledby="t-venir">
+  <div class="wrap">
+    <div class="entete"><h2 id="t-venir">Nous trouver</h2></div>
+    <div class="venir-grille">
+      <div>
+        <h3>Le repère</h3>
+        <div class="repere"><span class="slot">Quartier</span>,<br><span class="slot">face à …</span></div>
+        <p>Dites « la boulangerie <span class="slot">nom</span> » au taxi ou au moto-taxi : c’est le repère qu’on donne à Douala.</p>
+        <p><span class="slot">Lien Google Maps à ajouter</span></p>
+      </div>
+      <div>
+        <h3>Horaires</h3>
+        <table class="horaires" id="horaires">
+          <tbody>
+            <tr data-j="1"><td>Lundi – samedi</td><td>5 h 30 – 20 h 30</td></tr>
+            <tr data-j="0"><td>Dimanche</td><td>6 h – 13 h</td></tr>
+            <tr><td>Fournées</td><td>6 h · 11 h 30 · 17 h</td></tr>
+            <tr><td>Fournées du dimanche</td><td>6 h · 11 h 30</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h3>Paiement</h3>
+        <ul class="paiements">
+          <li><i style="background:var(--farine-2)">CFA</i>Espèces</li>
+          <li><i style="background:#FF7900">OM</i>Orange Money</li>
+          <li><i style="background:#FFCB05">MoMo</i>MTN Mobile Money</li>
+        </ul>
+        <p style="font-size:14px">Moyens de paiement à confirmer par la boutique.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="pied">
+  <div class="wrap">
+    <div class="enseigne" aria-hidden="true"><span>Boulangerie</span><span>Pâtisserie</span></div>
+    <div class="bas">
+      <span><span class="slot">Nom de l’enseigne</span> · <span class="slot">Quartier</span>, Douala · Cameroun</span>
+      <span>Commandes sur WhatsApp · <span class="slot">+237 6 __ __ __ __</span></span>
+    </div>
+  </div>
+</footer>
+
+<div class="barre" id="barre"><a href="#ticket"><span id="barre-txt">0 article</span><span class="btn btn-rouge">Voir ma commande</span></a></div>
+
+<script>
+/* ============ CONFIGURATION DE LA BOUTIQUE (à remplacer) ============ */
+const BOUTIQUE = {
+  whatsapp: "",                 // ex. "2376XXXXXXXX" — vide = numéro pas encore fourni
+  ouverture:  {semaine:[5.5, 20.5], dimanche:[6, 13]},
+  fournees:   {semaine:[6, 11.5, 17], dimanche:[6, 11.5]},
+  cuissonMin: 45,               // minutes au four avant la sortie
+  chaudMin:   60,               // minutes pendant lesquelles on dit « encore chaud »
+  delaiGateauJours: 2
+};
+const QUOI = {6:"Baguettes, pain de mie, croissants, pains au chocolat", 11.5:"Baguettes, pains chargés, pain complet", 17:"Baguettes, pain au lait, beignets"};
+const PRODUITS = [
+  {rayon:"Pains", id:"baguette", nom:"Baguette", desc:"250 g, croûte craquante", prix:150, f:[6,11.5,17], baguette:true},
+  {rayon:"Pains", id:"complet", nom:"Pain complet", desc:"Farine complète, mie serrée", prix:500, f:[11.5]},
+  {rayon:"Pains", id:"mie", nom:"Pain de mie", desc:"Tranché, pour le petit-déjeuner", prix:1000, f:[6]},
+  {rayon:"Pains", id:"lait", nom:"Pain au lait", desc:"Le sachet de 6", prix:600, f:[17]},
+  {rayon:"Viennoiseries", id:"croissant", nom:"Croissant", desc:"Pur beurre", prix:300, f:[6]},
+  {rayon:"Viennoiseries", id:"chocolat", nom:"Pain au chocolat", desc:"Deux barres de chocolat", prix:350, f:[6]},
+  {rayon:"Viennoiseries", id:"chausson", nom:"Chausson à l’ananas", desc:"Ananas frais, cuit maison", prix:400, f:[6]},
+  {rayon:"Viennoiseries", id:"beignets", nom:"Beignets", desc:"Le sachet de 5", prix:250, f:[17]},
+  {rayon:"Salé", id:"charge-omelette", nom:"Pain chargé omelette", desc:"Demi-baguette, omelette, oignons", prix:600, f:[11.5]},
+  {rayon:"Salé", id:"charge-avocat", nom:"Pain chargé avocat", desc:"Demi-baguette, avocat, piment au choix", prix:500, f:[11.5]},
+  {rayon:"Pâtisseries", id:"eclair", nom:"Éclair au chocolat", desc:"Crème pâtissière chocolat", prix:600, f:null},
+  {rayon:"Pâtisseries", id:"millefeuille", nom:"Mille-feuille", desc:"Crème vanille, glaçage", prix:700, f:null},
+  {rayon:"Pâtisseries", id:"coco", nom:"Tartelette coco", desc:"Noix de coco râpée, pâte sablée", prix:500, f:null},
+  {rayon:"Pâtisseries", id:"foret", nom:"Part de forêt-noire", desc:"Chocolat, chantilly, cerises", prix:800, f:null},
+  {rayon:"Boissons maison", id:"gingembre", nom:"Jus de gingembre", desc:"50 cl, bien frais", prix:500, f:null},
+  {rayon:"Boissons maison", id:"folere", nom:"Jus de foléré", desc:"50 cl, fleurs d’hibiscus", prix:500, f:null}
+];
+
+/* ============ Outils ============ */
+const $ = s => document.querySelector(s);
+const fmtH = h => { const H = Math.floor(h), M = Math.round((h-H)*60); return M ? `${H} h ${String(M).padStart(2,"0")}` : `${H} h`; };
+const fmtDuree = min => { min = Math.max(0, Math.round(min)); const h = Math.floor(min/60), m = min%60; return h ? (m ? `${h} h ${String(m).padStart(2,"0")}` : `${h} h`) : `${m} min`; };
+const fcfa = n => n.toLocaleString("fr-FR").replace(/\s/g," ") + " FCFA";
+
+/* Heure de Douala (Africa/Douala, UTC+1). Pour tester un état : #t=16:40 ou #t=16:40-0 (0 = dimanche). */
+function maintenant(){
+  const m = location.hash.match(/t=(\d{1,2}):(\d{2})(?:-(\d))?/);
+  if (m) return {h:+m[1] + +m[2]/60, j: m[3] ? +m[3] : 3, test:true};
+  const p = Object.fromEntries(new Intl.DateTimeFormat("en-GB",{timeZone:"Africa/Douala",hour:"2-digit",minute:"2-digit",weekday:"short",hour12:false}).formatToParts(new Date()).map(x=>[x.type,x.value]));
+  const jours = {Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};
+  return {h:(+p.hour%24) + +p.minute/60, j:jours[p.weekday]};
+}
+const planDu = j => j === 0 ? {ouv:BOUTIQUE.ouverture.dimanche, f:BOUTIQUE.fournees.dimanche} : {ouv:BOUTIQUE.ouverture.semaine, f:BOUTIQUE.fournees.semaine};
+
+function etatFournee(t, h){
+  const debut = t - BOUTIQUE.cuissonMin/60, fin = t + BOUTIQUE.chaudMin/60;
+  if (h < debut) return {code:"avenir", label:"à venir", dans:(t-h)*60};
+  if (h < t)     return {code:"four",   label:"au four",  dans:(t-h)*60};
+  if (h < fin)   return {code:"chaud",  label:"encore chaud", depuis:(h-t)*60};
+  return {code:"passe", label:"sortie"};
+}
+
+/* ============ Scène 1 : le four ============ */
+const H0 = 5, H1 = 21, pos = h => ((h-H0)/(H1-H0))*100;
+let filtreActif = "tout";
+
+function dessinerFour(){
+  const n = maintenant(), plan = planDu(n.j);
+  $("#horloge span").textContent = `Douala, ${fmtH(n.h).replace(/^(\d+) h$/,"$1 h 00")}${n.test ? " (simulation)" : ""}`;
+
+  // bande
+  const b = $("#bande"); b.innerHTML = "";
+  for (let h = H0+1; h < H1; h++){ const d = document.createElement("div"); d.className="h"; d.style.left = pos(h)+"%"; b.appendChild(d); }
+  const f1 = document.createElement("div"); f1.className="ferme"; f1.style.left="0"; f1.style.width=pos(plan.ouv[0])+"%"; b.appendChild(f1);
+  const f2 = document.createElement("div"); f2.className="ferme"; f2.style.left=pos(plan.ouv[1])+"%"; f2.style.right="0"; b.appendChild(f2);
+  plan.f.forEach(t => {
+    const e = etatFournee(t, n.h);
+    const c = document.createElement("div"); c.className = "cuisson" + (e.code==="four" ? " en-cours" : "");
+    c.style.left = pos(t - BOUTIQUE.cuissonMin/60)+"%"; c.style.width = (pos(t)-pos(t - BOUTIQUE.cuissonMin/60))+"%"; b.appendChild(c);
+    const ch = document.createElement("div"); ch.className="chaud"; ch.style.left = pos(t)+"%"; ch.style.width = (pos(t+BOUTIQUE.chaudMin/60)-pos(t))+"%"; b.appendChild(ch);
+  });
+  if (n.h >= H0 && n.h <= H1){ const m = document.createElement("div"); m.className="maintenant"; m.style.left = `calc(${pos(n.h)}% - 1px)`; b.appendChild(m); }
+
+  // graduation
+  const g = $("#graduation"); g.innerHTML = "";
+  const pasH = window.innerWidth < 560 ? 3 : 2;
+  for (let h = 6; h <= 20; h += pasH){ const s = document.createElement("span"); s.textContent = h+" h"; s.style.left = pos(h)+"%"; g.appendChild(s); }
+
+  // état principal
+  const ouvert = n.h >= plan.ouv[0] && n.h < plan.ouv[1];
+  const enCours = plan.f.find(t => etatFournee(t,n.h).code==="four");
+  const prochaine = plan.f.find(t => t > n.h);
+  const chaude = plan.f.find(t => etatFournee(t,n.h).code==="chaud");
+  let titre, fin, cible;
+  if (enCours !== undefined){
+    titre = `Au four maintenant : sortie à <b>${fmtH(enCours)}</b>`;
+    fin = `dans ${fmtDuree((enCours-n.h)*60)} · ${QUOI[enCours]}`; cible = enCours;
+  } else if (chaude !== undefined){
+    titre = `Sortie à ${fmtH(chaude)} : <b>encore chaud</b>`;
+    fin = prochaine !== undefined ? `Prochaine fournée à ${fmtH(prochaine)}.` : `Dernière fournée du jour.`; cible = prochaine ?? null;
+  } else if (!ouvert && n.h >= plan.ouv[1]){
+    const demain = planDu((n.j+1)%7);
+    titre = `Fermé · première fournée demain à <b>${fmtH(demain.f[0])}</b>`;
+    fin = `Vous pouvez déjà mettre de côté pour demain matin.`; cible = null;
+  } else if (!ouvert){
+    titre = `Ouverture à ${fmtH(plan.ouv[0])} · première fournée à <b>${fmtH(plan.f[0])}</b>`;
+    fin = `dans ${fmtDuree((plan.f[0]-n.h)*60)}`; cible = plan.f[0];
+  } else if (prochaine !== undefined){
+    titre = `Prochaine fournée à <b>${fmtH(prochaine)}</b>`;
+    fin = `dans ${fmtDuree((prochaine-n.h)*60)} · ${QUOI[prochaine]}`; cible = prochaine;
+  } else {
+    titre = `Fournées du jour terminées`; fin = `Ouvert jusqu’à ${fmtH(plan.ouv[1])}. Première fournée demain à ${fmtH(planDu((n.j+1)%7).f[0])}.`; cible = null;
+  }
+  $("#etat-titre").innerHTML = titre; $("#etat-fin").textContent = fin;
+  $("#cta-fournee").textContent = cible != null ? `Réserver sur la fournée de ${fmtH(cible)}` : "Mettre de côté pour demain";
+  $("#cta-fournee").dataset.cible = cible ?? "demain";
+
+  // cartes de fournée
+  const zone = $("#fournees"); zone.innerHTML = "";
+  plan.f.forEach(t => {
+    const e = etatFournee(t, n.h);
+    const bt = document.createElement("button"); bt.type="button"; bt.className="fournee";
+    bt.setAttribute("aria-pressed", String(filtreActif===String(t)));
+    const cls = e.code==="four" ? "four-on" : e.code==="chaud" ? "chaud-on" : "";
+    const txt = e.code==="avenir" ? `dans ${fmtDuree(e.dans)}` : e.code==="four" ? `au four · ${fmtDuree(e.dans)}` : e.code==="chaud" ? "encore chaud" : "sortie";
+    bt.innerHTML = `<span class="heure">${fmtH(t)}</span><span class="statut ${cls}">${txt}</span><div class="quoi">${QUOI[t]}</div><div class="voir">Voir dans la vitrine →</div>`;
+    bt.addEventListener("click", () => { choisirFiltre(String(t)); document.getElementById("vitrine").scrollIntoView(); });
+    zone.appendChild(bt);
+  });
+  remplirPassage(n, plan);
+  document.querySelectorAll("#horaires tr[data-j]").forEach(tr => tr.classList.toggle("auj", (n.j===0) === (tr.dataset.j==="0")));
+}
+
+/* ============ Vitrine ============ */
+const panier = {};
+function dessinerVitrine(){
+  const t = $("#tableau"); t.innerHTML = "";
+  const rayons = [...new Set(PRODUITS.map(p => p.rayon))];
+  rayons.forEach(r => {
+    const d = document.createElement("div"); d.className="rayon"; d.dataset.rayon = r;
+    d.innerHTML = `<h3>${r}</h3><div class="liste"></div>`; const L = d.querySelector(".liste");
+    PRODUITS.filter(p => p.rayon===r).forEach(p => {
+      const a = document.createElement("div"); a.className="article"; a.id = "a-"+p.id;
+      const tags = p.f ? p.f.map(h => `<span class="tag">${fmtH(h)}</span>`).join("") : `<span class="tag tag-jour">toute la journée</span>`;
+      a.innerHTML = `<div class="ligne"><span class="nom">${p.nom}</span><span class="points" aria-hidden="true"></span><span class="prix">${fcfa(p.prix)}</span></div>
+        <div class="desc"><span>${p.desc}</span>${tags}</div>
+        <div class="pas"><button type="button" aria-label="Retirer un ${p.nom}" data-m="-1">−</button><output aria-live="polite" aria-label="Quantité ${p.nom}">0</output><button type="button" aria-label="Ajouter un ${p.nom}" data-m="1">+</button></div>`;
+      a.querySelectorAll("button").forEach(bt => bt.addEventListener("click", () => changer(p.id, +bt.dataset.m)));
+      L.appendChild(a);
+    });
+    t.appendChild(d);
+  });
+  const fz = $("#filtres");
+  const opts = [["tout","Tout"],["6","6 h"],["11.5","11 h 30"],["17","17 h"],["jour","Toute la journée"]];
+  fz.innerHTML = opts.map(([v,l]) => `<button type="button" class="filtre" data-v="${v}" aria-pressed="${v===filtreActif}">${l}</button>`).join("");
+  fz.querySelectorAll("button").forEach(b => b.addEventListener("click", () => choisirFiltre(b.dataset.v)));
+  majArticles();
+}
+function choisirFiltre(v){
+  filtreActif = (filtreActif===v && v!=="tout") ? "tout" : v;
+  document.querySelectorAll(".filtre").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.v===filtreActif)));
+  document.querySelectorAll(".fournee").forEach((b,i) => b.setAttribute("aria-pressed", String(filtreActif===String(planDu(maintenant().j).f[i]))));
+  PRODUITS.forEach(p => {
+    const vis = filtreActif==="tout" || (filtreActif==="jour" ? !p.f : (p.f && p.f.includes(+filtreActif)));
+    $("#a-"+p.id).hidden = !vis;
+  });
+  document.querySelectorAll(".rayon").forEach(r => r.hidden = !r.querySelector(".article:not([hidden])"));
+  if (filtreActif !== "tout" && filtreActif !== "jour"){ const s = $("#passage"); const o = [...s.options].find(o => o.dataset.h === filtreActif && o.dataset.jour==="auj") || [...s.options].find(o => o.dataset.h === filtreActif); if (o) s.value = o.value; }
+}
+function changer(id, d){ panier[id] = Math.max(0, Math.min(99, (panier[id]||0) + d)); majArticles(); }
+function majArticles(){
+  let n = 0, tot = 0; const ul = $("#lignes"); ul.innerHTML = "";
+  PRODUITS.forEach(p => {
+    const q = panier[p.id]||0, a = $("#a-"+p.id);
+    a.classList.toggle("choisi", q>0); a.querySelector("output").textContent = q; a.querySelector("[data-m='-1']").disabled = q===0;
+    if (q){ n += q; tot += q*p.prix; const li = document.createElement("li"); li.innerHTML = `<span class="q">${q}×</span><span>${p.nom}</span><span>${fcfa(q*p.prix)}</span>`; ul.appendChild(li); }
+  });
+  if (!n) ul.innerHTML = `<li class="vide" style="display:block">Rien pour l’instant. Touchez <b>+</b> dans la vitrine.</li>`;
+  $("#total").textContent = fcfa(tot);
+  $("#champ-cuisson").hidden = !panier.baguette;
+  const env = $("#envoyer");
+  env.setAttribute("aria-disabled", String(!n));
+  env.querySelector("span").textContent = n ? (BOUTIQUE.whatsapp ? "Envoyer sur WhatsApp" : "Préparer le message WhatsApp") : "Choisissez au moins un article";
+  const barre = $("#barre"); barre.classList.toggle("on", n>0); document.body.classList.toggle("avec-barre", n>0);
+  $("#barre-txt").textContent = `${n} article${n>1?"s":""} · ${fcfa(tot)}`;
+  if (!$("#msg-zone").hidden) preparerMessage(false);
+}
+function remplirPassage(n, plan){
+  const s = $("#passage"), garde = s.value; s.innerHTML = "";
+  const add = (label, h, jour) => { const o = document.createElement("option"); o.value = `${jour}-${h}`; o.dataset.h = String(h); o.dataset.jour = jour; o.textContent = label; s.appendChild(o); };
+  plan.f.filter(t => t > n.h).forEach(t => add(`Aujourd’hui, à la sortie de ${fmtH(t)}`, t, "auj"));
+  if (n.h < plan.ouv[1]) add(`Aujourd’hui, avant ${fmtH(plan.ouv[1])}`, "fin", "auj");
+  planDu((n.j+1)%7).f.forEach(t => add(`Demain, à la sortie de ${fmtH(t)}`, t, "dem"));
+  if ([...s.options].some(o => o.value===garde)) s.value = garde;
+}
+function messageCommande(){
+  const lignes = PRODUITS.filter(p => panier[p.id]).map(p => `- ${panier[p.id]} × ${p.nom}${p.baguette ? ` (${document.querySelector("input[name=cuisson]:checked").value})` : ""}`);
+  const tot = PRODUITS.reduce((s,p) => s + (panier[p.id]||0)*p.prix, 0);
+  const nom = $("#nom").value.trim();
+  return `Bonjour, je voudrais mettre de côté :\n${lignes.join("\n")}\nTotal indicatif : ${fcfa(tot)}\nJe passe : ${$("#passage").selectedOptions[0]?.textContent.toLowerCase() || "—"}${nom ? `\nAu nom de : ${nom}` : ""}\nMerci !`;
+}
+function ouvrirWhatsApp(texte){ const url = `https://wa.me/${BOUTIQUE.whatsapp}?text=${encodeURIComponent(texte)}`; window.open(url, "_blank", "noopener"); }
+function preparerMessage(ouvrir){
+  const t = messageCommande();
+  $("#msg-texte").textContent = t; $("#msg-zone").hidden = false;
+  $("#limite").textContent = BOUTIQUE.whatsapp ? "Le message s’ouvre dans WhatsApp ; vous pouvez le modifier avant l’envoi." : "Le numéro WhatsApp de la boutique n’est pas encore renseigné : copiez le message, ou ajoutez le numéro dans la configuration du site.";
+  if (ouvrir && BOUTIQUE.whatsapp) ouvrirWhatsApp(t);
+}
+$("#envoyer").addEventListener("click", e => { e.preventDefault(); if (e.currentTarget.getAttribute("aria-disabled")==="true"){ document.getElementById("tableau").scrollIntoView({block:"start"}); return; } preparerMessage(true); });
+["#passage","#nom"].forEach(s => $(s).addEventListener("input", () => { if (!$("#msg-zone").hidden) preparerMessage(false); }));
+document.querySelectorAll("input[name=cuisson]").forEach(r => r.addEventListener("change", () => { if (!$("#msg-zone").hidden) preparerMessage(false); }));
+$("#copier").addEventListener("click", () => copier($("#msg-texte").textContent, $("#copier")));
+$("#cta-fournee").addEventListener("click", () => { const c = $("#cta-fournee").dataset.cible; if (c && c!=="demain") choisirFiltre(c); else { const s=$("#passage"); const o=[...s.options].find(o=>o.dataset.jour==="dem"); if(o) s.value=o.value; } });
+function copier(txt, bt){ const ok = () => { const v = bt.textContent; bt.textContent = "Copié ✓"; setTimeout(() => bt.textContent = v, 1600); };
+  if (navigator.clipboard) navigator.clipboard.writeText(txt).then(ok, () => {}); }
+
+/* ============ Gâteaux ============ */
+const OCCASIONS = ["Anniversaire","Mariage","Baptême","Communion","Autre"];
+const PARTS = [8,12,20,30];
+const PARFUMS = [
+  {id:"vanille", nom:"Vanille", dessus:"#F6EEDD", deco:"#D08A2E"},
+  {id:"choco", nom:"Chocolat", dessus:"#4B2A17", deco:"#F3E6D0"},
+  {id:"foret", nom:"Forêt-noire", dessus:"#F7F2EA", deco:"#8E1F2A"},
+  {id:"coco", nom:"Coco-ananas", dessus:"#FBF8F1", deco:"#E8B429"}
+];
+const PRIX_PART = 1200; // indicatif
+function puces(id, nom, items, lab, val, defaut){
+  $(id).innerHTML = items.map((it,i) => `<input type="radio" name="${nom}" id="${nom}-${i}" value="${val(it)}" ${val(it)===defaut?"checked":""}><label for="${nom}-${i}">${lab(it)}</label>`).join("");
+  $(id).setAttribute("role","radiogroup");
+}
+puces("#occasions","occ",OCCASIONS,o=>o,o=>o,"Anniversaire");
+puces("#parts","parts",PARTS,p=>`${p}${p===30?"+":""} <small>${p<=12?"rond":p<30?"grand rond":"plaque"}</small>`,p=>String(p),"12");
+puces("#parfums","parfum",PARFUMS,p=>`<span style="width:12px;height:12px;border-radius:50%;background:${p.dessus};box-shadow:inset 0 0 0 1.5px ${p.deco}"></span>${p.nom}`,p=>p.id,"vanille");
+
+const dateMin = (() => { const d = new Date(); d.setDate(d.getDate()+BOUTIQUE.delaiGateauJours); return d; })();
+const iso = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+const dLong = d => d.toLocaleDateString("fr-FR",{weekday:"long", day:"numeric", month:"long"});
+$("#date").min = iso(dateMin);
+$("#date").value = iso((() => { const d = new Date(dateMin); d.setDate(d.getDate()+3); return d; })());
+
+function valeurs(){
+  const g = n => document.querySelector(`input[name=${n}]:checked`)?.value;
+  return {occ:g("occ"), parts:+g("parts"), parfum:PARFUMS.find(p=>p.id===g("parfum")), texte:$("#inscription").value.trim(), date:$("#date").value};
+}
+function dateOk(v){
+  const err = $("#err-date");
+  if (!v.date){ err.hidden=false; err.textContent = `Choisissez une date : au plus tôt le ${dLong(dateMin)}.`; return false; }
+  const d = new Date(v.date+"T12:00");
+  if (d < new Date(iso(dateMin)+"T00:00")){ err.hidden=false; err.textContent = `Il nous faut ${BOUTIQUE.delaiGateauJours * 24} h pour préparer un gâteau : au plus tôt le ${dLong(dateMin)}.`; return false; }
+  err.hidden = true; return true;
+}
+function dessinerGateau(){
+  const v = valeurs(), svg = $("#svg-gateau"), NS = "http://www.w3.org/2000/svg";
+  [...svg.querySelectorAll(":scope > :not(title)")].forEach(n => n.remove());
+  const add = (tag, at, parent=svg) => { const e = document.createElementNS(NS, tag); for (const k in at) e.setAttribute(k, at[k]); parent.appendChild(e); return e; };
+  const cx = 260, cy = 215, p = v.parfum;
+  // plateau
+  if (v.parts < 30){
+    const R = v.parts <= 8 ? 128 : v.parts <= 12 ? 150 : 178;
+    add("circle",{cx,cy,r:R+20,fill:"none",stroke:"rgba(255,255,255,.18)","stroke-width":1.5,"stroke-dasharray":"2 6"});
+    add("circle",{cx,cy,r:R,fill:p.dessus});
+    add("circle",{cx,cy,r:R-10,fill:"none",stroke:p.deco,"stroke-width":2,"stroke-dasharray":"1 9","stroke-linecap":"round"});
+    for (let i=0;i<v.parts;i++){ const a = -Math.PI/2 + i*2*Math.PI/v.parts;
+      add("line",{x1:cx,y1:cy,x2:cx+Math.cos(a)*R,y2:cy+Math.sin(a)*R,stroke:"rgba(0,0,0,.14)","stroke-width":1.2,"stroke-dasharray":"5 5"}); }
+    add("circle",{cx,cy,r:R*.62,fill:p.dessus});
+    // rosaces
+    const nb = Math.min(v.parts, 20);
+    for (let i=0;i<nb;i++){ const a = -Math.PI/2 + (i+.5)*2*Math.PI/v.parts; add("circle",{cx:cx+Math.cos(a)*(R-22),cy:cy+Math.sin(a)*(R-22),r:7,fill:p.deco}); }
+    ecrire(add, cx, cy, R*1.55, p);
+    add("text",{x:cx,y:cy+R+46,"text-anchor":"middle",fill:"#A69D90","font-size":14,"font-family":"Archivo, sans-serif"}).textContent = `Ø ${v.parts<=8?20:v.parts<=12?24:28} cm · ${v.parts} parts`;
+  } else {
+    const W = 400, H = 280, x = cx-W/2, y = cy-H/2-10;
+    add("rect",{x,y,width:W,height:H,rx:10,fill:p.dessus});
+    for (let i=1;i<6;i++) add("line",{x1:x+i*W/6,y1:y,x2:x+i*W/6,y2:y+H,stroke:"rgba(0,0,0,.14)","stroke-dasharray":"5 5"});
+    for (let j=1;j<5;j++) add("line",{x1:x,y1:y+j*H/5,x2:x+W,y2:y+j*H/5,stroke:"rgba(0,0,0,.14)","stroke-dasharray":"5 5"});
+    add("rect",{x:x+36,y:y+62,width:W-72,height:H-124,rx:8,fill:p.dessus});
+    for (let i=0;i<14;i++){ add("circle",{cx:x+18+i*(W-36)/13,cy:y+16,r:6,fill:p.deco}); add("circle",{cx:x+18+i*(W-36)/13,cy:y+H-16,r:6,fill:p.deco}); }
+    ecrire(add, cx, y+H/2, W*.8, p);
+    add("text",{x:cx,y:y+H+40,"text-anchor":"middle",fill:"#A69D90","font-size":14,"font-family":"Archivo, sans-serif"}).textContent = `Plaque 40 × 30 cm · 30 parts et plus`;
+  }
+  const min = v.parts*PRIX_PART;
+  $("#prix-g").innerHTML = `à partir de ${fcfa(min)}<small>indicatif · ${fcfa(PRIX_PART)} la part, confirmé par le pâtissier</small>`;
+  $("#compte").textContent = `${v.texte.length} / 28 caractères`;
+  if (!$("#msg-zone-g").hidden) $("#msg-texte-g").textContent = messageGateau();
+}
+function ecrire(add, cx, cy, largeur, p){
+  const v = valeurs(), t = v.texte || "Votre message";
+  const mots = t.split(/\s+/); let l1 = t, l2 = "";
+  if (t.length > 13){ let acc = ""; for (let i=0;i<mots.length;i++){ if ((acc+" "+mots[i]).trim().length > Math.ceil(t.length/2)+2 && acc){ l2 = mots.slice(i).join(" "); break; } acc = (acc+" "+mots[i]).trim(); } l1 = acc; }
+  const taille = Math.min(46, (largeur*.78) / (Math.max(l1.length, l2.length) * .5));
+  const attrs = {x:cx,"text-anchor":"middle",fill:p.deco,"font-size":taille.toFixed(1),"font-family":"Archivo, sans-serif","font-style":"italic","font-weight":650,opacity:v.texte?1:.45};
+  if (l2){ add("text",{...attrs,y:cy-4}).textContent = l1; add("text",{...attrs,y:cy+taille*.95}).textContent = l2; }
+  else add("text",{...attrs,y:cy+taille*.35}).textContent = l1;
+}
+function messageGateau(){
+  const v = valeurs();
+  return `Bonjour, je voudrais commander un gâteau :\n- Occasion : ${v.occ}\n- ${v.parts}${v.parts===30?"+":""} parts, parfum ${v.parfum.nom.toLowerCase()}\n- Inscription : « ${v.texte || "sans inscription"} »\n- Pour le : ${v.date ? dLong(new Date(v.date+"T12:00")) : "—"}\nPouvez-vous me confirmer le prix et l’acompte ? Merci !`;
+}
+$("#form-gateau").addEventListener("input", () => { dessinerGateau(); if (!$("#err-date").hidden) dateOk(valeurs()); });
+$("#date").addEventListener("change", () => dateOk(valeurs()));
+$("#envoyer-g").addEventListener("click", e => { e.preventDefault(); const v = valeurs(); if (!dateOk(v)){ $("#date").focus(); return; }
+  $("#msg-texte-g").textContent = messageGateau(); $("#msg-zone-g").hidden = false; if (BOUTIQUE.whatsapp) ouvrirWhatsApp(messageGateau()); });
+$("#copier-g").addEventListener("click", () => copier($("#msg-texte-g").textContent, $("#copier-g")));
+if (!BOUTIQUE.whatsapp) $("#envoyer-g span").textContent = "Préparer la demande WhatsApp";
+
+/* ============ Démarrage ============ */
+dessinerVitrine();
+dessinerFour();
+dessinerGateau();
+setInterval(dessinerFour, 30000);
+window.addEventListener("hashchange", dessinerFour);
+let rz; window.addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(dessinerFour, 150); });
+</script>
+</body>
+</html>

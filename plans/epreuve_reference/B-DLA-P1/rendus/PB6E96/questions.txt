@@ -1,0 +1,10 @@
+Questions pour la boulangerie-pâtisserie (trois demandes, par gain de plafond). Le rendu a été construit sur hypothèses ; chaque réponse remplace une hypothèse.
+
+1. Contenu réel : nom exact de la boutique, quartier et repères pour la trouver, horaires d'ouverture, heures réelles des fournées (et ce qui sort à chaque fournée), liste des produits avec leurs prix en FCFA, conditions de commande des gâteaux (délai, acompte, moyens de paiement, livraison ou retrait), numéro WhatsApp de la boutique.
+   Hypothèses retenues : « La Fournée », Bonamoussadi ; 5 h 30 – 21 h du lundi au samedi, 6 h – 14 h le dimanche ; fournées à 5 h 30, 6 h 15, 11 h 30, 15 h et 16 h 30 ; prix d'exemple ; commande 48 h à l'avance, acompte 50 % par Orange Money ou MTN MoMo, retrait en boutique ; numéro WhatsApp absent (le bouton ouvre WhatsApp avec le message prêt, sans destinataire).
+
+2. Marque et images : avez-vous un logo, des couleurs ou une enseigne existante ? Pouvez-vous fournir des photos de vos produits, de la vitrine et de gâteaux déjà réalisés (ou autoriser une séance photo) ?
+   Hypothèse retenue : aucune marque existante, aucune photo ; identité typographique provisoire et schéma de gâteau dessiné en code. Les photos sont le principal manque pour donner envie.
+
+3. Destination : ce site doit-il être publié tel quel pour les clients, ou sert-il d'abord de maquette pour décider d'une direction (ou pour convaincre un propriétaire) ?
+   Hypothèse retenue : maquette de direction, avec un bandeau qui indique que les contenus sont des exemples.

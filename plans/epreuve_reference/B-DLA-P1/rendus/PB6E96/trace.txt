@@ -1,0 +1,48 @@
+RUN — P1-PB6E96 — DIRECTION — direction d'un site de boulangerie-pâtisserie à Douala (objet qui porte la promesse) — site interchangeable « artisan crème et brun » sans utilité locale — capture desktop + mobile, B1b sur la décision principale — EXPLORATORY
+OWNER : owner du brief (absent) ; agent = auteur du rendu.
+SCOPE : index.html, une page ; viewports 1440 et 390 ; états : ouvert / au four / chaud / fermé ; configurateur gâteau (vide, erreur de date, complet).
+DECISION-INTENT : l'horloge des fournées (heure de Douala) peut-elle être l'entrée d'un site de boulangerie, à la place d'une vitrine photo ?
+
+CREATIVE BOOT
+DECISION : quelle entrée — tableau des fournées en direct vs vitrine photo classique.
+PROMISE : savoir quand le pain est chaud, et commander le gâteau de fête sans se déplacer.
+PROOF-OBJECT : tableau des fournées calculé sur l'heure réelle de Douala (Africa/Douala), avec états « au four / chaud / sorti / à venir », et choix d'une heure de passage ; configurateur de gâteau dont le schéma à l'échelle change avec le nombre de parts, et qui compose le bon de commande.
+GESTURE : regarder la prochaine sortie → choisir une heure de passage ; composer un gâteau → l'envoyer sur WhatsApp.
+MODAL : fond crème, brun, serif italique, orange rouille, hero photo de croissant, trois cartes Pains/Viennoiseries/Pâtisseries, témoignages, bandeau défilant, « depuis 19XX » (vague 2) ; en plus, pour « Afrique » : motifs wax/kente, coucher de soleil orangé.
+PARTI : s'écarter sur palette et typographie (blanc farine, encre vert-noir, rouge braise réservé à l'état « chaud / au four » ; une seule grotesque à chasse variable, Archivo, étroite et grasse pour heures et prix, façon étiquette de vitrine et tableau horaire) parce que la thèse est le rythme du four, pas l'artisanat rustique. Garder : un site vitrine d'une page aux sections attendues (fournées, carte, gâteaux, venir), parce que le public cherche horaires, prix, commande, adresse. Refuser : motifs wax, faux dessins de pains, fausses photos, témoignages inventés.
+Convergence palette : « neutres + un accent » est convergente ; justifiée ici parce que l'accent code un état (chaud), et que la couleur des parfums de gâteau porte la seconde famille chromatique (donnée).
+STRUCTURAL-TENSION : TEMPORALITY immédiate ↔ séquencée (le pain maintenant / la journée des fournées) ; FOCUS unique (la prochaine sortie) ↔ distribué (la carte).
+STRUCTURAL-SIGNATURE : la page lit l'heure de Douala et hiérarchise en conséquence ; ce qui sort maintenant domine.
+CFT-TARGETS : Spécificité, Résolution, Présence.
+FABRICATION : structure — complète ; typo — Google Fonts (Archivo), complète ; couleur — complète ; assets — aucune photo fournie, aucune image dans le dossier → route CODE-NATIVE (schéma de gâteau SVG à l'échelle, déclaré comme schéma) ; plafond : l'appétence photographique est hors plafond ; contenu — fictif, marqué en langage produit (bandeau + mentions locales « exemple ») ; ancre : aucune référence observée pendant le run (calibration de mémoire : tableaux de départs, étiquettes de prix de vitrine) → ne permet d'affirmer ni l'adéquation au public doualais ni les usages (WhatsApp, Mobile Money, prix) : claims locaux À REVÉRIFIER.
+FIRST-OBJECT : page complète, contenu d'exemple crédible, états codés.
+DOMINANT-DEFECT recherché : la page lit « transport / tableau technique » plutôt que « boulangerie » (perte de chaleur et d'appétit).
+
+TRUTH (interne) : horaires, fournées, prix, adresse, nom → ILLUSTRATIVE ; tableau des fournées → ILLUSTRATIVE + MECHANISM ; schéma gâteau → ILLUSTRATIVE + MECHANISM ; heure de Douala → OBSERVED (horloge du navigateur, fuseau Africa/Douala).
+CTA : « Envoyer sur WhatsApp » ouvre wa.me/?text= (action réelle, sans destinataire, limite déclarée à côté) ; « Copier le message » : comportement local implémenté.
+
+OBSERVATION (captures Chromium headless, horloge simulée via page.clock ; dossier cap/)
+Lecture légère v1 (texte ignoré) : « service à horaires / tableau de départs, marque sobre, preuve = état en direct » ; la boulangerie n'est lisible que par le texte. Défaut dominant prévu confirmé : manque d'appétence (hors plafond : aucune photo).
+Défauts de craft corrigés : colonne des heures trop étroite (chiffres collés au texte) ; étiquette « sorti à 5 h 30 » redondante → « sorti » ; séparateur de milliers invisible (U+202F absent d'Archivo) → espace insécable ; champ prénom étiré ; nav mobile coupée en deux lignes ; CTA mobile ; contrastes (#6D7A74 sur tableau 3,73 → #7F8C86 4,78 ; #FFE3DA sur braise 3,84 → blanc 4,67) ; dimanche : titre en contradiction avec les fournées → titre calculé ; après fermeture : fournées de demain au lieu d'une liste « sorti » ; « sorti il y a 0 min » → « à l'instant » ; accord « pâtisseries… sorties ».
+
+B1b (auto-comparaison, même auteur ; pas un regard indépendant)
+DECISION : le tableau des fournées en masse sombre comme foyer de l'entrée.
+PAIRE : cap/b1b_before_dark.png → cap/b1b_after_light.png (transformation : surface du tableau sombre → papier clair filet encre ; seule variable).
+EFFET : la version claire lit un peu moins « transport » mais perd la masse de l'entrée et la relation « bouche du four sombre / fournée qui rougeoie » ; le rouge devient une alerte sur blanc.
+OUTCOME : confirmed — original conservé ; la lecture « horaire » vient de la structure en lignes, pas de la couleur du tableau.
+DECISION-CHANGE : direction « horloge des fournées comme entrée » confirmée par comparaison ; surface sombre conservée.
+
+GATE A (EXPERT + script, Web, WCAG 2.2 AA visé, 1440 et 390/360) : contrastes calculés sur les paires clés ≥ 4,5 (voir ci-dessus ; braise-ink/farine 5,98 ; muted/farine 5,24) ; labels et noms accessibles présents ; focus visible stylé ; motion réduite : pulsation « au four » sous prefers-reduced-motion:no-preference seulement (préférence activée NOT-VERIFIED en runtime) ; cibles ≥ 44 px ; état non chromatique (texte « chaud », « au four », « sorti ») ; pas de débordement horizontal ; lecteur d'écran NOT-VERIFIED ; clavier NOT-VERIFIED (non parcouru).
+GATE B : B1b ci-dessus ; aucun regard externe (B3 : absence déclarée).
+GATE C (capture 1440/390) : C1 planéité + tableau sombre découlant du four — présent ; C2 Archivo à chasse variable, étroit pour heures/prix — présent ; C3 composition titre/tableau — présent ; C4 densité : carte régulière, correcte ; C5 N/A-JUSTIFIED (planéité voulue) ; C6 résolution située : heure de Douala, 48 h de délai avec erreur, message WhatsApp composé — présent.
+V PASS-WITH-RESERVATION (auto-comparaison) ; U NOT-VERIFIED (pas de test utilisateur) ; A PASS partiel (voir NOT-VERIFIED) ; T : NOT-VERIFIED (performance non mesurée ; police web).
+
+CREATIVE CLOSE
+presence : titre étroit en rouge braise + tableau sombre où la fournée chaude rougeoie.
+signature : la page lit l'heure de Douala et remonte ce qui sort du four ; « Je passe à » pour choisir son heure.
+craft_detail : schéma de gâteau à l'échelle (Ø par étage) qui suit le nombre de parts ; erreur de date « première date possible le … ».
+dominant_defect : pas d'appétence visuelle (aucune photo de produit) ; lecture « horaire » plus que « boulangerie ».
+next_polish_action : STOP — le défaut restant dépend des photos réelles (hors plafond) ; prochaine action : intégrer 6 à 10 photos fournies avec un traitement unique.
+
+STATUT : EXPLORATORY (contenu fictif, pas de regard externe, droits N/A). Verdict global : non accepté. artifact : index.html sha256 1a9a7bf562ed…, 2026-09-27. Owner : owner du brief. Prochaine preuve : réponses à questions.txt, photos, regard externe.
+Limite connue : le choix d'heure ne couvre que la journée affichée ; les jours fériés ne sont pas gérés ; claims locaux (prix FCFA, usages WhatsApp / Mobile Money) À REVÉRIFIER.

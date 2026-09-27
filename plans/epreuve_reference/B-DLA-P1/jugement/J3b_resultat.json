@@ -1,0 +1,79 @@
+{
+  "pages": {
+    "L": {
+      "qualite": 9,
+      "adequation": 10,
+      "verite": 0,
+      "raison": "Le seul site pleinement fidèle au commerce réel : Bonamoussadi, prix et horaires exacts, les cinq photos fournies créditées, numéro WhatsApp affiché tel quel — fabrication soignée et honnête (dont un aveu explicite que les photos ne montrent pas la boutique)."
+    },
+    "R": {
+      "qualite": 8,
+      "adequation": 9,
+      "verite": 0,
+      "raison": "Même fidélité totale au brief que L (Bonamoussadi, photos créditées, prix et horaires exacts, WhatsApp affiché tel quel), avec une mise en page un peu plus sobre et un contenu légèrement moins riche."
+    },
+    "V": {
+      "qualite": 8,
+      "adequation": 5,
+      "verite": 0,
+      "raison": "Maquette générique très soignée typographiquement (minimalisme noir/blanc/rouge, clairement signalée comme exemple), mais sans aucune photo, avec des prix inventés et une pâtisserie à étages qui évoque plus la grande pâtisserie que le quartier."
+    },
+    "W": {
+      "qualite": 9,
+      "adequation": 4,
+      "verite": 0,
+      "raison": "Prouesse de mise en scène (chronologie des fournées, curseur horaire, zones de livraison) au niveau d'un designer senior, mais site sophistiqué et lourd pour une simple boulangerie de quartier, sans photo réelle et sur un mauvais quartier ; clairement signalé comme maquette."
+    },
+    "T": {
+      "qualite": 7,
+      "adequation": 4,
+      "verite": 0,
+      "raison": "Maquette propre et bien exécutée (jauge horaire, bon de commande simulé), mais générique : quartier et menu inventés, aucune photo réelle, sans le rendez-vous du samedi beignets-haricots ; numéro explicitement signalé comme fictif."
+    },
+    "X": {
+      "qualite": 7,
+      "adequation": 4,
+      "verite": 1,
+      "raison": "Belle identité illustrée et chaleureuse, mais revendique une « technique française » et une histoire de provenance non signalées comme exemple, à l'exact opposé du ton demandé par ce commerce ; aucune photo réelle utilisée."
+    },
+    "S": {
+      "qualite": 7,
+      "adequation": 4,
+      "verite": 1,
+      "raison": "Structure proche d'un vrai site de boulangerie (vitrine par onglets, compte à rebours de fournée), mais même défaut que X : ton « technique française », adresse et numéro inventés présentés sans aucune réserve d'exemple."
+    },
+    "P": {
+      "qualite": 6,
+      "adequation": 3,
+      "verite": 0,
+      "raison": "Identité visuelle plaisante et bien rangée, mais l'objectif même du site échoue : adresse et numéro WhatsApp restent « à renseigner », rendant la commande de gâteau impossible telle quelle."
+    },
+    "Z": {
+      "qualite": 5,
+      "adequation": 2,
+      "verite": 0,
+      "raison": "Reste à l'état de gabarit vide (« Nom de l'enseigne », bandeau générique non personnalisé) et installe un vrai panier d'achat en ligne avec totaux, ce que le commerçant a explicitement écarté."
+    }
+  },
+  "paires": {
+    "P1": { "choix": "droite", "raison": "S a une identité et un contenu construits ; Z n'est qu'un gabarit vide au nom non renseigné." },
+    "P2": { "choix": "droite", "raison": "V est plus abouti et sobre typographiquement et ne revendique pas de « technique française », contrairement à X." },
+    "P3": { "choix": "droite", "raison": "W affiche un niveau de fabrication supérieur (mise en scène des fournées) ; les deux restent hors sujet mais W impressionne davantage." },
+    "P4": { "choix": "gauche", "raison": "L colle exactement au commerce réel (Bonamoussadi, photos, prix, horaires) quand V est une maquette générique sans photo." },
+    "P5": { "choix": "gauche", "raison": "V est mieux fini et cohérent ; P bloque la commande de gâteau faute de numéro WhatsApp renseigné." },
+    "P6": { "choix": "droite", "raison": "R sert réellement ce commerce (Bonamoussadi, photos, prix exacts) alors que W, virtuose mais générique, est hors sujet." },
+    "P7": { "choix": "gauche", "raison": "T propose un site complet et cohérent, même générique ; Z n'est qu'un squelette de gabarit." },
+    "P8": { "choix": "gauche", "raison": "P a au moins une identité et un contenu construits ; Z reste un gabarit vide et transforme le site en boutique en ligne." },
+    "P9": { "choix": "gauche", "raison": "R est le site réel et fonctionnel pour ce commerce ; Z est un gabarit vide qui contredit même la consigne « pas de boutique en ligne »." },
+    "P10": { "choix": "gauche", "raison": "X a une identité visuelle et un contenu construits ; Z reste à l'état de gabarit non personnalisé." },
+    "P11": { "choix": "gauche", "raison": "V est un peu plus raffiné et sobre, plus proche de l'esprit « page légère » que T." },
+    "P12": { "choix": "droite", "raison": "V est légèrement plus abouti et sobre visuellement ; les deux restent des maquettes génériques sur le fond." },
+    "P13": { "choix": "droite", "raison": "W affiche un niveau de fabrication nettement supérieur ; les deux partagent le même défaut d'être des sites génériques." },
+    "P14": { "choix": "gauche", "raison": "L est le site le plus abouti et le plus fidèle du lot ; Z n'est qu'un gabarit vide." },
+    "P15": { "choix": "droite", "raison": "W a une mise en scène plus travaillée et plus mémorable que T, à générique égal." },
+    "P16": { "choix": "gauche", "raison": "R correspond réellement au commerce (Bonamoussadi, photos, prix exacts) ; V est une maquette générique sans photo." },
+    "P17": { "choix": "gauche", "raison": "L sert ce commerce précis avec des faits exacts ; W, malgré sa virtuosité, reste une démonstration générique et plus lourde." },
+    "P18": { "choix": "gauche", "raison": "W est mieux fini et sa commande WhatsApp fonctionne, contrairement à P dont le numéro n'est pas renseigné." }
+  },
+  "classement": ["L", "R", "V", "W", "T", "X", "S", "P", "Z"]
+}

@@ -1,0 +1,79 @@
+{
+  "pages": {
+    "L": {
+      "qualite": 9,
+      "adequation": 9,
+      "verite": 0,
+      "raison": "Site fidèle aux faits réels du commerce (nom, adresse, prix, photos créditées), chaleureux et clair, avec une expérience de commande WhatsApp bien pensée."
+    },
+    "T": {
+      "qualite": 7,
+      "adequation": 8,
+      "verite": 0,
+      "raison": "Autre version tout aussi fidèle aux faits réels (Pain d'Ici, Bonamoussadi, photos créditées), un peu plus sage dans la mise en page mais tout aussi juste dans le ton."
+    },
+    "S": {
+      "qualite": 8,
+      "adequation": 7,
+      "verite": 0,
+      "raison": "Maquette assumée avec beaucoup d'honnêteté (numéro explicitement signalé comme fictif), bien conçue pour la commande de gâteau par WhatsApp, avec une tonalité chaleureuse adaptée."
+    },
+    "R": {
+      "qualite": 8,
+      "adequation": 7,
+      "verite": 0,
+      "raison": "Maquette élégante et minimaliste, avec un bon suivi des fournées en temps réel et un configurateur de gâteau soigné, mais sans aucune photo et un ton un peu froid."
+    },
+    "Q": {
+      "qualite": 7,
+      "adequation": 7,
+      "verite": 0,
+      "raison": "Maquette honnête (mentions « à renseigner » pour l'adresse et le WhatsApp), bien structurée pour la commande de gâteau, mais un peu générique."
+    },
+    "Z": {
+      "qualite": 7,
+      "adequation": 6,
+      "verite": 0,
+      "raison": "Maquette très épurée et honnête sur son statut d'exemple, mais glaciale : aucune photo, aucune chaleur, plus proche d'un tableau de bord que d'une boulangerie de quartier."
+    },
+    "N": {
+      "qualite": 7,
+      "adequation": 5,
+      "verite": 2,
+      "raison": "Construit une identité de boulangerie fictive assez détaillée (« technique française », provenances précises, coordonnées) sans jamais signaler qu'il s'agit d'un exemple, et s'éloigne du ton demandé."
+    },
+    "M": {
+      "qualite": 8,
+      "adequation": 4,
+      "verite": 0,
+      "raison": "Gabarit générique bien dessiné graphiquement, clairement signalé comme exemple, mais qui installe un vrai panier d'achat en ligne pour le pain quotidien, ce qui contredit l'objectif affiché du site (pas de boutique en ligne)."
+    },
+    "V": {
+      "qualite": 7,
+      "adequation": 4,
+      "verite": 3,
+      "raison": "Invente une histoire de boulangerie complète (adresse précise, numéro d'aspect réel, zones de livraison tarifées dans tout Douala, « technique française ») sans aucun signalement d'exemple, ce qui est le plus éloigné de la consigne « ne pas inventer »."
+    }
+  },
+  "paires": {
+    "P1": { "choix": "gauche", "raison": "T colle aux faits réels du commerce quand M installe un panier e-commerce contraire à l'objectif « pas de boutique en ligne »." },
+    "P2": { "choix": "gauche", "raison": "À honnêteté égale, R a une exécution un peu plus raffinée (suivi de fournée en temps réel, configurateur de gâteau à l'échelle) que Q." },
+    "P3": { "choix": "droite", "raison": "R est une maquette plus soignée et surtout plus honnête ; N invente une histoire (technique française, coordonnées) sans le signaler." },
+    "P4": { "choix": "droite", "raison": "S est plus chaleureux et tout aussi honnête sur son statut d'exemple (numéro explicitement fictif), quand Z reste froid et sans image." },
+    "P5": { "choix": "droite", "raison": "T repose sur les vrais faits du commerce (nom, photos créditées) alors que Z n'est qu'un exemple, certes honnête mais froid." },
+    "P6": { "choix": "droite", "raison": "Les deux s'éloignent du besoin réel, mais M a une exécution graphique un peu plus aboutie que V." },
+    "P7": { "choix": "droite", "raison": "T s'appuie sur les vrais faits du commerce (nom, adresse, photos créditées), ce qui compte plus pour ce client que la seule finition, très proche, de R." },
+    "P8": { "choix": "droite", "raison": "Q est honnête sur ses inconnues (« à renseigner ») et reste centré sur la commande de gâteau, quand M ouvre un panier d'achat incohérent avec l'objectif du site." },
+    "P9": { "choix": "droite", "raison": "Z assume clairement son statut d'exemple ; N présente des faits inventés (technique française, coordonnées) comme s'ils étaient réels." },
+    "P10": { "choix": "droite", "raison": "S sert directement l'objectif « commander un gâteau par WhatsApp » alors que M construit une boutique en ligne que le brief exclut explicitement." },
+    "P11": { "choix": "droite", "raison": "Z ne fabrique ni adresse ni zones de livraison précises non signalées, contrairement à V." },
+    "P12": { "choix": "droite", "raison": "S est un peu plus chaleureux dans le ton et particulièrement transparent sur le caractère fictif de ses coordonnées, à qualité comparable à R." },
+    "P13": { "choix": "droite", "raison": "R reste honnête et sobre, quand V invente toute une politique de livraison par zones sans le signaler." },
+    "P14": { "choix": "droite", "raison": "N respecte mieux l'esprit « commande par WhatsApp, pas de boutique en ligne » que M, même si N invente certains faits sans le dire." },
+    "P15": { "choix": "droite", "raison": "L correspond exactement au commerce réel et à son objectif, quand M reste un gabarit générique inadapté (panier en ligne)." },
+    "P16": { "choix": "droite", "raison": "Q est un peu plus chaleureux et illustré (widget horaire, cartes produits) que Z, très minimal et sans image." },
+    "P17": { "choix": "droite", "raison": "L est ancré dans les faits réels du commerce, ce que R, aussi soigné soit-il, ne peut pas revendiquer." },
+    "P18": { "choix": "gauche", "raison": "L combine fidélité aux faits réels et chaleur visuelle, quand Z reste une maquette froide et anonyme." }
+  },
+  "classement": ["L", "T", "S", "R", "Q", "Z", "N", "M", "V"]
+}
