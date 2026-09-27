@@ -30,7 +30,7 @@ Les cinq absolus de `DIRECTION` protègent la baseline : direction perceptible, 
 | Brief vague ou risque inconnu | `DIRECTION/START` | `DIRECTION/EXTERNAL-START` |
 | Correction locale | `DIRECTION/START` → `ACTION/RUN-LITE` ou `RUN-ITER` | `SAVOIR` ou `BIBLIOTHEQUE` si la décision change |
 | Nouvelle surface opérationnelle | `DIRECTION/START` → `ACTION/RUN-STANDARD` | `BIBLIOTHEQUE/SELECT`, `SAVOIR/CONTEXT` |
-| Direction identitaire | `DIRECTION/START` → `DIRECTION/VISUAL_TARGET` → `DIRECTION/FIRST-OBJECT` → `ACTION/RUN-DIRECTION` (dès qu’il y a un build) | `SAVOIR/CRAFT`, `DIRECTION/DIRECTION-ATELIER` |
+| Direction identitaire | `DIRECTION/START` → `DIRECTION/CHARGE` (mode `DIRECTION`) | `SAVOIR/CRAFT`, `DIRECTION/DIRECTION-ATELIER` |
 | Structure ou composant partagé | `DIRECTION/START` → `ACTION/RUN-SYSTEM` | `BIBLIOTHEQUE/COMPONENTS`, `SAVOIR/SYSTEM`, `CHANGELOG` |
 | Preuve, vérification ou clôture | `ACTION` | Gate et route correspondant au risque |
 | Règle ou route durable | `CHANGELOG` et source propriétaire | `ACTION` pour preuve et `BIBLIOTHEQUE/EVOLUTION` si structure |

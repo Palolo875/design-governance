@@ -38,6 +38,7 @@ cp -a "$ROOT/scripts/validate_all.py" "$STAGE/github/scripts/validate_all.py"
 cp -a "$ROOT/scripts/validate_reading_map.py" "$STAGE/github/scripts/validate_reading_map.py"
 cp -a "$ROOT/scripts/read_route.py" "$STAGE/github/scripts/read_route.py"
 cp -a "$ROOT/scripts/validate_structure.py" "$STAGE/github/scripts/validate_structure.py"
+cp -a "$ROOT/scripts/build_core.py" "$STAGE/github/scripts/build_core.py"
 mkdir -p "$STAGE/github/.github/workflows"
 cp -a "$ROOT/.github/workflows/validate.yml" "$STAGE/github/.github/workflows/validate.yml"
 
@@ -54,6 +55,7 @@ cp -a "$ROOT/scripts/validate_all.py" "$STAGE/local/scripts/validate_all.py"
 cp -a "$ROOT/scripts/validate_reading_map.py" "$STAGE/local/scripts/validate_reading_map.py"
 cp -a "$ROOT/scripts/read_route.py" "$STAGE/local/scripts/read_route.py"
 cp -a "$ROOT/scripts/validate_structure.py" "$STAGE/local/scripts/validate_structure.py"
+cp -a "$ROOT/scripts/build_core.py" "$STAGE/local/scripts/build_core.py"
 cat > "$STAGE/local/README.md" <<'EOF'
 # Design Governance V1.1.1 — export Local
 

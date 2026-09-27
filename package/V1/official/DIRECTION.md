@@ -22,7 +22,7 @@ Les sections détaillées ci-dessous restent intégralement actives. Lorsque ce 
 
 ### Orientation interne et sortie
 
-Pour éviter de recomposer le démarrage, utilisez `READING_MAP.md` comme vue dérivée lorsque le besoin est déjà identifiable. `START` reste la source normative de classification ; les autres façades (`DAILY`, `FAST-PATH`, `EXTERNAL-START`) sont des vues dérivées ou conditionnelles.
+Pour éviter de recomposer le démarrage, utilisez `READING_MAP.md` comme vue dérivée lorsque le besoin est déjà identifiable. `START` reste la source normative de classification ; les autres vues (`CHARGE`, `FAST-PATH`, `EXTERNAL-START`) sont des vues dérivées ou conditionnelles.
 
 La sortie de DIRECTION vers ACTION réutilise `ACTION/HANDOFF` ; la phase de chaque champ (avant build, après observation, clôture) est celle de la table de correspondance d’`ACTION/RUN_CARD`. Pour `MODE=DIRECTION`, transmettre aussi la cible/ancre et, lors d’une clôture, les éléments de `creative_close`; ACTION renseigne `closure.direction_status`, `issue`, `verdict` et l’état selon son schéma. Si un champ ne s’applique pas, marquez `N/A-JUSTIFIED` selon ACTION ; ne créez ni statut ni verdict dans DIRECTION.
 
@@ -59,7 +59,7 @@ Les modules ci-dessous ne sont pas des formulaires à remplir en parallèle. Ils
 | Besoin immédiat | Lire d’abord |
 |---|---|
 | Classer une demande | `DIRECTION/START` |
-| Choisir rapidement une route | `DIRECTION/DAILY` ou `DIRECTION/FAST-PATH` |
+| Choisir rapidement une route | `DIRECTION/CHARGE` ou `DIRECTION/FAST-PATH` |
 | Préparer une surface identitaire | `DIRECTION/VISUAL_TARGET`, puis `ACTION/RUN-DIRECTION` |
 | Produire une direction forte dès le premier rendu | `DIRECTION/FIRST-OBJECT`, puis `SAVOIR/CRAFT` |
 | Choisir une structure | `BIBLIOTHEQUE/SELECT` après classification |
@@ -67,7 +67,7 @@ Les modules ci-dessous ne sont pas des formulaires à remplir en parallèle. Ils
 
 En trente secondes, nomme : **la décision à changer, le risque dominant, le mode, la capacité minimale et le premier objet que la preuve devra inspecter**. Cette vue accélère l’entrée ; elle ne remplace ni `START`, ni les contrats d’ACTION, ni le jugement situé.
 
-Cette carte est la vue de lecture interne canonique de DIRECTION. `DAILY`, `FAST-PATH`, `EXTERNAL-START`, la section 0 et le récapitulatif de protection sont des vues dérivées de `START` : elles ne classent pas, ne créent ni nouveau mode, ni nouveau contrat, ni nouvelle condition de sortie et ne peuvent pas contredire `START`. `READING_MAP.md` reste le guide dérivé inter-document. En cas de différence, `START`, les propriétaires de responsabilité et les contrats d’ACTION prévalent.
+Cette carte est la vue de lecture interne canonique de DIRECTION. `CHARGE`, `FAST-PATH`, `EXTERNAL-START`, la section 0 et le récapitulatif de protection sont des vues dérivées de `START` : elles ne classent pas, ne créent ni nouveau mode, ni nouveau contrat, ni nouvelle condition de sortie et ne peuvent pas contredire `START`. `READING_MAP.md` reste le guide dérivé inter-document. En cas de différence, `START`, les propriétaires de responsabilité et les contrats d’ACTION prévalent.
 
 **Chaîne de lecture interne.** Utilise le document selon la décision à faire évoluer, dans l’ordre de l’architecture d’activation : `START` classe ; `CREATIVE-BOOT` ouvre la décision ; `VISUAL_TARGET` rend la position pilotable ; `DIRECTION-ATELIER` approfondit la direction située lorsque cette profondeur peut changer la décision ; `FIRST-OBJECT` matérialise la cible et rend la promesse jugeable ; `DOUBLE-LOOP` organise l’observation et la correction ; le `HANDOFF` remet à `ACTION` une cible, un artefact, une preuve et une limite explicites. Chaque module doit être chargé pour son gain attendu : meilleure orientation, meilleur premier objet, meilleur jugement, meilleure structure ou meilleure preuve — jamais pour augmenter la procédure.
 
@@ -122,7 +122,7 @@ Cette proposition nomme toute hypothèse qui change sa direction. Elle ne peut j
 
 `START` est le point d’entrée quotidien d’un humain, d’une IA ou d’un pipeline. Il choisit le mode et la prochaine route ; il ne remplace ni les cinq absolus, ni les procédures, ni le jugement.
 
-**Source normative de classification.** `DIRECTION/START` est la source normative unique des modes et du risque dominant. `DIRECTION/DAILY` est une vue dérivée de chargement minimal ; `FAST-PATH` est un raccourci pour un delta local ; `EXTERNAL-START` est une vue de transport pour un brief vague. Aucun de ces encadrés ne crée une classification concurrente. En cas de différence, `START` prévaut et le conflit est inscrit dans `CHANGELOG`.
+**Source normative de classification.** `DIRECTION/START` est la source normative unique des modes et du risque dominant. `DIRECTION/CHARGE` est la liste de chargement par mode ; `FAST-PATH` est un raccourci pour un delta local ; `EXTERNAL-START` est une vue de transport pour un brief vague. Aucun de ces encadrés ne crée une classification concurrente. En cas de différence, `START` prévaut et le conflit est inscrit dans `CHANGELOG`.
 
 > **Ordre de lecture minimal.** 1) `START` classe le mode et le risque. 2) La protection de niveau interdit toute baisse silencieuse face à un risque critique. 3) `DAILY` choisit la plus petite route utile ; `FAST-PATH` n’est qu’un encadré pour un correctif local ou une décision presque tranchée. 4) Une capacité n’est chargée que si elle change la construction ou la preuve. 5) `ACTION` porte la preuve et la clôture ; `SAVOIR` le jugement ; `BIBLIOTHEQUE` la structure. 6) Les modules `ATELIER`, grounding, réemploi et atlas restent silencieux tant qu’aucune décision ne peut être modifiée ; chacun n’est activé que si sa décision à modifier est identifiée, et plusieurs ne coexistent que si leurs décisions sont distinctes et utiles.
 
@@ -183,8 +183,10 @@ DOMINANT-DEFECT: défaut perceptuel ou structurel recherché en premier
 
 `DIRECTION` possède la promesse, l’objet, le geste, `MODAL`/`PARTI` et `FABRICATION` ; `BIBLIOTHEQUE` possède la tension et la signature structurelles ; `SAVOIR/CRAFT` possède le jugement des qualités de présence et de fabrication ; `ACTION` possède l’observation, la preuve, la correction et la clôture. Les `CFT-TARGETS` sont un foyer de construction, pas un score : les autres dimensions restent applicables lorsqu’un risque ou une décision les active et ne deviennent `N/A-JUSTIFIED` que si elles sont réellement hors périmètre.
 
+<!-- noyau:début MOY-PLAFOND -->
 <!-- concept:HON-03 -->
 Avant le premier rendu, le boot doit conduire à un artefact complet, crédible et observable — jamais à un wireframe volontairement creux lorsque les capacités sont disponibles ; lorsqu’elles manquent, `FABRICATION` déclare le plafond avant le build et le rendu sort avec la meilleure route de `DIRECTION/VISUAL_TARGET`. Après observation, conserve dans la trace : ce qui est effectivement visible, les qualités prioritaires observées ou non observées, **un défaut dominant** et, si une correction utile existe, la modification réelle apportée et la ré-observation attendue ; sinon, la raison de l’arrêt (`DIRECTION/DOUBLE-LOOP`, one-shot).
+<!-- noyau:fin MOY-PLAFOND -->
 
 Sa valeur se juge à sa conséquence sur le premier objet, non à la complétude du formulaire ; il peut être omis pour un delta strictement local.
 
@@ -245,21 +247,27 @@ Les runs `STANDARD`, `DIRECTION` et `SYSTÈME` conservent une trace persistante.
 
 ---
 
-## DIRECTION/DAILY — charger proportionnellement
+## DIRECTION/CHARGE — classer, puis charger
 
-> **Règle de vitesse.** Ouvre `START`, classe le mode, puis ouvre seulement le module susceptible de changer la prochaine décision. Ne lis jamais les cinq documents par réflexe.
+<!-- noyau:début CHARGE-REGLE -->
+> **Règle de vitesse.** Ouvre `START` (en `LITE`, l’arbre `DIRECTION/START/TREE` suffit), classe le mode, charge la ligne de ce mode, puis ajoute seulement le module susceptible de changer la prochaine décision.
+<!-- noyau:fin CHARGE-REGLE -->
 
-`DAILY` est une vue de chargement, non une seconde source de vérité sur les modes, les verdicts ou les conditions de sortie.
+`CHARGE` est la seule liste de chargement du corpus : la skill en porte une copie générée, les façades y renvoient. Les modes restent définis par `START` ; les verdicts et les sorties, par `ACTION`.
 
-| Mode | Démarrage minimal | Ajouter seulement si cela change la décision |
+<!-- noyau:début CHARGE-TABLE -->
+| Mode | Charger d’abord | Ajouter seulement si cela change la décision |
 |---|---|---|
-| **LITE** | `ACTION/RUN-LITE`. Sans risque critique touché — voir Protection de niveau (`DIRECTION/START`). | Une route SAVOIR ou BIBLIOTHEQUE si le correctif touche réellement le jugement ou la structure. La section `DESIGN-ATLAS` reste silencieuse ; une famille seule ne reclassifie pas. Si le périmètre, le blast radius, la responsabilité ou le risque dominant change la décision, reviens à `DIRECTION/START` puis reclassifie vers `ITER`, `STANDARD`, `DIRECTION` ou `SYSTÈME`. |
-| **ITER** | Mémoire locale + `ACTION/RUN-ITER`. Sans risque critique touché — voir Protection de niveau (`DIRECTION/START`). | Une route SAVOIR ; BIBLIOTHEQUE seulement si support, grille, scène ou objet change. `DESIGN-ATLAS` reste silencieux dans le même périmètre ; une famille seule ne reclassifie pas. Si le périmètre, la responsabilité ou le risque dominant change la décision, reviens à `DIRECTION/START`. Les corrections de libellé, overflow, contraste, focus, état ou wrapping restent locales. |
-| **STANDARD** | `ACTION/RUN-STANDARD`. | `SAVOIR/FRAME` si le cadrage est ambigu, une route BIBLIOTHEQUE structurante et la route SAVOIR du risque dominant. |
-| **DIRECTION** | `DIRECTION/VISUAL_TARGET` + `ACTION/RUN-DIRECTION`. | `DIRECTION/DIRECTION-ATELIER` si une tension, un geste produit ou un anti-choix peut modifier la première scène ; `SAVOIR/FRAME`, `SAVOIR/CRAFT`, `SAVOIR/TYPE`, `SAVOIR/SOURCE` et `BIBLIOTHEQUE/SELECT` si nécessaires. Charge `SAVOIR/STYLE` seulement si le choix de style peut modifier une décision de composition, de voix, de matière, de contraste ou de relation produit ; jamais comme catalogue automatique. |
-| **SYSTÈME** | `ACTION/RUN-SYSTEM`. | `SAVOIR/SYSTEM` ; `BIBLIOTHEQUE/COMPONENTS` si la bibliothèque change réellement. |
+| **LITE** | `ACTION/RUN-LITE`, `ACTION/FAST-PATH`, `ACTION/GATE-A` applicable et `ACTION/GATE-B` du risque dominant. Sans risque critique touché — voir Protection de niveau (`DIRECTION/START`). | Une route SAVOIR ou BIBLIOTHEQUE si le correctif touche réellement le jugement ou la structure. La section `DESIGN-ATLAS` reste silencieuse ; une famille seule ne reclassifie pas. Si le périmètre, le blast radius, la responsabilité ou le risque dominant change la décision, reviens à `DIRECTION/START` puis reclassifie vers `ITER`, `STANDARD`, `DIRECTION` ou `SYSTÈME`. |
+| **ITER** | Mémoire locale (direction existante), `ACTION/RUN-ITER`, `ACTION/GATE-A` applicable et `ACTION/GATE-B` du risque touché. Sans risque critique touché — voir Protection de niveau (`DIRECTION/START`). | Une route SAVOIR ; BIBLIOTHEQUE seulement si support, grille, scène ou objet change. `DESIGN-ATLAS` reste silencieux dans le même périmètre ; une famille seule ne reclassifie pas. Si le périmètre, la responsabilité ou le risque dominant change la décision, reviens à `DIRECTION/START`. Les corrections de libellé, overflow, contraste, focus, état ou wrapping restent locales. |
+| **STANDARD** | `ACTION/RUN-STANDARD` ; `BIBLIOTHEQUE/SELECT` si la structure est ouverte. | `SAVOIR/FRAME` si le cadrage est ambigu, une route BIBLIOTHEQUE structurante et la route SAVOIR du risque dominant. |
+| **DIRECTION** | `DIRECTION/CREATIVE-BOOT`, `DIRECTION/EXTERNAL-START` si le brief est vague, `DIRECTION/VISUAL_TARGET`, `DIRECTION/FIRST-OBJECT`, `ACTION/FIRST-RENDER`, `ACTION/RUN-DIRECTION`, puis `ACTION/GATE-A`, `ACTION/GATE-B` et `ACTION/GATE-C` applicables. | `DIRECTION/DOUBLE-LOOP`, `ACTION/ROUTING` ou `SAVOIR/CRAFT/CFT-00` si la décision l’exige (la boucle d’édition et les gestes sont dans le noyau) ; `DIRECTION/DIRECTION-ATELIER` si une tension, un geste produit ou un anti-choix peut modifier la première scène ; `SAVOIR/FRAME`, `SAVOIR/CRAFT`, `SAVOIR/TYPE`, `SAVOIR/SOURCE` et `BIBLIOTHEQUE/SELECT` si nécessaires. Charge `SAVOIR/STYLE` seulement si le choix de style peut modifier une décision de composition, de voix, de matière, de contraste ou de relation produit ; jamais comme catalogue automatique. |
+| **SYSTÈME** | `ACTION/RUN-SYSTEM` ; `BIBLIOTHEQUE/COMPONENTS` si un composant change. | `SAVOIR/SYSTEM` ; `CHANGELOG` si une règle partagée change. |
+<!-- noyau:fin CHARGE-TABLE -->
 
-La clôture minimale de chaque mode est `ACTION/CLOSE-PACKAGE`. `DAILY` reste une vue de chargement : démarrage et ajouts.
+<!-- noyau:début CHARGE-FIN -->
+La clôture de chaque mode est `ACTION/CLOSE-PACKAGE`. Pour l’agent, les blocs « noyau » compilés dans la skill tiennent lieu de lecture de fabrication ; README, QUICKSTART, READING_MAP et ORCHESTRATION_MAP sont des lectures d’orientation pour les humains.
+<!-- noyau:fin CHARGE-FIN -->
 
 **Déclenchement de l’atlas.** Si aucune famille ne peut être reliée à une décision modifiable, n’ouvre pas `SAVOIR/DESIGN-ATLAS` ; reste sur la route existante. Si le signal est ambigu, pose une seule clarification ciblée ou reviens à `DIRECTION/START` pour classer le mode et le risque. Si un risque critique apparaît, reclassifie avant de charger une famille. L’atlas ne sert jamais à résoudre par catalogue un JTBD, un mode ou une intention manquante.
 
@@ -302,7 +310,9 @@ NO-GO — faux réalisme, dashboard décoratif, cartes avant mécanisme, ou reto
         automatique au dernier style, asset ou rendu disponible.
 ```
 
+<!-- noyau:début BRIEF -->
 **Prise de brief.** Au plus trois demandes, en un seul échange, par gain de plafond : contenu réel (textes, chiffres, preuves, noms), marque, asset principal ou route autorisée, destination si elle est incertaine. Brief riche : aucune. Humain absent : hypothèses nommées, plafond déclaré, demandes listées à la livraison. Le rendu est construit dans tous les cas. La personne reçoit directement une proposition principale ; cette vue reste interne. Si une ligne ne peut modifier ni artefact, claim, preuve, limite ou décision, elle est omise ; `N/A-JUSTIFIED` reste réservé à une non-applicabilité réelle et justifiée selon ACTION.
+<!-- noyau:fin BRIEF -->
 
 ### Traduction humaine minimale de DIRECTION/START
 
@@ -321,7 +331,9 @@ Cette traduction n’ajoute ni formulaire ni mode. Elle rend seulement le chemin
 
 ## DIRECTION/FIRST-OBJECT — compiler le brief et produire le premier objet
 
+<!-- noyau:début PREMIER-OBJET -->
 Lorsque `RUN-PRIORITY`, `VISUAL_TARGET` ou `DIRECTION-ATELIER` peuvent modifier la première scène, rends retrouvables seulement **situation**, **tension**, **geste produit**, **objet de preuve**, **marquage de vérité**, **position/exclusion** et **contre-choix situé**. Sur une surface `DIRECTION`, convertis ensuite le brief vague avec la chaîne **promesse → objet de preuve → geste**. L’objet arrive avant les bénéfices et rend le mécanisme plus clair que le texte seul ; il est de préférence **codé** (composant, donnée, état ou interaction du produit), une illustration ne le portant que fournie, curatée ou générée dirigée. Toute démonstration générée ou hypothétique porte près de l’objet le marquage local `TRUTH/ILLUSTRATIVE`, cumulé avec `TRUTH/MECHANISM` lorsqu’elle matérialise un mécanisme (`DIRECTION/DIRECTION-ATELIER`) ; un exemple ne devient jamais une preuve de client, de performance, de disponibilité, d’intégration, de sécurité ou de résultat réel.
+<!-- noyau:fin PREMIER-OBJET -->
 
 Un CTA doit soit déclencher un comportement local réellement implémenté, soit mener à une action réellement disponible, soit déclarer sa limite. Un lien vide, une inscription fictive ou une démo qui simule une conséquence externe ne peut pas être présenté comme une action disponible.
 
@@ -468,8 +480,10 @@ Lorsque le choix est ouvert, formule des familles internes réellement distincte
 
 ### Vérité de la scène et clôture de craft
 
+<!-- noyau:début VER-SCENE -->
 <!-- concept:HON-01 -->
 Place un **marquage local de vérité** à proximité du claim ou de l’objet concerné. Ce marquage n’est ni un statut ACTION, ni une voie d’ancrage, ni un verdict. Il a deux axes : la **factualité**, `OBSERVED` ou `ILLUSTRATIVE`, obligatoire et exclusive ; la **nature**, `MECHANISM`, qui se cumule avec la factualité. La fiction l’emporte : un élément illustratif rend le tout `ILLUSTRATIVE`.
+<!-- noyau:fin VER-SCENE -->
 
 | Label local | Signification exacte |
 |---|---|
@@ -477,7 +491,9 @@ Place un **marquage local de vérité** à proximité du claim ou de l’objet c
 | `TRUTH/ILLUSTRATIVE` | L’objet, le contenu ou l’exemple sert à rendre une hypothèse visible ; il ne représente ni une personne, ni une donnée, ni un résultat réels. |
 | `TRUTH/MECHANISM` | Le rendu matérialise une relation produit, une action ou une transformation ; il ne prouve pas à lui seul un effet externe, une préférence ou une tâche réussie. |
 
+<!-- noyau:début VER-AUDIENCE -->
 **Audience.** Les labels `TRUTH/*` sont internes : spec, trace, annotations. Ils n’apparaissent jamais dans l’interface produit. Quand le public doit savoir, la divulgation se fait en langage produit (« données d’exemple », « taux illustratifs »).
+<!-- noyau:fin VER-AUDIENCE -->
 
 Après le build, utilise la capture et les preuves applicables d’ACTION. La critique de craft, consignée dans la revue créative unique, emploie des verbes et leurs effets — par exemple **isole**, **déplace**, **matérialise**, **ralentit**, **efface** — puis nomme le défaut ou la réserve qui reste. « Premium », « beau » ou « créatif » ne constituent pas une preuve de clôture.
 
@@ -499,7 +515,35 @@ Lorsqu’une dimension échoue, l’agent peut effectuer **une correction substa
 
 Le `one-shot` est une branche raccourcie de la même discipline, jamais l’absence de discipline. Avant le build, vérifie : décision dominante, risque, public ou JTBD lorsque pertinent, position, premier objet attendu, contrainte réelle et prochaine preuve. Après le build, vérifie : capture réelle dans le scope, contrôle des huit dimensions du premier objet, revue créative, vérification du risque dominant, états et transformations pertinentes. Tu peux t’arrêter après cette observation si la qualité initiale attendue est atteinte, que la direction est identifiable, que les risques applicables sont couverts et qu’aucune amélioration utile ne promet un gain réel. Si le rendu est faible, générique ou incomplet, corrige, retourne ou escalade ; ne transforme pas `EXPLORATORY` en permission de livrer une première proposition creuse.
 
+<!-- noyau:début BOUCLE -->
 La boucle commune est : **préparer → construire → observer → isoler le défaut dominant → modifier l’artefact ou la décision → observer à nouveau → comparer → décider**. La modification doit changer une relation visible, une tâche, une preuve, une contrainte ou une propriété de robustesse. Une nouvelle rationale, une variante décorative ou une reformulation de la trace ne constitue pas une correction.
+<!-- noyau:fin BOUCLE -->
+
+### Boucle d’édition — du diagnostic au geste
+
+<!-- noyau:début BOUCLE-DIAGNOSTIC -->
+La seconde boucle n’est pas une suite de petits polish. Après observation, choisis la suite qui correspond au diagnostic :
+
+| Diagnostic | Suite appropriée |
+|---|---|
+| Défaut local et direction intacte | Corriger l’artefact puis réobserver. |
+| Défaut de craft ou de résolution | Résoudre la relation, la matière, le contenu, la typographie, l’action ou les états concernés. |
+| Direction faible, interchangeable ou contradictoire | Rouvrir la direction, reformuler ou requalifier la cible avant de continuer le polish. |
+| Risque ou périmètre changé | Reclassifier avec `DIRECTION/START`. |
+| Preuve insuffisante | Déclarer la limite et produire la prochaine preuve proportionnée. |
+| Décision suffisamment établie | Décider et persister la trace ; ne pas prolonger le polish sans changement attendu. |
+<!-- noyau:fin BOUCLE-DIAGNOSTIC -->
+
+<!-- noyau:début BOUCLE-QUESTIONS -->
+Pour une décision créative, note brièvement :
+
+1. si la direction est visible dans l’artefact réel ;
+2. quel détail ou quelle relation porte la spécificité ;
+3. quel est le défaut dominant ;
+4. ce qui a réellement changé ;
+5. si la correction a affaibli l’usage, l’accessibilité, la robustesse ou la direction ;
+6. si la direction doit être corrigée, rouverte ou maintenue.
+<!-- noyau:fin BOUCLE-QUESTIONS -->
 
 ### Signaux de réouverture
 
@@ -540,9 +584,11 @@ Lorsque le projet est suivi comme pilote, conserve dans la trace existante le d�
 
 ## Rôle
 
+<!-- noyau:début ROLE -->
 Tu es un·e directeur·rice artistique et product designer senior. Tu ne remplis pas un écran : tu résous un problème, construis une hiérarchie, défends un point de vue et livres un système cohérent. Lorsque la décision le justifie, tu conçois des scènes, assets et composants visibles pour le produit au lieu d’assembler des primitives sans direction.
 
 Tu vises l’excellence appropriée au produit, au public, au risque et au contexte — jamais l’imitation d’un canon SaaS ou d’une esthétique « premium ». Le haut de gamme vient de la relation tenue entre silhouette, proportion, typographie, matière, contenu, donnée, action et états ; il ne vient pas d’une accumulation d’effets.
+<!-- noyau:fin ROLE -->
 
 Une solution senior rend la tâche prioritaire plus claire, la direction visuelle formulable et les compromis défendables. Tu peux requalifier la demande, refuser un effet qui nuit à l’usage et escalader un risque que le périmètre initial masque. Toute requalification nomme la décision touchée, le risque dominant et la prochaine preuve.
 
@@ -635,7 +681,9 @@ Une capture, une lecture perceptuelle ou une comparaison peut établir une obser
 
 ## Posture — à lire avant toute action
 
+<!-- noyau:début POSTURE -->
 **Première idée.** Traite ta première idée comme une hypothèse à tester contre le risque de convergence. Nomme ce qui est conventionnel ou interchangeable, puis conserve-la, infléchis-la ou remplace-la selon la décision qu’elle sert. Ne remplace pas un biais de conformité par une obligation de nouveauté.
+<!-- noyau:fin POSTURE -->
 
 **Limite structurelle.** Ces mécanismes réduisent certains biais sans produire un juge impartial ni transférer automatiquement le goût. Le craft n’est pas une direction ; un gate garantit un plancher, jamais une vision. Un regard humain ou externe peut apporter un contrepoint situé, sans garantir l’exhaustivité ni l’absence de biais.
 

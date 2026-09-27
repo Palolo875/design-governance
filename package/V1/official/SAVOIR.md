@@ -113,7 +113,9 @@ Un moodboard, une référence ou une rationale doit être annoté par la décisi
 
 ### Singularité sans rejet des conventions
 
+<!-- noyau:début COMP-SINGULARITE -->
 Le test de singularité demande : si le logo et le nom disparaissent, qu’est-ce qui reste spécifique au produit ? La réponse peut être une donnée, une tâche, une hiérarchie, une voix, une densité, une interaction, une microcopie ou un traitement matériel.
+<!-- noyau:fin COMP-SINGULARITE -->
 
 La singularité n’exige pas une structure spectaculaire lorsque la convention de genre sert mieux l’usage. La convergence de genre est légitime lorsque la structure partagée répond à un besoin connu et que contenu, états, données, microcopie et craft sont propres au produit.
 
@@ -125,6 +127,7 @@ Une architecture faible ne se répare pas par un dégradé, une typographie rare
 
 ### Grammaire positive de composition
 
+<!-- noyau:début COMP-GRAMMAIRE -->
 Lorsque la décision visuelle est ouverte, construis dans cet ordre : **intention → tension → foyer → masse → rythme → matière et type → contenu réel → états → résolution → retenue**. Cette séquence n’est ni une recette de style ni une checklist obligatoire ; elle vérifie que les choix se renforcent au lieu d’être ajoutés séparément.
 
 | Élément | Question de composition |
@@ -137,6 +140,7 @@ Lorsque la décision visuelle est ouverte, construis dans cet ordre : **intentio
 | **Résolution et retenue** | Quels états, contenus, contraintes et détails doivent déjà tenir, et qu’est-il volontairement retiré ? |
 
 Une proposition est forte lorsque sa beauté vient d’une relation tenue entre produit, composition, contenu, matière, type, geste et contrainte. Elle n’est pas forte parce qu’elle accumule des effets, ni parce qu’elle s’écarte arbitrairement d’une convention.
+<!-- noyau:fin COMP-GRAMMAIRE -->
 
 ### Pluralité esthétique et goût situé
 
@@ -229,7 +233,9 @@ Une **proposition premium** est une proposition dont la valeur perçue est soute
 
 ### Creative Quality Review
 
+<!-- noyau:début BOUCLE-REVUE -->
 [MÉTHODE] Pour une décision où la qualité visuelle est dominante, conduis une revue courte après la première scène et après la repasse de craft : **ce qui est présent**, **ce qui est spécifique**, **ce qui est culturellement transformé**, **ce qui est encore générique**, **ce qui manque de résolution** et **le geste de polish le plus rentable**. La revue cite au moins un objet ou une relation observable et produit une prochaine action. Elle ne fabrique pas de score esthétique et ne remplace pas les preuves d’ACTION.
+<!-- noyau:fin BOUCLE-REVUE -->
 
 Un rendu n’est pas considéré comme suffisamment travaillé parce qu’il contient davantage de détails. Il l’est lorsque chaque détail important renforce la hiérarchie, le sens, la relation au produit ou la qualité de présence. La beauté pertinente peut venir de l’intensité comme de la retenue ; elle peut être éditoriale, technique, tactile, chaleureuse, colorée, ludique ou silencieuse selon le contexte.
 
@@ -262,9 +268,11 @@ Un principe récité sans conséquence visible est du théâtre procédural.
 
 [MÉTHODE] Les objets, matières et références du système sont des démonstrateurs de relation, jamais un catalogue à reproduire.
 
+<!-- noyau:début COMP-FORME -->
 > **Forme située = tâche + donnée ou objet métier + état et conséquence + densité de lecture + phénomène ou métaphore justifiable + preuve attendue.**
 
 Le phénomène ou la métaphore est facultatif. Il peut rendre perceptible un seuil, une trace, une séquence, une origine, un volume ou une relation matérielle. Il n’est jamais ajouté pour éviter un rectangle ou paraître créatif.
+<!-- noyau:fin COMP-FORME -->
 
 | Test | Question |
 |---|---|
@@ -295,6 +303,16 @@ Ces axes servent à produire une **alternative située**, jamais un menu de styl
 
 > **Alternative située :** position différente parce qu’elle répond à une contrainte, un public, un JTBD ou une opportunité distincte.
 
+<!-- noyau:début BOUCLE-AXE -->
+Pour produire du beau varié sans produire du bruit, faire varier **un axe situé à la fois** : public, JTBD, promesse, geste, structure, densité, matière ou ton. Pour chaque alternative, préciser dans la trace existante :
+
+- la décision qu’elle peut changer ;
+- le public, le contexte, le risque ou le JTBD qui la justifie ;
+- le niveau de matérialisation nécessaire ;
+- la comparaison ou la preuve prévue ;
+- la condition de retrait.
+<!-- noyau:fin BOUCLE-AXE -->
+
 Une alternative n’a pas à être matérialisée si elle ne peut modifier aucune décision. Lorsque le choix est ouvert et qu’une position différente peut réellement changer le résultat, développe-la au niveau nécessaire pour comparer : phrase, schéma, cible ou rendu.
 
 Les axes survivent aux tendances ; les étiquettes culturelles et les exemples doivent être révisés dans `SAVOIR/TOOLS`.
@@ -305,7 +323,9 @@ Les axes survivent aux tendances ; les étiquettes culturelles et les exemples d
 
 Colonnes, tailles, espacements et breakpoints sont des diagnostics de cohérence. Adapte-les lorsque contenu, plateforme ou direction produisent une relation plus juste.
 
+<!-- noyau:début COMP-CONTROLES -->
 Les contrôles principaux sont : alignements nets, compensation optique, proximité qui révèle les groupes, priorités lisibles, et responsive pensé comme recomposition. Une grille desktop peut devenir liste ; un panneau peut devenir écran ; un bloc dense peut devenir séquence progressive.
+<!-- noyau:fin COMP-CONTROLES -->
 
 Une vue peut avoir une priorité dominante ou un groupe de priorités liées. Ne force pas une dominante unique dans une surface de comparaison ou de supervision lorsque plusieurs décisions doivent rester simultanément visibles.
 
@@ -362,7 +382,9 @@ Formule le compromis : ce qui gagne entre compréhension immédiate et juste dis
 
 [REQUIS PAR LE MODULE — couleur, thème, statut ou surface identitaire] Conçois une palette par rôles : surfaces, textes, actions, états et frontières. La répartition entre neutres et couleurs est une décision de direction, pas un défaut : une structure neutre à accent, une identité multicolore structurelle ou un codage par zones sont recevables si les rôles, les états, le contraste calculé et un indice non chromatique pour toute information critique tiennent. Une couleur sémantique n’est pas une décoration.
 
+<!-- noyau:début COMP-CONVERGENCE -->
 **Question de convergence.** Cette palette est-elle celle que le modèle produirait sans brief (neutres et un seul accent, sombre et doré, dégradé froid) ? Si oui, nomme ce qui, dans le produit, la justifie. Sinon, reconsidère-la. La question ne prescrit aucun écart : une palette convergente justifiée reste valide.
+<!-- noyau:fin COMP-CONVERGENCE -->
 
 La palette est conditionnelle : elle est documentée lorsqu’elle peut changer la décision, le thème, le statut ou la direction. Si le système existant est conservé et qu’aucun choix de couleur ne change le run, note cette conservation et sa raison.
 
@@ -451,6 +473,7 @@ Le temps investi est un indice, jamais une preuve. Une simplification juste, un 
 
 ### Vocabulaire perceptuel
 
+<!-- noyau:début COMP-VOCABULAIRE -->
 | Terme | Question | Diff possible |
 |---|---|---|
 | Cohérence de rayon | Les courbures appartiennent-elles à une même relation ? | Échelle explicitée, valeurs magiques supprimées. |
@@ -459,6 +482,7 @@ Le temps investi est un indice, jamais une preuve. Une simplification juste, un 
 | Silhouette | À faible détail, la priorité reste-t-elle claire ? | Masses et contraste redistribués. |
 | Surface | Profondeur, lumière ou planéité sont-elles cohérentes ? | Élévations, frontières, lumière ou planéité revues. |
 | États | Loading, empty, error et récupération sont-ils compréhensibles ? | États et sorties de récupération dessinés. |
+<!-- noyau:fin COMP-VOCABULAIRE -->
 
 La silhouette n’exige pas une identité spectaculaire. Dans une vue administrative ou transactionnelle, elle vérifie surtout la lecture prioritaire au flou.
 
@@ -521,7 +545,9 @@ La profondeur de recherche augmente par déclencheur : confiance ou erreur coût
 
 Le point de départ n’est pas « quelle image produire ? », mais « quelle relation manque à la promesse, à la preuve ou à l’action ? ».
 
+<!-- noyau:début MOY-CALIBRATION -->
 Cherche des calibrations dans les domaines qui peuvent changer cette relation — cinéma pour lumière et séquence, édition pour rythme et crop, affichage pour échelle et distance, architecture pour masse, photographie pour focalisation, packaging pour matière, signalétique pour orientation, arts vivants pour mouvement — sans transformer une référence culturelle en décor interchangeable.
+<!-- noyau:fin MOY-CALIBRATION -->
 
 Choisis ensuite une route de production déclarée dans `DIRECTION/VISUAL_TARGET`. Une génération réussie ne se mesure pas à son réalisme intrinsèque : elle doit répondre au cadrage, au plan de lecture, au rôle du type, au contraste, au mouvement éventuel, au crop mobile et au niveau de preuve requis.
 
@@ -557,7 +583,9 @@ Les familles ci-dessous orientent la recherche ; elles ne sont ni des quotas, ni
 
 Un effet est retenu seulement s’il modifie une relation observable. Une ombre, un blur, un gradient, une texture, une animation ou une transition peuvent être légitimes, mais leur présence seule ne prouve rien. `DÉCORATIF-SANS-CONSEQUENCE` est une catégorie de retrait, jamais une technique à promouvoir.
 
+<!-- noyau:début MOY-ASSETS -->
 **Traitement des assets moyens.** Quand les assets disponibles sont moyens (photos de téléphone, banque d’images), applique un traitement unique et cohérent — recadrage, étalonnage, duotone, grain ou trame — justifié par la thèse, plutôt que de les poser bruts ou de les remplacer par un dessin. Le traitement unifie la série ; il ne masque ni un droit inconnu, ni une image hors sujet.
+<!-- noyau:fin MOY-ASSETS -->
 
 ### Rôles d’asset
 
@@ -829,11 +857,15 @@ Le sourcing de `DIRECTION` sépare trois rôles : **ancrage de direction** — p
 
 [VEILLE] Les listes de produits contemporains, tendances, registres culturels et snapshots ne sont pas neutres. Chaque élément mobilisé dans un run porte source, date, portée et limite dans sa trace locale.
 
+<!-- noyau:début COMP-VAGUES -->
 <!-- concept:ANT-01 -->
 [VEILLE 2026-09] **Marqueurs de vague**, pour nommer `MODAL` (`DIRECTION/CREATIVE-BOOT`), jamais pour interdire : un marqueur gardé par décision reste valide. Vague 1 : violet, police Inter, halos et gradient décoratif, hero SaaS à cartes répétées. Vague 2 : fond beige ou crème, brun, serif de caractère ou serif italique, orange rouille, bandeau défilant, illustration peinte, tramage. Vague 3 : dithering, logos pixel, ASCII, hachures de plan, gravures, bleu Klein, libellés mono en capitales, repères de recadrage, paysage peint en fond. Source : épreuve de référence interne V1.2 (26-09-2026) et revue de références de designers (27-09-2026), 6 rendus sur 6 sur fond crème et brun, avec ou sans système. À revoir avant 2027-03.
+<!-- noyau:fin COMP-VAGUES -->
 
+<!-- noyau:début MOY-CARTE -->
 <!-- concept:MOY-01 -->
 [VEILLE 2026-09] **Carte des moyens par couche**, des sources et jamais des styles, droits vérifiés à chaque usage. Typographie : polices de la marque, Google Fonts, Fontshare. Icônes : une seule famille (par exemple Lucide, Phosphor). Composants : design system fourni, sinon bibliothèque éprouvée (par exemple shadcn, Radix). Photographie : client, banques sous licence (Wikimedia Commons, Unsplash). Illustration et 3D : commande, packs sous licence, génération dirigée avec références (`GÉNÉRÉ-DIRIGÉ`). Fichiers et marque : Figma ou kit de marque par connecteur. En HTML seul, les assets figuratifs et le contenu réel restent hors plafond (`FABRICATION`). À revoir avant 2027-03.
+<!-- noyau:fin MOY-CARTE -->
 
 Une tendance est une hypothèse de direction. Avant de l’utiliser, vérifie qu’elle sert le JTBD, améliore la compréhension, reste accessible et performante et survit lorsque son nom marketing disparaît.
 
@@ -901,8 +933,10 @@ Lorsque la règle est satisfaite par le texte mais qu’aucun objet ou changemen
 
 Une capacité disponible modifie le type de preuve possible ; elle ne permet jamais d’affirmer une qualité sans examen du résultat. Toute délégation conserve délégataire, rôle, capacité déclarée, méthode, scope, artefact/résultat consulté, date/version, limite, owner de décision finale, `NEXT-PROOF` et condition de reprise ou d’escalade.
 
+<!-- noyau:début VER-FAUX-ASSET -->
 <!-- concept:HON-02 -->
 Ne fais jamais passer abstraction CSS, SVG, image générée ou placeholder pour photo, illustration, logomark, son ou asset authentique. Une abstraction assumée est autorisée si son rôle est honnête, son contenu non trompeur et son effet approprié. Un faux asset de marque ne l’est pas.
+<!-- noyau:fin VER-FAUX-ASSET -->
 
 Le modèle, le prompt ou l’outil de génération ne constituent jamais, à eux seuls, une preuve de qualité, de droit ou d’adéquation au contexte.
 
@@ -942,7 +976,9 @@ Ce résumé n’est pas une procédure de livraison. Il ne crée aucune route, g
 - QA et gates applicables ;
 - décision et persistance.
 
+<!-- noyau:début BOUCLE-REPASSE -->
 Une repasse complète est attendue en `DIRECTION`, recommandée en `STANDARD` et ciblée en `ITER` ou `LITE` sur le périmètre modifié. Cherche ce qui est resté par défaut : alignement optique, échelle, distance, état, composant, mouvement, contenu réel, breakpoint ou récupération.
+<!-- noyau:fin BOUCLE-REPASSE -->
 
 Le système n’installe pas mécaniquement le goût. Il rend le jugement plus difficile à simuler : références observées, décisions nommées, preuves adaptées, compromis assumés et limites déclarées.
 

@@ -38,11 +38,19 @@ DECISION-CHANGE — NEXT-ACTION — OWNER — NEXT-PROOF — EXIT-CONDITION
 
 2. **Réponse visible**, pour un humain, par défaut :
 
+<!-- noyau:début SORTIE -->
+<!-- concept:SOR-01 -->
+La personne reçoit une réponse en langage produit, sans le jargon interne du système, en quatre rubriques :
+
 ```text
-MODE — DECISION — CHANGE — PROOF — LIMIT — NEXT-ACTION — OWNER
+Ce que j’ai fait : la proposition et ses choix principaux, en une ou deux phrases.
+Pourquoi : la thèse et ce que le rendu permet de décider.
+Ce qui manque pour la vraie version : contenus, assets, droits, tests ou capacités, avec le plafond atteint.
+La suite : une ou deux actions proposées, et ce qu’il faut de la personne pour les engager.
 ```
 
-`CHANGE` vaut la conséquence décisionnelle d’`ACTION/STATUS` : décision changée, confirmée ou abandonnée, `N/A-JUSTIFIED` ou `NOT-OBSERVED`. La réponse visible ne remplace jamais le handoff d’un run persistant.
+L’agent active le système en silence : la personne donne l’objectif, le périmètre et l’autonomie ; l’agent choisit le mode, charge les sources et tient la trace. Le mode, la conséquence décisionnelle d’`ACTION/STATUS` (décision changée, confirmée ou abandonnée, `N/A-JUSTIFIED` ou `NOT-OBSERVED`), la preuve et l’owner restent dans la trace et sont exposés sur demande (« pourquoi ? », « qu’as-tu vérifié ? »). La réponse visible ne remplace jamais le handoff d’un run persistant.
+<!-- noyau:fin SORTIE -->
 
 **Formes.** La ligne de run de `DIRECTION` est la mémoire de lancement, sous-ensemble de lancement de ce handoff ; le handoff est la transmission ; `ACTION/CLOSE-PACKAGE` est la clôture par mode ; la `RUN_CARD` JSON est la projection persistante, selon la table de correspondance d’`ACTION/RUN_CARD`. **Forme courte LITE non persistante :** le paquet LITE de `ACTION/CLOSE-PACKAGE` ; les autres champs du handoff sont `N/A-JUSTIFIED` par défaut, avec deux pertes déclarées (METHOD, EXIT-CONDITION) ; TRACE-LOCATOR est alors l’artefact. Une reprise par un autre agent exige OWNER et NEXT-ACTION ; sinon la forme courte reste une préparation.
 
@@ -795,9 +803,11 @@ La preuve minimale est une paire de captures réelles : une capture initiale, pu
 
 #### Atelier d’édition — opération observable
 
+<!-- noyau:début BOUCLE-ATELIER -->
 Après la première capture, effectuer une lecture légère en ignorant le texte explicatif et nommer en une phrase la catégorie, la marque et le niveau de preuve que la surface semble raconter. Nommer ensuite la décision principale qui sera mise à l’épreuve. Éditer cette décision par **retrait, réduction ou transformation** ; une décision peut coordonner plusieurs diffs, mais l’unité de compte n’est pas le nombre de changements. Ne rien ajouter pour compenser.
 
 Conserver et comparer la capture suivante. La trace nomme le changement, sa direction, son effet et la décision qu’il confirme, modifie ou abandonne. Conserver l’original lorsqu’il résout mieux la décision est un résultat valide : la variante a alors confirmé une décision par comparaison plutôt que par déclaration.
+<!-- noyau:fin BOUCLE-ATELIER -->
 
 `N/A-JUSTIFIED` n’est recevable que si aucune décision principale éditable n’existe dans le périmètre, ou si une paire équivalente, toujours valide après le dernier changement substantiel, couvre déjà exactement la même décision. La justification lie l’artefact concerné, l’owner et la prochaine preuve. Une thèse encore incertaine, un élément producteur introuvable ou une paire qui n’autorise aucune conclusion maintiennent le run en `EXPLORATORY` ; ils ne produisent pas un `PASS` indirect.
 

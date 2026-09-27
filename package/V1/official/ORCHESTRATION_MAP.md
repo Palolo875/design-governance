@@ -14,7 +14,7 @@ La combinaison choisie reste dans la trace existante du run, seulement si elle p
 
 | Résultat recherché | Noyau possible | Renforcement seulement si nécessaire | Preuve à privilégier |
 |---|---|---|---|
-| **Direction forte et spécifique** | `DIRECTION/START` + `ACTION/RUN-DIRECTION` + `DIRECTION/VISUAL_TARGET` + `DIRECTION/FIRST-OBJECT` | `DIRECTION/CREATIVE-BOOT`, `DIRECTION/DOMAIN-FRAME`, `SAVOIR/CRAFT`, `SAVOIR/SOURCE`, `SAVOIR/STYLE`, `BIBLIOTHEQUE/SELECT` | Premier objet réel, revue créative, observation du défaut dominant et correction réellement observée. |
+| **Direction forte et spécifique** | `DIRECTION/CHARGE` (mode `DIRECTION`) | `DIRECTION/CREATIVE-BOOT`, `DIRECTION/DOMAIN-FRAME`, `SAVOIR/CRAFT`, `SAVOIR/SOURCE`, `SAVOIR/STYLE`, `BIBLIOTHEQUE/SELECT` | Premier objet réel, revue créative, observation du défaut dominant et correction réellement observée. |
 | **Beauté, goût et craft situés** | `DIRECTION/FIRST-OBJECT` + `SAVOIR/CRAFT` + `ACTION/FIRST-RENDER` | `SAVOIR/STYLE`, contenu crédible, matière, typographie ou ancre lorsque chacun peut modifier le jugement | Rendu réel dans le scope ; jugement créatif séparé des preuves d’usage, d’accessibilité et de robustesse. |
 | **Créativité variée mais utile** | `DIRECTION/CREATIVE-BOOT` + `DIRECTION/VISUAL_TARGET` + une alternative située | `DIRECTION/DOMAIN-FRAME`, `SAVOIR/SOURCE` ou atelier seulement si l’axe de divergence change une décision | Comparaison dans le même scope par public, JTBD, promesse, geste, structure ou expression. |
 | **UI/UX habitable** | `ACTION/UI-UX-REALITY` + `BIBLIOTHEQUE/SELECT` + `ACTION/GATE-A` (contrôles applicables) + contenu et états réels | Responsive, focus, récupération, runtime ou `SAVOIR/CONTEXT` selon le risque | Tâche, états, viewports, contenu extrême, clavier ou méthode adaptée au claim. |
@@ -28,13 +28,7 @@ Ces combinaisons ne sont pas des parcours obligatoires. Elles indiquent des capa
 
 ## Variation créative
 
-Pour produire du beau varié sans produire du bruit, faire varier **un axe situé à la fois** : public, JTBD, promesse, geste, structure, densité, matière ou ton. Pour chaque alternative, préciser dans la trace existante :
-
-- la décision qu’elle peut changer ;
-- le public, le contexte, le risque ou le JTBD qui la justifie ;
-- le niveau de matérialisation nécessaire ;
-- la comparaison ou la preuve prévue ;
-- la condition de retrait.
+Pour produire du beau varié sans bruit : `SAVOIR/CRAFT/CFT-02` (un axe situé à la fois).
 
 Une alternative est utile si elle peut modifier le choix. Une référence, une ancre, une rationale ou une variante ne constitue pas une preuve indépendante.
 

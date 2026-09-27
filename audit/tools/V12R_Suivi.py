@@ -92,7 +92,7 @@ def main() -> int:
     ll = mes.load_lists(root)
     now = {"lettre_mots": b["LETTRE"]["mots"], "negations": ind["TOTAL"]["negations"],
            "doublons": sum(d["occurrences"] for d in dup),
-           "listes_distinctes": len({tuple(v) for v in ll.values() if v is not None})}
+           "listes_distinctes": mes.distinct_lists(ll)}
     base = {"lettre_mots": ref["budget"]["LETTRE"]["mots"], "negations": ref["indicateurs"]["TOTAL"]["negations"],
             "doublons": sum(d["occurrences"] for d in ref["doublons"]),
             "listes_distinctes": len({tuple(v) for v in ref["listes_chargement"].values() if v is not None})}

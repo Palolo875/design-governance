@@ -49,6 +49,7 @@ Ne rien modifier dans `package/` pendant l'initialisation.
 - **R1 fait** (`V12R_01_OUTILS_MESURE.md`) : `audit/tools/V12R_Mesures.py` (budget ACTUEL/TABLE/LETTRE : 9 591 / 16 339 / 23 891 mots ; atteignabilité 3 / 7 / 10 outils sur 25 ; 863 négations ; 79 amas de doublons ; 5 listes de chargement distinctes sur 6) et `V12R_Carto_harnais.py` (389 cas : 233 structurels, 156 sensibles à la prose dont 58 via les LCF).
 - **R2 appliqué** (`V12R_02_R2_GARDES_PROPRIETE.md`, méthode M1–M4 validée) : `scripts/validate_structure.py` (8 concepts d'honnêteté balisés `<!-- concept:HON-0x -->`, uniques, à leur lieu propriétaire ; `read_route` retire les balises) ; table `audit/data/V12R/V12R_Correspondance_harnais.csv` (389 cas) ; **suivi de refonte `audit/tools/V12R_Suivi.py`** : 389/389, cliquets = référence B05, validate_all vert, 13.01 6/6 et 5/5, 13.02 38/38.
 - **R3 appliqué** (`V12R_03_R3_ALIGNEMENTS.md`) : D-01 (vocabulaire `MODAL`/`PARTI` unique), D-02 (prise de brief fidèle, condition canonique reformulée « destination si elle est incertaine »), D-07 (renvois vers marqueurs et carte, `SAVOIR/TOOLS`), D-08 (11 termes au glossaire), D-12, D-13 ; gardes de propriété associées ; R-17 et R-21 migrés (LCF-24, LCF-28) ; suivi vert, chemin prescrit 23 849 mots. D-16 reporté en R5c.
+- **R4 appliqué** (`V12R_04_R4_NOYAU.md`) : noyau de fabrication (2 843 mots, 29 blocs balisés dans les sources, compilé dans la skill par `scripts/build_core.py`) ; `DIRECTION/DAILY` → `DIRECTION/CHARGE`, seule liste de chargement ; réponse visible en langage produit (`ACTION/HANDOFF`) ; chemin prescrit **13 537 mots (−43 %)**, **24/25 outils de fabrication sur le chemin**, 1 liste de chargement ; 7 LCF rectifiées, 15 cas migrés ; suivi vert.
 - **Chantier en cours : plan V1.2**, `plans/Plan_V1.2_Qualite_senior_gouvernance.md`. Objectif : un premier rendu de niveau designer senior dès le one-shot, gouvernance conservée (bilan de fabrication, prise de brief minimale, matériaux, anti-slop vivant, atlas d'ancres, épreuve à l'aveugle).
 
 ## 3. Arborescence
@@ -109,7 +110,8 @@ Depuis `package/` :
 ```bash
 python3 -B scripts/validate_all.py        # validation complète, build des deux distributions
 python3 -B scripts/validate_reading_map.py  # 42 conditions (V1.1.1) ; 50 sur B05
-python3 -B scripts/validate_structure.py   # gardes de propriété (concepts balisés) ; 8 après R2
+python3 -B scripts/validate_structure.py   # gardes de propriété : concepts, renvois, vocabulaire, noyau compilé, chargement unique
+python3 -B scripts/build_core.py [--check]  # compile le noyau de fabrication dans la skill (ne jamais éditer la section compilée à la main)
 python3 scripts/read_route.py ACTION/RUN_CARD  # lire une route
 ```
 
@@ -118,7 +120,7 @@ python3 scripts/read_route.py ACTION/RUN_CARD  # lire une route
 ## 6. Prochaine étape
 
 1. ~~Porte G1 du plan V1.2~~ : franchie le 26-09-2026 (`audit/reports/V12_01_DECISIONS_G1.md`).
-2. ~~B05, lot 1 (A, B, D), addendum, lot 2 (G, H, I, D')~~ : faits (`V12_02` à `V12_04`). Lectures `V12_05` à `V12_11` faites. Mini-épreuve **reportée par l'owner** (27-09-2026). **Refonte (`plans/Plan_V1.2_Refonte.md`) : décisions 1, 2, 4, 7 prises ; R1, R2 et R3 faits ; prochaine : PATCH-DECISION R4 (noyau de fabrication compilé, liste de chargement unique, sortie en langage produit, marqueurs de vague dans le noyau) → → R3 → R4 → P1** ; la mini-épreuve V1.2 devient le point P1 (addendum §5-§6 : C3 ×2, C3r ×1, juge neuf avec brief riche intégral), puis G4.
+2. ~~B05, lot 1 (A, B, D), addendum, lot 2 (G, H, I, D')~~ : faits (`V12_02` à `V12_04`). Lectures `V12_05` à `V12_11` faites. Mini-épreuve **reportée par l'owner** (27-09-2026). **Refonte (`plans/Plan_V1.2_Refonte.md`) : décisions 1, 2, 4, 7 prises ; R1, R2, R3 et R4 faits. Prochaine : point de contrôle P1 (mini-épreuve sur B-DLA : C3 ×2, C3r ×1, juge neuf avec brief riche intégral, captures avec défilement, tokens), puis vague III (R5) selon le résultat**, puis G4.
 3. Suivre le séquencement du plan : G2 (gardes rouges puis vertes) → G3 (non-régression, budget tenu) → G4 (épreuve à l'aveugle avec juges extérieurs) → publication V1.2.0.
 
 Travail par branche : une branche par unité (`v1.2/patch-decision-abd`, …) ; étiquettes aux points de contrôle ; rapport de l'unité dans `audit/reports/`.

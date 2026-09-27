@@ -117,6 +117,15 @@ def cells(line: str) -> list[str]:
     return [cell.strip() for cell in line.strip().strip("|").split("|")]
 
 
+VISIBLE_RUBRIQUES = ("Ce que j’ai fait :", "Pourquoi :", "Ce qui manque pour la vraie version :", "La suite :")
+
+
+def charge_row(t: dict[str, str], mode: str) -> list[str] | None:
+    sec = t["D"][t["D"].find("## DIRECTION/CHARGE"):]
+    sec = sec[:sec.find("\n## ", 5)]
+    return row(sec, f"**{mode}**")
+
+
 def row(text: str, key: str, col: int = 0) -> list[str] | None:
     for line in text.splitlines():
         if line.startswith("|") and not line.startswith("|---"):
@@ -173,9 +182,11 @@ def load_texts() -> dict[str, str]:
 def lcf_07(t: dict[str, str]) -> bool:
     chain = after(t["D"], "**Chaîne de lecture interne.**", 700)
     prio = fenced_after(t["D"], "```text\nRUN-PRIORITY")
-    rows = [row(t["RM"], "Direction identitaire"), row(t["OM"], "Direction forte et spécifique"), row(t["SK"], "`DIRECTION`")]
+    pointers = [row(t["RM"], "Direction identitaire"), row(t["OM"], "Direction forte et spécifique")]
+    rows = [charge_row(t, "DIRECTION")]
     return (before(chain, "`VISUAL_TARGET`", "`FIRST-OBJECT`") and before(prio, "DIRECTION —", "FIRST-OBJECT —")
-            and all(r and before(" ".join(r), "VISUAL_TARGET", "FIRST-OBJECT") for r in rows))
+            and all(r and before(" ".join(r), "VISUAL_TARGET", "FIRST-OBJECT") for r in rows)
+            and all(p and "`DIRECTION/CHARGE`" in " ".join(p) for p in pointers))
 
 
 def lcf_03(t: dict[str, str]) -> bool:
@@ -266,7 +277,7 @@ def lcf_24(t: dict[str, str]) -> bool:
 def lcf_25(t: dict[str, str]) -> bool:
     carte = t["A"][t["A"].find("### Carte de lecture par mode"):t["A"].find("### ACTION/HANDOFF")]
     for mode in ("LITE", "ITER"):
-        sk, ac = row(t["SK"], f"`{mode}`"), row(carte, f"`{mode}`")
+        sk, ac = charge_row(t, mode), row(carte, f"`{mode}`")
         if not (sk and ac and len(sk) > 2 and "ACTION/GATE-B" in sk[1] and not re.search(r"(?i)gates? B", sk[2]) and "ACTION/GATE-B" in ac[1]):
             return False
     return True
@@ -385,7 +396,8 @@ def lcf_38(t: dict[str, str]) -> bool:
 
 def lcf_39(t: dict[str, str]) -> bool:
     sec = t["Q"][t["Q"].find("## 5. Charger"):t["Q"].find("## 6.")]
-    return all((r := row(sec, f"`{m}`")) and "ACTION/GATE-B" in r[1] for m in ("LITE", "ITER"))
+    return ("`DIRECTION/CHARGE`" in sec and not row(sec, "`LITE`")
+            and all((r := charge_row(t, m)) and "ACTION/GATE-A" in r[1] and "ACTION/GATE-B" in r[1] for m in ("LITE", "ITER")))
 
 
 def lcf_40(t: dict[str, str]) -> bool:
@@ -473,7 +485,7 @@ def savoir_section(t: dict[str, str], start: str, stop: str) -> str:
 
 def lcf_47(t: dict[str, str]) -> bool:
     fo = t["D"][t["D"].find("## DIRECTION/FIRST-OBJECT"):t["D"].find("### Contrat positif du premier objet")]
-    return "de préférence **codé**" in fo and "de préférence codé" in t["SK"]
+    return "de préférence **codé**" in fo and bool(re.search(r"de préférence (\*\*)?codé", t["SK"]))
 
 
 def lcf_48(t: dict[str, str]) -> bool:
@@ -505,7 +517,8 @@ def check_facades(errors: list[str]) -> None:
     # (ID, façade, source propriétaire, condition tenue)
     table = [
         ("LCF-01", "READING_MAP, ligne « Direction identitaire »", "DIRECTION/START ; ACTION/RUN-DIRECTION [FORCÉ]",
-         bool(rm33) and "ACTION/RUN-DIRECTION" in rm33[1] and "ACTION/RUN-DIRECTION" not in rm33[2]),
+         bool(rm33) and "`DIRECTION/CHARGE`" in rm33[1] and bool(charge_row(t, "DIRECTION"))
+         and "ACTION/RUN-DIRECTION" in charge_row(t, "DIRECTION")[1] and "ACTION/RUN-DIRECTION" not in charge_row(t, "DIRECTION")[2]),
         ("LCF-02", "READING_MAP, ligne « Accessibilité »", "ACTION/GATE-A (contrôles applicables dus)",
          bool(rm49) and "N/A-JUSTIFIED" not in rm49[-1] and "ACTION/GATE-A" in rm49[-1]),
         ("LCF-03", "ORCHESTRATION_MAP, noyau UI/UX, preuve, système", "ACTION/GATE-A ; gate du risque ; paquet SYSTÈME (B3)", lcf_03(t)),
@@ -524,9 +537,12 @@ def check_facades(errors: list[str]) -> None:
          all(re.search(r"(?i)classement\s*:\s*voir `DIRECTION/START`", text) for text in (t["Q"], t["README"]))),
         ("LCF-C1", "READING_MAP et skill, copies du handoff", "ACTION/HANDOFF",
          bool(canon) and HANDOFF_TOKENS.findall(fenced_after(t["RM"], "## Handoff minimal commun")) == canon
-         and all(token in HANDOFF_TOKENS.findall(after(t["SK"], "## Carte de lecture et sortie", 2500)) for token in canon)),
+         and (not after(t["SK"], "## Carte de lecture et sortie", 10)
+              or all(token in HANDOFF_TOKENS.findall(after(t["SK"], "## Carte de lecture et sortie", 2500)) for token in canon))),
         ("LCF-C2", "QUICKSTART et skill, réponse visible", "ACTION/HANDOFF",
-         all(VISIBLE in text for text in (after(t["A"], "### ACTION/HANDOFF", 3000), t["Q"], t["SK"]))),
+         all(r in after(t["A"], "### ACTION/HANDOFF", 4000) for r in VISIBLE_RUBRIQUES)
+         and "réponse visible en langage produit" in t["Q"] and "`ACTION/HANDOFF`" in t["Q"]
+         and all(r in t["SK"] for r in VISIBLE_RUBRIQUES) and VISIBLE not in t["Q"] + t["SK"]),
         ("LCF-11", "exemples de la skill et GLOSSAIRE, DECISION-CHANGE", "ACTION/STATUS (triade) ; INV-C1-1", lcf_11(t)),
         ("LCF-12", "exemples et GLOSSAIRE, ACCEPTED-WITH-RESERVATION", "INV-B2-9 ; ACTION (réserve complète)", lcf_12(t)),
         ("LCF-13", "exemples de la skill, NOT-OBSERVED et VERDICT", "triade C1 ; INV-C1-4", lcf_13(t)),

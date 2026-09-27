@@ -46,6 +46,15 @@ FIELD = re.compile(r"^\s*\[?([A-Z][A-Z0-9 /’'ÉÈ\-]+?)(?::| —)")
 BEAU = re.compile(r"\bbeau(?:té|x)?\b|\bbelle\b", re.I)
 
 
+COMPILED = re.compile(r"<!-- noyau:compilé début -->.*?<!-- noyau:compilé fin -->", re.S)
+
+
+def own_text(t: str) -> str:
+    """Texte propre d'un fichier : la section compilée de la skill (copie générée des sources) est exclue
+    des indicateurs et des doublons ; le budget, lui, la compte, puisqu'elle est lue."""
+    return COMPILED.sub("", t)
+
+
 def words(t: str) -> int:
     return len(t.split())
 
@@ -107,7 +116,7 @@ def reach(budgets: dict) -> dict:
 def indicators(root: Path) -> dict:
     out = {}
     for f in MD_FILES:
-        t = (root / f).read_text(encoding="utf-8")
+        t = own_text((root / f).read_text(encoding="utf-8"))
         fields, fence = set(), False
         for line in t.splitlines():
             if line.lstrip().startswith("```"):
@@ -138,7 +147,7 @@ def norm(s: str) -> list[str]:
 def paragraphs(root: Path) -> list[tuple[str, int, str]]:
     paras = []
     for f in MD_FILES:
-        lines = (root / f).read_text(encoding="utf-8").splitlines()
+        lines = own_text((root / f).read_text(encoding="utf-8")).splitlines()
         buf, start, fence = [], 0, False
         for i, line in enumerate(lines, 1):
             if line.lstrip().startswith("```"):
@@ -240,6 +249,11 @@ def load_lists(root: Path) -> dict:
     return out
 
 
+def distinct_lists(ll: dict) -> int:
+    """Listes distinctes, un renvoi vers DIRECTION/CHARGE (éventuellement précédé de START) n'étant pas une liste."""
+    return len({tuple(v) for v in ll.values() if v is not None and not set(v) <= {"DIRECTION/CHARGE", "DIRECTION/START"}})
+
+
 def main() -> int:
     root = Path(sys.argv[1]).resolve()
     jpath = Path(sys.argv[sys.argv.index("--json") + 1]) if "--json" in sys.argv else None
@@ -270,7 +284,7 @@ def main() -> int:
     print("== 5. LISTES DE CHARGEMENT « première lecture » d'un run DIRECTION")
     sets = [tuple(v) for v in ll.values() if v is not None]
     union = sorted({r for v in sets for r in v})
-    print(f"  listes : {len(ll)} ; distinctes : {len(set(sets))} ; introuvables : {[k for k, v in ll.items() if v is None]}")
+    print(f"  listes : {len(ll)} ; distinctes (renvois exclus) : {distinct_lists(ll)} ; introuvables : {[k for k, v in ll.items() if v is None]}")
     print(f"  {'route':28s}" + "".join(f"{k[:12]:>13s}" for k in ll))
     for r in union:
         print(f"  {r:28s}" + "".join(f"{('x' if v and r in v else '·'):>13s}" for v in ll.values()))

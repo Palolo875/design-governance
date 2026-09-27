@@ -134,7 +134,7 @@ C2;G-02;STRUCTURE;;-;MAINTENU;;R1;;F-DIR-006 la table couvre les vues DIRECTION 
 C2;G-03;PROSE;DIRECTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-039 DIRECTION 716 déclare le transport du paquet d'alternative (trace), plus « la RUN_CARD nomme » seule
 C2;G-04;PROSE;ACTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-ACT-002 HANDOFF déclare la forme courte LITE par renvoi à CLOSE-PACKAGE
 C2;G-05;PROSE;ACTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-010 HANDOFF situe les formes (ligne de run, HANDOFF, CLOSE-PACKAGE, projection)
-C2;G-06;PROSE;DIRECTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-013 DAILY : colonne « Clôture minimale » remplacée par un renvoi à ACTION/CLOSE-PACKAGE
+C2;G-06;PROSE;DIRECTION;DIRECTE;OBSOLETE;structure:CHG-01;R4;La vue DAILY est devenue DIRECTION/CHARGE (R4, liste unique). La propriété (pas de colonne de clôture, renvoi à ACTION/CLOSE-PACKAGE) est portée par la garde CHG-01, rouge sous la mutation « clôture non renvoyée » de V12R_Patch_R4.py.;F-DIR-013 DAILY : colonne « Clôture minimale » remplacée par un renvoi à ACTION/CLOSE-PACKAGE
 C2;G-07;STRUCTURE;;-;MAINTENU;;R1;;F-DIR-034/035 section 0 : preuve minimale et condition d'arrêt renvoyées à ACTION (PRECONDITION, CLOSE-EXIT-CHECK)
 C2;G-08;PROSE;DIRECTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-023 VISUAL_TARGET : table canonique avec « Résolution initiale » , la table des quatre décisions disparaît
 C2;G-09;PROSE;DIRECTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-023 passage à SPECCED défini par renvoi à la table (et non par une énumération concurrente)
@@ -153,10 +153,10 @@ C3;G-01;PROSE;BIBLIOTHEQUE_CHANGELOG;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-
 C3;G-02;PROSE;BIBLIOTHEQUE_CHANGELOG;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-BIB-002 table des niveaux : la ligne Local renvoie au contrat réduit de CONTRACTS
 C3;G-03;STRUCTURE;;-;MAINTENU;;R1;;F-BIB-002 DERIVE : champs rangés par phase (départ / après objet / promotion)
 C3;G-04;PROSE;ACTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-SK-001 ACTION/HANDOFF nomme deux sorties : réponse visible et handoff
-C3;G-05;PROSE;SKILL;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-SK-001 skill : plus de liste de onze champs « au minimum » , les deux sorties renvoient à ACTION/HANDOFF
-C3;G-06;STRUCTURE;;-;MAINTENU;;R1;;F-SK-001 skill : la copie du handoff porte les treize champs canoniques (14 libellés, composites séparés)
+C3;G-05;PROSE;SKILL;DIRECTE;OBSOLETE;structure:NOY-02;R4;La skill ne porte plus de liste de sorties : sa section « Sortie » est la copie compilée d’ACTION/HANDOFF (R4, décision 4). La propriété (la skill ne redéfinit pas les sorties) est portée par la garde de compilation NOY-02, rouge sous les mutations « skill retouchée à la main » et « bloc modifié sans recompiler ».;F-SK-001 skill : plus de liste de onze champs « au minimum » , les deux sorties renvoient à ACTION/HANDOFF
+C3;G-06;STRUCTURE;;-;OBSOLETE;lcf:LCF-C1;R4;La skill ne recopie plus le handoff (R4 : une chose, un lieu). LCF-C1 rectifiée vérifie que les copies qui subsistent (READING_MAP) sont fidèles et qu’une copie réintroduite dans la skill le serait , mutation « LCF-C1 » de V12R_Patch_R4.py rouge.;F-SK-001 skill : la copie du handoff porte les treize champs canoniques (14 libellés, composites séparés)
 C3;G-07;STRUCTURE;;-;MAINTENU;;R1;;F-SK-001 QUICKSTART : plus de « sortie minimale d'un handoff » à onze champs , renvoi à ACTION/HANDOFF
-C3;G-08;PROSE;FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-SK-001 la réponse visible de QUICKSTART est marquée « voir ACTION/HANDOFF » et identique au canon
+C3;G-08;PROSE;FACADES;DIRECTE;OBSOLETE;lcf:LCF-C2;R4;La réponse visible passe en langage produit (décision 4) , QUICKSTART renvoie à ACTION/HANDOFF au lieu de recopier. LCF-C2 rectifiée porte la propriété (canon dans ACTION/HANDOFF, pas de copie divergente) , mutation « LCF-C2 » rouge.;F-SK-001 la réponse visible de QUICKSTART est marquée « voir ACTION/HANDOFF » et identique au canon
 C4;T-POS-1;STRUCTURE;;-;MAINTENU;;R1;;B01 exemple canonique RUN_CARD accepté (normal) [acceptée]
 C4;T-POS-2;STRUCTURE;;-;MAINTENU;;R1;;B01 DIRECTION/START servi par le lecteur [76 lignes]
 C4;C4-01;STRUCTURE;;-;MAINTENU;;R1;;F-ACT-020 normal : ITER sans trace_locator [ITER exige trace_locator pour une RUN_CARD persistante]
@@ -191,19 +191,19 @@ C5;M-2;PROSE;FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-RM-002 le
 C5;M-3;PROSE;FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-OM-001 Gate A repasse en « renforcement seulement si nécessaire » [- LCF-03 : condition de façade non tenue — ORCHESTRATION_MAP]
 C5;M-4;PROSE;FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-QS-002 le craft redevient critère du mode DIRECTION (QUICKSTART) [- LCF-04 : condition de façade non tenue — QUICKSTART et REA]
 C5;M-5;PROSE;FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-RDR-001 ITER perd la condition de direction retrouvable (README) [- LCF-05 : condition de façade non tenue — README, ligne ITE]
-C5;M-6;PROSE;FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-SK-001 (C3) une copie du handoff perd un champ (skill) [- LCF-C1 : condition de façade non tenue — READING_MAP et sk]
-C5;LCF-01;PROSE;FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-RM-001 READING_MAP : ACTION/RUN-DIRECTION dans la première lecture de « Direction identitaire », pas dans l'optionnel
+C5;M-6;PROSE;FACADES;VIA-VALIDATEUR;OBSOLETE;lcf:LCF-C1;R4;La mutation visait la copie du handoff dans la skill, supprimée par R4. La propriété (une copie qui perd un champ rougit) reste portée par LCF-C1 rectifiée , mutation « LCF-C1 » de V12R_Patch_R4.py rouge.;F-SK-001 (C3) une copie du handoff perd un champ (skill) [- LCF-C1 : condition de façade non tenue — READING_MAP et sk]
+C5;LCF-01;PROSE;FACADES;DIRECTE;OBSOLETE;lcf:LCF-01;R4;READING_MAP renvoie à DIRECTION/CHARGE (R4). LCF-01 rectifiée : RUN-DIRECTION en première lecture de la ligne DIRECTION de DIRECTION/CHARGE, pas dans l’optionnel , mutation « LCF-01 » rouge.;F-RM-001 READING_MAP : ACTION/RUN-DIRECTION dans la première lecture de « Direction identitaire », pas dans l'optionnel
 C5;LCF-02;PROSE;FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-RM-002 READING_MAP : le non-chargement d'accessibilité ne produit pas de N/A et renvoie aux contrôles ACTION/GATE-A
 C5;LCF-03;PROSE;FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-OM-001 ORCHESTRATION_MAP : Gate A, gate du risque et paquet SYSTÈME dans le noyau, pas dans le renforcement
 C5;LCF-04;PROSE;FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-QS-002 QUICKSTART et README : le mode DIRECTION n'est pas classé par le craft , critère de START (autonome)
 C5;LCF-05;PROSE;FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-RDR-001 README : ITER exige une direction existante et retrouvable
 C5;LCF-06;PROSE;DIRECTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-041 DIRECTION, index : aucune présélection de STANDARD pour une nouvelle structure
-C5;LCF-07;PROSE;DIRECTION+FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-001 séquence causale cible → premier objet (DIRECTION 72, RUN-PRIORITY, READING_MAP, ORCHESTRATION_MAP, skill)
+C5;LCF-07;PROSE;DIRECTION+FACADES;DIRECTE;OBSOLETE;lcf:LCF-07;R4;Les façades renvoient à DIRECTION/CHARGE (R4). LCF-07 rectifiée : l’ordre cible → premier objet est vérifié dans DIRECTION/CHARGE (et garde CHG-07) , mutation « LCF-07 » rouge.;F-DIR-001 séquence causale cible → premier objet (DIRECTION 72, RUN-PRIORITY, READING_MAP, ORCHESTRATION_MAP, skill)
 C5;LCF-08;PROSE;DIRECTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-008 OWNER et SCOPE exclus de la règle d'omission (START, FAST-PATH)
 C5;LCF-09;STRUCTURE;;-;MAINTENU;;R1;;F-DIR-018 RUN-PRIORITY : premier objet avant le générique, sauf si navigation, recherche ou cartes sont l'objet de preuve
 C5;LCF-10;PROSE;FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;D-FAC-1 tables de mode (QUICKSTART, README) marquées « classement : voir DIRECTION/START »
-C5;LCF-C1;STRUCTURE;;-;MAINTENU;;R1;;F-SK-001 (C3) copies du handoff = canon ACTION/HANDOFF (canon 14 jetons , READING_MAP 14, même ordre , skill : tous présents)
-C5;LCF-C2;STRUCTURE;;-;MAINTENU;;R1;;F-SK-001 (C3) réponse visible : canon dans ACTION/HANDOFF, copies identiques (QUICKSTART, skill)
+C5;LCF-C1;STRUCTURE;;-;OBSOLETE;lcf:LCF-C1;R4;Témoin de LCF-C1 dans sa forme V1.1.1 (copie du handoff dans la skill). LCF-C1 rectifiée (copies fidèles là où elles existent) est verte , mutation « LCF-C1 » rouge.;F-SK-001 (C3) copies du handoff = canon ACTION/HANDOFF (canon 14 jetons , READING_MAP 14, même ordre , skill : tous présents)
+C5;LCF-C2;STRUCTURE;;-;OBSOLETE;lcf:LCF-C2;R4;Témoin de LCF-C2 dans sa forme V1.1.1 (format MODE — … — OWNER recopié). LCF-C2 rectifiée (langage produit défini par ACTION/HANDOFF, pas de copie de l’ancien format) est verte , mutation « LCF-C2 » rouge.;F-SK-001 (C3) réponse visible : canon dans ACTION/HANDOFF, copies identiques (QUICKSTART, skill)
 C6;T-POS-1;PROSE;DIRECTION+ACTION+SAVOIR+BIBLIOTHEQUE_CHANGELOG+FACADES+SKILL;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;témoin validate_reading_map sur la copie non modifiée → PASS [READING MAP VALIDATION PASSED — carte dérivée, propriétaires]
 C6;M-7;PROSE;FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-EX-001 DECISION-CHANGE redevient une liste de propriétés [- LCF-11 : condition de façade non tenue — exemples de la sk]
 C6;M-8;PROSE;FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-GLO-002 l'exemple CLOSED redevient une réserve sans attributs [- LCF-40 : condition de façade non tenue — GLOSSAIRE, exempl]
@@ -295,7 +295,7 @@ E1;E1-05;PROSE;ACTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-ACT-034 provena
 E1;E1-06;PROSE;BIBLIOTHEQUE_CHANGELOG;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-BIB-003 contrat de grille : familles MOBILE-* conditionnées au mobile dans le scope ou à un risque responsive
 E1;E1-07;PROSE;DIRECTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-005 légende déclarée commune à DIRECTION et SAVOIR
 E1;E1-08;STRUCTURE;;-;MAINTENU;;R1;;F-DIR-012 Boot : cardinalité des axes renvoyée à BIBLIOTHEQUE , anti-directions sans nombre fixe
-E1;E1-09;PROSE;DIRECTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-014 DAILY : la reclassification depuis LITE inclut ITER
+E1;E1-09;PROSE;DIRECTION;DIRECTE;OBSOLETE;structure:CHG-02;R4;La vue DAILY est devenue DIRECTION/CHARGE , la cellule de reclassification est inchangée. La propriété (depuis LITE, la reclassification inclut ITER) est portée par la garde CHG-02, rouge sous la mutation « reclassification sans ITER ».;F-DIR-014 DAILY : la reclassification depuis LITE inclut ITER
 E1;E1-10;PROSE;DIRECTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-015 FAST-PATH de DIRECTION : triade canonique « changée, confirmée ou abandonnée »
 E1;E1-11;PROSE;DIRECTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-025 routes de production : valeur pour l'absence intentionnelle d'asset
 E1;E1-12;PROSE;DIRECTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-DIR-026 GÉNÉRÉ-DIRIGÉ : condition bornée aux sources observées dans le scope, le délai et les droits
@@ -309,7 +309,7 @@ E1;E1-19;STRUCTURE;;-;MAINTENU;;R1;;F-EX-003 exemple SYSTÈME : NOT-VERIFIED pou
 E1;E1-20;STRUCTURE;;-;MAINTENU;;R1;;F-FLOW-001 flow.md : les branches risque critique et NOT-VERIFIED reviennent vers reclassification et owner / prochaine preuve
 E1;E1-21;PROSE;FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-GLO-001 GLOSSAIRE : RUN_CARD définie par la persistance exigée, avec renvoi à ACTION/RUN_CARD
 E1;E1-22;STRUCTURE;;-;MAINTENU;;R1;;F-MP-001 YAML : provenance.artifact_locator = artifact.locator
-E1;E1-23;PROSE;FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-QS-001 QUICKSTART : parcours qualifié par mode , COMPONENTS seulement si un composant change
+E1;E1-23;PROSE;FACADES;DIRECTE;OBSOLETE;structure:CHG-03;R4;QUICKSTART §5 renvoie à DIRECTION/CHARGE. La propriété (COMPONENTS seulement si un composant change) est portée par la garde CHG-03 sur la ligne SYSTÈME, rouge sous la mutation « COMPONENTS sans condition ».;F-QS-001 QUICKSTART : parcours qualifié par mode , COMPONENTS seulement si un composant change
 E1;E1-24;STRUCTURE;;-;MAINTENU;;R1;;F-QS-004 QUICKSTART : chemins explicites vers les références de la skill
 E1;E1-25;PROSE;SAVOIR;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-SAV-001 SAVOIR 38 : « typiquement zéro à deux , une route par question active »
 E1;E1-26;PROSE;SAVOIR;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;F-SAV-004 ATLAS 541 : SAVOIR/SYSTEM ajouté pour le composant partagé
@@ -342,14 +342,14 @@ E2;E2-23;STRUCTURE;;-;MAINTENU;;R1;;F-WF-001 actions du workflow épinglées par
 R03;R3-01;PROSE;ACTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;Q-01 droits inconnus : contrôle machine borné à la RUN_CARD DIRECTION
 R03;R3-02;PROSE;ACTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;Q-02 CLOSE-PACKAGE : les cinq paquets portent la conséquence décisionnelle (triade)
 R03;R3-03;PROSE;SAVOIR;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;Q-03 « aucune décision … » + N/A-JUSTIFIED : NOT-OBSERVED présent, non-applicabilité qualifiée ou renvoi au contrat ACTION
-R03;R3-04;STRUCTURE;;-;MAINTENU;;R1;;Q-06 QUICKSTART §5 : Gate B chargé en LITE et ITER
+R03;R3-04;STRUCTURE;;-;OBSOLETE;lcf:LCF-39;R4;QUICKSTART §5 renvoie à DIRECTION/CHARGE. LCF-39 rectifiée : renvoi présent et Gates A et B en LITE et ITER dans DIRECTION/CHARGE (et garde CHG-04) , mutation « LCF-39 » rouge.;Q-06 QUICKSTART §5 : Gate B chargé en LITE et ITER
 R03;R3-05;PROSE;ACTION+FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;Q-10 GLOSSAIRE CLOSED : réserve à sept attributs (date ou version)
 R03;R3-06;PROSE;ACTION+SKILL;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;O-1 null : champs du schéma qui l'admettent nommés , sinon omission
 R03;R3-07;STRUCTURE;;-;MAINTENU;;R1;;Q-05 QUICKSTART §9 : plus de « CHANGE: » , DECISION-CHANGE selon la triade
 R03;R3-08;PROSE;ACTION+FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;Q-01 LCF-36 dans la liste close et rouge sous mutation (P-37 inversé)
 R03;R3-09;PROSE;ACTION+FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;Q-02 LCF-37 dans la liste close et rouge sous mutation (P-38 inversé)
 R03;R3-10;PROSE;SAVOIR+FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;Q-03 LCF-38 dans la liste close et rouge sous mutation (P-40 inversé)
-R03;R3-11;PROSE;FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;Q-06 LCF-39 dans la liste close et rouge sous mutation (P-44 inversé)
+R03;R3-11;PROSE;FACADES;VIA-VALIDATEUR;OBSOLETE;lcf:LCF-39;R4;La mutation inversait P-44 (texte R.03 de QUICKSTART §5), retiré par R4. LCF-39 rectifiée reste dans la liste close , sa sensibilité est démontrée par la mutation « LCF-39 » de V12R_Patch_R4.py (rouge).;Q-06 LCF-39 dans la liste close et rouge sous mutation (P-44 inversé)
 R03;R3-12;PROSE;FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;Q-10 LCF-40 dans la liste close et rouge sous mutation (P-45 inversé)
 R03;R3-13;PROSE;ACTION+FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;O-1 LCF-41 dans la liste close et rouge sous mutation (P-46 inversé)
 R03;R3-14;PROSE;FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;Q-05 LCF-42 dans la liste close et rouge sous mutation (P-42 inversé)
@@ -361,7 +361,7 @@ R;T-1;PROSE;DIRECTION+ACTION+SAVOIR+BIBLIOTHEQUE_CHANGELOG+FACADES+SKILL;VIA-VAL
 R;R-01;STRUCTURE;;-;MAINTENU;;R1;;RET-1 DECISION-CHANGE : toute énumération avec N/A-JUSTIFIED porte aussi NOT-OBSERVED , « obtenue ou attendue » retiré
 R;R-02;PROSE;ACTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;RET-2 B1b : portée écrite = condition de check_b1b (DIRECTION acceptée, V PASS ou PASS-WITH-RESERVATION)
 R;R-03;STRUCTURE;;-;MAINTENU;;R1;;RET-3 Creative Boot des façades sans nombre fixe d'anti-directions ni de tension
-R;R-04;STRUCTURE;;-;MAINTENU;;R1;;RET-4 skill et carte d'ACTION : Gate B chargé en LITE et ITER, retiré du « non chargé »
+R;R-04;STRUCTURE;;-;OBSOLETE;lcf:LCF-25;R4;La skill porte la copie compilée de DIRECTION/CHARGE. LCF-25 rectifiée : Gate B chargé en LITE et ITER dans DIRECTION/CHARGE et dans la carte d’ACTION, absent du « non chargé » , mutation « LCF-25 » rouge.;RET-4 skill et carte d'ACTION : Gate B chargé en LITE et ITER, retiré du « non chargé »
 R;R-05;PROSE;SKILL;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;RET-5 machine_projection : valeurs d'axes et champs de profile_decision = schéma
 R;R-06;PROSE;BIBLIOTHEQUE_CHANGELOG;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;RET-6 « alignés sur leurs propriétaires » retiré , portée bornée à la liste close
 R;R-07;PROSE;DIRECTION+ACTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;R-08 table de correspondance : chaque champ attribué à VISUAL_TARGET existe dans sa table
@@ -375,7 +375,7 @@ R;R-14;PROSE;FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;GLOSS×B1 GLOSSAIR
 R;R-15;PROSE;ACTION+FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;RET-1 LCF-22 dans la liste close et rouge sous mutation (P-01 inversé)
 R;R-16;PROSE;ACTION+FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;RET-2 LCF-23 dans la liste close et rouge sous mutation (P-04 inversé)
 R;R-17;PROSE;FACADES;VIA-VALIDATEUR;OBSOLETE;lcf:LCF-24;R3;Le cas inverse P-06 (R.01), dont le texte d’arrivée a été réécrit par R3-V10 (vocabulaire MODAL/PARTI). La propriété (aucun nombre fixe dans le résumé du boot) reste portée par LCF-24, verte , sa sensibilité est démontrée par la mutation de migration « R-17 → LCF-24 » de V12R_Patch_R3.py (rouge).;RET-3 LCF-24 dans la liste close et rouge sous mutation (P-06 inversé)
-R;R-18;PROSE;FACADES+SKILL;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;RET-4 LCF-25 dans la liste close et rouge sous mutation (P-08 inversé)
+R;R-18;PROSE;FACADES+SKILL;VIA-VALIDATEUR;OBSOLETE;lcf:LCF-25;R4;La mutation inversait P-08 (texte R.01 de la table de charge de la skill), remplacée par la copie compilée. LCF-25 rectifiée reste dans la liste close , mutation « LCF-25 » de V12R_Patch_R4.py rouge.;RET-4 LCF-25 dans la liste close et rouge sous mutation (P-08 inversé)
 R;R-19;PROSE;FACADES+SKILL;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;RET-5 LCF-26 dans la liste close et rouge sous mutation (P-11 inversé)
 R;R-20;PROSE;BIBLIOTHEQUE_CHANGELOG+FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;RET-6 LCF-27 dans la liste close et rouge sous mutation (P-13 inversé)
 R;R-21;PROSE;ACTION+FACADES;VIA-VALIDATEUR;OBSOLETE;lcf:LCF-28;R3;Le cas inverse P-15 (R.01), dont la ligne d’arrivée a été réécrite par R3-V6 (champ « Modal / parti »). La propriété (champs VISUAL_TARGET d’ACTION présents dans la table canonique) reste portée par LCF-28, verte , sa sensibilité est démontrée par la mutation de migration « R-21 → LCF-28 » de V12R_Patch_R3.py (rouge).;R-08 LCF-28 dans la liste close et rouge sous mutation (P-15 inversé)

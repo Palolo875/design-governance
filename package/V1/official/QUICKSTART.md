@@ -55,7 +55,7 @@ Avant toute route détaillée, gardez en tête les cinq absolus de `DIRECTION` :
 | 30 secondes | Décision, risque, preuve, capacité et ligne de run. | `DIRECTION/START`. |
 | 5 minutes | Classification, sources minimales, premier objet, observation et suite. | `DIRECTION`, `ACTION` et la route du mode. |
 | Un agent à activer | Objectif, périmètre, autonomie, confirmation et format de sortie. | Skill pratique, `RUN_CARD` et références conditionnelles. |
-| Une direction visuelle ouverte | Creative Boot : promesse, objet, geste, modal et parti, tension, signature, cibles CFT, fabrication et premier objet. | `DIRECTION/CREATIVE-BOOT`, `DIRECTION/VISUAL_TARGET`, `DIRECTION/FIRST-OBJECT`, `DIRECTION/DOUBLE-LOOP`, `SAVOIR/CRAFT/CFT-00`, `ACTION/RUN-DIRECTION`. |
+| Une direction visuelle ouverte | Creative Boot : promesse, objet, geste, modal et parti, tension, signature, cibles CFT, fabrication et premier objet. | `DIRECTION/CHARGE` (mode `DIRECTION`). |
 | Un run à persister | Scope, artefact, preuve, limite, owner et projection validable. | `ACTION`, schéma `RUN_CARD` et validateur. |
 
 ## 2. Le chemin en trente secondes
@@ -85,16 +85,7 @@ Il comporte deux boucles liées :
 | **Boucle 1 — création** | Comprendre le produit et le public, classer le risque, formuler une direction située, choisir une structure, composer et construire un premier objet complet. | Un artefact réel, dirigé, spécifique, crédible et suffisamment résolu pour être observé. |
 | **Boucle 2 — amélioration** | Observer dans le scope déclaré, interpréter avec une limite, isoler le défaut dominant, modifier réellement, réobserver et décider de la suite. | Correction visible, direction rouverte, réserve explicite, décision ou prochaine preuve persistée. |
 
-La seconde boucle n’est pas obligatoirement une suite de petits polish. Après observation, choisissez la suite qui correspond au diagnostic :
-
-| Diagnostic | Suite appropriée |
-|---|---|
-| Défaut local et direction intacte | Corriger l’artefact puis réobserver. |
-| Défaut de craft ou de résolution | Résoudre la relation, la matière, le contenu, la typographie, l’action ou les états concernés. |
-| Direction faible, interchangeable ou contradictoire | Rouvrir la direction, reformuler ou requalifier la cible avant de continuer le polish. |
-| Risque ou périmètre changé | Reclassifier avec `DIRECTION/START`. |
-| Preuve insuffisante | Déclarer la limite et produire la prochaine preuve proportionnée. |
-| Décision suffisamment établie | Décider et persister la trace ; ne pas prolonger le polish sans changement attendu. |
+Après observation, choisissez la suite selon la table de diagnostic de `DIRECTION/DOUBLE-LOOP` (boucle d’édition).
 
 Une rationale seule ne constitue pas une correction. Lorsque la perception, l’usage, l’accessibilité ou la robustesse font partie de la décision, la boucle doit normalement conduire à une modification réelle de l’artefact, puis à une nouvelle observation. Si l’observation invalide l’hypothèse, le JTBD ou la cible, consignez dans la trace existante l’observation, son impact sur l’hypothèse, la décision touchée, le recadrage et la prochaine preuve ; cette note ne crée ni statut, ni gate, ni troisième boucle.
 
@@ -126,13 +117,15 @@ Le mode strict complète la validation structurelle ; il ne transforme pas une p
 4. **`LITE`** — un delta local, peu risqué, dans une structure connue ;
 5. **`STANDARD`** — une page ou un flow nouveau sans charge identitaire autonome ni blast radius partagé.
 
-| Situation | Mode probable | Première lecture |
-|---|---|---|
-| Correction locale, contraste, contenu, bug ou petit ajustement | `LITE` ou `ITER` | `DIRECTION/START`, puis `ACTION/RUN-LITE` ou `ACTION/RUN-ITER`. |
-| Nouvelle page ou nouveau flow sans identité autonome ; craft exigeant : Gate C ciblé, pas un critère de mode | `STANDARD` | `DIRECTION/START`, `ACTION/RUN-STANDARD`, puis `BIBLIOTHEQUE/SELECT` si la structure est ouverte. |
-| Brief flou ou risque impossible à classer | Clarification ou `EXTERNAL-START` avant le mode | `DIRECTION/START`, puis conservation de l’incertitude et reclassification. |
-| Identité, premier contact ou direction visuelle autonome | `DIRECTION` | `DIRECTION/START`, `DIRECTION/VISUAL_TARGET`, `SAVOIR/CRAFT/CFT-00`, puis `ACTION/RUN-DIRECTION`. |
-| Token, composant, pattern, convention ou format partagé | `SYSTÈME` | `DIRECTION/START`, `ACTION/RUN-SYSTEM`, `BIBLIOTHEQUE/COMPONENTS` et `CHANGELOG` si nécessaire. |
+| Situation | Mode probable |
+|---|---|
+| Correction locale, contraste, contenu, bug ou petit ajustement | `LITE` ou `ITER` |
+| Nouvelle page ou nouveau flow sans identité autonome ; craft exigeant : Gate C ciblé, pas un critère de mode | `STANDARD` |
+| Brief flou ou risque impossible à classer | Clarification ou `EXTERNAL-START` avant le mode |
+| Identité, premier contact ou direction visuelle autonome | `DIRECTION` |
+| Token, composant, pattern, convention ou format partagé | `SYSTÈME` |
+
+Première lecture de chaque mode : `DIRECTION/CHARGE`.
 
 Classement : voir `DIRECTION/START`.
 
@@ -140,13 +133,7 @@ Le mode est une hypothèse de routage, jamais un moyen de réduire la protection
 
 ## 5. Charger seulement ce qui peut changer la décision
 
-| Mode | Charger d’abord | Ajouter uniquement si cela change la décision |
-|---|---|---|
-| `LITE` | `DIRECTION/START`, `ACTION/RUN-LITE`, `ACTION/FAST-PATH`, `ACTION/GATE-A` applicable et `ACTION/GATE-B` du risque dominant. | `SAVOIR`, `BIBLIOTHEQUE` ou une ancre si le jugement ou la structure changent réellement. |
-| `ITER` | `DIRECTION/START`, `ACTION/RUN-ITER`, direction existante, `ACTION/GATE-A` applicable et `ACTION/GATE-B` du risque touché. | `SAVOIR` pour l’intégrité, `DIRECTION/VISUAL_TARGET` ou la couche système si la direction ou la portée changent. |
-| `STANDARD` | `DIRECTION/START`, `ACTION/RUN-STANDARD`, `BIBLIOTHEQUE/SELECT` si la structure est ouverte. | `SAVOIR`, atelier ou `CFT-00` si le craft ou la qualité perceptuelle deviennent la décision. |
-| `DIRECTION` | `DIRECTION/START`, `DIRECTION/VISUAL_TARGET`, `DIRECTION/FIRST-OBJECT`, `DIRECTION/DOUBLE-LOOP`, `ACTION/RUN-DIRECTION`, `SAVOIR/CRAFT/CFT-00` et les gates applicables. | Atlas, profil, référence ou atelier si cette source peut modifier la direction. |
-| `SYSTÈME` | `DIRECTION/START`, `ACTION/RUN-SYSTEM`, `BIBLIOTHEQUE/COMPONENTS` si un composant change. | `SAVOIR` pour le jugement du système, l’atelier ou `CHANGELOG` si l’expression ou la règle partagée est en jeu. |
+La liste de chargement par mode est unique : `DIRECTION/CHARGE`. La skill en porte une copie générée.
 
 « Non chargé par défaut » signifie qu’un module n’est pas lu sans raison ; ce n’est jamais une interdiction d’activer une source nécessaire. La charge documentaire ne diminue ni le mode, ni le niveau de preuve, ni la protection d’un risque.
 
@@ -199,11 +186,7 @@ CONSTRAINTS — contraintes de produit, technique, contenu, droits et délai.
 OUTPUT — artefact, trace, preuve, limite et prochaine action attendus.
 ```
 
-L’agent localise le package réellement fourni, classe la demande avec `DIRECTION/START`, charge uniquement les propriétaires utiles, produit l’artefact, vérifie le risque dominant et restitue par défaut la réponse visible (voir `ACTION/HANDOFF`) :
-
-```text
-MODE — DECISION — CHANGE — PROOF — LIMIT — NEXT-ACTION — OWNER
-```
+L’agent localise le package réellement fourni, classe la demande avec `DIRECTION/START`, charge uniquement les propriétaires utiles, produit l’artefact, vérifie le risque dominant et restitue par défaut la réponse visible en langage produit : ce qui a été fait, pourquoi, ce qui manque pour la vraie version, la suite (voir `ACTION/HANDOFF`).
 
 Il demande confirmation avant toute action externe, irréversible, publique, destructive, financière ou persistante hors du périmètre autorisé. Il ne choisit pas un mode plus léger parce qu’une capacité manque. Il déclare la capacité indisponible, requalifie la protection nécessaire ou conserve explicitement la limite.
 
@@ -271,14 +254,7 @@ Inspectez l’artefact ou le comportement réel dans le scope déclaré. Une mé
 
 Une capture prouve un rendu dans son scope ; elle ne prouve pas à elle seule une tâche utilisateur, un lecteur d’écran, une sécurité, une performance ou une intégration réelle. Une mesure d’accessibilité bornée ne certifie pas toute l’expérience. Une revue experte de craft ne remplace pas un test d’usage.
 
-Pour une décision créative, notez brièvement :
-
-1. si la direction est visible dans l’artefact réel ;
-2. quel détail ou quelle relation porte la spécificité ;
-3. quel est le défaut dominant ;
-4. ce qui a réellement changé ;
-5. si la correction a affaibli l’usage, l’accessibilité, la robustesse ou la direction ;
-6. si la direction doit être corrigée, rouverte ou maintenue.
+Pour une décision créative, appliquez les six questions de revue de `DIRECTION/DOUBLE-LOOP` (boucle d’édition).
 
 Le polish est la résolution cohérente de la structure, du contenu, de la typographie, de la matière, de l’action et des états. Ce n’est pas une couche automatique de gradients, d’ombres, de flou ou de gros rayons.
 

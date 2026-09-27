@@ -25,6 +25,23 @@ STATE: CLOSED
 
 Ne pas charger l’atlas ou une analyse de style si aucune responsabilité de design ne change.
 
+## DIRECTION — fabrication depuis un brief flou
+
+**Demande :** « Il me faut un site pour ma boulangerie. » Rien d’autre.
+
+**Prise de brief, en un seul échange :** l’agent demande les contenus réels (produits, prix, horaires, adresse), le logo ou les couleurs s’ils existent, et deux ou trois photos du comptoir ; la destination est une vraie mise en ligne. Faute de réponse, il construit avec des hypothèses nommées.
+
+```text
+THÈSE: le pain du jour se choisit d’un coup d’œil, avant d’entrer
+OBJET DE PREUVE: la vitrine du jour, composant codé (produit, prix, heure de sortie du four)
+MODAL: photo pleine largeur, titre centré, trois cartes « nos valeurs »
+PARTI: s’écarter pour la première scène, où la vitrine du jour remplace la photo ; garder la navigation attendue
+FABRICATION: typographie et couleur au plafond (polices libres, palette tirée des photos) ; photos du client moyennes, un seul traitement cohérent ; aucune illustration dessinée
+DÉFAUT DOMINANT: après capture, les prix se lisent mal sur mobile ; taille et contraste corrigés, seconde capture comparée
+```
+
+**Réponse visible :** « J’ai construit une page d’accueil organisée autour de la vitrine du jour. Pourquoi : on choisit son pain avant d’entrer, la page le permet en un coup d’œil. Ce qui manque pour la vraie version : vos prix, vos horaires et une photo du comptoir en lumière du jour ; les produits affichés sont des exemples marqués comme tels. La suite : envoyez ces éléments, je les intègre et je vérifie le mobile. »
+
 ## DIRECTION — première scène identitaire
 
 **Demande :** créer une hero mémorable pour un service de cartographie sonore, sans page SaaS générique.

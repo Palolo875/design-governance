@@ -1,6 +1,6 @@
 # Plan V1.2 — Refonte : fabrication, structure, trace et preuve
 
-**Date :** 2026-09-27 · **Owner :** Junior (Kamel) · **Statut :** proposition ; **rien n'est appliqué** avant validation des décisions du §8.
+**Date :** 2026-09-27 · **Owner :** Junior (Kamel) · **Statut :** en cours. R1 à R4 appliqués (27-09-2026, `audit/reports/V12R_01` à `V12R_04`) ; prochaine étape : P1. Chemin prescrit 13 537 mots (cible ≤ 14 000 atteinte dès R4) ; 24/25 outils de fabrication sur le chemin.
 **Base :** B05, candidate V1.2 (lots 1 et 2 appliqués).
 **Sources du plan :**
 - lectures `V12_05` à `V12_10` et synthèse `V12_11` (registre D-01 à D-18) ;

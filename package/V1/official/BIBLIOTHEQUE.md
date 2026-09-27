@@ -63,7 +63,9 @@ Le chemin minimal décrit une hypothèse de proportion. Il ne prouve ni réducti
 `SEED`, `PILOT`, `ADOPTED`, `DEPRECATED` et `ABANDONED` sont des statuts de cycle de vie `CHANGELOG`, jamais des modes, niveaux de structure, états, issues ou verdicts `ACTION`. `OWNER` désigne le responsable de la décision et de sa prochaine preuve ; `NEXT-OWNER` désigne le destinataire de l’action suivante ; l’owner de maintenance d’une route partagée reste distinct et se conserve dans le contrat d’évolution.
 
 
+<!-- noyau:début STRUCT-OU -->
 > L’interface ne commence ni avec une « landing premium », ni avec une grille de cartes, ni avec une image inspirante. Elle déclare d’abord **où elle vit**, **comment le regard circule**, **quelle preuve devient tangible** et **comment la personne agit**.
+<!-- noyau:fin STRUCT-OU -->
 
 ---
 
@@ -81,12 +83,15 @@ Une structure peut porter une scène naturelle, éditoriale, technique, tactile 
 
 ### Lecture expressive de la structure
 
+<!-- noyau:début STRUCT-EXPRESSION -->
 Une structure ne choisit pas seule le goût, mais elle ouvre ou ferme des possibilités de présence. Lorsqu’une décision esthétique est active, décris aussi le caractère perceptuel que la structure doit favoriser : **calme ou tension, intimité ou monumentalité, précision ou spontanéité, continuité ou rupture, collection ou instrument, retenue ou intensité**. Ces termes ne sont pas des styles à appliquer ; ils doivent être traduits par des relations observables de masse, de rythme, de matière, de typographie, de lumière, de contenu ou de comportement.
+<!-- noyau:fin STRUCT-EXPRESSION -->
 
 Une sélection structurelle est créativement utile lorsqu’elle améliore au moins une relation entre le produit et le regard : foyer, cadence, révélation, profondeur, voisinage, contraste, mémoire, geste ou preuve. Une structure peut donc être retenue pour sa contribution perceptuelle, à condition de nommer la décision, la contre-indication et la condition de sortie. La beauté ne justifie pas une structure qui masque la tâche, mais la tâche n’épuise pas toute la valeur d’une structure lorsque la présence, la voix ou l’expérience du regard sont elles-mêmes des décisions du run.
 
 ### BIBLIOTHEQUE/TENSION — diverger avant de sélectionner
 
+<!-- noyau:début STRUCT-TENSION -->
 Lorsqu’une décision structurelle ou créative est ouverte, déclare un ou deux axes de tension observables avant de choisir une route. Ces axes ne sont ni des styles, ni des scores, ni des verdicts ; ils décrivent la relation que la composition doit rendre perceptible.
 
 ```text
@@ -98,6 +103,7 @@ FIELD-MATERIAL: plan ↔ image ↔ typographie
 NAVIGATION: guidée ↔ exploratoire
 ACTION: centrale ↔ contextuelle
 ```
+<!-- noyau:fin STRUCT-TENSION -->
 
 La route devient une conséquence de cette tension, de la tâche, du contenu réel, du mécanisme de preuve et du risque ; elle ne constitue pas la direction créative à elle seule. Une tension est retenue seulement si son pôle choisi change une décision d’espace, de hiérarchie, de comportement, de preuve ou de mémoire et peut être observé dans le premier objet. Si aucun axe ne peut modifier la prochaine décision, conserve l’héritage ou justifie `N/A-JUSTIFIED`.
 
@@ -244,6 +250,7 @@ Une dérivation modifie d’abord un seul levier principal, puis vérifie la res
 
 ### Signaux de convergence structurelle
 
+<!-- noyau:début STRUCT-SIGNAUX -->
 Les compositions suivantes sont des signaux d’enquête, pas des interdits stylistiques :
 
 | Signal | Question de reprise |
@@ -256,6 +263,7 @@ Les compositions suivantes sont des signaux d’enquête, pas des interdits styl
 | Grille répétitive sans différence de priorité | Quelle rupture doit changer la lecture, la comparaison ou l’action ? |
 
 Un signal de convergence déclenche une reformulation de la tension, de la signature ou de l’objet ; il ne justifie pas l’ajout mécanique d’une nouvelle scène. La diversité crédible vient de la relation entre contenu réel, mécanisme de preuve, geste, contrainte et structure, et non d’un changement de nom ou de peau.
+<!-- noyau:fin STRUCT-SIGNAUX -->
 
 ---
 

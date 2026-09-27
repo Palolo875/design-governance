@@ -140,7 +140,7 @@ def resolve(locator: str, routes: dict[str, tuple[str, list[str]]] | None = None
     raise RouteError(f"locator inconnu : {locator}")
 
 
-CONCEPT_MARKER = re.compile(r"^\s*<!-- concept:[A-Z0-9\-]+ -->\s*$")
+CONCEPT_MARKER = re.compile(r"^\s*<!-- (?:concept:[A-Z0-9\-]+|noyau:(?:début|fin) [A-Z0-9\-]+) -->\s*$")
 
 
 def extract(lines: list[str], index: int) -> list[str]:
