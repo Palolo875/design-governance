@@ -343,7 +343,7 @@ R11 (tri des mineurs) peut commencer en parallèle dès R2, pour les mineurs que
 
 Les décisions 1, 2, 4 et 7 conditionnent R2 à R4. Les autres peuvent attendre leur lot.
 
-**Décisions prises :** 1, 2, 4 et 7 (`V12R_00`) ; 5 (a) et 11 (a), avec D-20 (exemple marqué) et D-22 (test de trame sans coût) (`V12R_06`, 27-09-2026). **En attente :** 3, 6, 8, 9, 10.
+**Décisions prises :** 1, 2, 4 et 7 (`V12R_00`) ; 5 (a) et 11 (a), avec D-20 (exemple marqué) et D-22 (test de trame sans coût) (`V12R_06`, 27-09-2026). **Prises le 27-09-2026 (`V12R_14`) :** 3 (a) V1.2.0, schéma inchangé, R9 reporté ; 6 (a) graduée ; 8 (a) ; 9 (c) ; 10 (a) ; atlas intégré en R8b (révision de G1) ; R10 par paliers ; R11 ciblé ; ordre « le rendu d'abord ». **Aucune décision en attente.**
 
 ## 9. Lecture
 

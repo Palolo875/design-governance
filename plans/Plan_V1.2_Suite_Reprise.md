@@ -69,13 +69,19 @@ git checkout claude/init-repo-claude-md-gm6njm
    - commit (lignes d'attribution), push sur les deux branches.
 9. **Critère d'arrêt commun** : si un lot demande plus de rectifications de harnais que de changements de texte, on s'arrête, on déclare et on revient à l'owner.
 
-## 4. Prochaines unités (ordre recommandé au 27-09-2026, après R6a)
+## 4. Prochaines unités (ordre décidé le 27-09-2026 : le rendu d'abord)
 
-1. **R8b — Matériaux et atlas** (M, le plus direct sur le rendu) : carte des moyens consolidée ; atlas d'ancres annotées v1 en référence de la skill, chargée seulement si la décision visuelle est ouverte ; arrêt si l'atlas pousse vers un style unique.
-2. **R11 — Réserves et mineurs** (M) : tri un par un (voir plus bas).
-3. **R6b — Façades** (M) : voir plus bas.
-4. **Restes des lots R5** : champs de trace de SAVOIR vers ACTION (lecture dédiée) ; annexe de maintenance de BIBLIOTHEQUE, `PRINT_FIELD` relié aux marqueurs ; doublons inter-fichiers (alternative située, `ANCHOR-GENERATED`).
-5. **Décisions à obtenir de l'owner** avant R7, R9 et R10 : 3, 6, 8, 9, 10 (tableau plus bas).
+**Décisions :** `audit/reports/V12R_14_DECISIONS_ARBITRAGES.md` (6 graduée ; schéma inchangé → V1.2.0, R9 reporté ; atlas intégré en R8b ; juges humains + modèles ; lois inchangées ; catalogue après publication ; R10 par paliers ; R11 ciblé). **Détail de mise en œuvre :** le plan consolidé (`plans/propositions/Plan_consolide_V1.2_2026-09-27.md`) sert de guide pour chaque lot (sections citées) ; il n'est pas un second plan actif.
+
+| Ordre | Unité | Guide | Points clés |
+|---|---|---|---|
+| 1 | **R8b** — carte des moyens consolidée, puis atlas conditionnel | consolidé §4 | Partir de `carte_moyens_v0` (déjà alignée sur D-20) et des 18 entrées d'`atlas_references_v0` ; retrouver les pièces exactes et leurs sources, sinon « matériau non vérifié hors atlas » ; leçon, relation produit/contenu, décision transférable, contre-indication, limite ; deux colonnes visuel/fond ; « principes observés » = observations, jamais lois ; fichier dans `skills/.../references/`, chargé seulement si la décision visuelle est ouverte ; manifeste et distributions vérifiés |
+| 2 | **R7** — ancre graduée ; lois et catalogue inchangés | consolidé §8 | Un propriétaire canonique de la règle d'ancre ; DIRECTION, ACTION, SAVOIR et façades alignés ; doublons `ANCHOR-GENERATED` traités ici |
+| 3 | **R11 ciblé** | consolidé §5 | Q04, Q07, Q08, Q09 (textes) ; Q11 et Q12 maintenus ; extraire `audit/logs/DG_AUDIT_001_Journaux_R02.zip` et `…_Epreuves_13-02_traces.zip` pour Q13 et R16 à R32 ; cas négatifs prioritaires ; reliquat écrit |
+| 4 | **R6b** — une entrée humaine | consolidé §6 | Fusion des README du package (rectification déclarée de `validate_design_governance.py` et des LCF) ; QUICKSTART à activation unique, sans démarrages concurrents (« 90 secondes », « trente secondes », « cinq minutes ») ; READING_MAP au chemin et aux locators, avec l'orientation utile d'ORCHESTRATION_MAP |
+| 5 | **Restes R5** | consolidé §7 | SAVOIR : copie du handoff (l.≈189) → renvoi ACTION ; BIBLIOTHEQUE : maintenance séparée, renvoi de `PRINT_FIELD` aux marqueurs ; doublons d'alternative située |
+| 6 | **R10 par paliers** (quand l'owner lève la consigne « pas de run ») | consolidé §10 | Palier 1 : 18 productions ; conditions figées avant production ; aveugle ; juges selon la décision 9 |
+| 7 | **R11 final**, puis **R12** | consolidé §5, §11 | CI hébergée sur la candidate distribuable ; réserves décidées ; V1.2.0 ; R9 déclaré reporté |
 
 ## 4 bis. Détail des lots (périmètres d'origine et état)
 
@@ -155,7 +161,7 @@ Chaque lot : **périmètre**, **gardes à ajouter**, **réussite**, **arrêt**.
   - placeholders dans les champs libres.
 - **Sources :** `audit/reports/Audit_Cloture_Finale_DG-AUDIT-001.md` §3.
 
-### Lots qui attendent une décision de l'owner
+### Lots qui attendaient une décision de l'owner (toutes prises le 27-09-2026, voir `V12R_14`)
 
 | Lot | Décision | Recommandation |
 |---|---|---|
