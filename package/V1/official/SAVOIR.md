@@ -682,7 +682,7 @@ Les termes ci-dessous ne sont pas interdits comme citations, hypothèses ou lang
 | « premium », « luxe », « haut de gamme » | proportion, matière, rareté, prix, public, tâche et signal observé | qualité universelle ou statut automatique |
 | « moderne », « contemporain », « actuel » | contraste avec une convention datée, public, usage ou contrainte réelle | nouveauté ou pertinence par défaut |
 | « beau », « élégant », « propre » | relation de forme, hiérarchie, rythme, lisibilité ou défaut retiré | direction ou efficacité |
-| « original », « créatif », « audacieux » | position choisie, anti-direction, risque assumé et différence perceptible | divergence simplement décorative |
+| « original », « créatif », « audacieux » | position choisie, parti (écart au modal), risque assumé et différence perceptible | divergence simplement décorative |
 | « intuitif », « simple », « fluide », « seamless » | tâche, étape, état, effort, erreur et preuve d’usage | utilisabilité sans observation |
 | « cohérent », « harmonieux », « aligné » | relation précise entre éléments, règle de système et exception | approbation globale non vérifiable |
 | « immersif », « impactant », « émotionnel » | effet attendu, contexte, durée, risque de surcharge et preuve située | effet garanti sur tout public |
@@ -829,8 +829,10 @@ Le sourcing de `DIRECTION` sépare trois rôles : **ancrage de direction** — p
 
 [VEILLE] Les listes de produits contemporains, tendances, registres culturels et snapshots ne sont pas neutres. Chaque élément mobilisé dans un run porte source, date, portée et limite dans sa trace locale.
 
+<!-- concept:ANT-01 -->
 [VEILLE 2026-09] **Marqueurs de vague**, pour nommer `MODAL` (`DIRECTION/CREATIVE-BOOT`), jamais pour interdire : un marqueur gardé par décision reste valide. Vague 1 : violet, police Inter, halos et gradient décoratif, hero SaaS à cartes répétées. Vague 2 : fond beige ou crème, brun, serif de caractère ou serif italique, orange rouille, bandeau défilant, illustration peinte, tramage. Vague 3 : dithering, logos pixel, ASCII, hachures de plan, gravures, bleu Klein, libellés mono en capitales, repères de recadrage, paysage peint en fond. Source : épreuve de référence interne V1.2 (26-09-2026) et revue de références de designers (27-09-2026), 6 rendus sur 6 sur fond crème et brun, avec ou sans système. À revoir avant 2027-03.
 
+<!-- concept:MOY-01 -->
 [VEILLE 2026-09] **Carte des moyens par couche**, des sources et jamais des styles, droits vérifiés à chaque usage. Typographie : polices de la marque, Google Fonts, Fontshare. Icônes : une seule famille (par exemple Lucide, Phosphor). Composants : design system fourni, sinon bibliothèque éprouvée (par exemple shadcn, Radix). Photographie : client, banques sous licence (Wikimedia Commons, Unsplash). Illustration et 3D : commande, packs sous licence, génération dirigée avec références (`GÉNÉRÉ-DIRIGÉ`). Fichiers et marque : Figma ou kit de marque par connecteur. En HTML seul, les assets figuratifs et le contenu réel restent hors plafond (`FABRICATION`). À revoir avant 2027-03.
 
 Une tendance est une hypothèse de direction. Avant de l’utiliser, vérifie qu’elle sert le JTBD, améliore la compréhension, reste accessible et performante et survit lorsque son nom marketing disparaît.

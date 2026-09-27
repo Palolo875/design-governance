@@ -320,7 +320,7 @@ Dans la projection JSON contrôlable, les noms composés sont sérialisés en `s
 | NEXT-PROOF | clôture | `next_proof` | — |
 | NEXT-ACTION | clôture | DIRECTION : `creative_close.next_polish_action` ; sinon `next_proof` lorsque l’action suivante est une preuve | **hors projection : trace** |
 | EXIT-CONDITION | clôture | `closure.reservations[].exit_condition` lorsqu’une réserve existe | **hors projection : trace** |
-| VISUAL_TARGET : thèse, anti-direction | avant build | `direction.thesis`, `.anti_direction` | — |
+| VISUAL_TARGET : thèse, modal / parti | avant build | `direction.thesis`, `.anti_direction` (le modal nommé et le parti) | — |
 | Direction qualifiée : premier objet (`DIRECTION/FIRST-OBJECT`), contrainte (`DIRECTION/VISUAL_TARGET`, « Qualifier la direction ») ; périmètre (`SCOPE`) | avant build | `direction.first_object`, `.constraint`, `.scope` | — |
 | VISUAL_TARGET : ancre | avant build | `anchors[]` (dont `type` et `date`) | — |
 | VISUAL_TARGET : objet de preuve | avant build → après observation | `next_proof` avant, `proof.observed` après | — |

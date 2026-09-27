@@ -33,7 +33,7 @@ La sortie de DIRECTION vers ACTION réutilise `ACTION/HANDOFF` ; la phase de cha
 | Contrat | Question | Sortie attendue |
 |---|---|---|
 | `ROUTE` | Quelle décision, quel risque et quel mode ? | Mode, risque, capacité et sources à charger. |
-| `TARGET` | Quelle position et quel objet faut-il construire ? | Thèse, silhouette, hiérarchie, matière, contenu, preuve, ancre et anti-direction. |
+| `TARGET` | Quelle position et quel objet faut-il construire ? | Thèse, silhouette, hiérarchie, matière, contenu, preuve, ancre, modal et parti. |
 | `HANDOFF` | Que doit exécuter et vérifier ACTION ? | **Avant build** : artefact, scope, preuve attendue, limite, prochaine action et owner. **Après observation** : défaut dominant, correction ou retour recommandé. |
 
 Ces contrats structurent le cadrage sans créer de route, de gate, de statut ou de `RUN_CARD` supplémentaires. `START` possède la classification ; `ACTION` possède la preuve et la clôture ; `SAVOIR` possède le jugement ; `BIBLIOTHEQUE` possède les structures.
@@ -85,7 +85,7 @@ Ce défaut élève l’ambition de la première proposition ; il ne crée ni sco
 
 **Standard créatif.** Lorsque la qualité perceptuelle est une décision du run, le cadrage active aussi la responsabilité de `SAVOIR/CRAFT/CFT-00`. La première proposition vise une présence identifiable, un point de vue, une composition maîtrisée, une culture visuelle transformée, une spécificité liée au produit, une expression cohérente, une désirabilité située et une résolution proportionnée à l’ambition. Ces dimensions sont jugées par des observations et des décisions de craft ; elles ne deviennent ni score, ni statut, ni verdict automatique. Une surface peut être conforme, utilisable et techniquement robuste tout en restant trop générique ou insuffisamment résolue : cet écart doit déclencher une correction de direction ou de polish, pas être compensé par la preuve d’un autre axe. L’usage, l’accessibilité, la robustesse et la faisabilité restent des protections actives ; elles ne doivent pas être sacrifiées au rendu, et le rendu ne doit pas être utilisé pour masquer leur absence de preuve. Pour un correctif strictement local, `LITE` ou `ITER` conservent la structure existante sauf si la décision visuelle elle-même est ouverte.
 
-`CREATIVE-BOOT`, `VISUAL_TARGET` et `DIRECTION-ATELIER` ne demandent pas trois descriptions concurrentes. Lorsque la même information apparaît sous plusieurs noms, conserve-la dans la vue qui la rend décisionnelle et renvoie les autres vues à cette sortie : la promesse devient la thèse si elle est transformée en position, l’anti-direction devient une exclusion si elle gouverne la scène, et l’ancre devient une preuve de calibration si elle modifie la composition. Les champs non transformés ne sont pas recopiés.
+`CREATIVE-BOOT`, `VISUAL_TARGET` et `DIRECTION-ATELIER` ne demandent pas trois descriptions concurrentes. Lorsque la même information apparaît sous plusieurs noms, conserve-la dans la vue qui la rend décisionnelle et renvoie les autres vues à cette sortie : la promesse devient la thèse si elle est transformée en position, le parti devient une exclusion s’il gouverne la scène, et l’ancre devient une preuve de calibration si elle modifie la composition. Les champs non transformés ne sont pas recopiés.
 
 **Statut de gouvernance.** Une source, un claim daté, un retour externe ou un asset reste local au run tant qu’il ne modifie pas durablement une règle partagée. Seule cette promotion justifie une décision dans `CHANGELOG.md`.
 
@@ -171,7 +171,7 @@ DECISION: décision que le premier rendu doit permettre de prendre
 PROMISE: promesse à rendre perceptible
 PROOF-OBJECT: objet, état, donnée ou relation qui rend la promesse crédible
 GESTURE: premier geste ou action attendu
-MODAL: ce que n’importe quelle IA produirait ici (structure, palette, typo, assets)
+MODAL: ce que n’importe quelle IA produirait ici (structure, palette, typo, assets) ; se nomme avec les marqueurs de vague datés de `SAVOIR/TOOLS`
 PARTI: garder ou s’écarter — où et pourquoi au regard de la thèse ; projeté dans `direction.anti_direction`
 STRUCTURAL-TENSION: axe(s) de tension selon BIBLIOTHEQUE (un ou deux, `BIBLIOTHEQUE/TENSION`)
 STRUCTURAL-SIGNATURE: relation que cette structure rend possible au-delà de l’héritage
@@ -290,7 +290,7 @@ Après `DIRECTION/START`, avant le premier code ou le premier rendu d’une surf
 RUN-PRIORITY
 1. TRUTH — retirer, sourcer ou marquer tout claim, chiffre, logo, témoignage,
    disponibilité, intégration, personne, action ou résultat non observé.
-2. DIRECTION — retenir support, tension, scène, typographie et anti-direction
+2. DIRECTION — retenir support, tension, scène, typographie, modal et parti
    parce qu’ils servent ce brief ; « premium », « beau » ou « moderne » ne suffisent pas.
 3. FIRST-OBJECT — matérialiser la cible : promesse → objet de preuve → geste,
    avant les éléments génériques ou décoratifs (bénéfices, navigation, cartes,
@@ -302,7 +302,7 @@ NO-GO — faux réalisme, dashboard décoratif, cartes avant mécanisme, ou reto
         automatique au dernier style, asset ou rendu disponible.
 ```
 
-**Prise de brief.** Au plus trois demandes, en un seul échange, par gain de plafond : contenu réel (textes, chiffres, preuves, noms), marque, asset principal ou route autorisée, destination si elle n’est pas évidente. Brief riche : aucune. Humain absent : hypothèses nommées, plafond déclaré, demandes listées à la livraison. Le rendu est construit dans tous les cas. La personne reçoit directement une proposition principale ; cette vue reste interne. Si une ligne ne peut modifier ni artefact, claim, preuve, limite ou décision, elle est omise ; `N/A-JUSTIFIED` reste réservé à une non-applicabilité réelle et justifiée selon ACTION.
+**Prise de brief.** Au plus trois demandes, en un seul échange, par gain de plafond : contenu réel (textes, chiffres, preuves, noms), marque, asset principal ou route autorisée, destination si elle est incertaine. Brief riche : aucune. Humain absent : hypothèses nommées, plafond déclaré, demandes listées à la livraison. Le rendu est construit dans tous les cas. La personne reçoit directement une proposition principale ; cette vue reste interne. Si une ligne ne peut modifier ni artefact, claim, preuve, limite ou décision, elle est omise ; `N/A-JUSTIFIED` reste réservé à une non-applicabilité réelle et justifiée selon ACTION.
 
 ### Traduction humaine minimale de DIRECTION/START
 
@@ -313,7 +313,7 @@ Pour une personne non spécialiste, les mêmes décisions peuvent être formulé
 | Qu’est-ce que la personne doit comprendre, ressentir ou faire ? | `DECISION`, `JTBD`, promesse et geste. |
 | Qu’est-ce qui doit être visible tout de suite ? | `FIRST-OBJECT`, preuve, foyer et hiérarchie. |
 | Qu’est-ce qui rend cette proposition propre à ce produit ? | Signature située, matière, contenu, public et contrainte. |
-| Qu’est-ce que nous refusons de faire ? | `ANTI-DIRECTION`, contre-choix et limites. |
+| Qu’est-ce que nous refusons de faire ? | `MODAL` écarté par le `PARTI`, contre-choix et limites. |
 | Qu’est-ce qui coûterait cher si c’était faux ? | `RISK` et Protection de niveau (`DIRECTION/START`). |
 | Comment saurons-nous si cela tient ? | `NEXT-PROOF`, observation, condition d’arrêt et owner. |
 
@@ -391,7 +391,7 @@ Sur une surface `DIRECTION`, la cible visuelle rassemble les décisions nécessa
 | **Matière / asset** | Rôle dans la promesse, route de production initiale, cadrage, zone sûre, contraste, mobile, fallback et condition de retrait. Une matière native au code — règle, trame, masque, gradient, typographie, SVG ou composition procédurale — est un choix complet lorsqu’elle porte mieux la relation qu’un asset externe. |
 | **Typographie** | Rôle du display, du corps, des données et de l’action ; mesure, cadence et contre-indication. |
 | **Objet de preuve** | Objet, média, état ou fenêtre produit qui répond directement à la promesse. |
-| **Anti-direction** | Gabarit, relation ou effet refusé, avec raison produit ou perceptuelle. |
+| **Modal / parti** | Le modal nommé (ce que n’importe quelle IA produirait ici) et le parti : garder ou s’écarter, où et pourquoi, avec raison produit ou perceptuelle. |
 | **Résolution initiale** | Quel niveau de contenu réel, d’état, de responsive, d’asset et de détail doit déjà tenir au premier rendu ? |
 
 Cette table est la seule représentation canonique de la cible. L’opération dominante peut être discrète : retenue, vide, séquence, contraste de densité ou émergence d’un signal critique. Elle ne prescrit ni texture, ni type géant, ni masque, ni palette, ni composant.
@@ -435,7 +435,7 @@ Ce n’est ni un statut, ni une préférence d’outil : c’est une réponse si
 
 La génération ne reçoit ni le rôle de défaut, ni celui de rattrapage décoratif. Une image générée est une **hypothèse visuelle comparable**, non une autorité esthétique. Une référence observée est un calibrateur, non un modèle à reproduire. La recherche ne vaut pas accumulation : elle explore seulement lorsqu’une source, un médium ou un registre peut modifier la direction.
 
-Une route est insuffisante si elle n’explique pas pourquoi l’asset, à son crop réel et dans son contexte réel, augmente la preuve, la compréhension ou la singularité de la surface. Sources par couche : carte des moyens (`SAVOIR`, `[VEILLE]`) ; un asset moyen reçoit un traitement unique et justifié (`SAVOIR`, section `DESIGN-ATLAS`), jamais un dessin de remplacement.
+Une route est insuffisante si elle n’explique pas pourquoi l’asset, à son crop réel et dans son contexte réel, augmente la preuve, la compréhension ou la singularité de la surface. Sources par couche : carte des moyens (`SAVOIR/TOOLS`, `[VEILLE]`) ; un asset moyen reçoit un traitement unique et justifié (`SAVOIR`, section `DESIGN-ATLAS`), jamais un dessin de remplacement.
 
 ### Réserve `ANCHOR-GENERATED` en enjeu identitaire élevé
 

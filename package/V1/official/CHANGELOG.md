@@ -8,11 +8,12 @@
 ## Non publié — candidate V1.2 (B05), chantiers A, B et D
 
 - **Bilan de fabrication.** `FABRICATION` remplace `ANCHOR-BASIS` et `ANCHOR-LIMIT` dans le Creative Boot ; `CONSTRAINT` inclut la destination ; en produit réel, jamais de faux asset ; capacités absentes : plafond déclaré, rendu livré. Trace seule, schéma `RUN_CARD` inchangé.
-- **Prise de brief minimale.** `DIRECTION/EXTERNAL-START` : au plus trois demandes, dans l’ordre contenu réel, marque, asset principal, destination ; construire dans tous les cas.
+- **Prise de brief minimale.** `DIRECTION/EXTERNAL-START` : au plus trois demandes, en un seul échange : contenu réel, marque, asset principal ou route autorisée, destination si elle est incertaine ; construire dans tous les cas.
 - **Anti-slop vivant.** `MODAL` / `PARTI` remplacent `ANTI-DIRECTIONS` (projetés dans `direction.anti_direction`) ; marqueurs de vague datés dans `SAVOIR` (`[VEILLE 2026-09]`), pour nommer, jamais pour interdire.
 - **Niveau senior (lot 2).** Objet de preuve codé de préférence (`DIRECTION/FIRST-OBJECT`) ; carte des moyens par couche et vague 3 datées (`SAVOIR`, `[VEILLE 2026-09]`) ; traitement des assets moyens (`SAVOIR`, section `DESIGN-ATLAS`).
 - **Validateur de carte.** La liste close des conditions de façade passe de 42 à 50 conditions (LCF-43 à LCF-50) ; LCF-46 couvre aussi la vague 3.
 - **Gardes de propriété (refonte, R2).** `scripts/validate_structure.py` : huit concepts d’honnêteté balisés à leur lieu propriétaire (`<!-- concept:HON-01 -->` à `HON-08`), chacun unique, non vide et dans son fichier ; `read_route.py` retire les balises à la lecture.
+- **Alignements (refonte, R3).** Vocabulaire unique `MODAL` / `PARTI` (le terme « anti-direction » ne subsiste que dans l’historique ; projection inchangée `direction.anti_direction`) ; résumés de la prise de brief fidèles au canon ; renvois du boot vers les marqueurs de vague et de la route de production vers la carte des moyens (`SAVOIR/TOOLS`) ; glossaire du vocabulaire de fabrication ; QUICKSTART au vouvoiement et sans table en double. Nouvelles gardes de propriété dans `scripts/validate_structure.py`.
 - **Efficacité.** `NOT-VERIFIED` : l’épreuve de référence donne V1.1.1 ≈ sans système sur la qualité perçue ; l’effet de ces chantiers reste à éprouver (G4).
 
 ## V1.1.1 — Retour d’audit : alignements de textes et de façades

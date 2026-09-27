@@ -20,9 +20,9 @@ Répondez ensuite à ces cinq questions :
 |---|---|
 | Quelle décision doit changer ? | Le choix concret à trancher, confirmer ou abandonner. |
 | Quel risque domine ? | Identité, usage, accessibilité, technique, système ou autre risque déclaré. |
-| Quelle preuve peut distinguer les options ? | Observation, capture, test, mesure, comparaison ou inspection adaptée. |
-| Qu’est-ce qui est réellement disponible ? | Artefact, runtime, données, participant, source ou capacité technique. |
-| Qui porte la décision ? | Owner de la décision, de la reprise ou de l’escalade. |
+| Quelle preuve peut distinguer les options ? | Mesure, capture, test, comparaison, inspection ou observation adaptée. |
+| Qu’est-ce qui est réellement disponible ? | Artefact, navigateur, DOM/CSS, contraste, clavier/AT, participant, runtime, donnée ou source. |
+| Qui porte la décision et la prochaine action ? | Owner explicite, avec confirmation ou escalade si nécessaire. |
 
 Produisez la ligne de run, faites l’action la moins coûteuse qui peut changer la décision, puis choisissez une seule suite : **corriger**, **approfondir la preuve**, **rouvrir**, **reclassifier** ou **fermer**. Passez aux sections suivantes seulement si le risque, le périmètre ou la décision le justifie.
 
@@ -40,15 +40,15 @@ Le guide se lit par couches. Ne chargez pas tout le corpus par réflexe ; charge
 
 Avant les routes détaillées, notez seulement le **mode**, le **risque dominant**, la **décision à changer**, la **prochaine preuve** et l’**owner**. `DIRECTION/START` classe la demande ; `DIRECTION` intervient si la cible ou la direction change ; `ACTION` intervient dès qu’un artefact, une preuve, un état ou une clôture est concerné ; `SAVOIR` intervient si le jugement, le craft, la source ou le contexte peut changer la décision ; `BIBLIOTHEQUE` intervient si la structure, le composant ou la micro-interface peut changer la décision. Cette façade ne crée ni mode, ni gate, ni statut, ni propriétaire supplémentaire.
 
-**Bénéfice attendu.** Charge `DIRECTION` pour obtenir une position située et un premier objet plus fort ; `SAVOIR` pour transformer une impression en jugement et en choix de craft ; `BIBLIOTHEQUE` pour rendre la structure habitable, compatible et maintenable ; `ACTION` pour transformer la décision en livraison observable, corrigible et prouvable. Si aucun de ces gains ne peut modifier la prochaine décision, reste sur le chemin court ; si un risque critique est actif, ne confonds pas chemin court et profondeur insuffisante.
+**Bénéfice attendu.** Chargez `DIRECTION` pour obtenir une position située et un premier objet plus fort ; `SAVOIR` pour transformer une impression en jugement et en choix de craft ; `BIBLIOTHEQUE` pour rendre la structure habitable, compatible et maintenable ; `ACTION` pour transformer la décision en livraison observable, corrigible et prouvable. Si aucun de ces gains ne peut modifier la prochaine décision, restez sur le chemin court ; si un risque critique est actif, ne confondez pas chemin court et profondeur insuffisante.
 
-Pour une décision visuelle ouverte, utilise le **Creative Boot** de `DIRECTION` avant le premier pixel : promesse, objet de preuve, geste, anti-directions concrètes, tension et signature structurelles (nombre d’axes : `BIBLIOTHEQUE/TENSION`), jusqu’à trois cibles créatives `SAVOIR/CRAFT`, `MODAL`/`PARTI` (d’où viennent les anti-directions), bilan de fabrication (`FABRICATION`), le premier objet et le défaut dominant. Le boot est une vue de cadrage, pas un nouveau formulaire ou une obligation pour les deltas locaux ; il doit modifier la construction ou rester omis. Sur brief vague, la prise de brief de `DIRECTION/EXTERNAL-START` demande au plus trois intrants, dans cet ordre : contenu réel, marque, asset principal, destination ; le rendu est construit dans tous les cas.
+Pour une décision visuelle ouverte, utilisez le **Creative Boot** de `DIRECTION` avant le premier pixel : promesse, objet de preuve, geste, tension et signature structurelles (nombre d’axes : `BIBLIOTHEQUE/TENSION`), jusqu’à trois cibles créatives `SAVOIR/CRAFT`, `MODAL`/`PARTI`, bilan de fabrication (`FABRICATION`), le premier objet et le défaut dominant. Le boot est une vue de cadrage, pas un nouveau formulaire ou une obligation pour les deltas locaux ; il doit modifier la construction ou rester omis. Sur brief vague, la prise de brief de `DIRECTION/EXTERNAL-START` demande au plus trois intrants, en un seul échange, par gain de plafond : contenu réel, marque, asset principal ou route autorisée, destination si elle est incertaine ; le rendu est construit dans tous les cas.
 
-Si le domaine, le public, la confiance, la culture, la convention ou l’ambition peuvent changer le résultat, active `DIRECTION/DOMAIN-FRAME`, puis `SAVOIR/SOURCE` pour une recherche orientée décision. Augmente la profondeur seulement lorsqu’un déclencheur est nommé ; la recherche doit revenir dans le contenu, la structure, le geste ou la preuve. Pour une UI/UX nouvelle, ajoute le contrat de réalité d’ACTION : tâche, contenu, états, responsive, accessibilité, robustesse et scope de preuve.
+Si le domaine, le public, la confiance, la culture, la convention ou l’ambition peuvent changer le résultat, activez `DIRECTION/DOMAIN-FRAME`, puis `SAVOIR/SOURCE` pour une recherche orientée décision. Augmentez la profondeur seulement lorsqu’un déclencheur est nommé ; la recherche doit revenir dans le contenu, la structure, le geste ou la preuve. Pour une UI/UX nouvelle, ajoutez le contrat de réalité d’ACTION : tâche, contenu, états, responsive, accessibilité, robustesse et scope de preuve.
 
 ### Constitution minimale
 
-Avant toute route détaillée, garde en tête les cinq absolus de `DIRECTION` : direction perceptible pour une surface identitaire ; ancre fraîche et inspectable ; preuves applicables au mode ; mode, prochaine preuve et budget déclarés avant l’exécution ; coordination du réel et du beau. La conformité seule ne constitue jamais une direction, une preuve d’usage ou une qualité réelle. La formulation canonique se trouve dans [`DIRECTION.md`](DIRECTION.md#les-cinq-règles-absolues).
+Avant toute route détaillée, gardez en tête les cinq absolus de `DIRECTION` : direction perceptible pour une surface identitaire ; ancre fraîche et inspectable ; preuves applicables au mode ; mode, prochaine preuve et budget déclarés avant l’exécution ; coordination du réel et du beau. La conformité seule ne constitue jamais une direction, une preuve d’usage ou une qualité réelle. La formulation canonique se trouve dans [`DIRECTION.md`](DIRECTION.md#les-cinq-règles-absolues).
 
 | Si vous avez… | Faites d’abord… | Puis approfondissez avec… |
 |---|---|---|
@@ -60,15 +60,7 @@ Avant toute route détaillée, garde en tête les cinq absolus de `DIRECTION` : 
 
 ## 2. Le chemin en trente secondes
 
-Avant de construire ou de modifier, répondez à ces cinq questions :
-
-| Question | Réponse minimale |
-|---|---|
-| **Quelle décision doit changer ?** | Une phrase qui décrit le choix à trancher. |
-| **Quel risque domine ?** | Identité, usage, accessibilité, technique, système ou autre risque déclaré. |
-| **Quelle preuve peut distinguer les options ?** | Mesure, capture, test, comparaison, inspection ou observation adaptée. |
-| **Qu’est-ce qui est réellement disponible ?** | Artefact, navigateur, DOM/CSS, contraste, clavier/AT, participant, runtime, donnée ou source. |
-| **Qui porte la décision et la prochaine action ?** | Owner explicite, avec confirmation ou escalade si nécessaire. |
+Avant de construire ou de modifier, répondez aux cinq questions du démarrage en 90 secondes.
 
 Produisez ensuite la ligne minimale :
 
@@ -264,7 +256,7 @@ NEXT-ACTION:
 Réobserver le mobile puis exécuter la preuve d’accessibilité appropriée avant clôture.
 ```
 
- Pour une `RUN_CARD` persistante, cet exemple doit être sérialisé selon le schéma réel. En mode `DIRECTION`, documentez notamment les `sources`, l’objet `direction`, les `anchors`, l’`artifact`, le `trace_locator`, la `proof`, la `next_proof`, le `capability_profile` et la `closure`. Pour une `DIRECTION` décidée ou clôturée, la `closure` porte aussi `direction_status` ; pour une `DIRECTION` clôturée, `creative_close` est obligatoire avec ses cinq champs, même si la revue créative reste réservée ou signale une limite. La projection machine transporte le contrat ; elle ne constitue pas une preuve par elle-même. Une validation JSON, CLI ou package confirme la structure contrôlée, mais ne prouve ni l’implémentation runtime, ni l’usage, ni l’accessibilité exécutée, ni la performance, ni la qualité visuelle.
+Pour une `RUN_CARD` persistante, cet exemple doit être sérialisé selon le schéma réel. En mode `DIRECTION`, documentez notamment les `sources`, l’objet `direction`, les `anchors`, l’`artifact`, le `trace_locator`, la `proof`, la `next_proof`, le `capability_profile` et la `closure`. Pour une `DIRECTION` décidée ou clôturée, la `closure` porte aussi `direction_status` ; pour une `DIRECTION` clôturée, `creative_close` est obligatoire avec ses cinq champs, même si la revue créative reste réservée ou signale une limite. La projection machine transporte le contrat ; elle ne constitue pas une preuve par elle-même. Une validation JSON, CLI ou package confirme la structure contrôlée, mais ne prouve ni l’implémentation runtime, ni l’usage, ni l’accessibilité exécutée, ni la performance, ni la qualité visuelle.
 
 ## 10. Observer, interpréter et améliorer
 

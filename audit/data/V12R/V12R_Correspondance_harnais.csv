@@ -374,11 +374,11 @@ R;R-13;PROSE;ACTION;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;R-14 blocs RUN-* : 
 R;R-14;PROSE;FACADES;DIRECTE;MAINTENU-JUSQU-A-REECRITURE;;R1;;GLOSS×B1 GLOSSAIRE CLOSED : NOT-VERIFIED critique exclut ACCEPTED, pas la réserve
 R;R-15;PROSE;ACTION+FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;RET-1 LCF-22 dans la liste close et rouge sous mutation (P-01 inversé)
 R;R-16;PROSE;ACTION+FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;RET-2 LCF-23 dans la liste close et rouge sous mutation (P-04 inversé)
-R;R-17;PROSE;FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;RET-3 LCF-24 dans la liste close et rouge sous mutation (P-06 inversé)
+R;R-17;PROSE;FACADES;VIA-VALIDATEUR;OBSOLETE;lcf:LCF-24;R3;Le cas inverse P-06 (R.01), dont le texte d’arrivée a été réécrit par R3-V10 (vocabulaire MODAL/PARTI). La propriété (aucun nombre fixe dans le résumé du boot) reste portée par LCF-24, verte , sa sensibilité est démontrée par la mutation de migration « R-17 → LCF-24 » de V12R_Patch_R3.py (rouge).;RET-3 LCF-24 dans la liste close et rouge sous mutation (P-06 inversé)
 R;R-18;PROSE;FACADES+SKILL;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;RET-4 LCF-25 dans la liste close et rouge sous mutation (P-08 inversé)
 R;R-19;PROSE;FACADES+SKILL;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;RET-5 LCF-26 dans la liste close et rouge sous mutation (P-11 inversé)
 R;R-20;PROSE;BIBLIOTHEQUE_CHANGELOG+FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;RET-6 LCF-27 dans la liste close et rouge sous mutation (P-13 inversé)
-R;R-21;PROSE;ACTION+FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;R-08 LCF-28 dans la liste close et rouge sous mutation (P-15 inversé)
+R;R-21;PROSE;ACTION+FACADES;VIA-VALIDATEUR;OBSOLETE;lcf:LCF-28;R3;Le cas inverse P-15 (R.01), dont la ligne d’arrivée a été réécrite par R3-V6 (champ « Modal / parti »). La propriété (champs VISUAL_TARGET d’ACTION présents dans la table canonique) reste portée par LCF-28, verte , sa sensibilité est démontrée par la mutation de migration « R-21 → LCF-28 » de V12R_Patch_R3.py (rouge).;R-08 LCF-28 dans la liste close et rouge sous mutation (P-15 inversé)
 R;R-22;PROSE;DIRECTION+FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;Légende LCF-29 dans la liste close et rouge sous mutation (P-29 inversé)
 R;R-23;PROSE;FACADES;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;QS §6 LCF-30 dans la liste close et rouge sous mutation (P-31 inversé)
 R;R-24;PROSE;FACADES+SKILL;VIA-VALIDATEUR;MAINTENU-JUSQU-A-REECRITURE;;R1;;Imitation LCF-31 dans la liste close et rouge sous mutation (P-32 inversé)

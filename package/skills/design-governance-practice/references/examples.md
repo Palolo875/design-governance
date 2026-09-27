@@ -29,7 +29,7 @@ Ne pas charger l’atlas ou une analyse de style si aucune responsabilité de de
 
 **Demande :** créer une hero mémorable pour un service de cartographie sonore, sans page SaaS générique.
 
-**Décisions :** thèse située, premier objet sonore, composition asymétrique, matière utile, composant authored et anti-direction. L’artefact doit être ouvrable et les données fictives marquées.
+**Décisions :** thèse située, premier objet sonore, composition asymétrique, matière utile, composant authored, modal et parti. L’artefact doit être ouvrable et les données fictives marquées.
 
 ```text
 MODE: DIRECTION

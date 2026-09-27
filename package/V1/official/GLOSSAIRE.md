@@ -26,6 +26,17 @@ Ce glossaire explique les mots nécessaires pour commencer. Il n’ajoute aucune
 | **Créativité située** | Un écart, une relation ou une reformulation qui apporte une réponse spécifique et utile ; ce n’est pas la nouveauté pour elle-même. |
 | **Goût situé** | La sélection, la proportion et la retenue adaptées au contexte ; ce n’est pas une préférence universelle. |
 | **Spécificité** | Ce qui relie le rendu au produit et au contexte au point qu’un template générique ne pourrait pas le remplacer sans perte. |
+| **Thèse** | La position de design en une phrase : ce que la proposition affirme sur le produit et sur la personne à qui elle s’adresse. |
+| **Ancre** | Une référence réellement regardée (observée, fournie ou générée) qui calibre une décision visuelle ; on note ce qu’on en retient, ce qu’on écarte et sa date. |
+| **Creative Boot** | Le cadrage court fait avant le premier pixel d’une décision visuelle ouverte : promesse, objet de preuve, geste, `MODAL`, `PARTI`, tension, `FABRICATION` et premier objet. |
+| **`MODAL`** | Ce que n’importe quelle IA produirait par défaut pour ce brief (structure, palette, typographie, assets), nommé pour pouvoir le garder ou s’en écarter en connaissance de cause. |
+| **`PARTI`** | La décision prise face au `MODAL` : le garder ou s’en écarter, à quel endroit et pour quelle raison liée à la thèse. |
+| **`FABRICATION`** | Le bilan des moyens réels (assets, marque, polices, composants, génération, contenu) et du niveau atteignable couche par couche avant le build. |
+| **Plafond** | Le niveau qu’une couche peut atteindre avec les moyens disponibles ; lorsqu’il est bas, l’agent le déclare et dit ce qui le relèverait. |
+| **Objet de preuve** | L’élément de la première scène qui rend la promesse crédible : de préférence un composant, une donnée, un état ou une interaction du produit. |
+| **Défaut dominant** | Le défaut qui pèse le plus sur la qualité perçue ou sur l’usage ; c’est lui que l’on corrige en premier. |
+| **Vérité de scène** | La règle qui marque comme illustratif tout exemple, chiffre ou témoignage non observé, et qui le signale au public en langage produit. |
+| **Slop** | Une production générique, répétitive ou trompeuse faite avec peu de soin ; le slop procédural est une trace remplie sans décision réelle. |
 | **Premier objet** | L’élément qui rend la direction visible et utile dans la première proposition : objet, scène, composant, interaction ou relation de contenu. |
 | **Boucle d’amélioration** | Après la première proposition, observer le réel, isoler le défaut dominant, modifier l’artefact, observer à nouveau et décider ; une critique textuelle seule ne constitue pas une correction. |
 | **Gate** | Un contrôle ciblé, avec une preuve ou une condition adaptée. `A/B/C` désignent des familles de contrôles ; ils ne constituent pas une note globale. |
