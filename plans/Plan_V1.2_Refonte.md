@@ -1,6 +1,6 @@
 # Plan V1.2 — Refonte : fabrication, structure, trace et preuve
 
-**Date :** 2026-09-27 · **Owner :** Junior (Kamel) · **Statut :** en cours. R1 à R4 appliqués (27-09-2026, `audit/reports/V12R_01` à `V12R_04`) ; prochaine étape : P1. Chemin prescrit 13 537 mots (cible ≤ 14 000 atteinte dès R4) ; 24/25 outils de fabrication sur le chemin.
+**Date :** 2026-09-27 · **Owner :** Junior (Kamel) · **Statut :** en cours. R1 à R4 appliqués, P1 fait, R5b-1 appliqué (27-09-2026, `audit/reports/V12R_01` à `V12R_06`) ; décisions 1, 2, 4, 5, 7 et 11 prises, D-20 et D-22 tranchés. Chemin prescrit 11 740 mots en trace légère (16 351 en trace complète) ; 24/25 outils de fabrication sur le chemin ; noyau 3 217 mots. Prochaine étape : R5b-2 (craft d’ACTION en gestes, Gate A par profil, boucle unique, promesse du validateur), puis R5a, R5c, R5d, R6.
 **Base :** B05, candidate V1.2 (lots 1 et 2 appliqués).
 **Sources du plan :**
 - lectures `V12_05` à `V12_10` et synthèse `V12_11` (registre D-01 à D-18) ;
@@ -342,6 +342,8 @@ R11 (tri des mineurs) peut commencer en parallèle dès R2, pour les mineurs que
 | 11 | Trace par défaut | (a) légère sauf run persistant, partagé ou audité ; (b) `RUN_CARD` complète en `DIRECTION` | **(a)** |
 
 Les décisions 1, 2, 4 et 7 conditionnent R2 à R4. Les autres peuvent attendre leur lot.
+
+**Décisions prises :** 1, 2, 4 et 7 (`V12R_00`) ; 5 (a) et 11 (a), avec D-20 (exemple marqué) et D-22 (test de trame sans coût) (`V12R_06`, 27-09-2026). **En attente :** 3, 6, 8, 9, 10.
 
 ## 9. Lecture
 

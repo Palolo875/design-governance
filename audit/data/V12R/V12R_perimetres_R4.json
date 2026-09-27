@@ -1,0 +1,109 @@
+{
+  "_doc": "Périmètres de lecture d'un run DIRECTION après R4 (liste canonique DIRECTION/CHARGE). Chaque élément porte sa justification : une citation qui doit exister telle quelle (sinon PÉRIMÉ). ACTUEL = périmètre historique de V12_Budget_lecture.py ; TABLE = skill (noyau compilé compris) + ligne DIRECTION de DIRECTION/CHARGE + START + renvois impératifs de RUN-DIRECTION ; LETTRE = TABLE + lectures supplémentaires que la skill prescrit (aucune après R4). Version B05 : V12R_perimetres_B05.json.",
+  "ACTUEL": [
+    {
+      "file": "skills/design-governance-practice/SKILL.md"
+    },
+    {
+      "file": "V1/official/READING_MAP.md"
+    },
+    {
+      "route": "DIRECTION/START"
+    },
+    {
+      "route": "DIRECTION/CREATIVE-BOOT"
+    },
+    {
+      "route": "DIRECTION/EXTERNAL-START"
+    },
+    {
+      "route": "DIRECTION/VISUAL_TARGET"
+    },
+    {
+      "route": "DIRECTION/FIRST-OBJECT"
+    },
+    {
+      "route": "ACTION/RUN-DIRECTION"
+    },
+    {
+      "route": "ACTION/FIRST-RENDER"
+    }
+  ],
+  "TABLE": [
+    {
+      "file": "skills/design-governance-practice/SKILL.md",
+      "why": [
+        "skills/design-governance-practice/SKILL.md",
+        "name: design-governance-practice"
+      ]
+    },
+    {
+      "route": "DIRECTION/START",
+      "why": [
+        "V1/official/DIRECTION.md",
+        "> **Règle de vitesse.** Ouvre `START`"
+      ]
+    },
+    {
+      "route": "DIRECTION/CREATIVE-BOOT",
+      "why": [
+        "V1/official/DIRECTION.md",
+        "| **DIRECTION** | `DIRECTION/CREATIVE-BOOT`, `DIRECTION/EXTERNAL-START` si le brief est vague"
+      ]
+    },
+    {
+      "route": "DIRECTION/EXTERNAL-START",
+      "why": "idem"
+    },
+    {
+      "route": "DIRECTION/VISUAL_TARGET",
+      "why": "idem"
+    },
+    {
+      "route": "DIRECTION/FIRST-OBJECT",
+      "why": "idem"
+    },
+    {
+      "route": "ACTION/FIRST-RENDER",
+      "why": "idem"
+    },
+    {
+      "route": "ACTION/RUN-DIRECTION",
+      "why": "idem"
+    },
+    {
+      "route": "ACTION/GATE-A",
+      "why": "idem"
+    },
+    {
+      "route": "ACTION/GATE-B",
+      "why": "idem"
+    },
+    {
+      "route": "ACTION/GATE-C",
+      "why": "idem"
+    },
+    {
+      "route": "ACTION/PIPELINE-DIRECTION",
+      "why": [
+        "V1/official/ACTION.md",
+        "Exécuter le pipeline `ACTION/PIPELINE-DIRECTION`"
+      ]
+    },
+    {
+      "route": "ACTION/VISUAL_PROOF",
+      "why": [
+        "V1/official/ACTION.md",
+        "build de la première scène significative, `ACTION/VISUAL_PROOF`"
+      ]
+    },
+    {
+      "route": "ACTION/CLOSE-PACKAGE",
+      "why": [
+        "V1/official/ACTION.md",
+        "Paquet `DIRECTION` d’`ACTION/CLOSE-PACKAGE`"
+      ]
+    }
+  ],
+  "LETTRE_EN_PLUS": []
+}

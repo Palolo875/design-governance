@@ -261,12 +261,12 @@ Les runs `STANDARD`, `DIRECTION` et `SYSTÈME` conservent une trace persistante.
 | **LITE** | `ACTION/RUN-LITE`, `ACTION/FAST-PATH`, `ACTION/GATE-A` applicable et `ACTION/GATE-B` du risque dominant. Sans risque critique touché — voir Protection de niveau (`DIRECTION/START`). | Une route SAVOIR ou BIBLIOTHEQUE si le correctif touche réellement le jugement ou la structure. La section `DESIGN-ATLAS` reste silencieuse ; une famille seule ne reclassifie pas. Si le périmètre, le blast radius, la responsabilité ou le risque dominant change la décision, reviens à `DIRECTION/START` puis reclassifie vers `ITER`, `STANDARD`, `DIRECTION` ou `SYSTÈME`. |
 | **ITER** | Mémoire locale (direction existante), `ACTION/RUN-ITER`, `ACTION/GATE-A` applicable et `ACTION/GATE-B` du risque touché. Sans risque critique touché — voir Protection de niveau (`DIRECTION/START`). | Une route SAVOIR ; BIBLIOTHEQUE seulement si support, grille, scène ou objet change. `DESIGN-ATLAS` reste silencieux dans le même périmètre ; une famille seule ne reclassifie pas. Si le périmètre, la responsabilité ou le risque dominant change la décision, reviens à `DIRECTION/START`. Les corrections de libellé, overflow, contraste, focus, état ou wrapping restent locales. |
 | **STANDARD** | `ACTION/RUN-STANDARD` ; `BIBLIOTHEQUE/SELECT` si la structure est ouverte. | `SAVOIR/FRAME` si le cadrage est ambigu, une route BIBLIOTHEQUE structurante et la route SAVOIR du risque dominant. |
-| **DIRECTION** | `DIRECTION/CREATIVE-BOOT`, `DIRECTION/EXTERNAL-START` si le brief est vague, `DIRECTION/VISUAL_TARGET`, `DIRECTION/FIRST-OBJECT`, `ACTION/FIRST-RENDER`, `ACTION/RUN-DIRECTION`, puis `ACTION/GATE-A`, `ACTION/GATE-B` et `ACTION/GATE-C` applicables. | `DIRECTION/DOUBLE-LOOP`, `ACTION/ROUTING` ou `SAVOIR/CRAFT/CFT-00` si la décision l’exige (la boucle d’édition et les gestes sont dans le noyau) ; `DIRECTION/DIRECTION-ATELIER` si une tension, un geste produit ou un anti-choix peut modifier la première scène ; `SAVOIR/FRAME`, `SAVOIR/CRAFT`, `SAVOIR/TYPE`, `SAVOIR/SOURCE` et `BIBLIOTHEQUE/SELECT` si nécessaires. Charge `SAVOIR/STYLE` seulement si le choix de style peut modifier une décision de composition, de voix, de matière, de contraste ou de relation produit ; jamais comme catalogue automatique. |
+| **DIRECTION** | `DIRECTION/CREATIVE-BOOT`, `DIRECTION/EXTERNAL-START` si le brief est vague, `DIRECTION/VISUAL_TARGET`, `DIRECTION/FIRST-OBJECT`, `ACTION/FIRST-RENDER`, `ACTION/RUN-DIRECTION`, puis `ACTION/GATE-A` et `ACTION/GATE-C` applicables ; en trace complète (`ACTION/HANDOFF`), `ACTION/GATE-B`, `ACTION/RUN_CARD` et `ACTION/CLOSE-PACKAGE`. | `DIRECTION/DOUBLE-LOOP`, `ACTION/ROUTING` ou `SAVOIR/CRAFT/CFT-00` si la décision l’exige (la boucle d’édition et les gestes sont dans le noyau) ; `DIRECTION/DIRECTION-ATELIER` si une tension, un geste produit ou un anti-choix peut modifier la première scène ; `SAVOIR/FRAME`, `SAVOIR/CRAFT`, `SAVOIR/TYPE`, `SAVOIR/SOURCE` et `BIBLIOTHEQUE/SELECT` si nécessaires. Charge `SAVOIR/STYLE` seulement si le choix de style peut modifier une décision de composition, de voix, de matière, de contraste ou de relation produit ; jamais comme catalogue automatique. |
 | **SYSTÈME** | `ACTION/RUN-SYSTEM` ; `BIBLIOTHEQUE/COMPONENTS` si un composant change. | `SAVOIR/SYSTEM` ; `CHANGELOG` si une règle partagée change. |
 <!-- noyau:fin CHARGE-TABLE -->
 
 <!-- noyau:début CHARGE-FIN -->
-La clôture de chaque mode est `ACTION/CLOSE-PACKAGE`. Pour l’agent, les blocs « noyau » compilés dans la skill tiennent lieu de lecture de fabrication ; README, QUICKSTART, READING_MAP et ORCHESTRATION_MAP sont des lectures d’orientation pour les humains.
+La clôture de chaque mode est `ACTION/CLOSE-PACKAGE`, en trace complète ; en trace légère, le run s’arrête à la proposition (`ACTION/HANDOFF`). Pour l’agent, les blocs « noyau » compilés dans la skill tiennent lieu de lecture de fabrication ; README, QUICKSTART, READING_MAP et ORCHESTRATION_MAP sont des lectures d’orientation pour les humains.
 <!-- noyau:fin CHARGE-FIN -->
 
 **Déclenchement de l’atlas.** Si aucune famille ne peut être reliée à une décision modifiable, n’ouvre pas `SAVOIR/DESIGN-ATLAS` ; reste sur la route existante. Si le signal est ambigu, pose une seule clarification ciblée ou reviens à `DIRECTION/START` pour classer le mode et le risque. Si un risque critique apparaît, reclassifie avant de charger une famille. L’atlas ne sert jamais à résoudre par catalogue un JTBD, un mode ou une intention manquante.
@@ -313,6 +313,11 @@ NO-GO — faux réalisme, dashboard décoratif, cartes avant mécanisme, ou reto
 <!-- noyau:début BRIEF -->
 **Prise de brief.** Au plus trois demandes, en un seul échange, par gain de plafond : contenu réel (textes, chiffres, preuves, noms), marque, asset principal ou route autorisée, destination si elle est incertaine. Brief riche : aucune. Humain absent : hypothèses nommées, plafond déclaré, demandes listées à la livraison. Le rendu est construit dans tous les cas. La personne reçoit directement une proposition principale ; cette vue reste interne. Si une ligne ne peut modifier ni artefact, claim, preuve, limite ou décision, elle est omise ; `N/A-JUSTIFIED` reste réservé à une non-applicabilité réelle et justifiée selon ACTION.
 <!-- noyau:fin BRIEF -->
+
+<!-- noyau:début CONTENU -->
+<!-- concept:CNT-01 -->
+**Destination réelle sans contenu.** Si la surface sert un vrai commerce, service ou personne mais que ses contenus manquent (nom, offre, prix, horaires, photos, adresse), remplis-la d’un contenu plausible **marqué comme exemple** plutôt que d’emplacements vides : elle doit se lire comme une page, pas comme un gabarit. Le marquage est discret dans l’interface (« exemple », « à confirmer ») et explicite dans la réponse, qui liste ce qu’il faut fournir. Le marquage de vérité s’applique sans exception.
+<!-- noyau:fin CONTENU -->
 
 ### Traduction humaine minimale de DIRECTION/START
 
@@ -751,7 +756,7 @@ La direction retenue ne l’emporte que si son avantage est formulé en une phra
 
 L’axe matière doit toujours être **déclaré**, y compris lorsqu’il est hérité, plat, absent ou inchangé. Il n’impose jamais une texture. Une surface peut être plate, photographique, illustrée, spatiale ou retenue si cette position sert mieux le contenu, la tâche, la preuve ou la contrainte.
 
-En session interactive, un checkpoint humain intervient avant le build lorsque le périmètre n’a pas été couvert par une autonomie explicite. Le checkpoint présente la position retenue, l’alternative considérée, la raison du choix et la preuve attendue. Si le regard requis n’est pas disponible, le run indique `BLOCKED`, `EXPLORATORY` ou le statut prévu par `ACTION` ; l’absence ne devient jamais une validation implicite.
+Le checkpoint suit `ACTION/PIPELINE-DIRECTION` : la première proposition en tient lieu, sauf action irréversible ou coûteuse ; elle présente la position retenue, l’alternative considérée, la raison du choix et la preuve attendue. Si le regard requis n’est pas disponible, le run indique `BLOCKED`, `EXPLORATORY` ou le statut prévu par `ACTION` ; l’absence ne devient jamais une validation implicite.
 
 ---
 

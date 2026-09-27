@@ -944,7 +944,7 @@ La curation dirigée est admise lorsqu’elle comble un besoin réel, avec type 
 
 Les rôles de critique sont des lentilles, non une simulation d’équipe. Chaque rôle identifie un problème observable, une correction, une preuve et un périmètre. Un regard humain distinct de l’auteur ou de l’owner peut apporter un contrepoint situé ; ne le qualifie pas d’indépendant sans déclarer relation, rôle, méthode, date et limites. Active `ACTION/GATE-B/B3` lorsque son scope est requis.
 
-L’autonomie accordée à l’agent par l’utilisateur ou l’owner couvre uniquement le périmètre `DIRECTION` explicitement annoncé. Une nouvelle marque, un nouveau public, une nouvelle surface identitaire ou une nouvelle hypothèse déclenche un checkpoint de cadrage dans le run, sauf instruction explicite couvrant ce périmètre ; elle ne remplace ni les droits, ni l’owner final, ni une escalade requise.
+L’autonomie accordée à l’agent par l’utilisateur ou l’owner couvre uniquement le périmètre `DIRECTION` explicitement annoncé. Elle ne remplace ni les droits, ni l’owner final, ni une escalade requise ; le checkpoint suit `ACTION/PIPELINE-DIRECTION` (la première proposition en tient lieu, sauf action irréversible ou coûteuse).
 
 ---
 

@@ -91,6 +91,8 @@ def check_why(root: Path, items: list[dict]) -> list[str]:
 def budget(root: Path) -> dict:
     per = json.loads((DATA / "V12R_perimetres.json").read_text(encoding="utf-8"))
     sets = {"ACTUEL": per["ACTUEL"], "TABLE": per["TABLE"], "LETTRE": per["TABLE"] + per["LETTRE_EN_PLUS"]}
+    if per.get("TRACE_COMPLETE_EN_PLUS"):  # R5b-1 : trace complète (run persistant, partagé ou audité)
+        sets["COMPLET"] = sets["LETTRE"] + per["TRACE_COMPLETE_EN_PLUS"]
     out = {}
     for name, items in sets.items():
         detail, text = [], []
