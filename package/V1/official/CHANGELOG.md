@@ -19,6 +19,7 @@
 - **ACTION restructurée (refonte, R5b-2).** Gate A par profil de surface (contrôles d’office et selon le contenu) ; Gate C relie chaque critère à son geste de correction dans le noyau et sert, en trace légère, de contrôle de craft sans verdict ; une seule description de la boucle (`DIRECTION/DOUBLE-LOOP`) ; promesse du validateur tenue en un seul lieu (`ACTION/RUN_CARD`). Schéma `RUN_CARD` inchangé.
 - **DIRECTION restructurée (refonte, R5a).** Rôle, posture et récapitulatif de protection en tête ; rôle défini une seule fois ; entrée unique (classer : `START`, charger : `CHARGE`, fabriquer : le noyau) ; doublons de lecture et de passage retirés ; phrase hors contexte du bloc de prise de brief corrigée. Aucun locator renommé.
 - **Convergence typographique (refonte, R8a).** La question de convergence du noyau porte sur la palette et sur la police de titre (comparer au moins deux voix typographiques sur le vrai titre) ; la veille note un signal à confirmer (grotesque large sur blanc neutre, P1).
+- **SAVOIR alignée (refonte, R5c, hors ancre).** Un seul modèle de niveaux (`Correction`, `Précision`, `Intention`) ; la triade visée / observée / prouvée devient « trois moments de la qualité » ; boucle et one-shot renvoient à leur lieu propriétaire.
 - **Efficacité.** `NOT-VERIFIED` : l’épreuve de référence donne V1.1.1 ≈ sans système sur la qualité perçue ; l’effet de ces chantiers reste à éprouver (G4).
 
 ## V1.1.1 — Retour d’audit : alignements de textes et de façades

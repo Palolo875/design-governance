@@ -204,11 +204,11 @@ Dans V1, le **polish structurel** concerne les proportions, la hiérarchie, la d
 
 Lorsque la direction visuelle est ouverte, le premier rendu doit déjà être **composé, spécifique, crédible, désirable et suffisamment résolu** dans le périmètre du mode. Il ne peut pas être seulement un moodboard, une structure vide, un assemblage de primitives ou une surface nominalement conforme lorsque la décision exige une scène réelle.
 
-Distingue trois niveaux : **qualité intrinsèque visée** — ce que l’objet doit déjà posséder avant toute prétention de réussite ; **qualité construite observée** — ce que le rendu réel permet d’inspecter dans son contexte ; **qualité prouvée** — ce qu’ACTION établit sur l’usage, l’accessibilité, la robustesse, la performance ou la conformité. Un rendu peut être visuellement fort mais encore non prouvé en utilisabilité ; un rendu peut être conforme et propre mais rester générique.
+Distingue trois moments de la qualité : **qualité intrinsèque visée** — ce que l’objet doit déjà posséder avant toute prétention de réussite ; **qualité construite observée** — ce que le rendu réel permet d’inspecter dans son contexte ; **qualité prouvée** — ce qu’ACTION établit sur l’usage, l’accessibilité, la robustesse, la performance ou la conformité. Un rendu peut être visuellement fort mais encore non prouvé en utilisabilité ; un rendu peut être conforme et propre mais rester générique. À chaque moment, la résolution atteinte se lit avec un seul modèle de niveaux : `Correction`, `Précision` et `Intention` (« Jugement visuel situé »).
 
-Le `one-shot` est une stratégie de préparation, pas une absence de jugement. Construis un premier rendu complet, observe-le réellement, puis arrête-toi seulement si l’intention, la relation, la composition, la spécificité et les risques applicables tiennent déjà. Si un défaut dominant reste visible, corrige l’artefact ou retourne ; ne transforme pas l’exploration en excuse pour livrer un premier objet faible.
+Le `one-shot` suit la branche one-shot d’`ACTION/PIPELINE-DIRECTION` : une exécution raccourcie de la boucle, jamais sa suppression ; un premier objet faible se corrige ou se retourne.
 
-La boucle de jugement est : **préparer → construire → observer → isoler le défaut dominant → modifier l’artefact ou la décision → observer à nouveau → comparer → décider**. Une correction doit changer une relation visible, une tâche, une preuve, une contrainte ou une propriété de robustesse. Une nouvelle rationale ou une variante décorative ne constitue pas une correction.
+La boucle de jugement est la boucle d’édition de `DIRECTION/DOUBLE-LOOP`, copiée dans le noyau de la skill.
 
 Le **polish expressif** concerne la matière, la typographie, la couleur, l’image, la silhouette, le rythme et la singularité située. Le polish décoratif ajoute une impression de finition sans conséquence utile ou perceptuelle défendable ; il doit être réduit, même s’il est séduisant.
 

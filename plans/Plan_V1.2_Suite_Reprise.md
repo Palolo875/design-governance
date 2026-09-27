@@ -15,7 +15,7 @@
    - auto-comparaison déclarée comme telle.
 4. **Décisions en attente** (plan maître §8) : 3, 6, 8, 9 et 10. **Ne pas appliquer un contenu qui en dépend avant la décision** ; préparer le texte et poser la question.
 
-## 2. État (après R8a)
+## 2. État (après R5c)
 
 | Fait | Rapport |
 |---|---|
@@ -25,6 +25,7 @@
 | R5b-2 : Gate A par profil, Gate C en gestes, boucle unique, promesse du validateur unique | `V12R_07` |
 | R5a : DIRECTION (rôle, posture et récapitulatif en tête ; entrée unique ; doublons ; D-17, D-19) | `V12R_08` |
 | R8a : convergence typographique (D-21) dans la question de convergence du noyau | `V12R_09` |
+| R5c (hors ancre) : un seul modèle de niveaux (D-16), boucle et one-shot en renvoi, exemption SAVOIR retirée | `V12R_10` |
 
 - **Mesures :**
   - chemin prescrit 12 076 mots (trace légère), 16 687 en trace complète ;
@@ -91,7 +92,9 @@ Chaque lot : **périmètre**, **gardes à ajouter**, **réussite**, **arrêt**.
 - **Réussite :** aucune route cassée (`read_route` sur tous les locators cités) ; doublons en baisse ; suivi vert.
 - **Arrêt :** si des locators doivent être renommés.
 
-### R5c — SAVOIR (M) · décision 6 pour la partie « ancre » seulement
+### R5c — SAVOIR : fait hors ancre (`V12R_10`). Reste : ancre (décision 6), champs de trace vers ACTION (lecture dédiée), doublons liés à l'ancre.
+
+#### (périmètre d'origine)
 
 - **Périmètre :**
   - champs de trace de SAVOIR (`DESIGN-ATLAS`, raccords) déplacés vers ACTION, avec renvoi ;

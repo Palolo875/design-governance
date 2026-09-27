@@ -1,0 +1,51 @@
+diff --git a/package/V1/official/CHANGELOG.md b/package/V1/official/CHANGELOG.md
+index 32ca014..5f6ab41 100644
+--- a/package/V1/official/CHANGELOG.md
++++ b/package/V1/official/CHANGELOG.md
+@@ -19,6 +19,7 @@
+ - **ACTION restructurée (refonte, R5b-2).** Gate A par profil de surface (contrôles d’office et selon le contenu) ; Gate C relie chaque critère à son geste de correction dans le noyau et sert, en trace légère, de contrôle de craft sans verdict ; une seule description de la boucle (`DIRECTION/DOUBLE-LOOP`) ; promesse du validateur tenue en un seul lieu (`ACTION/RUN_CARD`). Schéma `RUN_CARD` inchangé.
+ - **DIRECTION restructurée (refonte, R5a).** Rôle, posture et récapitulatif de protection en tête ; rôle défini une seule fois ; entrée unique (classer : `START`, charger : `CHARGE`, fabriquer : le noyau) ; doublons de lecture et de passage retirés ; phrase hors contexte du bloc de prise de brief corrigée. Aucun locator renommé.
+ - **Convergence typographique (refonte, R8a).** La question de convergence du noyau porte sur la palette et sur la police de titre (comparer au moins deux voix typographiques sur le vrai titre) ; la veille note un signal à confirmer (grotesque large sur blanc neutre, P1).
++- **SAVOIR alignée (refonte, R5c, hors ancre).** Un seul modèle de niveaux (`Correction`, `Précision`, `Intention`) ; la triade visée / observée / prouvée devient « trois moments de la qualité » ; boucle et one-shot renvoient à leur lieu propriétaire.
+ - **Efficacité.** `NOT-VERIFIED` : l’épreuve de référence donne V1.1.1 ≈ sans système sur la qualité perçue ; l’effet de ces chantiers reste à éprouver (G4).
+ 
+ ## V1.1.1 — Retour d’audit : alignements de textes et de façades
+diff --git a/package/V1/official/SAVOIR.md b/package/V1/official/SAVOIR.md
+index ab8b6c1..6ffbb0a 100644
+--- a/package/V1/official/SAVOIR.md
++++ b/package/V1/official/SAVOIR.md
+@@ -204,11 +204,11 @@ Dans V1, le **polish structurel** concerne les proportions, la hiérarchie, la d
+ 
+ Lorsque la direction visuelle est ouverte, le premier rendu doit déjà être **composé, spécifique, crédible, désirable et suffisamment résolu** dans le périmètre du mode. Il ne peut pas être seulement un moodboard, une structure vide, un assemblage de primitives ou une surface nominalement conforme lorsque la décision exige une scène réelle.
+ 
+-Distingue trois niveaux : **qualité intrinsèque visée** — ce que l’objet doit déjà posséder avant toute prétention de réussite ; **qualité construite observée** — ce que le rendu réel permet d’inspecter dans son contexte ; **qualité prouvée** — ce qu’ACTION établit sur l’usage, l’accessibilité, la robustesse, la performance ou la conformité. Un rendu peut être visuellement fort mais encore non prouvé en utilisabilité ; un rendu peut être conforme et propre mais rester générique.
++Distingue trois moments de la qualité : **qualité intrinsèque visée** — ce que l’objet doit déjà posséder avant toute prétention de réussite ; **qualité construite observée** — ce que le rendu réel permet d’inspecter dans son contexte ; **qualité prouvée** — ce qu’ACTION établit sur l’usage, l’accessibilité, la robustesse, la performance ou la conformité. Un rendu peut être visuellement fort mais encore non prouvé en utilisabilité ; un rendu peut être conforme et propre mais rester générique. À chaque moment, la résolution atteinte se lit avec un seul modèle de niveaux : `Correction`, `Précision` et `Intention` (« Jugement visuel situé »).
+ 
+-Le `one-shot` est une stratégie de préparation, pas une absence de jugement. Construis un premier rendu complet, observe-le réellement, puis arrête-toi seulement si l’intention, la relation, la composition, la spécificité et les risques applicables tiennent déjà. Si un défaut dominant reste visible, corrige l’artefact ou retourne ; ne transforme pas l’exploration en excuse pour livrer un premier objet faible.
++Le `one-shot` suit la branche one-shot d’`ACTION/PIPELINE-DIRECTION` : une exécution raccourcie de la boucle, jamais sa suppression ; un premier objet faible se corrige ou se retourne.
+ 
+-La boucle de jugement est : **préparer → construire → observer → isoler le défaut dominant → modifier l’artefact ou la décision → observer à nouveau → comparer → décider**. Une correction doit changer une relation visible, une tâche, une preuve, une contrainte ou une propriété de robustesse. Une nouvelle rationale ou une variante décorative ne constitue pas une correction.
++La boucle de jugement est la boucle d’édition de `DIRECTION/DOUBLE-LOOP`, copiée dans le noyau de la skill.
+ 
+ Le **polish expressif** concerne la matière, la typographie, la couleur, l’image, la silhouette, le rythme et la singularité située. Le polish décoratif ajoute une impression de finition sans conséquence utile ou perceptuelle défendable ; il doit être réduit, même s’il est séduisant.
+ 
+diff --git a/package/scripts/validate_structure.py b/package/scripts/validate_structure.py
+index 501abe3..0e3a284 100644
+--- a/package/scripts/validate_structure.py
++++ b/package/scripts/validate_structure.py
+@@ -79,9 +79,13 @@ RETIRED: list[tuple[str, str, set[str]]] = [
+     (r"\*\*Ce qu’atteste une `RUN_CARD` validée :\*\*", "renvoi à la frontière de validation d'ACTION/RUN_CARD (VAL-01)",
+      {"ACTION.md", "CHANGELOG.md"}),
+     # Boucle d'édition : une seule description (DIRECTION/DOUBLE-LOOP, copiée dans le noyau). Exemptions provisoires,
+-    # à retirer par R5c (SAVOIR), R5d (BIBLIOTHEQUE) et R6 (README).
++    # à retirer par R5d (BIBLIOTHEQUE) et R6 (README) ; SAVOIR retiré en R5c.
+     (r"→ isoler|observer, isoler", "boucle d'édition de DIRECTION/DOUBLE-LOOP (noyau)",
+-     {"DIRECTION.md", "SKILL.md", "CHANGELOG.md", "SAVOIR.md", "BIBLIOTHEQUE.md", "README.md"}),
++     {"DIRECTION.md", "SKILL.md", "CHANGELOG.md", "BIBLIOTHEQUE.md", "README.md"}),
++    (r"Distingue trois niveaux", "un seul modèle de niveaux : Correction, Précision, Intention (D-16)", {"CHANGELOG.md"}),
++    # One-shot : une seule définition (branche one-shot d'ACTION/PIPELINE-DIRECTION). Exemption provisoire : R5d.
++    (r"Le `one-shot` est une stratégie de préparation", "branche one-shot d'ACTION/PIPELINE-DIRECTION",
++     {"CHANGELOG.md", "BIBLIOTHEQUE.md"}),
+     (r"cette vue reste interne", "la prise de brief reste dans la trace (D-19)", {"CHANGELOG.md"}),
+     (r"Mandat de fonctionnement|Adopte le niveau d’exigence", "rôle unique (ROL-01)", {"CHANGELOG.md"}),
+     (r"`VISUAL_TARGET` la spécifie", "chaîne de lecture interne unique (DIRECTION)", {"CHANGELOG.md"}),
