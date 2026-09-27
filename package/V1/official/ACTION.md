@@ -6,7 +6,7 @@
 
 `ACTION` est le propriétaire des preuves exécutables, des gates, des statuts de run, des verdicts et de la clôture. Pour une lecture rapide, commencez par `ACTION/STATUS` et `ACTION/PRECONDITION`, puis la route de votre mode `ACTION/RUN-<MODE>`, et chargez seulement les gates correspondant au risque déclaré. `ACTION/FAST-PATH` est une vue de formalité réduite pour un delta local ; il ne supprime ni la preuve requise ni l’honnêteté du statut.
 
-**Capacité positive d’ACTION.** ACTION ne sert pas seulement à filtrer ou accepter un résultat : elle transforme une direction en livraison observable et améliorable. Son chemin positif est **construire → observer → isoler le défaut dominant → corriger ou accepter avec raison → prouver → clôturer avec une limite et une prochaine preuve**. Les gates protègent ce chemin ; ils ne sont pas sa finalité. La qualité du premier rendu, la lisibilité de la décision et la possibilité de reprendre le run font partie de la valeur livrée.
+**Capacité positive d’ACTION.** ACTION ne sert pas seulement à filtrer ou accepter un résultat : elle transforme une direction en livraison observable et améliorable. Son chemin positif est la boucle d’édition (`DIRECTION/DOUBLE-LOOP`), prolongée par la preuve et, en trace complète, par une clôture avec une limite et une prochaine preuve. Les gates protègent ce chemin ; ils ne sont pas sa finalité. La qualité du premier rendu, la lisibilité de la décision et la possibilité de reprendre le run font partie de la valeur livrée.
 
 ### Carte de lecture par mode
 
@@ -56,7 +56,7 @@ L’agent active le système en silence : la personne donne l’objectif, le pé
 
 <!-- noyau:début TRACE -->
 <!-- concept:TRA-01 -->
-**Trace légère par défaut.** Hors run persistant, partagé ou audité, la trace tient en six lignes au plus : mode ; thèse (promesse → objet de preuve → geste) ; modal, trame et parti ; plafond atteint et contenus marqués ; défaut dominant restant ; prochaine preuve. Les planchers s’appliquent pendant la fabrication (vérité, `ACTION/GATE-A`, boucle d’édition) ; seule leur écriture s’allège. Le run livre une **proposition** `EXPLORATORY` : ni verdict, ni acceptation, ni clôture, ni `RUN_CARD`. **Trace complète** (handoff, `ACTION/RUN_CARD`, `ACTION/CLOSE-PACKAGE`, gates écrits, `B1b` dans son scope) si le run est persistant, partagé, audité, ou si une acceptation ou une clôture est demandée.
+**Trace légère par défaut.** Hors run persistant, partagé ou audité, la trace tient en six lignes au plus : mode ; thèse (promesse → objet de preuve → geste) ; modal, trame et parti ; plafond atteint et contenus marqués ; défaut dominant restant ; prochaine preuve. Les planchers s’appliquent pendant la fabrication (vérité, `ACTION/GATE-A` selon le profil de surface, boucle d’édition) ; seule leur écriture s’allège. Le run livre une **proposition** `EXPLORATORY` : ni verdict, ni acceptation, ni clôture, ni `RUN_CARD`. **Trace complète** (handoff, `ACTION/RUN_CARD`, `ACTION/CLOSE-PACKAGE`, gates écrits, `B1b` dans son scope) si le run est persistant, partagé, audité, ou si une acceptation ou une clôture est demandée.
 <!-- noyau:fin TRACE -->
 
 **Formes.** La ligne de run de `DIRECTION` est la mémoire de lancement, sous-ensemble de lancement de ce handoff ; le handoff est la transmission ; `ACTION/CLOSE-PACKAGE` est la clôture par mode ; la `RUN_CARD` JSON est la projection persistante, selon la table de correspondance d’`ACTION/RUN_CARD`. **Forme courte LITE non persistante :** le paquet LITE de `ACTION/CLOSE-PACKAGE` ; les autres champs du handoff sont `N/A-JUSTIFIED` par défaut, avec deux pertes déclarées (METHOD, EXIT-CONDITION) ; TRACE-LOCATOR est alors l’artefact. Une reprise par un autre agent exige OWNER et NEXT-ACTION ; sinon la forme courte reste une préparation.
@@ -97,15 +97,9 @@ Une capacité indique ce qui peut être construit ou vérifié ; elle ne constit
 
 Un checkpoint indisponible ne réduit pas silencieusement le mode. Il rend la décision exploratoire, retournée ou escaladée selon le risque, la preuve disponible et la condition de sortie. `APPROVED`, lorsqu’un transport ou une trace le mentionne, signifie seulement qu’une décision d’autorité a été autorisée dans son scope ; il ne signifie ni résultat accepté, ni preuve complète, ni clôture.
 
-### Parcours minimal en cinq minutes
+### Parcours minimal
 
-1. Reprends le mode et le risque classés dans `DIRECTION/START`.
-2. Formule `DECISION-INTENT`, déclare l’artefact, le scope, les capacités et la prochaine preuve ; pour une décision visuelle ouverte, active `DIRECTION/CREATIVE-BOOT` avant le build.
-3. Construis un premier rendu suffisamment complet et jugeable pour le mode ; lorsque la décision visuelle est ouverte, il doit déjà être composé, crédible, spécifique et résolu à la bonne échelle, et rendre observables l’objet, la tension et les cibles créatives du boot.
-4. Observe le rendu réel sans laisser la rationale remplacer l’objet ; inscris l’interprétation, les qualités prioritaires effectivement visibles ou non observées, le défaut dominant et la limite.
-5. Corrige, résous, retourne, réserve ou accepte ; persiste `DECISION-CHANGE`, la preuve, l’owner et la prochaine action.
-
-Ce parcours est une façade de lecture, non une procédure concurrente. Les contrats détaillés, les gates et les conditions de clôture restent applicables dès que le risque ou le mode les déclenche.
+Le parcours d’un run est celui du noyau de la skill : classer et charger (`DIRECTION/CHARGE`), prendre le brief, construire une première scène complète, boucler (`DIRECTION/DOUBLE-LOOP`), répondre et tracer (`ACTION/HANDOFF`). ACTION en porte les preuves, les gates et, en trace complète, la clôture ; ses contrats restent applicables dès que le risque ou le mode les déclenche.
 
 ## ACTION/FIRST-RENDER — qualité initiale attendue
 
@@ -407,6 +401,7 @@ Les valeurs `state`, `issue`, `verdict`, `gate`, `axis`, `decision_change`, `NOT
 <!-- concept:HON-04 -->
 La validation JSON, la validation CLI, les fixtures, la compilation, le build et l’intégrité d’une archive établissent seulement que la projection, le package ou l’artefact de distribution respecte les contrôles exécutés. Ils ne prouvent ni que l’artefact est réellement implémenté dans son runtime, ni son usage, ni son accessibilité exécutée, ni sa performance, ni sa qualité visuelle, ni la préférence humaine. Une `RUN_CARD` valide peut donc rester `NOT-VERIFIED` sur un axe ou porter une limitation substantielle.
 
+<!-- concept:VAL-01 -->
 **Ce qu’atteste une `RUN_CARD` validée :** la forme de la projection et les invariants de la liste close (états, issues, verdicts et leur temps, axes, protection critique, exception, capacité et version de la preuve, réserves, droits déclarés, ancres, conséquence décisionnelle, reclassement, paquet SYSTÈME, B1b, trace par mode). **Ce qu’elle n’atteste pas (forme seule) :** que les observations ont réellement eu lieu ; la justesse des jugements V/U/A/T ; l’étendue réelle d’un claim (tâche utilisateur, technologie d’assistance, périmètre de diffusion) ; l’identité de la personne qui autorise ; la réalité des droits, licences et données ; la fraîcheur d’une ancre, dont seule la date ISO est contrôlée ; la qualité perceptuelle. Par mode : pour `LITE`, `ITER` et `STANDARD`, le paquet de clôture vit dans la trace et la machine ne le vérifie pas ; pour tous les modes, elle ne vérifie ni que les consumers listés sont tous les consumers réels, ni que la baseline montre ce qu’elle prétend, ni que la décision couverte par une paire équivalente est bien la même. Ces points restent à la trace, à la revue et à l’owner.
 
 Le **profil strict** applique les mêmes exigences par mode que la validation normale. Il ajoute le rejet des placeholders et des hôtes de démonstration, et l’existence des locators locaux, résolus depuis le dossier de la carte.
@@ -529,11 +524,11 @@ Le polish s’arrête lorsque le défaut dominant identifié est corrigé ou acc
 
 Ce pipeline s’applique au mode `DIRECTION`. Il vise une direction réellement choisie, non un catalogue de variantes.
 
-`DIRECTION/DOUBLE-LOOP` décrit la boucle de décision créative et d’apprentissage : observer, isoler, modifier, réobserver et décider. `ACTION/PIPELINE-DIRECTION` décrit son exécution livrable : préparer, construire, produire la preuve, appliquer les corrections, comparer et clôturer ou retourner. `ACTION/GATE-B/B1b` est un contrôle spécialisé déclenché dans ce pipeline lorsque son scope est actif ; ces trois niveaux ne sont pas trois boucles concurrentes.
+`DIRECTION/DOUBLE-LOOP` décrit la boucle d’édition, seule description de la boucle (copiée dans le noyau). `ACTION/PIPELINE-DIRECTION` décrit son exécution livrable : préparer, construire, produire la preuve, appliquer les corrections, comparer et clôturer ou retourner. `ACTION/GATE-B/B1b` est un contrôle spécialisé déclenché dans ce pipeline lorsque son scope est actif ; ces trois niveaux ne sont pas trois boucles concurrentes.
 
 ### Boucle de qualité et branche one-shot
 
-Pour tout run qui produit un rendu, la séquence de référence est : **préparer la qualité attendue → construire un premier rendu complet → observer le rendu réel sans se laisser guider par la rationale → isoler le défaut dominant → corriger l’artefact ou la décision → réobserver → comparer l’effet → clôturer ou retourner**. La correction doit changer une relation visible, une tâche, une preuve, une contrainte ou une propriété de robustesse ; une nouvelle explication ne constitue pas une correction.
+Pour tout run qui produit un rendu, la boucle est celle de `DIRECTION/DOUBLE-LOOP` ; ce pipeline en exécute la préparation, la preuve, puis la clôture ou le retour. Observe le rendu réel sans te laisser guider par la rationale.
 
 La branche `one-shot` est une exécution raccourcie de cette même boucle, jamais une suppression de la boucle. Elle permet de clôturer après l’observation initiale lorsque le premier rendu atteint la qualité attendue du mode, que la direction est identifiable, que les risques applicables sont couverts et qu’aucune amélioration utile n’est probable. Si le premier rendu est faible, générique ou incomplet, la branche one-shot ne s’applique pas : corrige, retourne ou déclare honnêtement la limite.
 
@@ -789,6 +784,16 @@ Pour un verdict global `ACCEPTED` ou `ACCEPTED-WITH-RESERVATION`, la `RUN_CARD` 
 | Saisie redondante | L’utilisateur ne doit pas ressaisir inutilement une information déjà fournie dans le même processus. | Répétition évitable sans raison. |
 | Authentification accessible | Le processus n’impose pas une charge cognitive ou sensorielle évitable. | Mémoire, perception ou interaction imposée sans alternative. |
 
+<!-- concept:GTA-01 -->
+**Profils de surface.** Commence par les contrôles d’office du profil ; un contrôle hors profil devient applicable dès que la surface porte l’élément concerné (formulaire, glisser, motion, connexion). Ce que le médium ne porte pas est `N/A-JUSTIFIED`.
+
+| Profil | Contrôles d’office | Selon le contenu |
+|---|---|---|
+| Page vitrine, éditoriale ou portfolio | Contraste, sémantique et nom accessible, focus clavier, information non chromatique, cibles d’interaction, contenu honnête, stabilité média. | États (formulaire, commande), motion réduite, mouvement de glisser, focus non masqué. |
+| Application, formulaire ou flow | Tous les contrôles d’interface : contraste, sémantique, focus clavier et non masqué, états, cibles, information non chromatique, saisie redondante, aide cohérente, contenu honnête. | Authentification accessible (connexion), motion réduite, mouvement de glisser, stabilité média. |
+| Scène, motion ou 3D | Motion réduite, contraste, information non chromatique, stabilité média, contenu honnête. | Focus clavier et cibles si la scène est interactive. |
+| Hors Web (imprimé, affiche, écran fixe) | Contraste ou lisibilité d’encre, information non chromatique, contenu honnête. | Référentiel du médium, déclaré dans `CONFORMANCE-TARGET`. |
+
 Les scripts et recettes sont des ressources versionnées. Une recette exécutée ne suffit pas à valider un résultat visuel, produit ou utilisateur.
 
 ---
@@ -897,16 +902,18 @@ Gate C décide sur le rendu à partir des observations de la revue créative et,
 
 Chaque verdict C précise le périmètre : viewport, état, scène, contenu et élément observé.
 
-| Critère | Présent si… | Retour ou réserve si… |
-|---|---|---|
-| **C1 — Stratégie de surface** | Photo, donnée, lumière, illustration, surface, trame, profondeur ou planéité assumée découle du produit. | Traitement par défaut sans relation observable. |
-| **C2 — Typographie choisie** | Famille, système existant ou alternative est justifié ; rôles, échelle et fallback servent le contexte. | Choix par défaut non interrogé ou non calibré. |
-| **C3 — Composition intentionnelle** | Structure de lecture identifiable sert l’action et le rythme. | Empilement uniforme sans décision spatiale. |
-| **C4 — Densité optique** | Espace, masses et regroupements suivent la priorité et l’usage. | Espacement uniforme qui masque les relations. |
-| **C5 — Stratégie de profondeur applicable** | Profondeur, lumière ou planéité est cohérente avec le registre et lisible au rendu. | Ombres, bordures ou flous par défaut sans logique. `N/A-JUSTIFIED` si la planéité est intentionnelle et suffisante. |
-| **C6 — Résolution située** | Une difficulté réelle est résolue par microcopie, état, donnée, interaction, asset ou transition pertinente. | Assemblage de composants sans adaptation au cas. |
+| Critère | Présent si… | Retour ou réserve si… | Geste si absent (noyau, §) |
+|---|---|---|---|
+| **C1 — Stratégie de surface** | Photo, donnée, lumière, illustration, surface, trame, profondeur ou planéité assumée découle du produit. | Traitement par défaut sans relation observable. | Choisis la surface d’après ce que le produit montre (carte des moyens, §6) ; un seul traitement pour les assets moyens ; retire le traitement sans rôle. |
+| **C2 — Typographie choisie** | Famille, système existant ou alternative est justifié ; rôles, échelle et fallback servent le contexte. | Choix par défaut non interrogé ou non calibré. | Choisis la famille pour la voix et la donnée à porter (§6) ; fixe deux ou trois rôles et une échelle contrastée ; vérifie le fallback au rendu. |
+| **C3 — Composition intentionnelle** | Structure de lecture identifiable sert l’action et le rythme. | Empilement uniforme sans décision spatiale. | Recompose dans l’ordre intention → foyer → masse → rythme (§5) ; nomme le foyer et l’ordre de lecture ; romps la trame modale si elle ne sert pas la tâche (§4). |
+| **C4 — Densité optique** | Espace, masses et regroupements suivent la priorité et l’usage. | Espacement uniforme qui masque les relations. | Regroupe par proximité ; redistribue masses et vides selon la priorité (masse visuelle, gestion du vide, §5) ; contrôle la silhouette à faible détail. |
+| **C5 — Stratégie de profondeur applicable** | Profondeur, lumière ou planéité est cohérente avec le registre et lisible au rendu. | Ombres, bordures ou flous par défaut sans logique. `N/A-JUSTIFIED` si la planéité est intentionnelle et suffisante. | Tiens une seule logique, lumière, élévation ou planéité, sur toute la surface ; retire ombres, bordures et flous sans rôle (surface, §5). |
+| **C6 — Résolution située** | Une difficulté réelle est résolue par microcopie, état, donnée, interaction, asset ou transition pertinente. | Assemblage de composants sans adaptation au cas. | Trouve la difficulté réelle du cas (attente, erreur, donnée, choix) et résous-la par microcopie, état, donnée ou interaction (forme située, §5). |
 
 Chaque verdict C cite l’élément concret observé. Un critère bloquant absent, ou plusieurs signaux faibles convergeant sur le même risque, déclenchent un retour. La correction revient à la direction, à la spec ou au build ; elle n’ajoute pas un effet décoratif terminal.
+
+En trace légère, Gate C sert de contrôle de craft sur la capture, dans la boucle d’édition : un critère absent déclenche son geste, puis une nouvelle capture ; aucun verdict n’est écrit.
 
 ---
 
