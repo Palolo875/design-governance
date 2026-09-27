@@ -17,3 +17,12 @@
 **Décisions antérieures conservées :** 1, 2, 4, 5, 7, 11 ; D-20 ; D-22 ; consigne « qualité avant nombre de mots ».
 
 **Proposition non tranchée :** un cliquet d'atteignabilité dans `V12R_Suivi.py` (écart 1 de `V12R_13`), à inclure dans la prochaine unité si l'owner l'accepte.
+
+## Addendum (27-09-2026) — deux lots ajoutés
+
+Discussion sur l'ambition du système (« le meilleur des deux mondes » : gouvernance **et** production du beau, haut de gamme, pour l'agent comme pour un novice, sans multiplier le travail). Proposition acceptée par l'owner (« Vas-y ») :
+
+- **R8c — passe de finition**, après R8b : gestes de polish concrets par couche (type, espace, couleur, image, interaction et états, détail), observables sur capture, dans le noyau à côté de la boucle d'édition.
+- **R6b élargi** : une page d'entrée humaine d'une page, une demande d'intrants amicale en un message, une voix produit engageante pour la réponse visible.
+
+**Ordre mis à jour :** R8b → **R8c** → R7 → R11 ciblé → **R6b élargi** → restes R5 → R10 par paliers → R11 final → R12.

@@ -69,19 +69,45 @@ git checkout claude/init-repo-claude-md-gm6njm
    - commit (lignes d'attribution), push sur les deux branches.
 9. **Critère d'arrêt commun** : si un lot demande plus de rectifications de harnais que de changements de texte, on s'arrête, on déclare et on revient à l'owner.
 
-## 4. Prochaines unités (ordre décidé le 27-09-2026 : le rendu d'abord)
+## 4. Prochaines unités (ordre décidé le 27-09-2026 : le rendu d'abord ; R8c et R6b élargi ajoutés le même jour)
 
 **Décisions :** `audit/reports/V12R_14_DECISIONS_ARBITRAGES.md` (6 graduée ; schéma inchangé → V1.2.0, R9 reporté ; atlas intégré en R8b ; juges humains + modèles ; lois inchangées ; catalogue après publication ; R10 par paliers ; R11 ciblé). **Détail de mise en œuvre :** le plan consolidé (`plans/propositions/Plan_consolide_V1.2_2026-09-27.md`) sert de guide pour chaque lot (sections citées) ; il n'est pas un second plan actif.
 
 | Ordre | Unité | Guide | Points clés |
 |---|---|---|---|
 | 1 | **R8b** — carte des moyens consolidée, puis atlas conditionnel | consolidé §4 | Partir de `carte_moyens_v0` (déjà alignée sur D-20) et des 18 entrées d'`atlas_references_v0` ; retrouver les pièces exactes et leurs sources, sinon « matériau non vérifié hors atlas » ; leçon, relation produit/contenu, décision transférable, contre-indication, limite ; deux colonnes visuel/fond ; « principes observés » = observations, jamais lois ; fichier dans `skills/.../references/`, chargé seulement si la décision visuelle est ouverte ; manifeste et distributions vérifiés |
+| 1 bis | **R8c** — passe de finition (nouveau lot) | ci-dessous, « R8c » | Gestes de polish concrets par couche, dans le noyau à côté de la boucle d'édition |
 | 2 | **R7** — ancre graduée ; lois et catalogue inchangés | consolidé §8 | Un propriétaire canonique de la règle d'ancre ; DIRECTION, ACTION, SAVOIR et façades alignés ; doublons `ANCHOR-GENERATED` traités ici |
 | 3 | **R11 ciblé** | consolidé §5 | Q04, Q07, Q08, Q09 (textes) ; Q11 et Q12 maintenus ; extraire `audit/logs/DG_AUDIT_001_Journaux_R02.zip` et `…_Epreuves_13-02_traces.zip` pour Q13 et R16 à R32 ; cas négatifs prioritaires ; reliquat écrit |
-| 4 | **R6b** — une entrée humaine | consolidé §6 | Fusion des README du package (rectification déclarée de `validate_design_governance.py` et des LCF) ; QUICKSTART à activation unique, sans démarrages concurrents (« 90 secondes », « trente secondes », « cinq minutes ») ; READING_MAP au chemin et aux locators, avec l'orientation utile d'ORCHESTRATION_MAP |
+| 4 | **R6b** — une entrée humaine (version élargie) | consolidé §6 et ci-dessous, « R6b élargi » | Fusion des README du package (rectification déclarée de `validate_design_governance.py` et des LCF) ; QUICKSTART à activation unique, sans démarrages concurrents (« 90 secondes », « trente secondes », « cinq minutes ») ; READING_MAP au chemin et aux locators, avec l'orientation utile d'ORCHESTRATION_MAP |
 | 5 | **Restes R5** | consolidé §7 | SAVOIR : copie du handoff (l.≈189) → renvoi ACTION ; BIBLIOTHEQUE : maintenance séparée, renvoi de `PRINT_FIELD` aux marqueurs ; doublons d'alternative située |
 | 6 | **R10 par paliers** (quand l'owner lève la consigne « pas de run ») | consolidé §10 | Palier 1 : 18 productions ; conditions figées avant production ; aveugle ; juges selon la décision 9 |
 | 7 | **R11 final**, puis **R12** | consolidé §5, §11 | CI hébergée sur la candidate distribuable ; réserves décidées ; V1.2.0 ; R9 déclaré reporté |
+
+### R8c — Passe de finition (M) · décidé le 27-09-2026
+
+- **Pourquoi.** Le système sait mieux « ne pas rater » que « réussir » : le noyau porte des gestes de composition, mais peu de recettes de finition concrètes. C'est l'écart entre un rendu correct et un rendu haut de gamme.
+- **Périmètre.** Un bloc `FINITION` dans le lieu propriétaire du craft (`SAVOIR/CRAFT`, à préciser dans le patch), compilé dans le noyau §7 juste après la repasse. Environ douze gestes, classés par couche :
+  - **type :** échelle contrastée, tailles optiques ou graisses de titre, approche des grands corps, longueur de ligne, interlignage par rôle, ponctuation et chiffres (tabulaires dans les données) ;
+  - **espace :** une échelle d'espacements, la proximité qui groupe, le vide qui isole le foyer ;
+  - **couleur :** rôles (fond, texte, accent, état), contraste vérifié, un accent tenu ;
+  - **image :** un seul traitement, recadrage au service du foyer ;
+  - **interaction et états :** focus visible et dessiné, survol et pression, chargement, vide et erreur rédigés ;
+  - **détail :** alignement optique, cohérence des rayons et des traits, icônes d'une seule famille.
+- **Forme de chaque geste :** quand l'appliquer ; ce qu'on regarde sur la capture ; la « diff possible ». Aucun style imposé ; aucun formulaire de trace.
+- **Sources datées** (`[VEILLE]`) : ouvrages et guides de référence en typographie et en interface, cités sans copie.
+- **Gardes :** concept `FIN-01` à son lieu propriétaire ; noyau recompilé ; renvoi depuis Gate C (C2, C4, C6) ; « qualité avant nombre de mots » assumée et déclarée.
+- **Réussite :** chaque geste s'observe sur une capture et produit une diff ; aucun ne contredit la retenue, la vérité ou l'accessibilité.
+- **Arrêt :** si un geste ne peut pas s'observer sur une capture, il sort ; si le bloc tourne à la liste de style, on revient aux critères.
+
+### R6b élargi — Une entrée humaine d'une page (M) · décidé le 27-09-2026
+
+- **En plus du périmètre du plan consolidé (§6) :**
+  - **une page d'entrée humaine**, courte et accueillante : « dites ce que vous voulez, donnez vos photos, vos textes et votre marque, voici ce que vous recevez et comment l'améliorer ensemble » ; au vouvoiement, sans jargon, avec renvoi vers la profondeur experte ;
+  - **une demande d'intrants amicale**, un seul message, qui applique la prise de brief décidée (au plus trois demandes, par gain de plafond ; rendu construit dans tous les cas) et explique pourquoi les photos et le vrai contenu changent le résultat ;
+  - **une voix produit pour la réponse visible** (`ACTION/HANDOFF`) : claire, engageante et professionnelle, sans jargon interne ; le ton ne masque jamais un manque ou une limite.
+- **Gardes :** fidélité de la prise de brief (garde FIDELITY existante) ; registre au vouvoiement ; une seule entrée humaine (pas de démarrage concurrent).
+- **Réussite :** un novice sait quoi dire et quoi fournir en moins d'une minute de lecture. C'est une revue documentaire ; la facilité réelle reste à observer (R10).
 
 ## 4 bis. Détail des lots (périmètres d'origine et état)
 
