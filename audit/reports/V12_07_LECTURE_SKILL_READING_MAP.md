@@ -71,6 +71,8 @@ La skill demande, pour un run `DIRECTION` :
 - l'outil de budget ne mesure qu'environ la moitié de ce que la skill prescrit (écart de périmètre, pas d'erreur de calcul). La baisse de 17 mots obtenue par les lots 1 et 2 est donc négligeable face à la charge réelle ;
 - sur ces ≈ 20 700 mots, la fabrication (Diriger/Construire de la skill, `VISUAL_TARGET`, `FIRST-OBJECT`, `FIRST-RENDER`, `CFT-00`, Gate C) en représente **environ un quart à un tiers** (probable, estimation par blocs : 5 400 à 6 400 mots selon que la boucle est comptée ou non).
 
+**Correction (`V12_11` §1) :** en suivant aussi le renvoi impératif de `RUN-DIRECTION` vers `PIPELINE-DIRECTION`, `VISUAL_PROOF`, `CLOSE-PACKAGE` et `HANDOFF`, le chemin prescrit atteint ≈ 23 600 mots (≈ 1 650 lignes).
+
 **Déclaré :** l'outil `V12_Budget_lecture.py` n'est pas modifié. Un second périmètre « chemin prescrit » est proposé en piste (§6).
 
 ### 3.2 La consigne de chargement est dite quatre fois (certain)
