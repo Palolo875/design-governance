@@ -646,7 +646,7 @@ Si ce standard entre en conflit avec une protection critique de compréhension, 
 
 <!-- noyau:début ANCRE -->
 <!-- concept:ANC-01 -->
-**Explorer, accepter, diffuser.** Une première proposition peut commencer sans ancre, quelle que soit sa destination : elle déclare cette limite et reste `EXPLORATORY` ; une hypothèse générée (`ANCHOR-GENERATED`) aide alors à comparer. **Accepter** une direction identitaire exige une ancre : une direction acceptée n’a jamais d’ancres vides. Pour un produit réel, l’ancre est observée ou fournie (`ANCHOR-OBSERVED`, `ANCHOR-PROVIDED`), pertinente et inspectée, avec les autres preuves applicables ; elle peut venir du projet lui-même (identité existante, produit, photographies, interface actuelle). Pour une démonstration ou un modèle, une hypothèse générée peut servir d’ancre à l’acceptation, avec sa limite déclarée. Une **diffusion limitée** sans l’ancre requise passe par `FAIL-ASSUMED` (`ACTION/OVERRIDE`) : le verdict reste non accepté.
+**Explorer, accepter, diffuser.** Une première proposition peut commencer sans ancre, quelle que soit sa destination : elle déclare cette limite et reste `EXPLORATORY` ; une hypothèse générée (`ANCHOR-GENERATED`) aide alors à comparer. **Accepter** une direction identitaire exige une ancre : une direction acceptée n’a jamais d’ancres vides. Pour un produit réel, l’ancre est observée ou fournie (`ANCHOR-OBSERVED`, `ANCHOR-PROVIDED`), pertinente et inspectée, avec les autres preuves applicables ; elle peut venir du projet lui-même (identité existante, produit, photographies, interface actuelle). Pour une démonstration ou un modèle, une hypothèse générée peut servir d’ancre à l’acceptation, avec sa limite déclarée. Sans l’ancre requise, la direction reste `EXPLORATORY` : elle peut être montrée ou partagée comme proposition, avec sa limite. `FAIL-ASSUMED` (`ACTION/OVERRIDE`) ne vaut que pour un échec connu et observé, jamais pour une ancre absente, qui reste `NOT-VERIFIED` ; le verdict reste non accepté.
 <!-- noyau:fin ANCRE -->
 
 Les voies d’ancrage sont les suivantes ; une ancre est datée et inspectable :
@@ -661,7 +661,7 @@ Les voies d’ancrage sont les suivantes ; une ancre est datée et inspectable :
 
 Une référence humaine ou produite est un calibrateur, non un modèle à reproduire. Elle ne prouve ni l’efficacité produit, ni le droit de réemploi, ni l’adéquation à tous les publics. Une source Web doit être réellement ouverte et réinspectable ; un extrait de résultat de recherche, une image isolée ou une tendance non datée ne suffit pas à constituer une ancre de direction.
 
-Sans ancre utile, les axes visuels concernés restent `NOT-VERIFIED` et la direction ne peut pas être acceptée ; une diffusion limitée reste possible par `FAIL-ASSUMED`, avec un verdict non accepté (`ACTION/OVERRIDE`). Le validateur de `RUN_CARD` refuse une direction acceptée sans ancre, mais ne connaît pas la destination : l’exigence d’une ancre observée ou fournie pour un produit réel relève de la revue d’acceptation.
+Sans ancre utile, les axes visuels concernés restent `NOT-VERIFIED` et la direction ne peut pas être acceptée ; elle reste `EXPLORATORY` avec sa limite. Une ancre absente n’est pas un échec connu : `FAIL-ASSUMED` ne s’y applique pas (`ACTION/OVERRIDE`). Le validateur de `RUN_CARD` refuse une direction acceptée sans ancre, mais ne connaît pas la destination : l’exigence d’une ancre observée ou fournie pour un produit réel relève de la revue d’acceptation.
 
 ### [ABSOLU 3 — GATE] Aucune livraison sans les preuves applicables au mode.
 

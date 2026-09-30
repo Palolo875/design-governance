@@ -53,3 +53,11 @@
   - il demande ou utilise les éléments du projet avant d'accepter une direction pour un vrai produit.
 - **Hypothétique :** l'effet sur les rendus et sur la qualité des acceptations (R10).
 - **Limite :** auto-comparaison.
+
+## Erratum (30-09-2026, raccord R7-2)
+
+Le texte appliqué disait qu'une diffusion limitée sans l'ancre requise « passe par `FAIL-ASSUMED` ». C'est inexact.
+- `ACTION/OVERRIDE` réserve `FAIL-ASSUMED` à un échec connu, présent dans `proof.observed`.
+- Une ancre absente laisse les axes visuels `NOT-VERIFIED`, et un `NOT-VERIFIED` ne se requalifie pas en échec.
+
+Chemin correct : sans l'ancre requise, la direction reste `EXPLORATORY`, avec sa limite. Corrigé par `V12R_24_R72_RACCORD_ANCRE.md`.

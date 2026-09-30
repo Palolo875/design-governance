@@ -30,11 +30,11 @@
 | R5d : boucle et one-shot de BIBLIOTHEQUE en renvoi, F22 atteignable depuis Gate C (PRC-01) | `V12R_11` |
 | R6a : boucle du README en renvoi (dernière exemption levée), glossaire des termes de la refonte | `V12R_12` |
 | R11a : résidu `DAILY` retiré ; ancre de mesure F13 rectifiée ; carte des moyens v0 alignée sur D-20 | `V12R_13` |
-| R8b, R8b-2, R8c, R8c-2 : moyens et gestes ; R7 : ancre graduée | `V12R_15` à `V12R_21` |
+| R8b, R8b-2, R8c, R8c-2 : moyens et gestes ; R7 : ancre graduée ; raccord R7-2 (ancre absente → `EXPLORATORY`, `FAIL-ASSUMED` pour un échec connu) | `V12R_15` à `V12R_21` ; `V12R_24` |
 | R11 ciblé : Q-04 à Q-13 et R-16 à R-32 instruits sur traces ; contrôle machine nommé par mode, one-shot relié à B1b, exclusion critique conditionnelle, ancre `transformed` en DIRECTION ; six cas négatifs ; trois cas de harnais migrés (M1) | `V12R_22`, `V12R_23` |
 
 - **Mesures :**
-  - **mesures après R11 ciblé** : chemin prescrit 12 839 mots (trace légère), trace complète 17 572 ; noyau 3 861 mots (après R7 : 12 795 et 3 861 ; après R8c-2 : 12 682 et 3 748 ; après R11a : 12 187 et 3 302) ;
+  - **mesures après R7-2** : chemin prescrit 12 867 mots (trace légère), trace complète 17 600 ; noyau 3 885 mots (après R11 ciblé : 12 839 et 3 861 ; après R7 : 12 795 et 3 861 ; après R8c-2 : 12 682 et 3 748 ; après R11a : 12 187 et 3 302) ;
   - 24/25 outils de fabrication sur le chemin ; l'outil manquant est **F22** (tests perceptifs), atteignable en un renvoi conditionnel depuis Gate C (`PRC-01`), non compté car la mesure ne suit que les lectures impératives ;
   - 1 liste de chargement.
 - **Gardes :**
