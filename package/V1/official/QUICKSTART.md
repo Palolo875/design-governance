@@ -98,7 +98,7 @@ python3 scripts/read_route.py DIRECTION/START
 python3 scripts/read_route.py ACTION/RUN-LITE
 ```
 
-Le lecteur résout le locator dans `READING_MAP.md`, vérifie le titre exact du propriétaire et n’affiche que le bloc demandé. Pour une carte concrète, le mode strict rejette les placeholders et vérifie les locators d’artefacts locaux :
+Le lecteur résout le locator selon `READING_MAP.md` (raccourci, titre propriétaire, puis sous-locator) et n’affiche que le bloc demandé. Pour une carte concrète, le mode strict rejette les placeholders et vérifie les locators d’artefacts locaux :
 
 ```bash
 python3 scripts/validate_run_card.py --strict chemin/vers/run_card.json

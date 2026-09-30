@@ -529,7 +529,7 @@ def check_facades(errors: list[str]) -> None:
         ("LCF-06", "DIRECTION, index « Nouvelle structure d’écran »", "DIRECTION/START (classification)",
          bool(index) and "classification `ACTION/RUN-STANDARD`" not in index[1]),
         ("LCF-07", "DIRECTION 72, RUN-PRIORITY, READING_MAP, ORCHESTRATION_MAP, skill", "DIRECTION 55 (cible avant premier objet)", lcf_07(t)),
-        ("LCF-08", "DIRECTION, gabarit START et FAST-PATH", "ACTION/RUN_CARD (OWNER et SCOPE jamais omis)",
+        ("LCF-08", "DIRECTION, gabarit START et FAST-PATH", "DIRECTION/START (OWNER et SCOPE jamais omis)",
          re.search(r"`?OWNER`? et `?SCOPE`?[^.]*jamais omis", entry) is not None and bool(fast) and "si nécessaire" not in fast[1]),
         ("LCF-09", "DIRECTION, RUN-PRIORITY et récapitulatif de protection (point 4)", "BIBLIOTHEQUE/SELECT, SCENE",
          bool(re.search(r"FIRST-OBJECT —[\s\S]*?sauf si", prio))),

@@ -105,7 +105,7 @@ RISK: blast radius partagé
 ARTIFACT: composant, états, captures et consommateurs représentatifs
 OBSERVED: libellé long, erreur, focus et clavier dans trois consommateurs ; troncature observée sur mobile dans le consommateur 2
 NOT-VERIFIED: autres écrans, plateformes et thèmes
-DECISION-CHANGE: ABANDONED — l’extension du Select en l’état est abandonnée jusqu’à correction de la troncature mobile (observation : consommateur 2)
+DECISION-CHANGE: ABANDONED — l’extension du Select en l’état est abandonnée : la troncature mobile casse ce consommateur ; une version corrigée reprend dans le même mode (observation : consommateur 2)
 ISSUE: RETURNED
 VERDICT: RETURN
 STATE: CLOSED

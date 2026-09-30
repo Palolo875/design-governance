@@ -217,7 +217,7 @@ def check_critical_protection(card: dict[str, Any], mode: Any) -> dict[str, Any]
     if risk.get("level") != "critical":
         return None
     if mode in {"LITE", "ITER"}:
-        raise ValidationError("un risque critical interdit le mode LITE ou ITER (DIRECTION 140)")
+        raise ValidationError("un risque critical interdit le mode LITE ou ITER (DIRECTION/START, Protection de niveau)")
     protection = risk.get("critical_protection")
     if not isinstance(protection, dict):
         raise ValidationError("un risque critical exige une critical_protection structurée")
@@ -419,7 +419,7 @@ def check_direction(card: dict[str, Any], closure: dict[str, Any]) -> None:
         if verdict in ACCEPTED:
             raise ValidationError("DIRECTION sans ancrage : verdict accepté interdit")
         if closure.get("issue") is None:
-            raise ValidationError("DIRECTION sans ancrage exige une issue (sérialisation honnête, ACTION 483)")
+            raise ValidationError("DIRECTION sans ancrage exige une issue (sérialisation honnête, ACTION/PIPELINE-DIRECTION)")
     for anchor in anchors:
         if not isinstance(anchor, dict):
             raise ValidationError("chaque ancrage DIRECTION doit être structuré")
@@ -498,7 +498,7 @@ def check_semantic_contract(document: Any) -> None:
     if mode == "ITER":
         direction = card.get("direction")
         if not isinstance(direction, dict) or not filled(direction.get("thesis")):
-            raise ValidationError("ITER exige un rappel de direction (direction.thesis) ; sinon reclasser (DIRECTION 672)")
+            raise ValidationError("ITER exige un rappel de direction (direction.thesis) ; sinon reclasser (DIRECTION, ITER se souvient)")
 
     if closure.get("direction_status") == "LOST-IN-BUILD" and verdict in ACCEPTED:
         raise ValidationError("LOST-IN-BUILD ne peut pas produire un verdict accepté")
@@ -773,6 +773,13 @@ UNIT_CASES: list[tuple[Any, ...]] = [
     ("C4-2", RETURNED, STRICT_LITE, ((RC, "artifact", "locator"), "captures/absent.png"), "artefact local absent", True),
     ("D2-1", RETURNED, BUILDING, ((RC, "decision_change"), {"outcome": "CHANGED", "value": "Conséquence déclarée", "evidence": "Aucune"}), "avant observation"),
     ("D2-2", RETURNED, ITER, ((RC, "direction"), DELETE), "rappel de direction"),
+    # Cas négatifs manquants (R11 ciblé, V12R_22 §5) : une règle, un cas.
+    ("N1", EXAMPLE, [], ((RC, "proof", "provenance", "artifact_locator"), "autre-chemin-local"), "artifact_locator doit correspondre à artifact.locator"),
+    ("N2", EXAMPLE, [], ((RC, "proof", "not_verified"), ["Hiérarchie et premier geste observés dans le viewport inspecté."]), "ne peuvent pas contenir le même claim"),
+    ("N3", EXAMPLE, [((RC, "risk"), CRITICAL)], ((RC, "risk", "critical_protection", "failure_action"), "CONTINUE"), "failure_action doit retourner, bloquer ou escalader"),
+    ("N4a", EXAMPLE, [((RC, "risk"), CRITICAL)], ((RC, "risk", "critical_protection", "owner"), DELETE), "critical_protection exige le champ owner"),
+    ("N4b", EXAMPLE, [((RC, "risk"), CRITICAL)], ((RC, "risk", "critical_protection", "evidence_locator"), DELETE), "critical_protection exige le champ evidence_locator"),
+    ("N5", EXAMPLE, [], ((RC, "proof", "provenance", "method"), DELETE), "proof.provenance exige le champ method"),
 ]
 
 

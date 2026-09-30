@@ -263,7 +263,7 @@ Après une observation qui modifie, confirme ou abandonne effectivement une déc
 
 > `DECISION-CHANGE — [décision effectivement changée, confirmée ou abandonnée grâce à la procédure].`
 
-À la clôture, si aucune décision n’a été changée, confirmée ou abandonnée, la triade d’`ACTION/STATUS` s’applique : `N/A-JUSTIFIED` lorsqu’aucune conséquence n’était applicable, avec la raison, le risque de continuer sans changement et la prochaine action éventuelle ; `NOT-OBSERVED` lorsqu’une conséquence attendue n’a pas été observée. Ne déclare jamais un changement avant qu’une observation ne l’ait rendu réel.
+À la clôture, si aucune décision n’a été changée, confirmée ou abandonnée, les valeurs de repli d’`ACTION/STATUS` s’appliquent : `N/A-JUSTIFIED` lorsqu’aucune conséquence n’était applicable, avec la raison, le risque de continuer sans changement et la prochaine action éventuelle ; `NOT-OBSERVED` lorsqu’une conséquence attendue n’a pas été observée. Ne déclare jamais un changement avant qu’une observation ne l’ait rendu réel.
 
 ### Mémoire de lancement et renvoi de `RUN_CARD`
 
@@ -375,7 +375,7 @@ Un CTA doit soit déclencher un comportement local réellement implémenté, soi
 
 ### Contrat positif du premier objet
 
-Le premier objet est suffisant lorsqu’il permet de juger la direction comme une proposition réelle, et non comme une intention décorative. Pour chaque dimension, conserve l’observation ; sinon la triade d’`ACTION/STATUS` s’applique : `N/A-JUSTIFIED` lorsque la dimension ne peut pas changer la décision, `NOT-OBSERVED` lorsqu’une conséquence attendue n’a pas été observée :
+Le premier objet est suffisant lorsqu’il permet de juger la direction comme une proposition réelle, et non comme une intention décorative. Pour chaque dimension, conserve l’observation ; sinon les valeurs de repli d’`ACTION/STATUS` s’appliquent : `N/A-JUSTIFIED` lorsque la dimension ne peut pas changer la décision, `NOT-OBSERVED` lorsqu’une conséquence attendue n’a pas été observée :
 
 | Dimension | Suffisant quand… | Retour si… | Dimension CFT-00 |
 |---|---|---|---|
@@ -487,7 +487,7 @@ Une route est insuffisante si elle n’explique pas pourquoi l’asset, à son c
 
 ### Réserve `ANCHOR-GENERATED` en enjeu identitaire élevé
 
-Lorsque l’enjeu identitaire est élevé et que seule la voie `ANCHOR-GENERATED` — hypothèse visuelle générée — est utilisée, la `RUN_CARD` porte une réserve explicite : « Direction calibrée uniquement sur hypothèse générée, sans référence observée ni contrainte réelle. » Le statut de direction ne peut pas être `HELD` sans cette réserve ou sans calibration complémentaire par `ANCHOR-OBSERVED`, `ANCHOR-PROVIDED` ou contrainte réelle. Cette réserve décrit une limite de calibration ; elle ne déclare ni l’image fausse, ni la direction invalide par principe. Dans une `RUN_CARD`, cette base est `direction.calibration` : `real_constraint` lorsqu’une contrainte réelle calibre la direction, sinon `generated_only_reserved`, qui interdit `ACCEPTED` (`ACTION/PIPELINE-DIRECTION`).
+Lorsque l’enjeu identitaire est élevé et que seule la voie `ANCHOR-GENERATED` — hypothèse visuelle générée — est utilisée, la `RUN_CARD` porte une réserve explicite : « Direction calibrée uniquement sur hypothèse générée, sans référence observée ni contrainte réelle. » Le statut de direction ne peut pas être `HELD` sans cette réserve ou sans calibration complémentaire par `ANCHOR-OBSERVED`, `ANCHOR-PROVIDED` ou contrainte réelle. Cette réserve décrit une limite de calibration ; elle ne déclare ni l’image fausse, ni la direction invalide par principe. Dans une `RUN_CARD`, cette base est `direction.calibration.basis` : `real_constraint` lorsqu’une contrainte réelle calibre la direction, sinon `generated_only_reserved`, qui interdit `ACCEPTED` (`ACTION/PIPELINE-DIRECTION`).
 
 > **Passage à `SPECCED`.** Dans `ACTION/STATUS`, `SPECCED` signifie que la direction, la hiérarchie, le contrat ou l’ancre nécessaires sont disponibles ; cela ne signifie ni construit, ni observé, ni accepté. Une surface `DIRECTION` est prête à construire lorsque chaque champ de la table de `VISUAL_TARGET` est renseigné ou `N/A-JUSTIFIED` ; la route d’asset seulement si nécessaire.
 
@@ -549,7 +549,7 @@ Lorsqu’une dimension échoue, l’agent peut effectuer **une correction substa
 
 ### One-shot et boucle d’amélioration
 
-Le `one-shot` est une branche raccourcie de la même discipline, jamais l’absence de discipline. Avant le build, vérifie : décision dominante, risque, public ou JTBD lorsque pertinent, position, premier objet attendu, contrainte réelle et prochaine preuve. Après le build, vérifie : capture réelle dans le scope, contrôle des huit dimensions du premier objet, revue créative, vérification du risque dominant, états et transformations pertinentes. Tu peux t’arrêter après cette observation si la qualité initiale attendue est atteinte, que la direction est identifiable, que les risques applicables sont couverts et qu’aucune amélioration utile ne promet un gain réel. Si le rendu est faible, générique ou incomplet, corrige, retourne ou escalade ; ne transforme pas `EXPLORATORY` en permission de livrer une première proposition creuse.
+Le `one-shot` est une branche raccourcie de la même discipline, jamais l’absence de discipline. Avant le build, vérifie : décision dominante, risque, public ou JTBD lorsque pertinent, position, premier objet attendu, contrainte réelle et prochaine preuve. Après le build, vérifie : capture réelle dans le scope, contrôle des huit dimensions du premier objet, revue créative, vérification du risque dominant, états et transformations pertinentes. Tu peux t’arrêter après cette observation si la qualité initiale attendue est atteinte, que la direction est identifiable, que les risques applicables sont couverts et qu’aucune amélioration utile ne promet un gain réel (B1b dans son scope, `ACTION/GATE-B/B1b`). Si le rendu est faible, générique ou incomplet, corrige, retourne ou escalade ; ne transforme pas `EXPLORATORY` en permission de livrer une première proposition creuse.
 
 <!-- noyau:début BOUCLE -->
 La boucle commune est : **préparer → construire → observer → isoler le défaut dominant → modifier l’artefact ou la décision → observer à nouveau → comparer → décider**. La modification doit changer une relation visible, une tâche, une preuve, une contrainte ou une propriété de robustesse. Une nouvelle rationale, une variante décorative ou une reformulation de la trace ne constitue pas une correction.

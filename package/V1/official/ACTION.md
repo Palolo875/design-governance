@@ -20,7 +20,7 @@
 | `DIRECTION` | `ACTION/RUN-DIRECTION`, `ACTION/PIPELINE-DIRECTION`, `ACTION/VISUAL_PROOF`, `ACTION/GATE-A`, `ACTION/GATE-C` ; `ACTION/GATE-B` en trace complète (`ACTION/HANDOFF`) |
 | `SYSTÈME` | `ACTION/RUN-SYSTEM`, puis `CHANGELOG` pour adoption ou migration |
 
-La sortie à conserver de chaque mode est définie une seule fois, par `ACTION/CLOSE-PACKAGE`.
+Le paquet de sortie de chaque mode est défini par `ACTION/CLOSE-PACKAGE` ; `ACTION/RUN-DIRECTION` (ancrages) et `ACTION/RUN-SYSTEM` (`closure.system_package`) en précisent le détail.
 
 Les sections `RUN_CARD`, `CLOSE-PACKAGE` et `CLOSE-EXIT-CHECK` s’ajoutent lorsque la trace est persistante ou que la clôture l’exige. `FAST-PATH` n’est pas une sixième voie : chaque occurrence de ce nom reste une vue locale du propriétaire qui l’emploie.
 
@@ -172,9 +172,9 @@ Le verdict global reste `null` avant `CHECKING` ; il est présent à `DECIDED` e
 | `FAIL-ASSUMED` | Un échec connu est explicitement journalisé et diffusé dans un périmètre limité et temporaire. |
 | `ESCALATED` | Une décision, un owner, un droit, une capacité ou un risque dépasse le périmètre du run. |
 
-**Compatibilités.** Une issue non nulle interdit un verdict accepté. `LOST-IN-BUILD` interdit un verdict accepté. `PARTIALLY-HELD` interdit `ACCEPTED` ; `HELD-WITH-ACCEPTED-DIFFERENCE` est le statut d’une différence acceptée. Une ancre `transformed` est compatible avec tout verdict ; elle est requise pour l’acceptation.
+**Compatibilités.** Une issue non nulle interdit un verdict accepté. `LOST-IN-BUILD` interdit un verdict accepté. `PARTIALLY-HELD` interdit `ACCEPTED` ; `HELD-WITH-ACCEPTED-DIFFERENCE` est le statut d’une différence acceptée. En `DIRECTION`, un verdict accepté exige que chaque ancre soit `transformation_status: transformed`.
 
-**Conséquence décisionnelle** (`DECISION-CHANGE`) : changée · confirmée · abandonnée · `N/A-JUSTIFIED` (aucune conséquence applicable, avec raison) · `NOT-OBSERVED` (conséquence attendue absente ; interdit `ACCEPTED`). À ne pas confondre avec `NOT-VERIFIED`, qui qualifie une preuve manquante ou un axe. Dans une `RUN_CARD`, ces valeurs sont `decision_change.outcome` : `CHANGED`, `CONFIRMED`, `ABANDONED`, `N/A-JUSTIFIED`, `NOT-OBSERVED`.
+**Conséquence décisionnelle** (`DECISION-CHANGE`) : changée · confirmée · abandonnée (la triade) ; sinon, l’une des deux valeurs de repli : `N/A-JUSTIFIED` (aucune conséquence applicable, avec raison) · `NOT-OBSERVED` (conséquence attendue absente ; interdit `ACCEPTED`). À ne pas confondre avec `NOT-VERIFIED`, qui qualifie une preuve manquante ou un axe. Dans une `RUN_CARD`, ces valeurs sont `decision_change.outcome` : `CHANGED`, `CONFIRMED`, `ABANDONED`, `N/A-JUSTIFIED`, `NOT-OBSERVED`.
 
 ### Règle de lecture des statuts
 
@@ -192,7 +192,7 @@ Si une équipe doit suivre un handoff ou une archive, elle le fait dans son outi
 
 ### Principe positif de qualité
 
-La méthode ne vise pas seulement à éviter une sortie générique. Elle prépare et construit une proposition qui peut être belle, ambitieuse, spécifique et cohérente dès le premier rendu. Avant le build, déclare la relation produit à rendre perceptible, le niveau de résolution attendu et le défaut dominant à éviter. Après le build, juge cette intention sur l’artefact réel. Un rendu one-shot peut être clôturé après la première observation si la qualité attendue est atteinte, les risques sont couverts et aucune correction ne promet un gain réel ; il ne peut jamais être clôturé sans observation du rendu.
+La méthode ne vise pas seulement à éviter une sortie générique. Elle prépare et construit une proposition qui peut être belle, ambitieuse, spécifique et cohérente dès le premier rendu. Avant le build, déclare la relation produit à rendre perceptible, le niveau de résolution attendu et le défaut dominant à éviter. Après le build, juge cette intention sur l’artefact réel. Un rendu one-shot peut être clôturé après la première observation si la qualité attendue est atteinte, les risques sont couverts et aucune correction ne promet un gain réel (B1b dans son scope, `ACTION/GATE-B/B1b`) ; il ne peut jamais être clôturé sans observation du rendu.
 
 
 ### Verdicts V/U/A/T
@@ -250,7 +250,7 @@ Après une observation qui modifie, confirme ou abandonne effectivement une déc
 DECISION-CHANGE — décision effectivement changée, confirmée ou abandonnée grâce au run.
 ```
 
-Si aucune décision ne change, la clôture utilise `N/A-JUSTIFIED` lorsque cela est justifié, avec la raison et la prochaine preuve éventuelle ; `NOT-OBSERVED` lorsqu’une conséquence attendue n’a pas été observée. Ne déclare jamais un changement avant qu’une observation ne l’ait rendu réel. Dans une `RUN_CARD`, `DECISION-CHANGE` devient `decision_change`, dont `outcome` porte la triade de `ACTION/STATUS` ; `N/A-JUSTIFIED` y exige `reason`. `DECISION-CHANGE` et le creative close sont des champs « après observation » : ils restent absents tant que le run n’a pas atteint `CHECKING`.
+Si aucune décision ne change, la clôture utilise `N/A-JUSTIFIED` lorsque cela est justifié, avec la raison et la prochaine preuve éventuelle ; `NOT-OBSERVED` lorsqu’une conséquence attendue n’a pas été observée. Ne déclare jamais un changement avant qu’une observation ne l’ait rendu réel. Dans une `RUN_CARD`, `DECISION-CHANGE` devient `decision_change`, dont `outcome` porte la triade et les deux valeurs de repli d’`ACTION/STATUS` ; `N/A-JUSTIFIED` y exige `reason`. `DECISION-CHANGE` et le creative close sont des champs « après observation » : ils restent absents tant que le run n’a pas atteint `CHECKING`.
 
 ### Trace post-build de `DIRECTION/EXTERNAL-START`
 
@@ -302,7 +302,7 @@ Quel que soit son support, elle conserve au minimum :
 | `DIRECTION-STATUS` | Statut de fidélité de la direction : `HELD`, `HELD-WITH-ACCEPTED-DIFFERENCE`, `PARTIALLY-HELD` ou `LOST-IN-BUILD`, si applicable. |
 | `DECISION` | Décision dominante à prendre ou à vérifier. |
 | `DECISION-INTENT` | Décision que la procédure doit permettre de trancher. |
-| `DECISION-CHANGE` | Décision effectivement changée, confirmée ou abandonnée ; sinon la triade d’`ACTION/STATUS` : `N/A-JUSTIFIED` si aucune conséquence n’était applicable (avec la raison), `NOT-OBSERVED` si une conséquence attendue n’a pas été observée (interdit `ACCEPTED`). |
+| `DECISION-CHANGE` | Décision effectivement changée, confirmée ou abandonnée ; sinon l’une des valeurs de repli d’`ACTION/STATUS` : `N/A-JUSTIFIED` si aucune conséquence n’était applicable (avec la raison), `NOT-OBSERVED` si une conséquence attendue n’a pas été observée (interdit `ACCEPTED`). |
 | `RISK` | Risque principal et impact potentiel ; projection : `risk.level` et `risk.statement`. |
 | `ARTIFACT` | Lien vers rendu, code, capture, test ou diff. |
 | `TRACE-LOCATOR` | URL, chemin, ticket, commit ou identifiant qui rend la trace et ses artefacts réinspectables. Requis en `STANDARD`, `DIRECTION`, `SYSTÈME` et `ITER` (toute `RUN_CARD` sérialisée ; un `ITER` éphémère reste en mémoire locale, sans `RUN_CARD`) ; en `LITE`, l’artefact localement évident peut servir de locator. |
@@ -310,7 +310,7 @@ Quel que soit son support, elle conserve au minimum :
 
 Dans la projection JSON contrôlable, les noms composés sont sérialisés en `snake_case` : `DATE / VERSION` devient `date_version`, `DIRECTION-STATUS` devient `direction_status`, `TRACE-LOCATOR` devient `trace_locator`, `NEXT-PROOF` devient `next_proof` et `CAPABILITY-PROFILE` devient `capability_profile`. Cette sérialisation ne change pas la signification canonique des champs.
 
-**Protection critique.** Un risque `critical` porte une protection : contrôle, owner, scope, action en cas d’échec (`RETURNED`, `BLOCKED` ou `ESCALATED`), locator de preuve et **résultat** (`PASS`, `FAIL` ou `NOT-VERIFIED`). Une vérification absente n’est jamais rédigée comme accomplie : sans résultat observé, le résultat est `NOT-VERIFIED`, qui interdit `ACCEPTED`. En cas d’échec, l’issue suit l’action déclarée et aucun verdict n’est accepté. Un risque critique exclut `LITE` et `ITER` (`DIRECTION/START`).
+**Protection critique.** Un risque `critical` porte une protection : contrôle, owner, scope, action en cas d’échec (`RETURNED`, `BLOCKED` ou `ESCALATED`), locator de preuve et **résultat** (`PASS`, `FAIL` ou `NOT-VERIFIED`). Une vérification absente n’est jamais rédigée comme accomplie : sans résultat observé, le résultat est `NOT-VERIFIED`, qui interdit `ACCEPTED`. En cas d’échec, l’issue suit l’action déclarée et aucun verdict n’est accepté. Un risque critique que le changement touche exclut `LITE` et `ITER` (`DIRECTION/START`, « Protection de niveau ») ; un delta démontré strictement local et sans effet sur ce risque ne le déclare pas comme risque du run.
 
 **Table de correspondance.** La projection imbrique les champs de run sous `run_card` et regroupe la clôture sous `closure`. La colonne Phase dit quand un champ est renseigné : `avant build`, `après observation` ou `clôture`. Cette table est descriptive : le schéma livré et le validateur restent les autorités de structure et de contrôle.
 
@@ -325,12 +325,12 @@ Dans la projection JSON contrôlable, les noms composés sont sérialisés en `s
 | PROOF / TRACE-LOCATOR | clôture | `trace_locator` | preuve détaillée : trace |
 | LIMIT / NOT-VERIFIED | clôture | `closure.limitations`, `proof.not_verified` ; axes : `closure.axes` | — |
 | STATE, ISSUE, VERDICT, DIRECTION-STATUS | chaque transition | `closure.state`, `.issue`, `.verdict`, `.direction_status` ; reclassement : `closure.reclassification` ; exception : `closure.exception` | — |
-| DECISION-CHANGE | après observation | `decision_change` (`outcome`, `reason`) | — |
+| DECISION-CHANGE | après observation | `decision_change` (`outcome`, `value`, `evidence` ; `reason` exigé si `N/A-JUSTIFIED`, non exigé si `NOT-OBSERVED`) | — |
 | NEXT-PROOF | clôture | `next_proof` | — |
 | NEXT-ACTION | clôture | DIRECTION : `creative_close.next_polish_action` ; sinon `next_proof` lorsque l’action suivante est une preuve | **hors projection : trace** |
 | EXIT-CONDITION | clôture | `closure.reservations[].exit_condition` lorsqu’une réserve existe | **hors projection : trace** |
 | VISUAL_TARGET : thèse, modal / parti | avant build | `direction.thesis`, `.anti_direction` (le modal nommé et le parti) | — |
-| Direction qualifiée : premier objet (`DIRECTION/FIRST-OBJECT`), contrainte (`DIRECTION/VISUAL_TARGET`, « Qualifier la direction ») ; périmètre (`SCOPE`) | avant build | `direction.first_object`, `.constraint`, `.scope` | — |
+| Direction qualifiée : premier objet (`DIRECTION/FIRST-OBJECT`), contrainte (`CONSTRAINT` de `DIRECTION/START`) ; surfaces couvertes par la direction (facultatif ; distinct d’`artifact.scope`, scope observé de l’artefact) | avant build | `direction.first_object`, `.constraint`, `.scope` | — |
 | VISUAL_TARGET : ancre | avant build | `anchors[]` (dont `type` et `date`) | — |
 | VISUAL_TARGET : objet de preuve | avant build → après observation | `next_proof` avant, `proof.observed` après | — |
 | VISUAL_TARGET : matière / asset | avant build | droits : `artifact.rights_status` | route, cadrage, fallback : **trace** |
@@ -341,7 +341,7 @@ Dans la projection JSON contrôlable, les noms composés sont sérialisés en `s
 | Sources, statut de source | avant build | `sources[]` (section canonique ou locator) | statut vérifié / non revu : **trace** |
 | Manifeste externe | clôture | résolu par `trace_locator` | — |
 
-**Règle.** Un champ hors projection n’est jamais glissé dans un champ voisin (par exemple NEXT-ACTION dans `limitations`) ; il reste dans la trace, que `trace_locator` rend retrouvable.
+**Règle.** Un champ hors projection n’est jamais glissé dans un champ voisin non prévu par cette table (par exemple NEXT-ACTION dans `limitations`) ; il reste dans la trace, que `trace_locator` rend retrouvable.
 
 `STATUS` peut rester lisible comme alias d’archive ou d’affichage pour compatibilité avec des traces existantes. Il est interdit dans une nouvelle `RUN_CARD` comme champ unificateur : les nouveaux runs utilisent séparément `STATE`, `ISSUE`, `VERDICT` et `DIRECTION-STATUS`. Aucun alias ne remplace cette séparation.
 
@@ -402,7 +402,7 @@ Les valeurs `state`, `issue`, `verdict`, `gate`, `axis`, `decision_change`, `NOT
 La validation JSON, la validation CLI, les fixtures, la compilation, le build et l’intégrité d’une archive établissent seulement que la projection, le package ou l’artefact de distribution respecte les contrôles exécutés. Ils ne prouvent ni que l’artefact est réellement implémenté dans son runtime, ni son usage, ni son accessibilité exécutée, ni sa performance, ni sa qualité visuelle, ni la préférence humaine. Une `RUN_CARD` valide peut donc rester `NOT-VERIFIED` sur un axe ou porter une limitation substantielle.
 
 <!-- concept:VAL-01 -->
-**Ce qu’atteste une `RUN_CARD` validée :** la forme de la projection et les invariants de la liste close (états, issues, verdicts et leur temps, axes, protection critique, exception, capacité et version de la preuve, réserves, droits déclarés, ancres, conséquence décisionnelle, reclassement, paquet SYSTÈME, B1b, trace par mode). **Ce qu’elle n’atteste pas (forme seule) :** que les observations ont réellement eu lieu ; la justesse des jugements V/U/A/T ; l’étendue réelle d’un claim (tâche utilisateur, technologie d’assistance, périmètre de diffusion) ; l’identité de la personne qui autorise ; la réalité des droits, licences et données ; la fraîcheur d’une ancre, dont seule la date ISO est contrôlée ; la qualité perceptuelle. Par mode : pour `LITE`, `ITER` et `STANDARD`, le paquet de clôture vit dans la trace et la machine ne le vérifie pas ; pour tous les modes, elle ne vérifie ni que les consumers listés sont tous les consumers réels, ni que la baseline montre ce qu’elle prétend, ni que la décision couverte par une paire équivalente est bien la même. Ces points restent à la trace, à la revue et à l’owner.
+**Ce qu’atteste une `RUN_CARD` validée :** la forme de la projection et les invariants de la liste close (états, issues, verdicts et leur temps, axes, protection critique, exception, capacité et version de la preuve, réserves, droits déclarés, ancres, conséquence décisionnelle, reclassement, paquet SYSTÈME, B1b, trace par mode). **Ce qu’elle n’atteste pas (forme seule) :** que les observations ont réellement eu lieu ; la justesse des jugements V/U/A/T ; l’étendue réelle d’un claim (tâche utilisateur, technologie d’assistance, périmètre de diffusion) ; l’identité de la personne qui autorise ; la réalité des droits, licences et données ; la fraîcheur d’une ancre, dont seule la date ISO est contrôlée ; la qualité perceptuelle. Par mode : pour `LITE`, `ITER` et `STANDARD`, la machine vérifie les invariants communs et les champs de mode nommés dans la colonne « Contrôle machine » d’`ACTION/CLOSE-PACKAGE` ; le reste du paquet vit dans la trace et n’est pas vérifié ; pour tous les modes, elle ne vérifie ni que les consumers listés sont tous les consumers réels, ni que la baseline montre ce qu’elle prétend, ni que la décision couverte par une paire équivalente est bien la même. Ces points restent à la trace, à la revue et à l’owner.
 
 Le **profil strict** applique les mêmes exigences par mode que la validation normale. Il ajoute le rejet des placeholders et des hôtes de démonstration, et l’existence des locators locaux, résolus depuis le dossier de la carte.
 
@@ -472,9 +472,9 @@ Livre d’abord l’artefact ou le lien de rendu. Enregistre ensuite le paquet m
 
 | Mode | Paquet minimal | Contrôle machine |
 |---|---|---|
-| **LITE** | Artefact touché, diff, risque, V/U/A/T touchés, verdict, réserve ou prochaine action, et conséquence décisionnelle (`DECISION-CHANGE`, `N/A-JUSTIFIED` ou `NOT-OBSERVED`). | Forme seule, dans la trace. |
-| **ITER** | Direction rappelée et retrouvable, diff observable, non-régression, preuve du risque touché, V/U/A/T mis à jour, verdict, risque restant, prochaine action et conséquence décisionnelle (`DECISION-CHANGE`, `N/A-JUSTIFIED` ou `NOT-OBSERVED`). | Forme seule, dans la trace. |
-| **STANDARD** | Rendu ou artefact, hiérarchie, typographie, états pertinents, V/U/A/T, verdict, risque restant, prochaine action et conséquence décisionnelle (`DECISION-CHANGE`, `N/A-JUSTIFIED` ou `NOT-OBSERVED`). | Forme seule, dans la trace. |
+| **LITE** | Artefact touché, diff, risque, V/U/A/T touchés, verdict, réserve ou prochaine action, et conséquence décisionnelle (`DECISION-CHANGE`, `N/A-JUSTIFIED` ou `NOT-OBSERVED`). | Invariants communs de la `RUN_CARD` si elle existe (états, axes, verdict, preuve) ; le reste du paquet vit dans la trace. |
+| **ITER** | Direction rappelée et retrouvable, diff observable, non-régression, preuve du risque touché, V/U/A/T mis à jour, verdict, risque restant, prochaine action et conséquence décisionnelle (`DECISION-CHANGE`, `N/A-JUSTIFIED` ou `NOT-OBSERVED`). | Invariants communs ; à la clôture, `decision_change`, `trace_locator` et rappel de direction (`direction.thesis`) ; le reste vit dans la trace. |
+| **STANDARD** | Rendu ou artefact, hiérarchie, typographie, états pertinents, V/U/A/T, verdict, risque restant, prochaine action et conséquence décisionnelle (`DECISION-CHANGE`, `N/A-JUSTIFIED` ou `NOT-OBSERVED`). | Invariants communs ; à la clôture, `decision_change` et `trace_locator` ; le reste vit dans la trace. |
 | **DIRECTION** | Artefact, direction écrite, ancre/spec, capture, trace locale des assets pertinents, écarts, revue créative, creative close, gates A/B/C, V/U/A/T, statut de direction, verdict global, owner, risque restant, prochaine preuve et conséquence décisionnelle (`DECISION-CHANGE`, `N/A-JUSTIFIED` ou `NOT-OBSERVED`). | Invariants DIRECTION et B1b (`closure.b1b`). |
 | **SYSTÈME** | Décision de système, impact, consumers, owner, migration/rollback, non-régression, réserves, verdict, entrée CHANGELOG et conséquence décisionnelle (`DECISION-CHANGE`, `N/A-JUSTIFIED` ou `NOT-OBSERVED`). | `closure.system_package`. |
 
@@ -530,7 +530,7 @@ Ce pipeline s’applique au mode `DIRECTION`. Il vise une direction réellement 
 
 Pour tout run qui produit un rendu, la boucle est celle de `DIRECTION/DOUBLE-LOOP` ; ce pipeline en exécute la préparation, la preuve, puis la clôture ou le retour. Observe le rendu réel sans te laisser guider par la rationale.
 
-La branche `one-shot` est une exécution raccourcie de cette même boucle, jamais une suppression de la boucle. Elle permet de clôturer après l’observation initiale lorsque le premier rendu atteint la qualité attendue du mode, que la direction est identifiable, que les risques applicables sont couverts et qu’aucune amélioration utile n’est probable. Si le premier rendu est faible, générique ou incomplet, la branche one-shot ne s’applique pas : corrige, retourne ou déclare honnêtement la limite.
+La branche `one-shot` est une exécution raccourcie de cette même boucle, jamais une suppression de la boucle. Elle permet de clôturer après l’observation initiale lorsque le premier rendu atteint la qualité attendue du mode, que la direction est identifiable, que les risques applicables sont couverts et qu’aucune amélioration utile n’est probable. Si le premier rendu est faible, générique ou incomplet, la branche one-shot ne s’applique pas : corrige, retourne ou déclare honnêtement la limite. Sur une surface `DIRECTION` acceptée avec V positif, l’arrêt suppose `ACTION/GATE-B/B1b` fait ou l’un de ses deux motifs `N/A-JUSTIFIED` ; la comparaison peut confirmer la décision initiale (`confirmed`). En trace légère, la proposition reste `EXPLORATORY` et B1b ne s’applique pas.
 
 ### 1. Situer les positions
 
@@ -611,7 +611,7 @@ Retourne à la direction, à l’ancre, à la spec ou au build lorsque l’écar
 
 ## ACTION/STRUCTURED-PROOF — contrats de décision et leur preuve
 
-Ces artefacts rendent les décisions inspectables. Chacun n’est dû que si son déclencheur est actif ; sinon il est `N/A-JUSTIFIED`, avec sa raison. Zéro contrat est valide lorsqu’aucun déclencheur n’est actif.
+Ces artefacts rendent les décisions inspectables. Chacun n’est dû que si son déclencheur est actif ; sinon il est `N/A-JUSTIFIED`, avec sa raison. Zéro contrat est valide lorsqu’aucun déclencheur n’est actif : aucun fichier `production_contracts` n’est alors produit ; un fichier présent en porte au moins un.
 
 | Contrat | Déclencheur |
 |---|---|
@@ -826,7 +826,7 @@ Conserver et comparer la capture suivante. La trace nomme le changement, sa dire
 
 `N/A-JUSTIFIED` n’est recevable que si aucune décision principale éditable n’existe dans le périmètre, ou si une paire équivalente, toujours valide après le dernier changement substantiel, couvre déjà exactement la même décision. La justification lie l’artefact concerné, l’owner et la prochaine preuve. Une thèse encore incertaine, un élément producteur introuvable ou une paire qui n’autorise aucune conclusion maintiennent le run en `EXPLORATORY` ; ils ne produisent pas un `PASS` indirect.
 
-Dans une `RUN_CARD`, B1b est `closure.b1b`. Statut `DONE` : `pair` avec `before_locator` et `after_locator` (deux captures distinctes), `decision` et `outcome` (`confirmed`, `modified` ou `abandoned`). Statut `N/A-JUSTIFIED` : `reason` prend l’une des deux seules valeurs admises, `no_editable_decision` ou `equivalent_pair_valid` (avec `pair_ref`), plus `covered_decision`, `owner` et `next_proof`. Le validateur exige `closure.b1b` pour une surface `DIRECTION` acceptée avec V en `PASS` ou `PASS-WITH-RESERVATION` ; il ne vérifie pas que la décision couverte par une paire équivalente est bien la même.
+Dans une `RUN_CARD`, B1b est `closure.b1b`. Statut `DONE` : `pair` avec `before_locator` et `after_locator` (deux captures distinctes), `decision` et `outcome` (`confirmed`, `modified` ou `abandoned` ; `modified` correspond à `CHANGED` de `decision_change`). Statut `N/A-JUSTIFIED` : `reason` prend l’une des deux seules valeurs admises, `no_editable_decision` ou `equivalent_pair_valid` (avec `pair_ref`), plus `covered_decision`, `owner` et `next_proof`. Le validateur exige `closure.b1b` pour une surface `DIRECTION` acceptée avec V en `PASS` ou `PASS-WITH-RESERVATION` ; il ne vérifie pas que la décision couverte par une paire équivalente est bien la même.
 
 B1b n’est ni un sixième absolu, ni un score esthétique, ni un quota universel. Hors de son scope, il ne s’applique pas. Dans son scope, il ne peut être omis sans la sortie matérielle ci-dessus.
 

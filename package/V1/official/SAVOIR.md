@@ -27,7 +27,7 @@ SAVOIR ne remplace pas :
 
 `SAVOIR/ROUTING` est la carte de décision principale de ce fichier. Commencez par une seule route principale ; ajoutez une route de renvoi uniquement si elle peut modifier la décision, la preuve ou la limite. `READING_MAP.md` fournit une vue dérivée des déclencheurs et du non-chargement ; il ne remplace ni DIRECTION ni ACTION.
 
-La sortie de SAVOIR n’est pas un verdict. Elle doit transmettre à ACTION la décision jugée, le principe ou la méthode utilisés, la conséquence observable, la preuve attendue, la limite, le propriétaire et la prochaine preuve. Si aucune décision ne peut changer, ne chargez pas une route supplémentaire. À la clôture, si aucune décision n’est changée, confirmée ou abandonnée, la triade d’`ACTION/STATUS` s’applique : `N/A-JUSTIFIED` lorsqu’aucune conséquence n’était applicable, `NOT-OBSERVED` lorsqu’une conséquence attendue n’a pas été observée.
+La sortie de SAVOIR n’est pas un verdict. Elle doit transmettre à ACTION la décision jugée, le principe ou la méthode utilisés, la conséquence observable, la preuve attendue, la limite, le propriétaire et la prochaine preuve. Si aucune décision ne peut changer, ne chargez pas une route supplémentaire. À la clôture, si aucune décision n’est changée, confirmée ou abandonnée, les valeurs de repli d’`ACTION/STATUS` s’appliquent : `N/A-JUSTIFIED` lorsqu’aucune conséquence n’était applicable, `NOT-OBSERVED` lorsqu’une conséquence attendue n’a pas été observée.
 
 **Condition d’arrêt de lecture :** arrêter lorsque la question de jugement, le levier choisi, la contre-indication, la limite et la prochaine observation sont explicites.
 
@@ -736,7 +736,7 @@ Cette table ne remplace pas le jugement de contexte. Elle empêche seulement le 
 
 [REQUIS PAR LE MODULE — blast radius partagé, token ou primitive] Sépare tokens primitifs — mesures, palette, familles — et tokens sémantiques — surface, texte, action, danger, élévation.
 
-Documente le comportement des tokens et composants, pas seulement leurs noms. Lorsqu’un token, composant, convention, format ou comportement affecte plusieurs consumers, plusieurs surfaces ou une source de vérité partagée, signale à `DIRECTION/START` l’effet partagé. START classe en `SYSTÈME` si la décision partagée est l’objet direct du run ; sinon la direction est traitée d’abord et le run système dépendant est ouvert ensuite (`DIRECTION/START/TREE`).
+Documente le comportement des tokens et composants, pas seulement leurs noms. Lorsqu’un token, composant, convention, format ou comportement affecte plusieurs consumers, plusieurs surfaces ou une source de vérité partagée, signale à `DIRECTION/START` l’effet partagé. START classe en `SYSTÈME` si la décision partagée est l’objet direct du run ; si elle découle d’une décision de direction, la direction est traitée d’abord et le run système dépendant ouvert ensuite, sauf décisions inséparables (`DIRECTION/START/TREE`).
 
 `DIRECTION/START` et `ACTION/RUN-SYSTEM` restent les autorités de classification et d’exécution ; `SAVOIR/SYSTEM` décrit le jugement technique et systémique.
 
@@ -939,7 +939,7 @@ Avant un verdict `DIRECTION`, réponds par une phrase liée à un objet concret 
 | Quel écart entre spec et rendu reste ? | Écart important ignoré ou justifié après coup. |
 | Quelle preuve manque encore ? | `PASS` affirmé sans preuve adaptée. |
 | Quelle hypothèse de contexte reste incertaine ? | Coût d’erreur élevé sans owner ni prochaine preuve. |
-| Quelle décision concrète a changé grâce à cette procédure ? | Aucune décision modifiée, confirmée ou abandonnée, sans `N/A-JUSTIFIED` justifié ni `NOT-OBSERVED` déclaré (triade d’`ACTION/STATUS`). |
+| Quelle décision concrète a changé grâce à cette procédure ? | Aucune décision modifiée, confirmée ou abandonnée, sans `N/A-JUSTIFIED` justifié ni `NOT-OBSERVED` déclaré (valeurs de repli d’`ACTION/STATUS`). |
 | Quelle règle risque d’être satisfaite dans la lettre seulement ? | Aucun test d’échappatoire théâtrale ni artefact de conséquence observable n’a été fourni. |
 
 ## Contrôle d’intégrité

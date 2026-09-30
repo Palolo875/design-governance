@@ -51,7 +51,7 @@ Ce glossaire explique les mots nécessaires pour commencer. Il n’ajoute aucune
 | **Verdict (`VERDICT`)** | La conclusion globale sur le périmètre observé : `ACCEPTED`, `ACCEPTED-WITH-RESERVATION`, `RETURN`, `RETURN-DIRECTION`, `EXPLORATORY` ou `SYSTEM-ESCALATION`. Les résultats d’axes peuvent utiliser `PASS`, `PASS-WITH-RESERVATION`, `RETURN`, `NOT-VERIFIED` ou `N/A-JUSTIFIED`, mais ils ne sont pas des verdicts globaux. |
 | **Statut de direction** | La fidélité de la direction dans le rendu : `HELD`, `HELD-WITH-ACCEPTED-DIFFERENCE`, `PARTIALLY-HELD` ou `LOST-IN-BUILD`. Il ne remplace pas le verdict global. |
 | **`DECISION-INTENT`** | La décision que la procédure doit permettre de trancher au lancement du run. |
-| **`DECISION-CHANGE`** | La décision effectivement changée, confirmée ou abandonnée grâce à une observation. Sinon, la triade d’`ACTION/STATUS` s’applique : `N/A-JUSTIFIED` lorsqu’aucune conséquence n’était applicable, avec la raison ; `NOT-OBSERVED` lorsqu’une conséquence attendue n’a pas été observée. |
+| **`DECISION-CHANGE`** | La décision effectivement changée, confirmée ou abandonnée grâce à une observation. Sinon, les valeurs de repli d’`ACTION/STATUS` s’appliquent : `N/A-JUSTIFIED` lorsqu’aucune conséquence n’était applicable, avec la raison ; `NOT-OBSERVED` lorsqu’une conséquence attendue n’a pas été observée. |
 | **`TRACE-LOCATOR`** | Le repère qui permet de retrouver la trace persistante du run : ticket, manifeste, fichier, espace de travail ou autre emplacement déclaré. |
 | **`CLOSED`** | La trace et les artefacts sont persistés. Cela ne signifie pas automatiquement « réussi » ou « vérifié ». |
 | **`NOT-VERIFIED`** | Une propriété importante n’a pas été vérifiée dans le périmètre ou avec les capacités disponibles. |
@@ -70,7 +70,7 @@ Ces exemples illustrent l’usage des termes ; ils ne créent pas de règle supp
 | **Décision** | « Garder la structure du formulaire, mais rendre le premier geste compréhensible sur mobile. » |
 | **Preuve** | « Comparer le rendu avant/après à 390 px, puis vérifier le focus clavier dans le scope déclaré. » |
 | **NOT-VERIFIED** | « Le contraste a été inspecté ; aucun test avec lecteur d’écran n’a été exécuté. » |
-| **DECISION-CHANGE** | « `CHANGED` — après observation à 390 px, la décision « deux CTA de même poids » est abandonnée au profit d’un CTA principal unique (observation : capture avant/après). » |
+| **DECISION-CHANGE** | « `CHANGED` — après observation à 390 px, la décision « deux CTA de même poids » est remplacée par un CTA principal unique (observation : capture avant/après). » |
 | **N/A-JUSTIFIED** | « Aucun test de préférence n’est applicable : la décision porte ici uniquement sur la robustesse du composant. » |
 | **CLOSED** | « La trace et les artefacts sont persistés. `CLOSED` ne dit rien du verdict : un run peut être clos en `RETURN`. Clos en `ACCEPTED-WITH-RESERVATION`, il porte une réserve complète (owner, portée, date ou version, impact, prochaine preuve, date de revue, condition de sortie). Une protection critique restée `NOT-VERIFIED` exclut `ACCEPTED`, pas la réserve ; une protection en échec (`FAIL`) exclut tout verdict accepté. » |
 
