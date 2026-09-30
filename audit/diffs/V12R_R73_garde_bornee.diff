@@ -1,0 +1,16 @@
+diff --git a/package/scripts/validate_structure.py b/package/scripts/validate_structure.py
+index a44a05f..9853f18 100644
+--- a/package/scripts/validate_structure.py
++++ b/package/scripts/validate_structure.py
+@@ -116,7 +116,10 @@ RETIRED: list[tuple[str, str, set[str]]] = [
+      r"abandonnée jusqu’à correction|vérifie le titre exact du propriétaire|sinon la direction est traitée d’abord",
+      "références alignées sur le schéma et les propriétaires (R-19, R-20, R-23, R-24, R-27, R-31)", {"CHANGELOG.md"}),
+     # R7-2 (V12R_24) : une ancre absente reste NOT-VERIFIED ; FAIL-ASSUMED exige un échec connu (ACTION/OVERRIDE).
+-    (r"passe par `FAIL-ASSUMED`|reste possible par `FAIL-ASSUMED`|`FAIL-ASSUMED` ne permet qu’une diffusion limitée",
++    # Bornée en R7-3 (V12R_26) : seul le raccourci « ancre absente → FAIL-ASSUMED » est retiré ; une diffusion limitée
++    # d'un échec connu qui « passe par FAIL-ASSUMED » reste une phrase légitime.
++    (r"(?:sans (?:l’)?ancre|ancre (?:absente|manquante))[^.]{0,200}(?:passe par|possible par) `FAIL-ASSUMED`|"
++     r"`FAIL-ASSUMED` ne permet qu’une diffusion limitée",
+      "sans ancre : EXPLORATORY ; FAIL-ASSUMED seulement pour un échec connu (R7-2)", set()),
+ ]
+ 

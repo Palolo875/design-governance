@@ -38,7 +38,7 @@ Hors package :
 | 13.02 | 38/38 |
 | B01 | 218/218 |
 | Suivi complet | **vert** sur l'arbre stable (second passage) : 389 cas, 369 maintenus verts, 20 migrés, aucune nouvelle migration ; négations 814 ; `validate_all` vert ; instantané `V12R_Instantane_suivi_R72.json` |
-| Mesures | chemin prescrit 12 839 → **12 867 mots** ; trace complète 17 600 ; noyau 3 861 → **3 885** ; 24/25 ; doublons 148 |
+| Mesures | chemin prescrit 12 839 → **12 867 mots** ; trace complète 17 600 ; noyau 3 861 → **3 889** (+28 ; section compilée avec son titre, périmètre des rapports précédents — rectifié le 30-09, voir `V12R_26`) ; 24/25 ; doublons 148 |
 
 ## 4. Écarts déclarés
 
@@ -56,3 +56,8 @@ Hors package :
 - **Certain.** Le noyau ne présente plus `FAIL-ASSUMED` comme la voie d'une ancre absente. DIRECTION, ACTION et le validateur disent la même chose.
 - **Probable.** L'agent qui manque d'ancre livre une proposition `EXPLORATORY` avec sa limite, au lieu de chercher une exception.
 - **Limite.** Auto-comparaison. La revue qui a signalé le défaut est externe au dépôt, mais n'est pas un observateur D3 déclaré.
+
+## Rectification (30-09-2026, R7-3)
+
+- **Mesure du noyau.** Le rapport annonçait « 3 861 → 3 885 (+24) », en mêlant deux périmètres : 3 861 inclut le titre de la section, 3 885 ne l'inclut pas. Mesure juste : **+28**, soit 3 857 → 3 885 sans le titre et **3 861 → 3 889** avec le titre (périmètre retenu).
+- **Garde de vocabulaire trop large.** Elle refusait aussi une phrase légitime (« une diffusion limitée d'un échec connu … passe par `FAIL-ASSUMED` »). Elle a été bornée au contexte de l'ancre absente par R7-3 (`V12R_26`).
