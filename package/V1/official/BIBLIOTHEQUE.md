@@ -181,7 +181,7 @@ Pour un delta local, réponds avant toute sélection : quelle relation change, q
 | **DIRECTION** | Évaluer `SUPPORT`, `GRID`, `SCENE` et objet de preuve, puis ne retenir que les niveaux qui changent la décision ; déclarer l’héritage des autres. | `MICRO` seulement si une tâche opérationnelle existe. |
 | **SYSTÈME** | La couche réellement affectée — par exemple `LAYER/PRIMITIVES`, `LAYER/OBJECTS`, `LAYER/SCENES` ou `LAYER/TOKENS` — avec le contrat de la couche, du token, du composant, de la scène ou de l’objet affecté. | Une scène ou un style n’est pas une décision système sans blast radius démontré. |
 
-La sélection structurelle est persistée dans la `RUN_CARD` ou la trace canonique du run référencée par `trace_locator`, avec `MODE`, `DECISION`, `RISK`, `SCOPE`, `ARTIFACT`, `OBSERVATION/METHOD`, `PROOF/TRACE-LOCATOR`, `LIMIT/NOT-VERIFIED`, `DECISION-CHANGE`, `NEXT-ACTION`, `OWNER`, `NEXT-PROOF` et `EXIT-CONDITION`. Les identifiants de routes peuvent être rappelés dans `sources` ou dans le paquet de preuve ; BIBLIOTHEQUE ne crée pas de champ machine concurrent et respecte `MODE / STATE / ISSUE / VERDICT` d’ACTION.
+En trace complète, la sélection structurelle est persistée dans la `RUN_CARD` ou la trace canonique du run référencée par `trace_locator`, avec `MODE`, `DECISION`, `RISK`, `SCOPE`, `ARTIFACT`, `OBSERVATION/METHOD`, `PROOF/TRACE-LOCATOR`, `LIMIT/NOT-VERIFIED`, `DECISION-CHANGE`, `NEXT-ACTION`, `OWNER`, `NEXT-PROOF` et `EXIT-CONDITION`. Les identifiants de routes peuvent être rappelés dans `sources` ou dans le paquet de preuve ; BIBLIOTHEQUE ne crée pas de champ machine concurrent et respecte `MODE / STATE / ISSUE / VERDICT` d’ACTION.
 
 ### One-shot et boucle structurelle
 
@@ -816,7 +816,7 @@ Avant de clôturer une sélection, vérifie :
 5. La recomposition mobile couvre-t-elle priorité, voisinage, action, état, contenu et performance lorsque le risque le requiert ?
 6. La combinaison choisie est-elle justifiée par JTBD, preuve, risque et condition de sortie ?
 7. Chaque identifiant sélectionné existe-t-il dans le catalogue canonique, ou est-il explicitement marqué local ou `PILOT` ?
-8. La sélection structurelle et sa justification sont-elles persistées dans la `RUN_CARD` ou la trace canonique référencée par `trace_locator`, le paquet de preuve n’étant qu’une pièce jointe localisable ?
+8. En trace complète, la sélection structurelle et sa justification sont-elles persistées dans la `RUN_CARD` ou la trace canonique référencée par `trace_locator`, le paquet de preuve n’étant qu’une pièce jointe localisable ?
 9. Les routes et identifiants respectent-ils le bon niveau : support, grille, scène, objet, micro, modificateur ou couche ?
 
 Si une réponse reste inconnue, utilise `NOT-VERIFIED`. Si un contrôle doit être repris, utilise `RETURN`; si le périmètre reste exploratoire, utilise l’issue ACTION appropriée, par exemple `EXPLORATORY` ou `RETURNED`. Ne transforme pas une chaîne complète de routes en preuve de qualité et ne remplace pas `ACTION/CLOSE-EXIT-CHECK`.

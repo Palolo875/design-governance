@@ -98,6 +98,10 @@ RETIRED: list[tuple[str, str, set[str]]] = [
     (r"→ isoler|observer, isoler", "boucle d'édition de DIRECTION/DOUBLE-LOOP (noyau)",
      {"DIRECTION.md", "SKILL.md", "CHANGELOG.md"}),
     (r"Distingue trois niveaux", "un seul modèle de niveaux : Correction, Précision, Intention (D-16)", {"CHANGELOG.md"}),
+    # Audit A1 (AUD-10) : l'agent lit le noyau et CHARGE ; READING_MAP est une vue pour les personnes
+    (r"seul document canonique de cadrage chargé au démarrage", "noyau compilé et DIRECTION/CHARGE (AUD-10)", {"CHANGELOG.md"}),
+    (r"utilisez `READING_MAP\.md` comme vue dérivée", "READING_MAP pour une personne ; l'agent charge par DIRECTION/CHARGE (AUD-10)",
+     {"CHANGELOG.md"}),
     # One-shot : une seule définition (branche one-shot d'ACTION/PIPELINE-DIRECTION).
     (r"Le `one-shot` est une stratégie de préparation", "branche one-shot d'ACTION/PIPELINE-DIRECTION", {"CHANGELOG.md"}),
     (r"cette vue reste interne", "la prise de brief reste dans la trace (D-19)", {"CHANGELOG.md"}),
@@ -210,6 +214,17 @@ FIDELITY: list[tuple[str, str, str]] = [
     ("clôture des routes en trace complète (G4b)", r"\*\*Clôture\.\*\*[^.]{0,40}`DECIDED`", "En trace complète"),
     # D-25 (V12R_36) : une valeur inconnue ne retire pas l'action principale ; elle reste fonctionnelle et marquée
     ("contenu marqué : action principale (D-25)", r"\*\*Destination réelle sans contenu\.\*\*", "action principale"),
+    # Audit A1 (V12R_38) : raccords sans arbitrage
+    ("ancre absente : pas de FAIL-ASSUMED, pipeline (AUD-03)", r"Sans ancre utile et spec exploitable", "échec connu"),
+    ("preuve indisponible : pas de FAIL-ASSUMED (AUD-03)", r"Si une preuve est indisponible, le mode ne baisse pas", "échec connu"),
+    ("trace persistante en trace complète (AUD-04)", r"conserve(?:nt)? une trace persistante", "trace complète"),
+    ("FAST-PATH : clôture en trace complète (AUD-04)", r"clôture avec la forme courte LITE", "trace complète"),
+    ("sélection structurelle persistée en trace complète (AUD-04)", r"sélection structurelle[^.?]{0,40}persisté", "trace complète"),
+    ("flux : fermer en trace complète (AUD-04)", r"[Dd]écider et fermer", "trace complète"),
+    ("exemples : niveau de trace (AUD-04)", r"Les champs affichés respectent les contrats d’ACTION", "trace complète"),
+    ("règle CTA : valeur d'exemple marquée (AUD-09)", r"Un CTA doit soit déclencher", "CNT-01"),
+    ("flux : READING_MAP pour une personne (AUD-10)", r"la section « Combinaisons par résultat recherché » de `READING_MAP", "si une personne le demande"),
+    ("veille : signal R10 (AUD-14)", r"\*\*Marqueurs de vague\*\*", "Signal R10"),
     # R7-2 (V12R_24)
     ("ancre et FAIL-ASSUMED (R7-2)", r"sans (?:l’)?ancre[^.]{0,200}`FAIL-ASSUMED`|ancre (?:absente|manquante)[^.]{0,200}`FAIL-ASSUMED`|"
      r"`FAIL-ASSUMED`[^.]{0,120}ancre (?:absente|manquante)", "échec connu"),
@@ -244,6 +259,8 @@ def check_entry(corpus: dict[Path, list[str]], errors: list[str]) -> None:
         familiar = re.search(TUTOIEMENT.pattern, block, re.I)  # insensible à la casse (début de phrase)
         if familiar:
             errors.append(f"[ENT-01] registre : tutoiement « {familiar.group(0)} » dans l'entrée humaine")
+        if block.count("retenir cette direction pour") > 1:  # AUD-15 : une seule mention, à la question 4
+            errors.append("[ENT-01] redite : « retenir cette direction pour » plus d'une fois dans l'entrée humaine")
     constitutions = CONSTITUTION.findall(text)
     if len(constitutions) != 1 or CONSTITUTION_SIGNATURE not in constitutions[0]:
         errors.append("[CST-01] constitution minimale absente, multiple ou inexacte dans README.md (bloc « constitution »)")

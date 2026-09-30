@@ -29,7 +29,7 @@ Une solution senior rend la tâche prioritaire plus claire, la direction visuell
 
 ## Constitution du document
 
-`DIRECTION` est le **seul document canonique de cadrage chargé au démarrage d’un run**. Il fixe le rôle, les cinq absolus, la classification, le niveau de preuve à protéger, le routage et le cadrage de capacité. `ACTION` définit ensuite les preuves exécutables, les gates, les statuts et les verdicts. Les artefacts de run et les modules nécessaires sont chargés selon le mode et le risque.
+`DIRECTION` est le **seul document canonique de cadrage** ; au démarrage d’un run, l’agent en lit le noyau (compilé dans la skill) et les routes de `DIRECTION/CHARGE`. Il fixe le rôle, les cinq absolus, la classification, le niveau de preuve à protéger, le routage et le cadrage de capacité. `ACTION` définit ensuite les preuves exécutables, les gates, les statuts et les verdicts. Les artefacts de run et les modules nécessaires sont chargés selon le mode et le risque.
 
 Les responsabilités sont séparées :
 
@@ -59,7 +59,7 @@ Les sections détaillées ci-dessous restent intégralement actives. Lorsque ce 
 
 ### Orientation interne et sortie
 
-Pour éviter de recomposer le démarrage, utilisez `READING_MAP.md` comme vue dérivée lorsque le besoin est déjà identifiable. `START` reste la source normative de classification ; les autres vues (`CHARGE`, `FAST-PATH`, `EXTERNAL-START`) sont des vues dérivées ou conditionnelles.
+Pour une personne, `READING_MAP.md` est la vue dérivée lorsque le besoin est déjà identifiable ; l’agent charge par `DIRECTION/CHARGE`. `START` reste la source normative de classification ; les autres vues (`CHARGE`, `FAST-PATH`, `EXTERNAL-START`) sont des vues dérivées ou conditionnelles.
 
 La sortie de DIRECTION vers ACTION réutilise `ACTION/HANDOFF` ; la phase de chaque champ (avant build, après observation, clôture) est celle de la table de correspondance d’`ACTION/RUN_CARD`. Pour `MODE=DIRECTION`, transmettre aussi la cible/ancre et, lors d’une clôture, les éléments de `creative_close`; ACTION renseigne `closure.direction_status`, `issue`, `verdict` et l’état selon son schéma. Si un champ ne s’applique pas, marquez `N/A-JUSTIFIED` selon ACTION ; ne créez ni statut ni verdict dans DIRECTION.
 
@@ -271,7 +271,7 @@ La ligne de run constitue une mémoire de lancement, sous-ensemble de lancement 
 
 Le schéma complet de `RUN_CARD` appartient exclusivement à **`ACTION/RUN_CARD`**. DIRECTION ne le reproduit pas et transmet la projection `ACTION/HANDOFF`; les champs non applicables sont `N/A-JUSTIFIED`, les observations non vérifiées restent `NOT-VERIFIED`. Une surface `DIRECTION` qui accepte avec V en `PASS` ou `PASS-WITH-RESERVATION`, dont le risque V/craft est dominant ou dont le verdict V dépend d’une intention encore non confrontée doit suivre `ACTION/GATE-B — B1b` avant clôture. Pour une `RUN_CARD DIRECTION` en `CLOSED`, `creative_close` contient `presence`, `signature`, `craft_detail`, `dominant_defect` et `next_polish_action` ; `direction_status`, `issue` et `verdict` restent les registres séparés d’ACTION.
 
-Les runs `STANDARD`, `DIRECTION` et `SYSTÈME` conservent une trace persistante. `ITER` peut s’appuyer sur la mémoire locale du projet si la direction précédente, le périmètre, le dernier artefact, la décision, la preuve et le risque restant sont retrouvables. `LITE` peut se limiter à la ligne de run et au verdict court si l’artefact et le risque restent retrouvables.
+Un run `STANDARD`, `DIRECTION` ou `SYSTÈME` persistant, partagé ou audité conserve une trace persistante (trace complète, `ACTION/HANDOFF`) ; sinon, la trace légère suffit. `ITER` peut s’appuyer sur la mémoire locale du projet si la direction précédente, le périmètre, le dernier artefact, la décision, la preuve et le risque restant sont retrouvables. `LITE` peut se limiter à la ligne de run et au verdict court si l’artefact et le risque restent retrouvables.
 
 ---
 
@@ -371,7 +371,7 @@ Lorsque `RUN-PRIORITY`, `VISUAL_TARGET` ou `DIRECTION-ATELIER` peuvent modifier 
 Les données d’exemple restent cohérentes entre elles : totaux, pourcentages, unités, dates et prix se recoupent. Un chiffre sans référence (« +32 % ») se situe (par rapport à quoi, sur quelle période) ou se retire.
 <!-- noyau:fin PREMIER-OBJET -->
 
-Un CTA doit soit déclencher un comportement local réellement implémenté, soit mener à une action réellement disponible, soit déclarer sa limite. Un lien vide, une inscription fictive ou une démo qui simule une conséquence externe ne peut pas être présenté comme une action disponible.
+Un CTA doit soit déclencher un comportement local réellement implémenté, soit mener à une action réellement disponible, soit déclarer sa limite. Un lien vide, une inscription fictive ou une démo qui simule une conséquence externe ne peut pas être présenté comme une action disponible. Une action principale dont la valeur manque (numéro, adresse, lien) reste présente avec une valeur d’exemple marquée (`CNT-01`) : c’est une limite déclarée, pas un retrait.
 
 ### Contrat positif du premier objet
 
@@ -688,7 +688,7 @@ Avant toute action qui engage un artefact, une preuve, un état, une diffusion o
 | Vérification | La preuve dominante est-elle obtenue, ou son absence est-elle explicitement statuée ? |
 | Clôture | Le verdict, le risque restant et la prochaine action sont-ils persistants ? |
 
-Ne choisis ni `LITE` pour éviter l’effort, ni `DIRECTION` pour paraître complet. Si une preuve est indisponible, le mode ne baisse pas silencieusement : l’axe ou la propriété concernée devient `NOT-VERIFIED`, puis l’issue ou le verdict est déterminé par `ACTION`, par exemple `EXPLORATORY`, `RETURNED`, `FAIL-ASSUMED` ou `ESCALATED`. Une contrainte d’outil, de temps ou de compétence peut modifier la preuve disponible ; elle ne transforme pas une qualité non observée en qualité acquise.
+Ne choisis ni `LITE` pour éviter l’effort, ni `DIRECTION` pour paraître complet. Si une preuve est indisponible, le mode ne baisse pas silencieusement : l’axe ou la propriété concernée devient `NOT-VERIFIED`, puis l’issue ou le verdict est déterminé par `ACTION`, par exemple `EXPLORATORY`, `RETURNED` ou `ESCALATED` ; `FAIL-ASSUMED` ne vaut que pour un échec connu (`ACTION/OVERRIDE`). Une contrainte d’outil, de temps ou de compétence peut modifier la preuve disponible ; elle ne transforme pas une qualité non observée en qualité acquise.
 
 ### [ABSOLU 5 — RÉEL ET BEAU ENSEMBLE] Cadre le produit, le JTBD, les preuves et les contraintes pour produire une beauté pertinente.
 

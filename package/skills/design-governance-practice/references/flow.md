@@ -9,7 +9,7 @@ flowchart LR
   C --> D[Composer et construire]
   D --> E[Polir et observer]
   E --> F[Vérifier et corriger]
-  F --> G[Décider et fermer]
+  F --> G[Proposer ou fermer]
   A -. risque critique .-> H[Protection de niveau]
   F -. preuve absente .-> I[NOT-VERIFIED]
   E -. défaut créatif .-> C
@@ -17,9 +17,9 @@ flowchart LR
   I --> J[Owner et prochaine preuve]
 ```
 
-En texte : **classer et protéger le run, cultiver et diriger la décision, composer et construire l’artefact, polir et observer le rendu, vérifier et corriger ce qui est observable, puis décider et fermer avec ses limites**. Un risque critique ramène au classement (reclassification) ; une preuve absente reste `NOT-VERIFIED`, avec owner et prochaine preuve. La boucle créative élève le résultat ; la boucle de gouvernance protège le risque, la preuve et la vérité de ce qui peut être affirmé.
+En texte : **classer et protéger le run, cultiver et diriger la décision, composer et construire l’artefact, polir et observer le rendu, vérifier et corriger ce qui est observable, puis présenter la proposition (trace légère) ou décider et fermer avec ses limites (trace complète)**. Un risque critique ramène au classement (reclassification) ; une preuve absente reste `NOT-VERIFIED`, avec owner et prochaine preuve. La boucle créative élève le résultat ; la boucle de gouvernance protège le risque, la preuve et la vérité de ce qui peut être affirmé.
 
 Charger `DIRECTION/START` avant un build, une modification, une vérification, une action externe ou une décision persistante. Charger les routes approfondies uniquement si elles peuvent modifier une décision, un artefact, une preuve, une limite ou la prochaine action.
 
-Pour composer plusieurs capacités selon un résultat recherché — direction, beauté située, créativité, usage, preuve, vitesse ou système — consulter la section « Combinaisons par résultat recherché » de `READING_MAP.md` dans la carte officielle du package. Cette carte complète le flux sans créer de route supplémentaire.
+Pour composer plusieurs capacités selon un résultat recherché — direction, beauté située, créativité, usage, preuve, vitesse ou système — consulter, si une personne le demande, la section « Combinaisons par résultat recherché » de `READING_MAP.md` dans la carte officielle du package. Cette carte complète le flux sans créer de route supplémentaire.
 

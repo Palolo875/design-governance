@@ -1,0 +1,224 @@
+diff --git a/package/README.md b/package/README.md
+index e34fcd2..15b588d 100644
+--- a/package/README.md
++++ b/package/README.md
+@@ -13,7 +13,7 @@ Design Governance aide un agent à produire un design dirigé, construit et soig
+ 
+ **2. Que fournir ?** Ce que vous avez déjà : textes, prix, horaires, logo, couleurs, photos (même prises au téléphone, à la lumière du jour), exemples que vous aimez, lien vers l’existant. Vos textes, votre marque et vos photos aident à produire une proposition plus spécifique et crédible. S’il en manque, l’agent vous pose d’abord au plus trois questions, en un seul message, avant de construire, seulement celles qui améliorent vraiment le résultat : contenu réel, marque, image principale ou source d’images autorisée, destination si elle est incertaine. Il construit la proposition dans tous les cas.
+ 
+-**3. Que recevoir ?** Une première proposition réellement construite, pas un gabarit vide. La réponse dit simplement ce qui a été fait et pourquoi, ce qui est un exemple à remplacer, ce qui manque pour la vraie version, et la suite proposée. C’est une proposition à discuter, pas une validation : pour retenir cette direction pour un vrai produit, l’agent doit s’appuyer sur des éléments réels, observés ou fournis, et effectuer les vérifications nécessaires.
++**3. Que recevoir ?** Une première proposition réellement construite, pas un gabarit vide. La réponse dit simplement ce qui a été fait et pourquoi, ce qui est un exemple à remplacer, ce qui manque pour la vraie version, et la suite proposée. C’est une proposition à discuter, pas une validation.
+ 
+ **4. Comment poursuivre ?** Validez pour continuer, réorientez ou arrêtez. Pour retenir cette direction pour votre vrai produit, dites-le : l’agent réunit alors les éléments réels et fait les vérifications nécessaires. Dites en une phrase ce qui ne va pas (« le titre écrase la photo », « trop froid pour une boulangerie ») : l’agent corrige le défaut principal, regarde de nouveau le résultat et vous dit ce qui a changé. Avant toute action irréversible ou coûteuse (publier, envoyer, payer, remplacer l’existant), il vous demande votre accord.
+ 
+diff --git a/package/V1/official/ACTION.md b/package/V1/official/ACTION.md
+index 9b91d23..4639337 100644
+--- a/package/V1/official/ACTION.md
++++ b/package/V1/official/ACTION.md
+@@ -276,7 +276,7 @@ Pour réduire le slop procédural, préfère une proposition principale et une a
+ 
+ ## ACTION/FAST-PATH — preuve minimale sans rituel
+ 
+-Pour `LITE` et les petits `ITER`, arrête le protocole après quatre réponses : décision touchée, risque dominant, preuve la moins coûteuse et conséquence de la preuve ; puis clôture avec la forme courte LITE (`ACTION/CLOSE-PACKAGE`, ligne LITE).
++Pour `LITE` et les petits `ITER`, arrête le protocole après quatre réponses : décision touchée, risque dominant, preuve la moins coûteuse et conséquence de la preuve ; puis, en trace complète, clôture avec la forme courte LITE (`ACTION/CLOSE-PACKAGE`, ligne LITE) ; en trace légère, la proposition suffit.
+ 
+ Si aucune décision ne peut changer, n’ajoute pas de capture, comparaison ou route uniquement pour remplir le paquet. Journalise `N/A-JUSTIFIED` lorsque la procédure ne peut rien modifier.
+ 
+@@ -560,7 +560,7 @@ La spec décrit uniquement les décisions utiles : structure, hiérarchie, relat
+ 
+ Une ancre est utile seulement si elle apporte une décision structurelle ou perceptuelle, une contre-indication et une liste d’attributs retenus, rejetés et non transférables.
+ 
+-Sans ancre utile et spec exploitable, les axes concernés sont `NOT-VERIFIED`. Le run devient `RETURNED`, `EXPLORATORY`, `FAIL-ASSUMED` ou `ESCALATED` selon le périmètre.
++Sans ancre utile et spec exploitable, les axes concernés sont `NOT-VERIFIED`. Le run devient `RETURNED`, `EXPLORATORY` ou `ESCALATED` selon le périmètre ; `FAIL-ASSUMED` ne vaut que pour un échec connu (`ACTION/OVERRIDE`), jamais pour une ancre absente.
+ 
+ Dans une `RUN_CARD`, chaque ancre porte son `type` (`generated`, `observed` ou `provided`) et une date ISO ; `direction.identity_stake` déclare l’enjeu identitaire (`high` ou `normal`). Lorsque l’enjeu est élevé, que toutes les ancres sont générées et que la direction est tenue, `direction.calibration` nomme sa base : `real_constraint`, ou `generated_only_reserved`, qui interdit `ACCEPTED`. Une revue indépendante n’est pas une base de calibration. Une ancre manquante se sérialise par l’issue — ancres vides, issue non nulle, aucun verdict accepté —, jamais par une ancre inventée.
+ 
+diff --git a/package/V1/official/BIBLIOTHEQUE.md b/package/V1/official/BIBLIOTHEQUE.md
+index f1d860e..06b39e2 100644
+--- a/package/V1/official/BIBLIOTHEQUE.md
++++ b/package/V1/official/BIBLIOTHEQUE.md
+@@ -181,7 +181,7 @@ Pour un delta local, réponds avant toute sélection : quelle relation change, q
+ | **DIRECTION** | Évaluer `SUPPORT`, `GRID`, `SCENE` et objet de preuve, puis ne retenir que les niveaux qui changent la décision ; déclarer l’héritage des autres. | `MICRO` seulement si une tâche opérationnelle existe. |
+ | **SYSTÈME** | La couche réellement affectée — par exemple `LAYER/PRIMITIVES`, `LAYER/OBJECTS`, `LAYER/SCENES` ou `LAYER/TOKENS` — avec le contrat de la couche, du token, du composant, de la scène ou de l’objet affecté. | Une scène ou un style n’est pas une décision système sans blast radius démontré. |
+ 
+-La sélection structurelle est persistée dans la `RUN_CARD` ou la trace canonique du run référencée par `trace_locator`, avec `MODE`, `DECISION`, `RISK`, `SCOPE`, `ARTIFACT`, `OBSERVATION/METHOD`, `PROOF/TRACE-LOCATOR`, `LIMIT/NOT-VERIFIED`, `DECISION-CHANGE`, `NEXT-ACTION`, `OWNER`, `NEXT-PROOF` et `EXIT-CONDITION`. Les identifiants de routes peuvent être rappelés dans `sources` ou dans le paquet de preuve ; BIBLIOTHEQUE ne crée pas de champ machine concurrent et respecte `MODE / STATE / ISSUE / VERDICT` d’ACTION.
++En trace complète, la sélection structurelle est persistée dans la `RUN_CARD` ou la trace canonique du run référencée par `trace_locator`, avec `MODE`, `DECISION`, `RISK`, `SCOPE`, `ARTIFACT`, `OBSERVATION/METHOD`, `PROOF/TRACE-LOCATOR`, `LIMIT/NOT-VERIFIED`, `DECISION-CHANGE`, `NEXT-ACTION`, `OWNER`, `NEXT-PROOF` et `EXIT-CONDITION`. Les identifiants de routes peuvent être rappelés dans `sources` ou dans le paquet de preuve ; BIBLIOTHEQUE ne crée pas de champ machine concurrent et respecte `MODE / STATE / ISSUE / VERDICT` d’ACTION.
+ 
+ ### One-shot et boucle structurelle
+ 
+@@ -816,7 +816,7 @@ Avant de clôturer une sélection, vérifie :
+ 5. La recomposition mobile couvre-t-elle priorité, voisinage, action, état, contenu et performance lorsque le risque le requiert ?
+ 6. La combinaison choisie est-elle justifiée par JTBD, preuve, risque et condition de sortie ?
+ 7. Chaque identifiant sélectionné existe-t-il dans le catalogue canonique, ou est-il explicitement marqué local ou `PILOT` ?
+-8. La sélection structurelle et sa justification sont-elles persistées dans la `RUN_CARD` ou la trace canonique référencée par `trace_locator`, le paquet de preuve n’étant qu’une pièce jointe localisable ?
++8. En trace complète, la sélection structurelle et sa justification sont-elles persistées dans la `RUN_CARD` ou la trace canonique référencée par `trace_locator`, le paquet de preuve n’étant qu’une pièce jointe localisable ?
+ 9. Les routes et identifiants respectent-ils le bon niveau : support, grille, scène, objet, micro, modificateur ou couche ?
+ 
+ Si une réponse reste inconnue, utilise `NOT-VERIFIED`. Si un contrôle doit être repris, utilise `RETURN`; si le périmètre reste exploratoire, utilise l’issue ACTION appropriée, par exemple `EXPLORATORY` ou `RETURNED`. Ne transforme pas une chaîne complète de routes en preuve de qualité et ne remplace pas `ACTION/CLOSE-EXIT-CHECK`.
+diff --git a/package/V1/official/CHANGELOG.md b/package/V1/official/CHANGELOG.md
+index e5cd5ce..41d4051 100644
+--- a/package/V1/official/CHANGELOG.md
++++ b/package/V1/official/CHANGELOG.md
+@@ -34,6 +34,7 @@
+ - **Répétitions retirées (refonte, restes R5).** Copies du handoff remplacées par un renvoi à `ACTION/HANDOFF` ; catégories de lecture et contrat de promotion sortis du préambule de BIBLIOTHEQUE (`BIBLIOTHEQUE/EVOLUTION`), déclaration de lecture limitée aux runs instrumentés ou audités ; alternative située répartie (DIRECTION déclenche, SAVOIR donne les leviers, ACTION matérialise, trace et compare) ; `PRINT_FIELD` relié aux signaux de convergence comme question de jugement.
+ - **Raccords de parcours (refonte, R11b).** Valider une proposition n’est pas l’accepter : l’acceptation pour un produit réel se demande et passe en trace complète ; humain présent, les demandes de brief précèdent le build ; chaque route `RUN-*` dit sa sortie en trace légère et ne clôt qu’en trace complète, et `ITER` reprend depuis la ligne de thèse d’une trace légère ; la réponse visible nomme l’alternative écartée ; `EXTERNAL-START` se charge avant le Creative Boot.
+ - **Action principale conservée (refonte, D-25).** Faute de valeur réelle, l’action principale d’une page (commander, écrire, appeler, venir) reste fonctionnelle avec une valeur d’exemple marquée, au lieu d’être retirée.
++- **Raccords d’audit (refonte, audit A1).** `FAIL-ASSUMED` réservé à un échec connu dans le pipeline et l’absolu 4 ; persistance et clôture en trace complète (DIRECTION, `FAST-PATH`, BIBLIOTHEQUE, flux, exemples) ; règle CTA reliée à la valeur d’exemple marquée ; l’agent lit le noyau et `CHARGE`, READING_MAP sert aux personnes ; veille mise à jour (R10) ; redite retirée de l’entrée humaine.
+ - **Efficacité.** `NOT-VERIFIED` : l’épreuve de référence donne V1.1.1 ≈ sans système sur la qualité perçue ; l’effet de ces chantiers reste à éprouver (G4).
+ 
+ ## V1.1.1 — Retour d’audit : alignements de textes et de façades
+diff --git a/package/V1/official/DIRECTION.md b/package/V1/official/DIRECTION.md
+index 049392b..ec8fbdc 100644
+--- a/package/V1/official/DIRECTION.md
++++ b/package/V1/official/DIRECTION.md
+@@ -29,7 +29,7 @@ Une solution senior rend la tâche prioritaire plus claire, la direction visuell
+ 
+ ## Constitution du document
+ 
+-`DIRECTION` est le **seul document canonique de cadrage chargé au démarrage d’un run**. Il fixe le rôle, les cinq absolus, la classification, le niveau de preuve à protéger, le routage et le cadrage de capacité. `ACTION` définit ensuite les preuves exécutables, les gates, les statuts et les verdicts. Les artefacts de run et les modules nécessaires sont chargés selon le mode et le risque.
++`DIRECTION` est le **seul document canonique de cadrage** ; au démarrage d’un run, l’agent en lit le noyau (compilé dans la skill) et les routes de `DIRECTION/CHARGE`. Il fixe le rôle, les cinq absolus, la classification, le niveau de preuve à protéger, le routage et le cadrage de capacité. `ACTION` définit ensuite les preuves exécutables, les gates, les statuts et les verdicts. Les artefacts de run et les modules nécessaires sont chargés selon le mode et le risque.
+ 
+ Les responsabilités sont séparées :
+ 
+@@ -59,7 +59,7 @@ Les sections détaillées ci-dessous restent intégralement actives. Lorsque ce
+ 
+ ### Orientation interne et sortie
+ 
+-Pour éviter de recomposer le démarrage, utilisez `READING_MAP.md` comme vue dérivée lorsque le besoin est déjà identifiable. `START` reste la source normative de classification ; les autres vues (`CHARGE`, `FAST-PATH`, `EXTERNAL-START`) sont des vues dérivées ou conditionnelles.
++Pour une personne, `READING_MAP.md` est la vue dérivée lorsque le besoin est déjà identifiable ; l’agent charge par `DIRECTION/CHARGE`. `START` reste la source normative de classification ; les autres vues (`CHARGE`, `FAST-PATH`, `EXTERNAL-START`) sont des vues dérivées ou conditionnelles.
+ 
+ La sortie de DIRECTION vers ACTION réutilise `ACTION/HANDOFF` ; la phase de chaque champ (avant build, après observation, clôture) est celle de la table de correspondance d’`ACTION/RUN_CARD`. Pour `MODE=DIRECTION`, transmettre aussi la cible/ancre et, lors d’une clôture, les éléments de `creative_close`; ACTION renseigne `closure.direction_status`, `issue`, `verdict` et l’état selon son schéma. Si un champ ne s’applique pas, marquez `N/A-JUSTIFIED` selon ACTION ; ne créez ni statut ni verdict dans DIRECTION.
+ 
+@@ -271,7 +271,7 @@ La ligne de run constitue une mémoire de lancement, sous-ensemble de lancement
+ 
+ Le schéma complet de `RUN_CARD` appartient exclusivement à **`ACTION/RUN_CARD`**. DIRECTION ne le reproduit pas et transmet la projection `ACTION/HANDOFF`; les champs non applicables sont `N/A-JUSTIFIED`, les observations non vérifiées restent `NOT-VERIFIED`. Une surface `DIRECTION` qui accepte avec V en `PASS` ou `PASS-WITH-RESERVATION`, dont le risque V/craft est dominant ou dont le verdict V dépend d’une intention encore non confrontée doit suivre `ACTION/GATE-B — B1b` avant clôture. Pour une `RUN_CARD DIRECTION` en `CLOSED`, `creative_close` contient `presence`, `signature`, `craft_detail`, `dominant_defect` et `next_polish_action` ; `direction_status`, `issue` et `verdict` restent les registres séparés d’ACTION.
+ 
+-Les runs `STANDARD`, `DIRECTION` et `SYSTÈME` conservent une trace persistante. `ITER` peut s’appuyer sur la mémoire locale du projet si la direction précédente, le périmètre, le dernier artefact, la décision, la preuve et le risque restant sont retrouvables. `LITE` peut se limiter à la ligne de run et au verdict court si l’artefact et le risque restent retrouvables.
++Un run `STANDARD`, `DIRECTION` ou `SYSTÈME` persistant, partagé ou audité conserve une trace persistante (trace complète, `ACTION/HANDOFF`) ; sinon, la trace légère suffit. `ITER` peut s’appuyer sur la mémoire locale du projet si la direction précédente, le périmètre, le dernier artefact, la décision, la preuve et le risque restant sont retrouvables. `LITE` peut se limiter à la ligne de run et au verdict court si l’artefact et le risque restent retrouvables.
+ 
+ ---
+ 
+@@ -371,7 +371,7 @@ Lorsque `RUN-PRIORITY`, `VISUAL_TARGET` ou `DIRECTION-ATELIER` peuvent modifier
+ Les données d’exemple restent cohérentes entre elles : totaux, pourcentages, unités, dates et prix se recoupent. Un chiffre sans référence (« +32 % ») se situe (par rapport à quoi, sur quelle période) ou se retire.
+ <!-- noyau:fin PREMIER-OBJET -->
+ 
+-Un CTA doit soit déclencher un comportement local réellement implémenté, soit mener à une action réellement disponible, soit déclarer sa limite. Un lien vide, une inscription fictive ou une démo qui simule une conséquence externe ne peut pas être présenté comme une action disponible.
++Un CTA doit soit déclencher un comportement local réellement implémenté, soit mener à une action réellement disponible, soit déclarer sa limite. Un lien vide, une inscription fictive ou une démo qui simule une conséquence externe ne peut pas être présenté comme une action disponible. Une action principale dont la valeur manque (numéro, adresse, lien) reste présente avec une valeur d’exemple marquée (`CNT-01`) : c’est une limite déclarée, pas un retrait.
+ 
+ ### Contrat positif du premier objet
+ 
+@@ -688,7 +688,7 @@ Avant toute action qui engage un artefact, une preuve, un état, une diffusion o
+ | Vérification | La preuve dominante est-elle obtenue, ou son absence est-elle explicitement statuée ? |
+ | Clôture | Le verdict, le risque restant et la prochaine action sont-ils persistants ? |
+ 
+-Ne choisis ni `LITE` pour éviter l’effort, ni `DIRECTION` pour paraître complet. Si une preuve est indisponible, le mode ne baisse pas silencieusement : l’axe ou la propriété concernée devient `NOT-VERIFIED`, puis l’issue ou le verdict est déterminé par `ACTION`, par exemple `EXPLORATORY`, `RETURNED`, `FAIL-ASSUMED` ou `ESCALATED`. Une contrainte d’outil, de temps ou de compétence peut modifier la preuve disponible ; elle ne transforme pas une qualité non observée en qualité acquise.
++Ne choisis ni `LITE` pour éviter l’effort, ni `DIRECTION` pour paraître complet. Si une preuve est indisponible, le mode ne baisse pas silencieusement : l’axe ou la propriété concernée devient `NOT-VERIFIED`, puis l’issue ou le verdict est déterminé par `ACTION`, par exemple `EXPLORATORY`, `RETURNED` ou `ESCALATED` ; `FAIL-ASSUMED` ne vaut que pour un échec connu (`ACTION/OVERRIDE`). Une contrainte d’outil, de temps ou de compétence peut modifier la preuve disponible ; elle ne transforme pas une qualité non observée en qualité acquise.
+ 
+ ### [ABSOLU 5 — RÉEL ET BEAU ENSEMBLE] Cadre le produit, le JTBD, les preuves et les contraintes pour produire une beauté pertinente.
+ 
+diff --git a/package/V1/official/SAVOIR.md b/package/V1/official/SAVOIR.md
+index 2f17922..331c841 100644
+--- a/package/V1/official/SAVOIR.md
++++ b/package/V1/official/SAVOIR.md
+@@ -872,7 +872,7 @@ Le sourcing de `DIRECTION` sépare trois rôles : **ancrage de direction** — p
+ 
+ <!-- noyau:début COMP-VAGUES -->
+ <!-- concept:ANT-01 -->
+-[VEILLE 2026-09] **Marqueurs de vague**, pour nommer `MODAL` (`DIRECTION/CREATIVE-BOOT`), jamais pour interdire : un marqueur gardé par décision reste valide. Vague 1 : violet, police Inter, halos et gradient décoratif, hero SaaS à cartes répétées. Vague 2 : fond beige ou crème, brun, serif de caractère ou serif italique, orange rouille, bandeau défilant, illustration peinte, tramage. Vague 3 : dithering, logos pixel, ASCII, hachures de plan, gravures, bleu Klein, libellés mono en capitales, repères de recadrage, paysage peint en fond. Source : épreuve de référence interne V1.2 (26-09-2026) et revue de références de designers (27-09-2026), 6 rendus sur 6 sur fond crème et brun, avec ou sans système. Signal à confirmer (P1, 27-09-2026, 3 rendus sur 3, même auteur) : grotesque large ou condensée (Archivo) sur fond blanc neutre avec un seul accent vif. À revoir avant 2027-03.
++[VEILLE 2026-09] **Marqueurs de vague**, pour nommer `MODAL` (`DIRECTION/CREATIVE-BOOT`), jamais pour interdire : un marqueur gardé par décision reste valide. Vague 1 : violet, police Inter, halos et gradient décoratif, hero SaaS à cartes répétées. Vague 2 : fond beige ou crème, brun, serif de caractère ou serif italique, orange rouille, bandeau défilant, illustration peinte, tramage. Vague 3 : dithering, logos pixel, ASCII, hachures de plan, gravures, bleu Klein, libellés mono en capitales, repères de recadrage, paysage peint en fond. Source : épreuve de référence interne V1.2 (26-09-2026) et revue de références de designers (27-09-2026), 6 rendus sur 6 sur fond crème et brun, avec ou sans système. Signal P1 (27-09-2026, 3 rendus sur 3, même auteur : grotesque large ou condensée, Archivo, sur fond blanc neutre avec un seul accent vif) non retrouvé en R10. Signal R10 (30-09-2026, auto-comparaison, 6 rendus) : même objet central par brief (fournées du jour ; facture tamponnée) et même grotesque de titre sur un brief, avec ou sans système. À revoir avant 2027-03.
+ <!-- noyau:fin COMP-VAGUES -->
+ 
+ <!-- noyau:début MOY-CARTE -->
+diff --git a/package/scripts/validate_structure.py b/package/scripts/validate_structure.py
+index dc9b927..3507269 100644
+--- a/package/scripts/validate_structure.py
++++ b/package/scripts/validate_structure.py
+@@ -98,6 +98,10 @@ RETIRED: list[tuple[str, str, set[str]]] = [
+     (r"→ isoler|observer, isoler", "boucle d'édition de DIRECTION/DOUBLE-LOOP (noyau)",
+      {"DIRECTION.md", "SKILL.md", "CHANGELOG.md"}),
+     (r"Distingue trois niveaux", "un seul modèle de niveaux : Correction, Précision, Intention (D-16)", {"CHANGELOG.md"}),
++    # Audit A1 (AUD-10) : l'agent lit le noyau et CHARGE ; READING_MAP est une vue pour les personnes
++    (r"seul document canonique de cadrage chargé au démarrage", "noyau compilé et DIRECTION/CHARGE (AUD-10)", {"CHANGELOG.md"}),
++    (r"utilisez `READING_MAP\.md` comme vue dérivée", "READING_MAP pour une personne ; l'agent charge par DIRECTION/CHARGE (AUD-10)",
++     {"CHANGELOG.md"}),
+     # One-shot : une seule définition (branche one-shot d'ACTION/PIPELINE-DIRECTION).
+     (r"Le `one-shot` est une stratégie de préparation", "branche one-shot d'ACTION/PIPELINE-DIRECTION", {"CHANGELOG.md"}),
+     (r"cette vue reste interne", "la prise de brief reste dans la trace (D-19)", {"CHANGELOG.md"}),
+@@ -210,6 +214,17 @@ FIDELITY: list[tuple[str, str, str]] = [
+     ("clôture des routes en trace complète (G4b)", r"\*\*Clôture\.\*\*[^.]{0,40}`DECIDED`", "En trace complète"),
+     # D-25 (V12R_36) : une valeur inconnue ne retire pas l'action principale ; elle reste fonctionnelle et marquée
+     ("contenu marqué : action principale (D-25)", r"\*\*Destination réelle sans contenu\.\*\*", "action principale"),
++    # Audit A1 (V12R_38) : raccords sans arbitrage
++    ("ancre absente : pas de FAIL-ASSUMED, pipeline (AUD-03)", r"Sans ancre utile et spec exploitable", "échec connu"),
++    ("preuve indisponible : pas de FAIL-ASSUMED (AUD-03)", r"Si une preuve est indisponible, le mode ne baisse pas", "échec connu"),
++    ("trace persistante en trace complète (AUD-04)", r"conserve(?:nt)? une trace persistante", "trace complète"),
++    ("FAST-PATH : clôture en trace complète (AUD-04)", r"clôture avec la forme courte LITE", "trace complète"),
++    ("sélection structurelle persistée en trace complète (AUD-04)", r"sélection structurelle[^.?]{0,40}persisté", "trace complète"),
++    ("flux : fermer en trace complète (AUD-04)", r"[Dd]écider et fermer", "trace complète"),
++    ("exemples : niveau de trace (AUD-04)", r"Les champs affichés respectent les contrats d’ACTION", "trace complète"),
++    ("règle CTA : valeur d'exemple marquée (AUD-09)", r"Un CTA doit soit déclencher", "CNT-01"),
++    ("flux : READING_MAP pour une personne (AUD-10)", r"la section « Combinaisons par résultat recherché » de `READING_MAP", "si une personne le demande"),
++    ("veille : signal R10 (AUD-14)", r"\*\*Marqueurs de vague\*\*", "Signal R10"),
+     # R7-2 (V12R_24)
+     ("ancre et FAIL-ASSUMED (R7-2)", r"sans (?:l’)?ancre[^.]{0,200}`FAIL-ASSUMED`|ancre (?:absente|manquante)[^.]{0,200}`FAIL-ASSUMED`|"
+      r"`FAIL-ASSUMED`[^.]{0,120}ancre (?:absente|manquante)", "échec connu"),
+@@ -244,6 +259,8 @@ def check_entry(corpus: dict[Path, list[str]], errors: list[str]) -> None:
+         familiar = re.search(TUTOIEMENT.pattern, block, re.I)  # insensible à la casse (début de phrase)
+         if familiar:
+             errors.append(f"[ENT-01] registre : tutoiement « {familiar.group(0)} » dans l'entrée humaine")
++        if block.count("retenir cette direction pour") > 1:  # AUD-15 : une seule mention, à la question 4
++            errors.append("[ENT-01] redite : « retenir cette direction pour » plus d'une fois dans l'entrée humaine")
+     constitutions = CONSTITUTION.findall(text)
+     if len(constitutions) != 1 or CONSTITUTION_SIGNATURE not in constitutions[0]:
+         errors.append("[CST-01] constitution minimale absente, multiple ou inexacte dans README.md (bloc « constitution »)")
+diff --git a/package/skills/design-governance-practice/SKILL.md b/package/skills/design-governance-practice/SKILL.md
+index 54164a8..5716a9f 100644
+--- a/package/skills/design-governance-practice/SKILL.md
++++ b/package/skills/design-governance-practice/SKILL.md
+@@ -116,7 +116,7 @@ Les contrôles principaux sont : alignements nets, compensation optique, proximi
+ 
+ **Question de convergence.** Cette palette et cette police de titre sont-elles celles que le modèle produirait sans brief (palette : neutres et un seul accent, sombre et doré, dégradé froid ; police : la grotesque large ou la serif de caractère prise par réflexe) ? Si oui, nomme ce qui, dans le produit, les justifie. Sinon, reconsidère-les. Pour la police de titre, compare au moins deux voix typographiques distinctes (par exemple grotesque, serif, mécane, manuscrite ou vernaculaire du lieu) sur le vrai titre avant de choisir. La question ne prescrit aucun écart : un choix convergent justifié reste valide.
+ 
+-[VEILLE 2026-09] **Marqueurs de vague**, pour nommer `MODAL` (`DIRECTION/CREATIVE-BOOT`), jamais pour interdire : un marqueur gardé par décision reste valide. Vague 1 : violet, police Inter, halos et gradient décoratif, hero SaaS à cartes répétées. Vague 2 : fond beige ou crème, brun, serif de caractère ou serif italique, orange rouille, bandeau défilant, illustration peinte, tramage. Vague 3 : dithering, logos pixel, ASCII, hachures de plan, gravures, bleu Klein, libellés mono en capitales, repères de recadrage, paysage peint en fond. Source : épreuve de référence interne V1.2 (26-09-2026) et revue de références de designers (27-09-2026), 6 rendus sur 6 sur fond crème et brun, avec ou sans système. Signal à confirmer (P1, 27-09-2026, 3 rendus sur 3, même auteur) : grotesque large ou condensée (Archivo) sur fond blanc neutre avec un seul accent vif. À revoir avant 2027-03.
++[VEILLE 2026-09] **Marqueurs de vague**, pour nommer `MODAL` (`DIRECTION/CREATIVE-BOOT`), jamais pour interdire : un marqueur gardé par décision reste valide. Vague 1 : violet, police Inter, halos et gradient décoratif, hero SaaS à cartes répétées. Vague 2 : fond beige ou crème, brun, serif de caractère ou serif italique, orange rouille, bandeau défilant, illustration peinte, tramage. Vague 3 : dithering, logos pixel, ASCII, hachures de plan, gravures, bleu Klein, libellés mono en capitales, repères de recadrage, paysage peint en fond. Source : épreuve de référence interne V1.2 (26-09-2026) et revue de références de designers (27-09-2026), 6 rendus sur 6 sur fond crème et brun, avec ou sans système. Signal P1 (27-09-2026, 3 rendus sur 3, même auteur : grotesque large ou condensée, Archivo, sur fond blanc neutre avec un seul accent vif) non retrouvé en R10. Signal R10 (30-09-2026, auto-comparaison, 6 rendus) : même objet central par brief (fournées du jour ; facture tamponnée) et même grotesque de titre sur un brief, avec ou sans système. À revoir avant 2027-03.
+ 
+ ### 6. Moyens et vérité
+ 
+diff --git a/package/skills/design-governance-practice/references/examples.md b/package/skills/design-governance-practice/references/examples.md
+index 5748d72..4359089 100644
+--- a/package/skills/design-governance-practice/references/examples.md
++++ b/package/skills/design-governance-practice/references/examples.md
+@@ -3,6 +3,8 @@
+ > Ces exemples sont des aides non canoniques. Reprendre la séquence, pas le style, les valeurs, les composants ou les décisions visuelles. Les cas sont `ILLUSTRATIVE` et `SIMULATED` sauf mention contraire. Les champs affichés varient volontairement selon le mode : une omission dans une condensation n’est pas une suppression de la règle correspondante et ces blocs ne constituent pas un formulaire universel de `RUN_CARD`. Les champs affichés respectent les contrats d’ACTION ; un champ omis reste dû dans la `RUN_CARD`.
+ >
+ > **Trace, pas sérialisation.** Ces blocs sont des traces : leurs noms (`OBSERVED`, `AXES`, `RISK` en phrase…) ne sont pas des clés JSON. Pour produire une `RUN_CARD`, partir de `schemas/run_card.example.json`, suivre [machine_projection.md](machine_projection.md) et la table de correspondance d’`ACTION/RUN_CARD`, puis contrôler avec `scripts/validate_run_card.py`.
++>
++> **Niveau de trace.** Les exemples qui se terminent par `CLOSED` montrent une trace complète (clôture demandée ou run persistant) ; « fabrication depuis un brief flou » montre la sortie par défaut : une proposition et sa réponse visible, sans clôture.
+ 
+ ## LITE — correctif local
+ 
+diff --git a/package/skills/design-governance-practice/references/flow.md b/package/skills/design-governance-practice/references/flow.md
+index 97f8377..2b43a81 100644
+--- a/package/skills/design-governance-practice/references/flow.md
++++ b/package/skills/design-governance-practice/references/flow.md
+@@ -9,7 +9,7 @@ flowchart LR
+   C --> D[Composer et construire]
+   D --> E[Polir et observer]
+   E --> F[Vérifier et corriger]
+-  F --> G[Décider et fermer]
++  F --> G[Proposer ou fermer]
+   A -. risque critique .-> H[Protection de niveau]
+   F -. preuve absente .-> I[NOT-VERIFIED]
+   E -. défaut créatif .-> C
+@@ -17,9 +17,9 @@ flowchart LR
+   I --> J[Owner et prochaine preuve]
+ ```
+ 
+-En texte : **classer et protéger le run, cultiver et diriger la décision, composer et construire l’artefact, polir et observer le rendu, vérifier et corriger ce qui est observable, puis décider et fermer avec ses limites**. Un risque critique ramène au classement (reclassification) ; une preuve absente reste `NOT-VERIFIED`, avec owner et prochaine preuve. La boucle créative élève le résultat ; la boucle de gouvernance protège le risque, la preuve et la vérité de ce qui peut être affirmé.
++En texte : **classer et protéger le run, cultiver et diriger la décision, composer et construire l’artefact, polir et observer le rendu, vérifier et corriger ce qui est observable, puis présenter la proposition (trace légère) ou décider et fermer avec ses limites (trace complète)**. Un risque critique ramène au classement (reclassification) ; une preuve absente reste `NOT-VERIFIED`, avec owner et prochaine preuve. La boucle créative élève le résultat ; la boucle de gouvernance protège le risque, la preuve et la vérité de ce qui peut être affirmé.
+ 
+ Charger `DIRECTION/START` avant un build, une modification, une vérification, une action externe ou une décision persistante. Charger les routes approfondies uniquement si elles peuvent modifier une décision, un artefact, une preuve, une limite ou la prochaine action.
+ 
+-Pour composer plusieurs capacités selon un résultat recherché — direction, beauté située, créativité, usage, preuve, vitesse ou système — consulter la section « Combinaisons par résultat recherché » de `READING_MAP.md` dans la carte officielle du package. Cette carte complète le flux sans créer de route supplémentaire.
++Pour composer plusieurs capacités selon un résultat recherché — direction, beauté située, créativité, usage, preuve, vitesse ou système — consulter, si une personne le demande, la section « Combinaisons par résultat recherché » de `READING_MAP.md` dans la carte officielle du package. Cette carte complète le flux sans créer de route supplémentaire.
+ 
