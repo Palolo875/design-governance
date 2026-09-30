@@ -1,0 +1,240 @@
+diff --git a/package/V1/official/ACTION.md b/package/V1/official/ACTION.md
+index aa51801..a8d102b 100644
+--- a/package/V1/official/ACTION.md
++++ b/package/V1/official/ACTION.md
+@@ -546,7 +546,7 @@ Une émotion n’est une direction que lorsqu’elle change une décision visibl
+ 
+ ### 3. Développer une alternative située
+ 
+-Lorsque la décision est ouverte et qu’une position différente peut réellement changer le choix, considère une proposition crédible répondant à un public, un JTBD, une contrainte ou une opportunité différente.
++Le déclenchement appartient à `DIRECTION` (« Direction divergente ») et les leviers à `SAVOIR/CRAFT/CFT-02`. En trace complète, avant le build, la trace du run (retrouvable par `trace_locator`) nomme la position retenue, l’alternative considérée, la raison de son niveau de matérialisation et la preuve attendue ; la projection JSON ne porte pas ce paquet (voir `ACTION/RUN_CARD`). En trace légère, la première proposition nomme l’alternative écartée (checkpoint, étape 7).
+ 
+ Matérialise l’alternative seulement au niveau nécessaire pour comparer la décision : phrase, schéma, cible ou rendu. Ne construis pas une variante qui ne peut modifier aucune décision. Si aucune alternative située ne change raisonnablement le choix, note cette condition et passe à la spec après avoir nommé la raison.
+ 
+diff --git a/package/V1/official/BIBLIOTHEQUE.md b/package/V1/official/BIBLIOTHEQUE.md
+index 4c1df5d..f1d860e 100644
+--- a/package/V1/official/BIBLIOTHEQUE.md
++++ b/package/V1/official/BIBLIOTHEQUE.md
+@@ -36,32 +36,11 @@ Cette entrée est un **résumé de protection**, pas une nouvelle route, un nouv
+ 
+ Après `DIRECTION/START`, et après `SAVOIR/STYLE` seulement si le registre d’expression peut modifier la structure, commencez par `BIBLIOTHEQUE/READ`, puis `SELECT` si une décision structurelle est ouverte. Cette instruction est interne à BIBLIOTHEQUE et ne remplace jamais le démarrage DIRECTION. La chaîne `support → grille → scène → objet → primitive` décrit des responsabilités, pas un ordre obligatoire de chargement. `READING_MAP.md` est une vue dérivée pour le déclencheur et le non-chargement.
+ 
+-Toute sélection ou non-sélection doit transmettre : `DECISION`, niveau ou héritage, `STRUCTURAL-SIGNATURE` si applicable, contre-indication, premier objet attendu, preuve, limite, owner et condition de sortie. Ces champs sont une projection structurelle locale vers le handoff canonique ACTION ; ils ne le remplacent pas. Conservez aussi `MODE`, `RISK`, `SCOPE`, `ARTIFACT`, `OBSERVATION/METHOD`, `PROOF/TRACE-LOCATOR`, `LIMIT/NOT-VERIFIED`, `DECISION-CHANGE`, `NEXT-ACTION`, `OWNER`, `NEXT-PROOF` et `EXIT-CONDITION`. Si la structure existante suffit, utilisez l’héritage ou le cas documentaire ; `N/A-JUSTIFIED` est réservé à une non-applicabilité justifiée selon ACTION. La clôture et le verdict restent chez ACTION.
++Toute sélection ou non-sélection doit transmettre : `DECISION`, niveau ou héritage, `STRUCTURAL-SIGNATURE` si applicable, contre-indication, premier objet attendu, preuve, limite, owner et condition de sortie. Ces champs sont une projection structurelle locale vers le handoff canonique ACTION ; ils ne le remplacent pas. Le reste de la transmission suit le handoff canonique (`ACTION/HANDOFF`). Si la structure existante suffit, utilisez l’héritage ou le cas documentaire ; `N/A-JUSTIFIED` est réservé à une non-applicabilité justifiée selon ACTION. La clôture et le verdict restent chez ACTION.
+ 
+ **Condition d’arrêt de lecture :** arrêter lorsque la relation structurelle à modifier, la route ou l’héritage, la conséquence observable, la preuve, la limite et le propriétaire suivant sont explicites.
+ 
+-### Charges de lecture à ne pas confondre
+-
+-Les quatre catégories canoniques sont définies par `DIRECTION/lecture instrumentée`. Déclare dans la trace la nature de chaque lecture structurelle effectivement lue :
+-
+-- `STARTUP-NOMINAL` — niveaux recommandés avant la première sélection ;
+-- `CONDITIONAL-READ` — routes ouvertes parce qu’une condition du brief ou du risque peut changer la structure ;
+-- `AUDIT-READ` — fichiers ouverts pour contrôler le corpus ou le protocole, sans être nécessaires au run ;
+-- `ACTUAL-READ` — routes effectivement lues dans un run instrumenté.
+-
+-Le chemin minimal décrit une hypothèse de proportion. Il ne prouve ni réduction de temps, ni baisse de charge cognitive, ni amélioration de qualité. Toute affirmation de gain doit indiquer méthode, périmètre, observation ou mesure et limite.
+-
+-### Contrat minimal par périmètre de contribution et statut de route
+-
+-| Niveau | Minimum attendu | Ne pas exiger par défaut |
+-|---|---|---|
+-| Local | Contrat réduit (`BIBLIOTHEQUE/CONTRACTS`) ; `N/A-JUSTIFIED` si aucune route ne change. | Contrat complet de promotion. |
+-| Route au statut `PILOT` | Contrat réduit, contre-indication, preuve, `DECISION-CHANGE` et périmètre déclaré. | Adoption ou compatibilité générale. |
+-| Partagé | Contrat complet, consumers, owner, compatibilité, états, mobile, accessibilité, migration et rollback selon le risque. | Promotion silencieuse. |
+-| Durable | Usages contrastés, baseline, observation ou mesure de gain, maintenance, owner et prochaine revue. | Validation par beauté, fréquence ou screenshot unique. |
+-
+-`SEED`, `PILOT`, `ADOPTED`, `DEPRECATED` et `ABANDONED` sont des statuts de cycle de vie `CHANGELOG`, jamais des modes, niveaux de structure, états, issues ou verdicts `ACTION`. `OWNER` désigne le responsable de la décision et de sa prochaine preuve ; `NEXT-OWNER` désigne le destinataire de l’action suivante ; l’owner de maintenance d’une route partagée reste distinct et se conserve dans le contrat d’évolution.
+-
++En run local, le contrat réduit de `BIBLIOTHEQUE/CONTRACTS` suffit, avec `N/A-JUSTIFIED` si aucune route ne change ; les exigences par périmètre de contribution (pilote, partagé, durable) et les statuts de cycle de vie relèvent de `BIBLIOTHEQUE/EVOLUTION`.
+ 
+ <!-- noyau:début STRUCT-OU -->
+ > L’interface ne commence ni avec une « landing premium », ni avec une grille de cartes, ni avec une image inspirante. Elle déclare d’abord **où elle vit**, **comment le regard circule**, **quelle preuve devient tangible** et **comment la personne agit**.
+@@ -261,6 +240,7 @@ Les compositions suivantes sont des signaux d’enquête, pas des interdits styl
+ | Plinthe de logos avant l’objet de preuve | Quelle preuve située est remplacée par un signal de réputation ? |
+ | Screenshot produit décoratif sans état ni geste | Quel comportement ou quel résultat de tâche le produit doit-il démontrer ? |
+ | Grille répétitive sans différence de priorité | Quelle rupture doit changer la lecture, la comparaison ou l’action ? |
++| Grain, trame d’impression ou texture repris d’un brief à l’autre | Quelle matière la thèse de ce produit appelle-t-elle, et que perd la page si on la retire (`MODIFIER/PRINT_FIELD`, test de retrait) ? |
+ 
+ <!-- concept:TRM-01 -->
+ **Test de trame.** Chaque brief a aussi sa trame modale : l’ordre de sections que n’importe quelle IA produirait pour lui (pour un SaaS : promesse, logos, trois bénéfices, tarifs, FAQ). Avant de fixer la structure, écris-la en une ligne, puis romps-la ou garde-la en le justifiant par ce que la personne doit voir, comprendre ou faire d’abord. Rompre, c’est changer l’ordre, le foyer ou l’objet qui organise la page ; renommer ou restyler les sections ne suffit pas.
+@@ -622,7 +602,7 @@ Grain, trame, aplat, bordure ou hachure donnent un statut de matière conçue.
+ 
+ **Conditions :** rôle perceptuel ou sémantique, test de retrait, contraste, performance et alternative lorsque la matière est informative. La sémantique ne dépend jamais de la texture ou de la couleur seule. La matière peut être produite par CSS, SVG, typographie, masque ou procédé local ; elle ne devient pas une recette réutilisable sans preuve de gain transversal.
+ 
+-**Test :** la matière soutient l’identité ou la preuve sans abaisser lisibilité, accessibilité ou robustesse.
++**Test :** la matière soutient l’identité ou la preuve sans abaisser lisibilité, accessibilité ou robustesse. Une matière reprise d’un brief à l’autre est un signal de convergence (`BIBLIOTHEQUE/SELECT`, signaux de convergence structurelle) : une question de jugement, jamais une interdiction.
+ 
+ ---
+ 
+@@ -773,6 +753,19 @@ La structure reçoit la route d’asset décidée par `DIRECTION` et vérifiée
+ 
+ BIBLIOTHEQUE est stable dans ses responsabilités, mais pilotée dans ses routes. Une route devient durable après plusieurs usages contrastés documentés, lorsque sa responsabilité reste stable, son contrat est complet, sa maintenance est assumée, ses rendus ne s’homogénéisent pas et un gain réel est observé ou mesuré avec baseline, contexte et limite. Elle doit également démontrer qu’elle permet des premiers objets composés, spécifiques et crédibles dans ces contextes, et pas seulement des structures conformes ou jolies dans un screenshot.
+ 
++**Mesure de lecture.** Pour mesurer ce qu’un run instrumenté lit dans les routes structurelles, les catégories de `DIRECTION` (« Lecture instrumentée et règle de passage ») s’appliquent ; un run ordinaire ne les déclare pas.
++
++### Contrat minimal par périmètre de contribution et statut de route
++
++| Niveau | Minimum attendu | Ne pas exiger par défaut |
++|---|---|---|
++| Local | Contrat réduit (`BIBLIOTHEQUE/CONTRACTS`) ; `N/A-JUSTIFIED` si aucune route ne change. | Contrat complet de promotion. |
++| Route au statut `PILOT` | Contrat réduit, contre-indication, preuve, `DECISION-CHANGE` et périmètre déclaré. | Adoption ou compatibilité générale. |
++| Partagé | Contrat complet, consumers, owner, compatibilité, états, mobile, accessibilité, migration et rollback selon le risque. | Promotion silencieuse. |
++| Durable | Usages contrastés, baseline, observation ou mesure de gain, maintenance, owner et prochaine revue. | Validation par beauté, fréquence ou screenshot unique. |
++
++`SEED`, `PILOT`, `ADOPTED`, `DEPRECATED` et `ABANDONED` sont des statuts de cycle de vie `CHANGELOG`, jamais des modes, niveaux de structure, états, issues ou verdicts `ACTION`. `OWNER` désigne le responsable de la décision et de sa prochaine preuve ; `NEXT-OWNER` désigne le destinataire de l’action suivante ; l’owner de maintenance d’une route partagée reste distinct et se conserve dans le contrat d’évolution.
++
+ ### Contrat de gain réel
+ 
+ Le gain réel ne doit pas être déclaré sans :
+diff --git a/package/V1/official/CHANGELOG.md b/package/V1/official/CHANGELOG.md
+index 678546f..f0bc29b 100644
+--- a/package/V1/official/CHANGELOG.md
++++ b/package/V1/official/CHANGELOG.md
+@@ -31,6 +31,7 @@
+ - **Cohérence ciblée (refonte, R11).** Contrôle machine nommé par mode (paquets de clôture, promesse du validateur) ; arrêt one-shot relié à B1b ; exclusion LITE/ITER alignée sur la protection de niveau ; ancre `transformed` exigée en DIRECTION ; triade définie, valeurs de repli nommées ; références alignées sur le schéma et les propriétaires ; locators nommés dans les messages du validateur ; six cas négatifs ajoutés. Schéma et comportement du validateur inchangés.
+ - **Entrée humaine (refonte, R6b-1).** Une seule entrée pour une personne qui fait une demande : section « Commencer » du README du package, en quatre questions (que demander, que fournir, que recevoir, comment poursuivre), au vouvoiement et sans mode à choisir ; le README Local la reprend, générée par le build depuis la même source. QUICKSTART devient le guide opérateur, à un seul parcours commun ; le README officiel devient un pointeur vers les sources normatives ; une seule constitution minimale, exacte (l’ancien résumé de l’absolu 2 est retiré).
+ - **Cartes réunies (refonte, R6b-2).** `READING_MAP` porte désormais les combinaisons par résultat recherché, leurs garde-fous et leur condition d’arrêt ; `ORCHESTRATION_MAP` devient un pointeur de compatibilité. Aucune règle nouvelle ; `DIRECTION/CHARGE` reste la seule liste de chargement.
++- **Répétitions retirées (refonte, restes R5).** Copies du handoff remplacées par un renvoi à `ACTION/HANDOFF` ; catégories de lecture et contrat de promotion sortis du préambule de BIBLIOTHEQUE (`BIBLIOTHEQUE/EVOLUTION`), déclaration de lecture limitée aux runs instrumentés ou audités ; alternative située répartie (DIRECTION déclenche, SAVOIR donne les leviers, ACTION matérialise, trace et compare) ; `PRINT_FIELD` relié aux signaux de convergence comme question de jugement.
+ - **Efficacité.** `NOT-VERIFIED` : l’épreuve de référence donne V1.1.1 ≈ sans système sur la qualité perçue ; l’effet de ces chantiers reste à éprouver (G4).
+ 
+ ## V1.1.1 — Retour d’audit : alignements de textes et de façades
+diff --git a/package/V1/official/DIRECTION.md b/package/V1/official/DIRECTION.md
+index 8c5e4b4..bc21844 100644
+--- a/package/V1/official/DIRECTION.md
++++ b/package/V1/official/DIRECTION.md
+@@ -669,7 +669,7 @@ Les gates et leurs conditions d’exécution sont définis par `ACTION`. DIRECTI
+ 
+ Un gate non applicable est `N/A-JUSTIFIED`. Un gate non vérifiable est `NOT-VERIFIED`, jamais `PASS` par défaut.
+ 
+-Une alternative ou un retrait n’est requis que si un choix plausible pourrait modifier la décision. En `DIRECTION`, considère une alternative située lorsque la décision est ouverte et qu’une position différente peut raisonnablement changer le choix. **Avant le build**, la trace nomme la position retenue, l’alternative considérée, la raison de son niveau de matérialisation et la preuve attendue. Matérialise-la seulement au niveau nécessaire pour comparer cette décision : phrase, schéma, cible ou rendu. Une alternative qui ne peut rien changer n’est pas produite ; sa non-production est justifiée.
++Une alternative ou un retrait n’est requis que si un choix plausible pourrait modifier la décision. En `DIRECTION`, l’alternative située suit « Direction divergente » (déclenchement), `SAVOIR/CRAFT/CFT-02` (leviers) et `ACTION/PIPELINE-DIRECTION` (matérialisation, trace et comparaison) ; une alternative qui ne peut rien changer n’est pas produite, et sa non-production est justifiée.
+ 
+ Le verdict nomme le risque ou conflit le plus important. **Aucun quota de retraits, de variantes ou de différences n’est imposé.**
+ 
+@@ -762,7 +762,8 @@ Avant de diverger, situe la première idée sur plusieurs axes :
+ | Densité | Respiration focalisée ↔ information concentrée. |
+ | Rapport texte/image | Texte souverain ↔ preuve souveraine ↔ relation équilibrée. |
+ 
+-En `DIRECTION`, considère une **alternative située** lorsque la décision est ouverte et qu’une position différente peut raisonnablement modifier le choix. Elle doit répondre à un public, un JTBD, une contrainte ou une opportunité distincte. Avant le build, la trace du run (retrouvable par `trace_locator`) nomme la position retenue, l’alternative considérée, la raison de son niveau de matérialisation et la preuve attendue. La projection JSON ne porte pas ce paquet (voir `ACTION/RUN_CARD`). Matérialise-la seulement au niveau nécessaire pour comparer la décision : phrase, schéma, cible ou rendu. Si aucune alternative plausible ne peut modifier le choix, note cette condition et passe à la spec après avoir nommé la raison.
++<!-- concept:ALT-01 -->
++En `DIRECTION`, considère une **alternative située** lorsque la décision est ouverte et qu’une position différente peut raisonnablement modifier le choix. Elle doit répondre à un public, un JTBD, une contrainte ou une opportunité distincte. Ses leviers sont les axes de `SAVOIR/CRAFT/CFT-02` ; sa matérialisation, sa trace selon le niveau retenu et sa comparaison suivent `ACTION/PIPELINE-DIRECTION` (étapes 3 et 7).
+ 
+ La direction retenue ne l’emporte que si son avantage est formulé en une phrase vérifiable reliant la position à un effet attendu sur la tâche, la compréhension, la preuve, la singularité ou la contrainte. Une palette seule, un adjectif ou une variation cosmétique ne constituent pas une direction distincte.
+ 
+@@ -842,14 +843,14 @@ Les gates, verdicts, exceptions, preuves exécutables et statuts restent canoniq
+ 
+ ### Lecture instrumentée et règle de passage
+ 
+-Pour éviter de présenter une hypothèse de proportion comme un gain démontré, distingue dans la trace :
++Pour éviter de présenter une hypothèse de proportion comme un gain démontré, dans un run instrumenté ou audité, distingue dans la trace :
+ 
+ - `STARTUP-NOMINAL` — modules recommandés avant la première décision ;
+ - `CONDITIONAL-READ` — modules ouverts parce qu’une condition du brief ou du risque peut changer la décision ;
+ - `AUDIT-READ` — fichiers ouverts pour contrôler le corpus ou le protocole, sans être nécessaires au run ;
+ - `ACTUAL-READ` — fichiers effectivement lus dans un run instrumenté.
+ 
+-La chaîne de lecture est définie une seule fois : « Chaîne de lecture interne », dans la constitution du document. Déclare dans la trace la catégorie de lecture applicable ; ne compte jamais un `AUDIT-READ` comme une lecture nécessaire au run. La règle de lecture proportionnelle décrit un chemin nominal : elle ne constitue pas une mesure de temps, de volume, de charge cognitive ou de qualité. Toute affirmation de réduction doit préciser la méthode, le périmètre et la limite.
++La chaîne de lecture est définie une seule fois : « Chaîne de lecture interne », dans la constitution du document. Dans un run instrumenté ou audité, déclare dans la trace la catégorie de lecture applicable (en trace légère, cette déclaration n’est pas demandée) ; ne compte jamais un `AUDIT-READ` comme une lecture nécessaire au run. La règle de lecture proportionnelle décrit un chemin nominal : elle ne constitue pas une mesure de temps, de volume, de charge cognitive ou de qualité. Toute affirmation de réduction doit préciser la méthode, le périmètre et la limite.
+ 
+ Le passage entre propriétaires reste celui de la règle de passage de `DIRECTION/CHARGE`. Pour une route partagée ou candidate à la promotion, l’ordre de décision est `DIRECTION/START` → `ACTION/RUN-SYSTEM` → `BIBLIOTHEQUE/EVOLUTION` si la route est structurelle, sinon la source normative propriétaire (`SAVOIR` pour une heuristique de jugement, `ACTION` pour un gate ou un champ de `RUN_CARD`) → `CHANGELOG`. Cet ordre ne constitue ni une promotion, ni un nouveau gate, ni une nouvelle source d’autorité.
+ 
+diff --git a/package/V1/official/SAVOIR.md b/package/V1/official/SAVOIR.md
+index 06dc98b..ba18996 100644
+--- a/package/V1/official/SAVOIR.md
++++ b/package/V1/official/SAVOIR.md
+@@ -186,7 +186,7 @@ Toute hypothèse importante indique, dans la ligne de run ou la `RUN_CARD` exist
+ | **Owner et prochaine preuve** | Qui peut confirmer ou corriger, et par quel test, retour, donnée, capture ou décision. |
+ | **User input requis** | `YES`, `NO` ou `NOT-REQUIRED` selon le risque U/A et le contexte ; une non-applicabilité doit être justifiée séparément et ne constitue pas un verdict. |
+ 
+-Ces champs sont une projection lisible du handoff d’ACTION ; ils ne créent ni nouveau schéma ni nouveau statut. Lorsque le run passe à ACTION, conserve au minimum `MODE`, `RISK`, `SCOPE`, `ARTIFACT`, `OBSERVATION/METHOD`, `PROOF/TRACE-LOCATOR`, `LIMIT/NOT-VERIFIED`, `DECISION-CHANGE`, `NEXT-ACTION`, `OWNER`, `NEXT-PROOF` et `EXIT-CONDITION` dans la `RUN_CARD` ou la trace équivalente. `Nature et confiance` alimente la qualification de la décision et du risque ; `Source et coût d’erreur` alimente les sources, le scope et la limite ; `User input requis` déclenche une méthode proportionnée lorsque U ou A domine.
++Ces champs sont une projection lisible du handoff d’ACTION ; ils ne créent ni nouveau schéma ni nouveau statut. Lorsque le run passe à ACTION, ces champs rejoignent le handoff canonique (`ACTION/HANDOFF`) ; en trace complète, ils vont dans la `RUN_CARD` ou la trace équivalente. `Nature et confiance` alimente la qualification de la décision et du risque ; `Source et coût d’erreur` alimente les sources, le scope et la limite ; `User input requis` déclenche une méthode proportionnée lorsque U ou A domine.
+ 
+ Distingue hypothèses de produit, de contenu et de direction : elles n’ont pas le même coût d’erreur. Une microcopie peut être provisoire ; une cible d’utilisateur, une contrainte critique ou un droit d’asset doivent rester visiblement incertains jusqu’à preuve.
+ 
+diff --git a/package/scripts/validate_structure.py b/package/scripts/validate_structure.py
+index ca807e5..0803226 100644
+--- a/package/scripts/validate_structure.py
++++ b/package/scripts/validate_structure.py
+@@ -23,6 +23,7 @@ Gardes :
+  12. LOCATORS DU VALIDATEUR — un message de `validate_run_card.py` cite un lieu nommé, jamais un numéro de ligne (R-28).
+  13. ENTRÉE HUMAINE — une seule entrée balisée (README du package, reprise par le README Local), quatre questions,
+      aucun mode demandé, vouvoiement ; une seule constitution minimale (ENT-01, CST-01).
++ 15. PRÉAMBULE DE BIBLIOTHEQUE — ni catégories de lecture ni contrat de promotion avant les routes (MNT-01, D-15).
+ 
+ Une reformulation ne casse pas ces gardes ; une suppression, un déplacement, une copie ou un retour du
+ vocabulaire retiré les cassent. `scripts/read_route.py` retire les balises à la lecture.
+@@ -72,6 +73,7 @@ CONCEPTS: list[tuple[str, str, str]] = [
+     ("RCV-01", "SAVOIR.md", "récupération après erreur : message, saisie conservée, focus, reprise observée par interaction"),
+     ("ANC-01", "DIRECTION.md", "ancre graduée : explorer sans ancre (limite déclarée), accepter avec ancre, observée ou fournie pour un produit réel"),
+     ("VAL-01", "ACTION.md", "promesse du validateur : ce qu'atteste et n'atteste pas une RUN_CARD validée, texte unique"),
++    ("ALT-01", "DIRECTION.md", "alternative située : déclenchement en un seul lieu ; leviers SAVOIR ; matérialisation, trace et comparaison ACTION"),
+ ]
+ 
+ # 2. Renvois : la route cite un locator dont le bloc contient le concept.
+@@ -129,6 +131,13 @@ RETIRED: list[tuple[str, str, set[str]]] = [
+      "entrée humaine unique (« Commencer », README du package) ; parcours commun du guide opérateur", {"CHANGELOG.md"}),
+     (r"dessinée uniquement de mémoire|coordination du réel et du beau",
+      "constitution minimale unique, exacte (README du package, bloc « constitution » ; D-24)", {"CHANGELOG.md"}),
++    # Restes R5 (V12R_30) : copies du handoff, instrumentation de lecture, copies du déclenchement de l'alternative.
++    (r"conserve au minimum `MODE`|Conservez aussi `MODE`", "renvoi au handoff canonique (ACTION/HANDOFF)", {"CHANGELOG.md"}),
++    (r"Charges de lecture à ne pas confondre|Déclare dans la trace la nature de chaque lecture",
++     "catégories de lecture de DIRECTION, pour un run instrumenté ou audité (D-15)", {"CHANGELOG.md"}),
++    (r"considère une proposition crédible répondant à un public|Matérialise-la seulement au niveau nécessaire pour comparer|"
++     r"sa trace avant le build",
++     "alternative située : déclenchement DIRECTION (ALT-01), leviers SAVOIR, matérialisation et trace ACTION", {"CHANGELOG.md"}),
+ ]
+ 
+ # 11. Choix contextuels (PKG-01) — garde BORNÉE. Elle ne juge pas le sens d'une phrase quelconque ; elle détecte
+@@ -179,6 +188,11 @@ FIDELITY: list[tuple[str, str, str]] = [
+     ("COMPONENTS en SYSTÈME (R-26)", r"`ACTION/RUN-SYSTEM` \+ `BIBLIOTHEQUE/COMPONENTS`", "si un composant change"),
+     ("zéro contrat (R-29)", r"Zéro contrat est valide", "`production_contracts`"),
+     ("champ voisin (R-30)", r"jamais glissé dans un champ voisin", "non prévu par cette table"),
++    # Restes R5 (V12R_30)
++    ("lecture instrumentée : ouverture (D-15)", r"distingue dans la trace :", "run instrumenté ou audité"),
++    ("lecture instrumentée : déclaration (D-15)", r"déclare dans la trace la catégorie de lecture", "run instrumenté ou audité"),
++    ("trace de l'alternative graduée", r"la raison de son niveau de matérialisation", "En trace légère"),
++    ("signal de matière (PRINT_FIELD)", r"Trois cartes égales sous un titre centré", "`MODIFIER/PRINT_FIELD`"),
+     # R7-2 (V12R_24)
+     ("ancre et FAIL-ASSUMED (R7-2)", r"sans (?:l’)?ancre[^.]{0,200}`FAIL-ASSUMED`|ancre (?:absente|manquante)[^.]{0,200}`FAIL-ASSUMED`|"
+      r"`FAIL-ASSUMED`[^.]{0,120}ancre (?:absente|manquante)", "échec connu"),
+@@ -223,6 +237,19 @@ def check_entry(corpus: dict[Path, list[str]], errors: list[str]) -> None:
+             errors.append(f"[CST-01] copie de la constitution minimale hors du README : {path.name}")
+ 
+ 
++# 15. Préambule de BIBLIOTHEQUE (restes R5, D-15) : ni instrumentation de lecture ni contrat de promotion avant les routes.
++def check_preamble(errors: list[str]) -> None:
++    text = (OFFICIAL / "BIBLIOTHEQUE.md").read_text(encoding="utf-8")
++    start, end = text.find("## Responsabilité"), text.find("## BIBLIOTHEQUE/READ")
++    if start < 0 or end < 0:
++        errors.append("[MNT-01] préambule de BIBLIOTHEQUE introuvable")
++        return
++    preamble = text[start:end]
++    for marker in ("STARTUP-NOMINAL", "AUDIT-READ", "### Contrat minimal par périmètre"):
++        if marker in preamble:
++            errors.append(f"[MNT-01] maintenance dans le préambule de BIBLIOTHEQUE (lu en premier) : « {marker} »")
++
++
+ # 14. Cartes réunies (R6b-2) : les combinaisons par résultat vivent dans READING_MAP ; ORCHESTRATION_MAP n'est qu'un pointeur.
+ def check_maps(errors: list[str]) -> None:
+     reading = (OFFICIAL / "READING_MAP.md").read_text(encoding="utf-8")
+@@ -522,6 +549,7 @@ def check() -> list[str]:
+     check_numeric_locators(errors)
+     check_entry(corpus, errors)
+     check_maps(errors)
++    check_preamble(errors)
+     return errors
+ 
+ 
+diff --git a/package/skills/design-governance-practice/SKILL.md b/package/skills/design-governance-practice/SKILL.md
+index 097168b..3effc78 100644
+--- a/package/skills/design-governance-practice/SKILL.md
++++ b/package/skills/design-governance-practice/SKILL.md
+@@ -72,6 +72,7 @@ Les compositions suivantes sont des signaux d’enquête, pas des interdits styl
+ | Plinthe de logos avant l’objet de preuve | Quelle preuve située est remplacée par un signal de réputation ? |
+ | Screenshot produit décoratif sans état ni geste | Quel comportement ou quel résultat de tâche le produit doit-il démontrer ? |
+ | Grille répétitive sans différence de priorité | Quelle rupture doit changer la lecture, la comparaison ou l’action ? |
++| Grain, trame d’impression ou texture repris d’un brief à l’autre | Quelle matière la thèse de ce produit appelle-t-elle, et que perd la page si on la retire (`MODIFIER/PRINT_FIELD`, test de retrait) ? |
+ 
+ **Test de trame.** Chaque brief a aussi sa trame modale : l’ordre de sections que n’importe quelle IA produirait pour lui (pour un SaaS : promesse, logos, trois bénéfices, tarifs, FAQ). Avant de fixer la structure, écris-la en une ligne, puis romps-la ou garde-la en le justifiant par ce que la personne doit voir, comprendre ou faire d’abord. Rompre, c’est changer l’ordre, le foyer ou l’objet qui organise la page ; renommer ou restyler les sections ne suffit pas.
+ 

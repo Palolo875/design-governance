@@ -669,7 +669,7 @@ Les gates et leurs conditions d’exécution sont définis par `ACTION`. DIRECTI
 
 Un gate non applicable est `N/A-JUSTIFIED`. Un gate non vérifiable est `NOT-VERIFIED`, jamais `PASS` par défaut.
 
-Une alternative ou un retrait n’est requis que si un choix plausible pourrait modifier la décision. En `DIRECTION`, considère une alternative située lorsque la décision est ouverte et qu’une position différente peut raisonnablement changer le choix. **Avant le build**, la trace nomme la position retenue, l’alternative considérée, la raison de son niveau de matérialisation et la preuve attendue. Matérialise-la seulement au niveau nécessaire pour comparer cette décision : phrase, schéma, cible ou rendu. Une alternative qui ne peut rien changer n’est pas produite ; sa non-production est justifiée.
+Une alternative ou un retrait n’est requis que si un choix plausible pourrait modifier la décision. En `DIRECTION`, l’alternative située suit « Direction divergente » (déclenchement), `SAVOIR/CRAFT/CFT-02` (leviers) et `ACTION/PIPELINE-DIRECTION` (matérialisation, trace et comparaison) ; une alternative qui ne peut rien changer n’est pas produite, et sa non-production est justifiée.
 
 Le verdict nomme le risque ou conflit le plus important. **Aucun quota de retraits, de variantes ou de différences n’est imposé.**
 
@@ -762,7 +762,8 @@ Avant de diverger, situe la première idée sur plusieurs axes :
 | Densité | Respiration focalisée ↔ information concentrée. |
 | Rapport texte/image | Texte souverain ↔ preuve souveraine ↔ relation équilibrée. |
 
-En `DIRECTION`, considère une **alternative située** lorsque la décision est ouverte et qu’une position différente peut raisonnablement modifier le choix. Elle doit répondre à un public, un JTBD, une contrainte ou une opportunité distincte. Avant le build, la trace du run (retrouvable par `trace_locator`) nomme la position retenue, l’alternative considérée, la raison de son niveau de matérialisation et la preuve attendue. La projection JSON ne porte pas ce paquet (voir `ACTION/RUN_CARD`). Matérialise-la seulement au niveau nécessaire pour comparer la décision : phrase, schéma, cible ou rendu. Si aucune alternative plausible ne peut modifier le choix, note cette condition et passe à la spec après avoir nommé la raison.
+<!-- concept:ALT-01 -->
+En `DIRECTION`, considère une **alternative située** lorsque la décision est ouverte et qu’une position différente peut raisonnablement modifier le choix. Elle doit répondre à un public, un JTBD, une contrainte ou une opportunité distincte. Ses leviers sont les axes de `SAVOIR/CRAFT/CFT-02` ; sa matérialisation, sa trace selon le niveau retenu et sa comparaison suivent `ACTION/PIPELINE-DIRECTION` (étapes 3 et 7).
 
 La direction retenue ne l’emporte que si son avantage est formulé en une phrase vérifiable reliant la position à un effet attendu sur la tâche, la compréhension, la preuve, la singularité ou la contrainte. Une palette seule, un adjectif ou une variation cosmétique ne constituent pas une direction distincte.
 
@@ -842,14 +843,14 @@ Les gates, verdicts, exceptions, preuves exécutables et statuts restent canoniq
 
 ### Lecture instrumentée et règle de passage
 
-Pour éviter de présenter une hypothèse de proportion comme un gain démontré, distingue dans la trace :
+Pour éviter de présenter une hypothèse de proportion comme un gain démontré, dans un run instrumenté ou audité, distingue dans la trace :
 
 - `STARTUP-NOMINAL` — modules recommandés avant la première décision ;
 - `CONDITIONAL-READ` — modules ouverts parce qu’une condition du brief ou du risque peut changer la décision ;
 - `AUDIT-READ` — fichiers ouverts pour contrôler le corpus ou le protocole, sans être nécessaires au run ;
 - `ACTUAL-READ` — fichiers effectivement lus dans un run instrumenté.
 
-La chaîne de lecture est définie une seule fois : « Chaîne de lecture interne », dans la constitution du document. Déclare dans la trace la catégorie de lecture applicable ; ne compte jamais un `AUDIT-READ` comme une lecture nécessaire au run. La règle de lecture proportionnelle décrit un chemin nominal : elle ne constitue pas une mesure de temps, de volume, de charge cognitive ou de qualité. Toute affirmation de réduction doit préciser la méthode, le périmètre et la limite.
+La chaîne de lecture est définie une seule fois : « Chaîne de lecture interne », dans la constitution du document. Dans un run instrumenté ou audité, déclare dans la trace la catégorie de lecture applicable (en trace légère, cette déclaration n’est pas demandée) ; ne compte jamais un `AUDIT-READ` comme une lecture nécessaire au run. La règle de lecture proportionnelle décrit un chemin nominal : elle ne constitue pas une mesure de temps, de volume, de charge cognitive ou de qualité. Toute affirmation de réduction doit préciser la méthode, le périmètre et la limite.
 
 Le passage entre propriétaires reste celui de la règle de passage de `DIRECTION/CHARGE`. Pour une route partagée ou candidate à la promotion, l’ordre de décision est `DIRECTION/START` → `ACTION/RUN-SYSTEM` → `BIBLIOTHEQUE/EVOLUTION` si la route est structurelle, sinon la source normative propriétaire (`SAVOIR` pour une heuristique de jugement, `ACTION` pour un gate ou un champ de `RUN_CARD`) → `CHANGELOG`. Cet ordre ne constitue ni une promotion, ni un nouveau gate, ni une nouvelle source d’autorité.
 

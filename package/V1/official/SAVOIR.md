@@ -186,7 +186,7 @@ Toute hypothèse importante indique, dans la ligne de run ou la `RUN_CARD` exist
 | **Owner et prochaine preuve** | Qui peut confirmer ou corriger, et par quel test, retour, donnée, capture ou décision. |
 | **User input requis** | `YES`, `NO` ou `NOT-REQUIRED` selon le risque U/A et le contexte ; une non-applicabilité doit être justifiée séparément et ne constitue pas un verdict. |
 
-Ces champs sont une projection lisible du handoff d’ACTION ; ils ne créent ni nouveau schéma ni nouveau statut. Lorsque le run passe à ACTION, conserve au minimum `MODE`, `RISK`, `SCOPE`, `ARTIFACT`, `OBSERVATION/METHOD`, `PROOF/TRACE-LOCATOR`, `LIMIT/NOT-VERIFIED`, `DECISION-CHANGE`, `NEXT-ACTION`, `OWNER`, `NEXT-PROOF` et `EXIT-CONDITION` dans la `RUN_CARD` ou la trace équivalente. `Nature et confiance` alimente la qualification de la décision et du risque ; `Source et coût d’erreur` alimente les sources, le scope et la limite ; `User input requis` déclenche une méthode proportionnée lorsque U ou A domine.
+Ces champs sont une projection lisible du handoff d’ACTION ; ils ne créent ni nouveau schéma ni nouveau statut. Lorsque le run passe à ACTION, ces champs rejoignent le handoff canonique (`ACTION/HANDOFF`) ; en trace complète, ils vont dans la `RUN_CARD` ou la trace équivalente. `Nature et confiance` alimente la qualification de la décision et du risque ; `Source et coût d’erreur` alimente les sources, le scope et la limite ; `User input requis` déclenche une méthode proportionnée lorsque U ou A domine.
 
 Distingue hypothèses de produit, de contenu et de direction : elles n’ont pas le même coût d’erreur. Une microcopie peut être provisoire ; une cible d’utilisateur, une contrainte critique ou un droit d’asset doivent rester visiblement incertains jusqu’à preuve.
 
