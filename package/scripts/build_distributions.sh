@@ -72,7 +72,7 @@ Design Governance V1.1.1 est une expérimentation maintenue qui aide à transfor
 
 ## Constitution minimale
 
-Les cinq absolus de `official/DIRECTION.md` protègent la baseline : direction perceptible, ancre inspectable, preuves applicables, déclaration du mode et de la prochaine preuve avant l’exécution, et coordination du réel et du beau. La conformité ne remplace ni la direction ni la preuve.
+Les cinq absolus de `official/DIRECTION.md` protègent la baseline : direction perceptible, ancre observée ou fournie avant d’accepter une direction pour un produit réel, preuves applicables, déclaration du mode et de la prochaine preuve avant l’exécution, et coordination du réel et du beau. La conformité ne remplace ni la direction ni la preuve.
 
 Pour charger un seul bloc :
 

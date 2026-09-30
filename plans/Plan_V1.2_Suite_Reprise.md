@@ -16,7 +16,7 @@
 4. **Décisions :** toutes les décisions du plan maître sont prises (`audit/reports/V12R_14_DECISIONS_ARBITRAGES.md`, addendums 1 et 2). Un contenu qui dépend d'une question nouvelle attend la réponse de l'owner.
 5. **Consolider avant d'évaluer.** Aucun run avant la porte **P2 « prêt pour l'évaluation »** (§4). Corriger et améliorer, c'est mettre l'existant à sa place (hiérarchie, organisation, accès, cohérence, clarté, fiabilité), pas ajouter ni retirer au hasard ; chaque modification répond à un défaut identifié, préserve ce qui marche et a une vérification proportionnée. Les moyens de produire du beau interviennent pendant la conception, pas seulement dans les contrôles de fin.
 
-## 2. État (après R8c-2, 30-09-2026)
+## 2. État (après R7, 30-09-2026)
 
 | Fait | Rapport |
 |---|---|
@@ -32,11 +32,11 @@
 | R11a : résidu `DAILY` retiré ; ancre de mesure F13 rectifiée ; carte des moyens v0 alignée sur D-20 | `V12R_13` |
 
 - **Mesures :**
-  - **mesures après R8c-2** : chemin prescrit 12 682 mots (trace légère) ; noyau 3 748 mots (après R8c : 12 629 et 3 695 ; après R11a : 12 187 et 3 302) ;
+  - **mesures après R7** : chemin prescrit 12 795 mots (trace légère) ; noyau 3 861 mots (après R8c-2 : 12 682 et 3 748 ; après R11a : 12 187 et 3 302) ;
   - 24/25 outils de fabrication sur le chemin ; l'outil manquant est **F22** (tests perceptifs), atteignable en un renvoi conditionnel depuis Gate C (`PRC-01`), non compté car la mesure ne suit que les lectures impératives ;
   - 1 liste de chargement.
 - **Gardes :**
-  - `validate_structure.py` : 23 concepts, 4 renvois, 12 vocabulaires retirés, 7 résumés fidèles, 16 termes de glossaire, CHG-01 à CHG-09, ORD-01, UNI-01 (garde bornée) ;
+  - `validate_structure.py` : 24 concepts, 4 renvois, 13 vocabulaires retirés, 7 résumés fidèles, 16 termes de glossaire, CHG-01 à CHG-09, ORD-01, UNI-01 (garde bornée) ;
   - `validate_reading_map.py` : 50 conditions.
 - **Suivi :** vert (372 cas maintenus, 17 migrés).
 
@@ -78,7 +78,7 @@ git checkout claude/init-repo-claude-md-gm6njm
 | 0 | **Inventaire unique des défauts** | `audit/data/V12R/V12R_Inventaire_P2.md` (créé le 30-09) | Registre D-01 à D-23, points du plan consolidé et de l'amendement, Q04 à Q13, R16 à R32, réserves de clôture : chacun marqué **bloquant P2** ou **non bloquant** (avec sa limite écrite). C'est la liste de sortie de la consolidation |
 | 1 | ~~**R8b**~~ — **fait** (`V12R_15`) ; moyens et enseignements transférables | amendement §4 | Carte des moyens consolidée : ce que chaque couche permet de construire, comment choisir, ce qui limite ; des conditions au lieu d'« atteignable » ; licences vérifiées par ressource ; D-20 préservé. **Plus d'atlas des 18 créations comme livrable** : les enseignements de l'atlas v0 sont confrontés à l'existant et deviennent un renvoi ou un ajout ciblé, conditionnel, avec observation attendue et contre-indication ; aucun style déduit d'un petit échantillon |
 | 2 | ~~**R8c**~~ **fait** (`V12R_17`, `V12R_18`) ; — résoudre plus précisément | amendement §5 ; `V12R_15` §2 | Candidats venus de R8b (à examiner, sans obligation d'ajouter une recette chacun) : contraste d'échelle, **geste existant** à approfondir (Gate C, C2 : « une échelle contrastée »), appliqué au titre, aux masses et à la composition ; texte dans la zone calme de l'image ; relecture de l'ensemble après une correction locale (hiérarchie et harmonie conservées) ; récupération après erreur, observée par interaction et reprise, pas seulement sur capture. Compléter seulement les gestes insuffisamment opérables (équilibre d'un titre, relation texte/image, poids optique des icônes, récupération après erreur, réinspection de l'ensemble après un réglage local) : déclencheur, corrections possibles, observation de l'effet. Aucune modification obligatoire si la relation fonctionne ; pas de bloc `FINITION` comme fin en soi ; « accent, traitement ou famille unique » restent contextuels. Contenus chez leurs propriétaires, noyau recompilé |
-| 3 | **R7** — ancre graduée | amendement §6 | DIRECTION porte la règle canonique, SAVOIR son exploitation, ACTION les observations et la conséquence sur l'acceptation ; une ancre peut venir du projet lui-même ; limite déclarée : le validateur (inchangé) ne garantit pas « observée ou fournie pour un produit réel », qui relève de la revue d'acceptation |
+| 3 | ~~**R7**~~ **fait** (`V12R_20`, `V12R_21`) ; — ancre graduée | amendement §6 | DIRECTION porte la règle canonique, SAVOIR son exploitation, ACTION les observations et la conséquence sur l'acceptation ; une ancre peut venir du projet lui-même ; limite déclarée : le validateur (inchangé) ne garantit pas « observée ou fournie pour un produit réel », qui relève de la revue d'acceptation |
 | 4 | **R11 ciblé** | amendement §7 | Q04, Q07, Q08, Q09 ; B1b : deux exceptions préservées, une comparaison peut confirmer l'original ; Q11 et Q12 maintenus ; `DAILY` enregistré comme corrigé (R11a) ; cas négatifs manquants (provenance, `observed` / `not_verified`, protection critique) après vérification des autres harnais ; Q13 et R16 à R32 ouverts jusqu'à lecture des traces (`audit/logs/*.zip`) |
 | 5 | **R6b élargi** — une entrée humaine cohérente | amendement §8 ; définition du 27-09 ci-dessous | Quatre questions : que demander, que fournir, que recevoir, comment poursuivre. Le novice ne choisit pas de mode ; prise de brief proportionnée ; fusion des README du package ; QUICKSTART raccourci ; cartes de lecture réunies sans perdre liens ni locators. **README Local généré par `build_distributions.sh` : à inclure impérativement.** Réponse visible d'`ACTION/HANDOFF` réutilisée |
 | 6 | **Restes R5** | amendement §9 | Copies du handoff (SAVOIR, BIBLIOTHEQUE) → renvois ; maintenance et promotion hors du parcours local (vérifier que le chargement inutile baisse) ; `PRINT_FIELD` relié aux signaux de convergence ; alternative située : DIRECTION le déclenchement, SAVOIR les leviers, ACTION la comparaison |

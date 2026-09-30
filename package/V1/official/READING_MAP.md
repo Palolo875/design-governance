@@ -21,7 +21,7 @@ Pour composer plusieurs capacités selon un résultat recherché — direction, 
 
 ## Constitution minimale
 
-Les cinq absolus de `DIRECTION` protègent la baseline : direction perceptible, ancre inspectable, preuves applicables, mode et prochaine preuve déclarés avant l’exécution, coordination du réel et du beau. La conformité ne remplace ni la direction ni la preuve. Pour le contrat complet, ouvrir [`DIRECTION.md`](DIRECTION.md#les-cinq-règles-absolues).
+Les cinq absolus de `DIRECTION` protègent la baseline : direction perceptible, ancre observée ou fournie avant d’accepter une direction pour un produit réel, preuves applicables, mode et prochaine preuve déclarés avant l’exécution, coordination du réel et du beau. La conformité ne remplace ni la direction ni la preuve. Pour le contrat complet, ouvrir [`DIRECTION.md`](DIRECTION.md#les-cinq-règles-absolues).
 
 ## Routage minimal par décision
 

@@ -48,7 +48,7 @@ Si le domaine, le public, la confiance, la culture, la convention ou l’ambitio
 
 ### Constitution minimale
 
-Avant toute route détaillée, gardez en tête les cinq absolus de `DIRECTION` : direction perceptible pour une surface identitaire ; ancre fraîche et inspectable ; preuves applicables au mode ; mode, prochaine preuve et budget déclarés avant l’exécution ; coordination du réel et du beau. La conformité seule ne constitue jamais une direction, une preuve d’usage ou une qualité réelle. La formulation canonique se trouve dans [`DIRECTION.md`](DIRECTION.md#les-cinq-règles-absolues).
+Avant toute route détaillée, gardez en tête les cinq absolus de `DIRECTION` : direction perceptible pour une surface identitaire ; ancre observée ou fournie avant d’accepter une direction pour un produit réel ; preuves applicables au mode ; mode, prochaine preuve et budget déclarés avant l’exécution ; coordination du réel et du beau. La conformité seule ne constitue jamais une direction, une preuve d’usage ou une qualité réelle. La formulation canonique se trouve dans [`DIRECTION.md`](DIRECTION.md#les-cinq-règles-absolues).
 
 | Si vous avez… | Faites d’abord… | Puis approfondissez avec… |
 |---|---|---|

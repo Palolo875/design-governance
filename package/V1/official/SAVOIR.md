@@ -511,7 +511,7 @@ HTML sémantique, nom accessible, focus visible, erreur associée et récupérat
 
 [REQUIS PAR LE MODULE — surface `DIRECTION`] Regarder n’est pas lire une légende. Une description textuelle peut expliquer un principe ; elle ne transmet pas seule masse, lumière, trame, densité ou rapport image/texte.
 
-Utilise les voies `ANCHOR-GENERATED` / `ANCHOR-OBSERVED` / `ANCHOR-PROVIDED` définies par `DIRECTION/VISUAL_TARGET` et exécutées dans `ACTION/PIPELINE-DIRECTION` seulement si une ancre peut modifier la décision et si sa limite sera déclarée. Pour une surface identitaire, l’ancre est requise (voir `DIRECTION`, ABSOLU 2) ; si elle manque, les axes concernés restent `NOT-VERIFIED` et le run suit l’issue ACTION appropriée (`ACTION/PIPELINE-DIRECTION`). Hors surface identitaire, justifie la non-applicabilité. Termine par une spec visuelle exploitable. Une image générée peut matérialiser une direction ; une référence observée peut calibrer une résolution ; une ancre fournie peut exprimer une intention ou un actif réel.
+Utilise les voies `ANCHOR-GENERATED` / `ANCHOR-OBSERVED` / `ANCHOR-PROVIDED` définies par `DIRECTION/VISUAL_TARGET` et exécutées dans `ACTION/PIPELINE-DIRECTION` seulement si une ancre peut modifier la décision et si sa limite sera déclarée. Pour une surface identitaire, l’ancre suit l’absolu 2 de `DIRECTION` : exploration possible sans ancre, limite déclarée ; acceptation avec une ancre, observée ou fournie pour un produit réel ; si elle manque, les axes concernés restent `NOT-VERIFIED` et le run suit l’issue ACTION appropriée (`ACTION/PIPELINE-DIRECTION`). Hors surface identitaire, justifie la non-applicabilité. Termine par une spec visuelle exploitable. Une image générée peut matérialiser une direction ; une référence observée peut calibrer une résolution ; une ancre fournie peut exprimer une intention ou un actif réel.
 
 `ANCHOR-GENERATED` est une **hypothèse visuelle générée**, utile pour explorer une direction et comparer une possibilité, mais elle ne fait pas autorité par défaut dans `SAVOIR/SOURCE`. Elle ne constitue ni une calibration externe suffisante, ni une preuve de qualité ou d’usage, et ne calibre pas seule un principe durable, un niveau de craft ou une résolution de détail. Lorsque l’enjeu identitaire est élevé, accompagne-la d’une référence observée, d’une contrainte réelle ou d’une réserve explicite sur l’absence de calibration externe ; une revue indépendante est un contrepoint (`ACTION/GATE-B`, B3), pas une calibration. Cette limite concerne l’autorité de la source, pas la valeur exploratoire de l’hypothèse.
 
@@ -980,7 +980,7 @@ Ce résumé n’est pas une procédure de livraison. Il ne crée aucune route, g
 3. Retire avant d’ajouter ; une décision tenue vaut mieux qu’une accumulation de signaux.
 4. Utilise contenu réel, états pertinents et microcopie honnête.
 5. Fais passer accessibilité, responsive, récupération et performance avant l’effet.
-6. Sur une surface `DIRECTION`, la spec est toujours requise ; l’ancre suit `DIRECTION/VISUAL_TARGET` (utile, ou absence déclarée).
+6. Sur une surface `DIRECTION`, la spec est toujours requise ; l’ancre suit `DIRECTION/VISUAL_TARGET` (utile, ou absence déclarée en exploration ; avant l’acceptation, absolu 2 de `DIRECTION`).
 7. Exécute les preuves applicables au mode ; déclare `NOT-VERIFIED` plutôt que de le noter comme `PASS`.
 8. Si un risque reste, retourne, passe en `EXPLORATORY` ou journalise un `FAIL-ASSUMED` autorisé ; ne compense jamais un axe bloquant par une moyenne.
 

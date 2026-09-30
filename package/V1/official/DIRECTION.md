@@ -46,7 +46,7 @@ Les responsabilités sont séparées :
 Avant de parcourir les sections détaillées, retiens ces décisions de protection :
 
 1. **Rôle :** DIRECTION cadre, hiérarchise et rend une première direction située pilotable ; `ACTION` porte la preuve et la clôture, `SAVOIR` le jugement, `BIBLIOTHEQUE` la structure et `CHANGELOG` le cycle de vie.
-2. **Absolus :** une surface identitaire doit avoir une direction perceptible ; son ancrage doit être observable ou explicitement limité ; aucune livraison ne se clôt sans les preuves applicables ; le mode, le scope, la capacité, la preuve, la limite et la prochaine action sont déclarés avant l’action ; le réel et le beau restent liés.
+2. **Absolus :** une surface identitaire doit avoir une direction perceptible ; son ancrage est déclaré comme limite en exploration et observable avant l’acceptation (absolu 2) ; aucune livraison ne se clôt sans les preuves applicables ; le mode, le scope, la capacité, la preuve, la limite et la prochaine action sont déclarés avant l’action ; le réel et le beau restent liés.
 3. **Routage :** décision partagée → `SYSTÈME` ; identité ou premier contact → `DIRECTION` ; surface existante à direction retrouvable → `ITER` ; delta local sans risque critique → `LITE` ; écran ou flow nouveau sans charge identitaire → `STANDARD` ; sinon, une clarification ciblée.
 4. **Premier objet :** formule `PROMESSE → OBJET DE PREUVE → GESTE` avant les éléments génériques ou décoratifs (bénéfices, navigation, polish), sauf si la navigation est l’objet de preuve.
 5. **Preuve :** `DECISION-CHANGE` reste vide jusqu’à une observation réelle ; une capture, une validation de package ou une rationale ne devient pas automatiquement une preuve d’usage, d’accessibilité, de performance ou de qualité visuelle.
@@ -642,9 +642,14 @@ La composition peut prendre la forme d’une tension, d’un déséquilibre assu
 
 Si ce standard entre en conflit avec une protection critique de compréhension, d’usage, de sécurité ou d’accessibilité, **la protection critique prévaut**. Résous alors la direction par la hiérarchie, la typographie, le contenu, la structure et le détail, sans effet nuisible à la tâche. L’ABSOLU 5 fournit le cadre de coordination entre réel et beauté ; il ne remplace pas le plancher P1 ni les protections spécialisées d’ACTION.
 
-### [ABSOLU 2 — ANCRAGE OBSERVABLE] Ne dessine jamais une surface identitaire uniquement de mémoire.
+### [ABSOLU 2 — ANCRAGE OBSERVABLE] Ne fais jamais accepter une direction identitaire calibrée uniquement de mémoire.
 
-Avant le premier code ou le premier rendu d’une surface `DIRECTION`, établis une ancre fraîche et inspectable par l’une des voies suivantes :
+<!-- noyau:début ANCRE -->
+<!-- concept:ANC-01 -->
+**Explorer, accepter, diffuser.** Une première proposition peut commencer sans ancre, quelle que soit sa destination : elle déclare cette limite et reste `EXPLORATORY` ; une hypothèse générée (`ANCHOR-GENERATED`) aide alors à comparer. **Accepter** une direction identitaire exige une ancre : une direction acceptée n’a jamais d’ancres vides. Pour un produit réel, l’ancre est observée ou fournie (`ANCHOR-OBSERVED`, `ANCHOR-PROVIDED`), pertinente et inspectée, avec les autres preuves applicables ; elle peut venir du projet lui-même (identité existante, produit, photographies, interface actuelle). Pour une démonstration ou un modèle, une hypothèse générée peut servir d’ancre à l’acceptation, avec sa limite déclarée. Une **diffusion limitée** sans l’ancre requise passe par `FAIL-ASSUMED` (`ACTION/OVERRIDE`) : le verdict reste non accepté.
+<!-- noyau:fin ANCRE -->
+
+Les voies d’ancrage sont les suivantes ; une ancre est datée et inspectable :
 
 | Voie | Fonction | Sortie minimale |
 |---|---|---|
@@ -656,7 +661,7 @@ Avant le premier code ou le premier rendu d’une surface `DIRECTION`, établis 
 
 Une référence humaine ou produite est un calibrateur, non un modèle à reproduire. Elle ne prouve ni l’efficacité produit, ni le droit de réemploi, ni l’adéquation à tous les publics. Une source Web doit être réellement ouverte et réinspectable ; un extrait de résultat de recherche, une image isolée ou une tendance non datée ne suffit pas à constituer une ancre de direction.
 
-Sans ancre fraîche et utile, les axes visuels concernés sont `NOT-VERIFIED`. Sur une surface identitaire, cela bloque la livraison validée, sauf `FAIL-ASSUMED` journalisé selon `ACTION`.
+Sans ancre utile, les axes visuels concernés restent `NOT-VERIFIED` et la direction ne peut pas être acceptée ; une diffusion limitée reste possible par `FAIL-ASSUMED`, avec un verdict non accepté (`ACTION/OVERRIDE`). Le validateur de `RUN_CARD` refuse une direction acceptée sans ancre, mais ne connaît pas la destination : l’exigence d’une ancre observée ou fournie pour un produit réel relève de la revue d’acceptation.
 
 ### [ABSOLU 3 — GATE] Aucune livraison sans les preuves applicables au mode.
 
@@ -781,7 +786,7 @@ Ne charge pas `ACTION`, `SAVOIR` et `BIBLIOTHEQUE` en bloc. Charge la route cano
 | Asset, motion, scène ou type spécifique | Contrat correspondant d’ACTION, route SAVOIR nécessaire ; pour une scène, `BIBLIOTHEQUE/SELECT` puis la route `BIBLIOTHEQUE/SCENE` retenue. | `[FORCÉ]` si la capacité est requise. |
 | Retouche `ITER` | `RUN_CARD` ou manifeste local ; charger `SAVOIR/INTEGRITY` si une question de limite, délégation, capacité ou théâtre procédural est active avant verdict. | Conditionnel |
 | Doute sur l’application d’une règle | `SAVOIR/INTEGRITY`. | `[FORCÉ]` |
-| Ancre absente pour une surface identitaire | Retour à l’ancrage ou statut prévu par ACTION. | `[FORCÉ]` |
+| Ancre absente pour une surface identitaire | En exploration : limite déclarée, run `EXPLORATORY`. Avant l’acceptation : retour à l’ancrage, ou statut prévu par ACTION (absolu 2). | `[FORCÉ]` |
 | FAIL exigé malgré un gate | Protocole `FAIL-ASSUMED` d’ACTION. | `[REQUIS PAR LE MODULE]` |
 | Motif possiblement générique ou réflexe | Test motivation/construction `SAVOIR/CRAFT/CFT-01` ; conséquence de gate `ACTION/ANTI-SLOP`. | `[REQUIS PAR LE MODULE]` |
 | Détail final susceptible de modifier le caractère, l’état, la hiérarchie, la densité ou la robustesse d’une surface `DIRECTION` | `SAVOIR/CRAFT/CFT-03` (composition, densité et harmonie), `SAVOIR/STATE`, `SAVOIR/INTEGRITY` et capture rendue. | `[FORCÉ]` |

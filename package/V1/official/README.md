@@ -36,7 +36,7 @@ Les cinq fichiers suivants sont les **seules sources normatives** de V1 :
 
 `README.md`, `QUICKSTART.md` et `GLOSSAIRE.md` sont des **guides d’entrée non normatifs**. Ils orientent la lecture, mais ne créent aucune route, gate, statut, score ou autorité concurrente. `DESIGN-ATLAS` appartient à `SAVOIR.md` ; ce n’est pas un fichier séparé.
 
-Les guides exposent une constitution minimale : direction perceptible, ancre inspectable, preuves applicables, déclaration du mode et de la prochaine preuve avant l’exécution, et coordination du réel et du beau. Cette synthèse ne remplace pas les cinq absolus de `DIRECTION`, qui restent la source normative.
+Les guides exposent une constitution minimale : direction perceptible, ancre observée ou fournie avant d’accepter une direction pour un produit réel, preuves applicables, déclaration du mode et de la prochaine preuve avant l’exécution, et coordination du réel et du beau. Cette synthèse ne remplace pas les cinq absolus de `DIRECTION`, qui restent la source normative.
 
 ## Chemin actif
 

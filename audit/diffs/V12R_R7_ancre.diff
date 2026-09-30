@@ -1,0 +1,182 @@
+diff --git a/package/V1/official/CHANGELOG.md b/package/V1/official/CHANGELOG.md
+index 4197345..ca3f323 100644
+--- a/package/V1/official/CHANGELOG.md
++++ b/package/V1/official/CHANGELOG.md
+@@ -27,6 +27,7 @@
+ - **Raccords (refonte, R8b-2).** Choix contextuels gardés au niveau de la phrase : l’obligation universelle d’un traitement ou d’une famille unique est refusée, le choix justifié accepté ; Fontshare : licence FFL ou OFL selon la police.
+ - **Gestes de résolution (refonte, R8c).** Équilibre d’un titre et texte sur image dans le noyau ; la boucle réobserve l’ensemble après une correction locale ; récupération après erreur (`SAVOIR/STATE`), observée par interaction et appelée depuis Gate C.
+ - **Raccords (refonte, R8c-2).** Garde des choix contextuels bornée et déclarée ; équilibre d’un titre rattaché à un défaut observé, composition voulue conservée ; récupération : focus selon le moment, issue claire si la réussite est impossible.
++- **Ancre graduée (refonte, R7).** Absolu 2 : explorer sans ancre avec une limite déclarée ; accepter avec une ancre, observée ou fournie pour un produit réel, qui peut venir du projet ; `FAIL-ASSUMED` ne permet qu’une diffusion limitée non acceptée ; SAVOIR, déclencheur critique et façades alignés par renvoi. Schéma et validateur inchangés.
+ - **Efficacité.** `NOT-VERIFIED` : l’épreuve de référence donne V1.1.1 ≈ sans système sur la qualité perçue ; l’effet de ces chantiers reste à éprouver (G4).
+ 
+ ## V1.1.1 — Retour d’audit : alignements de textes et de façades
+diff --git a/package/V1/official/DIRECTION.md b/package/V1/official/DIRECTION.md
+index 672d2b8..e6627dd 100644
+--- a/package/V1/official/DIRECTION.md
++++ b/package/V1/official/DIRECTION.md
+@@ -46,7 +46,7 @@ Les responsabilités sont séparées :
+ Avant de parcourir les sections détaillées, retiens ces décisions de protection :
+ 
+ 1. **Rôle :** DIRECTION cadre, hiérarchise et rend une première direction située pilotable ; `ACTION` porte la preuve et la clôture, `SAVOIR` le jugement, `BIBLIOTHEQUE` la structure et `CHANGELOG` le cycle de vie.
+-2. **Absolus :** une surface identitaire doit avoir une direction perceptible ; son ancrage doit être observable ou explicitement limité ; aucune livraison ne se clôt sans les preuves applicables ; le mode, le scope, la capacité, la preuve, la limite et la prochaine action sont déclarés avant l’action ; le réel et le beau restent liés.
++2. **Absolus :** une surface identitaire doit avoir une direction perceptible ; son ancrage est déclaré comme limite en exploration et observable avant l’acceptation (absolu 2) ; aucune livraison ne se clôt sans les preuves applicables ; le mode, le scope, la capacité, la preuve, la limite et la prochaine action sont déclarés avant l’action ; le réel et le beau restent liés.
+ 3. **Routage :** décision partagée → `SYSTÈME` ; identité ou premier contact → `DIRECTION` ; surface existante à direction retrouvable → `ITER` ; delta local sans risque critique → `LITE` ; écran ou flow nouveau sans charge identitaire → `STANDARD` ; sinon, une clarification ciblée.
+ 4. **Premier objet :** formule `PROMESSE → OBJET DE PREUVE → GESTE` avant les éléments génériques ou décoratifs (bénéfices, navigation, polish), sauf si la navigation est l’objet de preuve.
+ 5. **Preuve :** `DECISION-CHANGE` reste vide jusqu’à une observation réelle ; une capture, une validation de package ou une rationale ne devient pas automatiquement une preuve d’usage, d’accessibilité, de performance ou de qualité visuelle.
+@@ -642,9 +642,14 @@ La composition peut prendre la forme d’une tension, d’un déséquilibre assu
+ 
+ Si ce standard entre en conflit avec une protection critique de compréhension, d’usage, de sécurité ou d’accessibilité, **la protection critique prévaut**. Résous alors la direction par la hiérarchie, la typographie, le contenu, la structure et le détail, sans effet nuisible à la tâche. L’ABSOLU 5 fournit le cadre de coordination entre réel et beauté ; il ne remplace pas le plancher P1 ni les protections spécialisées d’ACTION.
+ 
+-### [ABSOLU 2 — ANCRAGE OBSERVABLE] Ne dessine jamais une surface identitaire uniquement de mémoire.
++### [ABSOLU 2 — ANCRAGE OBSERVABLE] Ne fais jamais accepter une direction identitaire calibrée uniquement de mémoire.
+ 
+-Avant le premier code ou le premier rendu d’une surface `DIRECTION`, établis une ancre fraîche et inspectable par l’une des voies suivantes :
++<!-- noyau:début ANCRE -->
++<!-- concept:ANC-01 -->
++**Explorer, accepter, diffuser.** Une première proposition peut commencer sans ancre, quelle que soit sa destination : elle déclare cette limite et reste `EXPLORATORY` ; une hypothèse générée (`ANCHOR-GENERATED`) aide alors à comparer. **Accepter** une direction identitaire exige une ancre : une direction acceptée n’a jamais d’ancres vides. Pour un produit réel, l’ancre est observée ou fournie (`ANCHOR-OBSERVED`, `ANCHOR-PROVIDED`), pertinente et inspectée, avec les autres preuves applicables ; elle peut venir du projet lui-même (identité existante, produit, photographies, interface actuelle). Pour une démonstration ou un modèle, une hypothèse générée peut servir d’ancre à l’acceptation, avec sa limite déclarée. Une **diffusion limitée** sans l’ancre requise passe par `FAIL-ASSUMED` (`ACTION/OVERRIDE`) : le verdict reste non accepté.
++<!-- noyau:fin ANCRE -->
++
++Les voies d’ancrage sont les suivantes ; une ancre est datée et inspectable :
+ 
+ | Voie | Fonction | Sortie minimale |
+ |---|---|---|
+@@ -656,7 +661,7 @@ Avant le premier code ou le premier rendu d’une surface `DIRECTION`, établis
+ 
+ Une référence humaine ou produite est un calibrateur, non un modèle à reproduire. Elle ne prouve ni l’efficacité produit, ni le droit de réemploi, ni l’adéquation à tous les publics. Une source Web doit être réellement ouverte et réinspectable ; un extrait de résultat de recherche, une image isolée ou une tendance non datée ne suffit pas à constituer une ancre de direction.
+ 
+-Sans ancre fraîche et utile, les axes visuels concernés sont `NOT-VERIFIED`. Sur une surface identitaire, cela bloque la livraison validée, sauf `FAIL-ASSUMED` journalisé selon `ACTION`.
++Sans ancre utile, les axes visuels concernés restent `NOT-VERIFIED` et la direction ne peut pas être acceptée ; une diffusion limitée reste possible par `FAIL-ASSUMED`, avec un verdict non accepté (`ACTION/OVERRIDE`). Le validateur de `RUN_CARD` refuse une direction acceptée sans ancre, mais ne connaît pas la destination : l’exigence d’une ancre observée ou fournie pour un produit réel relève de la revue d’acceptation.
+ 
+ ### [ABSOLU 3 — GATE] Aucune livraison sans les preuves applicables au mode.
+ 
+@@ -781,7 +786,7 @@ Ne charge pas `ACTION`, `SAVOIR` et `BIBLIOTHEQUE` en bloc. Charge la route cano
+ | Asset, motion, scène ou type spécifique | Contrat correspondant d’ACTION, route SAVOIR nécessaire ; pour une scène, `BIBLIOTHEQUE/SELECT` puis la route `BIBLIOTHEQUE/SCENE` retenue. | `[FORCÉ]` si la capacité est requise. |
+ | Retouche `ITER` | `RUN_CARD` ou manifeste local ; charger `SAVOIR/INTEGRITY` si une question de limite, délégation, capacité ou théâtre procédural est active avant verdict. | Conditionnel |
+ | Doute sur l’application d’une règle | `SAVOIR/INTEGRITY`. | `[FORCÉ]` |
+-| Ancre absente pour une surface identitaire | Retour à l’ancrage ou statut prévu par ACTION. | `[FORCÉ]` |
++| Ancre absente pour une surface identitaire | En exploration : limite déclarée, run `EXPLORATORY`. Avant l’acceptation : retour à l’ancrage, ou statut prévu par ACTION (absolu 2). | `[FORCÉ]` |
+ | FAIL exigé malgré un gate | Protocole `FAIL-ASSUMED` d’ACTION. | `[REQUIS PAR LE MODULE]` |
+ | Motif possiblement générique ou réflexe | Test motivation/construction `SAVOIR/CRAFT/CFT-01` ; conséquence de gate `ACTION/ANTI-SLOP`. | `[REQUIS PAR LE MODULE]` |
+ | Détail final susceptible de modifier le caractère, l’état, la hiérarchie, la densité ou la robustesse d’une surface `DIRECTION` | `SAVOIR/CRAFT/CFT-03` (composition, densité et harmonie), `SAVOIR/STATE`, `SAVOIR/INTEGRITY` et capture rendue. | `[FORCÉ]` |
+diff --git a/package/V1/official/QUICKSTART.md b/package/V1/official/QUICKSTART.md
+index beb861e..c64bcd1 100644
+--- a/package/V1/official/QUICKSTART.md
++++ b/package/V1/official/QUICKSTART.md
+@@ -48,7 +48,7 @@ Si le domaine, le public, la confiance, la culture, la convention ou l’ambitio
+ 
+ ### Constitution minimale
+ 
+-Avant toute route détaillée, gardez en tête les cinq absolus de `DIRECTION` : direction perceptible pour une surface identitaire ; ancre fraîche et inspectable ; preuves applicables au mode ; mode, prochaine preuve et budget déclarés avant l’exécution ; coordination du réel et du beau. La conformité seule ne constitue jamais une direction, une preuve d’usage ou une qualité réelle. La formulation canonique se trouve dans [`DIRECTION.md`](DIRECTION.md#les-cinq-règles-absolues).
++Avant toute route détaillée, gardez en tête les cinq absolus de `DIRECTION` : direction perceptible pour une surface identitaire ; ancre observée ou fournie avant d’accepter une direction pour un produit réel ; preuves applicables au mode ; mode, prochaine preuve et budget déclarés avant l’exécution ; coordination du réel et du beau. La conformité seule ne constitue jamais une direction, une preuve d’usage ou une qualité réelle. La formulation canonique se trouve dans [`DIRECTION.md`](DIRECTION.md#les-cinq-règles-absolues).
+ 
+ | Si vous avez… | Faites d’abord… | Puis approfondissez avec… |
+ |---|---|---|
+diff --git a/package/V1/official/READING_MAP.md b/package/V1/official/READING_MAP.md
+index b5d4db9..dcc2c4d 100644
+--- a/package/V1/official/READING_MAP.md
++++ b/package/V1/official/READING_MAP.md
+@@ -21,7 +21,7 @@ Pour composer plusieurs capacités selon un résultat recherché — direction,
+ 
+ ## Constitution minimale
+ 
+-Les cinq absolus de `DIRECTION` protègent la baseline : direction perceptible, ancre inspectable, preuves applicables, mode et prochaine preuve déclarés avant l’exécution, coordination du réel et du beau. La conformité ne remplace ni la direction ni la preuve. Pour le contrat complet, ouvrir [`DIRECTION.md`](DIRECTION.md#les-cinq-règles-absolues).
++Les cinq absolus de `DIRECTION` protègent la baseline : direction perceptible, ancre observée ou fournie avant d’accepter une direction pour un produit réel, preuves applicables, mode et prochaine preuve déclarés avant l’exécution, coordination du réel et du beau. La conformité ne remplace ni la direction ni la preuve. Pour le contrat complet, ouvrir [`DIRECTION.md`](DIRECTION.md#les-cinq-règles-absolues).
+ 
+ ## Routage minimal par décision
+ 
+diff --git a/package/V1/official/README.md b/package/V1/official/README.md
+index 7137fee..dd28166 100644
+--- a/package/V1/official/README.md
++++ b/package/V1/official/README.md
+@@ -36,7 +36,7 @@ Les cinq fichiers suivants sont les **seules sources normatives** de V1 :
+ 
+ `README.md`, `QUICKSTART.md` et `GLOSSAIRE.md` sont des **guides d’entrée non normatifs**. Ils orientent la lecture, mais ne créent aucune route, gate, statut, score ou autorité concurrente. `DESIGN-ATLAS` appartient à `SAVOIR.md` ; ce n’est pas un fichier séparé.
+ 
+-Les guides exposent une constitution minimale : direction perceptible, ancre inspectable, preuves applicables, déclaration du mode et de la prochaine preuve avant l’exécution, et coordination du réel et du beau. Cette synthèse ne remplace pas les cinq absolus de `DIRECTION`, qui restent la source normative.
++Les guides exposent une constitution minimale : direction perceptible, ancre observée ou fournie avant d’accepter une direction pour un produit réel, preuves applicables, déclaration du mode et de la prochaine preuve avant l’exécution, et coordination du réel et du beau. Cette synthèse ne remplace pas les cinq absolus de `DIRECTION`, qui restent la source normative.
+ 
+ ## Chemin actif
+ 
+diff --git a/package/V1/official/SAVOIR.md b/package/V1/official/SAVOIR.md
+index 4e76ec8..12549e5 100644
+--- a/package/V1/official/SAVOIR.md
++++ b/package/V1/official/SAVOIR.md
+@@ -511,7 +511,7 @@ HTML sémantique, nom accessible, focus visible, erreur associée et récupérat
+ 
+ [REQUIS PAR LE MODULE — surface `DIRECTION`] Regarder n’est pas lire une légende. Une description textuelle peut expliquer un principe ; elle ne transmet pas seule masse, lumière, trame, densité ou rapport image/texte.
+ 
+-Utilise les voies `ANCHOR-GENERATED` / `ANCHOR-OBSERVED` / `ANCHOR-PROVIDED` définies par `DIRECTION/VISUAL_TARGET` et exécutées dans `ACTION/PIPELINE-DIRECTION` seulement si une ancre peut modifier la décision et si sa limite sera déclarée. Pour une surface identitaire, l’ancre est requise (voir `DIRECTION`, ABSOLU 2) ; si elle manque, les axes concernés restent `NOT-VERIFIED` et le run suit l’issue ACTION appropriée (`ACTION/PIPELINE-DIRECTION`). Hors surface identitaire, justifie la non-applicabilité. Termine par une spec visuelle exploitable. Une image générée peut matérialiser une direction ; une référence observée peut calibrer une résolution ; une ancre fournie peut exprimer une intention ou un actif réel.
++Utilise les voies `ANCHOR-GENERATED` / `ANCHOR-OBSERVED` / `ANCHOR-PROVIDED` définies par `DIRECTION/VISUAL_TARGET` et exécutées dans `ACTION/PIPELINE-DIRECTION` seulement si une ancre peut modifier la décision et si sa limite sera déclarée. Pour une surface identitaire, l’ancre suit l’absolu 2 de `DIRECTION` : exploration possible sans ancre, limite déclarée ; acceptation avec une ancre, observée ou fournie pour un produit réel ; si elle manque, les axes concernés restent `NOT-VERIFIED` et le run suit l’issue ACTION appropriée (`ACTION/PIPELINE-DIRECTION`). Hors surface identitaire, justifie la non-applicabilité. Termine par une spec visuelle exploitable. Une image générée peut matérialiser une direction ; une référence observée peut calibrer une résolution ; une ancre fournie peut exprimer une intention ou un actif réel.
+ 
+ `ANCHOR-GENERATED` est une **hypothèse visuelle générée**, utile pour explorer une direction et comparer une possibilité, mais elle ne fait pas autorité par défaut dans `SAVOIR/SOURCE`. Elle ne constitue ni une calibration externe suffisante, ni une preuve de qualité ou d’usage, et ne calibre pas seule un principe durable, un niveau de craft ou une résolution de détail. Lorsque l’enjeu identitaire est élevé, accompagne-la d’une référence observée, d’une contrainte réelle ou d’une réserve explicite sur l’absence de calibration externe ; une revue indépendante est un contrepoint (`ACTION/GATE-B`, B3), pas une calibration. Cette limite concerne l’autorité de la source, pas la valeur exploratoire de l’hypothèse.
+ 
+@@ -980,7 +980,7 @@ Ce résumé n’est pas une procédure de livraison. Il ne crée aucune route, g
+ 3. Retire avant d’ajouter ; une décision tenue vaut mieux qu’une accumulation de signaux.
+ 4. Utilise contenu réel, états pertinents et microcopie honnête.
+ 5. Fais passer accessibilité, responsive, récupération et performance avant l’effet.
+-6. Sur une surface `DIRECTION`, la spec est toujours requise ; l’ancre suit `DIRECTION/VISUAL_TARGET` (utile, ou absence déclarée).
++6. Sur une surface `DIRECTION`, la spec est toujours requise ; l’ancre suit `DIRECTION/VISUAL_TARGET` (utile, ou absence déclarée en exploration ; avant l’acceptation, absolu 2 de `DIRECTION`).
+ 7. Exécute les preuves applicables au mode ; déclare `NOT-VERIFIED` plutôt que de le noter comme `PASS`.
+ 8. Si un risque reste, retourne, passe en `EXPLORATORY` ou journalise un `FAIL-ASSUMED` autorisé ; ne compense jamais un axe bloquant par une moyenne.
+ 
+diff --git a/package/scripts/build_core.py b/package/scripts/build_core.py
+index a7a398c..be5886b 100644
+--- a/package/scripts/build_core.py
++++ b/package/scripts/build_core.py
+@@ -38,7 +38,7 @@ NOYAU: list[tuple[str, list[tuple[str, str, tuple[int, ...] | None]]]] = [
+                      ("COMP-TITRE", "SAVOIR.md", None), ("COMP-TEXTE-IMAGE", "SAVOIR.md", None),
+                      ("COMP-VOCABULAIRE", "SAVOIR.md", None), ("COMP-CONVERGENCE", "SAVOIR.md", None),
+                      ("COMP-VAGUES", "SAVOIR.md", None)]),
+-    ("Moyens et vérité", [("MOY-PLAFOND", "DIRECTION.md", None), ("MOY-CARTE", "SAVOIR.md", None),
++    ("Moyens et vérité", [("MOY-PLAFOND", "DIRECTION.md", None), ("ANCRE", "DIRECTION.md", None), ("MOY-CARTE", "SAVOIR.md", None),
+                           ("MOY-ASSETS", "SAVOIR.md", None), ("MOY-CALIBRATION", "SAVOIR.md", None),
+                           ("VER-FAUX-ASSET", "SAVOIR.md", None), ("VER-SCENE", "DIRECTION.md", None),
+                           ("VER-AUDIENCE", "DIRECTION.md", None)]),
+diff --git a/package/scripts/build_distributions.sh b/package/scripts/build_distributions.sh
+index 2157b44..b7d003d 100644
+--- a/package/scripts/build_distributions.sh
++++ b/package/scripts/build_distributions.sh
+@@ -72,7 +72,7 @@ Design Governance V1.1.1 est une expérimentation maintenue qui aide à transfor
+ 
+ ## Constitution minimale
+ 
+-Les cinq absolus de `official/DIRECTION.md` protègent la baseline : direction perceptible, ancre inspectable, preuves applicables, déclaration du mode et de la prochaine preuve avant l’exécution, et coordination du réel et du beau. La conformité ne remplace ni la direction ni la preuve.
++Les cinq absolus de `official/DIRECTION.md` protègent la baseline : direction perceptible, ancre observée ou fournie avant d’accepter une direction pour un produit réel, preuves applicables, déclaration du mode et de la prochaine preuve avant l’exécution, et coordination du réel et du beau. La conformité ne remplace ni la direction ni la preuve.
+ 
+ Pour charger un seul bloc :
+ 
+diff --git a/package/scripts/validate_structure.py b/package/scripts/validate_structure.py
+index 9c9eda9..2908eec 100644
+--- a/package/scripts/validate_structure.py
++++ b/package/scripts/validate_structure.py
+@@ -67,6 +67,7 @@ CONCEPTS: list[tuple[str, str, str]] = [
+     ("TIT-01", "SAVOIR.md", "équilibre d'un titre : coupe par le sens, lignes équilibrées, écart d'échelle net"),
+     ("TXI-01", "SAVOIR.md", "texte sur image : zone calme, recadrage ou voile, contraste au point le plus défavorable"),
+     ("RCV-01", "SAVOIR.md", "récupération après erreur : message, saisie conservée, focus, reprise observée par interaction"),
++    ("ANC-01", "DIRECTION.md", "ancre graduée : explorer sans ancre (limite déclarée), accepter avec ancre, observée ou fournie pour un produit réel"),
+     ("VAL-01", "ACTION.md", "promesse du validateur : ce qu'atteste et n'atteste pas une RUN_CARD validée, texte unique"),
+ ]
+ 
+@@ -98,6 +99,9 @@ RETIRED: list[tuple[str, str, set[str]]] = [
+     (r"Mandat de fonctionnement|Adopte le niveau d’exigence", "rôle unique (ROL-01)", {"CHANGELOG.md"}),
+     (r"`VISUAL_TARGET` la spécifie", "chaîne de lecture interne unique (DIRECTION)", {"CHANGELOG.md"}),
+     (r"`DAILY`", "DIRECTION/CHARGE (R4 ; résidu retiré en R11a)", {"CHANGELOG.md"}),
++    (r"ancre fraîche et inspectable|\bancre inspectable\b|Ne dessine jamais une surface identitaire uniquement de mémoire|"
++     r"établis une ancre fraîche|bloque la livraison validée, sauf `FAIL-ASSUMED`",
++     "ancre graduée (ANC-01, absolu 2 de DIRECTION) ; FAIL-ASSUMED n'accepte jamais", {"CHANGELOG.md"}),
+ ]
+ 
+ # 11. Choix contextuels (PKG-01) — garde BORNÉE. Elle ne juge pas le sens d'une phrase quelconque ; elle détecte
+diff --git a/package/skills/design-governance-practice/SKILL.md b/package/skills/design-governance-practice/SKILL.md
+index 6cc8c64..7667aed 100644
+--- a/package/skills/design-governance-practice/SKILL.md
++++ b/package/skills/design-governance-practice/SKILL.md
+@@ -121,6 +121,8 @@ Les contrôles principaux sont : alignements nets, compensation optique, proximi
+ 
+ Avant le premier rendu, le boot doit conduire à un artefact complet, crédible et observable — jamais à un wireframe volontairement creux lorsque les capacités sont disponibles ; lorsqu’elles manquent, `FABRICATION` déclare le plafond avant le build et le rendu sort avec la meilleure route de `DIRECTION/VISUAL_TARGET`. Après observation, conserve dans la trace : ce qui est effectivement visible, les qualités prioritaires observées ou non observées, **un défaut dominant** et, si une correction utile existe, la modification réelle apportée et la ré-observation attendue ; sinon, la raison de l’arrêt (`DIRECTION/DOUBLE-LOOP`, one-shot).
+ 
++**Explorer, accepter, diffuser.** Une première proposition peut commencer sans ancre, quelle que soit sa destination : elle déclare cette limite et reste `EXPLORATORY` ; une hypothèse générée (`ANCHOR-GENERATED`) aide alors à comparer. **Accepter** une direction identitaire exige une ancre : une direction acceptée n’a jamais d’ancres vides. Pour un produit réel, l’ancre est observée ou fournie (`ANCHOR-OBSERVED`, `ANCHOR-PROVIDED`), pertinente et inspectée, avec les autres preuves applicables ; elle peut venir du projet lui-même (identité existante, produit, photographies, interface actuelle). Pour une démonstration ou un modèle, une hypothèse générée peut servir d’ancre à l’acceptation, avec sa limite déclarée. Une **diffusion limitée** sans l’ancre requise passe par `FAIL-ASSUMED` (`ACTION/OVERRIDE`) : le verdict reste non accepté.
++
+ [VEILLE 2026-09] **Carte des moyens par couche** : des sources, jamais des styles. Licence et conditions d’usage vérifiées pour chaque ressource retenue, au moment de l’intégrer ; le nom d’une plateforme ne vaut pas autorisation. Pour chaque couche : où chercher, comment choisir, ce qui limite.
+ - **Typographie :** polices de la marque ; Google Fonts (licences ouvertes, surtout SIL OFL) ; Fontshare (licence FFL ou OFL selon la police). Choisir par la voix et la donnée à porter ; vérifier chargement, graisses et glyphes (accents, chiffres) dans la cible.
+ - **Icônes :** une famille qui couvre les pictogrammes nécessaires (par exemple Lucide, Phosphor) ; poids, taille et sens accordés au texte ; mélanger des familles demande une raison visible.

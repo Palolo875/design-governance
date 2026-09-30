@@ -61,3 +61,14 @@ A7, A9 et A10 restent en l'état, car ils sont compatibles.
 - **Fidélité** : tout paragraphe qui cite l'absolu 2 garde « produit réel ».
 - **Mutations** : chaque correction rougit sous son inverse.
 - **Aucun changement** du validateur ni du schéma (décision 3).
+
+## Rectifications (30-09-2026, avant application)
+
+La vérification de l'owner a corrigé quatre points ; le texte appliqué est celui de `V12R_21` §1 et §2.
+
+- **FAIL-ASSUMED** est une diffusion limitée non acceptée, pas une exception d'acceptation.
+- **« Absence déclarée »** vaut pour explorer seulement.
+- **A4** est une clarification (le texte offrait déjà une issue graduée), pas une interdiction nette d'explorer.
+- **La garde de fidélité « produit réel »** est abandonnée : un renvoi suffit.
+
+**Omission constatée à l'application :** le README Local généré par `build_distributions.sh` portait aussi « ancre inspectable ».

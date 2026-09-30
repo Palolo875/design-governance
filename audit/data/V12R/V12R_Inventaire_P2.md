@@ -18,8 +18,8 @@ Cette vue couvre les identifiants D-01 à D-23 et les mineurs transmis. Elle n�
 | --- | --- | --- | --- | --- | --- |
 | D-01 | Vocabulaire MODAL/PARTI | Corrigé documenté | R3 | Non bloquant, sous réserve de maintien | V12R_03 |
 | D-02 | Prise de brief fidèle à sa règle | Corrigé documenté | R3 | Non bloquant ; R6b conserve cette fidélité | V12R_03 |
-| D-03 | Règle d'ancre dans skill et façades | À aligner | R7 | Bloquant avant P2 : règle d'acceptation | V12_11 ; V12R_14 |
-| D-04 | Positions divergentes sur l'ancre dans SAVOIR | À aligner | R7 | Même correction que D-03, sans second protocole | V12_11 ; V12R_14 |
+| D-03 | Règle d'ancre dans skill et façades | **Corrigé (R7, `V12R_21`)** | R7 | ~~Bloquant P2~~ fermé ; limite déclarée : la destination relève de la revue d'acceptation | V12_11 ; V12R_14 |
+| D-04 | Positions divergentes sur l'ancre dans SAVOIR | **Corrigé (R7, `V12R_21`)** | R7 | ~~Bloquant P2~~ fermé ; limite déclarée : la destination relève de la revue d'acceptation | V12_11 ; V12R_14 |
 | D-05 | Listes de chargement divergentes | Corrigé documenté | R4 | Non bloquant ; contrôler les routes lors de la consolidation | V12R_04 ; V12R_07 |
 | D-06 | BIBLIOTHEQUE requise mais hors accès | Traitement documenté | R4 et R5d | Accès conditionnel admis ; F22 ne doit pas être déclaré absent | V12R_04 ; V12R_11 |
 | D-07 | Marqueurs et carte des moyens hors d'atteinte | Corrigé documenté | R3 et R4 | Renvois acquis ; qualité de la carte à traiter en R8b | V12R_03 ; V12R_04 |
