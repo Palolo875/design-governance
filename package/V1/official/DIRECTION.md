@@ -344,7 +344,7 @@ NO-GO — faux réalisme, dashboard décoratif, cartes avant mécanisme, ou reto
 
 <!-- noyau:début CONTENU -->
 <!-- concept:CNT-01 -->
-**Destination réelle sans contenu.** Si la surface sert un vrai commerce, service ou personne mais que ses contenus manquent (nom, offre, prix, horaires, photos, adresse), remplis-la d’un contenu plausible **marqué comme exemple** plutôt que d’emplacements vides : elle doit se lire comme une page, pas comme un gabarit. Le marquage est discret dans l’interface (« exemple », « à confirmer ») et explicite dans la réponse, qui liste ce qu’il faut fournir. Le marquage de vérité s’applique sans exception.
+**Destination réelle sans contenu.** Si la surface sert un vrai commerce, service ou personne mais que ses contenus manquent (nom, offre, prix, horaires, photos, adresse), remplis-la d’un contenu plausible **marqué comme exemple** plutôt que d’emplacements vides : elle doit se lire comme une page, pas comme un gabarit. L’action principale (commander, écrire, appeler, venir) reste fonctionnelle avec une valeur d’exemple marquée (numéro, adresse, lien) : une valeur inconnue ne la retire pas. Le marquage est discret dans l’interface (« exemple », « à confirmer ») et explicite dans la réponse, qui liste ce qu’il faut fournir. Le marquage de vérité s’applique sans exception.
 <!-- noyau:fin CONTENU -->
 
 ### Traduction humaine minimale de DIRECTION/START

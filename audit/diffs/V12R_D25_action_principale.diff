@@ -1,0 +1,51 @@
+diff --git a/package/V1/official/CHANGELOG.md b/package/V1/official/CHANGELOG.md
+index 7b4d805..e5cd5ce 100644
+--- a/package/V1/official/CHANGELOG.md
++++ b/package/V1/official/CHANGELOG.md
+@@ -33,6 +33,7 @@
+ - **Cartes réunies (refonte, R6b-2).** `READING_MAP` porte désormais les combinaisons par résultat recherché, leurs garde-fous et leur condition d’arrêt ; `ORCHESTRATION_MAP` devient un pointeur de compatibilité. Aucune règle nouvelle ; `DIRECTION/CHARGE` reste la seule liste de chargement.
+ - **Répétitions retirées (refonte, restes R5).** Copies du handoff remplacées par un renvoi à `ACTION/HANDOFF` ; catégories de lecture et contrat de promotion sortis du préambule de BIBLIOTHEQUE (`BIBLIOTHEQUE/EVOLUTION`), déclaration de lecture limitée aux runs instrumentés ou audités ; alternative située répartie (DIRECTION déclenche, SAVOIR donne les leviers, ACTION matérialise, trace et compare) ; `PRINT_FIELD` relié aux signaux de convergence comme question de jugement.
+ - **Raccords de parcours (refonte, R11b).** Valider une proposition n’est pas l’accepter : l’acceptation pour un produit réel se demande et passe en trace complète ; humain présent, les demandes de brief précèdent le build ; chaque route `RUN-*` dit sa sortie en trace légère et ne clôt qu’en trace complète, et `ITER` reprend depuis la ligne de thèse d’une trace légère ; la réponse visible nomme l’alternative écartée ; `EXTERNAL-START` se charge avant le Creative Boot.
++- **Action principale conservée (refonte, D-25).** Faute de valeur réelle, l’action principale d’une page (commander, écrire, appeler, venir) reste fonctionnelle avec une valeur d’exemple marquée, au lieu d’être retirée.
+ - **Efficacité.** `NOT-VERIFIED` : l’épreuve de référence donne V1.1.1 ≈ sans système sur la qualité perçue ; l’effet de ces chantiers reste à éprouver (G4).
+ 
+ ## V1.1.1 — Retour d’audit : alignements de textes et de façades
+diff --git a/package/V1/official/DIRECTION.md b/package/V1/official/DIRECTION.md
+index 887a0da..049392b 100644
+--- a/package/V1/official/DIRECTION.md
++++ b/package/V1/official/DIRECTION.md
+@@ -344,7 +344,7 @@ NO-GO — faux réalisme, dashboard décoratif, cartes avant mécanisme, ou reto
+ 
+ <!-- noyau:début CONTENU -->
+ <!-- concept:CNT-01 -->
+-**Destination réelle sans contenu.** Si la surface sert un vrai commerce, service ou personne mais que ses contenus manquent (nom, offre, prix, horaires, photos, adresse), remplis-la d’un contenu plausible **marqué comme exemple** plutôt que d’emplacements vides : elle doit se lire comme une page, pas comme un gabarit. Le marquage est discret dans l’interface (« exemple », « à confirmer ») et explicite dans la réponse, qui liste ce qu’il faut fournir. Le marquage de vérité s’applique sans exception.
++**Destination réelle sans contenu.** Si la surface sert un vrai commerce, service ou personne mais que ses contenus manquent (nom, offre, prix, horaires, photos, adresse), remplis-la d’un contenu plausible **marqué comme exemple** plutôt que d’emplacements vides : elle doit se lire comme une page, pas comme un gabarit. L’action principale (commander, écrire, appeler, venir) reste fonctionnelle avec une valeur d’exemple marquée (numéro, adresse, lien) : une valeur inconnue ne la retire pas. Le marquage est discret dans l’interface (« exemple », « à confirmer ») et explicite dans la réponse, qui liste ce qu’il faut fournir. Le marquage de vérité s’applique sans exception.
+ <!-- noyau:fin CONTENU -->
+ 
+ ### Traduction humaine minimale de DIRECTION/START
+diff --git a/package/scripts/validate_structure.py b/package/scripts/validate_structure.py
+index c9e4a22..dc9b927 100644
+--- a/package/scripts/validate_structure.py
++++ b/package/scripts/validate_structure.py
+@@ -208,6 +208,8 @@ FIDELITY: list[tuple[str, str, str]] = [
+     ("réponse visible : alternative écartée (F2)", r"Pourquoi : la thèse", "l’alternative écartée"),
+     # R11c (V12R_34) : une route RUN-* ne prescrit DECIDED puis CLOSED qu'en trace complète (TRA-01)
+     ("clôture des routes en trace complète (G4b)", r"\*\*Clôture\.\*\*[^.]{0,40}`DECIDED`", "En trace complète"),
++    # D-25 (V12R_36) : une valeur inconnue ne retire pas l'action principale ; elle reste fonctionnelle et marquée
++    ("contenu marqué : action principale (D-25)", r"\*\*Destination réelle sans contenu\.\*\*", "action principale"),
+     # R7-2 (V12R_24)
+     ("ancre et FAIL-ASSUMED (R7-2)", r"sans (?:l’)?ancre[^.]{0,200}`FAIL-ASSUMED`|ancre (?:absente|manquante)[^.]{0,200}`FAIL-ASSUMED`|"
+      r"`FAIL-ASSUMED`[^.]{0,120}ancre (?:absente|manquante)", "échec connu"),
+diff --git a/package/skills/design-governance-practice/SKILL.md b/package/skills/design-governance-practice/SKILL.md
+index 3affdd2..54164a8 100644
+--- a/package/skills/design-governance-practice/SKILL.md
++++ b/package/skills/design-governance-practice/SKILL.md
+@@ -38,7 +38,7 @@ La clôture de chaque mode est `ACTION/CLOSE-PACKAGE`, en trace complète ; en t
+ 
+ **Prise de brief.** Au plus trois demandes, en un seul échange, par gain de plafond : contenu réel (textes, chiffres, preuves, noms), marque, asset principal ou route autorisée, destination si elle est incertaine. Brief riche : aucune. Humain présent : les demandes partent avant le build, en un seul message ; le build suit la réponse, avec des hypothèses nommées pour ce qui manque encore. Humain absent : hypothèses nommées, plafond déclaré, demandes listées à la livraison. Le rendu est construit dans tous les cas. La réponse est une proposition, pas un compte rendu de cadrage ; le raisonnement de cadrage reste dans la trace. Si une ligne ne peut modifier ni artefact, claim, preuve, limite ou décision, elle est omise ; `N/A-JUSTIFIED` reste réservé à une non-applicabilité réelle et justifiée selon ACTION.
+ 
+-**Destination réelle sans contenu.** Si la surface sert un vrai commerce, service ou personne mais que ses contenus manquent (nom, offre, prix, horaires, photos, adresse), remplis-la d’un contenu plausible **marqué comme exemple** plutôt que d’emplacements vides : elle doit se lire comme une page, pas comme un gabarit. Le marquage est discret dans l’interface (« exemple », « à confirmer ») et explicite dans la réponse, qui liste ce qu’il faut fournir. Le marquage de vérité s’applique sans exception.
++**Destination réelle sans contenu.** Si la surface sert un vrai commerce, service ou personne mais que ses contenus manquent (nom, offre, prix, horaires, photos, adresse), remplis-la d’un contenu plausible **marqué comme exemple** plutôt que d’emplacements vides : elle doit se lire comme une page, pas comme un gabarit. L’action principale (commander, écrire, appeler, venir) reste fonctionnelle avec une valeur d’exemple marquée (numéro, adresse, lien) : une valeur inconnue ne la retire pas. Le marquage est discret dans l’interface (« exemple », « à confirmer ») et explicite dans la réponse, qui liste ce qu’il faut fournir. Le marquage de vérité s’applique sans exception.
+ 
+ Lorsque `RUN-PRIORITY`, `VISUAL_TARGET` ou `DIRECTION-ATELIER` peuvent modifier la première scène, rends retrouvables seulement **situation**, **tension**, **geste produit**, **objet de preuve**, **marquage de vérité**, **position/exclusion** et **contre-choix situé**. Sur une surface `DIRECTION`, convertis ensuite le brief vague avec la chaîne **promesse → objet de preuve → geste**. L’objet arrive avant les bénéfices et rend le mécanisme plus clair que le texte seul ; il est de préférence **codé** (composant, donnée, état ou interaction du produit), une illustration ne le portant que fournie, curatée ou générée dirigée. Toute démonstration générée ou hypothétique porte près de l’objet le marquage local `TRUTH/ILLUSTRATIVE`, cumulé avec `TRUTH/MECHANISM` lorsqu’elle matérialise un mécanisme (`DIRECTION/DIRECTION-ATELIER`) ; un exemple ne devient jamais une preuve de client, de performance, de disponibilité, d’intégration, de sécurité ou de résultat réel.
+ 
