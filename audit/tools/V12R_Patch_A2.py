@@ -63,6 +63,10 @@ PATCH = [
      "contraste ou de relation produit ; jamais comme catalogue automatique. `SAVOIR/CRAFT/CFT-03`, `SAVOIR/STATE` ou "
      "`SAVOIR/INTEGRITY` si un détail final peut modifier le caractère, un état, la hiérarchie, la densité ou la robustesse ; "
      "`SAVOIR/INTEGRITY` avant un verdict (trace complète). |"),
+    # La colonne « Ajouter seulement si » entre dans le noyau : « une tension » y serait lu comme un compte (LCF-24).
+    ("A2-01h", "CHARGE, ligne DIRECTION : formulation sans compte de tensions", D,
+     "si une tension, un geste produit ou un anti-choix peut modifier la première scène",
+     "si la tension, le geste produit ou un anti-choix peuvent modifier la première scène"),
     # AUD-02 — plancher SAVOIR compilé dans le noyau
     ("A2-02a", "SAVOIR/TYPE : bloc noyau COMP-TYPO", S,
      "\n[REQUIS PAR LE MODULE — lecture, ton, données, hiérarchie ou surface identitaire] Choisis une typographie pour ses langues, "
