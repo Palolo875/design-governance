@@ -79,5 +79,7 @@ Une revue externe de `9cbdcc2`, transmise par l'owner, a relancé indépendammen
 - garde de fidélité « clôture des routes en trace complète », rouge avant (4 routes), verte après ;
 - 5/5 mutations rouges, dont le retrait de la condition de `RUN-DIRECTION` ;
 - testé sur copie, **non appliqué**.
+- **suivi complet sur la copie : VERT** (389 cas, 363 maintenus, 26 migrés, aucune migration nouvelle ; `validate_all` vert) ; chemin prescrit inchangé (13 105 mots) ;
+- **écart déclaré :** doublons 134 → 139. C'est un amas formel nouveau : les cinq phrases « Clôture. En trace complète, … » ont désormais la même tournure, chacune à sa route, sans copie de contenu ni contradiction. Le cliquet reste vert (référence 190).
 
 **Statut de P2 :** la décision de l'owner (P2 franchie) a précédé cette revue. **Recommandation :** conclure P2 après l'application de R11c. Le passage de P2 et l'autorisation de produire restent deux décisions distinctes.
