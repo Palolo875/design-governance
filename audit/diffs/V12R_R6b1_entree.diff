@@ -1,0 +1,459 @@
+diff --git a/package/README.md b/package/README.md
+index ebfb6fb..0340dd8 100644
+--- a/package/README.md
++++ b/package/README.md
+@@ -2,10 +2,24 @@
+ 
+ Design Governance V1 est un cadre de **direction, de création, de jugement et de vérification du design**. Il aide à transformer un brief en décision située, artefact réel, observation pertinente et trace proportionnée au risque.
+ 
+-Le corpus s’adresse à un designer, une équipe produit ou un agent qui doit produire un travail visuellement dirigé, spécifique, construit et poli, tout en rendant ses décisions, ses preuves et ses limites lisibles.
+-
+ > **Statut expérimental :** Design Governance V1.1.1 est une expérimentation maintenue. La baseline est contrôlée et destinée à un usage supervisé ; elle ne promet ni beauté automatique, ni réussite universelle, ni validation d’usage, ni conformité sans preuve adaptée.
+ 
++<!-- entree:début -->
++## Commencer
++
++Design Governance aide un agent à produire un design dirigé, construit et soigné dès la première proposition, puis à l’améliorer avec vous. Vous n’avez besoin de connaître ni les modes, ni le vocabulaire interne : l’agent s’en charge.
++
++**1. Que demander ?** Décrivez en quelques phrases ce que vous voulez obtenir (une page, un écran, une identité, une correction), pour qui, et où cela servira : démonstration, maquette ou vrai produit. S’il s’agit d’un vrai commerce ou d’un vrai service, dites-le.
++
++**2. Que fournir ?** Ce que vous avez déjà : textes, prix, horaires, logo, couleurs, photos (même prises au téléphone, à la lumière du jour), exemples que vous aimez, lien vers l’existant. Vos textes, votre marque et vos photos aident à produire une proposition plus spécifique et crédible. S’il en manque, l’agent vous pose au plus trois questions, en un seul message, seulement celles qui améliorent vraiment le résultat : contenu réel, marque, image principale ou source d’images autorisée, destination si elle est incertaine. Il construit la proposition dans tous les cas.
++
++**3. Que recevoir ?** Une première proposition réellement construite, pas un gabarit vide. La réponse dit simplement ce qui a été fait et pourquoi, ce qui est un exemple à remplacer, ce qui manque pour la vraie version, et la suite proposée. C’est une proposition à discuter, pas une validation : pour retenir cette direction pour un vrai produit, l’agent doit s’appuyer sur des éléments réels, observés ou fournis, et effectuer les vérifications nécessaires.
++
++**4. Comment poursuivre ?** Validez, réorientez ou arrêtez. Dites en une phrase ce qui ne va pas (« le titre écrase la photo », « trop froid pour une boulangerie ») : l’agent corrige le défaut principal, regarde de nouveau le résultat et vous dit ce qui a changé. Avant toute action irréversible ou coûteuse (publier, envoyer, payer, remplacer l’existant), il vous demande votre accord.
++
++Pour aller plus loin : le [guide opérateur](V1/official/QUICKSTART.md), la [skill](skills/design-governance-practice/SKILL.md) pour les agents, le [glossaire](V1/official/GLOSSAIRE.md) et les [sources normatives](V1/official/README.md).
++<!-- entree:fin -->
++
+ ## Fiche de version
+ 
+ | Élément | État |
+@@ -20,45 +34,34 @@ La carte [`V1/official/READING_MAP.md`](V1/official/READING_MAP.md) résout le p
+ 
+ Pour exploiter plusieurs capacités sans les charger mécaniquement, utilisez la [`ORCHESTRATION_MAP.md`](V1/official/ORCHESTRATION_MAP.md). Cette vue dérivée compose les résultats recherchés, les capacités, les intensités, les patterns créatifs et la preuve ; elle ne crée aucun mode ni aucune règle concurrente.
+ 
+-## Par où commencer
+-
+-Pour utiliser le système, commencez par [`V1/official/QUICKSTART.md`](V1/official/QUICKSTART.md). Le parcours minimal est :
++## Mission
+ 
+-> **Classer → diriger → construire → observer → corriger → fermer.**
++> Aider à créer des projets dirigés, construits et spécifiques, puis rendre visibles les décisions, les preuves et les limites qui permettent de les juger honnêtement.
+ 
+-### Démarrage express — 90 secondes
+-
+-Avant de lire une route détaillée, écrivez seulement :
+-
+-```text
+-MODE — DECISION — RISK — NEXT-PROOF — OWNER
+-```
+-
+-Puis produisez ou retrouvez l’artefact, observez-le dans son scope et choisissez une seule suite : corriger, approfondir la preuve, rouvrir la direction, reclassifier ou fermer. Le [Quickstart](V1/official/QUICKSTART.md) explique ensuite le parcours complet ; le [Glossaire](V1/official/GLOSSAIRE.md) donne les définitions utiles sans créer de nouvelles règles.
++Le corpus s’adresse à un designer, une équipe produit ou un agent qui doit produire un travail visuellement dirigé, spécifique, construit et poli, tout en rendant ses décisions, ses preuves et ses limites lisibles.
+ 
+-Si le vocabulaire est nouveau, consultez ensuite [`V1/official/GLOSSAIRE.md`](V1/official/GLOSSAIRE.md). Avant d’ouvrir les routes détaillées, établissez seulement cinq éléments : **mode**, **risque dominant**, **décision à changer**, **prochaine preuve** et **owner**. Chargez ensuite uniquement la source capable de modifier la prochaine décision : `DIRECTION` pour le cadrage, `ACTION` pour la preuve et la clôture, `SAVOIR` pour le jugement, ou `BIBLIOTHEQUE` pour la structure. Activez les modules conditionnels seulement lorsqu’un risque, une décision ou une capacité manquante le justifie ; ne chargez pas tout le corpus par réflexe. `DIRECTION/START` reste l’unique classification.
++V1 vise une première proposition composée, spécifique et soignée, sans imposer un registre esthétique par défaut. La méthode protège l’ambition de création — présence, point de vue, culture visuelle, spécificité, craft et polish — sans confondre une référence, une rationale, un asset ou une capture avec une preuve d’usage. Lorsqu’une décision exige une trace structurée, la `RUN_CARD` rassemble le mode, le risque, la décision, l’artefact, la preuve, la limite et la clôture. Pour les runs multi-domaines ou de profondeur élevée, les contrats `DOMAIN_FRAME`, `RESEARCH_BRIEF`, `CREATIVE_DIRECTION_SET`, `UI_UX_REALITY_PACK` et `EVALUATION_CASE` rendent exécutables le cadrage, la recherche, la divergence, la réalité UI/UX et l’apprentissage.
+ 
+-### Choisir le chemin court
++## Pour les agents et les opérateurs
+ 
+-| Situation | Chemin de départ | Point d’attention |
++| Lecteur | Entrée | Ce qu’il y trouve |
+ |---|---|---|
+-| Correction locale à faible risque | `LITE` | Preuve minimale et scope étroit. |
+-| Retouche d’une surface dont la direction existe et est retrouvable | `ITER` | La correction doit modifier l’artefact ou la décision. |
+-| Construction produit standard | `STANDARD` | Structure, contenu réel, états et usage proportionnés. |
+-| Identité, premier contact ou direction visuelle autonome | `DIRECTION` | Premier objet, cible visuelle, craft et preuve réelle. |
+-| Système partagé ou bibliothèque | `SYSTÈME` | Cohérence inter-surfaces, robustesse et promotion. |
+-
+-Classement : voir `DIRECTION/START`.
++| Agent | [`SKILL.md`](skills/design-governance-practice/SKILL.md) | Noyau de fabrication et liste de chargement unique (`DIRECTION/CHARGE`). |
++| Opérateur ou designer qui pilote un run | [Guide opérateur](V1/official/QUICKSTART.md) | Parcours commun, classement, chargement, handoff et exemple complet. |
++| Reviewer ou lead | [`READING_MAP.md`](V1/official/READING_MAP.md), puis `ACTION.md` | Preuve dans le scope, limites et décision de clôture. |
++| Mainteneur du package | Ce README, `CHANGELOG.md` et les validateurs | Contrat cohérent, testable et reproductible. |
+ 
+-Ces chemins sont des points d’entrée vers les contrats propriétaires, non de nouvelles règles du README. Pour une surface créative, le premier rendu doit déjà être composé, spécifique, crédible et suffisamment résolu selon le risque. Le `one-shot` peut compresser les cycles seulement après observation réelle ; il ne supprime ni le jugement ni la preuve applicable.
++Le mode d’un run est choisi par l’agent avec `DIRECTION/START`, seule classification ; il n’est jamais demandé à la personne qui fait la demande. Le parcours complet d’un run est : classer, diriger, construire, observer, corriger, fermer ; chaque mode n’en garde que les étapes de sa route.
+ 
+ Le README oriente la navigation. Il ne crée aucune règle concurrente. Les sources normatives font foi dans leur périmètre.
+ 
++<!-- constitution:début -->
+ ## Constitution minimale
+ 
+-Les cinq absolus transversaux de `DIRECTION` forment le noyau de protection de V1 : une surface identitaire doit avoir une direction perceptible ; une surface identitaire ne doit pas être dessinée uniquement de mémoire ; aucune livraison ne contourne les preuves applicables ; le mode, la preuve et le budget doivent être déclarés avant l’exécution ; le réel et le beau doivent être cadrés ensemble.
++Les cinq absolus transversaux de `DIRECTION` forment le noyau de protection de V1 : une surface identitaire doit avoir une direction perceptible ; une direction identitaire n’est acceptée qu’avec une ancre, observée ou fournie pour un produit réel (l’exploration peut commencer sans ancre, avec sa limite déclarée) ; aucune livraison ne contourne les preuves applicables ; le mode, la preuve et le budget sont déclarés avant l’exécution ; le réel et le beau sont cadrés ensemble.
+ 
+-Ces absolus ne remplacent pas les procédures propriétaires d’`ACTION`, de `SAVOIR` ou de `BIBLIOTHEQUE`. Ils rappellent la priorité de gouvernance et renvoient à [`DIRECTION.md`](V1/official/DIRECTION.md#les-cinq-règles-absolues), qui reste la source normative. Le piège de conformité est explicite : une conformité de surface ne vaut ni direction perceptible, ni preuve d’usage, ni qualité réelle.
++Ces absolus ne remplacent pas les procédures propriétaires d’`ACTION`, de `SAVOIR` ou de `BIBLIOTHEQUE`. Ils rappellent la priorité de gouvernance et renvoient à [DIRECTION.md](V1/official/DIRECTION.md#les-cinq-règles-absolues), qui reste la source normative. Le piège de conformité est explicite : une conformité de surface ne vaut ni direction perceptible, ni preuve d’usage, ni qualité réelle.
++<!-- constitution:fin -->
+ 
+ ## Le modèle à double boucle
+ 
+@@ -140,7 +143,7 @@ python3 scripts/validate_run_card.py chemin/run.json
+ python3 scripts/validate_all.py
+ ```
+ 
+-Ces contrôles établissent la cohérence du package, de ses projections et de ses distributions. Ils ne remplacent ni l’observation d’un rendu, ni un test utilisateur, ni une vérification d’accessibilité exécutée, ni une mesure de performance, ni une preuve d’adoption. Une projection `RUN_CARD` valide reste une trace structurée ; elle ne transforme pas une cible de conformité, une capture ou une validation CLI en preuve de résultat.
++Ces contrôles vérifient la forme du package, de ses projections et de ses distributions, ainsi que la liste close des conditions de façade ; une divergence hors de cette liste n’est pas détectée. Ils ne remplacent ni l’observation d’un rendu, ni un test utilisateur, ni une vérification d’accessibilité exécutée, ni une mesure de performance, ni une preuve d’adoption. Une projection `RUN_CARD` valide reste une trace structurée ; elle ne transforme pas une cible de conformité, une capture ou une validation CLI en preuve de résultat.
+ 
+ Une `RUN_CARD` validée atteste la forme de la projection et les invariants de la liste close ; elle n’atteste ni la réalité des observations, ni la justesse des jugements, ni la qualité perceptuelle. La liste exacte vit en un seul lieu : la frontière de validation d’`ACTION/RUN_CARD`.
+ 
+@@ -150,12 +153,4 @@ Une capture prouve un rendu dans son scope ; elle ne prouve pas à elle seule un
+ 
+ La qualité créative reste située. Une proposition peut être visuellement convaincante sans avoir prouvé l’usage, l’accessibilité ou la robustesse ; elle peut aussi être conforme et robuste tout en restant générique ou insuffisamment résolue. V1 demande de rendre cet écart visible et de corriger le défaut dominant plutôt que de le compenser par une autre preuve.
+ 
+-## Profils de lecture
+-
+-| Lecteur | Commencer par | Sortie attendue |
+-|---|---|---|
+-| Designer ou équipe produit | `QUICKSTART.md` | Décision, artefact, observation et prochaine action. |
+-| Reviewer ou lead | `READING_MAP.md`, puis `ACTION.md` | Preuve dans le scope, limites et décision de clôture. |
+-| Agent | `QUICKSTART.md`, puis `SKILL.md` | Artefact livré, trace proportionnée et escalade explicite. |
+-| Mainteneur du package | `README.md`, `CHANGELOG.md`, validateurs | Contrat cohérent, testable et reproductible. |
+-
++V1 rend certaines affirmations plus difficiles à simuler ; elle ne remplace pas le jugement créatif, les tests utilisateurs, l’inspection technique ou la responsabilité du projet. Toute conclusion doit préciser ce qui a été observé, par quelle méthode, dans quel scope et avec quelle limite.
+diff --git a/package/V1/official/CHANGELOG.md b/package/V1/official/CHANGELOG.md
+index 3cca9af..b9d5d10 100644
+--- a/package/V1/official/CHANGELOG.md
++++ b/package/V1/official/CHANGELOG.md
+@@ -29,6 +29,7 @@
+ - **Raccords (refonte, R8c-2).** Garde des choix contextuels bornée et déclarée ; équilibre d’un titre rattaché à un défaut observé, composition voulue conservée ; récupération : focus selon le moment, issue claire si la réussite est impossible.
+ - **Ancre graduée (refonte, R7).** Absolu 2 : explorer sans ancre avec une limite déclarée ; accepter avec une ancre, observée ou fournie pour un produit réel, qui peut venir du projet ; sans l’ancre requise, la direction reste `EXPLORATORY` ; `FAIL-ASSUMED` ne vaut que pour un échec connu, jamais pour une ancre absente (raccord R7-2) ; SAVOIR, déclencheur critique et façades alignés par renvoi. Schéma et validateur inchangés.
+ - **Cohérence ciblée (refonte, R11).** Contrôle machine nommé par mode (paquets de clôture, promesse du validateur) ; arrêt one-shot relié à B1b ; exclusion LITE/ITER alignée sur la protection de niveau ; ancre `transformed` exigée en DIRECTION ; triade définie, valeurs de repli nommées ; références alignées sur le schéma et les propriétaires ; locators nommés dans les messages du validateur ; six cas négatifs ajoutés. Schéma et comportement du validateur inchangés.
++- **Entrée humaine (refonte, R6b-1).** Une seule entrée pour une personne qui fait une demande : section « Commencer » du README du package, en quatre questions (que demander, que fournir, que recevoir, comment poursuivre), au vouvoiement et sans mode à choisir ; le README Local la reprend, générée par le build depuis la même source. QUICKSTART devient le guide opérateur, à un seul parcours commun ; le README officiel devient un pointeur vers les sources normatives ; une seule constitution minimale, exacte (l’ancien résumé de l’absolu 2 est retiré).
+ - **Efficacité.** `NOT-VERIFIED` : l’épreuve de référence donne V1.1.1 ≈ sans système sur la qualité perçue ; l’effet de ces chantiers reste à éprouver (G4).
+ 
+ ## V1.1.1 — Retour d’audit : alignements de textes et de façades
+diff --git a/package/V1/official/QUICKSTART.md b/package/V1/official/QUICKSTART.md
+index 588250c..d709df1 100644
+--- a/package/V1/official/QUICKSTART.md
++++ b/package/V1/official/QUICKSTART.md
+@@ -1,14 +1,16 @@
+-# Design Governance V1.1.1 — Quickstart
++# Design Governance V1.1.1 — Quickstart (guide opérateur)
+ 
+ **Package Design Governance V1.1.1.** Expérimentation maintenue pour diriger, construire et vérifier un travail de design avec une trace proportionnée au risque. Il est destiné à un usage supervisé et ne constitue pas une preuve d’efficacité en production.
+ 
+ > **Rôle de ce guide :** fournir une interface d’activation rapide. Il oriente la lecture et l’action, mais n’ajoute aucune règle, route, gate, axe, statut, verdict ou autorité. Les cinq sources normatives font foi.
+ 
++> **Pour qui :** ce guide sert à piloter un run (opérateur, designer ou agent). Pour faire simplement une demande, la section « Commencer » du README du package suffit : vous n’avez pas à choisir de mode.
++
+ V1 aide à transformer une demande en **décision située, artefact réel, observation pertinente et trace honnête**. Elle ne promet ni beauté automatique, ni réussite universelle, ni validation d’usage sans preuve adaptée. Elle vise néanmoins un niveau positif : lorsque la décision visuelle est ouverte et que les capacités sont disponibles, le premier rendu doit déjà être composé, spécifique, crédible, présentable et suffisamment résolu pour être jugé comme un objet réel.
+ 
+-## Démarrage en 90 secondes
++## Parcours commun
+ 
+-Si vous devez agir immédiatement, ne lisez pas encore les routes détaillées. Notez :
++Pour piloter un run, commencez ici ; les sections suivantes n’approfondissent que si le risque, le périmètre ou la décision le justifie. Notez :
+ 
+ ```text
+ MODE — DECISION — RISK — NEXT-PROOF — OWNER
+@@ -36,9 +38,9 @@ Une sortie de run a deux formes : la **réponse visible**, par défaut, et le **
+ 
+ Le guide se lit par couches. Ne chargez pas tout le corpus par réflexe ; chargez uniquement ce qui peut modifier la prochaine décision.
+ 
+-### Façade d’activation en cinq éléments
++### Façade d’activation : ce que chaque source apporte
+ 
+-Avant les routes détaillées, notez seulement le **mode**, le **risque dominant**, la **décision à changer**, la **prochaine preuve** et l’**owner**. `DIRECTION/START` classe la demande ; `DIRECTION` intervient si la cible ou la direction change ; `ACTION` intervient dès qu’un artefact, une preuve, un état ou une clôture est concerné ; `SAVOIR` intervient si le jugement, le craft, la source ou le contexte peut changer la décision ; `BIBLIOTHEQUE` intervient si la structure, le composant ou la micro-interface peut changer la décision. Cette façade ne crée ni mode, ni gate, ni statut, ni propriétaire supplémentaire.
++La ligne du parcours commun est la façade d’activation. `DIRECTION/START` classe la demande ; `DIRECTION` intervient si la cible ou la direction change ; `ACTION` intervient dès qu’un artefact, une preuve, un état ou une clôture est concerné ; `SAVOIR` intervient si le jugement, le craft, la source ou le contexte peut changer la décision ; `BIBLIOTHEQUE` intervient si la structure, le composant ou la micro-interface peut changer la décision. Cette façade ne crée ni mode, ni gate, ni statut, ni propriétaire supplémentaire.
+ 
+ **Bénéfice attendu.** Chargez `DIRECTION` pour obtenir une position située et un premier objet plus fort ; `SAVOIR` pour transformer une impression en jugement et en choix de craft ; `BIBLIOTHEQUE` pour rendre la structure habitable, compatible et maintenable ; `ACTION` pour transformer la décision en livraison observable, corrigible et prouvable. Si aucun de ces gains ne peut modifier la prochaine décision, restez sur le chemin court ; si un risque critique est actif, ne confondez pas chemin court et profondeur insuffisante.
+ 
+@@ -46,21 +48,19 @@ Pour une décision visuelle ouverte, utilisez le **Creative Boot** de `DIRECTION
+ 
+ Si le domaine, le public, la confiance, la culture, la convention ou l’ambition peuvent changer le résultat, activez `DIRECTION/DOMAIN-FRAME`, puis `SAVOIR/SOURCE` pour une recherche orientée décision. Augmentez la profondeur seulement lorsqu’un déclencheur est nommé ; la recherche doit revenir dans le contenu, la structure, le geste ou la preuve. Pour une UI/UX nouvelle, ajoutez le contrat de réalité d’ACTION : tâche, contenu, états, responsive, accessibilité, robustesse et scope de preuve.
+ 
+-### Constitution minimale
++### Constitution et entrées par besoin
+ 
+-Avant toute route détaillée, gardez en tête les cinq absolus de `DIRECTION` : direction perceptible pour une surface identitaire ; ancre observée ou fournie avant d’accepter une direction pour un produit réel ; preuves applicables au mode ; mode, prochaine preuve et budget déclarés avant l’exécution ; coordination du réel et du beau. La conformité seule ne constitue jamais une direction, une preuve d’usage ou une qualité réelle. La formulation canonique se trouve dans [`DIRECTION.md`](DIRECTION.md#les-cinq-règles-absolues).
++Les cinq absolus de `DIRECTION` protègent chaque run : leur résumé est dans la section « Constitution minimale » du README du package, leur formulation canonique dans [`DIRECTION.md`](DIRECTION.md#les-cinq-règles-absolues).
+ 
+-| Si vous avez… | Faites d’abord… | Puis approfondissez avec… |
++| Pour… | Faites d’abord… | Puis approfondissez avec… |
+ |---|---|---|
+-| 30 secondes | Décision, risque, preuve, capacité et ligne de run. | `DIRECTION/START`. |
+-| 5 minutes | Classification, sources minimales, premier objet, observation et suite. | `DIRECTION`, `ACTION` et la route du mode. |
+ | Un agent à activer | Objectif, périmètre, autonomie, confirmation et format de sortie. | Skill pratique, `RUN_CARD` et références conditionnelles. |
+ | Une direction visuelle ouverte | Creative Boot : promesse, objet, geste, modal et parti, tension, signature, cibles CFT, fabrication et premier objet. | `DIRECTION/CHARGE` (mode `DIRECTION`). |
+ | Un run à persister | Scope, artefact, preuve, limite, owner et projection validable. | `ACTION`, schéma `RUN_CARD` et validateur. |
+ 
+-## 2. Le chemin en trente secondes
++## 2. La ligne de run
+ 
+-Avant de construire ou de modifier, répondez aux cinq questions du démarrage en 90 secondes.
++Avant de construire ou de modifier, répondez aux cinq questions du parcours commun.
+ 
+ Produisez ensuite la ligne minimale :
+ 
+@@ -72,7 +72,7 @@ Ajoutez `DECISION-INTENT` au lancement. Ne produisez `DECISION-CHANGE` qu’apr
+ 
+ Si le package V1 ou une source canonique est indisponible, signalez-le. Une proposition créative peut rester explicitement hypothétique, mais elle ne doit pas être présentée comme un run V1 conforme.
+ 
+-## 3. Le parcours complet en cinq minutes
++## 3. Le parcours complet
+ 
+ Le parcours complet est le suivant ; chaque mode n’en garde que les étapes de sa route (`ACTION/RUN-<MODE>`) :
+ 
+diff --git a/package/V1/official/READING_MAP.md b/package/V1/official/READING_MAP.md
+index dcc2c4d..4e37293 100644
+--- a/package/V1/official/READING_MAP.md
++++ b/package/V1/official/READING_MAP.md
+@@ -21,7 +21,7 @@ Pour composer plusieurs capacités selon un résultat recherché — direction,
+ 
+ ## Constitution minimale
+ 
+-Les cinq absolus de `DIRECTION` protègent la baseline : direction perceptible, ancre observée ou fournie avant d’accepter une direction pour un produit réel, preuves applicables, mode et prochaine preuve déclarés avant l’exécution, coordination du réel et du beau. La conformité ne remplace ni la direction ni la preuve. Pour le contrat complet, ouvrir [`DIRECTION.md`](DIRECTION.md#les-cinq-règles-absolues).
++Les cinq absolus de `DIRECTION` protègent chaque run : résumé dans la section « Constitution minimale » du README du package, formulation canonique dans [`DIRECTION.md`](DIRECTION.md#les-cinq-règles-absolues).
+ 
+ ## Routage minimal par décision
+ 
+diff --git a/package/V1/official/README.md b/package/V1/official/README.md
+index dd28166..3d86c5b 100644
+--- a/package/V1/official/README.md
++++ b/package/V1/official/README.md
+@@ -1,26 +1,8 @@
+ # Design Governance V1.1.1
+ 
+-**Design Governance V1.1.1** est une expérimentation maintenue : un cadre de direction, de création, de jugement et de vérification du design. Il aide un humain ou un agent à transformer un brief en projet, interface, application, scène, identité ou système réellement construit, dirigé, exploitable et vérifiable.
++Ce dossier contient les sources officielles de **Design Governance V1.1.1**, une expérimentation maintenue : un cadre de direction, de création, de jugement et de vérification du design.
+ 
+-V1 vise une première proposition composée, spécifique et soignée, sans imposer un registre esthétique par défaut. La qualité recherchée dépend du produit, du public, du contenu, du médium et du contexte.
+-
+-## Mission
+-
+-> Aider à créer des projets dirigés, construits et spécifiques, puis rendre visibles les décisions, les preuves et les limites qui permettent de les juger honnêtement.
+-
+-La méthode protège l’ambition de création — présence, point de vue, culture visuelle, spécificité, craft et polish — sans confondre une référence, une rationale, un asset ou une capture avec une preuve d’usage. Elle ne garantit ni esthétique automatique, ni préférence humaine, ni accessibilité exécutée, ni performance, ni réussite universelle. Lorsqu’une décision exige une trace structurée, la `RUN_CARD` rassemble le mode, le risque, la décision, l’artefact, la preuve, la limite et la clôture.
+-
+-Pour les runs multi-domaines ou de profondeur élevée, les contrats `DOMAIN_FRAME`, `RESEARCH_BRIEF`, `CREATIVE_DIRECTION_SET`, `UI_UX_REALITY_PACK` et `EVALUATION_CASE` rendent exécutables le cadrage, la recherche, la divergence, la réalité UI/UX et l’apprentissage.
+-
+-## Commencer ici
+-
+-Lisez [`QUICKSTART.md`](./QUICKSTART.md), puis [`GLOSSAIRE.md`](./GLOSSAIRE.md) si le vocabulaire est nouveau. Avant les routes détaillées, établissez seulement le mode, le risque dominant, la décision à changer, la prochaine preuve et l’owner. `DIRECTION/START` reste l’unique classification ; chargez ensuite seulement la source normative qui peut modifier la prochaine décision. Le guide d’entrée explique le chemin ; la source propriétaire conserve la règle.
+-
+-### Carte de lecture dérivée
+-
+-Pour éviter de reconstruire les routes à partir de plusieurs guides, consultez [`READING_MAP.md`](./READING_MAP.md). Cette carte est non normative : elle résout le premier chemin, l’activation multi-perspective et la sortie minimale ; les cinq sources ci-dessous et le schéma `RUN_CARD` restent les autorités.
+-
+-Lorsque le résultat recherché exige plusieurs capacités, consultez aussi [`ORCHESTRATION_MAP.md`](./ORCHESTRATION_MAP.md). Cette carte dérivée aide à composer `DIRECTION`, `ACTION`, `SAVOIR` et `BIBLIOTHEQUE`, à choisir une intensité et à ajuster la combinaison après observation ; elle ne crée ni nouvelle route ni nouvelle autorité.
++Pour commencer, lisez la section « Commencer » du README à la racine du package : vous n’avez pas à choisir de mode. Pour piloter un run, lisez le guide opérateur [`QUICKSTART.md`](./QUICKSTART.md) ; un agent entre par la skill `design-governance-practice`. Le vocabulaire est défini dans [`GLOSSAIRE.md`](./GLOSSAIRE.md).
+ 
+ ## Sources normatives
+ 
+@@ -34,19 +16,6 @@ Les cinq fichiers suivants sont les **seules sources normatives** de V1 :
+ | [`BIBLIOTHEQUE.md`](./BIBLIOTHEQUE.md) | Support, grille, scène, objet, micro-interface, contrat et compatibilité. |
+ | [`CHANGELOG.md`](./CHANGELOG.md) | État du corpus, changements, compatibilités et maintenance. |
+ 
+-`README.md`, `QUICKSTART.md` et `GLOSSAIRE.md` sont des **guides d’entrée non normatifs**. Ils orientent la lecture, mais ne créent aucune route, gate, statut, score ou autorité concurrente. `DESIGN-ATLAS` appartient à `SAVOIR.md` ; ce n’est pas un fichier séparé.
+-
+-Les guides exposent une constitution minimale : direction perceptible, ancre observée ou fournie avant d’accepter une direction pour un produit réel, preuves applicables, déclaration du mode et de la prochaine preuve avant l’exécution, et coordination du réel et du beau. Cette synthèse ne remplace pas les cinq absolus de `DIRECTION`, qui restent la source normative.
+-
+-## Chemin actif
+-
+-> **Classer et protéger → cultiver et diriger → composer et construire → polir et observer → vérifier et corriger → décider et fermer.**
+-
+-La boucle créative vise une proposition composée, spécifique, culturellement située et suffisamment polie pour être jugée comme un objet réel. La boucle de gouvernance protège les risques, les preuves, les limites et la proportionnalité du processus. Elles restent distinctes : une preuve technique ne devient pas un jugement esthétique, et une intention créative ne masque pas un risque critique.
+-
+-Si une étape ou un champ ne peut modifier ni la décision, ni l’artefact, ni la preuve, ni la limite, il ne doit pas être chargé par réflexe. Une validation de package ou de `RUN_CARD` confirme uniquement les contrôles exécutés ; elle ne prouve ni l’usage, ni l’accessibilité exécutée, ni la performance, ni la qualité visuelle du produit.
+-
+-## Limites assumées
+-
+-V1 rend certaines affirmations plus difficiles à simuler ; elle ne remplace pas le jugement créatif, les tests utilisateurs, l’inspection technique ou la responsabilité du projet. Toute conclusion doit préciser ce qui a été observé, par quelle méthode, dans quel scope et avec quelle limite.
++`README.md`, `QUICKSTART.md` et `GLOSSAIRE.md` sont des **guides d’entrée non normatifs**. Ils orientent la lecture, mais ne créent aucune route, gate, statut, score ou autorité concurrente. `DESIGN-ATLAS` appartient à `SAVOIR.md` ; ce n’est pas un fichier séparé. Les cartes [`READING_MAP.md`](./READING_MAP.md) et [`ORCHESTRATION_MAP.md`](./ORCHESTRATION_MAP.md) sont dérivées et non normatives.
+ 
++Lorsqu’une décision exige une trace structurée, la `RUN_CARD` rassemble le mode, le risque, la décision, l’artefact, la preuve, la limite et la clôture ; son schéma et son validateur sont dans `schemas/` et `scripts/`. Une validation de package ou de `RUN_CARD` confirme uniquement les contrôles exécutés ; elle ne prouve ni l’usage, ni l’accessibilité exécutée, ni la performance, ni la qualité visuelle du produit.
+diff --git a/package/scripts/build_distributions.sh b/package/scripts/build_distributions.sh
+old mode 100644
+new mode 100755
+index b7d003d..259ae81
+--- a/package/scripts/build_distributions.sh
++++ b/package/scripts/build_distributions.sh
+@@ -59,20 +59,15 @@ cp -a "$ROOT/scripts/build_core.py" "$STAGE/local/scripts/build_core.py"
+ cat > "$STAGE/local/README.md" <<'EOF'
+ # Design Governance V1.1.1 — export Local
+ 
+-Design Governance V1.1.1 est une expérimentation maintenue qui aide à transformer un brief en proposition de design visuellement dirigée, cultivée, spécifique, construite et polie, puis en travail vérifiable. Il peut servir pour un correctif local, une nouvelle surface, une direction visuelle ou une modification de composant partagé. Son usage recommandé est supervisé ; son efficacité réelle reste `NOT-VERIFIED`.
++Design Governance V1.1.1 est une expérimentation maintenue qui aide à transformer un brief en proposition de design visuellement dirigée, cultivée, spécifique, construite et polie, puis en travail vérifiable. Son usage recommandé est supervisé ; son efficacité réelle reste `NOT-VERIFIED`.
+ 
+-## Commencer en deux minutes
++<!-- partage:entree -->
+ 
+-1. Lisez [`official/QUICKSTART.md`](official/QUICKSTART.md).
+-2. Si les termes `mode`, `risque`, `preuve` ou `run` sont nouveaux, lisez [`official/GLOSSAIRE.md`](official/GLOSSAIRE.md).
+-3. Si le besoin est déjà identifiable, consultez [`official/READING_MAP.md`](official/READING_MAP.md) pour le premier chemin et la sortie attendue.
+-4. Écrivez le mode, le risque dominant, la décision à changer, la prochaine preuve et l’owner.
+-5. Pour une décision visuelle, rendez explicites la présence, le point de vue et le niveau de polish recherchés.
+-6. Chargez seulement la source utile au mode retenu ; `DIRECTION/START` reste l’unique classification.
++## Pour les agents et les opérateurs
+ 
+-## Constitution minimale
++Un agent entre par [`skill/SKILL.md`](skill/SKILL.md) : noyau de fabrication et liste de chargement unique (`DIRECTION/CHARGE`). Pour piloter un run, lisez le guide opérateur [`official/QUICKSTART.md`](official/QUICKSTART.md) ; le vocabulaire est dans [`official/GLOSSAIRE.md`](official/GLOSSAIRE.md). Le mode d’un run est choisi par l’agent avec `DIRECTION/START` ; il n’est jamais demandé à la personne qui fait la demande.
+ 
+-Les cinq absolus de `official/DIRECTION.md` protègent la baseline : direction perceptible, ancre observée ou fournie avant d’accepter une direction pour un produit réel, preuves applicables, déclaration du mode et de la prochaine preuve avant l’exécution, et coordination du réel et du beau. La conformité ne remplace ni la direction ni la preuve.
++<!-- partage:constitution -->
+ 
+ Pour charger un seul bloc :
+ 
+@@ -88,17 +83,6 @@ python3 scripts/validate_run_card.py --strict chemin/vers/run_card.json
+ 
+ Les cinq sources normatives sont `official/DIRECTION.md`, `official/ACTION.md`, `official/SAVOIR.md`, `official/BIBLIOTHEQUE.md` et `official/CHANGELOG.md`. `README.md`, `QUICKSTART.md` et `GLOSSAIRE.md` orientent la lecture sans créer de règle concurrente.
+ 
+-## Cas simples
+-
+-| Situation | Point de départ |
+-|---|---|
+-| Corriger un défaut local, comme un contraste ou un libellé | `LITE` |
+-| Retoucher une surface dont la direction existe et est retrouvable | `ITER` |
+-| Identité, premier contact ou direction visuelle autonome | `DIRECTION` |
+-| Modifier un composant ou une convention partagée | `SYSTÈME` |
+-
+-Classement : voir `DIRECTION/START`.
+-
+ La projection machine de référence se trouve dans `schemas/run_card.example.json`. Les scripts ne nécessitent aucune dépendance Python tierce et supposent Python 3.10 ou plus récent. Pour contrôler la projection :
+ 
+ ```bash
+@@ -123,6 +107,28 @@ python3 scripts/validate_all.py
+ Dans l’export Local, `validate_all.py` contrôle le package, la projection, les fixtures et la CLI ; le build et la reproductibilité restent contrôlés depuis la distribution GitHub.
+ EOF
+ 
++# R6b-1 : l’entrée humaine et la constitution du README Local sont reprises des blocs balisés du README du package
++# (une seule source), avec les chemins propres au layout Local.
++python3 - "$ROOT/README.md" "$STAGE/local/README.md" <<'PY'
++import re
++import sys
++from pathlib import Path
++
++source = Path(sys.argv[1]).read_text(encoding="utf-8")
++target = Path(sys.argv[2])
++text = target.read_text(encoding="utf-8")
++for name in ("entree", "constitution"):
++    found = re.findall(rf"<!-- {name}:début -->.*?<!-- {name}:fin -->", source, re.S)
++    if len(found) != 1:
++        raise SystemExit(f"BUILD FAILED — README du package : bloc partagé « {name} » trouvé {len(found)} fois (attendu : 1)")
++    block = found[0].replace("V1/official/", "official/").replace("skills/design-governance-practice/", "skill/")
++    placeholder = f"<!-- partage:{name} -->"
++    if text.count(placeholder) != 1:
++        raise SystemExit(f"BUILD FAILED — README Local : emplacement « {placeholder} » absent ou multiple")
++    text = text.replace(placeholder, block)
++target.write_text(text, encoding="utf-8")
++PY
++
+ # E1 O-1 : chemins propres au layout Local, dans la skill, ses références et QUICKSTART.
+ python3 - "$STAGE/local" <<'PY'
+ from pathlib import Path
+diff --git a/package/scripts/validate_reading_map.py b/package/scripts/validate_reading_map.py
+index 6a821b0..7d617d0 100644
+--- a/package/scripts/validate_reading_map.py
++++ b/package/scripts/validate_reading_map.py
+@@ -522,10 +522,13 @@ def check_facades(errors: list[str]) -> None:
+         ("LCF-02", "READING_MAP, ligne « Accessibilité »", "ACTION/GATE-A (contrôles applicables dus)",
+          bool(rm49) and "N/A-JUSTIFIED" not in rm49[-1] and "ACTION/GATE-A" in rm49[-1]),
+         ("LCF-03", "ORCHESTRATION_MAP, noyau UI/UX, preuve, système", "ACTION/GATE-A ; gate du risque ; paquet SYSTÈME (B3)", lcf_03(t)),
+-        ("LCF-04", "QUICKSTART et README, ligne DIRECTION", "DIRECTION/START (direction visuelle autonome)",
+-         bool(qs_dir) and bool(rd_dir) and all("craft" not in c[0].lower() and "autonome" in c[0] for c in (qs_dir, rd_dir))),
+-        ("LCF-05", "README, ligne ITER", "DIRECTION/START (ITER : direction existante et retrouvable)",
+-         bool(rd_iter) and re.search(r"(?i)direction[^|]*(retrouvable|existante)", rd_iter[0]) is not None),
++        # R6b-1 (V12R_27, rectification déclarée) : la table des modes vit dans le guide opérateur (QUICKSTART) ; l'entrée
++        # humaine (README) ne demande aucun mode. Les propriétés sont conservées sur la table qui subsiste.
++        ("LCF-04", "QUICKSTART, ligne DIRECTION ; aucune table de mode dans le README", "DIRECTION/START (direction visuelle autonome)",
++         bool(qs_dir) and "craft" not in qs_dir[0].lower() and "autonome" in qs_dir[0] and rd_dir is None),
++        ("LCF-05", "QUICKSTART, ITER dans l'ordre canonique ; aucune ligne ITER dans le README",
++         "DIRECTION/START (ITER : direction existante et retrouvable)",
++         re.search(r"\*\*`ITER`\*\*[^\n]*(retrouvable|existante)", t["Q"]) is not None and rd_iter is None),
+         ("LCF-06", "DIRECTION, index « Nouvelle structure d’écran »", "DIRECTION/START (classification)",
+          bool(index) and "classification `ACTION/RUN-STANDARD`" not in index[1]),
+         ("LCF-07", "DIRECTION 72, RUN-PRIORITY, READING_MAP, ORCHESTRATION_MAP, skill", "DIRECTION 55 (cible avant premier objet)", lcf_07(t)),
+@@ -533,8 +536,8 @@ def check_facades(errors: list[str]) -> None:
+          re.search(r"`?OWNER`? et `?SCOPE`?[^.]*jamais omis", entry) is not None and bool(fast) and "si nécessaire" not in fast[1]),
+         ("LCF-09", "DIRECTION, RUN-PRIORITY et récapitulatif de protection (point 4)", "BIBLIOTHEQUE/SELECT, SCENE",
+          bool(re.search(r"FIRST-OBJECT —[\s\S]*?sauf si", prio))),
+-        ("LCF-10", "QUICKSTART et README, tables de mode", "D-FAC-1 (classement : voir DIRECTION/START)",
+-         all(re.search(r"(?i)classement\s*:\s*voir `DIRECTION/START`", text) for text in (t["Q"], t["README"]))),
++        ("LCF-10", "QUICKSTART, table de mode ; README sans table de mode", "D-FAC-1 (classement : voir DIRECTION/START)",
++         re.search(r"(?i)classement\s*:\s*voir `DIRECTION/START`", t["Q"]) is not None and rd_dir is None and rd_iter is None),
+         ("LCF-C1", "READING_MAP et skill, copies du handoff", "ACTION/HANDOFF",
+          bool(canon) and HANDOFF_TOKENS.findall(fenced_after(t["RM"], "## Handoff minimal commun")) == canon
+          and (not after(t["SK"], "## Carte de lecture et sortie", 10)
+diff --git a/package/scripts/validate_structure.py b/package/scripts/validate_structure.py
+index 9853f18..d844991 100644
+--- a/package/scripts/validate_structure.py
++++ b/package/scripts/validate_structure.py
+@@ -21,6 +21,8 @@ Gardes :
+      les façades y renvoient ; la ligne `DIRECTION` garde le build et l'ordre cible → premier objet ;
+      Gate B n'y est chargée qu'en trace complète (décision 11), comme dans la carte de lecture d'ACTION.
+  12. LOCATORS DU VALIDATEUR — un message de `validate_run_card.py` cite un lieu nommé, jamais un numéro de ligne (R-28).
++ 13. ENTRÉE HUMAINE — une seule entrée balisée (README du package, reprise par le README Local), quatre questions,
++     aucun mode demandé, vouvoiement ; une seule constitution minimale (ENT-01, CST-01).
+ 
+ Une reformulation ne casse pas ces gardes ; une suppression, un déplacement, une copie ou un retour du
+ vocabulaire retiré les cassent. `scripts/read_route.py` retire les balises à la lecture.
+@@ -121,6 +123,12 @@ RETIRED: list[tuple[str, str, set[str]]] = [
+     (r"(?:sans (?:l’)?ancre|ancre (?:absente|manquante))[^.]{0,200}(?:passe par|possible par) `FAIL-ASSUMED`|"
+      r"`FAIL-ASSUMED` ne permet qu’une diffusion limitée",
+      "sans ancre : EXPLORATORY ; FAIL-ASSUMED seulement pour un échec connu (R7-2)", set()),
++    # R6b-1 (V12R_27) : une seule entrée humaine ; plus de démarrages concurrents ; une seule constitution minimale.
++    (r"Démarrage en 90 secondes|démarrage en 90 secondes|Démarrage express|Le chemin en trente secondes|"
++     r"Le parcours complet en cinq minutes|Commencer en deux minutes|\| Si vous avez… \|",
++     "entrée humaine unique (« Commencer », README du package) ; parcours commun du guide opérateur", {"CHANGELOG.md"}),
++    (r"dessinée uniquement de mémoire|coordination du réel et du beau",
++     "constitution minimale unique, exacte (README du package, bloc « constitution » ; D-24)", {"CHANGELOG.md"}),
+ ]
+ 
+ # 11. Choix contextuels (PKG-01) — garde BORNÉE. Elle ne juge pas le sens d'une phrase quelconque ; elle détecte
+@@ -176,6 +184,45 @@ FIDELITY: list[tuple[str, str, str]] = [
+      r"`FAIL-ASSUMED`[^.]{0,120}ancre (?:absente|manquante)", "échec connu"),
+ ]
+ 
++# 13. Entrée humaine (R6b-1) : une seule entrée, balisée dans le README du package et reprise par le README Local ;
++#     quatre questions ; aucun mode interne demandé ; vouvoiement. Une seule constitution minimale, balisée au même lieu.
++ENTRY = re.compile(r"<!-- entree:début -->(.*?)<!-- entree:fin -->", re.S)
++CONSTITUTION = re.compile(r"<!-- constitution:début -->(.*?)<!-- constitution:fin -->", re.S)
++QUESTIONS = ("**1. Que demander ?**", "**2. Que fournir ?**", "**3. Que recevoir ?**", "**4. Comment poursuivre ?**")
++MODE_ASKED = re.compile(r"`(?:LITE|ITER|STANDARD|DIRECTION|SYSTÈME)`|MODE —")
++CONSTITUTION_SIGNATURE = "le réel et le beau sont cadrés ensemble"
++
++
++def check_entry(corpus: dict[Path, list[str]], errors: list[str]) -> None:
++    readme = ROOT / "README.md"
++    if not readme.is_file():
++        errors.append("[ENT-01] README.md absent à la racine du package")
++        return
++    text = readme.read_text(encoding="utf-8")
++    entries = ENTRY.findall(text)
++    if len(entries) != 1:
++        errors.append(f"[ENT-01] entrée humaine balisée {len(entries)} fois dans README.md (attendu : 1)")
++    else:
++        block = entries[0]
++        for question in QUESTIONS:
++            if question not in block:
++                errors.append(f"[ENT-01] question absente de l'entrée humaine : {question}")
++        asked = MODE_ASKED.search(block)
++        if asked:
++            errors.append(f"[ENT-01] l'entrée humaine demande un mode interne : « {asked.group(0)} »")
++        familiar = re.search(TUTOIEMENT.pattern, block, re.I)  # insensible à la casse (début de phrase)
++        if familiar:
++            errors.append(f"[ENT-01] registre : tutoiement « {familiar.group(0)} » dans l'entrée humaine")
++    constitutions = CONSTITUTION.findall(text)
++    if len(constitutions) != 1 or CONSTITUTION_SIGNATURE not in constitutions[0]:
++        errors.append("[CST-01] constitution minimale absente, multiple ou inexacte dans README.md (bloc « constitution »)")
++    for path, lines in corpus.items():
++        if path.resolve() == readme.resolve() or path.name == "CHANGELOG.md":
++            continue
++        if any(CONSTITUTION_SIGNATURE in line for line in lines):
++            errors.append(f"[CST-01] copie de la constitution minimale hors du README : {path.name}")
++
++
+ # 12. Locators numériques (R-28) : un message du validateur cite un lieu nommé, jamais un numéro de ligne.
+ NUMERIC_LOCATOR = re.compile(r"\((?:[^()]*, )?(?:DIRECTION|ACTION|SAVOIR|BIBLIOTHEQUE) \d+\)")
+ 
+@@ -461,6 +508,7 @@ def check() -> list[str]:
+     check_order(errors)
+     check_universal(corpus, errors)
+     check_numeric_locators(errors)
++    check_entry(corpus, errors)
+     return errors
+ 
+ 

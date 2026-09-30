@@ -1,14 +1,16 @@
-# Design Governance V1.1.1 — Quickstart
+# Design Governance V1.1.1 — Quickstart (guide opérateur)
 
 **Package Design Governance V1.1.1.** Expérimentation maintenue pour diriger, construire et vérifier un travail de design avec une trace proportionnée au risque. Il est destiné à un usage supervisé et ne constitue pas une preuve d’efficacité en production.
 
 > **Rôle de ce guide :** fournir une interface d’activation rapide. Il oriente la lecture et l’action, mais n’ajoute aucune règle, route, gate, axe, statut, verdict ou autorité. Les cinq sources normatives font foi.
 
+> **Pour qui :** ce guide sert à piloter un run (opérateur, designer ou agent). Pour faire simplement une demande, la section « Commencer » du README du package suffit : vous n’avez pas à choisir de mode.
+
 V1 aide à transformer une demande en **décision située, artefact réel, observation pertinente et trace honnête**. Elle ne promet ni beauté automatique, ni réussite universelle, ni validation d’usage sans preuve adaptée. Elle vise néanmoins un niveau positif : lorsque la décision visuelle est ouverte et que les capacités sont disponibles, le premier rendu doit déjà être composé, spécifique, crédible, présentable et suffisamment résolu pour être jugé comme un objet réel.
 
-## Démarrage en 90 secondes
+## Parcours commun
 
-Si vous devez agir immédiatement, ne lisez pas encore les routes détaillées. Notez :
+Pour piloter un run, commencez ici ; les sections suivantes n’approfondissent que si le risque, le périmètre ou la décision le justifie. Notez :
 
 ```text
 MODE — DECISION — RISK — NEXT-PROOF — OWNER
@@ -36,9 +38,9 @@ Une sortie de run a deux formes : la **réponse visible**, par défaut, et le **
 
 Le guide se lit par couches. Ne chargez pas tout le corpus par réflexe ; chargez uniquement ce qui peut modifier la prochaine décision.
 
-### Façade d’activation en cinq éléments
+### Façade d’activation : ce que chaque source apporte
 
-Avant les routes détaillées, notez seulement le **mode**, le **risque dominant**, la **décision à changer**, la **prochaine preuve** et l’**owner**. `DIRECTION/START` classe la demande ; `DIRECTION` intervient si la cible ou la direction change ; `ACTION` intervient dès qu’un artefact, une preuve, un état ou une clôture est concerné ; `SAVOIR` intervient si le jugement, le craft, la source ou le contexte peut changer la décision ; `BIBLIOTHEQUE` intervient si la structure, le composant ou la micro-interface peut changer la décision. Cette façade ne crée ni mode, ni gate, ni statut, ni propriétaire supplémentaire.
+La ligne du parcours commun est la façade d’activation. `DIRECTION/START` classe la demande ; `DIRECTION` intervient si la cible ou la direction change ; `ACTION` intervient dès qu’un artefact, une preuve, un état ou une clôture est concerné ; `SAVOIR` intervient si le jugement, le craft, la source ou le contexte peut changer la décision ; `BIBLIOTHEQUE` intervient si la structure, le composant ou la micro-interface peut changer la décision. Cette façade ne crée ni mode, ni gate, ni statut, ni propriétaire supplémentaire.
 
 **Bénéfice attendu.** Chargez `DIRECTION` pour obtenir une position située et un premier objet plus fort ; `SAVOIR` pour transformer une impression en jugement et en choix de craft ; `BIBLIOTHEQUE` pour rendre la structure habitable, compatible et maintenable ; `ACTION` pour transformer la décision en livraison observable, corrigible et prouvable. Si aucun de ces gains ne peut modifier la prochaine décision, restez sur le chemin court ; si un risque critique est actif, ne confondez pas chemin court et profondeur insuffisante.
 
@@ -46,21 +48,19 @@ Pour une décision visuelle ouverte, utilisez le **Creative Boot** de `DIRECTION
 
 Si le domaine, le public, la confiance, la culture, la convention ou l’ambition peuvent changer le résultat, activez `DIRECTION/DOMAIN-FRAME`, puis `SAVOIR/SOURCE` pour une recherche orientée décision. Augmentez la profondeur seulement lorsqu’un déclencheur est nommé ; la recherche doit revenir dans le contenu, la structure, le geste ou la preuve. Pour une UI/UX nouvelle, ajoutez le contrat de réalité d’ACTION : tâche, contenu, états, responsive, accessibilité, robustesse et scope de preuve.
 
-### Constitution minimale
+### Constitution et entrées par besoin
 
-Avant toute route détaillée, gardez en tête les cinq absolus de `DIRECTION` : direction perceptible pour une surface identitaire ; ancre observée ou fournie avant d’accepter une direction pour un produit réel ; preuves applicables au mode ; mode, prochaine preuve et budget déclarés avant l’exécution ; coordination du réel et du beau. La conformité seule ne constitue jamais une direction, une preuve d’usage ou une qualité réelle. La formulation canonique se trouve dans [`DIRECTION.md`](DIRECTION.md#les-cinq-règles-absolues).
+Les cinq absolus de `DIRECTION` protègent chaque run : leur résumé est dans la section « Constitution minimale » du README du package, leur formulation canonique dans [`DIRECTION.md`](DIRECTION.md#les-cinq-règles-absolues).
 
-| Si vous avez… | Faites d’abord… | Puis approfondissez avec… |
+| Pour… | Faites d’abord… | Puis approfondissez avec… |
 |---|---|---|
-| 30 secondes | Décision, risque, preuve, capacité et ligne de run. | `DIRECTION/START`. |
-| 5 minutes | Classification, sources minimales, premier objet, observation et suite. | `DIRECTION`, `ACTION` et la route du mode. |
 | Un agent à activer | Objectif, périmètre, autonomie, confirmation et format de sortie. | Skill pratique, `RUN_CARD` et références conditionnelles. |
 | Une direction visuelle ouverte | Creative Boot : promesse, objet, geste, modal et parti, tension, signature, cibles CFT, fabrication et premier objet. | `DIRECTION/CHARGE` (mode `DIRECTION`). |
 | Un run à persister | Scope, artefact, preuve, limite, owner et projection validable. | `ACTION`, schéma `RUN_CARD` et validateur. |
 
-## 2. Le chemin en trente secondes
+## 2. La ligne de run
 
-Avant de construire ou de modifier, répondez aux cinq questions du démarrage en 90 secondes.
+Avant de construire ou de modifier, répondez aux cinq questions du parcours commun.
 
 Produisez ensuite la ligne minimale :
 
@@ -72,7 +72,7 @@ Ajoutez `DECISION-INTENT` au lancement. Ne produisez `DECISION-CHANGE` qu’apr�
 
 Si le package V1 ou une source canonique est indisponible, signalez-le. Une proposition créative peut rester explicitement hypothétique, mais elle ne doit pas être présentée comme un run V1 conforme.
 
-## 3. Le parcours complet en cinq minutes
+## 3. Le parcours complet
 
 Le parcours complet est le suivant ; chaque mode n’en garde que les étapes de sa route (`ACTION/RUN-<MODE>`) :
 
