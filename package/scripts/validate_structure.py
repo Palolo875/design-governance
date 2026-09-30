@@ -225,6 +225,13 @@ FIDELITY: list[tuple[str, str, str]] = [
     ("règle CTA : valeur d'exemple marquée (AUD-09)", r"Un CTA doit soit déclencher", "CNT-01"),
     ("flux : READING_MAP pour une personne (AUD-10)", r"la section « Combinaisons par résultat recherché » de `READING_MAP", "si une personne le demande"),
     ("veille : signal R10 (AUD-14)", r"\*\*Marqueurs de vague\*\*", "Signal R10"),
+    # A2 (V12R_39) : une seule liste de chargement, plancher SAVOIR dans le noyau, lieu de la trace légère
+    ("carte d'ACTION : vue de CHARGE (AUD-01)", r"\*\*Socle pour tous les modes", "DIRECTION/CHARGE"),
+    ("ACTION, responsabilité : chargement par CHARGE (AUD-01)", r"est le propriétaire des preuves exécutables, des gates, des statuts de run", "DIRECTION/CHARGE"),
+    ("déclencheurs critiques : conditionnels, par CHARGE (AUD-01)", r"\| Détail final susceptible", "DIRECTION/CHARGE"),
+    ("ACTION/ROUTING : renvoi à CHARGE (AUD-01)", r"DIRECTION déclenche la classification générale", "DIRECTION/CHARGE"),
+    ("SAVOIR/READ : plancher dans le noyau (AUD-02)", r"\*\*Chemin minimal\.\*\* Décide d’abord", "noyau"),
+    ("trace légère : lieu (AUD-05)", r"\*\*Trace légère par défaut\.\*\*", "à côté de l’artefact"),
     # R7-2 (V12R_24)
     ("ancre et FAIL-ASSUMED (R7-2)", r"sans (?:l’)?ancre[^.]{0,200}`FAIL-ASSUMED`|ancre (?:absente|manquante)[^.]{0,200}`FAIL-ASSUMED`|"
      r"`FAIL-ASSUMED`[^.]{0,120}ancre (?:absente|manquante)", "échec connu"),
@@ -323,7 +330,7 @@ NORMATIVE = {"DIRECTION.md", "ACTION.md", "SAVOIR.md", "BIBLIOTHEQUE.md"}
 NOYAU_MARK = re.compile(r"^<!-- noyau:(début|fin) ([A-Z0-9\-]+) -->$")
 
 # 9. Chargement : en-têtes d'une table de chargement ; lignes de façade qui doivent renvoyer à DIRECTION/CHARGE.
-LOAD_HEADERS = re.compile(r"^\|\s*Mode\s*\|\s*(Charger d’abord|Démarrage minimal)")
+LOAD_HEADERS = re.compile(r"^\|\s*Mode\s*\|\s*(Charger d’abord|Démarrage minimal|Chargement)")  # AUD-01 : « Chargement » inclus
 LOAD_OWNERS = {"DIRECTION.md", "SKILL.md"}
 LOAD_POINTERS = [("QUICKSTART.md", "| Une direction visuelle ouverte |"),
                  ("READING_MAP.md", "| Direction identitaire |"),
@@ -566,6 +573,20 @@ def check_order(errors: list[str]) -> None:
             errors.append(f"[ORD-01] ordre de DIRECTION : « {first} » doit exister une fois, avant « {then} »")
 
 
+# AUD-01 et AUD-02 (V12R_39) : ce que la section compilée de la skill doit porter
+CORE_FLOOR = [("| Ajouter seulement si", "colonne « Ajouter seulement si » de DIRECTION/CHARGE (AUD-01)"),
+              ("Conçois une palette par rôles", "plancher couleur de SAVOIR/CRAFT/CFT-05 (AUD-02)"),
+              ("Choisis une typographie pour ses langues", "plancher typographique de SAVOIR/TYPE (AUD-02)")]
+
+
+def check_core_floor(errors: list[str]) -> None:
+    text = (SKILL_DIR / "SKILL.md").read_text(encoding="utf-8")
+    core = text[text.find("<!-- noyau:compilé début -->"):text.find("<!-- noyau:compilé fin -->")]
+    for needle, label in CORE_FLOOR:
+        if needle not in core:
+            errors.append(f"[CORE-01] noyau : {label} absent de la section compilée")
+
+
 def check() -> list[str]:
     errors: list[str] = []
     corpus = texts()
@@ -584,6 +605,7 @@ def check() -> list[str]:
     check_entry(corpus, errors)
     check_maps(errors)
     check_preamble(errors)
+    check_core_floor(errors)
     return errors
 
 

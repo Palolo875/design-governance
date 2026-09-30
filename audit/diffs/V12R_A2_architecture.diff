@@ -1,0 +1,257 @@
+diff --git a/package/V1/official/ACTION.md b/package/V1/official/ACTION.md
+index 4639337..d0e4526 100644
+--- a/package/V1/official/ACTION.md
++++ b/package/V1/official/ACTION.md
+@@ -4,15 +4,17 @@
+ 
+ ## Responsabilité
+ 
+-`ACTION` est le propriétaire des preuves exécutables, des gates, des statuts de run, des verdicts et de la clôture. Pour une lecture rapide, commencez par `ACTION/STATUS` et `ACTION/PRECONDITION`, puis la route de votre mode `ACTION/RUN-<MODE>`, et chargez seulement les gates correspondant au risque déclaré. `ACTION/FAST-PATH` est une vue de formalité réduite pour un delta local ; il ne supprime ni la preuve requise ni l’honnêteté du statut.
++`ACTION` est le propriétaire des preuves exécutables, des gates, des statuts de run, des verdicts et de la clôture. Dans un run, le chargement suit `DIRECTION/CHARGE`, seule liste de chargement. Pour lire ACTION hors run, commencez par `ACTION/STATUS` et `ACTION/PRECONDITION`, puis la route de votre mode `ACTION/RUN-<MODE>`, et chargez seulement les gates correspondant au risque déclaré. `ACTION/FAST-PATH` est une vue de formalité réduite pour un delta local ; il ne supprime ni la preuve requise ni l’honnêteté du statut.
+ 
+ **Capacité positive d’ACTION.** ACTION ne sert pas seulement à filtrer ou accepter un résultat : elle transforme une direction en livraison observable et améliorable. Son chemin positif est la boucle d’édition (`DIRECTION/DOUBLE-LOOP`), prolongée par la preuve et, en trace complète, par une clôture avec une limite et une prochaine preuve. Les gates protègent ce chemin ; ils ne sont pas sa finalité. La qualité du premier rendu, la lisibilité de la décision et la possibilité de reprendre le run font partie de la valeur livrée.
+ 
+ ### Carte de lecture par mode
+ 
+-**Socle pour tous les modes :** `ACTION/STATUS` et `ACTION/PRECONDITION`.
++Cette carte est une vue de `DIRECTION/CHARGE`, pas une seconde liste : elle nomme les sections d’ACTION que la route de chaque mode appelle.
+ 
+-| Mode | Chargement propre au mode |
++**Socle pour tous les modes :** `ACTION/STATUS` et `ACTION/PRECONDITION`, dès que le run écrit un statut, un gate ou un verdict (trace complète) ; `DIRECTION/CHARGE` reste la liste du démarrage.
++
++| Mode | Sections d’ACTION appelées par la route |
+ |---|---|
+ | `LITE` | `ACTION/RUN-LITE` ; `ACTION/GATE-A` applicable et `ACTION/GATE-B` du risque dominant |
+ | `ITER` | `ACTION/RUN-ITER` ; non-régression pertinente ; `ACTION/GATE-A` applicable et `ACTION/GATE-B` du risque touché ; `ACTION/GATE-C` seulement si le craft change |
+@@ -56,7 +58,7 @@ L’agent active le système en silence : la personne donne l’objectif, le pé
+ 
+ <!-- noyau:début TRACE -->
+ <!-- concept:TRA-01 -->
+-**Trace légère par défaut.** Hors run persistant, partagé ou audité, la trace tient en six lignes au plus : mode ; thèse (promesse → objet de preuve → geste) ; modal, trame et parti ; plafond atteint et contenus marqués ; défaut dominant restant ; prochaine preuve. Les planchers s’appliquent pendant la fabrication (vérité, `ACTION/GATE-A` selon le profil de surface, boucle d’édition) ; seule leur écriture s’allège. Le run livre une **proposition** `EXPLORATORY` : ni verdict, ni acceptation, ni clôture, ni `RUN_CARD`. **Trace complète** (handoff, `ACTION/RUN_CARD`, `ACTION/CLOSE-PACKAGE`, gates écrits, `B1b` dans son scope) si le run est persistant, partagé, audité, ou si une acceptation ou une clôture est demandée.
++**Trace légère par défaut.** Hors run persistant, partagé ou audité, la trace tient en six lignes au plus : mode ; thèse (promesse → objet de preuve → geste) ; modal, trame et parti ; plafond atteint et contenus marqués ; défaut dominant restant ; prochaine preuve. Elle s’écrit à côté de l’artefact quand l’agent écrit des fichiers (fichier de trace ou en-tête du fichier livré) ; sinon, après la réponse visible, sous « Trace ». Les planchers s’appliquent pendant la fabrication (vérité, `ACTION/GATE-A` selon le profil de surface, boucle d’édition) ; seule leur écriture s’allège. Le run livre une **proposition** `EXPLORATORY` : ni verdict, ni acceptation, ni clôture, ni `RUN_CARD`. **Trace complète** (handoff, `ACTION/RUN_CARD`, `ACTION/CLOSE-PACKAGE`, gates écrits, `B1b` dans son scope) si le run est persistant, partagé, audité, ou si une acceptation ou une clôture est demandée.
+ <!-- noyau:fin TRACE -->
+ 
+ **Formes.** La ligne de run de `DIRECTION` est la mémoire de lancement, sous-ensemble de lancement de ce handoff ; le handoff est la transmission ; `ACTION/CLOSE-PACKAGE` est la clôture par mode ; la `RUN_CARD` JSON est la projection persistante, selon la table de correspondance d’`ACTION/RUN_CARD`. **Forme courte LITE non persistante :** le paquet LITE de `ACTION/CLOSE-PACKAGE` ; les autres champs du handoff sont `N/A-JUSTIFIED` par défaut, avec deux pertes déclarées (METHOD, EXIT-CONDITION) ; TRACE-LOCATOR est alors l’artefact. Une reprise par un autre agent exige OWNER et NEXT-ACTION ; sinon la forme courte reste une préparation.
+@@ -997,11 +999,11 @@ Pour les composants critiques, maintiens une baseline d’états pertinents : va
+ 
+ ## ACTION/ROUTING — prérequis de jugement et de structure
+ 
+-DIRECTION déclenche la classification générale. ACTION appelle ensuite les routes de `SAVOIR` et `BIBLIOTHEQUE` qui peuvent modifier la prochaine décision.
++DIRECTION déclenche la classification générale. ACTION appelle ensuite les routes de `SAVOIR` et `BIBLIOTHEQUE` qui peuvent modifier la prochaine décision : elles s’ajoutent à la ligne du mode dans `DIRECTION/CHARGE` (colonne « Ajouter seulement si ») et ne forment pas une seconde liste.
+ 
+ | Situation | Routes ciblées |
+ |---|---|
+-| Spec `DIRECTION` | `SAVOIR/CRAFT`, `SAVOIR/TYPE`, `SAVOIR/SOURCE`, `SAVOIR/STYLE` si registre, `BIBLIOTHEQUE/SELECT` si structure ouverte. |
++| Spec `DIRECTION` | `SAVOIR/CRAFT`, `SAVOIR/TYPE` ou `SAVOIR/SOURCE` si la composition, la typographie ou l’ancrage restent ouverts, `SAVOIR/STYLE` si registre, `BIBLIOTHEQUE/SELECT` si structure ouverte. |
+ | Craft ou états | `SAVOIR/STATE`. |
+ | Couleur, contraste ou theming | `SAVOIR/CRAFT`, `SAVOIR/SYSTEM` et politique de contraste ACTION. |
+ | Risque critique, responsive, performance ou motion | `SAVOIR/CONTEXT`. |
+diff --git a/package/V1/official/CHANGELOG.md b/package/V1/official/CHANGELOG.md
+index 41d4051..01cac0d 100644
+--- a/package/V1/official/CHANGELOG.md
++++ b/package/V1/official/CHANGELOG.md
+@@ -35,6 +35,7 @@
+ - **Raccords de parcours (refonte, R11b).** Valider une proposition n’est pas l’accepter : l’acceptation pour un produit réel se demande et passe en trace complète ; humain présent, les demandes de brief précèdent le build ; chaque route `RUN-*` dit sa sortie en trace légère et ne clôt qu’en trace complète, et `ITER` reprend depuis la ligne de thèse d’une trace légère ; la réponse visible nomme l’alternative écartée ; `EXTERNAL-START` se charge avant le Creative Boot.
+ - **Action principale conservée (refonte, D-25).** Faute de valeur réelle, l’action principale d’une page (commander, écrire, appeler, venir) reste fonctionnelle avec une valeur d’exemple marquée, au lieu d’être retirée.
+ - **Raccords d’audit (refonte, audit A1).** `FAIL-ASSUMED` réservé à un échec connu dans le pipeline et l’absolu 4 ; persistance et clôture en trace complète (DIRECTION, `FAST-PATH`, BIBLIOTHEQUE, flux, exemples) ; règle CTA reliée à la valeur d’exemple marquée ; l’agent lit le noyau et `CHARGE`, READING_MAP sert aux personnes ; veille mise à jour (R10) ; redite retirée de l’entrée humaine.
++- **Architecture du chargement (refonte, A2).** `DIRECTION/CHARGE` est la seule liste de chargement, compilée dans le noyau avec sa colonne « Ajouter seulement si » ; la carte de lecture d’ACTION, les déclencheurs critiques de DIRECTION et `ACTION/ROUTING` en sont des vues ; le plancher couleur et typographique de SAVOIR entre dans le noyau ; la trace légère s’écrit à côté de l’artefact, ou après la réponse visible sous « Trace ».
+ - **Efficacité.** `NOT-VERIFIED` : l’épreuve de référence donne V1.1.1 ≈ sans système sur la qualité perçue ; l’effet de ces chantiers reste à éprouver (G4).
+ 
+ ## V1.1.1 — Retour d’audit : alignements de textes et de façades
+diff --git a/package/V1/official/DIRECTION.md b/package/V1/official/DIRECTION.md
+index ec8fbdc..be920f6 100644
+--- a/package/V1/official/DIRECTION.md
++++ b/package/V1/official/DIRECTION.md
+@@ -289,7 +289,7 @@ Un run `STANDARD`, `DIRECTION` ou `SYSTÈME` persistant, partagé ou audité con
+ | **LITE** | `ACTION/RUN-LITE`, `ACTION/FAST-PATH`, `ACTION/GATE-A` applicable et `ACTION/GATE-B` du risque dominant. Sans risque critique touché — voir Protection de niveau (`DIRECTION/START`). | Une route SAVOIR ou BIBLIOTHEQUE si le correctif touche réellement le jugement ou la structure. La section `DESIGN-ATLAS` reste silencieuse ; une famille seule ne reclassifie pas. Si le périmètre, le blast radius, la responsabilité ou le risque dominant change la décision, reviens à `DIRECTION/START` puis reclassifie vers `ITER`, `STANDARD`, `DIRECTION` ou `SYSTÈME`. |
+ | **ITER** | Mémoire locale (direction existante), `ACTION/RUN-ITER`, `ACTION/GATE-A` applicable et `ACTION/GATE-B` du risque touché. Sans risque critique touché — voir Protection de niveau (`DIRECTION/START`). | Une route SAVOIR ; BIBLIOTHEQUE seulement si support, grille, scène ou objet change. `DESIGN-ATLAS` reste silencieux dans le même périmètre ; une famille seule ne reclassifie pas. Si le périmètre, la responsabilité ou le risque dominant change la décision, reviens à `DIRECTION/START`. Les corrections de libellé, overflow, contraste, focus, état ou wrapping restent locales. |
+ | **STANDARD** | `ACTION/RUN-STANDARD` ; `BIBLIOTHEQUE/SELECT` si la structure est ouverte. | `SAVOIR/FRAME` si le cadrage est ambigu, une route BIBLIOTHEQUE structurante et la route SAVOIR du risque dominant. |
+-| **DIRECTION** | `DIRECTION/EXTERNAL-START` si le brief est vague, `DIRECTION/CREATIVE-BOOT`, `DIRECTION/VISUAL_TARGET`, `DIRECTION/FIRST-OBJECT`, `ACTION/FIRST-RENDER`, `ACTION/RUN-DIRECTION`, puis `ACTION/GATE-A` et `ACTION/GATE-C` applicables ; en trace complète (`ACTION/HANDOFF`), `ACTION/GATE-B`, `ACTION/RUN_CARD` et `ACTION/CLOSE-PACKAGE`. | `DIRECTION/DOUBLE-LOOP`, `ACTION/ROUTING` ou `SAVOIR/CRAFT/CFT-00` si la décision l’exige (la boucle d’édition et les gestes sont dans le noyau) ; `DIRECTION/DIRECTION-ATELIER` si une tension, un geste produit ou un anti-choix peut modifier la première scène ; `SAVOIR/FRAME`, `SAVOIR/CRAFT`, `SAVOIR/TYPE`, `SAVOIR/SOURCE` et `BIBLIOTHEQUE/SELECT` si nécessaires. Charge `SAVOIR/STYLE` seulement si le choix de style peut modifier une décision de composition, de voix, de matière, de contraste ou de relation produit ; jamais comme catalogue automatique. |
++| **DIRECTION** | `DIRECTION/EXTERNAL-START` si le brief est vague, `DIRECTION/CREATIVE-BOOT`, `DIRECTION/VISUAL_TARGET`, `DIRECTION/FIRST-OBJECT`, `ACTION/FIRST-RENDER`, `ACTION/RUN-DIRECTION`, puis `ACTION/GATE-A` et `ACTION/GATE-C` applicables ; en trace complète (`ACTION/HANDOFF`), `ACTION/GATE-B`, `ACTION/RUN_CARD` et `ACTION/CLOSE-PACKAGE`. | `DIRECTION/DOUBLE-LOOP`, `ACTION/ROUTING` ou `SAVOIR/CRAFT/CFT-00` si la décision l’exige (la boucle d’édition et les gestes sont dans le noyau) ; `DIRECTION/DIRECTION-ATELIER` si la tension, le geste produit ou un anti-choix peuvent modifier la première scène ; `SAVOIR/FRAME`, `SAVOIR/CRAFT`, `SAVOIR/TYPE`, `SAVOIR/SOURCE` et `BIBLIOTHEQUE/SELECT` si nécessaires. Charge `SAVOIR/STYLE` seulement si le choix de style peut modifier une décision de composition, de voix, de matière, de contraste ou de relation produit ; jamais comme catalogue automatique. `SAVOIR/CRAFT/CFT-03`, `SAVOIR/STATE` ou `SAVOIR/INTEGRITY` si un détail final peut modifier le caractère, un état, la hiérarchie, la densité ou la robustesse ; `SAVOIR/INTEGRITY` avant un verdict (trace complète). |
+ | **SYSTÈME** | `ACTION/RUN-SYSTEM` ; `BIBLIOTHEQUE/COMPONENTS` si un composant change. | `SAVOIR/SYSTEM` ; `CHANGELOG` si une règle partagée change. |
+ <!-- noyau:fin CHARGE-TABLE -->
+ 
+@@ -779,6 +779,8 @@ Ne charge pas `ACTION`, `SAVOIR` et `BIBLIOTHEQUE` en bloc. Charge la route cano
+ 
+ ### Déclencheurs critiques
+ 
++Ces déclencheurs disent quand ajouter une route à la ligne du mode dans `DIRECTION/CHARGE` ; ils ne forment pas une seconde liste de chargement.
++
+ | Signal | Charger ou exécuter | Statut |
+ |---|---|---|
+ | Surface identitaire | Après `DIRECTION/START`, `ACTION/RUN-DIRECTION`; charger `SAVOIR/CRAFT`, `SAVOIR/TYPE` ou `SAVOIR/SOURCE` seulement si la composition, la typographie, l’ancrage ou le sourcing peuvent modifier la décision. | `[FORCÉ]` pour la route ACTION ; conditionnel pour les routes SAVOIR |
+@@ -790,7 +792,7 @@ Ne charge pas `ACTION`, `SAVOIR` et `BIBLIOTHEQUE` en bloc. Charge la route cano
+ | Ancre absente pour une surface identitaire | En exploration : limite déclarée, run `EXPLORATORY`. Avant l’acceptation : retour à l’ancrage, ou statut prévu par ACTION (absolu 2). | `[FORCÉ]` |
+ | FAIL exigé malgré un gate | Protocole `FAIL-ASSUMED` d’ACTION. | `[REQUIS PAR LE MODULE]` |
+ | Motif possiblement générique ou réflexe | Test motivation/construction `SAVOIR/CRAFT/CFT-01` ; conséquence de gate `ACTION/ANTI-SLOP`. | `[REQUIS PAR LE MODULE]` |
+-| Détail final susceptible de modifier le caractère, l’état, la hiérarchie, la densité ou la robustesse d’une surface `DIRECTION` | `SAVOIR/CRAFT/CFT-03` (composition, densité et harmonie), `SAVOIR/STATE`, `SAVOIR/INTEGRITY` et capture rendue. | `[FORCÉ]` |
++| Détail final susceptible de modifier le caractère, l’état, la hiérarchie, la densité ou la robustesse d’une surface `DIRECTION` | `SAVOIR/CRAFT/CFT-03` (composition, densité et harmonie), `SAVOIR/STATE`, `SAVOIR/INTEGRITY` et capture rendue. | Conditionnel : colonne « Ajouter seulement si » de `DIRECTION/CHARGE` |
+ 
+ ### Index à la demande
+ 
+diff --git a/package/V1/official/SAVOIR.md b/package/V1/official/SAVOIR.md
+index 331c841..df70aa3 100644
+--- a/package/V1/official/SAVOIR.md
++++ b/package/V1/official/SAVOIR.md
+@@ -37,7 +37,7 @@ La sortie de SAVOIR n’est pas un verdict. Elle doit transmettre à ACTION la d
+ 
+ Ne charge jamais l’ensemble de SAVOIR par réflexe. Charge typiquement zéro à deux routes ; une route par question active (CRAFT, TYPE, SOURCE, CONTEXT…) ; zéro route est valide lorsqu’aucune responsabilité de jugement ne change. Ajoute une route seulement si elle peut modifier la prochaine décision ou le statut de preuve.
+ 
+-**Chemin minimal.** Décide d’abord la décision et le risque ; charge ensuite la route SAVOIR principale, ou aucune si le changement reste local. Ajoute une route seulement si elle change une question, une preuve ou une limite ; `ACTION` reste propriétaire des preuves, des gates, des verdicts et de la clôture. Un tag `[REQUIS PAR LE MODULE — scope]` indique qu’une responsabilité devient applicable dans le périmètre déclaré ; il n’impose pas de charger toute la bibliothèque, mais d’exécuter ou de tracer honnêtement le contrôle concerné selon le contrat d’ACTION.
++**Chemin minimal.** Décide d’abord la décision et le risque ; charge ensuite la route SAVOIR principale, ou aucune si le changement reste local. Ajoute une route seulement si elle change une question, une preuve ou une limite ; `ACTION` reste propriétaire des preuves, des gates, des verdicts et de la clôture. Un tag `[REQUIS PAR LE MODULE — scope]` indique qu’une responsabilité devient applicable dans le périmètre déclaré ; il n’impose pas de charger toute la bibliothèque, mais d’exécuter ou de tracer honnêtement le contrôle concerné selon le contrat d’ACTION. Sur le chemin d’un run, le plancher de ces obligations est compilé dans le noyau de la skill (composition, typographie, couleur, états, vérité) ; leur détail s’applique lorsque la route est chargée.
+ 
+ ### SAVOIR/FAST-PATH — juger sans produire un dossier
+ 
+@@ -385,7 +385,9 @@ Formule le compromis : ce qui gagne entre compréhension immédiate et juste dis
+ 
+ ## CFT-05 — couleur et contraste
+ 
++<!-- noyau:début COMP-COULEUR -->
+ [REQUIS PAR LE MODULE — couleur, thème, statut ou surface identitaire] Conçois une palette par rôles : surfaces, textes, actions, états et frontières. La répartition entre neutres et couleurs est une décision de direction, pas un défaut : une structure neutre à accent, une identité multicolore structurelle ou un codage par zones sont recevables si les rôles, les états, le contraste calculé et un indice non chromatique pour toute information critique tiennent. Une couleur sémantique n’est pas une décoration.
++<!-- noyau:fin COMP-COULEUR -->
+ 
+ <!-- noyau:début COMP-CONVERGENCE -->
+ **Question de convergence.** Cette palette et cette police de titre sont-elles celles que le modèle produirait sans brief (palette : neutres et un seul accent, sombre et doré, dégradé froid ; police : la grotesque large ou la serif de caractère prise par réflexe) ? Si oui, nomme ce qui, dans le produit, les justifie. Sinon, reconsidère-les. Pour la police de titre, compare au moins deux voix typographiques distinctes (par exemple grotesque, serif, mécane, manuscrite ou vernaculaire du lieu) sur le vrai titre avant de choisir. La question ne prescrit aucun écart : un choix convergent justifié reste valide.
+@@ -405,7 +407,9 @@ Les claims sur chroma, statut perçu ou tendances de palette passent par `SAVOIR
+ 
+ # SAVOIR/TYPE — typographie et données
+ 
++<!-- noyau:début COMP-TYPO -->
+ [REQUIS PAR LE MODULE — lecture, ton, données, hiérarchie ou surface identitaire] Choisis une typographie pour ses langues, chiffres, ponctuation, graisses, lisibilité, licence, performance, fallback et ton.
++<!-- noyau:fin COMP-TYPO -->
+ 
+ Une famille fréquente n’est pas un problème en soi. Le problème est le réflexe sans alternative comparée, système existant interrogé ou raison formulée.
+ 
+diff --git a/package/scripts/build_core.py b/package/scripts/build_core.py
+index be5886b..66030c8 100644
+--- a/package/scripts/build_core.py
++++ b/package/scripts/build_core.py
+@@ -27,7 +27,7 @@ CONCEPT = re.compile(r"^\s*<!-- concept:[A-Z0-9\-]+ -->\s*$")
+ # Registre : (titre de section, [(identifiant de bloc, fichier propriétaire, colonnes gardées ou None)]).
+ NOYAU: list[tuple[str, list[tuple[str, str, tuple[int, ...] | None]]]] = [
+     ("Rôle et posture", [("ROLE", "DIRECTION.md", None), ("POSTURE", "DIRECTION.md", None)]),
+-    ("Classer, puis charger", [("CHARGE-REGLE", "DIRECTION.md", None), ("CHARGE-TABLE", "DIRECTION.md", (0, 1)),
++    ("Classer, puis charger", [("CHARGE-REGLE", "DIRECTION.md", None), ("CHARGE-TABLE", "DIRECTION.md", None),
+                                ("CHARGE-FIN", "DIRECTION.md", None)]),
+     ("Prendre le brief et viser le premier objet", [("BRIEF", "DIRECTION.md", None), ("CONTENU", "DIRECTION.md", None),
+                                                     ("PREMIER-OBJET", "DIRECTION.md", None)]),
+@@ -35,8 +35,9 @@ NOYAU: list[tuple[str, list[tuple[str, str, tuple[int, ...] | None]]]] = [
+                    ("STRUCT-TENSION", "BIBLIOTHEQUE.md", None), ("STRUCT-SIGNAUX", "BIBLIOTHEQUE.md", None)]),
+     ("Composition", [("COMP-GRAMMAIRE", "SAVOIR.md", None), ("COMP-SINGULARITE", "SAVOIR.md", None),
+                      ("COMP-FORME", "SAVOIR.md", None), ("COMP-CONTROLES", "SAVOIR.md", None),
+-                     ("COMP-TITRE", "SAVOIR.md", None), ("COMP-TEXTE-IMAGE", "SAVOIR.md", None),
+-                     ("COMP-VOCABULAIRE", "SAVOIR.md", None), ("COMP-CONVERGENCE", "SAVOIR.md", None),
++                     ("COMP-TYPO", "SAVOIR.md", None), ("COMP-TITRE", "SAVOIR.md", None), ("COMP-TEXTE-IMAGE", "SAVOIR.md", None),
++                     ("COMP-VOCABULAIRE", "SAVOIR.md", None), ("COMP-COULEUR", "SAVOIR.md", None),
++                     ("COMP-CONVERGENCE", "SAVOIR.md", None),
+                      ("COMP-VAGUES", "SAVOIR.md", None)]),
+     ("Moyens et vérité", [("MOY-PLAFOND", "DIRECTION.md", None), ("ANCRE", "DIRECTION.md", None), ("MOY-CARTE", "SAVOIR.md", None),
+                           ("MOY-ASSETS", "SAVOIR.md", None), ("MOY-CALIBRATION", "SAVOIR.md", None),
+diff --git a/package/scripts/validate_structure.py b/package/scripts/validate_structure.py
+index 3507269..f0dbe11 100644
+--- a/package/scripts/validate_structure.py
++++ b/package/scripts/validate_structure.py
+@@ -225,6 +225,13 @@ FIDELITY: list[tuple[str, str, str]] = [
+     ("règle CTA : valeur d'exemple marquée (AUD-09)", r"Un CTA doit soit déclencher", "CNT-01"),
+     ("flux : READING_MAP pour une personne (AUD-10)", r"la section « Combinaisons par résultat recherché » de `READING_MAP", "si une personne le demande"),
+     ("veille : signal R10 (AUD-14)", r"\*\*Marqueurs de vague\*\*", "Signal R10"),
++    # A2 (V12R_39) : une seule liste de chargement, plancher SAVOIR dans le noyau, lieu de la trace légère
++    ("carte d'ACTION : vue de CHARGE (AUD-01)", r"\*\*Socle pour tous les modes", "DIRECTION/CHARGE"),
++    ("ACTION, responsabilité : chargement par CHARGE (AUD-01)", r"est le propriétaire des preuves exécutables, des gates, des statuts de run", "DIRECTION/CHARGE"),
++    ("déclencheurs critiques : conditionnels, par CHARGE (AUD-01)", r"\| Détail final susceptible", "DIRECTION/CHARGE"),
++    ("ACTION/ROUTING : renvoi à CHARGE (AUD-01)", r"DIRECTION déclenche la classification générale", "DIRECTION/CHARGE"),
++    ("SAVOIR/READ : plancher dans le noyau (AUD-02)", r"\*\*Chemin minimal\.\*\* Décide d’abord", "noyau"),
++    ("trace légère : lieu (AUD-05)", r"\*\*Trace légère par défaut\.\*\*", "à côté de l’artefact"),
+     # R7-2 (V12R_24)
+     ("ancre et FAIL-ASSUMED (R7-2)", r"sans (?:l’)?ancre[^.]{0,200}`FAIL-ASSUMED`|ancre (?:absente|manquante)[^.]{0,200}`FAIL-ASSUMED`|"
+      r"`FAIL-ASSUMED`[^.]{0,120}ancre (?:absente|manquante)", "échec connu"),
+@@ -323,7 +330,7 @@ NORMATIVE = {"DIRECTION.md", "ACTION.md", "SAVOIR.md", "BIBLIOTHEQUE.md"}
+ NOYAU_MARK = re.compile(r"^<!-- noyau:(début|fin) ([A-Z0-9\-]+) -->$")
+ 
+ # 9. Chargement : en-têtes d'une table de chargement ; lignes de façade qui doivent renvoyer à DIRECTION/CHARGE.
+-LOAD_HEADERS = re.compile(r"^\|\s*Mode\s*\|\s*(Charger d’abord|Démarrage minimal)")
++LOAD_HEADERS = re.compile(r"^\|\s*Mode\s*\|\s*(Charger d’abord|Démarrage minimal|Chargement)")  # AUD-01 : « Chargement » inclus
+ LOAD_OWNERS = {"DIRECTION.md", "SKILL.md"}
+ LOAD_POINTERS = [("QUICKSTART.md", "| Une direction visuelle ouverte |"),
+                  ("READING_MAP.md", "| Direction identitaire |"),
+@@ -566,6 +573,20 @@ def check_order(errors: list[str]) -> None:
+             errors.append(f"[ORD-01] ordre de DIRECTION : « {first} » doit exister une fois, avant « {then} »")
+ 
+ 
++# AUD-01 et AUD-02 (V12R_39) : ce que la section compilée de la skill doit porter
++CORE_FLOOR = [("| Ajouter seulement si", "colonne « Ajouter seulement si » de DIRECTION/CHARGE (AUD-01)"),
++              ("Conçois une palette par rôles", "plancher couleur de SAVOIR/CRAFT/CFT-05 (AUD-02)"),
++              ("Choisis une typographie pour ses langues", "plancher typographique de SAVOIR/TYPE (AUD-02)")]
++
++
++def check_core_floor(errors: list[str]) -> None:
++    text = (SKILL_DIR / "SKILL.md").read_text(encoding="utf-8")
++    core = text[text.find("<!-- noyau:compilé début -->"):text.find("<!-- noyau:compilé fin -->")]
++    for needle, label in CORE_FLOOR:
++        if needle not in core:
++            errors.append(f"[CORE-01] noyau : {label} absent de la section compilée")
++
++
+ def check() -> list[str]:
+     errors: list[str] = []
+     corpus = texts()
+@@ -584,6 +605,7 @@ def check() -> list[str]:
+     check_entry(corpus, errors)
+     check_maps(errors)
+     check_preamble(errors)
++    check_core_floor(errors)
+     return errors
+ 
+ 
+diff --git a/package/skills/design-governance-practice/SKILL.md b/package/skills/design-governance-practice/SKILL.md
+index 5716a9f..d18796e 100644
+--- a/package/skills/design-governance-practice/SKILL.md
++++ b/package/skills/design-governance-practice/SKILL.md
+@@ -24,13 +24,13 @@ Tu vises l’excellence appropriée au produit, au public, au risque et au conte
+ 
+ > **Règle de vitesse.** Ouvre `START` (en `LITE`, l’arbre `DIRECTION/START/TREE` suffit), classe le mode, charge la ligne de ce mode, puis ajoute seulement le module susceptible de changer la prochaine décision.
+ 
+-| Mode | Charger d’abord |
+-| --- | --- |
+-| **LITE** | `ACTION/RUN-LITE`, `ACTION/FAST-PATH`, `ACTION/GATE-A` applicable et `ACTION/GATE-B` du risque dominant. Sans risque critique touché — voir Protection de niveau (`DIRECTION/START`). |
+-| **ITER** | Mémoire locale (direction existante), `ACTION/RUN-ITER`, `ACTION/GATE-A` applicable et `ACTION/GATE-B` du risque touché. Sans risque critique touché — voir Protection de niveau (`DIRECTION/START`). |
+-| **STANDARD** | `ACTION/RUN-STANDARD` ; `BIBLIOTHEQUE/SELECT` si la structure est ouverte. |
+-| **DIRECTION** | `DIRECTION/EXTERNAL-START` si le brief est vague, `DIRECTION/CREATIVE-BOOT`, `DIRECTION/VISUAL_TARGET`, `DIRECTION/FIRST-OBJECT`, `ACTION/FIRST-RENDER`, `ACTION/RUN-DIRECTION`, puis `ACTION/GATE-A` et `ACTION/GATE-C` applicables ; en trace complète (`ACTION/HANDOFF`), `ACTION/GATE-B`, `ACTION/RUN_CARD` et `ACTION/CLOSE-PACKAGE`. |
+-| **SYSTÈME** | `ACTION/RUN-SYSTEM` ; `BIBLIOTHEQUE/COMPONENTS` si un composant change. |
++| Mode | Charger d’abord | Ajouter seulement si cela change la décision |
++|---|---|---|
++| **LITE** | `ACTION/RUN-LITE`, `ACTION/FAST-PATH`, `ACTION/GATE-A` applicable et `ACTION/GATE-B` du risque dominant. Sans risque critique touché — voir Protection de niveau (`DIRECTION/START`). | Une route SAVOIR ou BIBLIOTHEQUE si le correctif touche réellement le jugement ou la structure. La section `DESIGN-ATLAS` reste silencieuse ; une famille seule ne reclassifie pas. Si le périmètre, le blast radius, la responsabilité ou le risque dominant change la décision, reviens à `DIRECTION/START` puis reclassifie vers `ITER`, `STANDARD`, `DIRECTION` ou `SYSTÈME`. |
++| **ITER** | Mémoire locale (direction existante), `ACTION/RUN-ITER`, `ACTION/GATE-A` applicable et `ACTION/GATE-B` du risque touché. Sans risque critique touché — voir Protection de niveau (`DIRECTION/START`). | Une route SAVOIR ; BIBLIOTHEQUE seulement si support, grille, scène ou objet change. `DESIGN-ATLAS` reste silencieux dans le même périmètre ; une famille seule ne reclassifie pas. Si le périmètre, la responsabilité ou le risque dominant change la décision, reviens à `DIRECTION/START`. Les corrections de libellé, overflow, contraste, focus, état ou wrapping restent locales. |
++| **STANDARD** | `ACTION/RUN-STANDARD` ; `BIBLIOTHEQUE/SELECT` si la structure est ouverte. | `SAVOIR/FRAME` si le cadrage est ambigu, une route BIBLIOTHEQUE structurante et la route SAVOIR du risque dominant. |
++| **DIRECTION** | `DIRECTION/EXTERNAL-START` si le brief est vague, `DIRECTION/CREATIVE-BOOT`, `DIRECTION/VISUAL_TARGET`, `DIRECTION/FIRST-OBJECT`, `ACTION/FIRST-RENDER`, `ACTION/RUN-DIRECTION`, puis `ACTION/GATE-A` et `ACTION/GATE-C` applicables ; en trace complète (`ACTION/HANDOFF`), `ACTION/GATE-B`, `ACTION/RUN_CARD` et `ACTION/CLOSE-PACKAGE`. | `DIRECTION/DOUBLE-LOOP`, `ACTION/ROUTING` ou `SAVOIR/CRAFT/CFT-00` si la décision l’exige (la boucle d’édition et les gestes sont dans le noyau) ; `DIRECTION/DIRECTION-ATELIER` si la tension, le geste produit ou un anti-choix peuvent modifier la première scène ; `SAVOIR/FRAME`, `SAVOIR/CRAFT`, `SAVOIR/TYPE`, `SAVOIR/SOURCE` et `BIBLIOTHEQUE/SELECT` si nécessaires. Charge `SAVOIR/STYLE` seulement si le choix de style peut modifier une décision de composition, de voix, de matière, de contraste ou de relation produit ; jamais comme catalogue automatique. `SAVOIR/CRAFT/CFT-03`, `SAVOIR/STATE` ou `SAVOIR/INTEGRITY` si un détail final peut modifier le caractère, un état, la hiérarchie, la densité ou la robustesse ; `SAVOIR/INTEGRITY` avant un verdict (trace complète). |
++| **SYSTÈME** | `ACTION/RUN-SYSTEM` ; `BIBLIOTHEQUE/COMPONENTS` si un composant change. | `SAVOIR/SYSTEM` ; `CHANGELOG` si une règle partagée change. |
+ 
+ La clôture de chaque mode est `ACTION/CLOSE-PACKAGE`, en trace complète ; en trace légère, le run s’arrête à la proposition (`ACTION/HANDOFF`). Pour l’agent, les blocs « noyau » compilés dans la skill tiennent lieu de lecture de fabrication ; README, QUICKSTART et READING_MAP sont des lectures d’orientation pour les humains.
+ 
+@@ -101,6 +101,8 @@ Le phénomène ou la métaphore est facultatif. Il peut rendre perceptible un se
+ 
+ Les contrôles principaux sont : alignements nets, compensation optique, proximité qui révèle les groupes, priorités lisibles, et responsive pensé comme recomposition. Une grille desktop peut devenir liste ; un panneau peut devenir écran ; un bloc dense peut devenir séquence progressive.
+ 
++[REQUIS PAR LE MODULE — lecture, ton, données, hiérarchie ou surface identitaire] Choisis une typographie pour ses langues, chiffres, ponctuation, graisses, lisibilité, licence, performance, fallback et ton.
++
+ **Équilibre d’un titre.** Quand un titre porte la scène (grand titre, accroche, chiffre mis en avant), règle-le sur le vrai texte, puis corrige ce que la capture montre : une coupe de ligne qui casse le sens ; un mot isolé en dernière ligne qui n’est pas voulu ; des lignes si inégales que le bloc se lit mal (`text-wrap: balance` peut aider si la cible le permet) ; une approche trop lâche aux grandes tailles, si la police le demande ; une hiérarchie aplatie, que l’on rétablit par l’écart d’échelle entre le titre et le texte qui suit, ou par le poids, la position ou l’espace. Un mot isolé, un déséquilibre ou un faible écart peut être le choix de composition : on le garde si la capture montre qu’il fonctionne. Observe sur capture, en desktop et en mobile, avec le contenu réel : la forme du bloc de titre reste lisible au flou.
+ 
+ **Texte sur image.** Quand un texte est posé sur une photo, une illustration ou une texture, place-le dans la zone calme de l’image ou recadre pour en créer une ; sinon, ajoute un voile ou un dégradé localisé, ou sors le texte de l’image. Mesure le contraste aux points les plus défavorables, à chaque largeur où le recadrage change. Une image sans zone calme demande un autre recadrage ou un autre placement.
+@@ -114,6 +116,8 @@ Les contrôles principaux sont : alignements nets, compensation optique, proximi
+ | Surface | Profondeur, lumière ou planéité sont-elles cohérentes ? | Élévations, frontières, lumière ou planéité revues. |
+ | États | Loading, empty, error et récupération sont-ils compréhensibles ? | États et sorties de récupération dessinés. |
+ 
++[REQUIS PAR LE MODULE — couleur, thème, statut ou surface identitaire] Conçois une palette par rôles : surfaces, textes, actions, états et frontières. La répartition entre neutres et couleurs est une décision de direction, pas un défaut : une structure neutre à accent, une identité multicolore structurelle ou un codage par zones sont recevables si les rôles, les états, le contraste calculé et un indice non chromatique pour toute information critique tiennent. Une couleur sémantique n’est pas une décoration.
++
+ **Question de convergence.** Cette palette et cette police de titre sont-elles celles que le modèle produirait sans brief (palette : neutres et un seul accent, sombre et doré, dégradé froid ; police : la grotesque large ou la serif de caractère prise par réflexe) ? Si oui, nomme ce qui, dans le produit, les justifie. Sinon, reconsidère-les. Pour la police de titre, compare au moins deux voix typographiques distinctes (par exemple grotesque, serif, mécane, manuscrite ou vernaculaire du lieu) sur le vrai titre avant de choisir. La question ne prescrit aucun écart : un choix convergent justifié reste valide.
+ 
+ [VEILLE 2026-09] **Marqueurs de vague**, pour nommer `MODAL` (`DIRECTION/CREATIVE-BOOT`), jamais pour interdire : un marqueur gardé par décision reste valide. Vague 1 : violet, police Inter, halos et gradient décoratif, hero SaaS à cartes répétées. Vague 2 : fond beige ou crème, brun, serif de caractère ou serif italique, orange rouille, bandeau défilant, illustration peinte, tramage. Vague 3 : dithering, logos pixel, ASCII, hachures de plan, gravures, bleu Klein, libellés mono en capitales, repères de recadrage, paysage peint en fond. Source : épreuve de référence interne V1.2 (26-09-2026) et revue de références de designers (27-09-2026), 6 rendus sur 6 sur fond crème et brun, avec ou sans système. Signal P1 (27-09-2026, 3 rendus sur 3, même auteur : grotesque large ou condensée, Archivo, sur fond blanc neutre avec un seul accent vif) non retrouvé en R10. Signal R10 (30-09-2026, auto-comparaison, 6 rendus) : même objet central par brief (fournées du jour ; facture tamponnée) et même grotesque de titre sur un brief, avec ou sans système. À revoir avant 2027-03.
+@@ -201,7 +205,7 @@ La suite : une ou deux actions proposées, et ce qu’il faut de la personne pou
+ 
+ L’agent active le système en silence : la personne donne l’objectif, le périmètre et l’autonomie ; l’agent choisit le mode, charge les sources et tient la trace. Le mode, la conséquence décisionnelle d’`ACTION/STATUS` (décision changée, confirmée ou abandonnée, `N/A-JUSTIFIED` ou `NOT-OBSERVED`), la preuve et l’owner restent dans la trace et sont exposés sur demande (« pourquoi ? », « qu’as-tu vérifié ? »). La réponse visible ne remplace jamais le handoff d’un run persistant.
+ 
+-**Trace légère par défaut.** Hors run persistant, partagé ou audité, la trace tient en six lignes au plus : mode ; thèse (promesse → objet de preuve → geste) ; modal, trame et parti ; plafond atteint et contenus marqués ; défaut dominant restant ; prochaine preuve. Les planchers s’appliquent pendant la fabrication (vérité, `ACTION/GATE-A` selon le profil de surface, boucle d’édition) ; seule leur écriture s’allège. Le run livre une **proposition** `EXPLORATORY` : ni verdict, ni acceptation, ni clôture, ni `RUN_CARD`. **Trace complète** (handoff, `ACTION/RUN_CARD`, `ACTION/CLOSE-PACKAGE`, gates écrits, `B1b` dans son scope) si le run est persistant, partagé, audité, ou si une acceptation ou une clôture est demandée.
++**Trace légère par défaut.** Hors run persistant, partagé ou audité, la trace tient en six lignes au plus : mode ; thèse (promesse → objet de preuve → geste) ; modal, trame et parti ; plafond atteint et contenus marqués ; défaut dominant restant ; prochaine preuve. Elle s’écrit à côté de l’artefact quand l’agent écrit des fichiers (fichier de trace ou en-tête du fichier livré) ; sinon, après la réponse visible, sous « Trace ». Les planchers s’appliquent pendant la fabrication (vérité, `ACTION/GATE-A` selon le profil de surface, boucle d’édition) ; seule leur écriture s’allège. Le run livre une **proposition** `EXPLORATORY` : ni verdict, ni acceptation, ni clôture, ni `RUN_CARD`. **Trace complète** (handoff, `ACTION/RUN_CARD`, `ACTION/CLOSE-PACKAGE`, gates écrits, `B1b` dans son scope) si le run est persistant, partagé, audité, ou si une acceptation ou une clôture est demandée.
+ <!-- noyau:compilé fin -->
+ 
+ ## Références conditionnelles

@@ -94,6 +94,13 @@ Ne rien modifier dans `package/` pendant l'initialisation.
   - AUD-15 : redite retirée.
   - Contrôles : 14/14 mutations rouges ; une rectification déclarée (note des exemples mise en paragraphe distinct pour préserver la mutation historique R-24) ; chemin 13 238, doublons 142.
   - Décisions attendues : AUD-01, AUD-02, AUD-05.
+- **A2 appliqué** (`V12R_39`, options (a) de l'owner) :
+  - AUD-01 : `CHARGE` est la seule liste ; carte d'ACTION, déclencheurs critiques et `ACTION/ROUTING` en deviennent des vues (tables conservées pour les contrats de harnais) ; la colonne « Ajouter seulement si » entre dans le noyau ;
+  - AUD-02 : plancher couleur et typographique de SAVOIR compilé dans le noyau ;
+  - AUD-05 : trace légère à côté de l'artefact, ou après la réponse sous « Trace » ;
+  - gardes CORE-01 et `LOAD_HEADERS` élargi ; 10/10 mutations rouges ;
+  - rectification déclarée : « la tension, le geste produit » (LCF-24) ;
+  - chemin 13 614, noyau 4 444 (+376).
 - **Chantier en cours : consolidation V1.2**, pilotée par `plans/Plan_V1.2_Suite_Reprise.md` ; architecture dans `plans/Plan_V1.2_Refonte.md`, décisions dans `V12R_14`. Objectif : un premier rendu composé, spécifique et soigné, avec une entrée humaine claire et un effort maîtrisé ; efficacité encore à évaluer. R8b mobilise les moyens et les enseignements transférables ; R8c précise les gestes utiles ; aucun atlas de créations obligatoire.
 
 ## 3. Arborescence
@@ -164,7 +171,7 @@ python3 scripts/read_route.py ACTION/RUN_CARD  # lire une route
 ## 6. Prochaine étape
 
 1. ~~Porte G1 du plan V1.2~~ : franchie le 26-09-2026 (`audit/reports/V12_01_DECISIONS_G1.md`).
-2. ~~B05, lot 1 (A, B, D), addendum, lot 2 (G, H, I, D')~~ : faits (`V12_02` à `V12_04`). Lectures `V12_05` à `V12_11` faites. Mini-épreuve **reportée par l'owner** (27-09-2026). **Refonte (`plans/Plan_V1.2_Refonte.md`) : décisions 1, 2, 4, 7 prises ; R1, R2, R3 et R4 faits. P1 fait (orientation positive). R5b-1, R5b-2, R5a, R8a, R5c (hors ancre), R5d, R6a et R11a faits. Arbitrages décidés (`V12R_14`). Inventaire créé ; R8b, R8c, R7 (et raccords R7-2, R7-3), R11 ciblé, R6b élargi (R6b-1, R6b-2), restes R5, relecture de parcours et raccords R11b faits ; porte P2 franchie et conclue après R11c ; palier exploratoire de R10 fait (`V12R_35`) ; D-25 corrigé et R10 arrêté (`V12R_36`) ; audit interne A1 fait (`V12R_37`) et raccords A1 appliqués (`V12R_38`). Prochaine : décisions de l'owner sur AUD-01, AUD-02 et AUD-05, puis lot façades → R11 final → R12 — voir `plans/Plan_V1.2_Suite_Reprise.md`**, puis G4.
+2. ~~B05, lot 1 (A, B, D), addendum, lot 2 (G, H, I, D')~~ : faits (`V12_02` à `V12_04`). Lectures `V12_05` à `V12_11` faites. Mini-épreuve **reportée par l'owner** (27-09-2026). **Refonte (`plans/Plan_V1.2_Refonte.md`) : décisions 1, 2, 4, 7 prises ; R1, R2, R3 et R4 faits. P1 fait (orientation positive). R5b-1, R5b-2, R5a, R8a, R5c (hors ancre), R5d, R6a et R11a faits. Arbitrages décidés (`V12R_14`). Inventaire créé ; R8b, R8c, R7 (et raccords R7-2, R7-3), R11 ciblé, R6b élargi (R6b-1, R6b-2), restes R5, relecture de parcours et raccords R11b faits ; porte P2 franchie et conclue après R11c ; palier exploratoire de R10 fait (`V12R_35`) ; D-25 corrigé et R10 arrêté (`V12R_36`) ; audit interne A1 fait (`V12R_37`) et raccords A1 appliqués (`V12R_38`) ; A2 appliqué (`V12R_39`). Prochaine : lot façades (AUD-06, 08, 13), puis AUD-07 → R11 final → R12 — voir `plans/Plan_V1.2_Suite_Reprise.md`**, puis G4.
 **Plan de reprise (à lire en premier pour continuer) : `plans/Plan_V1.2_Suite_Reprise.md`** — consignes en vigueur (pas de run ni d'épreuve dans cette phase ; qualité avant nombre de mots), recette d'une unité, lots restants avec périmètre, gardes, réussite et arrêt, porte P2 et R10 progressif.
 3. Suivre le séquencement du plan : G2 (gardes rouges puis vertes) → G3 (non-régression, charge mesurée et justifiée) → G4 (épreuve à l'aveugle avec juges extérieurs) → publication V1.2.0.
 

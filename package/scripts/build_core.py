@@ -27,7 +27,7 @@ CONCEPT = re.compile(r"^\s*<!-- concept:[A-Z0-9\-]+ -->\s*$")
 # Registre : (titre de section, [(identifiant de bloc, fichier propriétaire, colonnes gardées ou None)]).
 NOYAU: list[tuple[str, list[tuple[str, str, tuple[int, ...] | None]]]] = [
     ("Rôle et posture", [("ROLE", "DIRECTION.md", None), ("POSTURE", "DIRECTION.md", None)]),
-    ("Classer, puis charger", [("CHARGE-REGLE", "DIRECTION.md", None), ("CHARGE-TABLE", "DIRECTION.md", (0, 1)),
+    ("Classer, puis charger", [("CHARGE-REGLE", "DIRECTION.md", None), ("CHARGE-TABLE", "DIRECTION.md", None),
                                ("CHARGE-FIN", "DIRECTION.md", None)]),
     ("Prendre le brief et viser le premier objet", [("BRIEF", "DIRECTION.md", None), ("CONTENU", "DIRECTION.md", None),
                                                     ("PREMIER-OBJET", "DIRECTION.md", None)]),
@@ -35,8 +35,9 @@ NOYAU: list[tuple[str, list[tuple[str, str, tuple[int, ...] | None]]]] = [
                    ("STRUCT-TENSION", "BIBLIOTHEQUE.md", None), ("STRUCT-SIGNAUX", "BIBLIOTHEQUE.md", None)]),
     ("Composition", [("COMP-GRAMMAIRE", "SAVOIR.md", None), ("COMP-SINGULARITE", "SAVOIR.md", None),
                      ("COMP-FORME", "SAVOIR.md", None), ("COMP-CONTROLES", "SAVOIR.md", None),
-                     ("COMP-TITRE", "SAVOIR.md", None), ("COMP-TEXTE-IMAGE", "SAVOIR.md", None),
-                     ("COMP-VOCABULAIRE", "SAVOIR.md", None), ("COMP-CONVERGENCE", "SAVOIR.md", None),
+                     ("COMP-TYPO", "SAVOIR.md", None), ("COMP-TITRE", "SAVOIR.md", None), ("COMP-TEXTE-IMAGE", "SAVOIR.md", None),
+                     ("COMP-VOCABULAIRE", "SAVOIR.md", None), ("COMP-COULEUR", "SAVOIR.md", None),
+                     ("COMP-CONVERGENCE", "SAVOIR.md", None),
                      ("COMP-VAGUES", "SAVOIR.md", None)]),
     ("Moyens et vérité", [("MOY-PLAFOND", "DIRECTION.md", None), ("ANCRE", "DIRECTION.md", None), ("MOY-CARTE", "SAVOIR.md", None),
                           ("MOY-ASSETS", "SAVOIR.md", None), ("MOY-CALIBRATION", "SAVOIR.md", None),

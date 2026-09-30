@@ -37,7 +37,7 @@ La sortie de SAVOIR n’est pas un verdict. Elle doit transmettre à ACTION la d
 
 Ne charge jamais l’ensemble de SAVOIR par réflexe. Charge typiquement zéro à deux routes ; une route par question active (CRAFT, TYPE, SOURCE, CONTEXT…) ; zéro route est valide lorsqu’aucune responsabilité de jugement ne change. Ajoute une route seulement si elle peut modifier la prochaine décision ou le statut de preuve.
 
-**Chemin minimal.** Décide d’abord la décision et le risque ; charge ensuite la route SAVOIR principale, ou aucune si le changement reste local. Ajoute une route seulement si elle change une question, une preuve ou une limite ; `ACTION` reste propriétaire des preuves, des gates, des verdicts et de la clôture. Un tag `[REQUIS PAR LE MODULE — scope]` indique qu’une responsabilité devient applicable dans le périmètre déclaré ; il n’impose pas de charger toute la bibliothèque, mais d’exécuter ou de tracer honnêtement le contrôle concerné selon le contrat d’ACTION.
+**Chemin minimal.** Décide d’abord la décision et le risque ; charge ensuite la route SAVOIR principale, ou aucune si le changement reste local. Ajoute une route seulement si elle change une question, une preuve ou une limite ; `ACTION` reste propriétaire des preuves, des gates, des verdicts et de la clôture. Un tag `[REQUIS PAR LE MODULE — scope]` indique qu’une responsabilité devient applicable dans le périmètre déclaré ; il n’impose pas de charger toute la bibliothèque, mais d’exécuter ou de tracer honnêtement le contrôle concerné selon le contrat d’ACTION. Sur le chemin d’un run, le plancher de ces obligations est compilé dans le noyau de la skill (composition, typographie, couleur, états, vérité) ; leur détail s’applique lorsque la route est chargée.
 
 ### SAVOIR/FAST-PATH — juger sans produire un dossier
 
@@ -385,7 +385,9 @@ Formule le compromis : ce qui gagne entre compréhension immédiate et juste dis
 
 ## CFT-05 — couleur et contraste
 
+<!-- noyau:début COMP-COULEUR -->
 [REQUIS PAR LE MODULE — couleur, thème, statut ou surface identitaire] Conçois une palette par rôles : surfaces, textes, actions, états et frontières. La répartition entre neutres et couleurs est une décision de direction, pas un défaut : une structure neutre à accent, une identité multicolore structurelle ou un codage par zones sont recevables si les rôles, les états, le contraste calculé et un indice non chromatique pour toute information critique tiennent. Une couleur sémantique n’est pas une décoration.
+<!-- noyau:fin COMP-COULEUR -->
 
 <!-- noyau:début COMP-CONVERGENCE -->
 **Question de convergence.** Cette palette et cette police de titre sont-elles celles que le modèle produirait sans brief (palette : neutres et un seul accent, sombre et doré, dégradé froid ; police : la grotesque large ou la serif de caractère prise par réflexe) ? Si oui, nomme ce qui, dans le produit, les justifie. Sinon, reconsidère-les. Pour la police de titre, compare au moins deux voix typographiques distinctes (par exemple grotesque, serif, mécane, manuscrite ou vernaculaire du lieu) sur le vrai titre avant de choisir. La question ne prescrit aucun écart : un choix convergent justifié reste valide.
@@ -405,7 +407,9 @@ Les claims sur chroma, statut perçu ou tendances de palette passent par `SAVOIR
 
 # SAVOIR/TYPE — typographie et données
 
+<!-- noyau:début COMP-TYPO -->
 [REQUIS PAR LE MODULE — lecture, ton, données, hiérarchie ou surface identitaire] Choisis une typographie pour ses langues, chiffres, ponctuation, graisses, lisibilité, licence, performance, fallback et ton.
+<!-- noyau:fin COMP-TYPO -->
 
 Une famille fréquente n’est pas un problème en soi. Le problème est le réflexe sans alternative comparée, système existant interrogé ou raison formulée.
 

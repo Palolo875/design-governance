@@ -87,7 +87,7 @@ Cette vue couvre les identifiants D-01 à D-23 et les mineurs transmis. Elle n�
 - **Mineurs :** AUD-10 à AUD-16.
 - Aucun bloquant.
 - **Corrigés par A1 (`V12R_38`) :** AUD-03, AUD-04, AUD-09, AUD-10, AUD-14 et AUD-15 (gardes, 14/14 mutations rouges).
-- **Décisions de l'owner attendues :** AUD-01, AUD-02 et AUD-05.
+- **Corrigés par A2 (`V12R_39`) :** AUD-01 (`CHARGE` seule liste, tables en vues, colonne « Ajouter seulement si » dans le noyau), AUD-02 (plancher couleur et typographique dans le noyau), AUD-05 (lieu de la trace légère).
 - **Lots suivants :** AUD-06, AUD-08, AUD-13 (façades) ; AUD-07 (convergence).
 
 ## 2. Réserves de clôture : articulation, sans double comptage
