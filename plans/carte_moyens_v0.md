@@ -4,7 +4,7 @@
 
 | Couche | Conditions et limites de fabrication | Où trouver de la qualité | Route (`VISUAL_TARGET`) |
 |---|---|---|---|
-| Typographie | Atteignable si la police est chargeable dans la cible et sa licence vérifiée pour l’usage (web, app, impression) | Polices de la marque ; Google Fonts (licences ouvertes, surtout SIL OFL) ; Fontshare (licence propre au service, gratuite sous conditions, à relire par police) | `CODE-NATIVE` |
+| Typographie | Atteignable si la police est chargeable dans la cible et sa licence vérifiée pour l’usage (web, app, impression) | Polices de la marque ; Google Fonts (licences ouvertes, surtout SIL OFL) ; Fontshare (licence FFL ou OFL selon la police, à relire par police) | `CODE-NATIVE` |
 | Icônes | Atteignable si la famille couvre les pictogrammes nécessaires ; licence à vérifier | Famille adaptée aux pictogrammes requis (par exemple Lucide, Phosphor) ; cohérence de poids, de taille et de sens à vérifier ; le choix d'une seule famille dépend du projet | `CODE-NATIVE` |
 | Composants | Atteignable dans la stack réelle ; hors web, traduire dans les idiomes de la plateforme | Design system fourni ; sinon bibliothèque éprouvée (par exemple shadcn, Radix) | `CODE-NATIVE` |
 | Données, objets de preuve | Atteignable | Contenu du client, sinon données plausibles marquées illustratives | `CODE-NATIVE` |

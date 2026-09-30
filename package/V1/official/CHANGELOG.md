@@ -24,6 +24,7 @@
 - **Façades (refonte, R6a).** README : la boucle renvoie à `DIRECTION/DOUBLE-LOOP` ; glossaire : trace légère, trace complète, première proposition, trame modale, profil de surface.
 - **Correctif (refonte, R11a).** L’ordre de lecture minimal de `DIRECTION/START` renvoie à `CHARGE` (dernier résidu de l’ancienne vue `DAILY`).
 - **Moyens de fabrication (refonte, R8b).** Carte des moyens par couche consolidée (où chercher, comment choisir, ce qui limite ; licence vérifiée pour chaque ressource retenue) ; traitement des assets et famille d’icônes choisis selon la thèse, jamais universels ; données d’exemple cohérentes entre elles, aucun chiffre sans référence.
+- **Raccords (refonte, R8b-2).** Choix contextuels gardés au niveau de la phrase : l’obligation universelle d’un traitement ou d’une famille unique est refusée, le choix justifié accepté ; Fontshare : licence FFL ou OFL selon la police.
 - **Efficacité.** `NOT-VERIFIED` : l’épreuve de référence donne V1.1.1 ≈ sans système sur la qualité perçue ; l’effet de ces chantiers reste à éprouver (G4).
 
 ## V1.1.1 — Retour d’audit : alignements de textes et de façades

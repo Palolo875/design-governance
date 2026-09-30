@@ -84,10 +84,11 @@ PATCH = [
 
 MUTATION_OF = {
     "R8b-K1": "résumé infidèle (carte des moyens)",
-    "R8b-K2": "vocabulaire retiré",
-    "R8b-K3": "vocabulaire retiré",
-    "R8b-K4": "vocabulaire retiré",
-    "R8b-K5": "vocabulaire retiré",
+    # Rectification R8b-2 (V12R_16) : la garde PKG-01 est désormais UNI-01 (au niveau de la phrase).
+    "R8b-K2": "[UNI-01]",
+    "R8b-K3": "[UNI-01]",
+    "R8b-K4": "[UNI-01]",
+    "R8b-K5": "[UNI-01]",
     "R8b-E1": "EXD-01 absent",
 }
 EXTRA_MUTATIONS = []

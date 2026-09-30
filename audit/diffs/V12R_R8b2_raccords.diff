@@ -1,0 +1,85 @@
+diff --git a/package/V1/official/CHANGELOG.md b/package/V1/official/CHANGELOG.md
+index b801101..1643d08 100644
+--- a/package/V1/official/CHANGELOG.md
++++ b/package/V1/official/CHANGELOG.md
+@@ -24,6 +24,7 @@
+ - **Façades (refonte, R6a).** README : la boucle renvoie à `DIRECTION/DOUBLE-LOOP` ; glossaire : trace légère, trace complète, première proposition, trame modale, profil de surface.
+ - **Correctif (refonte, R11a).** L’ordre de lecture minimal de `DIRECTION/START` renvoie à `CHARGE` (dernier résidu de l’ancienne vue `DAILY`).
+ - **Moyens de fabrication (refonte, R8b).** Carte des moyens par couche consolidée (où chercher, comment choisir, ce qui limite ; licence vérifiée pour chaque ressource retenue) ; traitement des assets et famille d’icônes choisis selon la thèse, jamais universels ; données d’exemple cohérentes entre elles, aucun chiffre sans référence.
++- **Raccords (refonte, R8b-2).** Choix contextuels gardés au niveau de la phrase : l’obligation universelle d’un traitement ou d’une famille unique est refusée, le choix justifié accepté ; Fontshare : licence FFL ou OFL selon la police.
+ - **Efficacité.** `NOT-VERIFIED` : l’épreuve de référence donne V1.1.1 ≈ sans système sur la qualité perçue ; l’effet de ces chantiers reste à éprouver (G4).
+ 
+ ## V1.1.1 — Retour d’audit : alignements de textes et de façades
+diff --git a/package/V1/official/SAVOIR.md b/package/V1/official/SAVOIR.md
+index 76e4f36..32df2a3 100644
+--- a/package/V1/official/SAVOIR.md
++++ b/package/V1/official/SAVOIR.md
+@@ -865,7 +865,7 @@ Le sourcing de `DIRECTION` sépare trois rôles : **ancrage de direction** — p
+ <!-- noyau:début MOY-CARTE -->
+ <!-- concept:MOY-01 -->
+ [VEILLE 2026-09] **Carte des moyens par couche** : des sources, jamais des styles. Licence et conditions d’usage vérifiées pour chaque ressource retenue, au moment de l’intégrer ; le nom d’une plateforme ne vaut pas autorisation. Pour chaque couche : où chercher, comment choisir, ce qui limite.
+-- **Typographie :** polices de la marque ; Google Fonts (licences ouvertes, surtout SIL OFL) ; Fontshare (licence propre au service, gratuite sous conditions). Choisir par la voix et la donnée à porter ; vérifier chargement, graisses et glyphes (accents, chiffres) dans la cible.
++- **Typographie :** polices de la marque ; Google Fonts (licences ouvertes, surtout SIL OFL) ; Fontshare (licence FFL ou OFL selon la police). Choisir par la voix et la donnée à porter ; vérifier chargement, graisses et glyphes (accents, chiffres) dans la cible.
+ - **Icônes :** une famille qui couvre les pictogrammes nécessaires (par exemple Lucide, Phosphor) ; poids, taille et sens accordés au texte ; mélanger des familles demande une raison visible.
+ - **Composants :** design system fourni, sinon bibliothèque éprouvée (par exemple shadcn, Radix) ; hors Web, les idiomes de la plateforme.
+ - **Données et objets de preuve :** contenu du client, sinon exemples marqués ; codables, donc au plafond sans intrant.
+diff --git a/package/scripts/validate_structure.py b/package/scripts/validate_structure.py
+index daa1a71..252940a 100644
+--- a/package/scripts/validate_structure.py
++++ b/package/scripts/validate_structure.py
+@@ -14,6 +14,7 @@ Gardes :
+   7. REGISTRE — les façades humaines vouvoient (formes de tutoiement impératif refusées dans QUICKSTART).
+   8. NOYAU — les blocs `<!-- noyau:début ID -->` / `<!-- noyau:fin ID -->` sont appariés, uniques et placés
+      dans les sources normatives ; la section compilée de la skill est identique à `scripts/build_core.py`.
++ 11. CHOIX CONTEXTUELS — « traitement unique » ou « une seule famille » seulement avec condition ou justification (PKG-01).
+  10. ORDRE — dans DIRECTION, rôle, posture et récapitulatif de protection précèdent les sections détaillées (D-17).
+   9. CHARGEMENT — une seule table de chargement (`DIRECTION/CHARGE`, et sa copie compilée dans la skill) ;
+      les façades y renvoient ; la ligne `DIRECTION` garde le build et l'ordre cible → premier objet ;
+@@ -92,10 +93,24 @@ RETIRED: list[tuple[str, str, set[str]]] = [
+     (r"Mandat de fonctionnement|Adopte le niveau d’exigence", "rôle unique (ROL-01)", {"CHANGELOG.md"}),
+     (r"`VISUAL_TARGET` la spécifie", "chaîne de lecture interne unique (DIRECTION)", {"CHANGELOG.md"}),
+     (r"`DAILY`", "DIRECTION/CHARGE (R4 ; résidu retiré en R11a)", {"CHANGELOG.md"}),
+-    (r"(?:applique|reçoit) un traitement unique|un seul traitement (?:pour|cohérent)|Icônes : une seule famille",
+-     "traitement ou famille choisis selon la thèse, jamais universels (PKG-01, R8b)", {"CHANGELOG.md"}),
+ ]
+ 
++# 11. Choix contextuels (PKG-01) : une phrase qui prescrit un traitement ou une famille unique doit porter sa condition
++#     ou sa justification ; l'obligation universelle est refusée, le choix justifié est accepté.
++UNIVERSAL = re.compile(r"traitement unique|un seul traitement|une seule famille", re.I)
++CONDITION = re.compile(r"\bsi\b|lorsqu|peut|peuvent|dépend|suffit|comparaison", re.I)
++
++
++def check_universal(corpus: dict[Path, list[str]], errors: list[str]) -> None:
++    for path, lines in corpus.items():
++        if path.name == "CHANGELOG.md":
++            continue
++        for para in paragraphs(lines):
++            for sentence in re.split(r"(?<=[.!?])\s+", para):
++                if UNIVERSAL.search(sentence) and not CONDITION.search(sentence):
++                    errors.append(f"[UNI-01] choix présenté comme universel ({path.name}) : « {sentence[:90]}… »")
++
++
+ # 10. Ordre de DIRECTION (D-17) : rôle, posture et récapitulatif de protection avant les sections détaillées.
+ ORDER: list[tuple[str, str]] = [("## Rôle", "## DIRECTION/START"),
+                                 ("## Posture — à lire avant toute action", "## DIRECTION/START"),
+@@ -380,6 +395,7 @@ def check() -> list[str]:
+     check_noyau(corpus, errors)
+     check_load(corpus, errors)
+     check_order(errors)
++    check_universal(corpus, errors)
+     return errors
+ 
+ 
+diff --git a/package/skills/design-governance-practice/SKILL.md b/package/skills/design-governance-practice/SKILL.md
+index f32e1a1..ff4f568 100644
+--- a/package/skills/design-governance-practice/SKILL.md
++++ b/package/skills/design-governance-practice/SKILL.md
+@@ -118,7 +118,7 @@ Les contrôles principaux sont : alignements nets, compensation optique, proximi
+ Avant le premier rendu, le boot doit conduire à un artefact complet, crédible et observable — jamais à un wireframe volontairement creux lorsque les capacités sont disponibles ; lorsqu’elles manquent, `FABRICATION` déclare le plafond avant le build et le rendu sort avec la meilleure route de `DIRECTION/VISUAL_TARGET`. Après observation, conserve dans la trace : ce qui est effectivement visible, les qualités prioritaires observées ou non observées, **un défaut dominant** et, si une correction utile existe, la modification réelle apportée et la ré-observation attendue ; sinon, la raison de l’arrêt (`DIRECTION/DOUBLE-LOOP`, one-shot).
+ 
+ [VEILLE 2026-09] **Carte des moyens par couche** : des sources, jamais des styles. Licence et conditions d’usage vérifiées pour chaque ressource retenue, au moment de l’intégrer ; le nom d’une plateforme ne vaut pas autorisation. Pour chaque couche : où chercher, comment choisir, ce qui limite.
+-- **Typographie :** polices de la marque ; Google Fonts (licences ouvertes, surtout SIL OFL) ; Fontshare (licence propre au service, gratuite sous conditions). Choisir par la voix et la donnée à porter ; vérifier chargement, graisses et glyphes (accents, chiffres) dans la cible.
++- **Typographie :** polices de la marque ; Google Fonts (licences ouvertes, surtout SIL OFL) ; Fontshare (licence FFL ou OFL selon la police). Choisir par la voix et la donnée à porter ; vérifier chargement, graisses et glyphes (accents, chiffres) dans la cible.
+ - **Icônes :** une famille qui couvre les pictogrammes nécessaires (par exemple Lucide, Phosphor) ; poids, taille et sens accordés au texte ; mélanger des familles demande une raison visible.
+ - **Composants :** design system fourni, sinon bibliothèque éprouvée (par exemple shadcn, Radix) ; hors Web, les idiomes de la plateforme.
+ - **Données et objets de preuve :** contenu du client, sinon exemples marqués ; codables, donc au plafond sans intrant.

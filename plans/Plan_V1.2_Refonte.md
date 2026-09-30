@@ -1,6 +1,6 @@
 # Plan V1.2 — Refonte : fabrication, structure, trace et preuve
 
-**Date de création :** 2026-09-27 · **Pilotage au :** 2026-09-30 · **Owner :** Junior · **Statut :** consolidation avant évaluation. R1 à R4, P1, R5b-1, R5b-2, R5a, R8a, R5c hors ancre, R5d, R6a et R11a sont documentés comme faits (`V12R_01` à `V12R_13`). Dernières mesures rapportées après R11a : chemin 12 187 mots en trace légère, 16 798 en trace complète ; noyau 3 302 mots ; 24/25 outils comptés, F22 accessible sous condition. Les contrôles correspondants ne sont pas réexécutés par cette synchronisation. **Reprise opérationnelle :** `plans/Plan_V1.2_Suite_Reprise.md` §4 ; décisions : `V12R_14`, addendum 2.
+**Date de création :** 2026-09-27 · **Pilotage au :** 2026-09-30 · **Owner :** Junior · **Statut :** consolidation avant évaluation. R1 à R4, P1, R5b-1, R5b-2, R5a, R8a, R5c hors ancre, R5d, R6a et R11a sont documentés comme faits (`V12R_01` à `V12R_13`). Mesures après R8b-2 (30-09) : chemin 12 430 mots en trace légère ; noyau 3 505 mots (après R11a : 12 187 et 3 302) ; 24/25 outils comptés, F22 accessible sous condition. Les contrôles correspondants ne sont pas réexécutés par cette synchronisation. **Reprise opérationnelle :** `plans/Plan_V1.2_Suite_Reprise.md` §4 ; décisions : `V12R_14`, addendum 2.
 **Base :** B05, candidate V1.2 (lots 1 et 2 appliqués).
 **Sources du plan :**
 - lectures `V12_05` à `V12_10` et synthèse `V12_11` (registre D-01 à D-18) ;

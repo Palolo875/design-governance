@@ -15,7 +15,7 @@
 | Entrée | Enseignement | Disposition |
 |---|---|---|
 | A01, A06, A10 | Le système naît du sujet ; chaque élément se justifie ; autorat | Déjà couvert : forme située, test de singularité, posture |
-| A02, A07, A08 (nombres géants) | Contraste d'échelle | **Absent du package** comme geste explicite. Relève de R8c (équilibre d'un titre, masse) |
+| A02, A07, A08 (nombres géants) | Contraste d'échelle | **Existant, à approfondir** : Gate C, C2 (« une échelle contrastée »). R8c précise son application au titre, aux masses et à la composition. *Erratum du 30-09 (`V12R_16`) : la première version disait « absent du package ».* |
 | A03, A04, A05 | Texte concret, les mots portent ; le code montre le produit | Couvert : objet de preuve codé (G), langage produit |
 | **A08** | Données cohérentes (56,2 % + 43,8 % = 100 %) ; « +32 % » sans référence | **Ajouté** (`EXD-01`) : c'était une lacune |
 | A09 | Affordance juste | Couvert : geste produit |
@@ -43,7 +43,7 @@ Aucune pièce de l'atlas n'est citée dans le package. L'atlas v0 reste un maté
 
 1. **+243 mots sur le chemin.** C'est la carte consolidée et le traitement des assets, conformément à « qualité avant nombre de mots » ; les deux sont lus au moment où la décision se prend.
 2. **Doublons +2 : artefact de mesure.** La phrase « À revoir avant 2027-03. », date de veille propre à chacun, apparaît dans deux blocs distincts (carte et marqueurs de vague). Le reste est un réordonnancement, pas un doublon nouveau.
-3. **Deux enseignements renvoyés à R8c** : le contraste d'échelle et la relation texte/image.
+3. **Deux enseignements renvoyés à R8c** : le contraste d'échelle (geste existant à approfondir, erratum `V12R_16`) et la relation texte/image.
 
 ## 5. Lecture
 
