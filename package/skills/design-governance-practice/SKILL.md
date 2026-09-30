@@ -100,6 +100,10 @@ Le phénomène ou la métaphore est facultatif. Il peut rendre perceptible un se
 
 Les contrôles principaux sont : alignements nets, compensation optique, proximité qui révèle les groupes, priorités lisibles, et responsive pensé comme recomposition. Une grille desktop peut devenir liste ; un panneau peut devenir écran ; un bloc dense peut devenir séquence progressive.
 
+**Équilibre d’un titre.** Quand un titre porte la scène (grand titre, accroche, chiffre mis en avant), règle-le sur le vrai texte : coupe les lignes selon le sens, sans mot isolé en dernière ligne ; équilibre la longueur des lignes (`text-wrap: balance` si la cible le permet) ; resserre l’approche aux grandes tailles si la police le demande ; garde un écart d’échelle net entre le titre et le texte qui suit, car un écart faible aplatit la hiérarchie. Observe sur capture, en desktop et en mobile, avec le contenu réel : la forme du bloc de titre reste lisible au flou.
+
+**Texte sur image.** Quand un texte est posé sur une photo, une illustration ou une texture, place-le dans la zone calme de l’image ou recadre pour en créer une ; sinon, ajoute un voile ou un dégradé localisé, ou sors le texte de l’image. Mesure le contraste aux points les plus défavorables, à chaque largeur où le recadrage change. Une image sans zone calme demande un autre recadrage ou un autre placement.
+
 | Terme | Question | Diff possible |
 |---|---|---|
 | Cohérence de rayon | Les courbures appartiennent-elles à une même relation ? | Échelle explicitée, valeurs magiques supprimées. |
@@ -166,7 +170,7 @@ Pour une décision créative, note brièvement :
 2. quel détail ou quelle relation porte la spécificité ;
 3. quel est le défaut dominant ;
 4. ce qui a réellement changé ;
-5. si la correction a affaibli l’usage, l’accessibilité, la robustesse ou la direction ;
+5. si la correction a affaibli l’usage, l’accessibilité, la robustesse, la direction, ou la hiérarchie et l’harmonie de l’ensemble : réobserve la page entière, pas seulement la zone corrigée ;
 6. si la direction doit être corrigée, rouverte ou maintenue.
 
 Une repasse complète est attendue en `DIRECTION`, recommandée en `STANDARD` et ciblée en `ITER` ou `LITE` sur le périmètre modifié. Cherche ce qui est resté par défaut : alignement optique, échelle, distance, état, composant, mouvement, contenu réel, breakpoint ou récupération.

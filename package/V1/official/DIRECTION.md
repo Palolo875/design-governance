@@ -577,7 +577,7 @@ Pour une décision créative, note brièvement :
 2. quel détail ou quelle relation porte la spécificité ;
 3. quel est le défaut dominant ;
 4. ce qui a réellement changé ;
-5. si la correction a affaibli l’usage, l’accessibilité, la robustesse ou la direction ;
+5. si la correction a affaibli l’usage, l’accessibilité, la robustesse, la direction, ou la hiérarchie et l’harmonie de l’ensemble : réobserve la page entière, pas seulement la zone corrigée ;
 6. si la direction doit être corrigée, rouverte ou maintenue.
 <!-- noyau:fin BOUCLE-QUESTIONS -->
 

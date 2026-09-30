@@ -1,0 +1,142 @@
+diff --git a/package/V1/official/ACTION.md b/package/V1/official/ACTION.md
+index 1ba5a5f..c0c0ba8 100644
+--- a/package/V1/official/ACTION.md
++++ b/package/V1/official/ACTION.md
+@@ -909,7 +909,7 @@ Chaque verdict C précise le périmètre : viewport, état, scène, contenu et 
+ | **C3 — Composition intentionnelle** | Structure de lecture identifiable sert l’action et le rythme. | Empilement uniforme sans décision spatiale. | Recompose dans l’ordre intention → foyer → masse → rythme (§5) ; nomme le foyer et l’ordre de lecture ; romps la trame modale si elle ne sert pas la tâche (§4). |
+ | **C4 — Densité optique** | Espace, masses et regroupements suivent la priorité et l’usage. | Espacement uniforme qui masque les relations. | Regroupe par proximité ; redistribue masses et vides selon la priorité (masse visuelle, gestion du vide, §5) ; contrôle la silhouette à faible détail. |
+ | **C5 — Stratégie de profondeur applicable** | Profondeur, lumière ou planéité est cohérente avec le registre et lisible au rendu. | Ombres, bordures ou flous par défaut sans logique. `N/A-JUSTIFIED` si la planéité est intentionnelle et suffisante. | Tiens une seule logique, lumière, élévation ou planéité, sur toute la surface ; retire ombres, bordures et flous sans rôle (surface, §5). |
+-| **C6 — Résolution située** | Une difficulté réelle est résolue par microcopie, état, donnée, interaction, asset ou transition pertinente. | Assemblage de composants sans adaptation au cas. | Trouve la difficulté réelle du cas (attente, erreur, donnée, choix) et résous-la par microcopie, état, donnée ou interaction (forme située, §5). |
++| **C6 — Résolution située** | Une difficulté réelle est résolue par microcopie, état, donnée, interaction, asset ou transition pertinente. | Assemblage de composants sans adaptation au cas. | Trouve la difficulté réelle du cas (attente, erreur, donnée, choix) et résous-la par microcopie, état, donnée ou interaction (forme située, §5) ; une erreur se résout jusqu’à la reprise (`SAVOIR/STATE`). |
+ 
+ Chaque verdict C cite l’élément concret observé. Un critère bloquant absent, ou plusieurs signaux faibles convergeant sur le même risque, déclenchent un retour. La correction revient à la direction, à la spec ou au build ; elle n’ajoute pas un effet décoratif terminal.
+ 
+diff --git a/package/V1/official/CHANGELOG.md b/package/V1/official/CHANGELOG.md
+index 1643d08..efc3528 100644
+--- a/package/V1/official/CHANGELOG.md
++++ b/package/V1/official/CHANGELOG.md
+@@ -25,6 +25,7 @@
+ - **Correctif (refonte, R11a).** L’ordre de lecture minimal de `DIRECTION/START` renvoie à `CHARGE` (dernier résidu de l’ancienne vue `DAILY`).
+ - **Moyens de fabrication (refonte, R8b).** Carte des moyens par couche consolidée (où chercher, comment choisir, ce qui limite ; licence vérifiée pour chaque ressource retenue) ; traitement des assets et famille d’icônes choisis selon la thèse, jamais universels ; données d’exemple cohérentes entre elles, aucun chiffre sans référence.
+ - **Raccords (refonte, R8b-2).** Choix contextuels gardés au niveau de la phrase : l’obligation universelle d’un traitement ou d’une famille unique est refusée, le choix justifié accepté ; Fontshare : licence FFL ou OFL selon la police.
++- **Gestes de résolution (refonte, R8c).** Équilibre d’un titre et texte sur image dans le noyau ; la boucle réobserve l’ensemble après une correction locale ; récupération après erreur (`SAVOIR/STATE`), observée par interaction et appelée depuis Gate C.
+ - **Efficacité.** `NOT-VERIFIED` : l’épreuve de référence donne V1.1.1 ≈ sans système sur la qualité perçue ; l’effet de ces chantiers reste à éprouver (G4).
+ 
+ ## V1.1.1 — Retour d’audit : alignements de textes et de façades
+diff --git a/package/V1/official/DIRECTION.md b/package/V1/official/DIRECTION.md
+index 9081c74..672d2b8 100644
+--- a/package/V1/official/DIRECTION.md
++++ b/package/V1/official/DIRECTION.md
+@@ -577,7 +577,7 @@ Pour une décision créative, note brièvement :
+ 2. quel détail ou quelle relation porte la spécificité ;
+ 3. quel est le défaut dominant ;
+ 4. ce qui a réellement changé ;
+-5. si la correction a affaibli l’usage, l’accessibilité, la robustesse ou la direction ;
++5. si la correction a affaibli l’usage, l’accessibilité, la robustesse, la direction, ou la hiérarchie et l’harmonie de l’ensemble : réobserve la page entière, pas seulement la zone corrigée ;
+ 6. si la direction doit être corrigée, rouverte ou maintenue.
+ <!-- noyau:fin BOUCLE-QUESTIONS -->
+ 
+diff --git a/package/V1/official/SAVOIR.md b/package/V1/official/SAVOIR.md
+index 32df2a3..7eadaa5 100644
+--- a/package/V1/official/SAVOIR.md
++++ b/package/V1/official/SAVOIR.md
+@@ -329,6 +329,11 @@ Les contrôles principaux sont : alignements nets, compensation optique, proximi
+ 
+ Une vue peut avoir une priorité dominante ou un groupe de priorités liées. Ne force pas une dominante unique dans une surface de comparaison ou de supervision lorsque plusieurs décisions doivent rester simultanément visibles.
+ 
++<!-- noyau:début COMP-TEXTE-IMAGE -->
++<!-- concept:TXI-01 -->
++**Texte sur image.** Quand un texte est posé sur une photo, une illustration ou une texture, place-le dans la zone calme de l’image ou recadre pour en créer une ; sinon, ajoute un voile ou un dégradé localisé, ou sors le texte de l’image. Mesure le contraste aux points les plus défavorables, à chaque largeur où le recadrage change. Une image sans zone calme demande un autre recadrage ou un autre placement.
++<!-- noyau:fin COMP-TEXTE-IMAGE -->
++
+ ### Cohérence et harmonie
+ 
+ La cohérence vérifie si les éléments suivent les mêmes règles. L’harmonie vérifie si les éléments entretiennent une relation juste. Une interface peut être cohérente et monotone ; elle peut contenir tension, asymétrie ou variation tout en restant harmonieuse si ces écarts sont tenus en relation.
+@@ -412,6 +417,11 @@ Une police variable peut devenir un système adaptatif : poids pour hiérarchie,
+ 
+ Une signature typographique ne tient pas si zoom, reflow, locale ou ajustement d’espacement la transforment en défaut de lecture.
+ 
++<!-- noyau:début COMP-TITRE -->
++<!-- concept:TIT-01 -->
++**Équilibre d’un titre.** Quand un titre porte la scène (grand titre, accroche, chiffre mis en avant), règle-le sur le vrai texte : coupe les lignes selon le sens, sans mot isolé en dernière ligne ; équilibre la longueur des lignes (`text-wrap: balance` si la cible le permet) ; resserre l’approche aux grandes tailles si la police le demande ; garde un écart d’échelle net entre le titre et le texte qui suit, car un écart faible aplatit la hiérarchie. Observe sur capture, en desktop et en mobile, avec le contenu réel : la forme du bloc de titre reste lisible au flou.
++<!-- noyau:fin COMP-TITRE -->
++
+ ### Preuve typographique
+ 
+ La preuve est documentée dans `ACTION/STRUCTURED-PROOF` lorsque la typographie peut changer la décision. Sépare, lorsque nécessaire :
+@@ -492,6 +502,9 @@ Un composant ne possède pas tous les états imaginables, mais aucun état néce
+ 
+ HTML sémantique, nom accessible, focus visible, erreur associée et récupération compréhensible sont des conditions de craft autant que de conformité. `ACTION/GATE-A` vérifie leur présence ; `ACTION/GATE-C` peut ensuite juger leur résolution perceptuelle ; une tâche utilisateur peut être requise lorsque la récupération ou la compréhension est le risque dominant.
+ 
++<!-- concept:RCV-01 -->
++**Récupération après erreur.** Un message d’erreur dit ce qui s’est passé, pourquoi si c’est utile, et comment reprendre ; il apparaît près de l’élément concerné, dans la langue du produit. La saisie de la personne est conservée, le focus va à l’erreur ou au résumé des erreurs, et une action de reprise est proposée : corriger, réessayer ou revenir. Une capture montre le message ; seule une interaction montre la reprise : parcours l’erreur, puis la correction, jusqu’au succès.
++
+ ---
+ 
+ # SAVOIR/SOURCE — ancre et sourcing visuel
+diff --git a/package/scripts/build_core.py b/package/scripts/build_core.py
+index a832886..a7a398c 100644
+--- a/package/scripts/build_core.py
++++ b/package/scripts/build_core.py
+@@ -35,6 +35,7 @@ NOYAU: list[tuple[str, list[tuple[str, str, tuple[int, ...] | None]]]] = [
+                    ("STRUCT-TENSION", "BIBLIOTHEQUE.md", None), ("STRUCT-SIGNAUX", "BIBLIOTHEQUE.md", None)]),
+     ("Composition", [("COMP-GRAMMAIRE", "SAVOIR.md", None), ("COMP-SINGULARITE", "SAVOIR.md", None),
+                      ("COMP-FORME", "SAVOIR.md", None), ("COMP-CONTROLES", "SAVOIR.md", None),
++                     ("COMP-TITRE", "SAVOIR.md", None), ("COMP-TEXTE-IMAGE", "SAVOIR.md", None),
+                      ("COMP-VOCABULAIRE", "SAVOIR.md", None), ("COMP-CONVERGENCE", "SAVOIR.md", None),
+                      ("COMP-VAGUES", "SAVOIR.md", None)]),
+     ("Moyens et vérité", [("MOY-PLAFOND", "DIRECTION.md", None), ("MOY-CARTE", "SAVOIR.md", None),
+diff --git a/package/scripts/validate_structure.py b/package/scripts/validate_structure.py
+index 252940a..1e271fd 100644
+--- a/package/scripts/validate_structure.py
++++ b/package/scripts/validate_structure.py
+@@ -63,6 +63,9 @@ CONCEPTS: list[tuple[str, str, str]] = [
+     ("ROL-01", "DIRECTION.md", "rôle de directeur·rice artistique senior, défini une seule fois, en tête de DIRECTION"),
+     ("PRC-01", "BIBLIOTHEQUE.md", "tests perceptifs de structure (non-généricité, silhouette, grille), atteignables depuis Gate C"),
+     ("EXD-01", "DIRECTION.md", "données d'exemple cohérentes entre elles ; aucun chiffre sans référence"),
++    ("TIT-01", "SAVOIR.md", "équilibre d'un titre : coupe par le sens, lignes équilibrées, écart d'échelle net"),
++    ("TXI-01", "SAVOIR.md", "texte sur image : zone calme, recadrage ou voile, contraste au point le plus défavorable"),
++    ("RCV-01", "SAVOIR.md", "récupération après erreur : message, saisie conservée, focus, reprise observée par interaction"),
+     ("VAL-01", "ACTION.md", "promesse du validateur : ce qu'atteste et n'atteste pas une RUN_CARD validée, texte unique"),
+ ]
+ 
+@@ -71,6 +74,7 @@ REFERENCES: list[tuple[str, str]] = [
+     ("DIRECTION/CREATIVE-BOOT", "ANT-01"),
+     ("DIRECTION/VISUAL_TARGET", "MOY-01"),
+     ("ACTION/GATE-C", "PRC-01"),
++    ("ACTION/GATE-C", "RCV-01"),
+ ]
+ 
+ # 3. Vocabulaire retiré : motif, remplacement, fichiers exemptés (historique).
+@@ -122,6 +126,7 @@ FIDELITY: list[tuple[str, str, str]] = [
+     ("checkpoint", r"checkpoint[^.]{0,60}avant (?:le )?build|avant (?:le )?build[^.]{0,60}checkpoint", "irréversible ou coûteuse"),
+     ("question de convergence", r"Question de convergence", "police de titre"),
+     ("carte des moyens", r"\*\*Carte des moyens par couche\*\*", "chaque ressource retenue"),
++    ("relecture de l'ensemble", r"la correction a affaibli", "l’ensemble"),
+ ]
+ 
+ # 5. Termes du vocabulaire de fabrication présents dans GLOSSAIRE.md (première cellule d'une ligne de table).
+diff --git a/package/skills/design-governance-practice/SKILL.md b/package/skills/design-governance-practice/SKILL.md
+index ff4f568..75e2e42 100644
+--- a/package/skills/design-governance-practice/SKILL.md
++++ b/package/skills/design-governance-practice/SKILL.md
+@@ -100,6 +100,10 @@ Le phénomène ou la métaphore est facultatif. Il peut rendre perceptible un se
+ 
+ Les contrôles principaux sont : alignements nets, compensation optique, proximité qui révèle les groupes, priorités lisibles, et responsive pensé comme recomposition. Une grille desktop peut devenir liste ; un panneau peut devenir écran ; un bloc dense peut devenir séquence progressive.
+ 
++**Équilibre d’un titre.** Quand un titre porte la scène (grand titre, accroche, chiffre mis en avant), règle-le sur le vrai texte : coupe les lignes selon le sens, sans mot isolé en dernière ligne ; équilibre la longueur des lignes (`text-wrap: balance` si la cible le permet) ; resserre l’approche aux grandes tailles si la police le demande ; garde un écart d’échelle net entre le titre et le texte qui suit, car un écart faible aplatit la hiérarchie. Observe sur capture, en desktop et en mobile, avec le contenu réel : la forme du bloc de titre reste lisible au flou.
++
++**Texte sur image.** Quand un texte est posé sur une photo, une illustration ou une texture, place-le dans la zone calme de l’image ou recadre pour en créer une ; sinon, ajoute un voile ou un dégradé localisé, ou sors le texte de l’image. Mesure le contraste aux points les plus défavorables, à chaque largeur où le recadrage change. Une image sans zone calme demande un autre recadrage ou un autre placement.
++
+ | Terme | Question | Diff possible |
+ |---|---|---|
+ | Cohérence de rayon | Les courbures appartiennent-elles à une même relation ? | Échelle explicitée, valeurs magiques supprimées. |
+@@ -166,7 +170,7 @@ Pour une décision créative, note brièvement :
+ 2. quel détail ou quelle relation porte la spécificité ;
+ 3. quel est le défaut dominant ;
+ 4. ce qui a réellement changé ;
+-5. si la correction a affaibli l’usage, l’accessibilité, la robustesse ou la direction ;
++5. si la correction a affaibli l’usage, l’accessibilité, la robustesse, la direction, ou la hiérarchie et l’harmonie de l’ensemble : réobserve la page entière, pas seulement la zone corrigée ;
+ 6. si la direction doit être corrigée, rouverte ou maintenue.
+ 
+ Une repasse complète est attendue en `DIRECTION`, recommandée en `STANDARD` et ciblée en `ITER` ou `LITE` sur le périmètre modifié. Cherche ce qui est resté par défaut : alignement optique, échelle, distance, état, composant, mouvement, contenu réel, breakpoint ou récupération.

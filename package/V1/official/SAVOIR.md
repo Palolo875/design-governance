@@ -329,6 +329,11 @@ Les contrôles principaux sont : alignements nets, compensation optique, proximi
 
 Une vue peut avoir une priorité dominante ou un groupe de priorités liées. Ne force pas une dominante unique dans une surface de comparaison ou de supervision lorsque plusieurs décisions doivent rester simultanément visibles.
 
+<!-- noyau:début COMP-TEXTE-IMAGE -->
+<!-- concept:TXI-01 -->
+**Texte sur image.** Quand un texte est posé sur une photo, une illustration ou une texture, place-le dans la zone calme de l’image ou recadre pour en créer une ; sinon, ajoute un voile ou un dégradé localisé, ou sors le texte de l’image. Mesure le contraste aux points les plus défavorables, à chaque largeur où le recadrage change. Une image sans zone calme demande un autre recadrage ou un autre placement.
+<!-- noyau:fin COMP-TEXTE-IMAGE -->
+
 ### Cohérence et harmonie
 
 La cohérence vérifie si les éléments suivent les mêmes règles. L’harmonie vérifie si les éléments entretiennent une relation juste. Une interface peut être cohérente et monotone ; elle peut contenir tension, asymétrie ou variation tout en restant harmonieuse si ces écarts sont tenus en relation.
@@ -412,6 +417,11 @@ Une police variable peut devenir un système adaptatif : poids pour hiérarchie,
 
 Une signature typographique ne tient pas si zoom, reflow, locale ou ajustement d’espacement la transforment en défaut de lecture.
 
+<!-- noyau:début COMP-TITRE -->
+<!-- concept:TIT-01 -->
+**Équilibre d’un titre.** Quand un titre porte la scène (grand titre, accroche, chiffre mis en avant), règle-le sur le vrai texte : coupe les lignes selon le sens, sans mot isolé en dernière ligne ; équilibre la longueur des lignes (`text-wrap: balance` si la cible le permet) ; resserre l’approche aux grandes tailles si la police le demande ; garde un écart d’échelle net entre le titre et le texte qui suit, car un écart faible aplatit la hiérarchie. Observe sur capture, en desktop et en mobile, avec le contenu réel : la forme du bloc de titre reste lisible au flou.
+<!-- noyau:fin COMP-TITRE -->
+
 ### Preuve typographique
 
 La preuve est documentée dans `ACTION/STRUCTURED-PROOF` lorsque la typographie peut changer la décision. Sépare, lorsque nécessaire :
@@ -491,6 +501,9 @@ La silhouette n’exige pas une identité spectaculaire. Dans une vue administra
 Un composant ne possède pas tous les états imaginables, mais aucun état nécessaire ne peut être implicite : focus clavier, empty de liste, erreur de formulaire, overflow, chargement, permission refusée, image absente, valeur extrême et contenu long lorsque pertinents.
 
 HTML sémantique, nom accessible, focus visible, erreur associée et récupération compréhensible sont des conditions de craft autant que de conformité. `ACTION/GATE-A` vérifie leur présence ; `ACTION/GATE-C` peut ensuite juger leur résolution perceptuelle ; une tâche utilisateur peut être requise lorsque la récupération ou la compréhension est le risque dominant.
+
+<!-- concept:RCV-01 -->
+**Récupération après erreur.** Un message d’erreur dit ce qui s’est passé, pourquoi si c’est utile, et comment reprendre ; il apparaît près de l’élément concerné, dans la langue du produit. La saisie de la personne est conservée, le focus va à l’erreur ou au résumé des erreurs, et une action de reprise est proposée : corriger, réessayer ou revenir. Une capture montre le message ; seule une interaction montre la reprise : parcours l’erreur, puis la correction, jusqu’au succès.
 
 ---
 
