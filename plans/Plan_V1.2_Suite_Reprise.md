@@ -16,7 +16,7 @@
 4. **Décisions :** toutes les décisions du plan maître sont prises (`audit/reports/V12R_14_DECISIONS_ARBITRAGES.md`, addendums 1 et 2). Un contenu qui dépend d'une question nouvelle attend la réponse de l'owner.
 5. **Consolider avant d'évaluer.** Aucun run avant la porte **P2 « prêt pour l'évaluation »** (§4). Corriger et améliorer, c'est mettre l'existant à sa place (hiérarchie, organisation, accès, cohérence, clarté, fiabilité), pas ajouter ni retirer au hasard ; chaque modification répond à un défaut identifié, préserve ce qui marche et a une vérification proportionnée. Les moyens de produire du beau interviennent pendant la conception, pas seulement dans les contrôles de fin.
 
-## 2. État (après R8c, 30-09-2026)
+## 2. État (après R8c-2, 30-09-2026)
 
 | Fait | Rapport |
 |---|---|
@@ -32,11 +32,11 @@
 | R11a : résidu `DAILY` retiré ; ancre de mesure F13 rectifiée ; carte des moyens v0 alignée sur D-20 | `V12R_13` |
 
 - **Mesures :**
-  - **mesures après R8c** : chemin prescrit 12 629 mots (trace légère) ; noyau 3 695 mots (après R8b-2 : 12 430 et 3 505 ; après R11a : 12 187 et 3 302) ;
+  - **mesures après R8c-2** : chemin prescrit 12 682 mots (trace légère) ; noyau 3 748 mots (après R8c : 12 629 et 3 695 ; après R11a : 12 187 et 3 302) ;
   - 24/25 outils de fabrication sur le chemin ; l'outil manquant est **F22** (tests perceptifs), atteignable en un renvoi conditionnel depuis Gate C (`PRC-01`), non compté car la mesure ne suit que les lectures impératives ;
   - 1 liste de chargement.
 - **Gardes :**
-  - `validate_structure.py` : 19 concepts, 3 renvois, 12 vocabulaires retirés, 3 résumés fidèles, 16 termes de glossaire, CHG-01 à CHG-09, ORD-01 ;
+  - `validate_structure.py` : 23 concepts, 4 renvois, 12 vocabulaires retirés, 7 résumés fidèles, 16 termes de glossaire, CHG-01 à CHG-09, ORD-01, UNI-01 (garde bornée) ;
   - `validate_reading_map.py` : 50 conditions.
 - **Suivi :** vert (372 cas maintenus, 17 migrés).
 

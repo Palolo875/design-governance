@@ -1,0 +1,101 @@
+diff --git a/package/V1/official/CHANGELOG.md b/package/V1/official/CHANGELOG.md
+index efc3528..4197345 100644
+--- a/package/V1/official/CHANGELOG.md
++++ b/package/V1/official/CHANGELOG.md
+@@ -26,6 +26,7 @@
+ - **Moyens de fabrication (refonte, R8b).** Carte des moyens par couche consolidée (où chercher, comment choisir, ce qui limite ; licence vérifiée pour chaque ressource retenue) ; traitement des assets et famille d’icônes choisis selon la thèse, jamais universels ; données d’exemple cohérentes entre elles, aucun chiffre sans référence.
+ - **Raccords (refonte, R8b-2).** Choix contextuels gardés au niveau de la phrase : l’obligation universelle d’un traitement ou d’une famille unique est refusée, le choix justifié accepté ; Fontshare : licence FFL ou OFL selon la police.
+ - **Gestes de résolution (refonte, R8c).** Équilibre d’un titre et texte sur image dans le noyau ; la boucle réobserve l’ensemble après une correction locale ; récupération après erreur (`SAVOIR/STATE`), observée par interaction et appelée depuis Gate C.
++- **Raccords (refonte, R8c-2).** Garde des choix contextuels bornée et déclarée ; équilibre d’un titre rattaché à un défaut observé, composition voulue conservée ; récupération : focus selon le moment, issue claire si la réussite est impossible.
+ - **Efficacité.** `NOT-VERIFIED` : l’épreuve de référence donne V1.1.1 ≈ sans système sur la qualité perçue ; l’effet de ces chantiers reste à éprouver (G4).
+ 
+ ## V1.1.1 — Retour d’audit : alignements de textes et de façades
+diff --git a/package/V1/official/SAVOIR.md b/package/V1/official/SAVOIR.md
+index 7eadaa5..4e76ec8 100644
+--- a/package/V1/official/SAVOIR.md
++++ b/package/V1/official/SAVOIR.md
+@@ -419,7 +419,7 @@ Une signature typographique ne tient pas si zoom, reflow, locale ou ajustement d
+ 
+ <!-- noyau:début COMP-TITRE -->
+ <!-- concept:TIT-01 -->
+-**Équilibre d’un titre.** Quand un titre porte la scène (grand titre, accroche, chiffre mis en avant), règle-le sur le vrai texte : coupe les lignes selon le sens, sans mot isolé en dernière ligne ; équilibre la longueur des lignes (`text-wrap: balance` si la cible le permet) ; resserre l’approche aux grandes tailles si la police le demande ; garde un écart d’échelle net entre le titre et le texte qui suit, car un écart faible aplatit la hiérarchie. Observe sur capture, en desktop et en mobile, avec le contenu réel : la forme du bloc de titre reste lisible au flou.
++**Équilibre d’un titre.** Quand un titre porte la scène (grand titre, accroche, chiffre mis en avant), règle-le sur le vrai texte, puis corrige ce que la capture montre : une coupe de ligne qui casse le sens ; un mot isolé en dernière ligne qui n’est pas voulu ; des lignes si inégales que le bloc se lit mal (`text-wrap: balance` peut aider si la cible le permet) ; une approche trop lâche aux grandes tailles, si la police le demande ; une hiérarchie aplatie, que l’on rétablit par l’écart d’échelle entre le titre et le texte qui suit, ou par le poids, la position ou l’espace. Un mot isolé, un déséquilibre ou un faible écart peut être le choix de composition : on le garde si la capture montre qu’il fonctionne. Observe sur capture, en desktop et en mobile, avec le contenu réel : la forme du bloc de titre reste lisible au flou.
+ <!-- noyau:fin COMP-TITRE -->
+ 
+ ### Preuve typographique
+@@ -503,7 +503,7 @@ Un composant ne possède pas tous les états imaginables, mais aucun état néce
+ HTML sémantique, nom accessible, focus visible, erreur associée et récupération compréhensible sont des conditions de craft autant que de conformité. `ACTION/GATE-A` vérifie leur présence ; `ACTION/GATE-C` peut ensuite juger leur résolution perceptuelle ; une tâche utilisateur peut être requise lorsque la récupération ou la compréhension est le risque dominant.
+ 
+ <!-- concept:RCV-01 -->
+-**Récupération après erreur.** Un message d’erreur dit ce qui s’est passé, pourquoi si c’est utile, et comment reprendre ; il apparaît près de l’élément concerné, dans la langue du produit. La saisie de la personne est conservée, le focus va à l’erreur ou au résumé des erreurs, et une action de reprise est proposée : corriger, réessayer ou revenir. Une capture montre le message ; seule une interaction montre la reprise : parcours l’erreur, puis la correction, jusqu’au succès.
++**Récupération après erreur.** Un message d’erreur dit ce qui s’est passé, pourquoi si c’est utile, et comment reprendre ; il apparaît près de l’élément concerné, dans la langue du produit. La saisie de la personne est conservée et une action de reprise est proposée : corriger, réessayer ou revenir. Le focus dépend du moment : après une soumission bloquée, il peut aller à l’erreur ou au résumé des erreurs ; pendant la saisie, l’erreur est annoncée de façon accessible (région live) sans déplacer le focus. Une capture montre le message ; seule une interaction montre la reprise : parcours l’erreur, puis la correction, jusqu’au succès, ou jusqu’à une issue claire lorsque la réussite est impossible (alternative ou sortie expliquée).
+ 
+ ---
+ 
+diff --git a/package/scripts/validate_structure.py b/package/scripts/validate_structure.py
+index 1e271fd..9c9eda9 100644
+--- a/package/scripts/validate_structure.py
++++ b/package/scripts/validate_structure.py
+@@ -14,7 +14,8 @@ Gardes :
+   7. REGISTRE — les façades humaines vouvoient (formes de tutoiement impératif refusées dans QUICKSTART).
+   8. NOYAU — les blocs `<!-- noyau:début ID -->` / `<!-- noyau:fin ID -->` sont appariés, uniques et placés
+      dans les sources normatives ; la section compilée de la skill est identique à `scripts/build_core.py`.
+- 11. CHOIX CONTEXTUELS — « traitement unique » ou « une seule famille » seulement avec condition ou justification (PKG-01).
++ 11. CHOIX CONTEXTUELS (garde bornée, PKG-01) — refuse le retour des formulations universelles retirées et les impératifs
++     universels explicites (« toujours », « à tous les »…) sur un traitement ou une famille unique ; accepte un choix situé.
+  10. ORDRE — dans DIRECTION, rôle, posture et récapitulatif de protection précèdent les sections détaillées (D-17).
+   9. CHARGEMENT — une seule table de chargement (`DIRECTION/CHARGE`, et sa copie compilée dans la skill) ;
+      les façades y renvoient ; la ligne `DIRECTION` garde le build et l'ordre cible → premier objet ;
+@@ -99,10 +100,17 @@ RETIRED: list[tuple[str, str, set[str]]] = [
+     (r"`DAILY`", "DIRECTION/CHARGE (R4 ; résidu retiré en R11a)", {"CHANGELOG.md"}),
+ ]
+ 
+-# 11. Choix contextuels (PKG-01) : une phrase qui prescrit un traitement ou une famille unique doit porter sa condition
+-#     ou sa justification ; l'obligation universelle est refusée, le choix justifié est accepté.
++# 11. Choix contextuels (PKG-01) — garde BORNÉE. Elle ne juge pas le sens d'une phrase quelconque ; elle détecte
++#     seulement (a) le retour des formulations universelles retirées en R8b, et (b) les impératifs universels explicites
++#     (« toujours », « à tous les », « dans tous les cas »…) portant sur un traitement ou une famille unique, sauf négation.
++#     Un choix situé (« pour cette série, un seul traitement a été retenu ») est accepté ; la revue juge le reste.
++RETIRED_UNIVERSAL = re.compile(r"applique un traitement unique et cohérent|reçoit un traitement unique et justifié|"
++                               r"un seul traitement pour les assets moyens|un seul traitement cohérent|Icônes : une seule famille",
++                               re.I)
+ UNIVERSAL = re.compile(r"traitement unique|un seul traitement|une seule famille", re.I)
+-CONDITION = re.compile(r"\bsi\b|lorsqu|peut|peuvent|dépend|suffit|comparaison", re.I)
++ALWAYS = re.compile(r"\btoujours\b|systématiquement|dans tous les cas|en toutes circonstances|quel que soit|"
++                    r"à tou(?:s|tes) les|pour tou(?:s|tes) les", re.I)
++NEGATION = re.compile(r"\bjamais\b|\bne\b|\bn[’']", re.I)
+ 
+ 
+ def check_universal(corpus: dict[Path, list[str]], errors: list[str]) -> None:
+@@ -111,7 +119,8 @@ def check_universal(corpus: dict[Path, list[str]], errors: list[str]) -> None:
+             continue
+         for para in paragraphs(lines):
+             for sentence in re.split(r"(?<=[.!?])\s+", para):
+-                if UNIVERSAL.search(sentence) and not CONDITION.search(sentence):
++                if RETIRED_UNIVERSAL.search(sentence) or (UNIVERSAL.search(sentence) and ALWAYS.search(sentence)
++                                                          and not NEGATION.search(sentence)):
+                     errors.append(f"[UNI-01] choix présenté comme universel ({path.name}) : « {sentence[:90]}… »")
+ 
+ 
+@@ -127,6 +136,8 @@ FIDELITY: list[tuple[str, str, str]] = [
+     ("question de convergence", r"Question de convergence", "police de titre"),
+     ("carte des moyens", r"\*\*Carte des moyens par couche\*\*", "chaque ressource retenue"),
+     ("relecture de l'ensemble", r"la correction a affaibli", "l’ensemble"),
++    ("titre : composition voulue", r"\*\*Équilibre d’un titre\.\*\*", "on le garde si"),
++    ("récupération : focus selon le moment", r"\*\*Récupération après erreur\.\*\*", "sans déplacer le focus"),
+ ]
+ 
+ # 5. Termes du vocabulaire de fabrication présents dans GLOSSAIRE.md (première cellule d'une ligne de table).
+diff --git a/package/skills/design-governance-practice/SKILL.md b/package/skills/design-governance-practice/SKILL.md
+index 75e2e42..6cc8c64 100644
+--- a/package/skills/design-governance-practice/SKILL.md
++++ b/package/skills/design-governance-practice/SKILL.md
+@@ -100,7 +100,7 @@ Le phénomène ou la métaphore est facultatif. Il peut rendre perceptible un se
+ 
+ Les contrôles principaux sont : alignements nets, compensation optique, proximité qui révèle les groupes, priorités lisibles, et responsive pensé comme recomposition. Une grille desktop peut devenir liste ; un panneau peut devenir écran ; un bloc dense peut devenir séquence progressive.
+ 
+-**Équilibre d’un titre.** Quand un titre porte la scène (grand titre, accroche, chiffre mis en avant), règle-le sur le vrai texte : coupe les lignes selon le sens, sans mot isolé en dernière ligne ; équilibre la longueur des lignes (`text-wrap: balance` si la cible le permet) ; resserre l’approche aux grandes tailles si la police le demande ; garde un écart d’échelle net entre le titre et le texte qui suit, car un écart faible aplatit la hiérarchie. Observe sur capture, en desktop et en mobile, avec le contenu réel : la forme du bloc de titre reste lisible au flou.
++**Équilibre d’un titre.** Quand un titre porte la scène (grand titre, accroche, chiffre mis en avant), règle-le sur le vrai texte, puis corrige ce que la capture montre : une coupe de ligne qui casse le sens ; un mot isolé en dernière ligne qui n’est pas voulu ; des lignes si inégales que le bloc se lit mal (`text-wrap: balance` peut aider si la cible le permet) ; une approche trop lâche aux grandes tailles, si la police le demande ; une hiérarchie aplatie, que l’on rétablit par l’écart d’échelle entre le titre et le texte qui suit, ou par le poids, la position ou l’espace. Un mot isolé, un déséquilibre ou un faible écart peut être le choix de composition : on le garde si la capture montre qu’il fonctionne. Observe sur capture, en desktop et en mobile, avec le contenu réel : la forme du bloc de titre reste lisible au flou.
+ 
+ **Texte sur image.** Quand un texte est posé sur une photo, une illustration ou une texture, place-le dans la zone calme de l’image ou recadre pour en créer une ; sinon, ajoute un voile ou un dégradé localisé, ou sors le texte de l’image. Mesure le contraste aux points les plus défavorables, à chaque largeur où le recadrage change. Une image sans zone calme demande un autre recadrage ou un autre placement.
+ 

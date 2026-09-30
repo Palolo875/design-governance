@@ -34,3 +34,5 @@
 2. **Rectification déclarée de `V12R_Patch_R8b.py`.** Les motifs de mutation de K2 à K5 passent à « [UNI-01] ». L'inverse de K1 ne s'applique plus, puisque R8b2-F1 a modifié ce texte ; il est remplacé par une mutation équivalente dans R8b-2 (la carte sans « chaque ressource retenue » rougit).
 3. **Doublons 146 → 148 : artefact.** L'entrée du CHANGELOG cite la phrase sur Fontshare.
 4. **Portée des contrôles.** Les mutations montrent que les gardes détectent les retours arrière testés. Les acceptations montrent qu'elles laissent passer les formulations légitimes testées. Ni les unes ni les autres ne disent rien de l'effet sur les rendus, qui reste à observer en R10.
+
+**Rectification du 30-09-2026 (`V12R_19`).** La promesse « obligation universelle refusée, choix justifié accepté » était trop large : trois contre-exemples de l'owner l'ont montré. UNI-01 est désormais une garde bornée (formulations retirées et impératifs universels explicites) ; sa portée est déclarée dans `V12R_19` §1.

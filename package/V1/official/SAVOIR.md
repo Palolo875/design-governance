@@ -419,7 +419,7 @@ Une signature typographique ne tient pas si zoom, reflow, locale ou ajustement d
 
 <!-- noyau:début COMP-TITRE -->
 <!-- concept:TIT-01 -->
-**Équilibre d’un titre.** Quand un titre porte la scène (grand titre, accroche, chiffre mis en avant), règle-le sur le vrai texte : coupe les lignes selon le sens, sans mot isolé en dernière ligne ; équilibre la longueur des lignes (`text-wrap: balance` si la cible le permet) ; resserre l’approche aux grandes tailles si la police le demande ; garde un écart d’échelle net entre le titre et le texte qui suit, car un écart faible aplatit la hiérarchie. Observe sur capture, en desktop et en mobile, avec le contenu réel : la forme du bloc de titre reste lisible au flou.
+**Équilibre d’un titre.** Quand un titre porte la scène (grand titre, accroche, chiffre mis en avant), règle-le sur le vrai texte, puis corrige ce que la capture montre : une coupe de ligne qui casse le sens ; un mot isolé en dernière ligne qui n’est pas voulu ; des lignes si inégales que le bloc se lit mal (`text-wrap: balance` peut aider si la cible le permet) ; une approche trop lâche aux grandes tailles, si la police le demande ; une hiérarchie aplatie, que l’on rétablit par l’écart d’échelle entre le titre et le texte qui suit, ou par le poids, la position ou l’espace. Un mot isolé, un déséquilibre ou un faible écart peut être le choix de composition : on le garde si la capture montre qu’il fonctionne. Observe sur capture, en desktop et en mobile, avec le contenu réel : la forme du bloc de titre reste lisible au flou.
 <!-- noyau:fin COMP-TITRE -->
 
 ### Preuve typographique
@@ -503,7 +503,7 @@ Un composant ne possède pas tous les états imaginables, mais aucun état néce
 HTML sémantique, nom accessible, focus visible, erreur associée et récupération compréhensible sont des conditions de craft autant que de conformité. `ACTION/GATE-A` vérifie leur présence ; `ACTION/GATE-C` peut ensuite juger leur résolution perceptuelle ; une tâche utilisateur peut être requise lorsque la récupération ou la compréhension est le risque dominant.
 
 <!-- concept:RCV-01 -->
-**Récupération après erreur.** Un message d’erreur dit ce qui s’est passé, pourquoi si c’est utile, et comment reprendre ; il apparaît près de l’élément concerné, dans la langue du produit. La saisie de la personne est conservée, le focus va à l’erreur ou au résumé des erreurs, et une action de reprise est proposée : corriger, réessayer ou revenir. Une capture montre le message ; seule une interaction montre la reprise : parcours l’erreur, puis la correction, jusqu’au succès.
+**Récupération après erreur.** Un message d’erreur dit ce qui s’est passé, pourquoi si c’est utile, et comment reprendre ; il apparaît près de l’élément concerné, dans la langue du produit. La saisie de la personne est conservée et une action de reprise est proposée : corriger, réessayer ou revenir. Le focus dépend du moment : après une soumission bloquée, il peut aller à l’erreur ou au résumé des erreurs ; pendant la saisie, l’erreur est annoncée de façon accessible (région live) sans déplacer le focus. Une capture montre le message ; seule une interaction montre la reprise : parcours l’erreur, puis la correction, jusqu’au succès, ou jusqu’à une issue claire lorsque la réussite est impossible (alternative ou sortie expliquée).
 
 ---
 
