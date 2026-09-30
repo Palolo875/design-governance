@@ -98,3 +98,12 @@ Une seule décision : **appliquer la maquette telle quelle** (recommandé). Poin
 ## 7. Arrêt
 
 - Si l'application fait rougir des cas de harnais que la maquette n'a pas révélés, ou impose une migration non justifiée, le lot s'arrête au point concerné et l'écart est déclaré.
+
+## 8. Revue du 30-09-2026 (transmise par l'owner, vérifiée) : retouches intégrées à la maquette
+
+- **Validations de la revue.** Sur copie, la revue a exécuté la maquette, recompilé le noyau et relancé `validate_all` ; les mesures annoncées sont confirmées ; les propriétés contrôlées par C3 sont conservées.
+- **Retouche 1 (certain).** L'ouverture de « Lecture instrumentée » restait inconditionnelle : « distingue dans la trace : ». Elle devient « …, dans un run instrumenté ou audité, distingue dans la trace : ».
+- **Retouche 2 (certain).** « Direction divergente » : « sa trace avant le build » laissait croire que toute trace précède le build. Nouveau texte : « sa trace selon le niveau retenu ». ACTION (étape 3) porte la distinction entre trace complète et trace légère.
+- **`PRINT_FIELD`.** La revue recommande aussi l'intégration au noyau.
+- **Comptage.** Selon la convention du pilotage (section compilée avec son titre), le noyau passe de 3 888 à 3 923 mots (+35) ; 3 884 → 3 919 est la compilation seule.
+- **Contrôles après retouches.** La maquette reste verte (structure, carte de lecture).

@@ -1,4 +1,4 @@
-"""Maquette des restes R5 (diagnostic V12R_29) : textes appliqués sur une copie du package."""
+"""Maquette des restes R5 (diagnostic V12R_29, deux retouches de la revue du 30-09 intégrées) : textes appliqués sur une copie."""
 import shutil
 import sys
 from pathlib import Path
@@ -38,6 +38,9 @@ t = (t[:j] + "**Mesure de lecture.** Pour mesurer ce qu’un run instrumenté li
      "`DIRECTION` (« Lecture instrumentée et règle de passage ») s’appliquent ; un run ordinaire ne les déclare pas.\n\n"
      + contrat + t[j:])
 B.write_text(t, encoding="utf-8")
+sub(D, "Pour éviter de présenter une hypothèse de proportion comme un gain démontré, distingue dans la trace :",
+    "Pour éviter de présenter une hypothèse de proportion comme un gain démontré, dans un run instrumenté ou audité, distingue "
+    "dans la trace :")
 sub(D, "Déclare dans la trace la catégorie de lecture applicable ;",
     "Dans un run instrumenté ou audité, déclare dans la trace la catégorie de lecture applicable (en trace légère, cette "
     "déclaration n’est pas demandée) ;")
@@ -66,7 +69,7 @@ sub(D, "Avant le build, la trace du run (retrouvable par `trace_locator`) nomme 
        "`ACTION/RUN_CARD`). Matérialise-la seulement au niveau nécessaire pour comparer la décision : phrase, schéma, cible ou "
        "rendu. Si aucune alternative plausible ne peut modifier le choix, note cette condition et passe à la spec après avoir "
        "nommé la raison.",
-    "Ses leviers sont les axes de `SAVOIR/CRAFT/CFT-02` ; sa matérialisation, sa trace avant le build et sa comparaison suivent "
+    "Ses leviers sont les axes de `SAVOIR/CRAFT/CFT-02` ; sa matérialisation, sa trace selon le niveau retenu et sa comparaison suivent "
     "`ACTION/PIPELINE-DIRECTION` (étapes 3 et 7).")
 sub(A, "Lorsque la décision est ouverte et qu’une position différente peut réellement changer le choix, considère une proposition "
        "crédible répondant à un public, un JTBD, une contrainte ou une opportunité différente.",
