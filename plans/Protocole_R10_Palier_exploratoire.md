@@ -175,6 +175,13 @@ Un seul problème évident suffit pour corriger d'abord. Pour P-4 et P-6, le dia
 3. **Brief riche B-SAAS des juges :** valider l'annexe, ou l'amender.
 4. **Juges :** J1 (l'owner) oui ou non ; humains extérieurs disponibles ; accès éventuel à des modèles d'autres familles.
 
+**Réponses de l'owner (30-09-2026) :**
+- 1 : **consigne levée** pour ce palier ;
+- 2 : **6 productions neuves** ;
+- juges : **juges modèles seulement**, sans J1 ni juge humain extérieur. Conséquence (décision 9) : le résultat est une **orientation en auto-comparaison**, jamais une preuve ; il ne lève pas la réserve `NOT-VERIFIED` ;
+- 3 (brief B-SAAS) : validation à confirmer. Elle est requise avant le jugement, pas avant la production, puisque les producteurs reçoivent le brief vague ;
+- modèles : le producteur est le modèle de la session, identique pour les 6 cas. Le choix des juges modèles (distincts du producteur si possible) est soumis à l'owner avant le lancement. Les identifiants restent hors du dépôt (§3).
+
 ## Annexe — Brief riche B-SAAS (proposé, fictif, pour les juges)
 
 Faits **fictifs mais plausibles**, comme B-DLA. Il remplace, pour ce palier, B-LOG (logiciel réel), reporté faute de captures crédibles (`briefs.md`). Il ne sert qu'aux juges ; aucun producteur ne le reçoit.
