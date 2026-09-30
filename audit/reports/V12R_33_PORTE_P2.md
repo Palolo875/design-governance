@@ -49,10 +49,12 @@
 - **Ce que P2 ne dit pas :** rien sur la qualité réelle des rendus, la facilité d'usage ou le coût. Seuls R10 et l'observation peuvent l'établir.
 
 **Décisions de l'owner :**
-1. Déclarer la porte P2 franchie.
-2. Lever ou non la consigne « pas de run ni d'épreuve », condition de R10.
+1. Déclarer la porte P2 franchie : **décidé (30-09-2026, « Allons-y »)**.
+2. Lever ou non la consigne « pas de run ni d'épreuve », condition de R10 : **non levée à ce jour** ; demandée avec le protocole du palier exploratoire.
 
-**Prochaine étape possible sans run :** écrire le protocole du palier exploratoire de R10 **avant toute production** :
+**Protocole écrit :** `plans/Protocole_R10_Palier_exploratoire.md` (30-09-2026).
+
+**Prochaine étape possible sans run (faite) :** écrire le protocole du palier exploratoire de R10 **avant toute production** :
 - critère du « problème évident » ;
 - seuil pour passer à 18 productions ;
 - compromis de coût acceptable ;
