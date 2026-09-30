@@ -40,7 +40,7 @@ Les supprimer aurait imposé des migrations de harnais. **Forme appliquée :**
 
 - **Gardes :** 11 erreurs avant, 0 après.
 - **Mutations :** 10/10 rouges, dont l'en-tête concurrent rétabli, la colonne retirée du noyau, le bloc couleur retiré du registre et le plancher typographique retiré de la skill.
-- **Suivi complet** (copie, puis package) : voir §5.
+- **Suivi complet** (copie, puis package) : vert (§5).
 - **Mesures :**
   - chemin prescrit 13 238 → **13 614 mots** ;
   - trace complète 18 347 mots ;
@@ -60,7 +60,11 @@ Les supprimer aurait imposé des migrations de harnais. **Forme appliquée :**
 
 ## 5. Contrôles finaux
 
-Voir le bloc ajouté après exécution.
+Sur le package appliqué :
+- suivi **VERT** : 389 cas, 363 maintenus, 26 migrés, aucune migration nouvelle ; `validate_all` vert ;
+- 13.01 : texte 6/6, non-régression 5/5 ;
+- 13.02 : 38/38 ;
+- B01 : 218/218.
 
 ## 6. Ce qui reste de l'audit
 
