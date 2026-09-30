@@ -73,6 +73,20 @@ Cette vue couvre les identifiants D-01 à D-23 et les mineurs transmis. Elle n�
 
 **PIL-01 à PIL-04 :** intégrés le 30-09-2026 (patch de la note préparatoire, appliqué sur `3966ad5`, empreintes conformes) ; confirmés par la relecture de parcours et l'examen P2 (`V12R_31`, `V12R_33`).
 
+**Audit interne A1 (`V12R_37`, 30-09-2026) : constats signalés, non corrigés.**
+- **Notables :**
+  - AUD-01 : quatre prescriptions de chargement concurrentes de `CHARGE` ;
+  - AUD-02 : obligations SAVOIR hors du chemin de lecture ;
+  - AUD-03 : `FAIL-ASSUMED` pour une ancre absente dans le pipeline ;
+  - AUD-04 : persistance ou clôture sans condition de trace ;
+  - AUD-05 : lieu de la trace légère ;
+  - AUD-06 : façades opérateur non mises à jour ;
+  - AUD-07 : convergence de concept ;
+  - AUD-08 : exemple de la skill dans le domaine B-DLA ;
+  - AUD-09 : règle CTA sans renvoi à `CNT-01`.
+- **Mineurs :** AUD-10 à AUD-16.
+- Aucun bloquant.
+
 ## 2. Réserves de clôture : articulation, sans double comptage
 
 | Réserve de la clôture | Objet | Traitement prévu |
