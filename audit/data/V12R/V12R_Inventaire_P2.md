@@ -60,6 +60,7 @@ Cette vue couvre les identifiants D-01 à D-23 et les mineurs transmis. Elle n�
 | PAR-G1 | « Valider » au checkpoint sans sens défini ; passage exploratoire → acceptation non dit | **Fermé (R11b, `V12R_32`)** : valider oriente la suite ; l'acceptation se demande et passe en trace complète | R11b parcours | ~~Bloquant P2~~ fermé | `V12R_31` ; `V12R_32` |
 | PAR-G2 | Moment des demandes de brief ambigu | **Fermé (R11b, `V12R_32`, décision (a))** : humain présent, demandes avant le build, en un seul message | R11b parcours | ~~Bloquant P2~~ fermé ; effet à observer en R10 | `V12R_31` ; `V12R_32` |
 | PAR-G4 | Sortie en trace légère non dite hors DIRECTION ; reprise ITER depuis une trace légère | **Fermé (R11b, `V12R_32`)** : « Trace légère : la proposition » dans chaque route ; ligne de thèse retrouvable pour ITER | R11b parcours | ~~Bloquant P2~~ fermé | `V12R_31` ; `V12R_32` |
+| PAR-G4b | Rubriques « Clôture » de RUN-LITE, RUN-ITER, RUN-STANDARD et RUN-SYSTEM : `DECIDED` puis `CLOSED` sans condition de trace, contre `TRA-01` (ni verdict ni clôture en trace légère) ; seule RUN-DIRECTION dit « En trace complète ». Relevé par la revue du 30-09 sur `9cbdcc2`, manqué par l'examen P2 | **Ouvert ; raccord R11c préparé** (`audit/tools/V12R_Patch_R11c.py`, vert sur copie), application en attente de l'owner | R11c | **Bloquant P2** : instruction locale contraire au noyau sur le chemin d'un run | Revue du 30-09 ; `V12R_33` §5 |
 | PAR-F1 à F3 | Trace de l'alternative, alternative écartée, ordre de chargement | **Fermés (R11b, `V12R_32`)** | R11b parcours | Non bloquants ; fermés | `V12R_31` ; `V12R_32` |
 
 **Identifiants des mineurs regroupés :** R-16, R-17, R-18, R-19, R-20, R-21, R-22, R-23, R-24, R-25, R-26, R-27, R-28, R-29, R-30, R-31, R-32. Ces codes sont ceux de la clôture ; ils ne sont pas les numéros des lots V1.2 ni, sans rapprochement des pièces, des cas de harnais portant un libellé voisin.
@@ -68,7 +69,7 @@ Cette vue couvre les identifiants D-01 à D-23 et les mineurs transmis. Elle n�
 
 **Deux séries « R » distinctes (vérifié le 30-09).** Les mineurs R-16 à R-32 viennent de la revue bornée 13.02 (`Audit_Phase13_02_EPREUVES_Efficacite_auto-comparaison.md`, « transmis tels quels ») et du retour (`Audit_PhaseR_01_PATCH_DECISION_Retour.md` §6 et §7 : « non vérifiés un par un »). Le harnais R (`R_harnais_non_regression.py`, cas R-01 à R-30) utilise des numéros voisins pour d'autres objets (conditions, LCF, conservations machine) : les deux séries ne se rapprochent pas par le numéro.
 
-**PIL-01 à PIL-04 :** intégrés le 30-09-2026 (patch de la note préparatoire, appliqué sur `3966ad5`, empreintes conformes). Ils restent à confirmer par la relecture de parcours.
+**PIL-01 à PIL-04 :** intégrés le 30-09-2026 (patch de la note préparatoire, appliqué sur `3966ad5`, empreintes conformes) ; confirmés par la relecture de parcours et l'examen P2 (`V12R_31`, `V12R_33`).
 
 ## 2. Réserves de clôture : articulation, sans double comptage
 

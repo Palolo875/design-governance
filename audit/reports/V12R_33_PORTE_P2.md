@@ -61,3 +61,23 @@
 - traitement des désaccords entre juges ;
 - vérification du réemploi des références C1 et C4 ;
 - tableau des mesures par rendu.
+
+## 5. Revue postérieure (30-09-2026) : un bloquant manqué
+
+Une revue externe de `9cbdcc2`, transmise par l'owner, a relancé indépendamment la validation complète, les mutations de R11b, les routes et les mesures (résultats conformes). Elle relève deux points, **vérifiés (certain)** :
+
+1. **PAR-G4b — clôture sans condition de trace.**
+   - Les rubriques « Clôture » de `RUN-LITE`, `RUN-ITER`, `RUN-STANDARD` et `RUN-SYSTEM` prescrivent `DECIDED` puis `CLOSED` sans condition. `ACTION/STATUS` exige alors un verdict.
+   - Or `TRA-01` dit qu'une trace légère livre une proposition sans verdict ni clôture. Seule `RUN-DIRECTION` dit « En trace complète ».
+   - Le noyau porte la bonne règle, mais l'instruction locale la contredit sur le chemin d'un run.
+   - **Écart de cet examen :** l'axe « cohérence opérationnelle » a été déclaré tenu. R11b avait traité les rubriques « Sortie » ; les rubriques « Clôture » n'ont pas été relues.
+2. **Documentaire :** la note de l'inventaire disait encore PIL-01 à PIL-04 « à confirmer », contre leurs lignes et ce dossier. Corrigée.
+
+**Raccord R11c préparé** (`audit/tools/V12R_Patch_R11c.py`) :
+- « En trace complète, » en tête des quatre phrases de clôture, comme `RUN-DIRECTION` ;
+- règles de retour et de reclassification conservées ;
+- garde de fidélité « clôture des routes en trace complète », rouge avant (4 routes), verte après ;
+- 5/5 mutations rouges, dont le retrait de la condition de `RUN-DIRECTION` ;
+- testé sur copie, **non appliqué**.
+
+**Statut de P2 :** la décision de l'owner (P2 franchie) a précédé cette revue. **Recommandation :** conclure P2 après l'application de R11c. Le passage de P2 et l'autorisation de produire restent deux décisions distinctes.

@@ -17,7 +17,7 @@
 | B-SAAS « Fais la page d'accueil d'un logiciel de facturation pour PME. » | 1 rendu | 1 rendu | 1 rendu |
 
 - **Brief reçu par les producteurs :** le brief vague seul, dans les trois conditions. C2 n'entre pas dans ce palier : P1 a déjà montré l'effet des intrants (12/12).
-- **Candidate C3 :** le `package/` du dépôt au commit de production. Son contenu doit être identique à `cb669a6` (aucune modification de `package/` depuis) ; l'empreinte de l'arbre est consignée dans la clé.
+- **Candidate C3 :** le `package/` du dépôt au commit de production. Son contenu doit être celui de la candidate après le raccord R11c (`cb669a6` + R11c) ; l'empreinte de l'arbre est consignée dans la clé.
 - **C4 :** le `package/` de l'étiquette `v1.1.1-import`.
 - **Où le système est posé :** dans les deux cas, copié dans `dg/` à côté du dossier de production, comme en B-DLA et en P1.
 
@@ -152,11 +152,11 @@ Un seul problème évident suffit pour corriger d'abord. Pour P-4 et P-6, le dia
 
 ## 8. Déroulé et arrêt
 
-1. Décisions de l'owner (§9). Contrôles : B01 218/218, et `package/` identique à `cb669a6`.
+1. Décisions de l'owner (§9). Raccord R11c appliqué (`V12R_33` §5). Contrôles : B01 218/218, et `package/` identique à la candidate après R11c.
 2. Production des 6 cas (ordre aléatoire), puis contrôles T.
 3. Captures, planches et mesures mécaniques (E, D, T, H mécanique).
 4. Jugement (J2a et J2b, J1, et D3 s'il y en a), puis révélation de la clé.
-5. Lecture selon le §6, rapport `V12R_34` avec les distinctions certain, probable et hypothétique, puis proposition à l'owner : corriger, passer à 18, ou s'arrêter.
+5. Lecture selon le §6, rapport de l'unité avec les distinctions certain, probable et hypothétique, puis proposition à l'owner : corriger, passer à 18, ou s'arrêter.
 
 **Estimation du coût (probable) :** environ 0,9 M tokens de production (repères B-DLA et P1), plus environ 0,1 M pour les juges modèles.
 
