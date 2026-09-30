@@ -209,7 +209,7 @@ Chaque lot : **périmètre**, **gardes à ajouter**, **réussite**, **arrêt**.
   - `PRINT_FIELD` relié aux marqueurs de vague ;
   - boucle structurelle (l.211) → renvoi, puis **retirer l'exemption `BIBLIOTHEQUE.md`**.
 
-### R6 — Façades : R6a fait (`V12R_12`). **R6b reste** : fusion des README (rectification déclarée de `validate_design_governance.py` et des LCF concernées), QUICKSTART humain, READING_MAP réduit, ORCHESTRATION_MAP.
+### R6 — Façades : R6a fait (`V12R_12`). **R6b fait** : R6b-1 (`V12R_27`, entrée humaine, README fusionnés, README Local généré, guide opérateur) et R6b-2 (`V12R_28`, cartes réunies). Périmètre d'origine ci-dessous, pour mémoire.
 
 #### (périmètre d'origine)
 

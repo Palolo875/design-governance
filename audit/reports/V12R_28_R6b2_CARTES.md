@@ -55,3 +55,9 @@ Sur une copie, les combinaisons ont été déplacées dans READING_MAP et ORCHES
 - **Certain** : une seule carte dérivée à lire, un pointeur de compatibilité, aucune règle nouvelle ; `DIRECTION/CHARGE` reste la seule liste de chargement.
 - **Probable** : moins de renvois croisés pour un lecteur expert.
 - **Limite** : auto-comparaison.
+
+## 6. Vérification externe (revue du 30-09-2026, transmise par l'owner)
+
+- La revue confirme, jusqu'au commit `24c0276`, les lots R7-3, R6b-1 et R6b-2 et les six migrations, avec leurs protections de remplacement.
+- **Reproductibilité du build : un premier échec, de cause inconnue**, lors de la relance par la revue. La relance isolée passe. Le point est consigné ici sans conclusion.
+- **À vérifier** en R11 final, sur la CI hébergée : si l'échec se reproduit, en chercher la cause (état résiduel `.build` ou `.dist.previous`, exécution concurrente, horodatage).

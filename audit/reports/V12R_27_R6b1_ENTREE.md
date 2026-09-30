@@ -68,7 +68,7 @@
 | 13.02 | 38/38 |
 | B01 | 218/218 |
 | Mesures | chemin prescrit 12 867 mots (inchangé : les façades humaines ne sont pas sur le chemin d'un run) ; noyau inchangé ; 24/25 ; doublons 148 → 147 |
-| Entrées (mots) | README du package + README officiel + QUICKSTART : 5 812 → 5 573 |
+| Entrées (mots) | README du package + README officiel + QUICKSTART : **5 908 → 5 663** (compteur du dépôt, `V12R_Mesures.py` ; rectifié le 30-09 : l’ancien chiffre 5 812 → 5 573 venait de `wc -w`, qui compte autrement) |
 
 ## 3. Écarts déclarés
 
