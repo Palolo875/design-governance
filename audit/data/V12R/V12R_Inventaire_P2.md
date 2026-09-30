@@ -26,7 +26,8 @@ Cette vue couvre les identifiants D-01 à D-23 et les mineurs transmis. Elle n�
 | D-08 | Glossaire incomplet | Corrigé documenté | R3 et R6a | Préserver les termes ; R6b examine leur usage humain | V12R_03 ; V12R_12 |
 | D-09 | Checkpoint avant build incompatible avec la première proposition | Corrigé documenté | R5b-1 | Exception action irréversible ou coûteuse conservée | V12R_06 |
 | D-10 | Réponse visible en jargon interne | Traitement documenté dans HANDOFF | R4 ; raccord R6b | Vérifier les façades, sans réécrire le contrat de sortie | V12R_04 ; V12R_12 |
-| D-11 | Entrée dispersée et deux README | À traiter | R6b | Bloquant pour le parcours novice avant P2 | V12_11 ; V12R_12 |
+| D-11 | Entrée dispersée et deux README | **Diagnostiqué (`V12R_25`)** : neuf démarrages concurrents, mode demandé au novice, trois présentations, README Local codé en dur ; coût mesuré par maquette (3 LCF à rectifier) | R6b-1 | Bloquant pour le parcours novice avant P2 | V12_11 ; V12R_12 ; `V12R_25` |
+| D-24 | README du dépôt : constitution minimale avec l'ancien absolu 2 (« dessinée uniquement de mémoire ») ; profil agent orienté vers QUICKSTART | **Relevé le 30-09 (`V12R_25` E5)** : résidu de D-03 non vu par R7 | R6b-1 | Bloquant P2 (règle d'acceptation mal résumée sur la page d'entrée) | `V12R_25` |
 | D-12 | Questions recopiées et tu/vous mêlés | Corrigé documenté | R3 | Préserver la fidélité ; ne pas refaire une correction déjà livrée | V12R_03 |
 | D-13 | Espace initial de QUICKSTART | Corrigé documenté | R3 | Coquille close ; aucune garde nouvelle | V12R_03 |
 | D-14 | Formats de sortie concurrents | Traitement documenté ; raccord à vérifier | R4 ; R6b | Une sortie humaine dérivée de HANDOFF | V12_11 ; V12R_04 |
