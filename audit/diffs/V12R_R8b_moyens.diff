@@ -1,0 +1,157 @@
+diff --git a/package/V1/official/ACTION.md b/package/V1/official/ACTION.md
+index 2ce8828..1ba5a5f 100644
+--- a/package/V1/official/ACTION.md
++++ b/package/V1/official/ACTION.md
+@@ -904,7 +904,7 @@ Chaque verdict C précise le périmètre : viewport, état, scène, contenu et 
+ 
+ | Critère | Présent si… | Retour ou réserve si… | Geste si absent (noyau, §) |
+ |---|---|---|---|
+-| **C1 — Stratégie de surface** | Photo, donnée, lumière, illustration, surface, trame, profondeur ou planéité assumée découle du produit. | Traitement par défaut sans relation observable. | Choisis la surface d’après ce que le produit montre (carte des moyens, §6) ; un seul traitement pour les assets moyens ; retire le traitement sans rôle. |
++| **C1 — Stratégie de surface** | Photo, donnée, lumière, illustration, surface, trame, profondeur ou planéité assumée découle du produit. | Traitement par défaut sans relation observable. | Choisis la surface d’après ce que le produit montre (carte des moyens, §6) ; un traitement justifié par la thèse pour les assets moyens ; retire le traitement sans rôle. |
+ | **C2 — Typographie choisie** | Famille, système existant ou alternative est justifié ; rôles, échelle et fallback servent le contexte. | Choix par défaut non interrogé ou non calibré. | Choisis la famille pour la voix et la donnée à porter (§6) ; fixe deux ou trois rôles et une échelle contrastée ; vérifie le fallback au rendu. |
+ | **C3 — Composition intentionnelle** | Structure de lecture identifiable sert l’action et le rythme. | Empilement uniforme sans décision spatiale. | Recompose dans l’ordre intention → foyer → masse → rythme (§5) ; nomme le foyer et l’ordre de lecture ; romps la trame modale si elle ne sert pas la tâche (§4). |
+ | **C4 — Densité optique** | Espace, masses et regroupements suivent la priorité et l’usage. | Espacement uniforme qui masque les relations. | Regroupe par proximité ; redistribue masses et vides selon la priorité (masse visuelle, gestion du vide, §5) ; contrôle la silhouette à faible détail. |
+diff --git a/package/V1/official/CHANGELOG.md b/package/V1/official/CHANGELOG.md
+index b0bf0d3..b801101 100644
+--- a/package/V1/official/CHANGELOG.md
++++ b/package/V1/official/CHANGELOG.md
+@@ -23,6 +23,7 @@
+ - **BIBLIOTHEQUE alignée (refonte, R5d).** Boucle structurelle et one-shot renvoient à leur lieu propriétaire en gardant leurs critères de structure ; les tests perceptifs de `BIBLIOTHEQUE/GATE` sont appelés depuis Gate C.
+ - **Façades (refonte, R6a).** README : la boucle renvoie à `DIRECTION/DOUBLE-LOOP` ; glossaire : trace légère, trace complète, première proposition, trame modale, profil de surface.
+ - **Correctif (refonte, R11a).** L’ordre de lecture minimal de `DIRECTION/START` renvoie à `CHARGE` (dernier résidu de l’ancienne vue `DAILY`).
++- **Moyens de fabrication (refonte, R8b).** Carte des moyens par couche consolidée (où chercher, comment choisir, ce qui limite ; licence vérifiée pour chaque ressource retenue) ; traitement des assets et famille d’icônes choisis selon la thèse, jamais universels ; données d’exemple cohérentes entre elles, aucun chiffre sans référence.
+ - **Efficacité.** `NOT-VERIFIED` : l’épreuve de référence donne V1.1.1 ≈ sans système sur la qualité perçue ; l’effet de ces chantiers reste à éprouver (G4).
+ 
+ ## V1.1.1 — Retour d’audit : alignements de textes et de façades
+diff --git a/package/V1/official/DIRECTION.md b/package/V1/official/DIRECTION.md
+index f2a8457..9081c74 100644
+--- a/package/V1/official/DIRECTION.md
++++ b/package/V1/official/DIRECTION.md
+@@ -366,6 +366,9 @@ Cette traduction n’ajoute ni formulaire ni mode. Elle rend seulement le chemin
+ 
+ <!-- noyau:début PREMIER-OBJET -->
+ Lorsque `RUN-PRIORITY`, `VISUAL_TARGET` ou `DIRECTION-ATELIER` peuvent modifier la première scène, rends retrouvables seulement **situation**, **tension**, **geste produit**, **objet de preuve**, **marquage de vérité**, **position/exclusion** et **contre-choix situé**. Sur une surface `DIRECTION`, convertis ensuite le brief vague avec la chaîne **promesse → objet de preuve → geste**. L’objet arrive avant les bénéfices et rend le mécanisme plus clair que le texte seul ; il est de préférence **codé** (composant, donnée, état ou interaction du produit), une illustration ne le portant que fournie, curatée ou générée dirigée. Toute démonstration générée ou hypothétique porte près de l’objet le marquage local `TRUTH/ILLUSTRATIVE`, cumulé avec `TRUTH/MECHANISM` lorsqu’elle matérialise un mécanisme (`DIRECTION/DIRECTION-ATELIER`) ; un exemple ne devient jamais une preuve de client, de performance, de disponibilité, d’intégration, de sécurité ou de résultat réel.
++
++<!-- concept:EXD-01 -->
++Les données d’exemple restent cohérentes entre elles : totaux, pourcentages, unités, dates et prix se recoupent. Un chiffre sans référence (« +32 % ») se situe (par rapport à quoi, sur quelle période) ou se retire.
+ <!-- noyau:fin PREMIER-OBJET -->
+ 
+ Un CTA doit soit déclencher un comportement local réellement implémenté, soit mener à une action réellement disponible, soit déclarer sa limite. Un lien vide, une inscription fictive ou une démo qui simule une conséquence externe ne peut pas être présenté comme une action disponible.
+@@ -480,7 +483,7 @@ Ce n’est ni un statut, ni une préférence d’outil : c’est une réponse si
+ 
+ La génération ne reçoit ni le rôle de défaut, ni celui de rattrapage décoratif. Une image générée est une **hypothèse visuelle comparable**, non une autorité esthétique. Une référence observée est un calibrateur, non un modèle à reproduire. La recherche ne vaut pas accumulation : elle explore seulement lorsqu’une source, un médium ou un registre peut modifier la direction.
+ 
+-Une route est insuffisante si elle n’explique pas pourquoi l’asset, à son crop réel et dans son contexte réel, augmente la preuve, la compréhension ou la singularité de la surface. Sources par couche : carte des moyens (`SAVOIR/TOOLS`, `[VEILLE]`) ; un asset moyen reçoit un traitement unique et justifié (`SAVOIR`, section `DESIGN-ATLAS`), jamais un dessin de remplacement.
++Une route est insuffisante si elle n’explique pas pourquoi l’asset, à son crop réel et dans son contexte réel, augmente la preuve, la compréhension ou la singularité de la surface. Sources par couche : carte des moyens (`SAVOIR/TOOLS`, `[VEILLE]`) ; un asset moyen reçoit le traitement que justifie la thèse (`SAVOIR`, section `DESIGN-ATLAS`), jamais un dessin de remplacement.
+ 
+ ### Réserve `ANCHOR-GENERATED` en enjeu identitaire élevé
+ 
+diff --git a/package/V1/official/SAVOIR.md b/package/V1/official/SAVOIR.md
+index 6ffbb0a..76e4f36 100644
+--- a/package/V1/official/SAVOIR.md
++++ b/package/V1/official/SAVOIR.md
+@@ -584,7 +584,7 @@ Les familles ci-dessous orientent la recherche ; elles ne sont ni des quotas, ni
+ Un effet est retenu seulement s’il modifie une relation observable. Une ombre, un blur, un gradient, une texture, une animation ou une transition peuvent être légitimes, mais leur présence seule ne prouve rien. `DÉCORATIF-SANS-CONSEQUENCE` est une catégorie de retrait, jamais une technique à promouvoir.
+ 
+ <!-- noyau:début MOY-ASSETS -->
+-**Traitement des assets moyens.** Quand les assets disponibles sont moyens (photos de téléphone, banque d’images), applique un traitement unique et cohérent — recadrage, étalonnage, duotone, grain ou trame — justifié par la thèse, plutôt que de les poser bruts ou de les remplacer par un dessin. Le traitement unifie la série ; il ne masque ni un droit inconnu, ni une image hors sujet.
++**Traitement des assets moyens.** Quand les assets disponibles sont moyens (photos de téléphone, banque d’images), choisis le traitement que justifie la thèse — recadrage, étalonnage, duotone, grain ou trame — plutôt que de les poser bruts ou de les remplacer par un dessin. Un traitement commun peut unifier une série disparate ; plusieurs traitements se justifient si leurs rôles sont distincts et lisibles. Vérifie sur capture la relation entre les images et la composition. Le traitement ne masque ni un droit inconnu, ni une image hors sujet.
+ <!-- noyau:fin MOY-ASSETS -->
+ 
+ ### Rôles d’asset
+@@ -864,7 +864,17 @@ Le sourcing de `DIRECTION` sépare trois rôles : **ancrage de direction** — p
+ 
+ <!-- noyau:début MOY-CARTE -->
+ <!-- concept:MOY-01 -->
+-[VEILLE 2026-09] **Carte des moyens par couche**, des sources et jamais des styles, droits vérifiés à chaque usage. Typographie : polices de la marque, Google Fonts, Fontshare. Icônes : une seule famille (par exemple Lucide, Phosphor). Composants : design system fourni, sinon bibliothèque éprouvée (par exemple shadcn, Radix). Photographie : client, banques sous licence (Wikimedia Commons, Unsplash). Illustration et 3D : commande, packs sous licence, génération dirigée avec références (`GÉNÉRÉ-DIRIGÉ`). Fichiers et marque : Figma ou kit de marque par connecteur. En HTML seul, les assets figuratifs et le contenu réel restent hors plafond (`FABRICATION`). À revoir avant 2027-03.
++[VEILLE 2026-09] **Carte des moyens par couche** : des sources, jamais des styles. Licence et conditions d’usage vérifiées pour chaque ressource retenue, au moment de l’intégrer ; le nom d’une plateforme ne vaut pas autorisation. Pour chaque couche : où chercher, comment choisir, ce qui limite.
++- **Typographie :** polices de la marque ; Google Fonts (licences ouvertes, surtout SIL OFL) ; Fontshare (licence propre au service, gratuite sous conditions). Choisir par la voix et la donnée à porter ; vérifier chargement, graisses et glyphes (accents, chiffres) dans la cible.
++- **Icônes :** une famille qui couvre les pictogrammes nécessaires (par exemple Lucide, Phosphor) ; poids, taille et sens accordés au texte ; mélanger des familles demande une raison visible.
++- **Composants :** design system fourni, sinon bibliothèque éprouvée (par exemple shadcn, Radix) ; hors Web, les idiomes de la plateforme.
++- **Données et objets de preuve :** contenu du client, sinon exemples marqués ; codables, donc au plafond sans intrant.
++- **Texture et traitement :** CSS, SVG, canvas ; rendu inspecté sur capture, performance mesurée dans le runtime cible.
++- **Photographie :** client (même au téléphone, en lumière du jour), banques sous licence (Wikimedia Commons, Unsplash).
++- **Illustration et 3D :** commande, packs sous licence, génération dirigée avec références (`GÉNÉRÉ-DIRIGÉ`).
++- **Fichiers et marque :** Figma ou kit de marque par connecteur.
++
++Sans intrant ni route autorisée, les assets figuratifs et le contenu réel restent hors plafond (`FABRICATION`). À revoir avant 2027-03.
+ <!-- noyau:fin MOY-CARTE -->
+ 
+ Une tendance est une hypothèse de direction. Avant de l’utiliser, vérifie qu’elle sert le JTBD, améliore la compréhension, reste accessible et performante et survit lorsque son nom marketing disparaît.
+diff --git a/package/scripts/validate_structure.py b/package/scripts/validate_structure.py
+index fed89c6..daa1a71 100644
+--- a/package/scripts/validate_structure.py
++++ b/package/scripts/validate_structure.py
+@@ -61,6 +61,7 @@ CONCEPTS: list[tuple[str, str, str]] = [
+     ("GTA-01", "ACTION.md", "Gate A par profil de surface : contrôles d'office et contrôles selon le contenu"),
+     ("ROL-01", "DIRECTION.md", "rôle de directeur·rice artistique senior, défini une seule fois, en tête de DIRECTION"),
+     ("PRC-01", "BIBLIOTHEQUE.md", "tests perceptifs de structure (non-généricité, silhouette, grille), atteignables depuis Gate C"),
++    ("EXD-01", "DIRECTION.md", "données d'exemple cohérentes entre elles ; aucun chiffre sans référence"),
+     ("VAL-01", "ACTION.md", "promesse du validateur : ce qu'atteste et n'atteste pas une RUN_CARD validée, texte unique"),
+ ]
+ 
+@@ -91,6 +92,8 @@ RETIRED: list[tuple[str, str, set[str]]] = [
+     (r"Mandat de fonctionnement|Adopte le niveau d’exigence", "rôle unique (ROL-01)", {"CHANGELOG.md"}),
+     (r"`VISUAL_TARGET` la spécifie", "chaîne de lecture interne unique (DIRECTION)", {"CHANGELOG.md"}),
+     (r"`DAILY`", "DIRECTION/CHARGE (R4 ; résidu retiré en R11a)", {"CHANGELOG.md"}),
++    (r"(?:applique|reçoit) un traitement unique|un seul traitement (?:pour|cohérent)|Icônes : une seule famille",
++     "traitement ou famille choisis selon la thèse, jamais universels (PKG-01, R8b)", {"CHANGELOG.md"}),
+ ]
+ 
+ # 10. Ordre de DIRECTION (D-17) : rôle, posture et récapitulatif de protection avant les sections détaillées.
+@@ -103,6 +106,7 @@ FIDELITY: list[tuple[str, str, str]] = [
+     ("prise de brief", r"au plus trois", "destination si elle est incertaine"),
+     ("checkpoint", r"checkpoint[^.]{0,60}avant (?:le )?build|avant (?:le )?build[^.]{0,60}checkpoint", "irréversible ou coûteuse"),
+     ("question de convergence", r"Question de convergence", "police de titre"),
++    ("carte des moyens", r"\*\*Carte des moyens par couche\*\*", "chaque ressource retenue"),
+ ]
+ 
+ # 5. Termes du vocabulaire de fabrication présents dans GLOSSAIRE.md (première cellule d'une ligne de table).
+diff --git a/package/skills/design-governance-practice/SKILL.md b/package/skills/design-governance-practice/SKILL.md
+index 7a0fa10..f32e1a1 100644
+--- a/package/skills/design-governance-practice/SKILL.md
++++ b/package/skills/design-governance-practice/SKILL.md
+@@ -42,6 +42,8 @@ La clôture de chaque mode est `ACTION/CLOSE-PACKAGE`, en trace complète ; en t
+ 
+ Lorsque `RUN-PRIORITY`, `VISUAL_TARGET` ou `DIRECTION-ATELIER` peuvent modifier la première scène, rends retrouvables seulement **situation**, **tension**, **geste produit**, **objet de preuve**, **marquage de vérité**, **position/exclusion** et **contre-choix situé**. Sur une surface `DIRECTION`, convertis ensuite le brief vague avec la chaîne **promesse → objet de preuve → geste**. L’objet arrive avant les bénéfices et rend le mécanisme plus clair que le texte seul ; il est de préférence **codé** (composant, donnée, état ou interaction du produit), une illustration ne le portant que fournie, curatée ou générée dirigée. Toute démonstration générée ou hypothétique porte près de l’objet le marquage local `TRUTH/ILLUSTRATIVE`, cumulé avec `TRUTH/MECHANISM` lorsqu’elle matérialise un mécanisme (`DIRECTION/DIRECTION-ATELIER`) ; un exemple ne devient jamais une preuve de client, de performance, de disponibilité, d’intégration, de sécurité ou de résultat réel.
+ 
++Les données d’exemple restent cohérentes entre elles : totaux, pourcentages, unités, dates et prix se recoupent. Un chiffre sans référence (« +32 % ») se situe (par rapport à quoi, sur quelle période) ou se retire.
++
+ ### 4. Structure
+ 
+ > L’interface ne commence ni avec une « landing premium », ni avec une grille de cartes, ni avec une image inspirante. Elle déclare d’abord **où elle vit**, **comment le regard circule**, **quelle preuve devient tangible** et **comment la personne agit**.
+@@ -115,9 +117,19 @@ Les contrôles principaux sont : alignements nets, compensation optique, proximi
+ 
+ Avant le premier rendu, le boot doit conduire à un artefact complet, crédible et observable — jamais à un wireframe volontairement creux lorsque les capacités sont disponibles ; lorsqu’elles manquent, `FABRICATION` déclare le plafond avant le build et le rendu sort avec la meilleure route de `DIRECTION/VISUAL_TARGET`. Après observation, conserve dans la trace : ce qui est effectivement visible, les qualités prioritaires observées ou non observées, **un défaut dominant** et, si une correction utile existe, la modification réelle apportée et la ré-observation attendue ; sinon, la raison de l’arrêt (`DIRECTION/DOUBLE-LOOP`, one-shot).
+ 
+-[VEILLE 2026-09] **Carte des moyens par couche**, des sources et jamais des styles, droits vérifiés à chaque usage. Typographie : polices de la marque, Google Fonts, Fontshare. Icônes : une seule famille (par exemple Lucide, Phosphor). Composants : design system fourni, sinon bibliothèque éprouvée (par exemple shadcn, Radix). Photographie : client, banques sous licence (Wikimedia Commons, Unsplash). Illustration et 3D : commande, packs sous licence, génération dirigée avec références (`GÉNÉRÉ-DIRIGÉ`). Fichiers et marque : Figma ou kit de marque par connecteur. En HTML seul, les assets figuratifs et le contenu réel restent hors plafond (`FABRICATION`). À revoir avant 2027-03.
++[VEILLE 2026-09] **Carte des moyens par couche** : des sources, jamais des styles. Licence et conditions d’usage vérifiées pour chaque ressource retenue, au moment de l’intégrer ; le nom d’une plateforme ne vaut pas autorisation. Pour chaque couche : où chercher, comment choisir, ce qui limite.
++- **Typographie :** polices de la marque ; Google Fonts (licences ouvertes, surtout SIL OFL) ; Fontshare (licence propre au service, gratuite sous conditions). Choisir par la voix et la donnée à porter ; vérifier chargement, graisses et glyphes (accents, chiffres) dans la cible.
++- **Icônes :** une famille qui couvre les pictogrammes nécessaires (par exemple Lucide, Phosphor) ; poids, taille et sens accordés au texte ; mélanger des familles demande une raison visible.
++- **Composants :** design system fourni, sinon bibliothèque éprouvée (par exemple shadcn, Radix) ; hors Web, les idiomes de la plateforme.
++- **Données et objets de preuve :** contenu du client, sinon exemples marqués ; codables, donc au plafond sans intrant.
++- **Texture et traitement :** CSS, SVG, canvas ; rendu inspecté sur capture, performance mesurée dans le runtime cible.
++- **Photographie :** client (même au téléphone, en lumière du jour), banques sous licence (Wikimedia Commons, Unsplash).
++- **Illustration et 3D :** commande, packs sous licence, génération dirigée avec références (`GÉNÉRÉ-DIRIGÉ`).
++- **Fichiers et marque :** Figma ou kit de marque par connecteur.
++
++Sans intrant ni route autorisée, les assets figuratifs et le contenu réel restent hors plafond (`FABRICATION`). À revoir avant 2027-03.
+ 
+-**Traitement des assets moyens.** Quand les assets disponibles sont moyens (photos de téléphone, banque d’images), applique un traitement unique et cohérent — recadrage, étalonnage, duotone, grain ou trame — justifié par la thèse, plutôt que de les poser bruts ou de les remplacer par un dessin. Le traitement unifie la série ; il ne masque ni un droit inconnu, ni une image hors sujet.
++**Traitement des assets moyens.** Quand les assets disponibles sont moyens (photos de téléphone, banque d’images), choisis le traitement que justifie la thèse — recadrage, étalonnage, duotone, grain ou trame — plutôt que de les poser bruts ou de les remplacer par un dessin. Un traitement commun peut unifier une série disparate ; plusieurs traitements se justifient si leurs rôles sont distincts et lisibles. Vérifie sur capture la relation entre les images et la composition. Le traitement ne masque ni un droit inconnu, ni une image hors sujet.
+ 
+ Cherche des calibrations dans les domaines qui peuvent changer cette relation — cinéma pour lumière et séquence, édition pour rythme et crop, affichage pour échelle et distance, architecture pour masse, photographie pour focalisation, packaging pour matière, signalétique pour orientation, arts vivants pour mouvement — sans transformer une référence culturelle en décor interchangeable.
+ 
+diff --git a/package/skills/design-governance-practice/references/examples.md b/package/skills/design-governance-practice/references/examples.md
+index e89b80a..69b0755 100644
+--- a/package/skills/design-governance-practice/references/examples.md
++++ b/package/skills/design-governance-practice/references/examples.md
+@@ -36,7 +36,7 @@ THÈSE: le pain du jour se choisit d’un coup d’œil, avant d’entrer
+ OBJET DE PREUVE: la vitrine du jour, composant codé (produit, prix, heure de sortie du four)
+ MODAL: photo pleine largeur, titre centré, trois cartes « nos valeurs »
+ PARTI: s’écarter pour la première scène, où la vitrine du jour remplace la photo ; garder la navigation attendue
+-FABRICATION: typographie et couleur au plafond (polices libres, palette tirée des photos) ; photos du client moyennes, un seul traitement cohérent ; aucune illustration dessinée
++FABRICATION: typographie et couleur au plafond (polices libres, palette tirée des photos) ; photos du client moyennes, traitement commun choisi pour unifier la série ; aucune illustration dessinée
+ DÉFAUT DOMINANT: après capture, les prix se lisent mal sur mobile ; taille et contraste corrigés, seconde capture comparée
+ ```
+ 

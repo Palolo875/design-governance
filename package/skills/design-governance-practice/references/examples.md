@@ -36,7 +36,7 @@ THÈSE: le pain du jour se choisit d’un coup d’œil, avant d’entrer
 OBJET DE PREUVE: la vitrine du jour, composant codé (produit, prix, heure de sortie du four)
 MODAL: photo pleine largeur, titre centré, trois cartes « nos valeurs »
 PARTI: s’écarter pour la première scène, où la vitrine du jour remplace la photo ; garder la navigation attendue
-FABRICATION: typographie et couleur au plafond (polices libres, palette tirée des photos) ; photos du client moyennes, un seul traitement cohérent ; aucune illustration dessinée
+FABRICATION: typographie et couleur au plafond (polices libres, palette tirée des photos) ; photos du client moyennes, traitement commun choisi pour unifier la série ; aucune illustration dessinée
 DÉFAUT DOMINANT: après capture, les prix se lisent mal sur mobile ; taille et contraste corrigés, seconde capture comparée
 ```
 
