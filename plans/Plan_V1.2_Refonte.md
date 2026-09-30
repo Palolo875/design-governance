@@ -1,6 +1,6 @@
 # Plan V1.2 — Refonte : fabrication, structure, trace et preuve
 
-**Date :** 2026-09-27 · **Owner :** Junior (Kamel) · **Statut :** en cours. R1 à R4 appliqués, P1 fait, R5b-1, R5b-2 et R5a appliqués (27-09-2026, `audit/reports/V12R_01` à `V12R_08` ; reprise : `plans/Plan_V1.2_Suite_Reprise.md`) ; décisions 1, 2, 4, 5, 7 et 11 prises, D-20 et D-22 tranchés. Chemin prescrit 12 076 mots en trace légère (16 687 en trace complète) ; 24/25 outils sur le chemin ; noyau 3 222 mots. Consigne de l’owner : la qualité du résultat prime sur le nombre de mots (pas de plafond de coupe ; on ne retire que doublons et texte sans effet). Prochaine étape : R5c, R5d, R6, R8, R11.
+**Date de création :** 2026-09-27 · **Pilotage au :** 2026-09-30 · **Owner :** Junior · **Statut :** consolidation avant évaluation. R1 à R4, P1, R5b-1, R5b-2, R5a, R8a, R5c hors ancre, R5d, R6a et R11a sont documentés comme faits (`V12R_01` à `V12R_13`). Dernières mesures rapportées après R11a : chemin 12 187 mots en trace légère, 16 798 en trace complète ; noyau 3 302 mots ; 24/25 outils comptés, F22 accessible sous condition. Les contrôles correspondants ne sont pas réexécutés par cette synchronisation. **Reprise opérationnelle :** `plans/Plan_V1.2_Suite_Reprise.md` §4 ; décisions : `V12R_14`, addendum 2.
 **Base :** B05, candidate V1.2 (lots 1 et 2 appliqués).
 **Sources du plan :**
 - lectures `V12_05` à `V12_10` et synthèse `V12_11` (registre D-01 à D-18) ;
@@ -8,7 +8,7 @@
 - dossier de clôture DG-AUDIT-001, §3 (réserves 1 à 9) ;
 - mineurs transmis (Q-04, Q-07, Q-08, Q-09, Q-11, Q-12, Q-13 ; R-16 à R-32).
 
-Ce plan **remplace le séquencement** du plan V1.2 et de l'addendum à partir de maintenant. Leurs chantiers y sont repris (§4). Les décisions G1 déjà prises restent valables, sauf si le §8 les rouvre explicitement.
+Ce plan conserve l'architecture du chantier et l'historique des lots. **Le plan de reprise porte le séquencement opérationnel courant**, et `V12R_14` les décisions et leurs révisions. En cas d'écart, les décisions actuelles et leur intégration au plan de reprise prévalent sur les périmètres d'origine ci-dessous. Les décisions G1 restent valables dans leur portée non révisée.
 
 ---
 
@@ -237,17 +237,23 @@ Chaque lot suit la méthode du §6. **Taille :** S ≈ une unité courte, M ≈ 
 - Lois de SAVOIR (décision 8) : testées en R10.
 - Catalogue élargi aux contextes de l'owner (décision 10) : **après publication**, à partir de runs réels, en `PILOT`.
 
-**R8 — Matériaux et atlas** (M ; chantiers C et E')
-- **Périmètre :** carte des moyens consolidée (critères + sources datées `[VEILLE]`) ; atlas d'ancres annotées v1 (liens et descriptions, double colonne visuel / fond, références hors canon occidental), placé en **référence de la skill**, chargée seulement si la décision visuelle est ouverte.
-- **Arrêt :** si R10 montre une baisse de diversité, on retire les exemples et on ne garde que les critères (règle déjà décidée dans le plan V1.2).
+**R8 — Moyens et gestes de résolution** (périmètre courant : plan de reprise §4)
+- **R8a fait :** question de convergence typographique ; effet sur les rendus encore à mesurer.
+- **R8b :** carte des moyens consolidée et enseignements transférables confrontés aux propriétaires existants ; aucune intégration obligatoire des 18 créations de l'atlas.
+- **R8c :** préciser les gestes insuffisamment opérables, avec déclencheur, corrections possibles et observation de l'effet ; aucun quota de gestes ou de retouches.
+- **Diversité :** si elle baisse en R10, examiner les consignes et ressources susceptibles de favoriser la convergence, sans présumer sa cause.
 
-**R9 — Trace machine** (L ; décision 3)
-- **Périmètre :** niveau de trace dans la `RUN_CARD` (léger / complet) ; champ facultatif `fabrication` ; vocabulaire `direction.anti_direction` → `modal`/`parti`, avec alias de compatibilité.
-- **Version :** si le schéma reste **rétrocompatible**, V1.2.0 ; sinon V1.3.0.
+**R9 — Trace machine : reporté** (décision 3)
+- **Périmètre d'origine conservé en historique :** champs de trace et de fabrication, renommage avec alias. Aucun de ces changements de schéma ne fait partie de la candidate actuelle.
+- **Décision actuelle :** schéma `RUN_CARD` inchangé ; `modal` / `parti` projetés dans `direction.anti_direction` ; version cible V1.2.0 ; report déclaré lors de R12.
 
 ### Vague V — Preuve, réserves, publication
 
-**R10 — Épreuve à l'aveugle** (L ; chantier F ; décision 9)
+**R10 — Évaluation progressive** (chantier F ; décision 9)
+
+**Périmètre actif :** après P2 et levée de la consigne « pas de run », palier exploratoire de 6 cas, puis 18 si justifié ; extension seulement pour une question définie. Candidate, conditions, mesures et critères de décision fixés avant production, réemploi des références selon le plan de reprise §4. L'observation novice est distincte.
+
+**Protocole élargi de référence ci-dessous :** option d'extension, sans lancement automatique ni seuil statistique établi. Les anciens critères de décision doivent être rendus opérables avant une épreuve qui les utilise.
 - **Briefs :** B-DLA (commerce, Douala), B-LOG (reporté), un produit SaaS, un service public, un portfolio.
 - **Conditions :**
   - C1 : brief vague, sans système ;
@@ -279,15 +285,9 @@ Chaque lot suit la méthode du §6. **Taille :** S ≈ une unité courte, M ≈ 
 
 ### Dépendances
 
-```
-R1 → R2 → R3 → R4 → P1 ─┬→ R5a → R5b → R5c → R5d → R6 → R9
-                        └→ R7 (texte) , R8
-R6 + R8 + R9 → R10 → R11 → R12
-```
+Le séquencement courant est celui du plan de reprise §4 : inventaire → R8b → R8c → R7 → R11 ciblé → R6b élargi → restes R5 → relecture de parcours et P2 → R10 progressif → R11 final → R12. R9 est reporté et ne conditionne pas R10.
 
-R11 (tri des mineurs) peut commencer en parallèle dès R2, pour les mineurs que la refonte ne rend pas obsolètes.
-
-**Signalement de taille (style de l'owner) :** le programme compte **douze lots**, dont trois grands (R5b, R9, R10). Il est surdimensionné pour être mené d'un bloc. Le point de contrôle P1 permet de s'arrêter après la vague II si le noyau ne change pas le rendu.
+**Charge :** les lots de consolidation sont traités séparément. R10 augmente seulement si les résultats ou une question ouverte le justifient ; P1 reste une orientation historique.
 
 ## 6. Méthode
 
@@ -301,7 +301,7 @@ R11 (tri des mineurs) peut commencer en parallèle dès R2, pour les mineurs que
    - table de correspondance des harnais (300 cas : conservé / obsolète déclaré) ;
    - R, R03, 13.01, 13.02 ;
    - B01 218/218.
-3. **Budget mesuré à chaque lot** sur le chemin prescrit (R1). Aucun lot n'augmente le chemin sans décision.
+3. **Charge mesurée à chaque lot** sur le chemin prescrit (R1). Une augmentation utile est justifiée et déclarée ; les coupes visent les doublons et le texte sans effet, conformément à « qualité avant nombre de mots ».
 4. **Aucune correction non décidée** (règle 3). Un défaut découvert va au registre D-xx avec son lot.
 5. **Rapport allégé par lot** : diff, résultats, écarts déclarés, certain / probable / hypothétique.
 6. **Charte de rédaction** appliquée à tout texte réécrit :
@@ -322,12 +322,14 @@ R11 (tri des mineurs) peut commencer en parallèle dès R2, pour les mineurs que
 | Coût des harnais (prose figée) | Plus de rectifications que de changements de texte | R2 avant tout ; table de correspondance ; arrêt commun de R5 |
 | Perte de l'honnêteté mesurée | Données d'exemple non marquées en P1 ou R10 | Gardes d'honnêteté (R2) ; critère bloquant en R10 |
 | Style maison créé par le noyau (mêmes gestes → mêmes rendus) | Diversité en baisse en P1 ou R10 | Mesure de diversité ; gestes formulés en décisions, pas en styles ; retrait des exemples (R8) |
-| Noyau qui gonfle | > 3 000 mots | Arrêt de R4 ; tout ajout financé par une coupe |
+| Charge qui augmente sans contribution utile | Parcours alourdi sans décision, construction ou vérification améliorée | Justifier les ajouts ; retirer les doublons et le texte sans effet ; anciens seuils de mots conservés comme diagnostic historique |
 | Biais d'auto-comparaison | Mêmes conclusions que l'auteur | Juge neuf en P1 ; regard extérieur en R10 ; déclaration |
 | Surdimensionnement | Lots qui débordent | Découpage de R5b et R9 ; P1 comme porte de sortie |
 | Temps et usage de l'owner | Décisions en attente | Décisions groupées (§8) ; défauts par recommandation écrite |
 
-## 8. Décisions attendues de l'owner
+## 8. Arbitrages d'origine et décisions prises
+
+Les options ci-dessous sont historiques ; l'état courant figure dans `V12R_14`, addendums 1 et 2.
 
 | # | Décision | Options | Recommandation |
 |---|---|---|---|
@@ -345,7 +347,7 @@ R11 (tri des mineurs) peut commencer en parallèle dès R2, pour les mineurs que
 
 Les décisions 1, 2, 4 et 7 conditionnent R2 à R4. Les autres peuvent attendre leur lot.
 
-**Décisions prises :** 1, 2, 4 et 7 (`V12R_00`) ; 5 (a) et 11 (a), avec D-20 (exemple marqué) et D-22 (test de trame sans coût) (`V12R_06`, 27-09-2026). **Prises le 27-09-2026 (`V12R_14`) :** 3 (a) V1.2.0, schéma inchangé, R9 reporté ; 6 (a) graduée ; 8 (a) ; 9 (c) ; 10 (a) ; atlas intégré en R8b (révision de G1) ; R10 par paliers ; R11 ciblé ; ordre « le rendu d'abord ». **Aucune décision en attente.** Lots ajoutés le 27-09-2026 : **R8c** (passe de finition) et **R6b élargi** (entrée humaine d'une page) ; ordre et détail dans `plans/Plan_V1.2_Suite_Reprise.md` §4.
+**Décisions prises :** 1, 2, 4 et 7 (`V12R_00`) ; 5 et 11, D-20 et D-22 (`V12R_06`) ; 3, 6, 8, 9 et 10 (`V12R_14`). **Révisions au 30-09-2026 :** R8b sans atlas obligatoire ; R8c ciblé sur les gestes insuffisamment opérables ; R6b inclut l'entrée Local générée ; consolidation avant R10, porte P2 et évaluation progressive. Schéma inchangé, R9 reporté, V1.2.0. Les questions encore à instruire (cliquet d'atteignabilité, critères de R10, disponibilité des regards extérieurs, feu vert final) restent explicites dans le plan de reprise.
 
 ## 9. Lecture
 

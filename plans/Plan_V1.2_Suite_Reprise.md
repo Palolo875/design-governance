@@ -76,7 +76,7 @@ git checkout claude/init-repo-claude-md-gm6njm
 
 | Ordre | Unité | Guide | Points clés |
 |---|---|---|---|
-| 0 | **Inventaire unique des défauts** | ci-dessous | Registre D-01 à D-23, points du plan consolidé et de l'amendement, Q04 à Q13, R16 à R32, réserves de clôture : chacun marqué **bloquant P2** ou **non bloquant** (avec sa limite écrite). C'est la liste de sortie de la consolidation |
+| 0 | **Inventaire unique des défauts** | `audit/data/V12R/V12R_Inventaire_P2.md` (créé le 30-09) | Registre D-01 à D-23, points du plan consolidé et de l'amendement, Q04 à Q13, R16 à R32, réserves de clôture : chacun marqué **bloquant P2** ou **non bloquant** (avec sa limite écrite). C'est la liste de sortie de la consolidation |
 | 1 | **R8b** — moyens et enseignements transférables | amendement §4 | Carte des moyens consolidée : ce que chaque couche permet de construire, comment choisir, ce qui limite ; des conditions au lieu d'« atteignable » ; licences vérifiées par ressource ; D-20 préservé. **Plus d'atlas des 18 créations comme livrable** : les enseignements de l'atlas v0 sont confrontés à l'existant et deviennent un renvoi ou un ajout ciblé, conditionnel, avec observation attendue et contre-indication ; aucun style déduit d'un petit échantillon |
 | 2 | **R8c** — résoudre plus précisément | amendement §5 | Compléter seulement les gestes insuffisamment opérables (équilibre d'un titre, relation texte/image, poids optique des icônes, récupération après erreur, réinspection de l'ensemble après un réglage local) : déclencheur, corrections possibles, observation de l'effet. Aucune modification obligatoire si la relation fonctionne ; pas de bloc `FINITION` comme fin en soi ; « accent, traitement ou famille unique » restent contextuels. Contenus chez leurs propriétaires, noyau recompilé |
 | 3 | **R7** — ancre graduée | amendement §6 | DIRECTION porte la règle canonique, SAVOIR son exploitation, ACTION les observations et la conséquence sur l'acceptation ; une ancre peut venir du projet lui-même ; limite déclarée : le validateur (inchangé) ne garantit pas « observée ou fournie pour un produit réel », qui relève de la revue d'acceptation |
@@ -93,7 +93,7 @@ git checkout claude/init-repo-claude-md-gm6njm
 |---|---|---|
 | Hiérarchie et autorité | Chaque règle a un lieu propriétaire ; obligatoire et conditionnel distingués ; résolution des conflits écrite | Gardes de propriété ; relecture |
 | Organisation et accès | Une entrée agent (la skill), une entrée humaine (R6b) ; chaque ressource atteignable au moment où elle sert | Atteignabilité (disparition, accès conditionnel et fragilité d'ancre distingués) ; routes résolubles |
-| Cohérence opérationnelle | Double boucle reliée : connaissance → décision → geste → capture → correction | Relecture de parcours |
+| Cohérence opérationnelle | `DIRECTION/DOUBLE-LOOP` reste la référence : fabrication guidée, réobservation, comparaison, maintien ou réouverture de la direction, arrêt justifié ; observation adaptée au risque (capture, interaction, séquence ou mesure) | Relecture des embranchements et de leurs renvois, sans nouvelle définition de la boucle |
 | Clarté et charge | Pas de doublon contradictoire ; aucune nuance utile perdue ; jargon expliqué | Mesure des doublons ; glossaire ; relecture |
 | Fiabilité | Renvois valides ; exemples conformes aux règles ; distributions GitHub et Local fidèles aux sources | `validate_all`, 13.01, 13.02, suivi, build des distributions |
 
@@ -110,12 +110,14 @@ P2 ne prétend pas établir ce que seul l'usage montre.
 - un humain novice ;
 - un expert qui reprend un run.
 
-On note chaque trou, chaque contradiction et chaque ressource qui arrive trop tard ; chaque constat entre dans l'inventaire. La relecture se fait à la fin des lots, puis à la porte P2.
+On note chaque trou, chaque contradiction et chaque ressource qui arrive trop tard ; chaque constat entre dans l'inventaire. La relecture suit aussi les retours de `DIRECTION/DOUBLE-LOOP` : défaut local, direction à rouvrir, risque changé, preuve insuffisante et arrêt justifié. Elle vérifie le passage d'une première proposition exploratoire à une acceptation pour un produit réel (R7). Une observation par interaction ou mesure reste accessible lorsque la capture ne suffit pas. La relecture se fait à la fin des lots, puis à la porte P2.
+
+**Inventaire :** réconcilier les registres existants dans une vue unique (identifiant, emplacement, conséquence, lot, état, preuve ou limite). Un défaut déjà corrigé reste un acquis à vérifier ; il ne redevient pas une correction à faire. Une classification « non bloquant P2 » se justifie par la conséquence restante. Pour Q13 et R16–R32, la classification reste à instruire jusqu'à lecture des traces : une absence de preuve ne permet pas de les déclarer non bloquants. P2 s'appuie sur les outils existants ; l'ajout du cliquet d'atteignabilité reste une proposition distincte.
 
 ### R10 progressif
 
 - **But :** évaluer ce qu'une lecture ne peut pas établir (qualité réelle, facilité d'usage, coût, variabilité), pas améliorer le système.
-- **Palier exploratoire :** 2 briefs contrastés (B-DLA et SaaS) × 3 conditions (C1, C3, C4), soit environ 6 productions. Environ 4 si les rendus B-DLA existants restent comparables (même modèle producteur) ; sinon on les refait.
+- **Palier exploratoire :** 2 briefs contrastés (B-DLA et SaaS) × 3 conditions (C1, C3, C4) = **6 cas comparés**. Il faut 6 productions neuves, ou 4 seulement si une référence B-DLA C1 et une référence B-DLA C4 restent réutilisables. Vérifier et consigner pour chaque réemploi : modèle et version, consignes et brief, outils et capacités, intrants, limites de production, captures et mesures. Déclarer les écarts et refaire un cas lorsqu'ils empêchent la comparaison. **C3 est produit avec la candidate consolidée après P2** ; un ancien rendu C3 de P1 (package après R4) reste une pièce historique et ne représente pas cette candidate.
 - **Critères écrits avant de produire :**
   - ce qu'est un « problème évident » (on corrige d'abord) ;
   - ce qui justifie de passer à 18 ;
@@ -237,7 +239,7 @@ Chaque lot : **périmètre**, **gardes à ajouter**, **réussite**, **arrêt**.
 | Lot | Décision | Recommandation |
 |---|---|---|
 | R7 (texte d'orientation) | 6 (ancre), 8 (lois), 10 (catalogue) | 6 (a) graduée par destination ; 8 (a) tester en R10 ; 10 (a) après publication |
-| R9 (trace machine, schéma) | 3 (version) | (a) V1.2.0 si `RUN_CARD` rétrocompatible : champ `trace_level` (`light` / `full`) facultatif, `modal` / `parti` avec alias `anti_direction` |
+| R9 (trace machine, schéma) | 3 (version) | **Reporté.** Schéma `RUN_CARD` inchangé ; aucun champ nouveau ; `modal` / `parti` restent projetés dans `direction.anti_direction` ; publication visée V1.2.0 |
 | R10 (épreuve à l'aveugle) | 9 (juges) | (c) personnes extérieures et juges modèles d'autres familles, déclarés non indépendants |
 | R12 (publication V1.2.0) | feu vert final | après R10 |
 
@@ -247,5 +249,5 @@ Chaque lot : **périmètre**, **gardes à ajouter**, **réussite**, **arrêt**.
 - **Carte de lecture d'ACTION** : conservée (C4, 13.02 et `validate_design_governance` en dépendent), gardée par CHG-09. Sa fusion demande une rectification déclarée de ces outils.
 - ~~D-19~~ (R5a) ; ~~D-21~~ (R8a) ; ~~D-16~~ (R5c) ; ~~F22~~ (R5d, atteignable depuis Gate C).
 - **Mesure d'atteignabilité** : elle repose sur des ancres textuelles (`audit/data/V12R/V12R_outils_fabrication.json`) ; une reformulation peut faire « disparaître » un outil encore présent (cas F13 en R8a, rectifié en R11a). Proposition : cliquet d'atteignabilité dans `V12R_Suivi.py` (à décider).
-- **Plan consolidé (proposition du 27-09-2026)** : `plans/propositions/Plan_consolide_V1.2_2026-09-27.md`. Non actif : ses arbitrages seront intégrés à ce plan après décision de l'owner, sans second plan concurrent.
+- **Plan consolidé et amendement archivés** : documents de provenance, sans statut de plan actif. Les arbitrages pris sont consignés dans `V12R_14` et intégrés au §4 ; les anciennes recommandations remplacées restent historiques.
 - **Coût d'un run** (D-23) : l'effet de la trace légère n'a pas été mesuré, ce sera en R10.
