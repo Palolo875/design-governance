@@ -24,7 +24,7 @@ Sur B-DLA, les rendus C3 et C4 n'avaient ni numéro ni bouton WhatsApp : la comm
 
 - **Garde :** rouge avant (source et copie compilée), verte après.
 - **Mutations :** 2/2 rouges (inverse de l'entrée ; retrait dans la copie compilée).
-- **Contrôles :** voir §5.
+- **Contrôles :** suivi vert, 13.01 6/6 et 5/5, 13.02 38/38 (§5).
 - **B01 :** 218/218.
 
 ## 4. Ce qui n'est pas établi
@@ -35,7 +35,16 @@ Sur B-DLA, les rendus C3 et C4 n'avaient ni numéro ni bouton WhatsApp : la comm
 
 ## 5. Contrôles finaux
 
-Voir le bloc « Résultats du suivi », ajouté après l'exécution.
+**Résultats sur le package appliqué :**
+- **Suivi :** VERT (389 cas, 363 maintenus, 26 migrés, aucune migration nouvelle ; `validate_all` vert).
+- **13.01 :** texte 6/6, non-régression 5/5.
+- **13.02 :** 38/38.
+- **B01 :** 218/218.
+
+**Mesures :**
+- chemin prescrit : 13 105 → **13 153 mots** (+48 : la phrase est comptée dans la source et dans sa copie compilée) ;
+- doublons : 139, inchangé ;
+- outils de fabrication : 24/25, inchangé.
 
 ## 6. R10 : état à l'arrêt
 
