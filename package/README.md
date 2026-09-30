@@ -32,7 +32,7 @@ Pour aller plus loin : le [guide opérateur](V1/official/QUICKSTART.md), la [ski
 
 La carte [`V1/official/READING_MAP.md`](V1/official/READING_MAP.md) résout le premier chemin, l’activation multi-perspective, les handoffs et les locators principaux. Elle est dérivée et non normative. Les cinq sources officielles, le schéma `RUN_CARD` et leurs validateurs restent les autorités.
 
-Pour exploiter plusieurs capacités sans les charger mécaniquement, utilisez la [`ORCHESTRATION_MAP.md`](V1/official/ORCHESTRATION_MAP.md). Cette vue dérivée compose les résultats recherchés, les capacités, les intensités, les patterns créatifs et la preuve ; elle ne crée aucun mode ni aucune règle concurrente.
+Pour exploiter plusieurs capacités sans les charger mécaniquement, utilisez la section « Combinaisons par résultat recherché » de la même carte. Cette vue dérivée compose les résultats recherchés, les capacités, les intensités, les patterns créatifs et la preuve ; elle ne crée aucun mode ni aucune règle concurrente.
 
 ## Mission
 

@@ -32,7 +32,7 @@ Tu vises l’excellence appropriée au produit, au public, au risque et au conte
 | **DIRECTION** | `DIRECTION/CREATIVE-BOOT`, `DIRECTION/EXTERNAL-START` si le brief est vague, `DIRECTION/VISUAL_TARGET`, `DIRECTION/FIRST-OBJECT`, `ACTION/FIRST-RENDER`, `ACTION/RUN-DIRECTION`, puis `ACTION/GATE-A` et `ACTION/GATE-C` applicables ; en trace complète (`ACTION/HANDOFF`), `ACTION/GATE-B`, `ACTION/RUN_CARD` et `ACTION/CLOSE-PACKAGE`. |
 | **SYSTÈME** | `ACTION/RUN-SYSTEM` ; `BIBLIOTHEQUE/COMPONENTS` si un composant change. |
 
-La clôture de chaque mode est `ACTION/CLOSE-PACKAGE`, en trace complète ; en trace légère, le run s’arrête à la proposition (`ACTION/HANDOFF`). Pour l’agent, les blocs « noyau » compilés dans la skill tiennent lieu de lecture de fabrication ; README, QUICKSTART, READING_MAP et ORCHESTRATION_MAP sont des lectures d’orientation pour les humains.
+La clôture de chaque mode est `ACTION/CLOSE-PACKAGE`, en trace complète ; en trace légère, le run s’arrête à la proposition (`ACTION/HANDOFF`). Pour l’agent, les blocs « noyau » compilés dans la skill tiennent lieu de lecture de fabrication ; README, QUICKSTART et READING_MAP sont des lectures d’orientation pour les humains.
 
 ### 3. Prendre le brief et viser le premier objet
 
@@ -209,4 +209,4 @@ L’agent active le système en silence : la personne donne l’objectif, le pé
 - **Flux :** [references/flow.md](references/flow.md) : la vue courte du chemin.
 - **Projection machine :** [references/machine_projection.md](references/machine_projection.md) : sérialiser une `RUN_CARD` pour un run persistant, partagé ou audité.
 - **Aide-mémoire :** [references/canonical_minimum.md](references/canonical_minimum.md) : seulement si les sources V1 sont absentes.
-- **Lecture humaine :** `README.md`, `QUICKSTART.md`, `READING_MAP.md` et `ORCHESTRATION_MAP.md` orientent les personnes ; l’agent les ouvre seulement si une personne le demande.
+- **Lecture humaine :** `README.md`, `QUICKSTART.md` et `READING_MAP.md` orientent les personnes ; l’agent les ouvre seulement si une personne le demande.

@@ -21,5 +21,5 @@ En texte : **classer et protéger le run, cultiver et diriger la décision, comp
 
 Charger `DIRECTION/START` avant un build, une modification, une vérification, une action externe ou une décision persistante. Charger les routes approfondies uniquement si elles peuvent modifier une décision, un artefact, une preuve, une limite ou la prochaine action.
 
-Pour composer plusieurs capacités selon un résultat recherché — direction, beauté située, créativité, usage, preuve, vitesse ou système — consulter `ORCHESTRATION_MAP.md` dans la carte officielle du package. Cette carte complète le flux sans créer de route supplémentaire.
+Pour composer plusieurs capacités selon un résultat recherché — direction, beauté située, créativité, usage, preuve, vitesse ou système — consulter la section « Combinaisons par résultat recherché » de `READING_MAP.md` dans la carte officielle du package. Cette carte complète le flux sans créer de route supplémentaire.
 

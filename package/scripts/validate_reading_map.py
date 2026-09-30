@@ -182,7 +182,7 @@ def load_texts() -> dict[str, str]:
 def lcf_07(t: dict[str, str]) -> bool:
     chain = after(t["D"], "**Chaîne de lecture interne.**", 700)
     prio = fenced_after(t["D"], "```text\nRUN-PRIORITY")
-    pointers = [row(t["RM"], "Direction identitaire"), row(t["OM"], "Direction forte et spécifique")]
+    pointers = [row(t["RM"], "Direction identitaire"), row(t["RM"], "Direction forte et spécifique")]
     rows = [charge_row(t, "DIRECTION")]
     return (before(chain, "`VISUAL_TARGET`", "`FIRST-OBJECT`") and before(prio, "DIRECTION —", "FIRST-OBJECT —")
             and all(r and before(" ".join(r), "VISUAL_TARGET", "FIRST-OBJECT") for r in rows)
@@ -190,7 +190,7 @@ def lcf_07(t: dict[str, str]) -> bool:
 
 
 def lcf_03(t: dict[str, str]) -> bool:
-    ui, proof, system = row(t["OM"], "UI/UX habitable"), row(t["OM"], "Preuve et décision fiables"), row(t["OM"], "Système maintenable")
+    ui, proof, system = row(t["RM"], "UI/UX habitable"), row(t["RM"], "Preuve et décision fiables"), row(t["RM"], "Système maintenable")
     keys = ("migration", "rollback", "CHANGELOG")
     return (bool(ui) and "ACTION/GATE-A" in ui[1] and "ACTION/GATE-A" not in ui[2]
             and bool(proof) and re.search(r"(?i)gate", proof[1]) is not None and re.search(r"(?i)gate", proof[2]) is None
@@ -521,7 +521,7 @@ def check_facades(errors: list[str]) -> None:
          and "ACTION/RUN-DIRECTION" in charge_row(t, "DIRECTION")[1] and "ACTION/RUN-DIRECTION" not in charge_row(t, "DIRECTION")[2]),
         ("LCF-02", "READING_MAP, ligne « Accessibilité »", "ACTION/GATE-A (contrôles applicables dus)",
          bool(rm49) and "N/A-JUSTIFIED" not in rm49[-1] and "ACTION/GATE-A" in rm49[-1]),
-        ("LCF-03", "ORCHESTRATION_MAP, noyau UI/UX, preuve, système", "ACTION/GATE-A ; gate du risque ; paquet SYSTÈME (B3)", lcf_03(t)),
+        ("LCF-03", "READING_MAP (combinaisons), noyau UI/UX, preuve, système", "ACTION/GATE-A ; gate du risque ; paquet SYSTÈME (B3)", lcf_03(t)),
         # R6b-1 (V12R_27, rectification déclarée) : la table des modes vit dans le guide opérateur (QUICKSTART) ; l'entrée
         # humaine (README) ne demande aucun mode. Les propriétés sont conservées sur la table qui subsiste.
         ("LCF-04", "QUICKSTART, ligne DIRECTION ; aucune table de mode dans le README", "DIRECTION/START (direction visuelle autonome)",
@@ -531,7 +531,7 @@ def check_facades(errors: list[str]) -> None:
          re.search(r"\*\*`ITER`\*\*[^\n]*(retrouvable|existante)", t["Q"]) is not None and rd_iter is None),
         ("LCF-06", "DIRECTION, index « Nouvelle structure d’écran »", "DIRECTION/START (classification)",
          bool(index) and "classification `ACTION/RUN-STANDARD`" not in index[1]),
-        ("LCF-07", "DIRECTION 72, RUN-PRIORITY, READING_MAP, ORCHESTRATION_MAP, skill", "DIRECTION 55 (cible avant premier objet)", lcf_07(t)),
+        ("LCF-07", "DIRECTION 72, RUN-PRIORITY, READING_MAP (routage et combinaisons), skill", "DIRECTION 55 (cible avant premier objet)", lcf_07(t)),
         ("LCF-08", "DIRECTION, gabarit START et FAST-PATH", "DIRECTION/START (OWNER et SCOPE jamais omis)",
          re.search(r"`?OWNER`? et `?SCOPE`?[^.]*jamais omis", entry) is not None and bool(fast) and "si nécessaire" not in fast[1]),
         ("LCF-09", "DIRECTION, RUN-PRIORITY et récapitulatif de protection (point 4)", "BIBLIOTHEQUE/SELECT, SCENE",

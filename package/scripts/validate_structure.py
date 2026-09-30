@@ -223,6 +223,18 @@ def check_entry(corpus: dict[Path, list[str]], errors: list[str]) -> None:
             errors.append(f"[CST-01] copie de la constitution minimale hors du README : {path.name}")
 
 
+# 14. Cartes réunies (R6b-2) : les combinaisons par résultat vivent dans READING_MAP ; ORCHESTRATION_MAP n'est qu'un pointeur.
+def check_maps(errors: list[str]) -> None:
+    reading = (OFFICIAL / "READING_MAP.md").read_text(encoding="utf-8")
+    if reading.count("## Combinaisons par résultat recherché") != 1:
+        errors.append("[MAP-01] READING_MAP doit porter une seule section « Combinaisons par résultat recherché »")
+    pointer = OFFICIAL / "ORCHESTRATION_MAP.md"
+    if pointer.is_file():
+        text = pointer.read_text(encoding="utf-8")
+        if any(line.startswith("|") or line.startswith("## ") for line in text.splitlines()) or len(text.split()) > 80:
+            errors.append("[MAP-01] ORCHESTRATION_MAP porte de nouveau un contenu propre (pointeur de compatibilité attendu)")
+
+
 # 12. Locators numériques (R-28) : un message du validateur cite un lieu nommé, jamais un numéro de ligne.
 NUMERIC_LOCATOR = re.compile(r"\((?:[^()]*, )?(?:DIRECTION|ACTION|SAVOIR|BIBLIOTHEQUE) \d+\)")
 
@@ -254,7 +266,7 @@ LOAD_HEADERS = re.compile(r"^\|\s*Mode\s*\|\s*(Charger d’abord|Démarrage mini
 LOAD_OWNERS = {"DIRECTION.md", "SKILL.md"}
 LOAD_POINTERS = [("QUICKSTART.md", "| Une direction visuelle ouverte |"),
                  ("READING_MAP.md", "| Direction identitaire |"),
-                 ("ORCHESTRATION_MAP.md", "| **Direction forte et spécifique** |")]
+                 ("READING_MAP.md", "| **Direction forte et spécifique** |")]
 
 
 def texts() -> dict[Path, list[str]]:
@@ -509,6 +521,7 @@ def check() -> list[str]:
     check_universal(corpus, errors)
     check_numeric_locators(errors)
     check_entry(corpus, errors)
+    check_maps(errors)
     return errors
 
 

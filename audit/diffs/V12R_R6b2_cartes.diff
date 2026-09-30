@@ -1,0 +1,271 @@
+diff --git a/package/README.md b/package/README.md
+index 0340dd8..b895e86 100644
+--- a/package/README.md
++++ b/package/README.md
+@@ -32,7 +32,7 @@ Pour aller plus loin : le [guide opérateur](V1/official/QUICKSTART.md), la [ski
+ 
+ La carte [`V1/official/READING_MAP.md`](V1/official/READING_MAP.md) résout le premier chemin, l’activation multi-perspective, les handoffs et les locators principaux. Elle est dérivée et non normative. Les cinq sources officielles, le schéma `RUN_CARD` et leurs validateurs restent les autorités.
+ 
+-Pour exploiter plusieurs capacités sans les charger mécaniquement, utilisez la [`ORCHESTRATION_MAP.md`](V1/official/ORCHESTRATION_MAP.md). Cette vue dérivée compose les résultats recherchés, les capacités, les intensités, les patterns créatifs et la preuve ; elle ne crée aucun mode ni aucune règle concurrente.
++Pour exploiter plusieurs capacités sans les charger mécaniquement, utilisez la section « Combinaisons par résultat recherché » de la même carte. Cette vue dérivée compose les résultats recherchés, les capacités, les intensités, les patterns créatifs et la preuve ; elle ne crée aucun mode ni aucune règle concurrente.
+ 
+ ## Mission
+ 
+diff --git a/package/V1/official/CHANGELOG.md b/package/V1/official/CHANGELOG.md
+index b9d5d10..678546f 100644
+--- a/package/V1/official/CHANGELOG.md
++++ b/package/V1/official/CHANGELOG.md
+@@ -30,6 +30,7 @@
+ - **Ancre graduée (refonte, R7).** Absolu 2 : explorer sans ancre avec une limite déclarée ; accepter avec une ancre, observée ou fournie pour un produit réel, qui peut venir du projet ; sans l’ancre requise, la direction reste `EXPLORATORY` ; `FAIL-ASSUMED` ne vaut que pour un échec connu, jamais pour une ancre absente (raccord R7-2) ; SAVOIR, déclencheur critique et façades alignés par renvoi. Schéma et validateur inchangés.
+ - **Cohérence ciblée (refonte, R11).** Contrôle machine nommé par mode (paquets de clôture, promesse du validateur) ; arrêt one-shot relié à B1b ; exclusion LITE/ITER alignée sur la protection de niveau ; ancre `transformed` exigée en DIRECTION ; triade définie, valeurs de repli nommées ; références alignées sur le schéma et les propriétaires ; locators nommés dans les messages du validateur ; six cas négatifs ajoutés. Schéma et comportement du validateur inchangés.
+ - **Entrée humaine (refonte, R6b-1).** Une seule entrée pour une personne qui fait une demande : section « Commencer » du README du package, en quatre questions (que demander, que fournir, que recevoir, comment poursuivre), au vouvoiement et sans mode à choisir ; le README Local la reprend, générée par le build depuis la même source. QUICKSTART devient le guide opérateur, à un seul parcours commun ; le README officiel devient un pointeur vers les sources normatives ; une seule constitution minimale, exacte (l’ancien résumé de l’absolu 2 est retiré).
++- **Cartes réunies (refonte, R6b-2).** `READING_MAP` porte désormais les combinaisons par résultat recherché, leurs garde-fous et leur condition d’arrêt ; `ORCHESTRATION_MAP` devient un pointeur de compatibilité. Aucune règle nouvelle ; `DIRECTION/CHARGE` reste la seule liste de chargement.
+ - **Efficacité.** `NOT-VERIFIED` : l’épreuve de référence donne V1.1.1 ≈ sans système sur la qualité perçue ; l’effet de ces chantiers reste à éprouver (G4).
+ 
+ ## V1.1.1 — Retour d’audit : alignements de textes et de façades
+diff --git a/package/V1/official/DIRECTION.md b/package/V1/official/DIRECTION.md
+index 30a0131..8c5e4b4 100644
+--- a/package/V1/official/DIRECTION.md
++++ b/package/V1/official/DIRECTION.md
+@@ -294,7 +294,7 @@ Les runs `STANDARD`, `DIRECTION` et `SYSTÈME` conservent une trace persistante.
+ <!-- noyau:fin CHARGE-TABLE -->
+ 
+ <!-- noyau:début CHARGE-FIN -->
+-La clôture de chaque mode est `ACTION/CLOSE-PACKAGE`, en trace complète ; en trace légère, le run s’arrête à la proposition (`ACTION/HANDOFF`). Pour l’agent, les blocs « noyau » compilés dans la skill tiennent lieu de lecture de fabrication ; README, QUICKSTART, READING_MAP et ORCHESTRATION_MAP sont des lectures d’orientation pour les humains.
++La clôture de chaque mode est `ACTION/CLOSE-PACKAGE`, en trace complète ; en trace légère, le run s’arrête à la proposition (`ACTION/HANDOFF`). Pour l’agent, les blocs « noyau » compilés dans la skill tiennent lieu de lecture de fabrication ; README, QUICKSTART et READING_MAP sont des lectures d’orientation pour les humains.
+ <!-- noyau:fin CHARGE-FIN -->
+ 
+ **Déclenchement de l’atlas.** Si aucune famille ne peut être reliée à une décision modifiable, n’ouvre pas `SAVOIR/DESIGN-ATLAS` ; reste sur la route existante. Si le signal est ambigu, pose une seule clarification ciblée ou reviens à `DIRECTION/START` pour classer le mode et le risque. Si un risque critique apparaît, reclassifie avant de charger une famille. L’atlas ne sert jamais à résoudre par catalogue un JTBD, un mode ou une intention manquante.
+diff --git a/package/V1/official/ORCHESTRATION_MAP.md b/package/V1/official/ORCHESTRATION_MAP.md
+index 9b9ae1c..4a93275 100644
+--- a/package/V1/official/ORCHESTRATION_MAP.md
++++ b/package/V1/official/ORCHESTRATION_MAP.md
+@@ -1,47 +1,3 @@
+ # ORCHESTRATION_MAP — combinaisons dérivées par résultat
+ 
+-**Statut :** vue dérivée, non normative. `DIRECTION/START`, les cinq sources normatives, `READING_MAP.md`, le schéma `RUN_CARD` et les validateurs font foi en cas de divergence.
+-
+-## Rôle
+-
+-Cette fiche aide à combiner plusieurs capacités lorsque chacune peut **modifier la même décision** ou **protéger un risque déclaré**. Elle ne crée ni mode, ni route, ni gate, ni statut, ni verdict, ni champ machine. Le mode est d’abord classé par `DIRECTION/START` ; la combinaison est ensuite choisie selon le résultat recherché et le scope réel.
+-
+-> **Principe :** ne pas charger le maximum de routes ; composer le maximum de contribution pertinente. Toute capacité activée doit avoir une contribution nommable et être retirée si elle ne change ni la décision, ni l’artefact, ni la preuve, ni la limite, ni la prochaine action.
+-
+-La combinaison choisie reste dans la trace existante du run, seulement si elle peut modifier la décision. Ne crée pas une trace par capacité et ne transforme pas une table d’orientation en preuve.
+-
+-## Combinaisons par résultat recherché
+-
+-| Résultat recherché | Noyau possible | Renforcement seulement si nécessaire | Preuve à privilégier |
+-|---|---|---|---|
+-| **Direction forte et spécifique** | `DIRECTION/CHARGE` (mode `DIRECTION`) | `DIRECTION/CREATIVE-BOOT`, `DIRECTION/DOMAIN-FRAME`, `SAVOIR/CRAFT`, `SAVOIR/SOURCE`, `SAVOIR/STYLE`, `BIBLIOTHEQUE/SELECT` | Premier objet réel, revue créative, observation du défaut dominant et correction réellement observée. |
+-| **Beauté, goût et craft situés** | `DIRECTION/FIRST-OBJECT` + `SAVOIR/CRAFT` + `ACTION/FIRST-RENDER` | `SAVOIR/STYLE`, contenu crédible, matière, typographie ou ancre lorsque chacun peut modifier le jugement | Rendu réel dans le scope ; jugement créatif séparé des preuves d’usage, d’accessibilité et de robustesse. |
+-| **Créativité variée mais utile** | `DIRECTION/CREATIVE-BOOT` + `DIRECTION/VISUAL_TARGET` + une alternative située | `DIRECTION/DOMAIN-FRAME`, `SAVOIR/SOURCE` ou atelier seulement si l’axe de divergence change une décision | Comparaison dans le même scope par public, JTBD, promesse, geste, structure ou expression. |
+-| **UI/UX habitable** | `ACTION/UI-UX-REALITY` + `BIBLIOTHEQUE/SELECT` + `ACTION/GATE-A` (contrôles applicables) + contenu et états réels | Responsive, focus, récupération, runtime ou `SAVOIR/CONTEXT` selon le risque | Tâche, états, viewports, contenu extrême, clavier ou méthode adaptée au claim. |
+-| **Preuve et décision fiables** | `ACTION/STRUCTURED-PROOF` + artefact réel + gate correspondant au risque + `ACTION/CLOSE-EXIT-CHECK` | Preuve croisée ou `RUN_CARD` stricte si la persistance l’exige | Claim, méthode, scope, date, artefact, limite et `TRACE-LOCATOR` retrouvables. |
+-| **Vitesse sans appauvrissement** | `DIRECTION/START` + `ACTION/FAST-PATH` + `LITE` ou `ITER` correctement classé | Ajouter une seule capacité si elle peut changer la décision ; reclassifier si le risque ou le périmètre augmente | Artefact réel, observation ciblée, preuve minimale applicable et prochaine action. |
+-| **Système maintenable** | `ACTION/RUN-SYSTEM` + `BIBLIOTHEQUE/COMPONENTS` si un composant change + migration, rollback et `CHANGELOG` (paquet SYSTÈME) | `BIBLIOTHEQUE/EVOLUTION` ou `SAVOIR/SYSTEM` selon la décision partagée | Consumers, compatibilité, non-régression, owner, migration et condition de reprise. |
+-| **Domaine sensible ou incertain** | `DIRECTION/DOMAIN-FRAME` + `SAVOIR/SOURCE` + `ACTION/STRUCTURED-PROOF` | Contexte culturel, conventions, confiance ou recherche seulement si un déclencheur peut changer la décision | Source ou observation reliée à la décision, transformation, rejet et limite. |
+-| **Agent contrôlé** | `DIRECTION/START` + `ACTION/AUTHORITY` + `SKILL.md` + owner | `READING_MAP`, `RUN_CARD` et cette fiche seulement si plusieurs capacités sont réellement nécessaires | Artefact livré, autonomie exercée, décision, preuve, limite, escalade et prochaine action. |
+-
+-Ces combinaisons ne sont pas des parcours obligatoires. Elles indiquent des capacités compatibles ; `READING_MAP.md` résout le premier chemin et les sources propriétaires définissent le contenu exact des routes.
+-
+-## Variation créative
+-
+-Pour produire du beau varié sans bruit : `SAVOIR/CRAFT/CFT-02` (un axe situé à la fois).
+-
+-Une alternative est utile si elle peut modifier le choix. Une référence, une ancre, une rationale ou une variante ne constitue pas une preuve indépendante.
+-
+-## Garde-fous
+-
+-- Classer d’abord avec `DIRECTION/START` ; cette fiche ne reclassifie pas.
+-- `ITER` signifie une itération sur une direction ou un système existant retrouvable, dans son périmètre ; il ne signifie pas simplement « quelque chose existe déjà ».
+-- Un chemin court ne réduit jamais la protection d’un risque critique.
+-- Une capacité indisponible limite le claim correspondant ; elle ne justifie pas une baisse silencieuse du mode.
+-- Ne pas remplir toutes les routes d’une combinaison si une route principale suffit.
+-- Ne pas ajouter de trace, de variante ou de preuve qui ne peut changer la décision, l’artefact, la limite ou l’action suivante.
+-
+-## Arrêt
+-
+-Arrêter l’orchestration lorsque la décision, le risque, le scope, l’owner, l’artefact, la preuve, la limite et la prochaine action sont suffisamment explicites. La richesse de lecture n’est pas un résultat ; **l’effet positif observable dans le périmètre déclaré** est le résultat recherché.
+-
++**Statut :** pointeur de compatibilité. Les combinaisons par résultat recherché, leurs garde-fous et leur condition d’arrêt sont désormais dans [`READING_MAP.md`](READING_MAP.md), section « Combinaisons par résultat recherché ». Ce fichier ne porte plus de contenu propre.
+diff --git a/package/V1/official/READING_MAP.md b/package/V1/official/READING_MAP.md
+index 4e37293..bf30846 100644
+--- a/package/V1/official/READING_MAP.md
++++ b/package/V1/official/READING_MAP.md
+@@ -6,7 +6,7 @@
+ 
+ Cette carte réduit la recomposition mentale du lecteur. Elle ne crée ni mode, ni gate, ni axe, ni statut, ni verdict, ni owner de décision supplémentaire. Elle indique seulement où commencer, quoi charger, ce qui doit sortir et quand transmettre.
+ 
+-Pour composer plusieurs capacités selon un résultat recherché — direction, beauté située, créativité, usage, preuve, vitesse ou système — consulter [`ORCHESTRATION_MAP.md`](ORCHESTRATION_MAP.md). Cette carte d’orchestration est dérivée et complémentaire : `READING_MAP` résout le premier chemin ; `ORCHESTRATION_MAP` aide à ajuster la combinaison et l’intensité sans remplacer les propriétaires normatifs.
++Pour composer plusieurs capacités selon un résultat recherché — direction, beauté située, créativité, usage, preuve, vitesse ou système — voir la section « Combinaisons par résultat recherché » ci-dessous : elle aide à ajuster la combinaison et l’intensité sans remplacer les propriétaires normatifs.
+ 
+ ## Chemin canonique de démarrage
+ 
+@@ -37,6 +37,44 @@ Les cinq absolus de `DIRECTION` protègent chaque run : résumé dans la section
+ 
+ Sortie : réponse visible et handoff (`ACTION/HANDOFF`) ; clôture : `ACTION/CLOSE-PACKAGE`.
+ 
++## Combinaisons par résultat recherché
++
++Cette section aide à combiner plusieurs capacités lorsque chacune peut **modifier la même décision** ou **protéger un risque déclaré**. Elle ne crée ni mode, ni route, ni gate, ni statut, ni verdict, ni champ machine. Le mode est d’abord classé par `DIRECTION/START` ; la combinaison est ensuite choisie selon le résultat recherché et le scope réel.
++
++> **Principe :** ne pas charger le maximum de routes ; composer le maximum de contribution pertinente. Toute capacité activée doit avoir une contribution nommable et être retirée si elle ne change ni la décision, ni l’artefact, ni la preuve, ni la limite, ni la prochaine action.
++
++La combinaison choisie reste dans la trace existante du run, seulement si elle peut modifier la décision. Ne crée pas une trace par capacité et ne transforme pas une table d’orientation en preuve.
++
++| Résultat recherché | Noyau possible | Renforcement seulement si nécessaire | Preuve à privilégier |
++|---|---|---|---|
++| **Direction forte et spécifique** | `DIRECTION/CHARGE` (mode `DIRECTION`) | `DIRECTION/CREATIVE-BOOT`, `DIRECTION/DOMAIN-FRAME`, `SAVOIR/CRAFT`, `SAVOIR/SOURCE`, `SAVOIR/STYLE`, `BIBLIOTHEQUE/SELECT` | Premier objet réel, revue créative, observation du défaut dominant et correction réellement observée. |
++| **Beauté, goût et craft situés** | `DIRECTION/FIRST-OBJECT` + `SAVOIR/CRAFT` + `ACTION/FIRST-RENDER` | `SAVOIR/STYLE`, contenu crédible, matière, typographie ou ancre lorsque chacun peut modifier le jugement | Rendu réel dans le scope ; jugement créatif séparé des preuves d’usage, d’accessibilité et de robustesse. |
++| **Créativité variée mais utile** | `DIRECTION/CREATIVE-BOOT` + `DIRECTION/VISUAL_TARGET` + une alternative située | `DIRECTION/DOMAIN-FRAME`, `SAVOIR/SOURCE` ou atelier seulement si l’axe de divergence change une décision | Comparaison dans le même scope par public, JTBD, promesse, geste, structure ou expression. |
++| **UI/UX habitable** | `ACTION/UI-UX-REALITY` + `BIBLIOTHEQUE/SELECT` + `ACTION/GATE-A` (contrôles applicables) + contenu et états réels | Responsive, focus, récupération, runtime ou `SAVOIR/CONTEXT` selon le risque | Tâche, états, viewports, contenu extrême, clavier ou méthode adaptée au claim. |
++| **Preuve et décision fiables** | `ACTION/STRUCTURED-PROOF` + artefact réel + gate correspondant au risque + `ACTION/CLOSE-EXIT-CHECK` | Preuve croisée ou `RUN_CARD` stricte si la persistance l’exige | Claim, méthode, scope, date, artefact, limite et `TRACE-LOCATOR` retrouvables. |
++| **Vitesse sans appauvrissement** | `DIRECTION/START` + `ACTION/FAST-PATH` + `LITE` ou `ITER` correctement classé | Ajouter une seule capacité si elle peut changer la décision ; reclassifier si le risque ou le périmètre augmente | Artefact réel, observation ciblée, preuve minimale applicable et prochaine action. |
++| **Système maintenable** | `ACTION/RUN-SYSTEM` + `BIBLIOTHEQUE/COMPONENTS` si un composant change + migration, rollback et `CHANGELOG` (paquet SYSTÈME) | `BIBLIOTHEQUE/EVOLUTION` ou `SAVOIR/SYSTEM` selon la décision partagée | Consumers, compatibilité, non-régression, owner, migration et condition de reprise. |
++| **Domaine sensible ou incertain** | `DIRECTION/DOMAIN-FRAME` + `SAVOIR/SOURCE` + `ACTION/STRUCTURED-PROOF` | Contexte culturel, conventions, confiance ou recherche seulement si un déclencheur peut changer la décision | Source ou observation reliée à la décision, transformation, rejet et limite. |
++| **Agent contrôlé** | `DIRECTION/START` + `ACTION/AUTHORITY` + `SKILL.md` + owner | Cette carte et `RUN_CARD` seulement si plusieurs capacités sont réellement nécessaires | Artefact livré, autonomie exercée, décision, preuve, limite, escalade et prochaine action. |
++
++Ces combinaisons ne sont pas des parcours obligatoires. Elles indiquent des capacités compatibles ; les sources propriétaires définissent le contenu exact des routes.
++
++### Variation créative
++
++Pour produire du beau varié sans bruit : `SAVOIR/CRAFT/CFT-02` (un axe situé à la fois).
++
++Une alternative est utile si elle peut modifier le choix. Une référence, une ancre, une rationale ou une variante ne constitue pas une preuve indépendante.
++
++### Garde-fous de la combinaison
++
++- `ITER` signifie une itération sur une direction ou un système existant retrouvable, dans son périmètre ; il ne signifie pas simplement « quelque chose existe déjà ».
++- Un chemin court ne réduit jamais la protection d’un risque critique.
++- Une capacité indisponible limite le claim correspondant ; elle ne justifie pas une baisse silencieuse du mode.
++- Ne pas remplir toutes les routes d’une combinaison si une route principale suffit.
++- Ne pas ajouter de trace, de variante ou de preuve qui ne peut changer la décision, l’artefact, la limite ou l’action suivante.
++
++Arrêter l’orchestration lorsque la décision, le risque, le scope, l’owner, l’artefact, la preuve, la limite et la prochaine action sont suffisamment explicites. La richesse de lecture n’est pas un résultat ; **l’effet positif observable dans le périmètre déclaré** est le résultat recherché.
++
+ ## Activation multi-perspective
+ 
+ Une perspective ne se charge que si son déclencheur peut modifier la décision. `N/A-JUSTIFIED` est une sortie valide lorsque la perspective est examinée et non applicable. Ne pas charger une lecture ne rend jamais `N/A` un contrôle applicable du propriétaire.
+diff --git a/package/V1/official/README.md b/package/V1/official/README.md
+index 3d86c5b..cc5a5ba 100644
+--- a/package/V1/official/README.md
++++ b/package/V1/official/README.md
+@@ -16,6 +16,6 @@ Les cinq fichiers suivants sont les **seules sources normatives** de V1 :
+ | [`BIBLIOTHEQUE.md`](./BIBLIOTHEQUE.md) | Support, grille, scène, objet, micro-interface, contrat et compatibilité. |
+ | [`CHANGELOG.md`](./CHANGELOG.md) | État du corpus, changements, compatibilités et maintenance. |
+ 
+-`README.md`, `QUICKSTART.md` et `GLOSSAIRE.md` sont des **guides d’entrée non normatifs**. Ils orientent la lecture, mais ne créent aucune route, gate, statut, score ou autorité concurrente. `DESIGN-ATLAS` appartient à `SAVOIR.md` ; ce n’est pas un fichier séparé. Les cartes [`READING_MAP.md`](./READING_MAP.md) et [`ORCHESTRATION_MAP.md`](./ORCHESTRATION_MAP.md) sont dérivées et non normatives.
++`README.md`, `QUICKSTART.md` et `GLOSSAIRE.md` sont des **guides d’entrée non normatifs**. Ils orientent la lecture, mais ne créent aucune route, gate, statut, score ou autorité concurrente. `DESIGN-ATLAS` appartient à `SAVOIR.md` ; ce n’est pas un fichier séparé. La carte [`READING_MAP.md`](./READING_MAP.md) (chemin, combinaisons par résultat et locators) est dérivée et non normative ; `ORCHESTRATION_MAP.md` n’est plus qu’un pointeur vers elle.
+ 
+ Lorsqu’une décision exige une trace structurée, la `RUN_CARD` rassemble le mode, le risque, la décision, l’artefact, la preuve, la limite et la clôture ; son schéma et son validateur sont dans `schemas/` et `scripts/`. Une validation de package ou de `RUN_CARD` confirme uniquement les contrôles exécutés ; elle ne prouve ni l’usage, ni l’accessibilité exécutée, ni la performance, ni la qualité visuelle du produit.
+diff --git a/package/scripts/validate_reading_map.py b/package/scripts/validate_reading_map.py
+index 7d617d0..c4e4263 100644
+--- a/package/scripts/validate_reading_map.py
++++ b/package/scripts/validate_reading_map.py
+@@ -182,7 +182,7 @@ def load_texts() -> dict[str, str]:
+ def lcf_07(t: dict[str, str]) -> bool:
+     chain = after(t["D"], "**Chaîne de lecture interne.**", 700)
+     prio = fenced_after(t["D"], "```text\nRUN-PRIORITY")
+-    pointers = [row(t["RM"], "Direction identitaire"), row(t["OM"], "Direction forte et spécifique")]
++    pointers = [row(t["RM"], "Direction identitaire"), row(t["RM"], "Direction forte et spécifique")]
+     rows = [charge_row(t, "DIRECTION")]
+     return (before(chain, "`VISUAL_TARGET`", "`FIRST-OBJECT`") and before(prio, "DIRECTION —", "FIRST-OBJECT —")
+             and all(r and before(" ".join(r), "VISUAL_TARGET", "FIRST-OBJECT") for r in rows)
+@@ -190,7 +190,7 @@ def lcf_07(t: dict[str, str]) -> bool:
+ 
+ 
+ def lcf_03(t: dict[str, str]) -> bool:
+-    ui, proof, system = row(t["OM"], "UI/UX habitable"), row(t["OM"], "Preuve et décision fiables"), row(t["OM"], "Système maintenable")
++    ui, proof, system = row(t["RM"], "UI/UX habitable"), row(t["RM"], "Preuve et décision fiables"), row(t["RM"], "Système maintenable")
+     keys = ("migration", "rollback", "CHANGELOG")
+     return (bool(ui) and "ACTION/GATE-A" in ui[1] and "ACTION/GATE-A" not in ui[2]
+             and bool(proof) and re.search(r"(?i)gate", proof[1]) is not None and re.search(r"(?i)gate", proof[2]) is None
+@@ -521,7 +521,7 @@ def check_facades(errors: list[str]) -> None:
+          and "ACTION/RUN-DIRECTION" in charge_row(t, "DIRECTION")[1] and "ACTION/RUN-DIRECTION" not in charge_row(t, "DIRECTION")[2]),
+         ("LCF-02", "READING_MAP, ligne « Accessibilité »", "ACTION/GATE-A (contrôles applicables dus)",
+          bool(rm49) and "N/A-JUSTIFIED" not in rm49[-1] and "ACTION/GATE-A" in rm49[-1]),
+-        ("LCF-03", "ORCHESTRATION_MAP, noyau UI/UX, preuve, système", "ACTION/GATE-A ; gate du risque ; paquet SYSTÈME (B3)", lcf_03(t)),
++        ("LCF-03", "READING_MAP (combinaisons), noyau UI/UX, preuve, système", "ACTION/GATE-A ; gate du risque ; paquet SYSTÈME (B3)", lcf_03(t)),
+         # R6b-1 (V12R_27, rectification déclarée) : la table des modes vit dans le guide opérateur (QUICKSTART) ; l'entrée
+         # humaine (README) ne demande aucun mode. Les propriétés sont conservées sur la table qui subsiste.
+         ("LCF-04", "QUICKSTART, ligne DIRECTION ; aucune table de mode dans le README", "DIRECTION/START (direction visuelle autonome)",
+@@ -531,7 +531,7 @@ def check_facades(errors: list[str]) -> None:
+          re.search(r"\*\*`ITER`\*\*[^\n]*(retrouvable|existante)", t["Q"]) is not None and rd_iter is None),
+         ("LCF-06", "DIRECTION, index « Nouvelle structure d’écran »", "DIRECTION/START (classification)",
+          bool(index) and "classification `ACTION/RUN-STANDARD`" not in index[1]),
+-        ("LCF-07", "DIRECTION 72, RUN-PRIORITY, READING_MAP, ORCHESTRATION_MAP, skill", "DIRECTION 55 (cible avant premier objet)", lcf_07(t)),
++        ("LCF-07", "DIRECTION 72, RUN-PRIORITY, READING_MAP (routage et combinaisons), skill", "DIRECTION 55 (cible avant premier objet)", lcf_07(t)),
+         ("LCF-08", "DIRECTION, gabarit START et FAST-PATH", "DIRECTION/START (OWNER et SCOPE jamais omis)",
+          re.search(r"`?OWNER`? et `?SCOPE`?[^.]*jamais omis", entry) is not None and bool(fast) and "si nécessaire" not in fast[1]),
+         ("LCF-09", "DIRECTION, RUN-PRIORITY et récapitulatif de protection (point 4)", "BIBLIOTHEQUE/SELECT, SCENE",
+diff --git a/package/scripts/validate_structure.py b/package/scripts/validate_structure.py
+index d844991..ca807e5 100644
+--- a/package/scripts/validate_structure.py
++++ b/package/scripts/validate_structure.py
+@@ -223,6 +223,18 @@ def check_entry(corpus: dict[Path, list[str]], errors: list[str]) -> None:
+             errors.append(f"[CST-01] copie de la constitution minimale hors du README : {path.name}")
+ 
+ 
++# 14. Cartes réunies (R6b-2) : les combinaisons par résultat vivent dans READING_MAP ; ORCHESTRATION_MAP n'est qu'un pointeur.
++def check_maps(errors: list[str]) -> None:
++    reading = (OFFICIAL / "READING_MAP.md").read_text(encoding="utf-8")
++    if reading.count("## Combinaisons par résultat recherché") != 1:
++        errors.append("[MAP-01] READING_MAP doit porter une seule section « Combinaisons par résultat recherché »")
++    pointer = OFFICIAL / "ORCHESTRATION_MAP.md"
++    if pointer.is_file():
++        text = pointer.read_text(encoding="utf-8")
++        if any(line.startswith("|") or line.startswith("## ") for line in text.splitlines()) or len(text.split()) > 80:
++            errors.append("[MAP-01] ORCHESTRATION_MAP porte de nouveau un contenu propre (pointeur de compatibilité attendu)")
++
++
+ # 12. Locators numériques (R-28) : un message du validateur cite un lieu nommé, jamais un numéro de ligne.
+ NUMERIC_LOCATOR = re.compile(r"\((?:[^()]*, )?(?:DIRECTION|ACTION|SAVOIR|BIBLIOTHEQUE) \d+\)")
+ 
+@@ -254,7 +266,7 @@ LOAD_HEADERS = re.compile(r"^\|\s*Mode\s*\|\s*(Charger d’abord|Démarrage mini
+ LOAD_OWNERS = {"DIRECTION.md", "SKILL.md"}
+ LOAD_POINTERS = [("QUICKSTART.md", "| Une direction visuelle ouverte |"),
+                  ("READING_MAP.md", "| Direction identitaire |"),
+-                 ("ORCHESTRATION_MAP.md", "| **Direction forte et spécifique** |")]
++                 ("READING_MAP.md", "| **Direction forte et spécifique** |")]
+ 
+ 
+ def texts() -> dict[Path, list[str]]:
+@@ -509,6 +521,7 @@ def check() -> list[str]:
+     check_universal(corpus, errors)
+     check_numeric_locators(errors)
+     check_entry(corpus, errors)
++    check_maps(errors)
+     return errors
+ 
+ 
+diff --git a/package/skills/design-governance-practice/SKILL.md b/package/skills/design-governance-practice/SKILL.md
+index 537de3d..097168b 100644
+--- a/package/skills/design-governance-practice/SKILL.md
++++ b/package/skills/design-governance-practice/SKILL.md
+@@ -32,7 +32,7 @@ Tu vises l’excellence appropriée au produit, au public, au risque et au conte
+ | **DIRECTION** | `DIRECTION/CREATIVE-BOOT`, `DIRECTION/EXTERNAL-START` si le brief est vague, `DIRECTION/VISUAL_TARGET`, `DIRECTION/FIRST-OBJECT`, `ACTION/FIRST-RENDER`, `ACTION/RUN-DIRECTION`, puis `ACTION/GATE-A` et `ACTION/GATE-C` applicables ; en trace complète (`ACTION/HANDOFF`), `ACTION/GATE-B`, `ACTION/RUN_CARD` et `ACTION/CLOSE-PACKAGE`. |
+ | **SYSTÈME** | `ACTION/RUN-SYSTEM` ; `BIBLIOTHEQUE/COMPONENTS` si un composant change. |
+ 
+-La clôture de chaque mode est `ACTION/CLOSE-PACKAGE`, en trace complète ; en trace légère, le run s’arrête à la proposition (`ACTION/HANDOFF`). Pour l’agent, les blocs « noyau » compilés dans la skill tiennent lieu de lecture de fabrication ; README, QUICKSTART, READING_MAP et ORCHESTRATION_MAP sont des lectures d’orientation pour les humains.
++La clôture de chaque mode est `ACTION/CLOSE-PACKAGE`, en trace complète ; en trace légère, le run s’arrête à la proposition (`ACTION/HANDOFF`). Pour l’agent, les blocs « noyau » compilés dans la skill tiennent lieu de lecture de fabrication ; README, QUICKSTART et READING_MAP sont des lectures d’orientation pour les humains.
+ 
+ ### 3. Prendre le brief et viser le premier objet
+ 
+@@ -209,4 +209,4 @@ L’agent active le système en silence : la personne donne l’objectif, le pé
+ - **Flux :** [references/flow.md](references/flow.md) : la vue courte du chemin.
+ - **Projection machine :** [references/machine_projection.md](references/machine_projection.md) : sérialiser une `RUN_CARD` pour un run persistant, partagé ou audité.
+ - **Aide-mémoire :** [references/canonical_minimum.md](references/canonical_minimum.md) : seulement si les sources V1 sont absentes.
+-- **Lecture humaine :** `README.md`, `QUICKSTART.md`, `READING_MAP.md` et `ORCHESTRATION_MAP.md` orientent les personnes ; l’agent les ouvre seulement si une personne le demande.
++- **Lecture humaine :** `README.md`, `QUICKSTART.md` et `READING_MAP.md` orientent les personnes ; l’agent les ouvre seulement si une personne le demande.
+diff --git a/package/skills/design-governance-practice/references/flow.md b/package/skills/design-governance-practice/references/flow.md
+index b3505bd..97f8377 100644
+--- a/package/skills/design-governance-practice/references/flow.md
++++ b/package/skills/design-governance-practice/references/flow.md
+@@ -21,5 +21,5 @@ En texte : **classer et protéger le run, cultiver et diriger la décision, comp
+ 
+ Charger `DIRECTION/START` avant un build, une modification, une vérification, une action externe ou une décision persistante. Charger les routes approfondies uniquement si elles peuvent modifier une décision, un artefact, une preuve, une limite ou la prochaine action.
+ 
+-Pour composer plusieurs capacités selon un résultat recherché — direction, beauté située, créativité, usage, preuve, vitesse ou système — consulter `ORCHESTRATION_MAP.md` dans la carte officielle du package. Cette carte complète le flux sans créer de route supplémentaire.
++Pour composer plusieurs capacités selon un résultat recherché — direction, beauté située, créativité, usage, preuve, vitesse ou système — consulter la section « Combinaisons par résultat recherché » de `READING_MAP.md` dans la carte officielle du package. Cette carte complète le flux sans créer de route supplémentaire.
+ 
