@@ -13,9 +13,10 @@
    - écarts déclarés ;
    - distinguer certain, probable et hypothétique ;
    - auto-comparaison déclarée comme telle.
-4. **Décisions en attente** (plan maître §8) : 3, 6, 8, 9 et 10. **Ne pas appliquer un contenu qui en dépend avant la décision** ; préparer le texte et poser la question.
+4. **Décisions :** toutes les décisions du plan maître sont prises (`audit/reports/V12R_14_DECISIONS_ARBITRAGES.md`, addendums 1 et 2). Un contenu qui dépend d'une question nouvelle attend la réponse de l'owner.
+5. **Consolider avant d'évaluer.** Aucun run avant la porte **P2 « prêt pour l'évaluation »** (§4). Corriger et améliorer, c'est mettre l'existant à sa place (hiérarchie, organisation, accès, cohérence, clarté, fiabilité), pas ajouter ni retirer au hasard ; chaque modification répond à un défaut identifié, préserve ce qui marche et a une vérification proportionnée. Les moyens de produire du beau interviennent pendant la conception, pas seulement dans les contrôles de fin.
 
-## 2. État (après R11a)
+## 2. État (après R11a ; pilotage synchronisé le 30-09-2026)
 
 | Fait | Rapport |
 |---|---|
@@ -69,22 +70,66 @@ git checkout claude/init-repo-claude-md-gm6njm
    - commit (lignes d'attribution), push sur les deux branches.
 9. **Critère d'arrêt commun** : si un lot demande plus de rectifications de harnais que de changements de texte, on s'arrête, on déclare et on revient à l'owner.
 
-## 4. Prochaines unités (ordre décidé le 27-09-2026 : le rendu d'abord ; R8c et R6b élargi ajoutés le même jour)
+## 4. Prochaines unités (ordre au 30-09-2026 : consolider, puis évaluer)
 
-**Décisions :** `audit/reports/V12R_14_DECISIONS_ARBITRAGES.md` (6 graduée ; schéma inchangé → V1.2.0, R9 reporté ; atlas intégré en R8b ; juges humains + modèles ; lois inchangées ; catalogue après publication ; R10 par paliers ; R11 ciblé). **Détail de mise en œuvre :** le plan consolidé (`plans/propositions/Plan_consolide_V1.2_2026-09-27.md`) sert de guide pour chaque lot (sections citées) ; il n'est pas un second plan actif.
+**Décisions :** `V12R_14` (addendum 1 du 27-09 ; addendum 2 du 30-09 : amendement du 28-09, R10 progressif, consolidation avant les runs). **Guides de détail :** plan consolidé (`plans/propositions/Plan_consolide_V1.2_2026-09-27.md`) et amendement (`plans/propositions/Amendement_V1.2_2026-09-28.md`). Ce sont des documents de provenance, pas des plans actifs : leurs anciennes propositions ne réintroduisent pas un périmètre remplacé.
 
 | Ordre | Unité | Guide | Points clés |
 |---|---|---|---|
-| 1 | **R8b** — carte des moyens consolidée, puis atlas conditionnel | consolidé §4 | Partir de `carte_moyens_v0` (déjà alignée sur D-20) et des 18 entrées d'`atlas_references_v0` ; retrouver les pièces exactes et leurs sources, sinon « matériau non vérifié hors atlas » ; leçon, relation produit/contenu, décision transférable, contre-indication, limite ; deux colonnes visuel/fond ; « principes observés » = observations, jamais lois ; fichier dans `skills/.../references/`, chargé seulement si la décision visuelle est ouverte ; manifeste et distributions vérifiés |
-| 1 bis | **R8c** — passe de finition (nouveau lot) | ci-dessous, « R8c » | Gestes de polish concrets par couche, dans le noyau à côté de la boucle d'édition |
-| 2 | **R7** — ancre graduée ; lois et catalogue inchangés | consolidé §8 | Un propriétaire canonique de la règle d'ancre ; DIRECTION, ACTION, SAVOIR et façades alignés ; doublons `ANCHOR-GENERATED` traités ici |
-| 3 | **R11 ciblé** | consolidé §5 | Q04, Q07, Q08, Q09 (textes) ; Q11 et Q12 maintenus ; extraire `audit/logs/DG_AUDIT_001_Journaux_R02.zip` et `…_Epreuves_13-02_traces.zip` pour Q13 et R16 à R32 ; cas négatifs prioritaires ; reliquat écrit |
-| 4 | **R6b** — une entrée humaine (version élargie) | consolidé §6 et ci-dessous, « R6b élargi » | Fusion des README du package (rectification déclarée de `validate_design_governance.py` et des LCF) ; QUICKSTART à activation unique, sans démarrages concurrents (« 90 secondes », « trente secondes », « cinq minutes ») ; READING_MAP au chemin et aux locators, avec l'orientation utile d'ORCHESTRATION_MAP |
-| 5 | **Restes R5** | consolidé §7 | SAVOIR : copie du handoff (l.≈189) → renvoi ACTION ; BIBLIOTHEQUE : maintenance séparée, renvoi de `PRINT_FIELD` aux marqueurs ; doublons d'alternative située |
-| 6 | **R10 par paliers** (quand l'owner lève la consigne « pas de run ») | consolidé §10 | Palier 1 : 18 productions ; conditions figées avant production ; aveugle ; juges selon la décision 9 |
-| 7 | **R11 final**, puis **R12** | consolidé §5, §11 | CI hébergée sur la candidate distribuable ; réserves décidées ; V1.2.0 ; R9 déclaré reporté |
+| 0 | **Inventaire unique des défauts** | ci-dessous | Registre D-01 à D-23, points du plan consolidé et de l'amendement, Q04 à Q13, R16 à R32, réserves de clôture : chacun marqué **bloquant P2** ou **non bloquant** (avec sa limite écrite). C'est la liste de sortie de la consolidation |
+| 1 | **R8b** — moyens et enseignements transférables | amendement §4 | Carte des moyens consolidée : ce que chaque couche permet de construire, comment choisir, ce qui limite ; des conditions au lieu d'« atteignable » ; licences vérifiées par ressource ; D-20 préservé. **Plus d'atlas des 18 créations comme livrable** : les enseignements de l'atlas v0 sont confrontés à l'existant et deviennent un renvoi ou un ajout ciblé, conditionnel, avec observation attendue et contre-indication ; aucun style déduit d'un petit échantillon |
+| 2 | **R8c** — résoudre plus précisément | amendement §5 | Compléter seulement les gestes insuffisamment opérables (équilibre d'un titre, relation texte/image, poids optique des icônes, récupération après erreur, réinspection de l'ensemble après un réglage local) : déclencheur, corrections possibles, observation de l'effet. Aucune modification obligatoire si la relation fonctionne ; pas de bloc `FINITION` comme fin en soi ; « accent, traitement ou famille unique » restent contextuels. Contenus chez leurs propriétaires, noyau recompilé |
+| 3 | **R7** — ancre graduée | amendement §6 | DIRECTION porte la règle canonique, SAVOIR son exploitation, ACTION les observations et la conséquence sur l'acceptation ; une ancre peut venir du projet lui-même ; limite déclarée : le validateur (inchangé) ne garantit pas « observée ou fournie pour un produit réel », qui relève de la revue d'acceptation |
+| 4 | **R11 ciblé** | amendement §7 | Q04, Q07, Q08, Q09 ; B1b : deux exceptions préservées, une comparaison peut confirmer l'original ; Q11 et Q12 maintenus ; `DAILY` enregistré comme corrigé (R11a) ; cas négatifs manquants (provenance, `observed` / `not_verified`, protection critique) après vérification des autres harnais ; Q13 et R16 à R32 ouverts jusqu'à lecture des traces (`audit/logs/*.zip`) |
+| 5 | **R6b élargi** — une entrée humaine cohérente | amendement §8 ; définition du 27-09 ci-dessous | Quatre questions : que demander, que fournir, que recevoir, comment poursuivre. Le novice ne choisit pas de mode ; prise de brief proportionnée ; fusion des README du package ; QUICKSTART raccourci ; cartes de lecture réunies sans perdre liens ni locators. **README Local généré par `build_distributions.sh` : à inclure impérativement.** Réponse visible d'`ACTION/HANDOFF` réutilisée |
+| 6 | **Restes R5** | amendement §9 | Copies du handoff (SAVOIR, BIBLIOTHEQUE) → renvois ; maintenance et promotion hors du parcours local (vérifier que le chargement inutile baisse) ; `PRINT_FIELD` relié aux signaux de convergence ; alternative située : DIRECTION le déclenchement, SAVOIR les leviers, ACTION la comparaison |
+| 7 | **Relecture de parcours**, puis **porte P2** | ci-dessous | Voir « Porte P2 » |
+| 8 | **R10 progressif** (après P2, et quand l'owner lève la consigne « pas de run ») | ci-dessous | Palier exploratoire, puis 18 si justifié, puis davantage pour une question précise |
+| 9 | **R11 final**, puis **R12** | amendement §11 | CI hébergée sur la candidate distribuable ; réserves disposées ; V1.2.0 avec R9 reporté ; feu vert final |
 
-### R8c — Passe de finition (M) · décidé le 27-09-2026
+### Porte P2 — prêt pour l'évaluation
+
+| Axe | Critère | Vérification |
+|---|---|---|
+| Hiérarchie et autorité | Chaque règle a un lieu propriétaire ; obligatoire et conditionnel distingués ; résolution des conflits écrite | Gardes de propriété ; relecture |
+| Organisation et accès | Une entrée agent (la skill), une entrée humaine (R6b) ; chaque ressource atteignable au moment où elle sert | Atteignabilité (disparition, accès conditionnel et fragilité d'ancre distingués) ; routes résolubles |
+| Cohérence opérationnelle | Double boucle reliée : connaissance → décision → geste → capture → correction | Relecture de parcours |
+| Clarté et charge | Pas de doublon contradictoire ; aucune nuance utile perdue ; jargon expliqué | Mesure des doublons ; glossaire ; relecture |
+| Fiabilité | Renvois valides ; exemples conformes aux règles ; distributions GitHub et Local fidèles aux sources | `validate_all`, 13.01, 13.02, suivi, build des distributions |
+
+**Seuil :**
+- les défauts connus qui compromettent l'usage ou faussent l'évaluation sont corrigés (aucun « bloquant P2 » ouvert dans l'inventaire) ;
+- les parcours essentiels sont vérifiés ;
+- les limites restantes sont écrites et ne bloquent pas l'épreuve.
+
+P2 ne prétend pas établir ce que seul l'usage montre.
+
+**Relecture de parcours** (une inspection, sans production). On suit pas à pas ce que le système fait lire et faire, pour quatre profils :
+- un agent sur brief vague ;
+- un agent sur brief riche avec photos ;
+- un humain novice ;
+- un expert qui reprend un run.
+
+On note chaque trou, chaque contradiction et chaque ressource qui arrive trop tard ; chaque constat entre dans l'inventaire. La relecture se fait à la fin des lots, puis à la porte P2.
+
+### R10 progressif
+
+- **But :** évaluer ce qu'une lecture ne peut pas établir (qualité réelle, facilité d'usage, coût, variabilité), pas améliorer le système.
+- **Palier exploratoire :** 2 briefs contrastés (B-DLA et SaaS) × 3 conditions (C1, C3, C4), soit environ 6 productions. Environ 4 si les rendus B-DLA existants restent comparables (même modèle producteur) ; sinon on les refait.
+- **Critères écrits avant de produire :**
+  - ce qu'est un « problème évident » (on corrige d'abord) ;
+  - ce qui justifie de passer à 18 ;
+  - le compromis de coût acceptable ;
+  - le traitement des désaccords entre juges.
+- **Mesures par rendu :** qualité de la première proposition, reprises nécessaires, effort (tokens, temps), honnêteté. Conserver si possible la première proposition et le résultat après corrections.
+- **Ensuite :** 18 productions si les résultats sont encourageants mais incertains ; au-delà seulement pour une question précise encore ouverte. Les 18 peuvent faire partie des 60 si le protocole et la version sont identiques.
+- **Jugement :** comme en P1 (juges neufs, à l'aveugle, brief riche, sans argumentaire du producteur) ; juges selon la décision 9 ; aucun label D3 automatique.
+- **Observation novice**, à part : 2 ou 3 personnes lisent l'entrée R6b et lancent une demande ; on note les blocages.
+- **Si la diversité baisse :** examiner les consignes et les ressources qui peuvent favoriser la convergence, sans en présumer la cause.
+
+### Définitions du 27-09 (historique)
+
+#### R8c — Passe de finition (définition du 27-09) · **remplacée par l'amendement du 28-09**
 
 - **Pourquoi.** Le système sait mieux « ne pas rater » que « réussir » : le noyau porte des gestes de composition, mais peu de recettes de finition concrètes. C'est l'écart entre un rendu correct et un rendu haut de gamme.
 - **Périmètre.** Un bloc `FINITION` dans le lieu propriétaire du craft (`SAVOIR/CRAFT`, à préciser dans le patch), compilé dans le noyau §7 juste après la repasse. Environ douze gestes, classés par couche :
@@ -100,7 +145,7 @@ git checkout claude/init-repo-claude-md-gm6njm
 - **Réussite :** chaque geste s'observe sur une capture et produit une diff ; aucun ne contredit la retenue, la vérité ou l'accessibilité.
 - **Arrêt :** si un geste ne peut pas s'observer sur une capture, il sort ; si le bloc tourne à la liste de style, on revient aux critères.
 
-### R6b élargi — Une entrée humaine d'une page (M) · décidé le 27-09-2026
+#### R6b élargi — Une entrée humaine d'une page (définition du 27-09) · **valable en complément de l'amendement du 28-09**
 
 - **En plus du périmètre du plan consolidé (§6) :**
   - **une page d'entrée humaine**, courte et accueillante : « dites ce que vous voulez, donnez vos photos, vos textes et votre marque, voici ce que vous recevez et comment l'améliorer ensemble » ; au vouvoiement, sans jargon, avec renvoi vers la profondeur experte ;
@@ -171,7 +216,7 @@ Chaque lot : **périmètre**, **gardes à ajouter**, **réussite**, **arrêt**.
   - séquence de boucle du README (l.77) → renvoi, puis **retirer l'exemption `README.md`**.
 - **Réussite :** aucune façade ne redéfinit un contenu normatif.
 
-### R8 — Matériaux et atlas (M) · sans décision en attente (option de l'owner : peut passer avant R5c)
+### R8 — Matériaux et atlas · **périmètre historique** : R8a fait ; R8b réorienté (sans atlas) et R8c recadré, voir §4
 
 - **Périmètre :**
   - carte des moyens consolidée (critères, sources datées `[VEILLE]`) ;
@@ -179,7 +224,7 @@ Chaque lot : **périmètre**, **gardes à ajouter**, **réussite**, **arrêt**.
   - ~~**D-21**~~ fait en R8a (`V12R_09`). Rappel de l'ancien périmètre : étendre la « question de convergence » du noyau (§5) à la **typographie** (familles que le modèle choisit sans brief) avec la même règle : nommer, justifier ou reconsidérer, jamais interdire.
 - **Arrêt :** si l'atlas pousse vers un seul style, ne garder que les critères.
 
-### R11 — Réserves et mineurs (M) · sans décision en attente
+### R11 — Réserves et mineurs · périmètre d'origine (ciblé depuis `V12R_14` ; voir §4)
 
 - **Périmètre :**
   - tri un par un de Q-04, Q-07, Q-08, Q-09, Q-11, Q-12, Q-13, R-16 à R-32 : corrigé, rendu obsolète par la refonte (déclaré) ou maintenu (déclaré) ;

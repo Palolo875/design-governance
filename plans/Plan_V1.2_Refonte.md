@@ -12,6 +12,8 @@ Ce plan **remplace le séquencement** du plan V1.2 et de l'addendum à partir de
 
 ---
 
+> **Note du 30-09-2026.** Les plafonds de mots de ce plan (noyau ≤ 2 500 ; chemin ≤ 14 000, objectif haut ≤ 12 000) sont **historiques** : depuis le 27-09-2026, la consigne de l'owner « qualité avant nombre de mots » s'applique, et ces chiffres ne sont plus que des repères de diagnostic, ni critère de réussite ni critère d'arrêt. Le séquencement opérationnel, la porte **P2** (consolider avant d'évaluer) et **R10 progressif** sont dans `plans/Plan_V1.2_Suite_Reprise.md` §4 ; R8b ne livre plus d'atlas (`V12R_14`, addendum 2).
+
 ## 1. Objectif
 
 Faire de Design Governance **une machine à produire un travail de design de niveau senior dès le premier rendu** :
