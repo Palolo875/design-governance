@@ -1,0 +1,318 @@
+{
+ "R10F0": {
+  "capture": {
+   "390": {
+    "images_vides": 0,
+    "hauteur": 6504,
+    "debordement_horizontal": false,
+    "erreurs": []
+   },
+   "1440": {
+    "images_vides": 0,
+    "hauteur": 4369,
+    "debordement_horizontal": false,
+    "erreurs": []
+   }
+  },
+  "poids_octets_html": 37071,
+  "poids_octets_dossier_hors_dg": 2044505,
+  "fichiers_hors_dg": [
+   "_work/closed.png",
+   "_work/d1.png",
+   "_work/dfull.png",
+   "_work/dmid.png",
+   "_work/dpart0.png",
+   "_work/dpart1.png",
+   "_work/dpart2.png",
+   "_work/dpart3.png",
+   "_work/gateaux.png",
+   "_work/m.png",
+   "_work/mpart0.png",
+   "_work/mpart1.png",
+   "_work/mpart2.png",
+   "_work/mpart3.png",
+   "_work/mpart4.png",
+   "_work/shot.js",
+   "_work/shot2.js",
+   "_work/sun.png",
+   "_work/t.png",
+   "_work/type.html",
+   "_work/type.png",
+   "index.html",
+   "run_card.json"
+  ],
+  "hotes_externes": [
+   "fonts.googleapis.com",
+   "fonts.gstatic.com"
+  ],
+  "questions": "Questions ouvertes (personne n'a répondu ; le rendu avance sur les hypothèses indiquées entre crochets)\n\n1. Nom et identité : quel est le nom de la boulangerie ? Existe-t-il un logo, des couleurs, une enseigne ?\n   [Hypothèse : nom provisoire « Mboa », identité créée pour la maquette.]\n2. Adresse : dans quel quartier de Douala (Akwa, Bonapriso, Bonamoussadi, Makepe…) et quel repère donne-t-on aux clients (« face à… », « carrefour… ») ?\n   [Hypothèse : bloc « Nous trouver » organisé par repère, contenu à renseigner.]\n3. Horaires d'ouverture et heures réelles des fournées (matin, soir) ?\n   [Hypothèse : 5 h 30 – 20 h 30, fournées d'exemple à 5 h 30, 6 h 30, 10 h, 12 h, 16 h 30.]\n4. Produits et prix réels (pains, viennoiseries, salé, pain chargé, douceurs, boissons) ?\n   [Hypothèse : carte et prix d'exemple en FCFA, marqués comme tels.]\n5. Gâteaux sur commande : délai minimal, parfums, tailles, fourchettes de prix, livraison ou retrait, acompte ?\n   [Hypothèse : délai de 48 h, estimation indicative, retrait en boutique ou livraison à préciser.]\n6. Canal de commande : numéro WhatsApp de la boutique ? Téléphone ?\n   [Hypothèse : le message de commande est généré et copiable ; l'envoi direct attend le numéro.]\n7. Moyens de paiement acceptés (espèces, Orange Money, MTN MoMo, carte) ?\n   [Hypothèse : non affirmé ; liste « à confirmer ».]\n8. Photos réelles des produits et de la boutique disponibles ?\n   [Hypothèse : aucune ; rendu sans photo, matière dessinée en code. Des photos réelles changeraient la scène des sections Vitrine et Gâteaux.]\n9. Langues du site : français seul, ou aussi anglais ?\n   [Hypothèse : français.]\n",
+  "m2": {
+   "titre": "Bricolage Grotesque",
+   "texte": "Bricolage Grotesque",
+   "polices": [
+    "Bricolage Grotesque",
+    "DM Mono",
+    "Arial"
+   ],
+   "sections": 4,
+   "bg": "rgb(251, 243, 230)"
+  },
+  "signalements_exemple": 11,
+  "langage_systeme": [],
+  "mots_visibles": 652
+ },
+ "R31FF": {
+  "capture": {
+   "390": {
+    "images_vides": 0,
+    "hauteur": 5868,
+    "debordement_horizontal": false,
+    "erreurs": []
+   },
+   "1440": {
+    "images_vides": 0,
+    "hauteur": 3595,
+    "debordement_horizontal": false,
+    "erreurs": []
+   }
+  },
+  "poids_octets_html": 33736,
+  "poids_octets_dossier_hors_dg": 33736,
+  "fichiers_hors_dg": [
+   "index.html"
+  ],
+  "hotes_externes": [
+   "fonts.googleapis.com",
+   "fonts.gstatic.com"
+  ],
+  "questions": "Questions (personne n'a répondu ; le rendu repose sur les hypothèses indiquées entre parenthèses)\n\n1. Contenu réel : quel est le nom de la boutique, son adresse exacte avec un repère, ses horaires, les heures réelles des fournées, et sa carte avec les prix en FCFA ? (Hypothèse : « Le Fournil d'Akwa », nom d'exemple, à Akwa ; ouvert de 5 h 30 à 21 h, le dimanche de 6 h à 14 h ; cinq fournées ; prix d'exemple marqués dans la page.)\n2. Marque et photos : existe-t-il un logo, des couleurs, des photos de la vitrine et des produits (prises au téléphone en lumière du jour, cela suffit) ? (Hypothèse : aucune ; logotype en texte et pictogramme de four dessiné en code, aucune fausse photo.)\n3. Commandes : sur quel numéro WhatsApp prendre les commandes de gâteaux ; faut-il vraiment 48 h ; la livraison, l'acompte et les paiements Orange Money et MTN MoMo sont-ils proposés ? (Hypothèse : message de commande à copier, bouton WhatsApp à brancher à la mise en ligne ; conditions marquées « à confirmer ».)\n",
+  "m2": {
+   "titre": "Zilla Slab",
+   "texte": "Instrument Sans",
+   "polices": [
+    "Instrument Sans",
+    "Zilla Slab",
+    "Arial",
+    "Caveat"
+   ],
+   "sections": 4,
+   "bg": "rgb(244, 242, 236)"
+  },
+  "signalements_exemple": 9,
+  "langage_systeme": [],
+  "mots_visibles": 643
+ },
+ "RCD7E": {
+  "capture": {
+   "390": {
+    "images_vides": 0,
+    "hauteur": 8050,
+    "debordement_horizontal": false,
+    "erreurs": []
+   },
+   "1440": {
+    "images_vides": 0,
+    "hauteur": 4867,
+    "debordement_horizontal": false,
+    "erreurs": []
+   }
+  },
+  "poids_octets_html": 35581,
+  "poids_octets_dossier_hors_dg": 35581,
+  "fichiers_hors_dg": [
+   "index.html"
+  ],
+  "hotes_externes": [
+   "fonts.googleapis.com",
+   "fonts.gstatic.com",
+   "wa.me",
+   "www.google.com"
+  ],
+  "questions": "Questions (sans réponse ; hypothèses retenues entre crochets)\n\n1. Quel est le nom de la boulangerie-pâtisserie ? [Nom fictif : « Le Fournil du Wouri ».]\n2. Adresse exacte, quartier, nombre de boutiques ? [Une seule boutique, boulevard de la Liberté, Akwa.]\n3. Numéro de téléphone / WhatsApp ? [Numéro d'exemple : +237 6 90 00 00 00, à remplacer.]\n4. Horaires d'ouverture et heures réelles des fournées ? [Lun–sam 5 h 30 – 21 h ; dim 6 h – 14 h ; fournées 5 h 30, 6 h 30, 7 h, 10 h 30, 12 h, 16 h 30, 17 h.]\n5. Carte et prix réels ? [Carte et prix d'exemple en FCFA, plausibles pour Douala, à valider.]\n6. Commandes de gâteaux : délais, acompte, livraison ? [48 h (7 jours pour mariage et dot), acompte 50 % par Orange Money ou MTN MoMo, livraison à moto dans les quartiers centraux, 1 000 FCFA ; réponse WhatsApp « dans l’heure », de 7 h à 20 h. Distances des ingrédients et provenances : plausibles, à confirmer.]\n7. Existe-t-il une identité visuelle (logo, couleurs, photos) ? [Aucune ; identité créée : jaune des taxis de Douala, brun cacao, rouge foléré ; pas de photos, motif de grignes dessiné en SVG.]\n8. Le site doit-il être bilingue français/anglais ? [Français seulement.]\n9. Commande en ligne avec paiement, ou simple prise de contact ? [Prise de contact : le formulaire compose un message WhatsApp, aucun paiement en ligne.]\n",
+  "m2": {
+   "titre": "Big Shoulders Display",
+   "texte": "Figtree",
+   "polices": [
+    "Figtree",
+    "Big Shoulders Display"
+   ],
+   "sections": 4,
+   "bg": "rgb(255, 254, 250)"
+  },
+  "signalements_exemple": 0,
+  "langage_systeme": [],
+  "mots_visibles": 874
+ },
+ "R6AC1": {
+  "capture": {
+   "390": {
+    "images_vides": 0,
+    "hauteur": 10323,
+    "debordement_horizontal": false,
+    "erreurs": []
+   },
+   "1440": {
+    "images_vides": 0,
+    "hauteur": 5780,
+    "debordement_horizontal": false,
+    "erreurs": []
+   }
+  },
+  "poids_octets_html": 39097,
+  "poids_octets_dossier_hors_dg": 39097,
+  "fichiers_hors_dg": [
+   "index.html"
+  ],
+  "hotes_externes": [
+   "fonts.googleapis.com",
+   "fonts.gstatic.com"
+  ],
+  "questions": "Questions (sans réponse ; le rendu avance sur les hypothèses indiquées)\n\n1. Quel est le nom du logiciel et existe-t-il une identité (logo, couleurs, polices) ?\n   Hypothèse : aucun élément fourni. Nom provisoire « Talon » (le talon d'un carnet de factures), logo et palette créés pour la page.\n\n2. Quel marché vise-t-on (pays, devise, cadre légal) ?\n   Hypothèse : PME françaises, euros, TVA française. La page s'appuie sur la réforme de la facture électronique\n   (réception obligatoire pour toutes les entreprises depuis le 1er septembre 2026, émission obligatoire pour les PME\n   au 1er septembre 2027). À confirmer, ainsi que le statut réel du logiciel vis-à-vis des plateformes agréées.\n\n3. Quelles fonctionnalités le produit possède-t-il réellement ?\n   Hypothèse : cycle devis → facture → relance → encaissement, Factur-X, export FEC, accès expert-comptable,\n   rapprochement bancaire, paiement par lien. Toute fonctionnalité absente du produit réel doit être retirée.\n\n4. Quels tarifs et quelle offre d'essai ?\n   Hypothèse : trois formules (12 €, 29 €, 59 € HT par mois) et un essai de 30 jours sans carte bancaire. Montants fictifs.\n\n5. Existe-t-il des preuves sociales (nombre de clients, avis, logos, certifications) ?\n   Hypothèse : aucune fournie, donc aucune n'est affichée. Pas de chiffre de clients ni de témoignage inventé.\n\n6. Quelle est l'action principale attendue du visiteur (essai, démo, prise de rendez-vous) ?\n   Hypothèse : démarrer un essai gratuit ; action secondaire : voir une facture d'exemple / la démo.\n",
+  "m2": {
+   "titre": "Schibsted Grotesk",
+   "texte": "IBM Plex Mono",
+   "polices": [
+    "Schibsted Grotesk",
+    "IBM Plex Mono"
+   ],
+   "sections": 8,
+   "bg": "rgb(238, 240, 236)"
+  },
+  "signalements_exemple": 1,
+  "langage_systeme": [],
+  "mots_visibles": 1066
+ },
+ "R3803": {
+  "capture": {
+   "390": {
+    "images_vides": 0,
+    "hauteur": 8042,
+    "debordement_horizontal": false,
+    "erreurs": []
+   },
+   "1440": {
+    "images_vides": 0,
+    "hauteur": 5291,
+    "debordement_horizontal": false,
+    "erreurs": []
+   }
+  },
+  "poids_octets_html": 41993,
+  "poids_octets_dossier_hors_dg": 1837212,
+  "fichiers_hors_dg": [
+   "index.html",
+   "trace.txt",
+   "work/check.js",
+   "work/d_0.png",
+   "work/d_1.png",
+   "work/d_2.png",
+   "work/d_3.png",
+   "work/fonts.html",
+   "work/fonts.png",
+   "work/full_1440.png",
+   "work/full_390.png",
+   "work/m_0.png",
+   "work/m_1.png",
+   "work/m_2.png",
+   "work/m_3.png",
+   "work/m_a.png",
+   "work/m_z.png",
+   "work/shot.js"
+  ],
+  "hotes_externes": [
+   "fonts.googleapis.com",
+   "fonts.gstatic.com"
+  ],
+  "questions": "Questions (personne n'a répondu ; le rendu repose sur les hypothèses indiquées)\n\n1. Le produit a-t-il un nom, une marque, un tarif et des captures réelles ?\n   Hypothèse : nom « Soldé » inventé, tarif unique de 19 € HT/mois, fonctions (relances, rapprochement bancaire, accès comptable, Factur-X) inventées. Tout est signalé comme exemple sur la page.\n2. Quel marché : la France (euro, TVA, mentions légales françaises, réforme de la facture électronique) ou un autre pays, par exemple la zone OHADA avec le franc CFA ?\n   Hypothèse : la France. À changer si ce n'est pas le cas : devise, TVA, mentions, encadré sur la réforme.\n3. Où mène le bouton « Créer mon compte » ? Existe-t-il une vraie page d'inscription ?\n   Hypothèse : non. Le bouton affiche un message qui dit que l'inscription n'est pas branchée.\n\nÀ vérifier avant publication : le calendrier de la réforme (réception obligatoire le 1er septembre 2026, émission par les PME le 1er septembre 2027) et le libellé exact des mentions obligatoires.\n",
+  "m2": {
+   "titre": "Schibsted Grotesk",
+   "texte": "IBM Plex Sans",
+   "polices": [
+    "IBM Plex Sans",
+    "Schibsted Grotesk",
+    "IBM Plex Mono"
+   ],
+   "sections": 6,
+   "bg": "rgb(243, 244, 241)"
+  },
+  "signalements_exemple": 8,
+  "langage_systeme": [],
+  "mots_visibles": 987
+ },
+ "R4485": {
+  "capture": {
+   "390": {
+    "images_vides": 0,
+    "hauteur": 7257,
+    "debordement_horizontal": false,
+    "erreurs": []
+   },
+   "1440": {
+    "images_vides": 0,
+    "hauteur": 5039,
+    "debordement_horizontal": false,
+    "erreurs": []
+   }
+  },
+  "poids_octets_html": 49217,
+  "poids_octets_dossier_hors_dg": 6104968,
+  "fichiers_hors_dg": [
+   ".work/b1b.js",
+   ".work/b1b_after.png",
+   ".work/b1b_before.png",
+   ".work/b1b_pair.png",
+   ".work/cmp_paid.png",
+   ".work/cmp_paid2.png",
+   ".work/d1440.png",
+   ".work/d_part0.png",
+   ".work/d_part1.png",
+   ".work/d_part2.png",
+   ".work/d_part3.png",
+   ".work/f_a.png",
+   ".work/f_b.png",
+   ".work/final_views.png",
+   ".work/m390.png",
+   ".work/m_fold.png",
+   ".work/m_part0.png",
+   ".work/m_part1.png",
+   ".work/m_part2.png",
+   ".work/m_part3.png",
+   ".work/s_err.png",
+   ".work/s_focus.png",
+   ".work/s_fold1440.png",
+   ".work/s_formerr.png",
+   ".work/s_formok.png",
+   ".work/s_full1440.png",
+   ".work/s_m390.png",
+   ".work/s_m_paid.png",
+   ".work/s_paid.png",
+   ".work/s_relance.png",
+   ".work/s_tab3.png",
+   ".work/shot.js",
+   ".work/states.js",
+   ".work/t1024.png",
+   ".work/typo.html",
+   ".work/typo.png",
+   "index.html",
+   "trace_run.txt"
+  ],
+  "hotes_externes": [
+   "fonts.googleapis.com",
+   "fonts.gstatic.com"
+  ],
+  "questions": "Questions ouvertes (aucune réponse attendue ; hypothèses retenues entre crochets)\n\n1. Nom et identité du logiciel : existe-t-il un nom, un logo, une charte ?\n   [Hypothèse : nom de travail « Soldé » (une facture soldée est entièrement payée), aucun logo ni charte existants.]\n2. Marché et langue : France, Belgique, Suisse, Afrique francophone (FCFA) ?\n   [Hypothèse : France, euros, TVA à 20 %.]\n3. Public prioritaire : artisans et TPE, ou PME avec service comptable ?\n   [Hypothèse : dirigeants de TPE/PME qui facturent eux-mêmes (artisans, commerçants, prestataires).]\n4. Fonctions réellement disponibles : devis, relances automatiques, paiement en ligne, export comptable, multi-utilisateurs ?\n   [Hypothèse : devis → facture, envoi, suivi d'ouverture, relances programmées, tableau des sommes dues, export comptable. À confirmer ligne par ligne.]\n5. Réforme de la facturation électronique (France) : le logiciel est-il plateforme agréée ou raccordé à une plateforme ? Quels formats (Factur-X, UBL) ?\n   [Hypothèse : non affirmé sur la page ; aucun claim de conformité réglementaire publié tant que ce n'est pas confirmé.]\n6. Tarifs : prix, période d'essai, engagement ?\n   [Hypothèse : tarif indicatif 19 € HT/mois, 30 jours d'essai sans carte ; marqué « indicatif » sur la page.]\n7. Destination des boutons « Essayer » et « Se connecter » : quelles URL ?\n   [Hypothèse : aucune ; le formulaire d'essai est local et dit qu'il n'envoie rien.]\n8. Preuves sociales : existe-t-il des clients, chiffres ou témoignages publiables ?\n   [Hypothèse : aucun ; la page n'en invente pas.]\n",
+  "m2": {
+   "titre": "Schibsted Grotesk",
+   "texte": "Schibsted Grotesk",
+   "polices": [
+    "Schibsted Grotesk",
+    "IBM Plex Mono"
+   ],
+   "sections": 4,
+   "bg": "rgb(255, 255, 255)"
+  },
+  "signalements_exemple": 11,
+  "langage_systeme": [],
+  "mots_visibles": 879
+ }
+}

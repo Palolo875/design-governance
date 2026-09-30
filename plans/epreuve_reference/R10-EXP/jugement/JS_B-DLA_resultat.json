@@ -1,0 +1,46 @@
+{
+  "pages": {
+    "S": {
+      "qualite": 7,
+      "adequation": 6,
+      "verite": ["Aucun fait inventé présenté comme vrai : bandeau « Maquette » en haut, pastilles « prix d'exemple » / « tarifs d'exemple » / « à confirmer », nom « d'exemple ». Réserve : règles posées sans marquage propre (acompte au-delà de 20 parts, 'cinq fournées par jour', 'ouvert 7 jours sur 7') mais couvertes par le bandeau maquette global."],
+      "reprises": {
+        "bloquant": ["Pas de bouton WhatsApp : l'objectif du site est la commande par WhatsApp, or le seul geste est « Copier le message de commande » (numéro à ajouter plus tard) ; le numéro fictif +237 6XX XX XX XX n'est affiché nulle part", "Adresse absente (« Rue et repère exacts à fournir ») et aucun lien vers la carte : le brief demande adresse et lien carte"],
+        "notable": ["Livraison à moto (Bonamoussadi, Kotto, 1 000 F) à peine évoquée (« frais selon quartier ») ; quartier Akwa au lieu de Bonamoussadi", "Ton plutôt sobre et propre, peu « fier du quartier » ; peu de chaleur, aucune image ni illustration de produit", "Carte organisée par heures de sortie du four : originale mais longue ; beignets du samedi absents", "Horaires d'exemple en contradiction avec le brief (non reprochable, mais à remplacer)"],
+        "finition": ["Petits textes annexes (légendes, mentions de poids) très petits sur mobile", "Sélecteur de date au format mm/dd/yyyy", "Aperçu de gâteau dessiné très schématique"]
+      },
+      "raison": "Page propre, sobre et honnête avec un configurateur de gâteau soigné et bien signalé comme maquette, mais sans vrai chemin WhatsApp ni adresse, et un peu froide pour un fournil de quartier."
+    },
+    "W": {
+      "qualite": 8,
+      "adequation": 6,
+      "verite": ["Adresse précise « Boulevard de la Liberté, Akwa » présentée comme vraie", "Section « Le plus près possible » : distances chiffrées (3 km, 70 km, 250 km, 290 km) et provenance des produits (poivre de Penja, cacao du Centre, café de l'Ouest, mangues du marché) : chiffres et claims inventés", "« Levain entretenu depuis l'ouverture, pousse lente de 18 heures », mentions « MAISON » : savoir-faire/historique non donné", "« Deux tables et un comptoir à café », stationnement dans la rue latérale, « on vous répond sur WhatsApp dans l'heure, de 7 h à 20 h »", "Acompte de 50 %, délai 7 jours pour mariage, zones de livraison nommées (Akwa, Bonanjo, Bonapriso, Deïdo), paliers de prix des gâteaux, carte complète de prix et de produits (pâtisseries, salés) : présentés sans marquage d'exemple", "Numéro +237 6 90 00 00 00 présenté comme réel (pas le format fictif demandé)"],
+      "reprises": {
+        "bloquant": ["Retirer ou marquer comme exemples tous les faits inventés (adresse, distances et provenances, levain, politique d'acompte, zones de livraison, carte et prix) : la page se présente comme vraie et le brief interdit d'inventer", "Section « Le plus près possible » à supprimer ou reformuler : fausse preuve chiffrée", "Numéro WhatsApp non conforme à la forme fictive demandée"],
+        "notable": ["Hors-sujet partiel : livraison à Bonamoussadi et Kotto non traitée, quartier Akwa au lieu de Bonamoussadi", "Formulaire long (occasion, parts, parfum, date, prénom, inscription) sur mobile, mais cohérent avec l'objectif", "Jaune plein très dominant : lisibilité OK mais sature sur petit écran et sur réseau lent (risque de poids non mesuré)", "Carte des prix très dense"],
+        "finition": ["Sélecteur de date mm/dd/yyyy", "Titre condensé en majuscules très serrés par endroits", "Petits textes de description très petits sur bureau"]
+      },
+      "raison": "La page la plus forte visuellement et la plus directe (bouton WhatsApp, formulaire avec message prêt, énergie de quartier), mais elle invente et affirme adresse, provenances chiffrées, procédés et politiques sans aucun marquage, contre la consigne du brief."
+    },
+    "Z": {
+      "qualite": 6,
+      "adequation": 6,
+      "verite": ["Aucun fait inventé présenté comme vrai : bandeau « Maquette » en haut, « Horaires d'exemple », « prix d'exemple, confirmé par la boutique », « Paiement : espèces et mobile money, moyens exacts à confirmer », pied de page « Nom provisoire »", "Mentions de recette (« compote d'ananas maison », « jus de gingembre maison ») et liste de produits inventés, couvertes par le marquage d'exemple"],
+      "reprises": {
+        "bloquant": ["Pas de bouton WhatsApp ni numéro affiché : la commande se fait par « Copier le message » ; l'objectif du site n'est pas rempli tant que le bouton d'envoi n'existe pas", "Bloc adresse non terminé : « Face à ..., carrefour ... » avec champs vides visibles, aucun lien vers la carte"],
+        "notable": ["Titres condensés à interlettrage négatif si serré que les lettres se touchent (« Ce qu'on trouve au comptoir. »)", "Illustration du sandwich en CSS un peu kitsch et déconnectée du reste", "Livraison à moto et zones (Bonamoussadi, Kotto) absentes ; paiement relégué dans le bloc repère", "Frise de la journée du four peu lisible (petits textes)"],
+        "finition": ["Sélecteur de date mm/dd/yyyy", "Horaires d'exemple en contradiction avec le brief (à remplacer)", "Petits textes monospace du bon de commande peu lisibles"]
+      },
+      "raison": "Concept de bon de commande bien pensé et honnête, palette brune et orange chaleureuse, mais la typographie serrée, l'adresse en placeholders et l'absence de chemin WhatsApp direct le laissent derrière S."
+    }
+  },
+  "paires": {
+    "P1": {"choix": "droite", "raison": "S est plus propre et plus fini ; Z a des titres trop serrés, un bloc adresse en placeholders et une illustration kitsch."},
+    "P2": {"choix": "gauche", "raison": "W a bien plus de présence, de personnalité de quartier et de chemin de commande direct (WhatsApp) ; Z est plus terne et inachevé."},
+    "P3": {"choix": "gauche", "raison": "S est plus soigné et cohérent que Z, à honnêteté égale."},
+    "P4": {"choix": "droite", "raison": "W est plus proche d'un travail de designer senior par l'impact et l'adéquation fonctionnelle, malgré des faits inventés non marqués que S évite."},
+    "P5": {"choix": "droite", "raison": "W surclasse Z en composition et en tunnel de commande, même avec ses inventions non signalées."},
+    "P6": {"choix": "gauche", "raison": "W est plus chaleureux, direct et complet pour une commande WhatsApp ; l'avantage est mince à cause de l'honnêteté de S."}
+  },
+  "classement": ["W", "S", "Z"]
+}

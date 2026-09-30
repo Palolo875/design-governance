@@ -1,0 +1,5 @@
+Questions (personne n'a répondu ; le rendu repose sur les hypothèses indiquées entre parenthèses)
+
+1. Contenu réel : quel est le nom de la boutique, son adresse exacte avec un repère, ses horaires, les heures réelles des fournées, et sa carte avec les prix en FCFA ? (Hypothèse : « Le Fournil d'Akwa », nom d'exemple, à Akwa ; ouvert de 5 h 30 à 21 h, le dimanche de 6 h à 14 h ; cinq fournées ; prix d'exemple marqués dans la page.)
+2. Marque et photos : existe-t-il un logo, des couleurs, des photos de la vitrine et des produits (prises au téléphone en lumière du jour, cela suffit) ? (Hypothèse : aucune ; logotype en texte et pictogramme de four dessiné en code, aucune fausse photo.)
+3. Commandes : sur quel numéro WhatsApp prendre les commandes de gâteaux ; faut-il vraiment 48 h ; la livraison, l'acompte et les paiements Orange Money et MTN MoMo sont-ils proposés ? (Hypothèse : message de commande à copier, bouton WhatsApp à brancher à la mise en ligne ; conditions marquées « à confirmer ».)

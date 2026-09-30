@@ -1,0 +1,22 @@
+Questions (sans réponse ; le rendu avance sur les hypothèses indiquées)
+
+1. Quel est le nom du logiciel et existe-t-il une identité (logo, couleurs, polices) ?
+   Hypothèse : aucun élément fourni. Nom provisoire « Talon » (le talon d'un carnet de factures), logo et palette créés pour la page.
+
+2. Quel marché vise-t-on (pays, devise, cadre légal) ?
+   Hypothèse : PME françaises, euros, TVA française. La page s'appuie sur la réforme de la facture électronique
+   (réception obligatoire pour toutes les entreprises depuis le 1er septembre 2026, émission obligatoire pour les PME
+   au 1er septembre 2027). À confirmer, ainsi que le statut réel du logiciel vis-à-vis des plateformes agréées.
+
+3. Quelles fonctionnalités le produit possède-t-il réellement ?
+   Hypothèse : cycle devis → facture → relance → encaissement, Factur-X, export FEC, accès expert-comptable,
+   rapprochement bancaire, paiement par lien. Toute fonctionnalité absente du produit réel doit être retirée.
+
+4. Quels tarifs et quelle offre d'essai ?
+   Hypothèse : trois formules (12 €, 29 €, 59 € HT par mois) et un essai de 30 jours sans carte bancaire. Montants fictifs.
+
+5. Existe-t-il des preuves sociales (nombre de clients, avis, logos, certifications) ?
+   Hypothèse : aucune fournie, donc aucune n'est affichée. Pas de chiffre de clients ni de témoignage inventé.
+
+6. Quelle est l'action principale attendue du visiteur (essai, démo, prise de rendez-vous) ?
+   Hypothèse : démarrer un essai gratuit ; action secondaire : voir une facture d'exemple / la démo.

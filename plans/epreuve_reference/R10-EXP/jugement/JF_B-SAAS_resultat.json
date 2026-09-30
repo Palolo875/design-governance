@@ -1,0 +1,87 @@
+{
+  "pages": {
+    "K": {
+      "qualite": 8,
+      "adequation": 4,
+      "verite": [
+        "Grille tarifaire complète présentée comme réelle : Solo 12 €, PME 29 €, Équipe 59 € HT/mois, avec quotas (20 factures, 3 puis 10 utilisateurs) et badge « Le plus choisi ». Le brief dit un seul abonnement au montant non communiqué.",
+        "Badge « Le plus choisi » : suggère une statistique d'usage qui n'existe pas.",
+        "Fonctions et garanties non fournies, affirmées comme acquises : rapprochement bancaire, API et connexion ERP, droits par rôle, multi-établissements, devises (francs CFA), conservation 10 ans, « Talon couvre les deux », transmission par plateforme agréée.",
+        "Promesse « Facturez en deux minutes » : promesse chiffrée, contraire au ton demandé.",
+        "Aucune mention signalant que le nom, le tarif et les fonctions sont fictifs. Seul le tableau de bord porte « Données d'exemple »."
+      ],
+      "reprises": {
+        "bloquant": [
+          "Supprimer la grille à trois formules et les prix inventés ; un seul abonnement, montant « communiqué prochainement » ou signalé comme fictif.",
+          "Retirer ou signaler comme exemple le badge « Le plus choisi », les quotas et les fonctions non confirmées (API/ERP, multi-établissements, rapprochement bancaire).",
+          "Retirer « en deux minutes » (promesse chiffrée)."
+        ],
+        "notable": [
+          "La mise en avant de la réforme de la facture électronique (bloc sombre) prend la place d'un argument sur les trois fonctions demandées ; le devis transformé en facture est noyé dans une carte parmi quatre.",
+          "Beaucoup de contenu (8 cartes « détails légaux », 3 formules, FAQ) : page longue pour une TPE qui consulte aussi sur mobile.",
+          "Aucune indication que la page est un exemple fictif."
+        ],
+        "finition": [
+          "Texte très petit dans les cartes de formules et de détails légaux sur ordinateur.",
+          "Barre de navigation : « Essai gratuit » correct, mais le pied de page est minimal.",
+          "Le tampon « PAYÉE » recouvre des chiffres de la facture en mobile."
+        ]
+      },
+      "raison": "La plus polie visuellement (facture-héros, typographie maîtrisée, vert sobre), mais elle invente une grille de trois prix et des fonctions présentés comme vrais, ce qui contredit le brief et la rend inutilisable telle quelle."
+    },
+    "L": {
+      "qualite": 8,
+      "adequation": 8,
+      "verite": [
+        "Aucun fait inventé présenté comme vrai : bandeau haut « Page d'exemple. Le nom Soldé, le tarif, les entreprises et les montants sont fictifs », répété en pied de page, et mentions « Exemple fictif », « Données d'exemple ».",
+        "Le tarif de 19 € HT/mois est un montant inventé, mais clairement déclaré fictif : acceptable. Il figure toutefois dans un bouton du hero, ce qui le fait ressembler à un fait établi."
+      ],
+      "reprises": {
+        "bloquant": [],
+        "notable": [
+          "Le bouton secondaire du hero « 19 € HT par mois » ressemble à une action alors que c'est une information, et c'est un prix non communiqué par le client.",
+          "La fonction « devis en facture en un clic » est peu visible : elle n'apparaît que dans une ligne de la liste du tarif ; la première fonction demandée manque de démonstration.",
+          "Le simulateur de facture (« Essayez ») est riche mais long, et détourne de la conversion vers l'essai.",
+          "L'argument de la réforme 2027 a un bloc entier, sans lien direct avec la demande."
+        ],
+        "finition": [
+          "Texte de tableaux, notes et légendes très petit sur ordinateur.",
+          "Densité un peu élevée du bloc hero (facture, frise, encart) au-dessus de la ligne de flottaison en mobile.",
+          "Liste de puces numérotées du simulateur dispersée sous la facture."
+        ]
+      },
+      "raison": "Sobre, rassurante, concrète : la métaphore de la facture papier à carbone donne un vrai parti pris, le récit jour par jour « qui fait quoi » et le suivi sont convaincants, et tout l'inventé est déclaré fictif, mais le devis est sous-exposé et le tarif en bouton est discutable."
+    },
+    "Q": {
+      "qualite": 8,
+      "adequation": 8,
+      "verite": [
+        "Aucun fait inventé présenté comme vrai : « Exemple fictif », « Tarif indicatif, à confirmer avant lancement », « Page de démonstration : entreprises, clients, montants et tarifs sont fictifs ou indicatifs » et « nom de travail » en pied de page.",
+        "Le tarif de 19 € HT/mois est inventé mais signalé comme indicatif ; il est répété dans le hero et la section tarif, avec un tampon « Sans engagement » qui est une promesse non fournie."
+      ],
+      "reprises": {
+        "bloquant": [],
+        "notable": [
+          "Le bleu électrique saturé en hero est plus énergique que « sobre, rassurant », et le titre blanc/bleu clair du hero a un contraste faible sur la seconde ligne.",
+          "La cible est restreinte à « artisans, commerçants et PME qui facturent eux-mêmes », plus étroite que TPE/PME de 1 à 20 salariés.",
+          "Le schéma d'échéance de la section relances est peu lisible en mobile (frise quasi vide, étiquettes en dehors)."
+        ],
+        "finition": [
+          "Texte très petit sur ordinateur dans la facture et les tableaux.",
+          "Le lien souligné « Manipuler l'exemple de facture » est discret comme CTA secondaire.",
+          "Pied de page très sommaire."
+        ]
+      },
+      "raison": "Identité la plus affirmée (bleu, grotesque serré, mono), démonstration interactive de la facture, e-mail de relance concret, tarif en pro forma et formulaire d'essai sans carte, le tout déclaré fictif : le plus proche d'un travail senior, malgré un bleu moins sobre."
+    }
+  },
+  "paires": {
+    "P1": {"choix": "gauche", "raison": "Q a une identité plus forte et un formulaire d'essai direct ; L est très proche en honnêteté et en sobriété mais moins distinctive et avec un CTA moins franc."},
+    "P2": {"choix": "droite", "raison": "K invente une grille de trois prix et des fonctions présentés comme vrais, L déclare tout l'inventé comme fictif."},
+    "P3": {"choix": "gauche", "raison": "Q est honnête et adaptée ; K, plus lisse, brise le brief avec trois formules et un « Le plus choisi »."},
+    "P4": {"choix": "gauche", "raison": "L respecte la vérité et le ton ; K garde une belle finition mais inventée sur le tarif."},
+    "P5": {"choix": "droite", "raison": "Très proches ; Q est plus affirmée, convertit mieux (formulaire, CTA répétés), L plus sobre mais sous-expose le devis."},
+    "P6": {"choix": "droite", "raison": "Q fait un travail comparable en soin et respecte le brief ; K présente des prix et des fonctions inventés comme réels."}
+  },
+  "classement": ["Q", "L", "K"]
+}

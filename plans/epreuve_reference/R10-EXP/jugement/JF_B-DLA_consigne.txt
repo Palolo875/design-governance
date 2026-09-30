@@ -1,0 +1,37 @@
+Tu es juge dans une évaluation à l'aveugle de pages web. Tu ne sais pas comment ni par qui elles ont été faites, et tu ne dois rien supposer à ce sujet.
+
+Le besoin réel est le brief ci-dessous. Les pages ont été faites à partir d'une demande beaucoup plus courte (« Fais le site d'une boulangerie-pâtisserie à Douala. ») et ne connaissent donc pas ces faits (nom, prix, horaires) : ne les pénalise pas pour un fait qu'elles n'ont pas pu connaître, mais juge ce que la page montre, comme le feraient ce commerçant et ses clients. Un fait inventé présenté comme vrai reste un défaut ; un contenu clairement signalé comme exemple n'en est pas un.
+
+--- BRIEF ---
+- **Commerce :** « Pain d'Ici », boulangerie-pâtisserie de quartier à Bonamoussadi (Douala), ouverte en 2019. Deux fours, six employés.
+- **Offre et prix (FCFA) :** baguette 150 ; pain complet 500 ; croissant 300 ; pain au chocolat 350 ; beignets-haricots le samedi matin ; gâteaux d'anniversaire sur commande, de 12 000 à 30 000 selon la taille, à commander 48 heures à l'avance.
+- **Horaires :** du lundi au samedi, de 6 h à 20 h ; le dimanche, de 7 h à 13 h.
+- **Public :** familles du quartier, employés qui passent avant le travail, parents qui commandent un gâteau.
+- **Objectif du site :** faire commander les gâteaux par WhatsApp et donner l'adresse et les horaires. Ce n'est pas une boutique en ligne.
+- **Paiement :** espèces, Orange Money, MTN MoMo. Livraison à moto dans Bonamoussadi et Kotto (1 000 FCFA).
+- **Ton :** chaleureux, direct, fier du quartier. Pas de luxe ni de « patisserie française » de façade.
+- **Langue :** français. Une phrase d'accueil en anglais est la bienvenue.
+- **Contraintes :** usage à 90 % sur mobile ; réseau parfois lent, donc une page légère (cible < 1 Mo) ; pas de carte intégrée, seulement un lien vers la carte ; numéro WhatsApp fictif `+237 6XX XX XX XX` affiché tel quel.
+- **Preuve disponible :** aucune. Pas d'avis clients, pas de chiffres, pas de presse. **N'en invente pas.**
+--- FIN DU BRIEF ---
+
+Trois pages sont désignées par une lettre : Q, V, W. Pour chaque page, les captures sont dans le dossier `/tmp/claude-0/-home-user-design-governance/0a3b69f1-c424-582d-aaa1-b2314040cdb3/scratchpad/r10/juges/JF_B-DLA/` : `page_<lettre>_bureau_N.jpg` (écran d'ordinateur, page entière réduite, lue colonne par colonne de gauche à droite) et `page_<lettre>_mobile_N.jpg` (téléphone, page entière, colonnes de gauche à droite). Regarde toutes les captures de toutes les pages avant de juger. Ne lis aucun autre fichier.
+
+Pour chaque page, donne :
+- qualite : note de 1 à 10 sur la qualité perçue (beauté, composition, typographie, finition, niveau d'un designer senior) ;
+- adequation : note de 1 à 10 sur l'adéquation à ce besoin (public, objectif de la page, contraintes, ton) ;
+- verite : liste des faits inventés présentés comme vrais (avis ou témoignages, chiffres, clients ou logos, presse, labels, prix ou historique non donnés) ; un exemple clairement signalé comme exemple ne compte pas ;
+- reprises : ce qu'il faudrait corriger avant de montrer la page au client, en trois listes « bloquant », « notable », « finition » ;
+- raison : une phrase.
+
+Puis tranche ces 6 paires (« gauche », « droite » ou « égal », sur l'ensemble qualité et adéquation ; question : lequel est le plus proche d'un travail de designer senior pour ce besoin ?), avec une raison courte chacune :
+P1 : Q (gauche) contre V (droite)
+P2 : Q (gauche) contre W (droite)
+P3 : W (gauche) contre V (droite)
+P4 : V (gauche) contre Q (droite)
+P5 : V (gauche) contre W (droite)
+P6 : W (gauche) contre Q (droite)
+
+Enfin, classe les trois pages de la meilleure à la moins bonne.
+
+Écris ton résultat en JSON dans le fichier `/tmp/claude-0/-home-user-design-governance/0a3b69f1-c424-582d-aaa1-b2314040cdb3/scratchpad/r10/juges/JF_B-DLA/resultat.json`, avec les clés "pages" (lettre → {"qualite","adequation","verite","reprises","raison"}), "paires" (P1 à P6 → {"choix","raison"}) et "classement" (liste de lettres). Réponds ensuite en une ligne : « résultat écrit ».

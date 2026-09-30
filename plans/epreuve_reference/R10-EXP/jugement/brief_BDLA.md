@@ -1,0 +1,10 @@
+- **Commerce :** « Pain d'Ici », boulangerie-pâtisserie de quartier à Bonamoussadi (Douala), ouverte en 2019. Deux fours, six employés.
+- **Offre et prix (FCFA) :** baguette 150 ; pain complet 500 ; croissant 300 ; pain au chocolat 350 ; beignets-haricots le samedi matin ; gâteaux d'anniversaire sur commande, de 12 000 à 30 000 selon la taille, à commander 48 heures à l'avance.
+- **Horaires :** du lundi au samedi, de 6 h à 20 h ; le dimanche, de 7 h à 13 h.
+- **Public :** familles du quartier, employés qui passent avant le travail, parents qui commandent un gâteau.
+- **Objectif du site :** faire commander les gâteaux par WhatsApp et donner l'adresse et les horaires. Ce n'est pas une boutique en ligne.
+- **Paiement :** espèces, Orange Money, MTN MoMo. Livraison à moto dans Bonamoussadi et Kotto (1 000 FCFA).
+- **Ton :** chaleureux, direct, fier du quartier. Pas de luxe ni de « patisserie française » de façade.
+- **Langue :** français. Une phrase d'accueil en anglais est la bienvenue.
+- **Contraintes :** usage à 90 % sur mobile ; réseau parfois lent, donc une page légère (cible < 1 Mo) ; pas de carte intégrée, seulement un lien vers la carte ; numéro WhatsApp fictif `+237 6XX XX XX XX` affiché tel quel.
+- **Preuve disponible :** aucune. Pas d'avis clients, pas de chiffres, pas de presse. **N'en invente pas.**

@@ -1,0 +1,101 @@
+{
+  "run_card": {
+    "id": "DIRECTION-BOULANGERIE-DOUALA-001",
+    "owner": "Owner du projet (commanditaire du brief)",
+    "date_version": "2026-09-30 / V1.1.1",
+    "mode": "DIRECTION",
+    "decision": "Fixer la direction et la première scène du site d'une boulangerie-pâtisserie de quartier à Douala.",
+    "decision_intent": "Rendre visible dès la première scène quand le pain sort du four et donner un chemin concret pour commander un gâteau.",
+    "risk": {
+      "level": "important",
+      "statement": "Site de boulangerie interchangeable (crème, blé, serif) ou contenus inventés présentés comme réels (nom, prix, horaires, adresse).",
+      "critical_protection": null
+    },
+    "sources": [
+      "DIRECTION/START",
+      "DIRECTION/EXTERNAL-START",
+      "DIRECTION/CREATIVE-BOOT",
+      "DIRECTION/VISUAL_TARGET",
+      "DIRECTION/FIRST-OBJECT",
+      "ACTION/ROUTING",
+      "ACTION/FIRST-RENDER",
+      "ACTION/RUN-DIRECTION",
+      "ACTION/GATE-A",
+      "ACTION/GATE-C",
+      "ACTION/HANDOFF",
+      "SAVOIR/CRAFT/CFT-00",
+      "SAVOIR/TYPE",
+      "BIBLIOTHEQUE/TENSION"
+    ],
+    "direction": {
+      "thesis": "Le four rythme le quartier : la page s'organise autour de l'heure des fournées (matin et soir) et de la commande de gâteaux de fête, avec les usages de Douala (FCFA, pain chargé, repère, message à envoyer).",
+      "anti_direction": [
+        "Gabarit de boulangerie artisanale crème, épis de blé et serif doux.",
+        "Motif wax ou pagne plaqué en décor sans rôle.",
+        "Cartes produits répétées avec photos factices.",
+        "Bouton d'envoi simulant une commande qui n'existe pas."
+      ],
+      "first_object": "Ruban « La journée du four » : fournées positionnées sur la journée, heure de Douala en direct, prochaine fournée annoncée dans le titre.",
+      "identity_stake": "high",
+      "calibration": {"basis": "generated_only_reserved", "detail": "Direction calibrée uniquement sur hypothèse générée, sans référence observée ni contrainte réelle au-delà du brief (Douala, boulangerie-pâtisserie)."}
+    },
+    "anchors": [
+      {
+        "role": "direction",
+        "type": "generated",
+        "source": "Hypothèse de l'agent sur les usages locaux (pain chargé, fournées du soir, repères, commande par message) ; aucune référence ouverte.",
+        "date": "2026-09-30",
+        "scope": "contenu, structure et registre typographique",
+        "retained": ["deux fournées par jour", "prix au mur en FCFA", "adresse par repère", "commande de gâteau par message"],
+        "rejected": ["palette crème", "décor wax", "photos simulées"],
+        "transformation": "Usages traduits en objets : ruban des fournées, tableau de prix à points de conduite, bon de commande qui génère le message.",
+        "limitation": "Direction calibrée uniquement sur hypothèse générée, sans référence observée ni contrainte réelle.",
+        "transformation_status": "transformed"
+      }
+    ],
+    "artifact": {
+      "locator": "index.html",
+      "scope": "Page complète, 1440 px et 390 px ; états ouvert (fournée à venir, dernière fournée passée), fermé avant et après ouverture, dimanche ; formulaire de commande (date trop proche, date valide, copie).",
+      "rights_status": "not_applicable",
+      "version": "2026-09-30 / 1"
+    },
+    "trace_locator": "run_card.json",
+    "next_proof": "Remplacer les contenus d'exemple par ceux de la boutique (questions.txt), puis faire tester la commande de gâteau par deux ou trois clients réels sur mobile Android.",
+    "proof": {
+      "observed": [
+        "Captures Chromium 1440 px et 390 px : aucun défilement horizontal, aucune erreur console.",
+        "Titre et ruban recalculés selon l'heure de Douala (5 horaires testés).",
+        "Formulaire : erreur de date sous 48 h affichée, estimation et message mis à jour, copie dans le presse-papiers réussie.",
+        "Contrastes calculés : textes principaux de 5,1:1 à 16,4:1."
+      ],
+      "not_verified": [
+        "Lecteur d'écran non exécuté.",
+        "Performance sur réseau mobile réel non mesurée.",
+        "Juge humain ou client non consulté."
+      ]
+    },
+    "decision_change": {
+      "outcome": "CHANGED",
+      "value": "Premier rendu : la preuve (ruban) tombait sous la ligne de flottaison ; titre réduit et scène recomposée en deux colonnes, ruban remonté dans le premier écran.",
+      "evidence": "Captures successives 1440 × 900."
+    },
+    "creative_close": {
+      "presence": "Titre condensé géant qui annonce la prochaine fournée, heure en braise sur fond croûte.",
+      "signature": "Ruban des fournées et pains à grignes ; prix au mur en FCFA ; adresse par repère.",
+      "craft_detail": "Le titre change selon l'heure réelle de Douala (ouvert, fermé, dimanche) ; le bon de commande se remplit en direct.",
+      "dominant_defect": "Sans photos réelles, la gourmandise repose sur le texte et un seul dessin (pain chargé).",
+      "next_polish_action": "Intégrer des photos réelles des produits dans la vitrine et le bloc Gâteaux."
+    },
+    "closure": {
+      "state": "DECIDED",
+      "direction_status": "PARTIALLY-HELD",
+      "issue": "EXPLORATORY",
+      "verdict": "EXPLORATORY",
+      "limitations": [
+        "Direction calibrée uniquement sur hypothèse générée, sans référence observée ni contrainte réelle.",
+        "Nom, prix, horaires, fournées et adresse d'exemple.",
+        "Envoi direct de la commande en attente du numéro de la boutique."
+      ]
+    }
+  }
+}

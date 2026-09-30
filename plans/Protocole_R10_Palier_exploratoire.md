@@ -179,8 +179,10 @@ Un seul problème évident suffit pour corriger d'abord. Pour P-4 et P-6, le dia
 - 1 : **consigne levée** pour ce palier ;
 - 2 : **6 productions neuves** ;
 - juges : **juges modèles seulement**, sans J1 ni juge humain extérieur. Conséquence (décision 9) : le résultat est une **orientation en auto-comparaison**, jamais une preuve ; il ne lève pas la réserve `NOT-VERIFIED` ;
-- 3 (brief B-SAAS) : validation à confirmer. Elle est requise avant le jugement, pas avant la production, puisque les producteurs reçoivent le brief vague ;
-- modèles : le producteur est le modèle de la session, identique pour les 6 cas. Le choix des juges modèles (distincts du producteur si possible) est soumis à l'owner avant le lancement. Les identifiants restent hors du dépôt (§3).
+- 3 (brief B-SAAS) : **validé** ;
+- modèles : le producteur est le modèle de la session, identique pour les 6 cas ; deux juges modèles distincts du producteur, choisis par l'owner (le second a échoué faute de crédits et a été remplacé par un second juge du premier modèle : écart déclaré dans `V12R_35`). Les identifiants restent hors du dépôt (§3).
+
+**Exécution :** palier fait le 30-09-2026, lecture dans `audit/reports/V12R_35_R10_PALIER_EXPLORATOIRE.md`.
 
 ## Annexe — Brief riche B-SAAS (proposé, fictif, pour les juges)
 

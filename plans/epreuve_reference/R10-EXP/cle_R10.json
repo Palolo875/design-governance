@@ -1,0 +1,47 @@
+{
+ "date": "2026-09-30",
+ "modele_producteur": "hérité de la session, identique pour les 6 cas",
+ "juges": "JS et JF : deux juges modèles neufs par brief, même modèle, distinct du producteur, même famille (le second modèle prévu a échoué faute de crédits : remplacé, écart déclaré)",
+ "candidate_C3": "package/ à 64265da (arbre 4a23c52)",
+ "C4": "package/ de v1.1.1-import (arbre 01d6938)",
+ "ordre_production": [
+  "R10F0",
+  "R31FF",
+  "RCD7E",
+  "R6AC1",
+  "R3803",
+  "R4485"
+ ],
+ "cle": {
+  "R10F0": {
+   "brief": "B-DLA",
+   "condition": "C4",
+   "rep": 1
+  },
+  "R31FF": {
+   "brief": "B-DLA",
+   "condition": "C3",
+   "rep": 1
+  },
+  "RCD7E": {
+   "brief": "B-DLA",
+   "condition": "C1",
+   "rep": 1
+  },
+  "R6AC1": {
+   "brief": "B-SAAS",
+   "condition": "C1",
+   "rep": 1
+  },
+  "R3803": {
+   "brief": "B-SAAS",
+   "condition": "C3",
+   "rep": 1
+  },
+  "R4485": {
+   "brief": "B-SAAS",
+   "condition": "C4",
+   "rep": 1
+  }
+ }
+}

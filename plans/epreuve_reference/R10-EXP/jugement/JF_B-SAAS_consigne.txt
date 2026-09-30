@@ -1,0 +1,39 @@
+Tu es juge dans une évaluation à l'aveugle de pages web. Tu ne sais pas comment ni par qui elles ont été faites, et tu ne dois rien supposer à ce sujet.
+
+Le besoin réel est le brief ci-dessous. Les pages ont été faites à partir d'une demande beaucoup plus courte (« Fais la page d'accueil d'un logiciel de facturation pour PME. ») et ne connaissent donc pas ces faits (nom, fonctions exactes, tarif) : ne les pénalise pas pour un fait qu'elles n'ont pas pu connaître, mais juge ce que la page montre, comme le feraient ce gérant de PME et l'éditeur du logiciel. Un fait inventé présenté comme vrai reste un défaut ; un contenu clairement signalé comme exemple n'en est pas un.
+
+--- BRIEF ---
+- **Produit :** « Carnet », logiciel de facturation en ligne pour PME et indépendants. Lancé en 2023, petite équipe.
+- **Cible :** gérants de TPE et PME (1 à 20 salariés), sans comptable à plein temps ; usage sur ordinateur au bureau, consultation sur mobile.
+- **Trois fonctions :**
+  - créer un devis et le transformer en facture en un clic ;
+  - relancer automatiquement les factures impayées ;
+  - voir en un tableau ce qui est encaissé et ce qui reste à encaisser.
+- **Objectif de la page :** faire démarrer un essai gratuit de 30 jours, sans carte bancaire.
+- **Tarif :** un abonnement mensuel après l'essai, **montant non communiqué**.
+- **Preuve disponible :** aucune. Pas de clients nommés, pas de logos, pas de chiffres d'usage, pas de témoignages. **N'en invente pas.**
+- **Ton :** sobre, rassurant, concret ; pas de jargon comptable inutile ; pas de promesse chiffrée.
+- **Langue :** français.
+- **Assets :** aucun. Ni logo ni capture fournis.
+--- FIN DU BRIEF ---
+
+Trois pages sont désignées par une lettre : K, L, Q. Pour chaque page, les captures sont dans le dossier `/tmp/claude-0/-home-user-design-governance/0a3b69f1-c424-582d-aaa1-b2314040cdb3/scratchpad/r10/juges/JF_B-SAAS/` : `page_<lettre>_bureau_N.jpg` (écran d'ordinateur, page entière réduite, lue colonne par colonne de gauche à droite) et `page_<lettre>_mobile_N.jpg` (téléphone, page entière, colonnes de gauche à droite). Regarde toutes les captures de toutes les pages avant de juger. Ne lis aucun autre fichier.
+
+Pour chaque page, donne :
+- qualite : note de 1 à 10 sur la qualité perçue (beauté, composition, typographie, finition, niveau d'un designer senior) ;
+- adequation : note de 1 à 10 sur l'adéquation à ce besoin (public, objectif de la page, contraintes, ton) ;
+- verite : liste des faits inventés présentés comme vrais (avis ou témoignages, chiffres, clients ou logos, presse, labels, prix ou historique non donnés) ; un exemple clairement signalé comme exemple ne compte pas ;
+- reprises : ce qu'il faudrait corriger avant de montrer la page au client, en trois listes « bloquant », « notable », « finition » ;
+- raison : une phrase.
+
+Puis tranche ces 6 paires (« gauche », « droite » ou « égal », sur l'ensemble qualité et adéquation ; question : lequel est le plus proche d'un travail de designer senior pour ce besoin ?), avec une raison courte chacune :
+P1 : Q (gauche) contre L (droite)
+P2 : K (gauche) contre L (droite)
+P3 : Q (gauche) contre K (droite)
+P4 : L (gauche) contre K (droite)
+P5 : L (gauche) contre Q (droite)
+P6 : K (gauche) contre Q (droite)
+
+Enfin, classe les trois pages de la meilleure à la moins bonne.
+
+Écris ton résultat en JSON dans le fichier `/tmp/claude-0/-home-user-design-governance/0a3b69f1-c424-582d-aaa1-b2314040cdb3/scratchpad/r10/juges/JF_B-SAAS/resultat.json`, avec les clés "pages" (lettre → {"qualite","adequation","verite","reprises","raison"}), "paires" (P1 à P6 → {"choix","raison"}) et "classement" (liste de lettres). Réponds ensuite en une ligne : « résultat écrit ».

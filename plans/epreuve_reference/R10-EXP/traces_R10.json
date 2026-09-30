@@ -1,0 +1,50 @@
+{
+ "R6AC1": {
+  "tokens": 92141,
+  "outils": 6,
+  "duree_s": 238,
+  "vu_navigateur": false,
+  "lu": "aucun fichier",
+  "m4": 0
+ },
+ "RCD7E": {
+  "tokens": 94155,
+  "outils": 6,
+  "duree_s": 258,
+  "vu_navigateur": false,
+  "lu": "aucun fichier",
+  "m4": 0
+ },
+ "R31FF": {
+  "tokens": 158884,
+  "outils": 31,
+  "duree_s": 457,
+  "lu": "SKILL + routes via read_route (START, EXTERNAL-START, CREATIVE-BOOT, VISUAL_TARGET, FIRST-OBJECT, FIRST-RENDER, RUN-DIRECTION, GATE-A, GATE-C)",
+  "vu_navigateur": true,
+  "m4": 665
+ },
+ "R10F0": {
+  "tokens": 172562,
+  "outils": 43,
+  "duree_s": 581,
+  "vu_navigateur": true,
+  "lu": "SKILL + routes via read_route (14) + schéma/fixture run_card",
+  "m4": 625
+ },
+ "R3803": {
+  "tokens": 167840,
+  "outils": 31,
+  "duree_s": 516,
+  "vu_navigateur": true,
+  "lu": "SKILL en entier + routes via read_route (CHARGE, START, EXTERNAL-START, CREATIVE-BOOT, VISUAL_TARGET, FIRST-OBJECT, FIRST-RENDER, RUN-DIRECTION, GATE-A, GATE-C)",
+  "m4": 466
+ },
+ "R4485": {
+  "tokens": 232460,
+  "outils": 52,
+  "duree_s": 839,
+  "vu_navigateur": true,
+  "lu": "SKILL, README, READING_MAP, QUICKSTART + routes via read_route (20)",
+  "m4": 900
+ }
+}

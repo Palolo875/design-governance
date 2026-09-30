@@ -1,0 +1,552 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Le Fournil d'Akwa — boulangerie-pâtisserie à Douala</title>
+<meta name="description" content="Boulangerie-pâtisserie à Akwa, Douala : cinq fournées par jour, gâteaux sur commande 48 h à l'avance. Maquette : contenus d'exemple à confirmer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Instrument+Sans:wght@400;500;600&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --page:#F4F2EC;       /* papier de sac à pain */
+    --paper:#FFFFFF;
+    --ink:#1B1915;
+    --ink-2:#55504A;
+    --line:#D9D4CA;
+    --board:#1C1916;      /* ardoise / gueule du four */
+    --board-2:#2A2622;
+    --board-ink:#F1ECE3;
+    --board-dim:#A79E92;
+    --braise:#EE5A24;     /* chaleur : réservé à « maintenant / chaud » */
+    --braise-text:#B23A0E;/* même signal, lisible sur fond clair */
+    --radius:6px;
+    --display:"Zilla Slab", "Rockwell", Georgia, serif;
+    --body:"Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto} *{transition:none!important;animation:none!important}}
+  body{margin:0;background:var(--page);color:var(--ink);font:16px/1.55 var(--body);-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  :focus-visible{outline:3px solid var(--braise);outline-offset:2px;border-radius:3px}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+  .num{font-variant-numeric:tabular-nums lining-nums}
+
+  /* bandeau maquette */
+  .demo{background:var(--ink);color:#E9E4DA;font-size:13px;text-align:center;padding:7px 16px}
+  .demo strong{font-weight:600;color:#fff}
+
+  /* en-tête */
+  header.top{border-bottom:1px solid var(--line)}
+  .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:72px}
+  .mark{display:flex;align-items:center;gap:10px;text-decoration:none}
+  .mark svg{flex:none}
+  .mark b{font:700 22px/1 var(--display);letter-spacing:-.01em}
+  .mark span{display:block;font-size:12px;color:var(--ink-2);margin-top:3px;letter-spacing:.01em}
+  nav.main{display:flex;align-items:center;gap:26px;font-weight:500;font-size:15px}
+  nav.main a{text-decoration:none;padding:8px 0}
+  nav.main a:hover{text-decoration:underline;text-underline-offset:4px}
+  nav.main a.btn{padding:0 22px;text-decoration:none}
+  .sm{display:none}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 20px;border-radius:999px;font:600 15px/1 var(--body);text-decoration:none;border:0;cursor:pointer}
+  .btn-ink{background:var(--ink);color:#fff}
+  .btn-ink:hover{background:#000}
+  .btn-line{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+  .btn-line:hover{background:var(--ink);color:#fff}
+
+  /* scène d'ouverture */
+  .hero{padding:56px 0 64px}
+  .hero .wrap{display:grid;grid-template-columns:1.12fr .88fr;gap:56px;align-items:end}
+  .eyebrow{font-size:14px;font-weight:600;color:var(--ink-2);margin:0 0 18px}
+  h1{font:700 clamp(46px,6.6vw,88px)/.95 var(--display);letter-spacing:-.02em;margin:0 0 26px;text-wrap:balance}
+  .lede{font-size:19px;line-height:1.5;max-width:34em;margin:0 0 30px;color:#2C2823}
+  .lede b{font-weight:600}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:12px}
+
+  .now{background:var(--board);color:var(--board-ink);border-radius:10px;padding:26px 26px 22px;position:relative}
+  .now-clock{display:flex;justify-content:space-between;align-items:baseline;font-size:14px;color:var(--board-dim);margin-bottom:18px}
+  .now-clock .num{color:var(--board-ink);font-weight:600}
+  .now-label{font-size:14px;font-weight:600;letter-spacing:.02em;color:var(--braise);display:flex;align-items:center;gap:8px;margin:0 0 4px}
+  .now-label i{width:9px;height:9px;border-radius:50%;background:var(--braise);box-shadow:0 0 0 4px rgba(238,90,36,.22)}
+  .now-time{font:700 76px/1 var(--display);letter-spacing:-.02em;margin:0}
+  .now-eta{font:600 22px/1.2 var(--display);color:var(--braise);margin:6px 0 14px}
+  .now-what{font-size:16px;margin:0;color:var(--board-ink)}
+  .day{margin:24px 0 8px;position:relative;height:44px}
+  .day-track{position:absolute;left:0;right:0;top:18px;height:2px;background:#4A433C}
+  .day-past{position:absolute;left:0;top:18px;height:2px;background:var(--board-dim)}
+  .tick{position:absolute;top:11px;width:2px;height:16px;background:var(--board-dim);transform:translateX(-1px)}
+  .tick.next{background:var(--braise);height:20px;top:9px;width:3px}
+  .tick em{position:absolute;top:22px;left:50%;transform:translateX(-50%);font:500 11px/1 var(--body);font-style:normal;color:var(--board-dim);white-space:nowrap}
+  .tick.next em{color:var(--braise);font-weight:600}
+  .tick.nolab em{display:none}
+  .tick.off{opacity:.3}
+  .cursor{position:absolute;top:4px;width:0;height:30px;border-left:1.5px dashed var(--board-ink)}
+  .cursor::before{content:"";position:absolute;top:-3px;left:-5px;width:8px;height:8px;border-radius:50%;background:var(--board-ink)}
+  .now-foot{display:flex;justify-content:space-between;gap:12px;font-size:12.5px;color:var(--board-dim);border-top:1px solid #3A342E;padding-top:12px;margin-top:10px}
+
+  /* journée du fournil */
+  section{padding:84px 0}
+  .sec-head{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:36px}
+  h2{font:700 clamp(34px,4.2vw,52px)/1 var(--display);letter-spacing:-.015em;margin:0;text-wrap:balance}
+  .sec-head p{margin:0;color:var(--ink-2);max-width:32em}
+  #gateaux .sec-head{grid-template-columns:1.4fr 1fr}
+  .tag-ex{display:inline-block;font:500 12px/1 var(--body);color:var(--ink-2);border:1px solid var(--line);border-radius:999px;padding:5px 9px;white-space:nowrap;vertical-align:middle}
+
+  #fournees{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .batches{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink)}
+  .batch{display:grid;grid-template-columns:170px 1fr 1.25fr;gap:32px;padding:26px 0 28px;border-bottom:1px solid var(--line);position:relative}
+  .b-time{font:700 44px/1 var(--display);letter-spacing:-.02em}
+  .b-state{display:inline-flex;align-items:center;gap:7px;margin-top:12px;font:600 13.5px/1.2 var(--body);letter-spacing:0;color:var(--ink-2)}
+  .b-state::before{content:"";width:7px;height:7px;border-radius:50%;border:1.5px solid currentColor}
+  .batch.is-out .b-state::before{background:currentColor}
+  .batch.is-next .b-state{color:var(--braise-text)}
+  .batch.is-next .b-state::before{background:var(--braise);border-color:var(--braise)}
+  .batch.is-next::before{content:"";position:absolute;left:-24px;top:-1px;bottom:-1px;width:4px;background:var(--braise)}
+  .batch.is-off{opacity:.5}
+  .b-name{font:600 22px/1.15 var(--display);margin:2px 0 8px}
+  .b-note{margin:0;color:var(--ink-2);font-size:15px;max-width:26em}
+  .items{list-style:none;margin:0;padding:0}
+  .items li{display:flex;align-items:baseline;gap:10px;padding:7px 0;font-size:16px}
+  .items li::after{content:"";order:2;flex:1;border-bottom:1.5px dotted #B9B2A6;transform:translateY(-4px)}
+  .items .it{order:1}
+  .items .it small{color:var(--ink-2);font-size:13.5px;margin-left:4px}
+  .items .pr{order:3;font-weight:600;white-space:nowrap}
+  .fine{font-size:13.5px;color:var(--ink-2);margin:18px 0 0}
+
+  /* gâteaux */
+  .cake{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:start}
+  fieldset{border:0;margin:0 0 26px;padding:0;min-width:0}
+  legend,.lbl{font:600 15px/1.2 var(--body);margin:0 0 10px;padding:0;display:block}
+  .hint{font-weight:400;color:var(--ink-2);font-size:13.5px;margin-left:6px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{position:relative}
+  .chip input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+  .chip span{display:flex;flex-direction:column;gap:2px;min-height:46px;justify-content:center;padding:8px 16px;border-radius:var(--radius);background:var(--paper);box-shadow:inset 0 0 0 1.5px var(--line);font-size:15px;font-weight:500;cursor:pointer}
+  .chip span small{font-size:12.5px;color:var(--ink-2);font-weight:400}
+  .chip input:checked + span{box-shadow:inset 0 0 0 2px var(--ink);background:var(--ink);color:#fff}
+  .chip input:checked + span small{color:#CFC8BD}
+  .chip input:focus-visible + span{outline:3px solid var(--braise);outline-offset:2px}
+  .field{width:100%;min-height:48px;padding:10px 14px;border-radius:var(--radius);border:1.5px solid var(--line);background:var(--paper);font:500 16px var(--body);color:var(--ink)}
+  .field:focus{border-color:var(--ink);outline:none;box-shadow:0 0 0 3px rgba(238,90,36,.35)}
+  .field[aria-invalid="true"]{border-color:var(--braise-text)}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .err{color:var(--braise-text);font-size:14px;font-weight:500;margin:8px 0 0;display:flex;gap:6px}
+  .err[hidden]{display:none}
+  .counter{font-size:12.5px;color:var(--ink-2);text-align:right;margin-top:6px}
+
+  .ticket{background:var(--paper);border:1px solid var(--line);border-radius:10px;overflow:hidden;position:sticky;top:20px}
+  .ticket-view{background:#EAE6DE;display:grid;place-items:center;padding:24px 16px 10px;position:relative}
+  .ticket-view svg{width:100%;max-width:330px;height:auto;display:block}
+  .ticket-view .ill{position:absolute;right:12px;top:10px}
+  .ticket-body{padding:22px 24px 24px}
+  .ticket h3{font:700 22px/1.15 var(--display);margin:0 0 12px}
+  .recap{list-style:none;margin:0 0 16px;padding:0;font-size:15px}
+  .recap li{display:flex;justify-content:space-between;gap:16px;padding:6px 0;border-bottom:1px solid #EEEAE3}
+  .recap li span:first-child{color:var(--ink-2)}
+  .recap li span:last-child{text-align:right;font-weight:500}
+  .total{display:flex;justify-content:space-between;align-items:baseline;margin:6px 0 16px}
+  .total b{font:700 30px/1 var(--display)}
+  .total small{color:var(--ink-2);font-size:13px}
+  .send{display:grid;gap:10px}
+  .send .btn{width:100%}
+  .send p{margin:0;font-size:13.5px;color:var(--ink-2)}
+  .copied{color:#1E6B3A;font-weight:600}
+
+  /* venir */
+  #venir{background:var(--board);color:var(--board-ink)}
+  #venir h2{color:var(--board-ink)}
+  #venir .sec-head p{color:var(--board-dim)}
+  #venir .tag-ex{color:var(--board-dim);border-color:#4A433C}
+  .visit{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid #4A433C}
+  .visit > div{padding:26px 28px 6px 0}
+  .visit > div + div{padding-left:28px;border-left:1px solid #3A342E}
+  .visit h3{font:600 14px/1 var(--body);letter-spacing:.02em;color:var(--board-dim);margin:0 0 14px}
+  .visit p{margin:0 0 10px}
+  .big{font:600 24px/1.2 var(--display)}
+  .hours{width:100%;border-collapse:collapse;font-size:16px}
+  .hours td{padding:6px 0;border-bottom:1px solid #3A342E}
+  .hours td:last-child{text-align:right}
+  .hours tr.today td{color:var(--braise);font-weight:600}
+  .pay{list-style:none;margin:0;padding:0}
+  .pay li{padding:6px 0;border-bottom:1px solid #3A342E}
+
+  footer{background:var(--board);color:var(--board-dim);font-size:13.5px;border-top:1px solid #3A342E}
+  footer .wrap{padding-top:26px;padding-bottom:34px;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+  footer b{color:var(--board-ink);font:700 17px var(--display)}
+
+  /* responsive : recomposer, pas rétrécir */
+  @media (max-width:980px){
+    .hero .wrap{grid-template-columns:1fr;gap:36px}
+    .batch{grid-template-columns:120px 1fr;gap:18px 24px}
+    .batch .items{grid-column:2}
+    .cake{grid-template-columns:1fr}
+    .ticket{position:static}
+    .sec-head,#gateaux .sec-head{grid-template-columns:1fr;gap:14px}
+  }
+  @media (max-width:720px){
+    .wrap{padding:0 18px}
+    nav.main a:not(.btn){display:none}
+    .hero{padding:34px 0 44px}
+    .lede{font-size:17.5px}
+    .now{padding:22px 18px 18px}
+    .now-time{font-size:62px}
+    section{padding:60px 0}
+    .batch{grid-template-columns:1fr;gap:10px}
+    .batch .items{grid-column:1}
+    .batch.is-next::before{left:-18px}
+    .b-time{font-size:38px;display:flex;align-items:baseline;gap:14px}
+    .b-state{margin-top:0}
+    .row2{grid-template-columns:1fr}
+    .visit{grid-template-columns:1fr}
+    .visit > div + div{padding-left:0;border-left:0;border-top:1px solid #3A342E}
+    .visit > div{padding-right:0}
+    .tick em{font-size:10px}
+    .hero-text{display:contents}
+    .hero .wrap{gap:0}
+    .eyebrow{order:1}
+    h1{order:2;margin-bottom:22px}
+    .now{order:3;margin-bottom:26px}
+    .lede{order:4}
+    .hero-actions{order:5}
+    .mark span{display:none}
+    .mark b{font-size:20px}
+    .lg{display:none}
+    .sm{display:inline}
+    nav.main a.btn{min-height:42px;padding:0 18px}
+    .tick.hide-sm em{display:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="demo" role="note"><strong>Maquette.</strong> Nom, adresse, prix, horaires et moyens de paiement sont des exemples à remplacer par ceux de la boutique.</div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="#" aria-label="Le Fournil d'Akwa, accueil">
+      <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><path d="M3 31V17a14 14 0 0 1 28 0v14" fill="none" stroke="#1B1915" stroke-width="3"/><path d="M10 31v-9a7 7 0 0 1 14 0v9" fill="#EE5A24"/><path d="M1 31.5h32" stroke="#1B1915" stroke-width="3"/></svg>
+      <div><b>Le Fournil d'Akwa</b><span>Boulangerie-pâtisserie · Douala</span></div>
+    </a>
+    <nav class="main" aria-label="Navigation principale">
+      <a href="#fournees">Les fournées</a>
+      <a href="#gateaux">Gâteaux</a>
+      <a href="#venir">Venir</a>
+      <a class="btn btn-ink" href="#gateaux"><span class="lg">Commander un gâteau</span><span class="sm">Gâteaux</span></a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero" aria-labelledby="t-hero" style="padding-top:56px">
+  <div class="wrap">
+    <div class="hero-text">
+      <p class="eyebrow">Akwa, Douala · ouvert 7 jours sur 7</p>
+      <h1 id="t-hero">Le pain sort du four cinq fois par jour.</h1>
+      <p class="lede">Baguettes dès <b>5 h 30</b>, croissants à <b>6 h 30</b>, pâtés chauds à <b>10 h 30</b>, encore du pain à midi et à <b>16 h</b>. Passez au bon moment — et pour une fête, commandez votre gâteau deux jours avant.</p>
+      <div class="hero-actions">
+        <a class="btn btn-ink" href="#fournees">Voir les fournées du jour</a>
+        <a class="btn btn-line" href="#gateaux">Composer un gâteau</a>
+      </div>
+    </div>
+
+    <aside class="now" aria-labelledby="now-label" aria-live="polite">
+      <div class="now-clock"><span id="now-day">Aujourd'hui</span><span>Il est <span class="num" id="now-clock">--:--</span> à Douala</span></div>
+      <p class="now-label" id="now-label"><i aria-hidden="true"></i><span id="now-kicker">Prochaine fournée</span></p>
+      <p class="now-time num" id="now-time">16 h 00</p>
+      <p class="now-eta num" id="now-eta">dans 1 h 48</p>
+      <p class="now-what" id="now-what">Baguettes, pain complet et gâteaux du goûter.</p>
+      <div class="day" id="day" aria-hidden="true">
+        <div class="day-track"></div><div class="day-past" id="day-past"></div>
+      </div>
+      <div class="now-foot"><span>Horaires d'exemple, à confirmer</span><span id="now-open">Ouvert jusqu'à 21 h</span></div>
+    </aside>
+  </div>
+</section>
+
+<section id="fournees" aria-labelledby="t-fournees">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="t-fournees">La journée du fournil</h2>
+      <p>Chaque produit est rangé à l'heure où il sort du four : c'est le moment où il est le meilleur. Prix en francs CFA, à l'unité. <span class="tag-ex">prix d'exemple</span></p>
+    </div>
+    <ol class="batches" id="batches"></ol>
+    <p class="fine">Le dimanche, deux fournées seulement (6 h 30 et 10 h 30), fermeture à 14 h. Les quantités sont limitées : en fin de journée, certaines vitrines sont vides.</p>
+  </div>
+</section>
+
+<section id="gateaux" aria-labelledby="t-gateaux">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="t-gateaux">Un gâteau pour samedi&nbsp;?<br>Commandez 48&nbsp;h avant.</h2>
+      <p>Anniversaire, baptême, fin d'année scolaire : choisissez la taille, le parfum et le message. Vous obtenez le prix et un message de commande prêt à envoyer. <span class="tag-ex">tarifs d'exemple</span></p>
+    </div>
+
+    <div class="cake">
+      <form id="cake-form" novalidate>
+        <fieldset>
+          <legend>Taille <span class="hint">une part ≈ une personne</span></legend>
+          <div class="chips" id="sizes"></div>
+        </fieldset>
+        <fieldset>
+          <legend>Parfum</legend>
+          <div class="chips" id="flavours"></div>
+        </fieldset>
+        <div style="margin-bottom:26px">
+          <label class="lbl" for="msg">Message sur le gâteau <span class="hint">écrit à la main par le pâtissier</span></label>
+          <input class="field" id="msg" maxlength="28" value="Joyeux anniversaire Maëlle" autocomplete="off" aria-describedby="msg-count">
+          <div class="counter num" id="msg-count">26 / 28 caractères</div>
+        </div>
+        <div class="row2">
+          <div>
+            <label class="lbl" for="date">Jour de retrait</label>
+            <input class="field num" type="date" id="date" aria-describedby="date-err date-help">
+            <p class="err" id="date-err" role="alert" hidden></p>
+            <p class="counter" id="date-help" style="text-align:left">Au plus tôt dans 48 h. Dimanche : retrait avant 14 h.</p>
+          </div>
+          <fieldset style="margin:0">
+            <legend>Retrait</legend>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="mode" value="boutique" checked><span>En boutique</span></label>
+              <label class="chip"><input type="radio" name="mode" value="livraison"><span>Livraison<small>frais selon quartier</small></span></label>
+            </div>
+          </fieldset>
+        </div>
+      </form>
+
+      <aside class="ticket" aria-labelledby="t-ticket">
+        <div class="ticket-view">
+          <span class="tag-ex ill">aperçu dessiné</span>
+          <svg id="cake-svg" viewBox="48 2 244 236" role="img" aria-labelledby="cake-alt">
+            <title id="cake-alt">Aperçu dessiné du gâteau vu de dessus</title>
+            <ellipse cx="170" cy="226" rx="120" ry="10" fill="#D9D3C8"/>
+            <g id="cake-g">
+              <circle id="cake-plate" cx="170" cy="118" r="108" fill="#fff" stroke="#D2CCC1" stroke-width="1.5"/>
+              <circle id="cake-top" cx="170" cy="118" r="86" fill="#5B3A2A"/>
+              <g id="cake-deco"></g>
+              <path id="msg-path" d="M 104 124 A 66 66 0 0 1 236 124" fill="none"/>
+              <text font-family="Caveat, cursive" font-weight="600" fill="#fff" text-anchor="middle" id="cake-text-el">
+                <textPath href="#msg-path" startOffset="50%" id="cake-text">Joyeux anniversaire Maëlle</textPath>
+              </text>
+            </g>
+          </svg>
+        </div>
+        <div class="ticket-body">
+          <h3 id="t-ticket">Votre commande</h3>
+          <ul class="recap" id="recap"></ul>
+          <div class="total"><div><small>Estimation</small><br><b class="num" id="total">13 500 FCFA</b></div><small id="per-part" class="num">1 125 FCFA la part</small></div>
+          <div class="send">
+            <button type="button" class="btn btn-ink" id="copy">Copier le message de commande</button>
+            <p id="copy-status" aria-live="polite">Le numéro WhatsApp de la boutique sera ajouté à la mise en ligne ; en attendant, le message est prêt à coller.</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="venir" aria-labelledby="t-venir">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="t-venir">Venir au fournil</h2>
+      <p>Tout ce qu'il faut pour passer prendre son pain ou son gâteau. <span class="tag-ex">à confirmer</span></p>
+    </div>
+    <div class="visit">
+      <div>
+        <h3>Adresse</h3>
+        <p class="big">Akwa, Douala</p>
+        <p>Rue et repère exacts à fournir par la boutique.</p>
+      </div>
+      <div>
+        <h3>Horaires</h3>
+        <table class="hours num" aria-label="Horaires d'ouverture">
+          <tbody id="hours"></tbody>
+        </table>
+      </div>
+      <div>
+        <h3>Paiement</h3>
+        <ul class="pay">
+          <li>Espèces</li>
+          <li>Orange Money</li>
+          <li>MTN Mobile Money</li>
+        </ul>
+        <p style="margin-top:12px;color:var(--board-dim);font-size:14px">Acompte demandé pour les gâteaux au-delà de 20 parts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span><b>Le Fournil d'Akwa</b> — nom d'exemple</span>
+    <span>Maquette : contenus à remplacer, photos de la boutique à venir.</span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  // ---- Données d'exemple (à remplacer par celles de la boutique) ----
+  const BATCHES = [
+    { t: 330, name: "L'aube", note: "La première fournée, pour le petit-déjeuner et les sandwichs du matin.", sunday: false,
+      items: [["Baguette", "200 g", 150], ["Pain de mie", "500 g", 1000], ["Pain complet", "400 g", 500]] },
+    { t: 390, name: "Les viennoiseries", note: "Pur beurre, feuilletées la veille, cuites le matin même.", sunday: true,
+      items: [["Croissant", "", 400], ["Pain au chocolat", "", 450], ["Pain au lait", "", 200], ["Chausson à l'ananas", "", 500]] },
+    { t: 630, name: "Le salé", note: "Les pâtés sortent chauds vers 10 h 30 ; ils partent vite.", sunday: true,
+      items: [["Pâté à la viande", "", 300], ["Pâté au poisson", "", 300], ["Feuilleté au fromage", "", 500]] },
+    { t: 720, name: "Midi", note: "Du pain frais pour le déjeuner, et de quoi manger sur le pouce.", sunday: false,
+      items: [["Baguette", "200 g", 150], ["Pain aux céréales", "400 g", 600], ["Sandwich poulet-crudités", "", 1200]] },
+    { t: 960, name: "Le goûter et le soir", note: "La dernière fournée : le pain du dîner et les gâteaux à la part.", sunday: false,
+      items: [["Baguette", "200 g", 150], ["Pain complet", "400 g", 500], ["Gâteau coco", "la part", 500], ["Cake marbré", "la tranche", 400]] }
+  ];
+  const OPEN = { week: [330, 1260], sunday: [360, 840] }; // 5 h 30–21 h ; dimanche 6 h–14 h
+  const SIZES = [ { parts: 8, price: 9000, d: "Ø 18 cm" }, { parts: 12, price: 13500, d: "Ø 22 cm" }, { parts: 20, price: 22000, d: "Ø 28 cm" }, { parts: 30, price: 33000, d: "2 étages" } ];
+  const FLAVOURS = [
+    { id: "chocolat", label: "Chocolat", top: "#4A2C20", deco: "#7A4A34", text: "#FFF6EC" },
+    { id: "vanille-ananas", label: "Vanille-ananas", top: "#F6E7B8", deco: "#E9B93A", text: "#5B3A12" },
+    { id: "coco", label: "Coco", top: "#FBFAF6", deco: "#D8D2C4", text: "#6B5A45" },
+    { id: "foret-noire", label: "Forêt-noire", top: "#3A2520", deco: "#B0252F", text: "#FFF6EC" },
+    { id: "passion", label: "Fruit de la passion", top: "#F2C230", deco: "#8A5A0C", text: "#4A2A05" }
+  ];
+
+  const fmt = n => n.toLocaleString("fr-FR").replace(/ | /g, " ");
+  const hm = m => `${Math.floor(m/60)} h ${String(m%60).padStart(2,"0")}`;
+  const DAYS = ["dimanche","lundi","mardi","mercredi","jeudi","vendredi","samedi"];
+
+  // Heure de Douala (UTC+1, sans heure d'été), quel que soit le fuseau du visiteur
+  function doualaNow() {
+    const p = new Intl.DateTimeFormat("en-GB", { timeZone: "Africa/Douala", weekday: "short", hour: "2-digit", minute: "2-digit", year: "numeric", month: "2-digit", day: "2-digit", hourCycle: "h23" }).formatToParts(new Date());
+    const g = t => p.find(x => x.type === t).value;
+    const wd = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].indexOf(g("weekday"));
+    return { wd, min: +g("hour") * 60 + +g("minute"), y: +g("year"), mo: +g("month"), d: +g("day"), hh: g("hour"), mm: g("minute") };
+  }
+
+  // ---- Fournées ----
+  const list = document.getElementById("batches");
+  const day = document.getElementById("day");
+  const D0 = 300, D1 = 1260; // axe 5 h – 21 h
+  const pct = m => ((Math.min(Math.max(m, D0), D1) - D0) / (D1 - D0)) * 100;
+
+  BATCHES.forEach((b, i) => {
+    const li = document.createElement("li");
+    li.className = "batch"; li.id = "b" + i;
+    li.innerHTML = `
+      <div><div class="b-time num">${hm(b.t)}<span class="b-state" data-state>À venir</span></div></div>
+      <div><h3 class="b-name">${b.name}</h3><p class="b-note">${b.note}</p></div>
+      <ul class="items">${b.items.map(([n, q, p]) => `<li><span class="it">${n}${q ? `<small>${q}</small>` : ""}</span><span class="pr num">${fmt(p)} F</span></li>`).join("")}</ul>`;
+    list.appendChild(li);
+    const tk = document.createElement("div");
+    tk.className = "tick" + (i === 3 ? " hide-sm" : "") + (i === 1 ? " nolab" : ""); tk.style.left = pct(b.t) + "%";
+    tk.innerHTML = `<em>${Math.floor(b.t/60)}h${b.t%60 ? String(b.t%60).padStart(2,"0") : ""}</em>`;
+    day.appendChild(tk);
+  });
+  const cursor = document.createElement("div"); cursor.className = "cursor"; day.appendChild(cursor);
+
+  function update() {
+    const n = doualaNow();
+    const sunday = n.wd === 0;
+    const [o, c] = sunday ? OPEN.sunday : OPEN.week;
+    document.getElementById("now-clock").textContent = `${n.hh}:${n.mm}`;
+    document.getElementById("now-day").textContent = DAYS[n.wd].replace(/^./, s => s.toUpperCase());
+    const todays = BATCHES.map((b, i) => ({ ...b, i })).filter(b => !sunday || b.sunday);
+    const next = todays.find(b => b.t > n.min && n.min < c);
+    const last = [...todays].reverse().find(b => b.t <= n.min);
+
+    BATCHES.forEach((b, i) => {
+      const li = document.getElementById("b" + i), st = li.querySelector("[data-state]");
+      li.classList.remove("is-out", "is-next", "is-off");
+      if (sunday && !b.sunday) { li.classList.add("is-off"); st.textContent = "Pas le dimanche"; }
+      else if (next && next.i === i) { li.classList.add("is-next"); st.textContent = `Prochaine · dans ${eta(b.t - n.min)}`; }
+      else if (n.min >= c) { const tomSun = n.wd === 6; if (tomSun && !b.sunday) { li.classList.add("is-off"); st.textContent = "Pas demain (dimanche)"; } else st.textContent = "Demain"; }
+      else if (b.t <= n.min) { li.classList.add("is-out"); st.textContent = "Sortie du four"; }
+      else st.textContent = "À venir";
+    });
+    day.querySelectorAll(".tick").forEach((t, i) => { t.classList.toggle("next", !!next && next.i === i); t.classList.toggle("off", sunday && !BATCHES[i].sunday); });
+    cursor.style.left = pct(n.min) + "%";
+    document.getElementById("day-past").style.width = pct(n.min) + "%";
+
+    const K = document.getElementById("now-kicker"), T = document.getElementById("now-time"), E = document.getElementById("now-eta"), W = document.getElementById("now-what"), O = document.getElementById("now-open");
+    if (n.min < o) {
+      K.textContent = "Ouverture"; T.textContent = hm(o); E.textContent = `dans ${eta(o - n.min)}`;
+      W.textContent = `Première fournée à ${hm(todays[0].t)} : ${lower(todays[0].items)}.`; O.textContent = "Fermé pour l'instant";
+    } else if (n.min >= c) {
+      const tomorrowSun = n.wd === 6;
+      K.textContent = "Fermé · réouverture demain"; T.textContent = hm(tomorrowSun ? OPEN.sunday[0] : OPEN.week[0]);
+      E.textContent = `première fournée à ${hm(tomorrowSun ? BATCHES[1].t : BATCHES[0].t)}`;
+      W.textContent = "Un gâteau pour ce week-end ? La commande se prépare dès maintenant."; O.textContent = "Fermé";
+    } else if (next) {
+      K.textContent = "Prochaine fournée"; T.textContent = hm(next.t); E.textContent = `dans ${eta(next.t - n.min)}`;
+      W.textContent = `${lower(next.items)}.`; W.textContent = W.textContent[0].toUpperCase() + W.textContent.slice(1);
+      O.textContent = `Ouvert jusqu'à ${hm(c).replace(" h 00", " h")}`;
+    } else {
+      K.textContent = "Dernière fournée sortie"; T.textContent = hm(last.t); E.textContent = "servez-vous tant qu'il en reste";
+      W.textContent = `${lower(last.items)}.`; W.textContent = W.textContent[0].toUpperCase() + W.textContent.slice(1);
+      O.textContent = `Ouvert jusqu'à ${hm(c).replace(" h 00", " h")}`;
+    }
+    // horaires
+    const rows = [["Lundi – samedi", "5 h 30 – 21 h", !sunday], ["Dimanche", "6 h – 14 h", sunday]];
+    document.getElementById("hours").innerHTML = rows.map(([d, h, t]) => `<tr class="${t ? "today" : ""}"><td>${d}${t ? " · aujourd'hui" : ""}</td><td>${h}</td></tr>`).join("");
+  }
+  const eta = m => m < 60 ? `${m} min` : `${Math.floor(m/60)} h ${String(m%60).padStart(2,"0")}`;
+  const lower = items => items.map(i => i[0]).join(", ").replace(/, ([^,]*)$/, " et $1").toLowerCase().replace(/^./, s => s);
+  update(); setInterval(update, 30000);
+
+  // ---- Gâteau ----
+  const sizesEl = document.getElementById("sizes"), flEl = document.getElementById("flavours");
+  sizesEl.innerHTML = SIZES.map((s, i) => `<label class="chip"><input type="radio" name="size" value="${i}" ${i === 1 ? "checked" : ""}><span class="num">${s.parts} parts<small>${s.d} · ${fmt(s.price)} F</small></span></label>`).join("");
+  flEl.innerHTML = FLAVOURS.map((f, i) => `<label class="chip"><input type="radio" name="flavour" value="${i}" ${i === 1 ? "checked" : ""}><span>${f.label}</span></label>`).join("");
+
+  const form = document.getElementById("cake-form"), msg = document.getElementById("msg"), date = document.getElementById("date");
+  const n0 = doualaNow();
+  const minDate = new Date(Date.UTC(n0.y, n0.mo - 1, n0.d + 2));
+  const iso = d => d.toISOString().slice(0, 10);
+  date.min = iso(minDate);
+  // proposer le prochain samedi possible
+  const sat = new Date(minDate); while (sat.getUTCDay() !== 6) sat.setUTCDate(sat.getUTCDate() + 1);
+  date.value = iso(sat);
+  const longDate = s => { const d = new Date(s + "T12:00:00Z"); return `${DAYS[d.getUTCDay()]} ${d.getUTCDate()} ${["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"][d.getUTCMonth()]}`; };
+
+  function render() {
+    const s = SIZES[+form.size.value], f = FLAVOURS[+form.flavour.value], mode = form.mode.value;
+    const text = msg.value.trim();
+    document.getElementById("msg-count").textContent = `${msg.value.length} / 28 caractères`;
+    // aperçu
+    const r = 62 + (s.parts / 30) * 38;
+    const top = document.getElementById("cake-top"); top.setAttribute("r", r); top.setAttribute("fill", f.top);
+    const deco = document.getElementById("cake-deco"); deco.innerHTML = "";
+    const k = Math.round(10 + s.parts * 0.6);
+    for (let j = 0; j < k; j++) { const a = (j / k) * Math.PI * 2; deco.insertAdjacentHTML("beforeend", `<circle cx="${170 + Math.cos(a) * (r - 9)}" cy="${118 + Math.sin(a) * (r - 9)}" r="4.6" fill="${f.deco}"/>`); }
+    if (s.parts === 30) deco.insertAdjacentHTML("beforeend", `<circle cx="170" cy="118" r="${r * 0.55}" fill="none" stroke="${f.deco}" stroke-width="2" stroke-dasharray="3 5"/>`);
+    const rp = r * 0.68;
+    document.getElementById("msg-path").setAttribute("d", `M ${170 - rp} ${126} A ${rp} ${rp} 0 0 1 ${170 + rp} ${126}`);
+    const te = document.getElementById("cake-text-el"); te.setAttribute("fill", f.text);
+    te.setAttribute("font-size", Math.max(13, Math.min(28, (Math.PI * rp) / (Math.max(text.length, 8) * 0.42))));
+    document.getElementById("cake-text").textContent = text || "Sans message";
+    // date
+    let dateOk = true; const err = document.getElementById("date-err");
+    if (!date.value) { dateOk = false; err.textContent = "Choisissez un jour de retrait."; }
+    else if (date.value < date.min) { dateOk = false; err.textContent = `Il nous faut 48 h : premier retrait possible le ${longDate(date.min)}.`; }
+    err.hidden = dateOk; date.setAttribute("aria-invalid", String(!dateOk));
+    const isSun = date.value && new Date(date.value + "T12:00:00Z").getUTCDay() === 0;
+    document.getElementById("recap").innerHTML = [
+      ["Taille", `${s.parts} parts · ${s.d}`], ["Parfum", f.label], ["Message", text ? `« ${text} »` : "sans message"],
+      ["Retrait", dateOk ? `${longDate(date.value)}${isSun ? ", avant 14 h" : ""} · ${mode === "boutique" ? "en boutique" : "livraison"}` : "date à choisir"]
+    ].map(([a, b]) => `<li><span>${a}</span><span>${b}</span></li>`).join("");
+    document.getElementById("total").textContent = `${fmt(s.price)} FCFA`;
+    document.getElementById("per-part").textContent = `${fmt(Math.round(s.price / s.parts))} FCFA la part${mode === "livraison" ? " · + livraison" : ""}`;
+    const btn = document.getElementById("copy"); btn.disabled = !dateOk; btn.style.opacity = dateOk ? "" : ".45";
+    return `Bonjour Le Fournil d'Akwa, je souhaite commander un gâteau : ${s.parts} parts (${s.d}), parfum ${f.label.toLowerCase()}, message « ${text || "sans message"} », retrait le ${longDate(date.value)} ${mode === "boutique" ? "en boutique" : "en livraison (merci de m'indiquer les frais)"}. Prix indiqué sur le site : ${fmt(s.price)} FCFA. Merci !`;
+  }
+  form.addEventListener("input", render); form.addEventListener("change", render);
+  render();
+
+  document.getElementById("copy").addEventListener("click", async () => {
+    const txt = render(), st = document.getElementById("copy-status");
+    try { await navigator.clipboard.writeText(txt); st.innerHTML = '<span class="copied">Message copié.</span> Collez-le dans WhatsApp ou un SMS à la boutique.'; }
+    catch { st.textContent = "Copie impossible dans ce navigateur. Le message : " + txt; }
+  });
+})();
+</script>
+</body>
+</html>

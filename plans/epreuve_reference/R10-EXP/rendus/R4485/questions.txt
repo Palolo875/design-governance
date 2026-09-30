@@ -1,0 +1,18 @@
+Questions ouvertes (aucune réponse attendue ; hypothèses retenues entre crochets)
+
+1. Nom et identité du logiciel : existe-t-il un nom, un logo, une charte ?
+   [Hypothèse : nom de travail « Soldé » (une facture soldée est entièrement payée), aucun logo ni charte existants.]
+2. Marché et langue : France, Belgique, Suisse, Afrique francophone (FCFA) ?
+   [Hypothèse : France, euros, TVA à 20 %.]
+3. Public prioritaire : artisans et TPE, ou PME avec service comptable ?
+   [Hypothèse : dirigeants de TPE/PME qui facturent eux-mêmes (artisans, commerçants, prestataires).]
+4. Fonctions réellement disponibles : devis, relances automatiques, paiement en ligne, export comptable, multi-utilisateurs ?
+   [Hypothèse : devis → facture, envoi, suivi d'ouverture, relances programmées, tableau des sommes dues, export comptable. À confirmer ligne par ligne.]
+5. Réforme de la facturation électronique (France) : le logiciel est-il plateforme agréée ou raccordé à une plateforme ? Quels formats (Factur-X, UBL) ?
+   [Hypothèse : non affirmé sur la page ; aucun claim de conformité réglementaire publié tant que ce n'est pas confirmé.]
+6. Tarifs : prix, période d'essai, engagement ?
+   [Hypothèse : tarif indicatif 19 € HT/mois, 30 jours d'essai sans carte ; marqué « indicatif » sur la page.]
+7. Destination des boutons « Essayer » et « Se connecter » : quelles URL ?
+   [Hypothèse : aucune ; le formulaire d'essai est local et dit qu'il n'envoie rien.]
+8. Preuves sociales : existe-t-il des clients, chiffres ou témoignages publiables ?
+   [Hypothèse : aucun ; la page n'en invente pas.]

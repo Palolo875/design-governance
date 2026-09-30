@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Le Fournil du Wouri — Boulangerie-pâtisserie à Akwa, Douala</title>
+<meta name="description" content="Boulangerie-pâtisserie à Akwa, Douala. Pain chaud dès 5 h 30 et à 16 h 30, viennoiseries, pains chargés, gâteaux de fête sur commande par WhatsApp.">
+<meta name="theme-color" content="#F4C20D">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --taxi:#F4C20D;
+  --taxi-deep:#E0AE00;
+  --cacao:#24140E;
+  --cacao-2:#3A2319;
+  --folere:#B0133C;
+  --blanc:#FFFEFA;
+  --ink:#24140E;
+  --muted:#6B574D;
+  --line:rgba(36,20,14,.16);
+  --display:"Big Shoulders Display","Big Shoulders","Oswald",Impact,"Arial Narrow",sans-serif;
+  --text:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --wrap:1180px;
+  --gutter:clamp(16px,4vw,40px);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--blanc);color:var(--ink);font:400 17px/1.55 var(--text);font-variant-numeric:tabular-nums}
+a{color:inherit}
+img,svg{display:block;max-width:100%}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--gutter)}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:16px;top:16px;background:var(--cacao);color:var(--taxi);padding:8px 12px;z-index:10}
+:focus-visible{outline:3px solid var(--folere);outline-offset:3px}
+
+/* ---------- En-tête ---------- */
+.top{background:var(--taxi);border-bottom:2px solid var(--cacao)}
+.top .wrap{display:flex;align-items:center;gap:24px;min-height:72px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;margin-right:auto}
+.brand svg{width:40px;height:40px;flex:none}
+.brand b{font:900 1.55rem/0.9 var(--display);text-transform:uppercase;letter-spacing:.01em}
+.brand b span{display:block;font-size:.62em;letter-spacing:.14em;font-weight:800}
+.nav{display:flex;gap:22px;font-weight:600;font-size:.95rem}
+.nav a{text-decoration:none;padding:4px 0;border-bottom:2px solid transparent}
+.nav a:hover{border-color:var(--cacao)}
+.btn{display:inline-flex;align-items:center;gap:10px;font:700 1rem/1 var(--text);text-decoration:none;border:2px solid var(--cacao);border-radius:999px;padding:13px 20px;cursor:pointer;background:var(--cacao);color:var(--taxi);transition:transform .15s ease,background .15s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn svg{width:18px;height:18px;flex:none}
+.btn.ghost{background:transparent;color:var(--cacao)}
+.btn.ghost:hover{background:rgba(36,20,14,.08)}
+.btn.sm{padding:10px 16px;font-size:.92rem}
+@media (max-width:760px){
+  .nav{order:3;width:100%;gap:18px;font-size:.9rem;overflow-x:auto;padding-bottom:2px}
+  .brand b{font-size:1.3rem}
+}
+
+/* ---------- Ouverture ---------- */
+.hero{background:var(--taxi);padding:clamp(40px,7vw,88px) 0 clamp(48px,7vw,96px)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(32px,5vw,72px);align-items:center}
+.eyebrow{font-weight:700;font-size:.82rem;letter-spacing:.16em;text-transform:uppercase;margin:0 0 18px;display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:28px;height:2px;background:currentColor}
+h1{font:900 clamp(3.1rem,8.2vw,6.9rem)/.88 var(--display);text-transform:uppercase;margin:0 0 26px;letter-spacing:-.005em;text-wrap:balance}
+h1 em{font-style:normal;color:var(--folere)}
+.lead{font-size:clamp(1.05rem,1.6vw,1.2rem);max-width:34em;margin:0 0 30px}
+.actions{display:flex;flex-wrap:wrap;gap:12px}
+
+/* Tableau des fournées */
+.board{background:var(--cacao);color:var(--blanc);border-radius:18px;padding:22px 22px 14px;box-shadow:10px 10px 0 var(--folere)}
+.board-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-bottom:1px solid rgba(255,254,250,.18);padding-bottom:14px;margin-bottom:6px}
+.board-head h2{font:800 1.5rem/1 var(--display);text-transform:uppercase;letter-spacing:.04em;margin:0;color:var(--taxi)}
+.clock{font-size:.85rem;color:rgba(255,254,250,.72);text-align:right}
+.clock strong{display:block;font:800 1.7rem/1 var(--display);color:var(--blanc);letter-spacing:.03em}
+.rows{list-style:none;margin:0;padding:0}
+.rows li{display:grid;grid-template-columns:70px 1fr auto;gap:14px;align-items:center;padding:11px 8px;border-bottom:1px dashed rgba(255,254,250,.14);border-radius:8px}
+.rows li:last-child{border-bottom:0}
+.rows .t{font:800 1.55rem/1 var(--display);color:var(--taxi);letter-spacing:.02em}
+.rows .p{font-weight:600;font-size:.98rem;line-height:1.25}
+.rows .p small{display:block;font-weight:400;font-size:.8rem;color:rgba(255,254,250,.62);margin-top:2px}
+.tag{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 9px;border-radius:999px;border:1px solid rgba(255,254,250,.3);color:rgba(255,254,250,.75);white-space:nowrap}
+.rows li.hot{background:rgba(244,194,13,.12)}
+.rows li.hot .tag{background:var(--taxi);color:var(--cacao);border-color:var(--taxi)}
+.rows li.oven .tag{background:var(--folere);color:var(--blanc);border-color:var(--folere)}
+.rows li.done .t,.rows li.done .p{opacity:.55}
+.board-foot{font-size:.82rem;color:rgba(255,254,250,.7);margin:12px 8px 4px}
+.board-foot b{color:var(--taxi);font-weight:600}
+@media (max-width:900px){.hero .wrap{grid-template-columns:1fr}.board{box-shadow:6px 6px 0 var(--folere)}}
+@media (max-width:420px){.rows li{grid-template-columns:56px 1fr;}.rows .tag{grid-column:2;justify-self:start}.rows .t{font-size:1.35rem}}
+
+/* Bande de grignes */
+.grignes{height:38px;background:var(--cacao)}
+.grignes svg{width:100%;height:38px}
+
+/* ---------- Sections ---------- */
+section{padding:clamp(56px,8vw,104px) 0}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:clamp(28px,4vw,48px)}
+h2.title{font:900 clamp(2.4rem,5.4vw,4.2rem)/.9 var(--display);text-transform:uppercase;margin:0;text-wrap:balance}
+.sec-head p{max-width:30em;margin:0;color:var(--muted)}
+.kicker{font-weight:700;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:var(--folere);margin:0 0 12px}
+
+/* Carte */
+.menu{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(28px,4vw,56px) clamp(32px,5vw,80px)}
+.cat h3{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font:800 1.75rem/1 var(--display);text-transform:uppercase;margin:0 0 6px;padding-bottom:12px;border-bottom:3px solid var(--cacao)}
+.cat h3 span{font:700 .78rem/1 var(--text);letter-spacing:.1em;background:var(--taxi);padding:6px 9px;border-radius:999px;white-space:nowrap}
+.items{list-style:none;margin:0;padding:0}
+.items li{padding:13px 0;border-bottom:1px solid var(--line)}
+.items .row{display:flex;align-items:baseline;gap:10px}
+.items .n{font-weight:600}
+.items .dots{flex:1;border-bottom:2px dotted rgba(36,20,14,.28);transform:translateY(-4px);min-width:16px}
+.items .pr{font-weight:700;white-space:nowrap}
+.items .pr small{font-weight:500;font-size:.75em;color:var(--muted)}
+.items .d{font-size:.9rem;color:var(--muted);margin:2px 0 0;max-width:34em}
+.sig{display:inline-block;font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--folere);border:1.5px solid var(--folere);border-radius:4px;padding:2px 5px;margin-left:6px;transform:translateY(-2px)}
+.menu-note{margin:36px 0 0;font-size:.9rem;color:var(--muted)}
+@media (max-width:760px){.menu{grid-template-columns:1fr}}
+
+/* Gâteaux */
+.cakes{background:var(--cacao);color:var(--blanc)}
+.cakes .kicker{color:var(--taxi)}
+.cakes .sec-head p{color:rgba(255,254,250,.75)}
+.cakes-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,5vw,72px);align-items:start}
+.steps{list-style:none;margin:0 0 36px;padding:0;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:52px 1fr;gap:14px;padding:16px 0;border-top:1px solid rgba(255,254,250,.16)}
+.steps li::before{content:counter(s);font:900 2.4rem/1 var(--display);color:var(--taxi)}
+.steps b{display:block;font-size:1.05rem;margin-bottom:2px}
+.steps span{color:rgba(255,254,250,.75);font-size:.95rem}
+.tarifs{width:100%;border-collapse:collapse;font-size:.95rem}
+.tarifs caption{text-align:left;font:800 1.3rem/1 var(--display);text-transform:uppercase;letter-spacing:.04em;color:var(--taxi);padding-bottom:10px}
+.tarifs td{padding:10px 0;border-bottom:1px solid rgba(255,254,250,.14)}
+.tarifs td:last-child{text-align:right;font-weight:700;white-space:nowrap}
+
+.order{background:var(--blanc);color:var(--ink);border-radius:18px;padding:clamp(20px,3vw,32px);box-shadow:10px 10px 0 var(--taxi)}
+.order h3{font:900 2rem/1 var(--display);text-transform:uppercase;margin:0 0 6px}
+.order > p{margin:0 0 22px;color:var(--muted);font-size:.95rem}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.field.full{grid-column:1/-1}
+label,.legend{font-weight:600;font-size:.88rem}
+.opt{font-weight:400;color:var(--muted)}
+input,select,textarea{font:inherit;font-size:1rem;color:var(--ink);background:#fff;border:1.5px solid rgba(36,20,14,.3);border-radius:10px;padding:11px 12px;width:100%;min-width:0}
+textarea{resize:vertical;min-height:64px}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--cacao);box-shadow:0 0 0 3px rgba(244,194,13,.55)}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.chips label{position:relative}
+.chips input{position:absolute;opacity:0;width:1px;height:1px}
+.chips span{display:inline-block;padding:9px 14px;border:1.5px solid rgba(36,20,14,.3);border-radius:999px;font-weight:600;font-size:.9rem;cursor:pointer;background:#fff}
+.chips input:checked + span{background:var(--cacao);color:var(--taxi);border-color:var(--cacao)}
+.chips input:focus-visible + span{outline:3px solid var(--folere);outline-offset:2px}
+.ticket{margin:22px 0 18px;background:#FFF6CC;border:1.5px dashed rgba(36,20,14,.35);border-radius:10px;padding:14px 16px;font-size:.9rem;white-space:pre-line;color:var(--cacao-2)}
+.ticket b{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px;color:var(--muted)}
+.order .btn{width:100%;justify-content:center;background:#1D8A4E;border-color:#1D8A4E;color:#fff;font-size:1.05rem;padding:16px}
+.err{color:var(--folere);font-size:.88rem;font-weight:600;margin:10px 0 0;min-height:1.2em}
+.small{font-size:.82rem;color:var(--muted);margin:12px 0 0}
+@media (max-width:900px){.cakes-grid{grid-template-columns:1fr}.order{box-shadow:6px 6px 0 var(--taxi)}}
+@media (max-width:520px){.fields{grid-template-columns:1fr}}
+
+/* Ingrédients */
+.origins{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:3px solid var(--cacao)}
+.origin{padding:26px 22px 8px 0}
+.origin + .origin{padding-left:22px;border-left:1px solid var(--line)}
+.origin .km{font:900 3rem/1 var(--display);display:block;margin-bottom:10px}
+.origin .km small{font-size:.45em;letter-spacing:.06em;margin-left:4px}
+.origin h3{font-size:1.08rem;margin:0 0 6px}
+.origin p{margin:0;color:var(--muted);font-size:.95rem}
+@media (max-width:900px){.origins{grid-template-columns:1fr 1fr}.origin:nth-child(3){padding-left:0;border-left:0}.origin{border-bottom:1px solid var(--line);padding-bottom:22px}}
+@media (max-width:520px){.origins{grid-template-columns:1fr}.origin,.origin + .origin{padding-left:0;border-left:0}}
+
+/* Nous trouver */
+.visit{background:var(--taxi)}
+.visit-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(32px,5vw,72px)}
+.addr{font:800 clamp(1.8rem,3.4vw,2.6rem)/1.02 var(--display);text-transform:uppercase;margin:0 0 18px}
+.visit p{margin:0 0 14px;max-width:32em}
+.hours{width:100%;border-collapse:collapse;font-size:1.02rem}
+.hours th{text-align:left;font-weight:600;padding:12px 0;border-bottom:1.5px solid rgba(36,20,14,.3)}
+.hours td{text-align:right;font-weight:700;padding:12px 0;border-bottom:1.5px solid rgba(36,20,14,.3)}
+.hours tr.today th,.hours tr.today td{color:var(--folere)}
+.status{display:inline-flex;align-items:center;gap:8px;font-weight:700;background:var(--cacao);color:var(--blanc);padding:8px 14px;border-radius:999px;font-size:.9rem;margin-bottom:18px}
+.status i{width:9px;height:9px;border-radius:50%;background:#47D18C}
+.status.closed i{background:var(--folere)}
+.pay{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 26px;padding:0;list-style:none}
+.pay li{border:1.5px solid var(--cacao);border-radius:6px;padding:5px 10px;font-weight:600;font-size:.88rem}
+@media (max-width:900px){.visit-grid{grid-template-columns:1fr}}
+
+/* Pied */
+footer{background:var(--cacao);color:rgba(255,254,250,.75);font-size:.9rem;padding:36px 0}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer b{color:var(--taxi);font:800 1.2rem/1 var(--display);text-transform:uppercase;letter-spacing:.04em}
+
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#" aria-label="Le Fournil du Wouri, accueil">
+      <svg viewBox="0 0 40 40" aria-hidden="true">
+        <rect x="1" y="1" width="38" height="38" rx="10" fill="#24140E"/>
+        <g transform="rotate(-32 20 20)">
+          <rect x="4" y="14" width="32" height="12" rx="6" fill="#F4C20D"/>
+          <g fill="#24140E">
+            <rect x="10" y="17.6" width="5" height="1.8" rx=".9"/>
+            <rect x="17.5" y="17.6" width="5" height="1.8" rx=".9"/>
+            <rect x="25" y="17.6" width="5" height="1.8" rx=".9"/>
+          </g>
+        </g>
+      </svg>
+      <b>Le Fournil<span>du Wouri</span></b>
+    </a>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="#fournees">Fournées</a>
+      <a href="#carte">Carte</a>
+      <a href="#gateaux">Gâteaux</a>
+      <a href="#trouver">Nous trouver</a>
+    </nav>
+    <a class="btn sm" href="https://wa.me/237690000000" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3.9 2.5 1 2.7.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.6-.3Z"/></svg>
+      Commander
+    </a>
+  </div>
+</header>
+
+<main id="contenu">
+  <!-- Ouverture : la promesse + le tableau des fournées -->
+  <div class="hero" id="fournees">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Boulangerie-pâtisserie · Akwa, Douala</p>
+        <h1>Pain chaud<br>à 5&nbsp;h&nbsp;30.<br><em>Et encore à 16&nbsp;h&nbsp;30.</em></h1>
+        <p class="lead">Deux fournées de baguettes par jour, des croissants au beurre, des pains chargés à midi et des gâteaux de fête sur commande. Tout est cuit sur place, boulevard de la Liberté.</p>
+        <div class="actions">
+          <a class="btn" href="#gateaux">Commander un gâteau</a>
+          <a class="btn ghost" href="#carte">Voir la carte et les prix</a>
+        </div>
+      </div>
+
+      <div class="board" aria-live="polite">
+        <div class="board-head">
+          <h2>Sorties du four</h2>
+          <div class="clock"><strong id="clock">--h--</strong><span id="clockLabel">à Douala</span></div>
+        </div>
+        <ul class="rows" id="rows"></ul>
+        <p class="board-foot" id="boardFoot">Horaires des fournées du lundi au samedi.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="grignes" aria-hidden="true">
+    <svg preserveAspectRatio="none">
+      <defs>
+        <pattern id="g" width="64" height="38" patternUnits="userSpaceOnUse">
+          <ellipse cx="32" cy="19" rx="18" ry="4.2" fill="#F4C20D" transform="rotate(-24 32 19)"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="38" fill="url(#g)"/>
+    </svg>
+  </div>
+
+  <!-- Carte -->
+  <section id="carte" aria-labelledby="t-carte">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="kicker">La carte du jour</p>
+          <h2 class="title" id="t-carte">Du four au comptoir</h2>
+        </div>
+        <p>Prix en francs CFA, à la pièce sauf mention. Ce qui part vite part vite&nbsp;: les croissants sont souvent épuisés avant 9&nbsp;h.</p>
+      </div>
+
+      <div class="menu">
+        <div class="cat">
+          <h3>Pains <span>dès 5 h 30</span></h3>
+          <ul class="items">
+            <li><div class="row"><span class="n">Baguette 200&nbsp;g</span><span class="dots"></span><span class="pr">150</span></div><p class="d">La baguette de tous les jours, croûte fine, mie aérée.</p></li>
+            <li><div class="row"><span class="n">Baguette tradition au levain<span class="sig">Maison</span></span><span class="dots"></span><span class="pr">300</span></div><p class="d">Levain entretenu depuis l'ouverture, pousse lente de 18&nbsp;heures.</p></li>
+            <li><div class="row"><span class="n">Pain de mie</span><span class="dots"></span><span class="pr">1&nbsp;200</span></div><p class="d">500&nbsp;g, tranché à la demande.</p></li>
+            <li><div class="row"><span class="n">Pain complet</span><span class="dots"></span><span class="pr">800</span></div></li>
+            <li><div class="row"><span class="n">Fougasse au poivre de Penja</span><span class="dots"></span><span class="pr">1&nbsp;000</span></div><p class="d">Poivre blanc du Moungo, huile d'olive, gros sel. Sort à midi.</p></li>
+          </ul>
+        </div>
+
+        <div class="cat">
+          <h3>Viennoiseries <span>dès 6 h 30</span></h3>
+          <ul class="items">
+            <li><div class="row"><span class="n">Croissant au beurre</span><span class="dots"></span><span class="pr">400</span></div></li>
+            <li><div class="row"><span class="n">Pain au chocolat<span class="sig">Maison</span></span><span class="dots"></span><span class="pr">500</span></div><p class="d">Deux barres de chocolat noir au cacao du Cameroun.</p></li>
+            <li><div class="row"><span class="n">Chausson ananas-citronnelle</span><span class="dots"></span><span class="pr">600</span></div></li>
+            <li><div class="row"><span class="n">Pain aux raisins</span><span class="dots"></span><span class="pr">500</span></div></li>
+            <li><div class="row"><span class="n">Beignets soufflés</span><span class="dots"></span><span class="pr">500 <small>/ 10</small></span></div><p class="d">Le matin à 7&nbsp;h, le soir à 17&nbsp;h. Vendus chauds, en sachet.</p></li>
+          </ul>
+        </div>
+
+        <div class="cat">
+          <h3>Salé <span>dès 10 h 30</span></h3>
+          <ul class="items">
+            <li><div class="row"><span class="n">Pain chargé haricot-avocat</span><span class="dots"></span><span class="pr">500</span></div><p class="d">Demi-baguette, haricots rouges, avocat, piment à part.</p></li>
+            <li><div class="row"><span class="n">Pain chargé omelette-spaghetti</span><span class="dots"></span><span class="pr">700</span></div></li>
+            <li><div class="row"><span class="n">Friand au bœuf</span><span class="dots"></span><span class="pr">600</span></div></li>
+            <li><div class="row"><span class="n">Quiche poulet-poireau</span><span class="dots"></span><span class="pr">1&nbsp;000 <small>la part</small></span></div></li>
+          </ul>
+        </div>
+
+        <div class="cat">
+          <h3>Pâtisseries <span>toute la journée</span></h3>
+          <ul class="items">
+            <li><div class="row"><span class="n">Éclair au café de l'Ouest</span><span class="dots"></span><span class="pr">900</span></div><p class="d">Crème au café arabica des hauts plateaux de l'Ouest.</p></li>
+            <li><div class="row"><span class="n">Tarte coco-ananas<span class="sig">Maison</span></span><span class="dots"></span><span class="pr">1&nbsp;000 <small>la part</small></span></div></li>
+            <li><div class="row"><span class="n">Flan pâtissier</span><span class="dots"></span><span class="pr">700 <small>la part</small></span></div></li>
+            <li><div class="row"><span class="n">Entremets corossol-mangue</span><span class="dots"></span><span class="pr">1&nbsp;800</span></div><p class="d">Mousse de corossol, cœur mangue, biscuit coco. Individuel.</p></li>
+            <li><div class="row"><span class="n">Cake banane</span><span class="dots"></span><span class="pr">3&nbsp;500 <small>entier</small></span></div></li>
+          </ul>
+        </div>
+      </div>
+      <p class="menu-note">Allergènes (gluten, lait, œufs, fruits à coque) : demandez au comptoir, nous vous montrons la fiche de chaque produit.</p>
+    </div>
+  </section>
+
+  <!-- Gâteaux sur commande -->
+  <section class="cakes" id="gateaux" aria-labelledby="t-gateaux">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="kicker">Sur commande</p>
+          <h2 class="title" id="t-gateaux">Le gâteau de la fête</h2>
+        </div>
+        <p>Anniversaire, dot, mariage, baptême, fin d'année au bureau&nbsp;: dites-nous l'occasion, le nombre d'invités et le parfum. On vous répond sur WhatsApp dans l'heure, de 7&nbsp;h à 20&nbsp;h.</p>
+      </div>
+
+      <div class="cakes-grid">
+        <div>
+          <ol class="steps">
+            <li><div><b>Écrivez-nous au moins 48&nbsp;h avant</b><span>Sept jours pour un mariage, une dot ou une pièce montée.</span></div></li>
+            <li><div><b>Confirmez avec un acompte de 50&nbsp;%</b><span>Par Orange Money ou MTN MoMo. Le solde se règle au retrait.</span></div></li>
+            <li><div><b>Retrait en boutique ou livraison à moto</b><span>Akwa, Bonanjo, Bonapriso, Deïdo&nbsp;: 1&nbsp;000&nbsp;FCFA. Ailleurs, sur devis.</span></div></li>
+          </ol>
+          <table class="tarifs">
+            <caption>Repères de prix</caption>
+            <tbody>
+              <tr><td>6 parts</td><td>dès 10&nbsp;000 FCFA</td></tr>
+              <tr><td>12 parts</td><td>dès 18&nbsp;000 FCFA</td></tr>
+              <tr><td>25 parts</td><td>dès 35&nbsp;000 FCFA</td></tr>
+              <tr><td>40 parts et plus, pièce montée</td><td>sur devis</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <form class="order" id="order" novalidate>
+          <h3>Préparer ma demande</h3>
+          <p>Remplissez, vérifiez le message, puis envoyez-le sur WhatsApp. Rien n'est payé ici.</p>
+
+          <div class="fields">
+            <fieldset class="field full">
+              <legend class="legend">Occasion</legend>
+              <div class="chips" id="occasion">
+                <label><input type="radio" name="occasion" value="un anniversaire" checked><span>Anniversaire</span></label>
+                <label><input type="radio" name="occasion" value="une dot ou un mariage"><span>Dot ou mariage</span></label>
+                <label><input type="radio" name="occasion" value="un baptême ou une communion"><span>Baptême, communion</span></label>
+                <label><input type="radio" name="occasion" value="un événement d'entreprise"><span>Entreprise</span></label>
+                <label><input type="radio" name="occasion" value="une autre occasion"><span>Autre</span></label>
+              </div>
+            </fieldset>
+
+            <div class="field">
+              <label for="parts">Nombre de parts</label>
+              <select id="parts" name="parts">
+                <option value="6">6 parts</option>
+                <option value="12" selected>12 parts</option>
+                <option value="25">25 parts</option>
+                <option value="40 et plus">40 parts et plus</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="parfum">Parfum</label>
+              <select id="parfum" name="parfum">
+                <option>Chocolat noir, cacao du Cameroun</option>
+                <option>Vanille-coco</option>
+                <option>Ananas-passion</option>
+                <option>Corossol-mangue</option>
+                <option>Café de l'Ouest</option>
+                <option>À discuter</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="date">Date souhaitée</label>
+              <input type="date" id="date" name="date" required>
+            </div>
+            <div class="field">
+              <label for="mode">Retrait ou livraison</label>
+              <select id="mode" name="mode">
+                <option value="retrait en boutique">Retrait en boutique</option>
+                <option value="livraison">Livraison</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="nom">Votre prénom</label>
+              <input type="text" id="nom" name="nom" autocomplete="given-name" required placeholder="Ex. Aïcha">
+            </div>
+            <div class="field full">
+              <label for="texte">Inscription sur le gâteau <span class="opt">(facultatif)</span></label>
+              <textarea id="texte" name="texte" maxlength="60" placeholder="Ex. Joyeux anniversaire Maman Rose"></textarea>
+            </div>
+          </div>
+
+          <div class="ticket" id="ticket" aria-live="polite"><b>Votre message</b><span id="msg"></span></div>
+
+          <button class="btn" type="submit">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3.9 2.5 1 2.7.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.6-.3Z"/></svg>
+            Envoyer sur WhatsApp
+          </button>
+          <p class="err" id="err" role="alert"></p>
+          <p class="small">Pas de WhatsApp&nbsp;? Appelez le +237&nbsp;6&nbsp;90&nbsp;00&nbsp;00&nbsp;00.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ingrédients -->
+  <section id="maison" aria-labelledby="t-maison">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="kicker">Ce qui entre dans le four</p>
+          <h2 class="title" id="t-maison">Le plus près possible</h2>
+        </div>
+        <p>La farine de blé vient de loin&nbsp;; le reste, autant que possible, vient du pays. Distances depuis la boutique, par la route.</p>
+      </div>
+      <div class="origins">
+        <div class="origin"><span class="km">3<small>km</small></span><h3>Fruits du marché</h3><p>Ananas, coco, mangue et corossol achetés chaque matin au marché, pour les tartes et les entremets.</p></div>
+        <div class="origin"><span class="km">70<small>km</small></span><h3>Poivre de Penja</h3><p>Le poivre blanc du Moungo, dans la fougasse de midi et dans quelques pains chargés.</p></div>
+        <div class="origin"><span class="km">250<small>km</small></span><h3>Cacao du Centre</h3><p>Chocolat noir pour les pains au chocolat, les entremets et les gâteaux de fête.</p></div>
+        <div class="origin"><span class="km">290<small>km</small></span><h3>Café de l'Ouest</h3><p>Arabica des hauts plateaux, torréfié à Douala, pour les éclairs et le café du comptoir.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nous trouver -->
+  <section class="visit" id="trouver" aria-labelledby="t-trouver">
+    <div class="wrap visit-grid">
+      <div>
+        <p class="kicker" style="color:var(--cacao)">Nous trouver</p>
+        <h2 class="title" id="t-trouver" style="margin-bottom:22px">Passez à la boutique</h2>
+        <p class="addr">Boulevard de la Liberté<br>Akwa, Douala</p>
+        <p>Deux tables et un comptoir à café pour prendre le croissant sur place. Stationnement possible dans la rue latérale.</p>
+        <ul class="pay" aria-label="Moyens de paiement">
+          <li>Espèces</li><li>Orange Money</li><li>MTN MoMo</li>
+        </ul>
+        <div class="actions">
+          <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Boulevard+de+la+Libert%C3%A9+Akwa+Douala" target="_blank" rel="noopener">Itinéraire</a>
+          <a class="btn ghost" href="tel:+237690000000">+237 6 90 00 00 00</a>
+        </div>
+      </div>
+      <div>
+        <div class="status" id="status"><i></i><span>Horaires</span></div>
+        <table class="hours" aria-label="Horaires d'ouverture">
+          <tbody>
+            <tr data-d="1"><th scope="row">Lundi</th><td>5 h 30 – 21 h 00</td></tr>
+            <tr data-d="2"><th scope="row">Mardi</th><td>5 h 30 – 21 h 00</td></tr>
+            <tr data-d="3"><th scope="row">Mercredi</th><td>5 h 30 – 21 h 00</td></tr>
+            <tr data-d="4"><th scope="row">Jeudi</th><td>5 h 30 – 21 h 00</td></tr>
+            <tr data-d="5"><th scope="row">Vendredi</th><td>5 h 30 – 21 h 00</td></tr>
+            <tr data-d="6"><th scope="row">Samedi</th><td>5 h 30 – 21 h 00</td></tr>
+            <tr data-d="0"><th scope="row">Dimanche</th><td>6 h 00 – 14 h 00</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><b>Le Fournil du Wouri</b><br>Boulangerie-pâtisserie · Akwa, Douala</div>
+    <div>WhatsApp et téléphone&nbsp;: +237 6 90 00 00 00</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var WA = "237690000000";
+  var fournees = [
+    {t:330,  p:"Baguettes & pain de mie", s:"La première fournée", sun:true},
+    {t:390,  p:"Croissants & pains au chocolat", s:"Au beurre, cacao du Cameroun", sun:true},
+    {t:420,  p:"Beignets soufflés", s:"Vendus chauds, par sachet de 10", sun:true},
+    {t:630,  p:"Pains chargés & friands", s:"Pour la pause de midi", sun:true},
+    {t:720,  p:"Fougasse au poivre de Penja", s:"Pain complet en même temps", sun:true},
+    {t:990,  p:"Baguettes du soir", s:"La deuxième fournée", sun:false},
+    {t:1020, p:"Beignets du soir", s:"Jusqu'à épuisement", sun:false}
+  ];
+  var hours = {open:[330,330,330,330,330,330,360], close:[1260,1260,1260,1260,1260,1260,840]}; // index: 0 = lundi … 6 = dimanche
+
+  function douala(){
+    var d = new Date(Date.now() + 3600000); // Douala : UTC+1, sans heure d'été
+    return {m: d.getUTCHours()*60 + d.getUTCMinutes(), day: d.getUTCDay(), date: d};
+  }
+  function hm(m, sep){ var h = Math.floor(m/60), mm = m%60; return h + (sep||" h ") + (mm<10?"0":"") + mm; }
+  function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;"); }
+
+  function render(){
+    var now = douala(), m = now.m, day = now.day, idx = (day+6)%7;
+    var sunday = day === 0;
+    var open = m >= hours.open[idx] && m < hours.close[idx];
+    var list = fournees.filter(function(f){ return !sunday || f.sun; });
+    document.getElementById("clock").textContent = hm(m, "h");
+    document.getElementById("clockLabel").textContent = "à Douala";
+
+    var html = "", hot = null, next = null;
+    list.forEach(function(f){
+      var cls = "", tag;
+      if (!open) {
+        tag = m < hours.open[idx] ? "À venir" : "Demain";
+        cls = m < hours.open[idx] ? "" : "done";
+      } else if (f.t <= m) {
+        if (m - f.t < 60) { tag = "Tout chaud"; cls = "hot"; hot = f; }
+        else { tag = "En rayon"; cls = "done"; }
+      } else {
+        if (!next) next = f;
+        if (f.t - m <= 45) { tag = "Au four"; cls = "oven"; } else { tag = "À venir"; }
+      }
+      html += '<li class="'+cls+'"><span class="t">'+hm(f.t,"h")+'</span><span class="p">'+esc(f.p)+'<small>'+esc(f.s)+'</small></span><span class="tag">'+tag+'</span></li>';
+    });
+    document.getElementById("rows").innerHTML = html;
+
+    var foot = document.getElementById("boardFoot"), st = document.getElementById("status");
+    if (!open) {
+      var reopen = m < hours.open[idx] ? hours.open[idx] : hours.open[(idx+1)%7];
+      foot.innerHTML = "Boutique fermée. <b>Réouverture à " + hm(reopen) + (m < hours.open[idx] ? "" : " demain") + ".</b>";
+    } else if (hot) {
+      foot.innerHTML = "Tout chaud en ce moment&nbsp;: <b>" + esc(hot.p.toLowerCase()) + "</b>" + (next ? ". Ensuite, " + esc(next.p.toLowerCase()) + " à " + hm(next.t) + "." : ".");
+    } else if (next) {
+      foot.innerHTML = "Prochaine sortie&nbsp;: <b>" + esc(next.p.toLowerCase()) + " à " + hm(next.t) + "</b>.";
+    } else {
+      foot.innerHTML = "Dernière fournée passée. <b>Ouvert jusqu'à " + hm(hours.close[idx]) + ".</b>";
+    }
+    if (sunday && open) foot.innerHTML += " Le dimanche, pas de fournée du soir.";
+
+    st.className = "status" + (open ? "" : " closed");
+    st.querySelector("span").textContent = open ? "Ouvert maintenant · jusqu'à " + hm(hours.close[idx]) : "Fermé maintenant";
+    var rows = document.querySelectorAll(".hours tr");
+    rows.forEach(function(r){ r.classList.toggle("today", +r.dataset.d === day); });
+  }
+  render();
+  setInterval(render, 30000);
+
+  /* Formulaire de gâteau → message WhatsApp */
+  var form = document.getElementById("order"), msg = document.getElementById("msg"), err = document.getElementById("err");
+  var dateIn = document.getElementById("date");
+  var min = douala().date; min.setUTCDate(min.getUTCDate() + 2);
+  dateIn.min = min.toISOString().slice(0,10);
+
+  function frDate(v){
+    if (!v) return "";
+    var p = v.split("-"), d = new Date(Date.UTC(+p[0], +p[1]-1, +p[2]));
+    try { return d.toLocaleDateString("fr-FR", {weekday:"long", day:"numeric", month:"long", timeZone:"UTC"}); } catch(e){ return v; }
+  }
+  function compose(){
+    var f = form.elements;
+    var occ = form.querySelector('input[name="occasion"]:checked').value;
+    var nom = f.nom.value.trim();
+    var lines = [
+      "Bonjour Le Fournil du Wouri" + (nom ? ", c'est " + nom : "") + ".",
+      "Je voudrais un gâteau pour " + occ + " : " + f.parts.value + " parts, parfum " + f.parfum.value.toLowerCase() + ".",
+      "Date : " + (f.date.value ? frDate(f.date.value) : "à préciser") + ", " + f.mode.value + "."
+    ];
+    if (f.texte.value.trim()) lines.push("Inscription : « " + f.texte.value.trim() + " »");
+    lines.push("Merci de me confirmer le prix et l'acompte.");
+    return lines.join("\n");
+  }
+  function update(){ msg.textContent = compose(); }
+  form.addEventListener("input", update);
+  form.addEventListener("change", update);
+  update();
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var f = form.elements, problems = [];
+    if (!f.nom.value.trim()) problems.push("votre prénom");
+    if (!f.date.value) problems.push("la date");
+    else if (f.date.value < dateIn.min) problems.push("une date au moins 48 h à l'avance");
+    if (problems.length) { err.textContent = "Il manque " + problems.join(" et ") + "."; (f.nom.value.trim() ? f.date : f.nom).focus(); return; }
+    err.textContent = "";
+    window.open("https://wa.me/" + WA + "?text=" + encodeURIComponent(compose()), "_blank", "noopener");
+  });
+})();
+</script>
+</body>
+</html>

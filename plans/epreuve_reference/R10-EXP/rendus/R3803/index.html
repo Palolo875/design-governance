@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Soldé — facturation pour PME</title>
+<meta name="description" content="Soldé crée vos factures conformes, les envoie, relance vos clients et vous dit quand l’argent arrive. Page d’exemple.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --field:#F3F4F1;
+  --sheet:#FFFFFF;
+  --ink:#15223A;
+  --ink-2:#4A5467;
+  --ink-3:#5F6777;
+  --rule:#D8DCD5;
+  --rule-2:#E7E9E4;
+  --paid:#16684A;
+  --paid-bg:#E3F1EA;
+  --late:#B3362B;
+  --late-bg:#F8E4E1;
+  --seen:#2F5A9E;
+  --seen-bg:#E4ECF7;
+  --copy-y:#F1E29C;
+  --copy-p:#EFC4CB;
+  --display:"Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --text:"IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --gutter:clamp(16px, 4vw, 40px);
+  --max:1200px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--field);color:var(--ink);font:400 16px/1.55 var(--text);font-variant-numeric:tabular-nums}
+img,svg{display:block}
+a{color:inherit}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--seen);outline-offset:3px;border-radius:4px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Bandeau d'exemple */
+.demo-note{background:var(--ink);color:#E9ECF2;font-size:13px;line-height:1.4;text-align:center;padding:7px var(--gutter)}
+.demo-note strong{font-weight:600;color:#fff}
+
+/* En-tête */
+header.top{border-bottom:1px solid var(--rule)}
+.top .wrap{display:flex;align-items:center;gap:32px;height:68px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 22px/1 var(--display);letter-spacing:-.01em}
+.brand svg{width:28px;height:28px}
+.top nav{display:flex;gap:26px;margin-left:auto;font-size:15px}
+.top nav a{text-decoration:none;color:var(--ink-2)}
+.top nav a:hover{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 20px;border-radius:8px;border:1.5px solid var(--ink);background:var(--ink);color:#fff;font-weight:600;font-size:16px;text-decoration:none;cursor:pointer;transition:background .15s}
+.btn:hover{background:#243552}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.ghost:hover{background:#E6E8E3}
+.btn.small{min-height:40px;padding:0 16px;font-size:15px}
+
+/* Hero */
+.hero{padding:64px 0 72px}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,5.3fr) minmax(0,6.7fr);gap:56px;align-items:center}
+.hero h1{font:800 clamp(40px,4.3vw,60px)/1.02 var(--display);letter-spacing:-.028em;margin:10px 0 24px;text-wrap:balance}
+.hero .lede{font-size:19px;line-height:1.5;color:var(--ink-2);max-width:31em;margin:0 0 30px}
+.hero .actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.hero .fine{margin:22px 0 0;font-size:14px;color:var(--ink-3)}
+.kicker{font:600 15px/1.3 var(--text);color:var(--paid);display:flex;align-items:center;gap:8px}
+.kicker::before{content:"";width:18px;height:2px;background:currentColor}
+
+/* Liasse : facture + doubles */
+.stack{position:relative;padding:0 24px 48px 0}
+.copy{position:absolute;border-radius:3px;border:1px solid rgba(21,34,58,.12)}
+.copy span{position:absolute;right:12px;bottom:4px;font-size:12.5px;font-weight:500;color:rgba(21,34,58,.78)}
+.copy.y{top:12px;left:12px;right:12px;bottom:24px;background:var(--copy-y)}
+.copy.p{top:24px;left:24px;right:0;bottom:0;background:var(--copy-p)}
+.sheet{position:relative;background:var(--sheet);border:1px solid rgba(21,34,58,.14);border-radius:3px;box-shadow:0 1px 0 rgba(21,34,58,.04),0 18px 40px -24px rgba(21,34,58,.35);padding:30px 32px 26px;font-size:13.5px;line-height:1.45}
+.sheet-head{display:flex;justify-content:space-between;gap:20px;padding-bottom:18px;border-bottom:1px solid var(--rule-2)}
+.sheet-head b{display:block;font:700 16px/1.25 var(--display)}
+.muted{color:var(--ink-3)}
+.sheet-title{text-align:right}
+.sheet-title .doc{font:700 22px/1 var(--display);letter-spacing:.01em}
+.num{font-family:var(--mono);font-size:12.5px}
+.parties{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:16px 0 14px}
+.label{display:block;font-size:12px;color:var(--ink-3);margin-bottom:2px}
+table.lines{width:100%;border-collapse:collapse}
+.lines th{font-size:12px;font-weight:500;color:var(--ink-3);text-align:left;padding:7px 0;border-bottom:1px solid var(--rule)}
+.lines td{padding:9px 0;border-bottom:1px solid var(--rule-2);vertical-align:top}
+.lines .r{text-align:right;white-space:nowrap;padding-left:14px}
+.totals{margin:12px 0 0 auto;width:min(270px,100%);display:grid;grid-template-columns:1fr auto;row-gap:4px}
+.totals dt{color:var(--ink-2)}
+.totals dd{margin:0;text-align:right}
+.totals .ttc{font:700 18px/1.3 var(--display);padding-top:8px;margin-top:4px;border-top:1.5px solid var(--ink)}
+.sheet-foot{margin-top:18px;padding-top:12px;border-top:1px solid var(--rule-2);font-size:11.5px;line-height:1.45;color:var(--ink-3)}
+
+/* Tampon */
+.stamp{position:absolute;left:34px;bottom:96px;transform:rotate(-9deg);border:3px solid currentColor;border-radius:6px;padding:6px 14px 5px;text-align:center;color:var(--paid);background:rgba(255,255,255,.72);pointer-events:none;mix-blend-mode:multiply}
+.stamp strong{display:block;font:800 30px/1 var(--display);letter-spacing:.06em}
+.stamp small{display:block;font:600 12.5px/1.3 var(--text);margin-top:3px}
+.stamp[data-tone="draft"]{color:var(--ink-3)}
+.stamp[data-tone="sent"]{color:var(--ink)}
+.stamp[data-tone="seen"]{color:var(--seen)}
+.stamp[data-tone="late"]{color:var(--late)}
+.stamp.hit{animation:hit .28s ease-out}
+@keyframes hit{from{transform:rotate(-9deg) scale(1.35);opacity:0}to{transform:rotate(-9deg) scale(1);opacity:1}}
+
+/* Parcours du hero */
+.rail{margin-top:26px}
+.rail ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);position:relative}
+.rail .track{position:relative}
+.rail ol::before{content:"";position:absolute;left:10%;right:10%;top:9px;height:2px;background:var(--rule)}
+.rail .bar{position:absolute;left:10%;top:9px;height:2px;background:var(--ink);transition:width .3s ease;width:0;z-index:1}
+.rail li{position:relative;text-align:center}
+.rail button{all:unset;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;width:100%;padding-bottom:4px;border-radius:6px}
+.rail button:focus-visible{outline:3px solid var(--seen);outline-offset:2px}
+.rail .dot{width:20px;height:20px;border-radius:50%;background:var(--field);border:2px solid var(--rule);position:relative;z-index:1;transition:background .2s,border-color .2s}
+.rail .step-l{font-weight:600;font-size:14px;line-height:1.2}
+.rail .step-d{font-size:12.5px;color:var(--ink-3)}
+.rail li.done .dot{background:var(--ink);border-color:var(--ink)}
+.rail li.on .dot{background:var(--sheet);border-color:var(--ink);box-shadow:0 0 0 4px rgba(21,34,58,.12)}
+.rail li.on.paid .dot{border-color:var(--paid);background:var(--paid)}
+.rail li.on.late .dot{border-color:var(--late)}
+.rail li:not(.done):not(.on) .step-l{color:var(--ink-3)}
+.event{margin:18px 0 0;padding:12px 16px;border-left:3px solid var(--ink);background:var(--sheet);font-size:15px;min-height:48px}
+.event[data-tone="paid"]{border-color:var(--paid)}
+.event[data-tone="late"]{border-color:var(--late)}
+.event[data-tone="seen"]{border-color:var(--seen)}
+.caption{font-size:13px;color:var(--ink-3);margin:10px 0 0}
+
+/* Sections */
+section.band{padding:88px 0;border-top:1px solid var(--rule)}
+.band.white{background:var(--sheet)}
+.band h2{font:800 clamp(30px,3.6vw,46px)/1.05 var(--display);letter-spacing:-.022em;margin:0 0 14px;text-wrap:balance;max-width:18em}
+.band .intro{font-size:18px;color:var(--ink-2);max-width:36em;margin:0 0 44px}
+
+/* Qui fait quoi */
+.days{display:grid;grid-template-columns:150px repeat(5,minmax(0,1fr));grid-template-rows:auto auto auto;grid-auto-flow:column;border-top:1.5px solid var(--ink)}
+.days .cell{margin:0}
+.days .m-who{font-size:13px;color:var(--ink-3)}
+.days .rowh{font-size:13px;color:var(--ink-3);padding:14px 16px 14px 0;border-bottom:1px solid var(--rule)}
+.days .rowh.who{font:700 16px/1.3 var(--display);color:var(--ink)}
+.days .cell{padding:14px 16px 16px 0;border-bottom:1px solid var(--rule);font-size:15px;line-height:1.45}
+.days .cell.h{font:700 17px/1.2 var(--display)}
+.days .cell.h small{display:block;font:400 13px/1.3 var(--text);color:var(--ink-3);margin-top:3px}
+.days .cell.you{color:var(--ink-2)}
+.days .cell.you.nothing{color:var(--paid);font-weight:600}
+.days .m-who{display:none}
+.days .cell.sol .m-who,.days .cell.you .m-who{display:none}
+
+/* Toutes vos factures */
+.ledger-sum{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1.5px solid var(--ink);margin-bottom:28px}
+.ledger-sum div{padding:16px 20px 18px 0}
+.ledger-sum div + div{padding-left:20px;border-left:1px solid var(--rule)}
+.ledger-sum .v{display:block;font:800 clamp(26px,3vw,36px)/1.1 var(--display);letter-spacing:-.02em;white-space:nowrap}
+@media (max-width:760px){.ledger-sum .v{font-size:24px}}
+.ledger-sum .late .v{color:var(--late)}
+.split{display:flex;height:14px;border-radius:3px;overflow:hidden;gap:2px;margin:0 0 8px}
+.split span{display:block;height:100%}
+.split-legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:var(--ink-2);margin:0 0 30px;padding:0;list-style:none}
+.split-legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+table.ledger{width:100%;border-collapse:collapse;font-size:15px}
+.ledger th{font-size:13px;font-weight:500;color:var(--ink-3);text-align:left;padding:10px 12px 10px 0;border-bottom:1px solid var(--rule)}
+.ledger td{padding:14px 12px 14px 0;border-bottom:1px solid var(--rule-2);vertical-align:middle}
+.ledger .r{text-align:right;padding-right:0}
+.ledger tr.is-paid td{color:var(--ink-3)}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;padding:3px 10px 3px 8px;border-radius:999px;white-space:nowrap}
+.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.pill.paid{color:var(--paid);background:var(--paid-bg)}
+.pill.late{color:var(--late);background:var(--late-bg)}
+.pill.seen{color:var(--seen);background:var(--seen-bg)}
+.pill.sent{color:var(--ink);background:#E6E8EC}
+.ledger .next{font-size:13.5px;color:var(--ink-2)}
+.note{font-size:13px;color:var(--ink-3);margin:14px 0 0}
+
+/* Essai */
+.try{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,6fr);gap:48px;align-items:start}
+form.maker{display:grid;gap:16px;background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:24px}
+.band.white form.maker{background:var(--field)}
+.field label{display:block;font-weight:600;font-size:14px;margin-bottom:6px}
+.field input,.field select{width:100%;min-height:46px;border:1.5px solid #B9BFC8;border-radius:7px;background:#fff;padding:0 12px;font-size:16px}
+.field input:focus,.field select:focus{border-color:var(--ink);outline:none;box-shadow:0 0 0 3px rgba(47,90,158,.25)}
+.field .hint{font-size:13px;color:var(--ink-3);margin-top:5px}
+.field .err{font-size:13px;color:var(--late);margin-top:5px;font-weight:500}
+.field input[aria-invalid="true"]{border-color:var(--late)}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.private{font-size:13px;color:var(--ink-3);margin:0}
+.preview .sheet{padding:26px 28px 22px}
+.marks{list-style:none;margin:22px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;font-size:14px;color:var(--ink-2)}
+.marks li{display:flex;gap:10px;align-items:baseline}
+.mk{flex:none;display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--ink);color:#fff;font:600 11px/1 var(--text);transform:translateY(-1px)}
+.sheet .mk{width:17px;height:17px;font-size:10px;margin-left:4px;vertical-align:1px;background:var(--seen)}
+.reminders{margin-top:16px;padding:12px 14px;background:var(--seen-bg);border-radius:6px;font-size:13.5px;color:#1F3B66}
+.reminders b{font-weight:600}
+.reform{margin-top:56px;display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start;padding:22px 24px;border:1.5px solid var(--ink);border-radius:10px;background:var(--sheet)}
+.reform .date sup{font-size:.5em}
+.reform .date{font:800 26px/1 var(--display);letter-spacing:-.01em;white-space:nowrap}
+.reform p{margin:0;max-width:52em}
+.reform small{display:block;color:var(--ink-3);margin-top:6px;font-size:13px}
+
+/* Tarif */
+.price{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:56px;align-items:center}
+.price .sheet{font-size:14.5px}
+.price .stamp{left:30px;bottom:86px}
+.price-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px;align-items:center}
+.msg{font-size:14px;color:var(--ink-2);margin:12px 0 0;min-height:1.4em}
+.price ul.inc{margin:0;padding:0;list-style:none;display:grid;gap:10px;font-size:16px}
+.price ul.inc li{display:flex;gap:10px}
+.price ul.inc svg{flex:none;width:18px;height:18px;margin-top:4px;color:var(--paid)}
+
+/* Questions */
+.faq{max-width:780px;margin-top:32px}
+.faq details{border-top:1px solid var(--rule)}
+.faq details:last-child{border-bottom:1px solid var(--rule)}
+.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:20px;padding:20px 0;font:700 19px/1.3 var(--display)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font:400 26px/1 var(--text);color:var(--ink-3);transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{margin:0 0 22px;color:var(--ink-2);max-width:40em}
+
+footer{padding:40px 0 56px;border-top:1px solid var(--rule);font-size:14px;color:var(--ink-3)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 32px;justify-content:space-between}
+
+/* Mobile */
+@media (max-width: 980px){
+  .hero .wrap,.try,.price{grid-template-columns:1fr;gap:40px}
+  .top nav{display:none}
+  .top .btn{margin-left:auto}
+}
+@media (max-width: 760px){
+  .hero{padding:36px 0 52px}
+  .hero .lede{font-size:17px}
+  .stack{padding:0 12px 40px 0}
+  .copy.y{top:6px;left:6px;right:6px;bottom:20px}
+  .copy.p{top:12px;left:12px;right:0;bottom:0}
+  .copy span{font-size:11px;right:8px;bottom:3px}
+  .sheet{padding:20px 18px 18px;font-size:12.5px}
+  .sheet-head{flex-direction:column;gap:10px}
+  .sheet-title{text-align:left}
+  .parties{grid-template-columns:1fr 1fr;gap:12px}
+  .lines .qty{display:none}
+  .stamp{left:auto;right:14px;bottom:auto;top:96px}
+  .stamp strong{font-size:22px}
+  .stamp small{font-size:11px}
+  .rail .step-l{font-size:12.5px}
+  .rail .step-d{font-size:11px}
+  section.band{padding:60px 0}
+  .band .intro{font-size:16.5px;margin-bottom:32px}
+  .days{display:block;border-top:0}
+  .days .rowh{display:none}
+  .days .cell{border-bottom:0;padding:0}
+  .days .cell.h{padding-top:18px;border-top:1.5px solid var(--ink);margin-top:8px}
+  .days .cell.sol,.days .cell.you{display:grid;grid-template-columns:62px 1fr;gap:8px;padding-top:8px}
+  .days .cell.sol .m-who,.days .cell.you .m-who{display:block;padding-top:1px}
+  .days .cell.you{padding-bottom:10px}
+  .ledger-sum{grid-template-columns:1fr 1fr}
+  .ledger-sum div:first-child{grid-column:1 / -1;border-bottom:1px solid var(--rule)}
+  .ledger-sum div + div{padding-left:0;border-left:0}
+  .ledger-sum div:last-child{padding-left:16px;border-left:1px solid var(--rule)}
+  table.ledger thead{display:none}
+  table.ledger,table.ledger tbody,table.ledger tr,table.ledger td{display:block;width:100%}
+  table.ledger tr{display:grid;grid-template-columns:1fr auto;gap:4px 12px;padding:14px 0;border-bottom:1px solid var(--rule-2)}
+  table.ledger td{padding:0;border:0}
+  table.ledger td.who{grid-column:1}
+  table.ledger td.amt{grid-column:2;grid-row:1;text-align:right}
+  table.ledger td.st{grid-column:1 / -1}
+  table.ledger td.next{grid-column:1 / -1}
+  table.ledger td.no{display:none}
+  .marks{grid-template-columns:1fr}
+  .reform{grid-template-columns:1fr;gap:8px}
+  .price .stamp{left:auto;right:14px;bottom:auto;top:40px}
+  .pair{grid-template-columns:1fr 1fr}
+}
+@media (prefers-reduced-motion: reduce){
+  *{transition:none!important;animation:none!important}
+}
+</style>
+</head>
+<body>
+
+<p class="demo-note"><strong>Page d’exemple.</strong> Le nom Soldé, le tarif, les entreprises et les montants sont fictifs.</p>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#" aria-label="Soldé, accueil">
+      <svg viewBox="0 0 28 28" aria-hidden="true"><rect x="4" y="2.5" width="18" height="23" rx="2" fill="#fff" stroke="#15223A" stroke-width="2"/><path d="M8 9h10M8 13h7" stroke="#15223A" stroke-width="2" stroke-linecap="round"/><circle cx="20" cy="20" r="6.5" fill="#16684A"/><path d="m17.2 20 2 2 3.6-3.8" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Soldé
+    </a>
+    <nav aria-label="Navigation principale">
+      <a href="#qui-fait-quoi">Comment ça marche</a>
+      <a href="#vos-factures">Suivi des paiements</a>
+      <a href="#tarif">Tarif</a>
+      <a href="#questions">Questions</a>
+    </nav>
+    <a class="btn small" href="#essayer">Faire une facture</a>
+  </div>
+</header>
+
+<main>
+<section class="hero" aria-labelledby="h1">
+  <div class="wrap">
+    <div>
+      <p class="kicker">Logiciel de facturation pour PME</p>
+      <h1 id="h1">Une facture n’est finie que quand elle est payée.</h1>
+      <p class="lede">Soldé fait vos factures conformes, les envoie, relance vos clients à votre place et vous dit quand l’argent arrive sur votre compte.</p>
+      <div class="actions">
+        <a class="btn" href="#essayer">Faire ma première facture</a>
+        <a class="btn ghost" href="#tarif">19 € HT par mois</a>
+      </div>
+      <p class="fine">30 jours d’essai, sans carte bancaire. Votre comptable y accède gratuitement.</p>
+    </div>
+
+    <div>
+      <div class="stack" id="liasse">
+        <div class="copy p" aria-hidden="true"><span>→ vos archives, 10 ans</span></div>
+        <div class="copy y" aria-hidden="true"><span>→ votre comptable</span></div>
+        <article class="sheet" aria-label="Exemple de facture n° 2026-0128">
+          <div class="sheet-head">
+            <div>
+              <b>Atelier Morel · Menuiserie</b>
+              <span class="muted">12 rue des Tanneurs<br>49000 Angers<br>SIRET <span class="num">812 345 678 00021</span></span>
+            </div>
+            <div class="sheet-title">
+              <div class="doc">Facture</div>
+              <div class="num">n° 2026-0128</div>
+              <span class="muted">Émise le 04/08/2026<br>Échéance 03/09/2026</span>
+            </div>
+          </div>
+          <div class="parties">
+            <div><span class="label">Client</span><b>Boulangerie Lenoir</b><br><span class="muted">8 place du Ralliement, Angers</span></div>
+            <div><span class="label">Conditions</span>Paiement à 30 jours<br><span class="muted">Virement bancaire</span></div>
+          </div>
+          <table class="lines">
+            <thead><tr><th>Désignation</th><th class="r qty">Qté</th><th class="r">Montant HT</th></tr></thead>
+            <tbody>
+              <tr><td>Agencement du comptoir, pose de la vitrine réfrigérée</td><td class="r qty">1</td><td class="r">2 400,00 €</td></tr>
+              <tr><td>Plan de travail chêne massif, 3,20 m</td><td class="r qty">1</td><td class="r">860,00 €</td></tr>
+              <tr><td>Main-d’œuvre, 12 h à 45,00 €</td><td class="r qty">12</td><td class="r">540,00 €</td></tr>
+            </tbody>
+          </table>
+          <dl class="totals">
+            <dt>Total HT</dt><dd>3 800,00 €</dd>
+            <dt>TVA 20 %</dt><dd>760,00 €</dd>
+            <dt class="ttc">Total TTC</dt><dd class="ttc">4 560,00 €</dd>
+          </dl>
+          <p class="sheet-foot">Pénalités de retard : 3 fois le taux d’intérêt légal. Indemnité forfaitaire pour frais de recouvrement : 40 €. Pas d’escompte pour paiement anticipé.</p>
+          <div class="stamp" id="stamp" data-tone="paid" aria-hidden="true"><strong id="stamp-t">PAYÉE</strong><small id="stamp-d">le 11/09/2026</small></div>
+        </article>
+      </div>
+
+      <div class="rail" aria-label="Parcours de la facture">
+        <div class="track"><span class="bar" id="bar" aria-hidden="true"></span>
+        <ol id="rail">
+          <li data-i="0"><button type="button" aria-pressed="false"><span class="dot"></span><span class="step-l">Créée</span><span class="step-d">04/08</span></button></li>
+          <li data-i="1"><button type="button" aria-pressed="false"><span class="dot"></span><span class="step-l">Envoyée</span><span class="step-d">04/08</span></button></li>
+          <li data-i="2"><button type="button" aria-pressed="false"><span class="dot"></span><span class="step-l">Ouverte</span><span class="step-d">05/08</span></button></li>
+          <li data-i="3"><button type="button" aria-pressed="false"><span class="dot"></span><span class="step-l">Relancée</span><span class="step-d">06/09</span></button></li>
+          <li data-i="4"><button type="button" aria-pressed="true"><span class="dot"></span><span class="step-l">Payée</span><span class="step-d">11/09</span></button></li>
+        </ol></div>
+        <p class="event" id="event" data-tone="paid" aria-live="polite">11/09 · Virement de 4 560,00 € reçu de Boulangerie Lenoir. Soldé l’a rapproché de la facture : plus rien à suivre.</p>
+        <p class="caption">Cliquez sur une étape pour voir la facture à ce moment-là. Exemple fictif.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band white" id="qui-fait-quoi" aria-labelledby="h-qui">
+  <div class="wrap">
+    <h2 id="h-qui">Qui fait quoi, entre l’envoi et le paiement</h2>
+    <p class="intro">La même facture n° 2026-0128, jour par jour. Vous décidez une fois ; Soldé s’occupe de la suite, et vous prévient seulement quand il faut.</p>
+    <div class="days">
+      <div class="rowh" aria-hidden="true">Jour</div>
+      <div class="rowh who" aria-hidden="true">Soldé</div>
+      <div class="rowh who" aria-hidden="true">Vous</div>
+      <h3 class="cell h">4 août<small>émission</small></h3>
+      <p class="cell sol"><span class="m-who">Soldé</span><span>Numérote, ajoute les mentions obligatoires et envoie la facture au format électronique.</span></p>
+      <p class="cell you"><span class="m-who">Vous</span><span>Relisez, puis cliquez sur « Envoyer ».</span></p>
+      <h3 class="cell h">5 août<small>lendemain</small></h3>
+      <p class="cell sol"><span class="m-who">Soldé</span><span>Voit que le client a ouvert la facture et le note dans son dossier.</span></p>
+      <p class="cell you nothing"><span class="m-who">Vous</span><span>Rien.</span></p>
+      <h3 class="cell h">3 septembre<small>échéance</small></h3>
+      <p class="cell sol"><span class="m-who">Soldé</span><span>Constate qu’aucun virement n’est arrivé. Prépare la relance.</span></p>
+      <p class="cell you nothing"><span class="m-who">Vous</span><span>Rien.</span></p>
+      <h3 class="cell h">6 septembre<small>3 jours de retard</small></h3>
+      <p class="cell sol"><span class="m-who">Soldé</span><span>Envoie une relance courtoise, signée de votre nom, avec la facture jointe.</span></p>
+      <p class="cell you"><span class="m-who">Vous</span><span>Rien, ou un coup de fil si vous préférez. Le texte de la relance est modifiable.</span></p>
+      <h3 class="cell h">11 septembre<small>paiement</small></h3>
+      <p class="cell sol"><span class="m-who">Soldé</span><span>Reconnaît le virement sur votre compte et marque la facture payée.</span></p>
+      <p class="cell you nothing"><span class="m-who">Vous</span><span>Rien. Votre comptable a déjà le justificatif.</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="vos-factures" aria-labelledby="h-factures">
+  <div class="wrap">
+    <h2 id="h-factures">Et toutes vos factures, rangées par l’argent qui doit rentrer</h2>
+    <p class="intro">Le matin, vous voyez ce qui est en retard, ce qui arrive ce mois-ci et ce que Soldé fait déjà pour chaque client.</p>
+
+    <div class="ledger-sum" aria-label="Résumé au 30 septembre 2026">
+      <div><span class="label">À encaisser au 30/09/2026</span><span class="v">21 480,00 €</span></div>
+      <div class="late"><span class="label">Dont en retard</span><span class="v">3 480,00 €</span></div>
+      <div><span class="label">Attendu en octobre</span><span class="v">18 000,00 €</span></div>
+    </div>
+
+    <div class="split" role="img" aria-label="Répartition des 21 480 euros à encaisser : 9 000 et 6 840 euros ouverts par le client, 3 480 euros en retard, 2 160 euros envoyés.">
+      <span style="flex:9000;background:var(--seen)"></span>
+      <span style="flex:6840;background:var(--seen);opacity:.7"></span>
+      <span style="flex:3480;background:var(--late)"></span>
+      <span style="flex:2160;background:#8B93A3"></span>
+    </div>
+    <ul class="split-legend" aria-hidden="true">
+      <li><i style="background:var(--seen)"></i>Ouvertes par le client</li>
+      <li><i style="background:var(--late)"></i>En retard</li>
+      <li><i style="background:#8B93A3"></i>Envoyées, pas encore ouvertes</li>
+    </ul>
+
+    <table class="ledger">
+      <caption class="sr">Factures d’Atelier Morel au 30 septembre 2026 (exemple)</caption>
+      <thead><tr><th>N°</th><th>Client</th><th>État</th><th>Ce qui se passe ensuite</th><th class="r">Montant TTC</th></tr></thead>
+      <tbody>
+        <tr><td class="no num">2026-0136</td><td class="who">SCI Les Tilleuls</td><td class="st"><span class="pill late">En retard de 12 jours</span></td><td class="next">Relancée le 21/09. Deuxième relance le 02/10, sauf si vous l’arrêtez.</td><td class="r amt">3 480,00 €</td></tr>
+        <tr><td class="no num">2026-0141</td><td class="who">Mairie de Saint-Aubin</td><td class="st"><span class="pill seen">Ouverte</span></td><td class="next">Échéance le 15/10.</td><td class="r amt">6 840,00 €</td></tr>
+        <tr><td class="no num">2026-0142</td><td class="who">Cabinet Arnaud</td><td class="st"><span class="pill sent">Envoyée</span></td><td class="next">Pas encore ouverte. Échéance le 20/10.</td><td class="r amt">2 160,00 €</td></tr>
+        <tr><td class="no num">2026-0143</td><td class="who">Hôtel du Port</td><td class="st"><span class="pill seen">Ouverte</span></td><td class="next">Échéance le 30/10.</td><td class="r amt">9 000,00 €</td></tr>
+        <tr class="is-paid"><td class="no num">2026-0139</td><td class="who">Boulangerie Lenoir</td><td class="st"><span class="pill paid">Payée le 22/09</span></td><td class="next">Rapprochée du virement. Rien à faire.</td><td class="r amt">1 320,00 €</td></tr>
+      </tbody>
+    </table>
+    <p class="note">Données d’exemple. Les montants payés ne comptent pas dans le total à encaisser.</p>
+  </div>
+</section>
+
+<section class="band white" id="essayer" aria-labelledby="h-essai">
+  <div class="wrap">
+    <h2 id="h-essai">Essayez : votre prochaine facture, ici, maintenant</h2>
+    <p class="intro">Remplissez quatre champs. Soldé calcule la TVA, l’échéance et les dates de relance, et ajoute les mentions que la loi exige.</p>
+    <div class="try">
+      <form class="maker" id="maker" novalidate>
+        <div class="field">
+          <label for="f-client">Client</label>
+          <input id="f-client" value="Cabinet Arnaud" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="f-what">Prestation</label>
+          <input id="f-what" value="Rénovation d’un escalier en chêne" autocomplete="off">
+        </div>
+        <div class="pair">
+          <div class="field">
+            <label for="f-qty">Quantité</label>
+            <input id="f-qty" inputmode="decimal" value="1" aria-describedby="e-qty">
+            <p class="err" id="e-qty" hidden>Indiquez un nombre, par exemple 2 ou 1,5.</p>
+          </div>
+          <div class="field">
+            <label for="f-price">Prix unitaire HT (€)</label>
+            <input id="f-price" inputmode="decimal" value="1 800" aria-describedby="e-price">
+            <p class="err" id="e-price" hidden>Indiquez un montant, par exemple 1 800 ou 95,50.</p>
+          </div>
+        </div>
+        <div class="pair">
+          <div class="field">
+            <label for="f-vat">TVA</label>
+            <select id="f-vat">
+              <option value="20" selected>20 %</option>
+              <option value="10">10 %</option>
+              <option value="5.5">5,5 %</option>
+              <option value="0">Non applicable</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-term">Paiement</label>
+            <select id="f-term">
+              <option value="15">à 15 jours</option>
+              <option value="30" selected>à 30 jours</option>
+              <option value="45">à 45 jours</option>
+              <option value="60">à 60 jours</option>
+            </select>
+          </div>
+        </div>
+        <p class="private">Tout est calculé dans votre navigateur. Rien n’est envoyé ni enregistré.</p>
+      </form>
+
+      <div class="preview">
+        <article class="sheet" aria-live="polite" aria-label="Aperçu de votre facture">
+          <div class="sheet-head">
+            <div>
+              <b>Votre entreprise</b>
+              <span class="muted">Votre adresse<br>SIRET et n° de TVA <span class="mk">2</span></span>
+            </div>
+            <div class="sheet-title">
+              <div class="doc">Facture <span class="mk">6</span></div>
+              <div class="num">n° 2026-0001 <span class="mk">1</span></div>
+              <span class="muted">Émise le <span id="p-date">—</span><br>Échéance <span id="p-due">—</span> <span class="mk">3</span></span>
+            </div>
+          </div>
+          <div class="parties">
+            <div><span class="label">Client</span><b id="p-client">Cabinet Arnaud</b></div>
+            <div><span class="label">Conditions</span><span id="p-term">Paiement à 30 jours</span></div>
+          </div>
+          <table class="lines">
+            <thead><tr><th>Désignation</th><th class="r qty">Qté</th><th class="r">Montant HT</th></tr></thead>
+            <tbody><tr><td id="p-what">Rénovation d’un escalier en chêne</td><td class="r qty" id="p-qty">1</td><td class="r" id="p-ht">1 800,00 €</td></tr></tbody>
+          </table>
+          <dl class="totals">
+            <dt>Total HT</dt><dd id="p-ht2">1 800,00 €</dd>
+            <dt id="p-vat-l">TVA 20 % <span class="mk">4</span></dt><dd id="p-vat">360,00 €</dd>
+            <dt class="ttc">Total TTC</dt><dd class="ttc" id="p-ttc">2 160,00 €</dd>
+          </dl>
+          <p class="sheet-foot"><span class="mk" style="margin:0 6px 0 0">5</span><span id="p-vatnote"></span>Pénalités de retard : 3 fois le taux d’intérêt légal. Indemnité forfaitaire pour frais de recouvrement : 40&nbsp;€.</p>
+        </article>
+        <p class="reminders" id="p-rem">Si le paiement n’est pas arrivé, Soldé relancera le <b>—</b>, puis le <b>—</b>.</p>
+        <ol class="marks" aria-label="Mentions ajoutées d’office">
+          <li><span class="mk" aria-hidden="true">1</span><span>Numéro unique, sans trou dans la suite</span></li>
+          <li><span class="mk" aria-hidden="true">2</span><span>Vos identifiants : SIRET, n° de TVA</span></li>
+          <li><span class="mk" aria-hidden="true">3</span><span>Date d’émission et date d’échéance</span></li>
+          <li><span class="mk" aria-hidden="true">4</span><span>Taux et montant de TVA, ou la mention d’exonération</span></li>
+          <li><span class="mk" aria-hidden="true">5</span><span>Pénalités de retard et indemnité de 40 €</span></li>
+          <li><span class="mk" aria-hidden="true">6</span><span>Fichier Factur-X : un PDF lisible et ses données</span></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="reform">
+      <div class="date">1<sup>er</sup> sept. 2027</div>
+      <p>Depuis le 1er septembre 2026, toute entreprise doit pouvoir recevoir des factures électroniques. À partir du 1er septembre 2027, les PME devront aussi en émettre. Les factures faites avec Soldé partent déjà au format électronique.
+      <small>Calendrier de la réforme de la facturation électronique en France, tel qu’annoncé au 30/09/2026.</small></p>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="tarif" aria-labelledby="h-tarif">
+  <div class="wrap price">
+    <div>
+      <h2 id="h-tarif">Un seul tarif, présenté comme il se doit</h2>
+      <p class="intro" style="margin-bottom:28px">Pas de formule à comparer. Toutes les fonctions, pour toute l’équipe administrative.</p>
+      <ul class="inc">
+        <li><svg viewBox="0 0 18 18" aria-hidden="true"><path d="m3.5 9.5 3.5 3.5 7.5-8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Factures, devis et avoirs illimités</li>
+        <li><svg viewBox="0 0 18 18" aria-hidden="true"><path d="m3.5 9.5 3.5 3.5 7.5-8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Relances automatiques, à votre nom</li>
+        <li><svg viewBox="0 0 18 18" aria-hidden="true"><path d="m3.5 9.5 3.5 3.5 7.5-8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Rapprochement avec votre compte bancaire</li>
+        <li><svg viewBox="0 0 18 18" aria-hidden="true"><path d="m3.5 9.5 3.5 3.5 7.5-8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Accès gratuit pour votre comptable</li>
+      </ul>
+      <div class="price-cta">
+        <button class="btn" type="button" id="signup">Créer mon compte</button>
+        <a class="btn ghost" href="#essayer">Faire une facture d’abord</a>
+      </div>
+      <p class="msg" id="signup-msg" aria-live="polite"></p>
+    </div>
+    <div class="stack">
+      <div class="copy p" aria-hidden="true"></div>
+      <div class="copy y" aria-hidden="true"></div>
+      <article class="sheet" aria-label="Le tarif, sous forme de facture">
+        <div class="sheet-head">
+          <div><b>Soldé</b><span class="muted">Abonnement mensuel</span></div>
+          <div class="sheet-title"><div class="doc">Tarif</div><span class="muted">Sans engagement</span></div>
+        </div>
+        <table class="lines" style="margin-top:12px">
+          <thead><tr><th>Désignation</th><th class="r qty">Qté</th><th class="r">Montant HT</th></tr></thead>
+          <tbody>
+            <tr><td>Abonnement Soldé, toutes fonctions, 1 mois</td><td class="r qty">1</td><td class="r">19,00 €</td></tr>
+            <tr><td>Utilisateur supplémentaire, 5,00 € par mois</td><td class="r qty">0</td><td class="r">0,00 €</td></tr>
+            <tr><td>Accès de votre comptable</td><td class="r qty">1</td><td class="r">0,00 €</td></tr>
+          </tbody>
+        </table>
+        <dl class="totals">
+          <dt>Total HT</dt><dd>19,00 €</dd>
+          <dt>TVA 20 %</dt><dd>3,80 €</dd>
+          <dt class="ttc">Total TTC</dt><dd class="ttc">22,80 €</dd>
+        </dl>
+        <p class="sheet-foot">Premier mois : 30 jours d’essai, sans carte bancaire. Résiliable à tout moment ; vos factures restent exportables.</p>
+        <div class="stamp" data-tone="paid" aria-hidden="true"><strong>OFFERT</strong><small>les 30 premiers jours</small></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="band white" id="questions" aria-labelledby="h-q">
+  <div class="wrap">
+    <h2 id="h-q">Questions avant de commencer</h2>
+    <div class="faq">
+      <details><summary>Mon comptable peut-il travailler dans Soldé ?</summary><p>Oui. Invitez-le depuis vos réglages : il consulte les factures, les paiements et exporte les écritures dans son logiciel, sans compte payant.</p></details>
+      <details><summary>Je fais mes factures sur Word ou Excel. Je perds tout ?</summary><p>Non. Importez vos clients depuis un fichier, et reprenez votre numérotation là où elle s’arrête : la suite reste continue, comme la loi l’exige.</p></details>
+      <details><summary>Et si mon client ne paie qu’une partie ?</summary><p>Soldé note le paiement partiel, affiche le reste dû et adapte la relance au montant restant.</p></details>
+      <details><summary>Je peux arrêter quand je veux ?</summary><p>Oui, sans préavis. Toutes vos factures restent téléchargeables en PDF et au format Factur-X.</p></details>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span><strong style="color:var(--ink)">Soldé</strong> · logiciel de facturation pour PME</span>
+    <span>Page d’exemple : nom, tarif, entreprises et montants sont fictifs.</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* Parcours de la facture 2026-0128 */
+  var steps=[
+    {t:"BROUILLON",d:"non envoyée",tone:"draft",ev:"04/08 · Facture préparée. Numéro, mentions et TVA ajoutés automatiquement."},
+    {t:"ENVOYÉE",d:"le 04/08/2026",tone:"sent",ev:"04/08 · Facture envoyée à Boulangerie Lenoir, au format électronique. Copie transmise à votre comptable."},
+    {t:"OUVERTE",d:"le 05/08/2026",tone:"seen",ev:"05/08 · Le client a ouvert la facture. Échéance le 03/09."},
+    {t:"RELANCÉE",d:"le 06/09/2026",tone:"late",ev:"06/09 · Aucun virement à l’échéance. Relance envoyée à votre nom, facture jointe."},
+    {t:"PAYÉE",d:"le 11/09/2026",tone:"paid",ev:"11/09 · Virement de 4 560,00 € reçu de Boulangerie Lenoir. Soldé l’a rapproché de la facture : plus rien à suivre."}
+  ];
+  var rail=document.getElementById('rail'),items=rail.querySelectorAll('li'),bar=document.getElementById('bar');
+  var stamp=document.getElementById('stamp'),st=document.getElementById('stamp-t'),sd=document.getElementById('stamp-d'),ev=document.getElementById('event');
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches,timer=null;
+  function show(i,animate){
+    var s=steps[i];
+    items.forEach(function(li,k){
+      li.classList.toggle('done',k<i);li.classList.toggle('on',k===i);
+      li.classList.toggle('paid',k===i&&s.tone==='paid');li.classList.toggle('late',k===i&&s.tone==='late');
+      li.querySelector('button').setAttribute('aria-pressed',k===i?'true':'false');
+    });
+    bar.style.width=(i/4*80)+'%';
+    stamp.dataset.tone=s.tone;st.textContent=s.t;sd.textContent=s.d;
+    ev.dataset.tone=s.tone;ev.textContent=s.ev;
+    if(animate&&!reduce){stamp.classList.remove('hit');void stamp.offsetWidth;stamp.classList.add('hit');}
+  }
+  items.forEach(function(li,k){li.querySelector('button').addEventListener('click',function(){clearInterval(timer);show(k,true);});});
+  if(reduce){show(4,false);}else{
+    var i=0;show(0,false);
+    timer=setInterval(function(){i++;show(i,true);if(i>=4)clearInterval(timer);},1300);
+  }
+
+  /* Essai : facture calculée localement */
+  var eur=new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR'});
+  function fmt(d){return d.toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric'});}
+  function add(d,n){var x=new Date(d);x.setDate(x.getDate()+n);return x;}
+  function num(v){v=String(v).replace(/[\s  €]/g,'').replace(',','.');if(v===''||!/^\d*\.?\d+$/.test(v))return NaN;return parseFloat(v);}
+  var $=function(id){return document.getElementById(id);};
+  function check(input,err,val){var bad=isNaN(val);input.setAttribute('aria-invalid',bad?'true':'false');$(err).hidden=!bad;return !bad;}
+  function update(){
+    var q=num($('f-qty').value),p=num($('f-price').value),vat=parseFloat($('f-vat').value),term=parseInt($('f-term').value,10);
+    var okq=check($('f-qty'),'e-qty',q),okp=check($('f-price'),'e-price',p);
+    $('p-client').textContent=$('f-client').value.trim()||'Nom du client';
+    $('p-what').textContent=$('f-what').value.trim()||'Prestation';
+    var today=new Date(),due=add(today,term);
+    $('p-date').textContent=fmt(today);$('p-due').textContent=fmt(due);
+    $('p-term').textContent='Paiement à '+term+' jours';
+    $('p-rem').innerHTML='Si le paiement n’est pas arrivé, Soldé relancera le <b>'+fmt(add(due,3))+'</b>, puis le <b>'+fmt(add(due,10))+'</b>. Vous pouvez changer ces dates.';
+    if(!(okq&&okp))return;
+    var ht=Math.round(q*p*100)/100,tva=Math.round(ht*vat)/100,ttc=Math.round((ht+tva)*100)/100;
+    $('p-qty').textContent=String(q).replace('.',',');
+    $('p-ht').textContent=eur.format(ht);$('p-ht2').textContent=eur.format(ht);
+    $('p-vat-l').innerHTML=(vat===0?'TVA':'TVA '+String(vat).replace('.',',')+' %')+' <span class="mk">4</span>';
+    $('p-vat').textContent=eur.format(tva);$('p-ttc').textContent=eur.format(ttc);
+    $('p-vatnote').textContent=vat===0?'TVA non applicable, art. 293 B du CGI. ':'';
+  }
+  ['f-client','f-what','f-qty','f-price'].forEach(function(id){$(id).addEventListener('input',update);});
+  ['f-vat','f-term'].forEach(function(id){$(id).addEventListener('change',update);});
+  $('maker').addEventListener('submit',function(e){e.preventDefault();});
+  update();
+
+  /* Inscription : limite déclarée */
+  $('signup').addEventListener('click',function(){
+    $('signup-msg').textContent='Cette page est une maquette : l’inscription n’est pas encore branchée. En attendant, la facture d’essai ci-dessus fonctionne.';
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+{
+  "pages": {
+    "Q": {
+      "qualite": 8,
+      "adequation": 7,
+      "verite": [],
+      "reprises": {
+        "bloquant": [
+          "Aucun numéro WhatsApp affiché ni bouton d'envoi : le parcours se termine par « Copier le message de commande » avec une note « sera ajouté à la mise en ligne », alors que le brief demande d'afficher +237 6XX XX XX XX tel quel et que l'objectif est la commande par WhatsApp"
+        ],
+        "notable": [
+          "Horaires d'exemple (7 j sur 7, 5 h 30-21 h, dimanche 6-14 h) et prix d'exemple (croissant 400, pain au chocolat 450, pain de mie 1 000, gâteau 8 parts à 9 000) éloignés du brief, même s'ils sont signalés comme exemples",
+          "Livraison seulement « frais selon quartier » : ni Bonamoussadi, ni Kotto, ni 1 000 FCFA ; Orange Money et MTN MoMo présents mais Bonamoussadi absent (Akwa à la place)",
+          "Le récit « cinq fournées par jour » et l'horloge en direct sont un pari créatif fort, qui ne repose sur aucun fait du client ; ton plus urbain et sobre que chaleureux et fier du quartier",
+          "Pas de ton anglais d'accueil ; les gâteaux à 8 parts/9 000 F sont sous le minimum du brief",
+          "Navigation mobile réduite à un seul lien « Gâteaux »"
+        ],
+        "finition": [
+          "Illustration du gâteau (disque jaune avec texte en cercle) un peu faible et décorative",
+          "Petit texte gris clair de faible contraste sur les zones sombres (Venir au fournil)",
+          "Champ date au format mm/jj/aaaa dans une page en français"
+        ]
+      },
+      "raison": "Page la plus composée et la plus honnête : grille horaire du fournil, composeur de gâteau avec estimation et message, typographie slab maîtrisée, tout le contenu inventé clairement signalé comme exemple, mais le parcours WhatsApp n'est pas bouclé."
+    },
+    "V": {
+      "qualite": 7,
+      "adequation": 7,
+      "verite": [],
+      "reprises": {
+        "bloquant": [
+          "Aucun numéro WhatsApp affiché ni bouton d'envoi direct (« Copier le message », bouton d'envoi promis « avec le numéro de la boutique ») alors que le brief demande le numéro fictif tel quel",
+          "Adresse et repère non renseignés : la carte « Face à ..., carrefour ... » affiche des points de suspension, avec une surbrillance étrange sur « à préciser » ; la section « Nous trouver » ne remplit pas son rôle (pas de lien carte)"
+        ],
+        "notable": [
+          "Horaires et prix d'exemple éloignés du brief (5 h 30-20 h 30, baguette 200, croissant 400, pain au chocolat 500) ; cela reste signalé comme exemple",
+          "Livraison à moto, paiement précis et 1 000 FCFA absents ; paiement seulement évoqué en petit dans le repère",
+          "Titres condensés très serrés : les lettres se touchent (« Ce qu'on trouve au comptoir. », « Votre gâteau de fête ») et nuisent à la lecture",
+          "Illustration du pain chargé de type clip-art qui fait décalé face au reste ; peu de chaleur de quartier explicite, pas d'anglais d'accueil"
+        ],
+        "finition": [
+          "Champ date en mm/dd/yyyy",
+          "Bon de commande en monospace bien trouvé mais texte très petit sur bureau",
+          "Les mini-baguettes de la frise horaire sont minuscules et peu lisibles sur bureau",
+          "Zone vide importante à droite de la section Nous trouver"
+        ]
+      },
+      "raison": "Identité chaude brun-orange cohérente, frise du four et bon de commande inventifs, tout signalé comme exemple, mais l'adresse est vide, les titres sont trop serrés et le parcours WhatsApp n'est pas bouclé."
+    },
+    "W": {
+      "qualite": 8,
+      "adequation": 5,
+      "verite": [
+        "Adresse précise présentée comme vraie : « Boulevard de la Liberté, Akwa, Douala » (le brief dit Bonamoussadi), avec « Deux tables et un comptoir à café » et « stationnement possible dans la rue latérale »",
+        "Section « Le plus près possible » : distances et provenances inventées (Fruits du marché 3 km, Poivre de Penja 70 km, Cacao du Centre 250 km, Café de l'Ouest 290 km) présentées comme des faits d'approvisionnement",
+        "Labels « MAISON » et récits de fabrication inventés (levain entretenu depuis l'ouverture, pousse lente de 18 heures, croissants « au beurre »)",
+        "Livraison à moto dans Akwa, Bonanjo, Bonapriso, Deïdo à 1 000 FCFA (brief : Bonamoussadi et Kotto)",
+        "Promesses de service inventées : « on vous répond sur WhatsApp dans l'heure, de 7 h à 20 h », acompte de 50 %, sept jours pour un mariage, pièce montée sur devis, fiche d'allergènes au comptoir",
+        "Horaires 5 h 30-21 h, dimanche 6-14 h, « ouvert maintenant » et prix (baguette tradition 300, pain complet 800, pain de mie 1 200, cake banane 3 500, 10 000 à 35 000 selon les parts) présentés comme réels, sans mention d'exemple nulle part",
+        "Produits et horaires de fournées (7 h beignets soufflés, 17 h beignets du soir) non donnés par le brief"
+      ],
+      "reprises": {
+        "bloquant": [
+          "Faits inventés présentés comme vrais sur toute la page, sans aucun marquage d'exemple : adresse, distances d'approvisionnement, labels « Maison », promesses de service, zones de livraison (voir verite)",
+          "Zone de livraison et adresse contredisent le brief (Akwa/Bonanjo/Bonapriso/Deïdo au lieu de Bonamoussadi/Kotto)"
+        ],
+        "notable": [
+          "Prix et horaires qui s'écartent du brief (pain complet 800 au lieu de 500, pain au chocolat 500 au lieu de 350, gâteaux dès 10 000 selon 6 parts, horaires jusqu'à 21 h) sans signalement",
+          "Numéro affiché +237 6 90 00 00 00, pas le format fictif demandé",
+          "Section provenance qui sonne « label premium » et s'éloigne du ton de quartier direct, et ajoute du poids",
+          "Pas de phrase d'accueil en anglais ; gâteaux sans mention claire des tailles de 12 000 à 30 000"
+        ],
+        "finition": [
+          "Champs date en mm/dd/yyyy",
+          "Étiquette « SUR COMMANDE » chevauche le titre sur bureau (le kicker est collé au H2)",
+          "Menu dense sur bureau avec petites descriptions très pâles",
+          "Mobile : parcours gâteau long, sélecteurs natifs peu soignés"
+        ]
+      },
+      "raison": "Visuellement percutant et le parcours WhatsApp est complet avec bouton vert et numéro, mais tout le contenu est affirmé comme réel, y compris des faits d'origine, d'adresse et de service inventés, ce qui le rend inutilisable tel quel pour ce client."
+    }
+  },
+  "paires": {
+    "P1": {"choix": "gauche", "raison": "Q est plus net et mieux composé ; V a des titres trop serrés et une adresse laissée vide."},
+    "P2": {"choix": "gauche", "raison": "Q est honnête et cohérent ; W est plus percutant mais affirme beaucoup de faits inventés comme vrais."},
+    "P3": {"choix": "droite", "raison": "V marque tout comme exemple, W présente adresse, provenances et promesses inventées comme réelles."},
+    "P4": {"choix": "droite", "raison": "Q est plus soigné en typographie et en composition que V."},
+    "P5": {"choix": "gauche", "raison": "V évite les faits inventés présentés comme vrais, alors que W est bloqué par sa véracité malgré un parcours WhatsApp plus abouti."},
+    "P6": {"choix": "droite", "raison": "Q est utilisable après remplacement du contenu, alors que W exige une réécriture de ses affirmations."}
+  },
+  "classement": ["Q", "V", "W"]
+}

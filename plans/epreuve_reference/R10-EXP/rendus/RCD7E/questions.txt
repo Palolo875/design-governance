@@ -1,0 +1,11 @@
+Questions (sans réponse ; hypothèses retenues entre crochets)
+
+1. Quel est le nom de la boulangerie-pâtisserie ? [Nom fictif : « Le Fournil du Wouri ».]
+2. Adresse exacte, quartier, nombre de boutiques ? [Une seule boutique, boulevard de la Liberté, Akwa.]
+3. Numéro de téléphone / WhatsApp ? [Numéro d'exemple : +237 6 90 00 00 00, à remplacer.]
+4. Horaires d'ouverture et heures réelles des fournées ? [Lun–sam 5 h 30 – 21 h ; dim 6 h – 14 h ; fournées 5 h 30, 6 h 30, 7 h, 10 h 30, 12 h, 16 h 30, 17 h.]
+5. Carte et prix réels ? [Carte et prix d'exemple en FCFA, plausibles pour Douala, à valider.]
+6. Commandes de gâteaux : délais, acompte, livraison ? [48 h (7 jours pour mariage et dot), acompte 50 % par Orange Money ou MTN MoMo, livraison à moto dans les quartiers centraux, 1 000 FCFA ; réponse WhatsApp « dans l’heure », de 7 h à 20 h. Distances des ingrédients et provenances : plausibles, à confirmer.]
+7. Existe-t-il une identité visuelle (logo, couleurs, photos) ? [Aucune ; identité créée : jaune des taxis de Douala, brun cacao, rouge foléré ; pas de photos, motif de grignes dessiné en SVG.]
+8. Le site doit-il être bilingue français/anglais ? [Français seulement.]
+9. Commande en ligne avec paiement, ou simple prise de contact ? [Prise de contact : le formulaire compose un message WhatsApp, aucun paiement en ligne.]

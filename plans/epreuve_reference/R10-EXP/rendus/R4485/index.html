@@ -1,0 +1,743 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Soldé — la facturation des PME, du devis au paiement</title>
+<meta name="description" content="Soldé crée vos factures avec les mentions obligatoires, les envoie, relance vos clients à votre place et vous montre qui vous doit quoi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#1f33b5;          /* bleu encre de tampon : champ, action, tampon */
+  --blue-deep:#16248a;
+  --blue-soft:#e8ebfb;
+  --on-blue:#ffffff;
+  --on-blue-muted:#c9d0f7;
+  --ink:#15171f;
+  --muted:#565b6b;
+  --line:#d8dbe4;
+  --line-strong:#b9bdcb;
+  --paper:#ffffff;
+  --ground:#f2f3f6;
+  --late:#b42318;          /* retard : toujours doublé d'un texte */
+  --late-soft:#fdeceb;
+  --focus:#ffb000;
+  --sans:"Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --wrap:1200px;
+  --gutter:clamp(20px, 4vw, 48px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55;font-feature-settings:"kern" 1}
+img,svg{display:block}
+a{color:inherit}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:2px}
+.stage :focus-visible,.trial :focus-visible,.foot :focus-visible{outline-color:var(--focus)}
+.stage .sheet :focus-visible{outline-color:var(--blue)}
+.skip{position:absolute;left:12px;top:-60px;background:var(--paper);color:var(--ink);padding:10px 14px;z-index:10;text-decoration:none;font-weight:600}
+.skip:focus{top:12px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--gutter)}
+.num{font-variant-numeric:lining-nums}
+.nw{white-space:nowrap}
+.mono{font-family:var(--mono);font-size:.78em;letter-spacing:.02em}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- En-tête + scène d'entrée ---------- */
+.stage{background:var(--blue);color:var(--on-blue);position:relative;overflow:hidden}
+.stage::after{ /* trame de carnet : lignes fines, très discrètes */
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(to bottom, transparent 0 31px, rgba(255,255,255,.04) 31px 32px);
+}
+.top{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-top:22px;padding-bottom:22px;position:relative;z-index:1}
+.brand{font-weight:800;font-size:28px;letter-spacing:-.04em;text-decoration:none;line-height:1}
+.nav{display:flex;align-items:center;gap:28px;font-size:15px}
+.nav a{text-decoration:none;color:var(--on-blue-muted)}
+.nav a:hover{color:var(--on-blue);text-decoration:underline;text-underline-offset:4px}
+.nav .btn-line{color:var(--on-blue);border:1.5px solid rgba(255,255,255,.7);padding:9px 16px;border-radius:4px;font-weight:600}
+.nav .btn-line:hover{background:var(--on-blue);color:var(--blue);text-decoration:none}
+
+.hero{display:grid;grid-template-columns:minmax(0,11fr) minmax(0,13fr);gap:clamp(32px,4vw,56px);align-items:start;padding-top:clamp(20px,2.6vw,36px);padding-bottom:clamp(56px,7vw,96px);position:relative;z-index:1}
+.hero-copy{padding-top:clamp(0px,3.4vw,52px)}
+.hero h1{font-weight:800;font-size:clamp(44px,4.3vw,64px);line-height:1;letter-spacing:-.035em;margin:0 0 28px}
+.hero h1 span{display:block}
+.hero h1 .ret{color:var(--on-blue-muted)}
+.lede{font-size:clamp(18px,1.5vw,20px);line-height:1.5;max-width:30em;margin:0 0 32px;color:#eef0fd}
+.cta-row{display:flex;flex-wrap:wrap;gap:14px 22px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:10px;border:0;border-radius:4px;padding:15px 22px;font-weight:700;font-size:17px;cursor:pointer;text-decoration:none;line-height:1.1}
+.btn-white{background:var(--on-blue);color:var(--blue)}
+.btn-white:hover{background:#e7eaff}
+.btn-blue{background:var(--blue);color:var(--on-blue)}
+.btn-blue:hover{background:var(--blue-deep)}
+.link-quiet{color:var(--on-blue);font-weight:600;text-underline-offset:5px}
+.hero-note{margin:26px 0 0;font-size:14px;color:var(--on-blue-muted);max-width:30em}
+
+/* ---------- La facture (objet de preuve) ---------- */
+.specimen{position:relative}
+.specimen-tag{display:flex;justify-content:space-between;gap:12px;align-items:baseline;margin:0 0 10px;font-family:var(--mono);font-size:12.5px;color:var(--on-blue-muted);letter-spacing:.02em}
+.sheet{background:var(--paper);color:var(--ink);border-radius:3px;padding:clamp(20px,2.4vw,28px) clamp(18px,3vw,38px) 22px;position:relative;
+  box-shadow:0 1px 0 rgba(0,0,0,.06), 0 18px 40px -18px rgba(5,12,70,.55), 0 40px 80px -40px rgba(5,12,70,.45)}
+.sheet-head{display:grid;grid-template-columns:1fr auto;gap:18px 24px;align-items:start;padding-bottom:14px;border-bottom:1.5px solid var(--ink)}
+.issuer strong{display:block;font-size:17px;letter-spacing:-.01em}
+.issuer span,.client span{display:block;font-size:13px;color:var(--muted);line-height:1.45}
+.doc-id{text-align:right}
+.doc-id .kind{font-weight:800;font-size:22px;letter-spacing:.08em;line-height:1}
+.doc-id dl{margin:10px 0 0;display:grid;grid-template-columns:auto auto;gap:2px 12px;font-size:13px;justify-content:end}
+.doc-id dt{color:var(--muted)}
+.doc-id dd{margin:0;font-family:var(--mono);font-size:12.5px;text-align:right}
+.client{padding:11px 0 10px;display:flex;justify-content:space-between;gap:16px;align-items:flex-end}
+.client .lbl{font-family:var(--mono);font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px}
+.client strong{display:block;font-size:15.5px}
+
+table.lines{width:100%;border-collapse:collapse;font-size:14.5px}
+.lines th{font-family:var(--mono);font-weight:400;font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);text-align:right;padding:8px 0 8px 10px;border-bottom:1px solid var(--line)}
+.lines th:first-child{text-align:left;padding-left:0}
+.lines td{padding:9px 0 9px 10px;border-bottom:1px solid var(--line);vertical-align:baseline;text-align:right}
+.lines td:first-child{text-align:left;padding-left:0}
+.lines td:nth-child(2){white-space:nowrap}
+.lines .desc strong{font-weight:600;display:block;line-height:1.3}
+.lines .desc span{font-size:12.5px;color:var(--muted)}
+.cell-in{width:100%;max-width:92px;text-align:right;border:0;border-bottom:1.5px dashed #848999;background:transparent;padding:3px 2px;border-radius:0}
+.cell-in.qty{max-width:52px}
+.cell-in:hover{border-bottom-color:var(--blue)}
+.cell-in:focus{outline:none;border-bottom:2px solid var(--blue);background:var(--blue-soft)}
+.cell-in:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.cell-in[readonly]{border-bottom-color:transparent;background:transparent;cursor:default}
+.cell-in[aria-invalid="true"]{border-bottom-color:var(--late);background:var(--late-soft)}
+.unit{font-size:12px;color:var(--muted);margin-left:3px}
+.totals{display:grid;grid-template-columns:1fr auto;gap:3px 0;margin:10px 0 0 auto;max-width:300px;font-size:14.5px}
+.totals dt{color:var(--muted)}
+.totals dd{margin:0;text-align:right;padding-left:28px}
+.totals .grand{font-weight:800;font-size:22px;letter-spacing:-.02em;color:var(--ink);padding-top:8px;margin-top:6px;border-top:1.5px solid var(--ink)}
+.totals dt.grand{font-size:15px;font-weight:700;display:flex;align-items:flex-end;padding-bottom:3px}
+.legal{margin:14px 0 0;padding-top:10px;border-top:1px solid var(--line);font-size:11.5px;line-height:1.5;color:var(--muted)}
+.legal b{font-weight:600;color:#3b3f4c}
+.lock-note{margin:12px 0 0;font-size:13px;color:var(--ink);background:var(--blue-soft);padding:9px 12px;border-left:3px solid var(--blue);display:none}
+.sheet[data-state]:not([data-state="0"]) .lock-note{display:block}
+.err-note{margin:10px 0 0;font-size:13px;color:var(--late);font-weight:600;min-height:0}
+
+/* tampon */
+.tot-wrap{position:relative}
+.client{position:relative}
+.stamp-m{display:none}
+.stamp{position:absolute;left:-6px;top:50%;margin-top:-40px;transform:rotate(-9deg) scale(.96);
+  font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:clamp(22px,2.3vw,31px);line-height:1;
+  color:var(--blue);border:4px solid currentColor;outline:1.5px solid currentColor;outline-offset:4px;padding:10px 16px 8px;border-radius:6px;
+  opacity:0;pointer-events:none;filter:url(#rough);mix-blend-mode:multiply;transition:opacity .18s ease, transform .22s cubic-bezier(.2,1.6,.4,1)}
+.stamp small{display:block;font-family:var(--mono);font-weight:500;font-size:.34em;letter-spacing:.12em;margin-top:5px;text-align:center}
+.sheet[data-state="4"] .stamp{opacity:.92;transform:rotate(-9deg) scale(1)}
+
+.state-pill{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;padding:4px 9px;border-radius:99px;border:1px solid var(--line-strong);color:var(--muted);white-space:nowrap}
+.state-pill::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.state-pill[data-s="1"],.state-pill[data-s="2"]{color:var(--blue);border-color:#aeb7ee}
+.state-pill[data-s="3"]{color:var(--late);border-color:#f0b7b1}
+.state-pill[data-s="4"]{color:var(--paper);background:var(--blue);border-color:var(--blue)}
+
+/* vie de la facture */
+.life{margin-top:18px}
+.life-title{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:0 0 10px;font-size:14px;color:var(--on-blue-muted)}
+.life-title b{color:var(--on-blue);font-weight:600}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;position:relative}
+.steps li{position:relative}
+.steps li::before{content:"";position:absolute;left:0;right:0;top:15px;height:2px;background:rgba(255,255,255,.28)}
+.steps li:first-child::before{left:50%}
+.steps li:last-child::before{right:50%}
+.steps li.done::before{background:var(--on-blue)}
+.steps li.done + li.now::before{background:linear-gradient(to right,var(--on-blue) 50%, rgba(255,255,255,.28) 50%)}
+.step{position:relative;width:100%;background:none;border:0;padding:0 2px 4px;cursor:pointer;color:var(--on-blue-muted);display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
+.step .dot{width:32px;height:32px;border-radius:50%;background:var(--blue);border:2px solid rgba(255,255,255,.5);display:grid;place-items:center;font-family:var(--mono);font-size:12px;color:var(--on-blue);position:relative;z-index:1;transition:background .15s, border-color .15s}
+.step .lab{font-size:13.5px;font-weight:600;line-height:1.2}
+.step .when{font-family:var(--mono);font-size:11px;opacity:.85}
+.done .step{color:var(--on-blue)}
+.done .step .dot{background:var(--on-blue);color:var(--blue);border-color:var(--on-blue)}
+.now .step{color:var(--on-blue)}
+.now .step .dot{background:var(--on-blue);color:var(--blue);border-color:var(--on-blue);box-shadow:0 0 0 5px rgba(255,255,255,.22)}
+.step:hover .lab{text-decoration:underline;text-underline-offset:3px}
+.life-say{margin:14px 0 0;background:rgba(9,17,90,.38);border-left:3px solid var(--on-blue);padding:13px 16px;font-size:15px;line-height:1.45;color:#f2f4ff;min-height:72px;display:flex;gap:16px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+.life-say p{margin:0;flex:1 1 280px}
+.life-say .btn{padding:11px 16px;font-size:15px;flex:0 0 auto}
+
+/* ---------- Sections ---------- */
+section{scroll-margin-top:16px}
+.band{padding:clamp(64px,8vw,112px) 0}
+.band-ground{background:var(--ground)}
+.kicker{font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);margin:0 0 14px}
+h2{text-wrap:balance;font-weight:800;font-size:clamp(32px,3.8vw,52px);line-height:1.02;letter-spacing:-.03em;margin:0 0 18px;max-width:16em}
+.intro{font-size:18px;color:var(--muted);max-width:36em;margin:0}
+.split{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,5vw,72px);align-items:start}
+
+/* relances */
+.ruler{margin:40px 0 0;position:relative}
+.ruler-track{position:relative;height:56px;border-bottom:2px solid var(--ink)}
+.ruler-track .tick{position:absolute;bottom:-2px;width:1px;height:10px;background:var(--line-strong)}
+.ruler-track .tick.major{height:18px;background:var(--ink);width:2px}
+.ruler-track .tick.due{background:var(--ink);height:56px;width:2px}
+.ruler-track .due-lab{position:absolute;bottom:62px;transform:translateX(-50%);font-family:var(--mono);font-size:12px;white-space:nowrap;color:var(--ink)}
+.ruler-tabs{position:relative;height:84px}
+.rtab{position:absolute;top:0;transform:translateX(-50%);background:var(--paper);border:1.5px solid var(--ink);border-radius:4px;padding:8px 12px;cursor:pointer;text-align:left;min-width:124px;box-shadow:0 2px 0 var(--ink)}
+.rtab::before{content:"";position:absolute;left:50%;top:-14px;width:2px;height:14px;background:var(--ink)}
+.rtab.first{transform:translateX(-14px)}.rtab.first::before{left:13px}
+.rtab.last{transform:translateX(calc(-100% + 14px))}.rtab.last::before{left:auto;right:13px}
+.rtab b{display:block;font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.04em}
+.rtab span{font-size:14px;font-weight:600}
+.rtab[aria-selected="true"]{background:var(--blue);border-color:var(--blue);color:var(--on-blue);box-shadow:0 2px 0 var(--blue-deep)}
+.rtab[aria-selected="true"]::before{background:var(--blue)}
+.ruler-legend{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:6px}
+.letter{background:var(--paper);border:1px solid var(--line);border-radius:3px;padding:26px 28px 24px;box-shadow:0 12px 30px -20px rgba(20,24,60,.35);font-size:15.5px}
+.letter-meta{display:grid;grid-template-columns:auto 1fr;gap:3px 14px;font-size:13px;padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:16px}
+.letter-meta dt{color:var(--muted);font-family:var(--mono);font-size:12px}
+.letter-meta dd{margin:0}
+.letter p{margin:0 0 12px}
+.letter .sig{color:var(--muted);margin-bottom:0}
+.letter-foot{margin-top:16px;padding-top:12px;border-top:1px dashed var(--line-strong);font-size:13px;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between}
+
+/* sommes dues */
+.ledger{margin-top:40px;background:var(--paper);border:1px solid var(--line);border-radius:3px}
+.ledger-head{display:flex;flex-wrap:wrap;gap:18px 48px;align-items:flex-end;justify-content:space-between;padding:24px 28px;border-bottom:1.5px solid var(--ink)}
+.sum .lbl{font-size:14px;color:var(--muted);display:block}
+.sum .val{font-weight:800;font-size:clamp(34px,4vw,48px);letter-spacing:-.03em;line-height:1.05}
+.sum.late .val{color:var(--late)}
+.sum.late .lbl{color:var(--late);font-weight:600}
+.ledger table{width:100%;border-collapse:collapse;font-size:15px}
+.ledger th{font-family:var(--mono);font-weight:400;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:12px 16px;border-bottom:1px solid var(--line)}
+.ledger td{padding:15px 16px;border-bottom:1px solid var(--line);vertical-align:baseline}
+.ledger tr:last-child td{border-bottom:0}
+.ledger th:first-child,.ledger td:first-child{padding-left:28px}
+.ledger th:last-child,.ledger td:last-child{padding-right:28px}
+.ledger .amt{text-align:right;font-weight:600;white-space:nowrap}
+.ledger th.amt{font-weight:400}
+.ledger .who strong{display:block;font-weight:600}
+.ledger .who span{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.flag{display:inline-flex;gap:7px;align-items:baseline;font-size:14px}
+.flag.late{color:var(--late);font-weight:600}
+.flag.late::before{content:"!";display:inline-grid;place-items:center;width:17px;height:17px;border-radius:50%;background:var(--late);color:#fff;font-size:11px;font-weight:800;transform:translateY(-1px)}
+.next{font-size:13.5px;color:var(--muted)}
+.ledger-foot{padding:14px 28px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);background:#fafbfc}
+
+/* tarif */
+.price-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(32px,5vw,64px);align-items:start;margin-top:40px}
+.proforma{background:var(--paper);border:1px solid var(--line);border-radius:3px;padding:28px 30px 24px;position:relative;box-shadow:0 12px 30px -20px rgba(20,24,60,.35)}
+.proforma-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;padding-bottom:14px;border-bottom:1.5px solid var(--ink);margin-bottom:4px}
+.proforma-head .kind{font-weight:800;letter-spacing:.08em;font-size:16px}
+.proforma-head .meta{font-family:var(--mono);font-size:12px;color:var(--muted);text-align:right;line-height:1.6}
+.proforma table{width:100%;border-collapse:collapse;font-size:15px}
+.proforma td{padding:12px 0;border-bottom:1px solid var(--line);vertical-align:baseline}
+.proforma td:last-child{text-align:right;white-space:nowrap;padding-left:16px;font-family:var(--mono);font-size:13px;color:var(--muted)}
+.proforma td span{display:block;font-size:13.5px;color:var(--muted)}
+.proforma tr.sub td{border-bottom:1.5px solid var(--ink)}
+.proforma tr.sub td:last-child{font-family:var(--sans);font-size:15px;color:var(--ink);font-weight:600}
+.proforma .totals{max-width:320px}
+.proforma .stamp-mini{position:absolute;left:34px;bottom:92px;transform:rotate(-7deg);color:var(--blue);border:3px solid currentColor;outline:1px solid currentColor;outline-offset:3px;border-radius:5px;padding:6px 10px 5px;font-weight:800;letter-spacing:.12em;font-size:15px;text-transform:uppercase;filter:url(#rough);mix-blend-mode:multiply;opacity:.9}
+.proforma .note{font-size:12.5px;color:var(--muted);margin:18px 0 0}
+
+.trial{background:var(--blue);color:var(--on-blue);border-radius:3px;padding:30px 30px 28px}
+.trial h3{font-size:26px;letter-spacing:-.02em;line-height:1.1;margin:0 0 10px}
+.trial p{margin:0 0 20px;color:#e6e9fd;font-size:15.5px}
+.field{margin:0 0 14px}
+.field label{display:block;font-weight:600;font-size:14.5px;margin-bottom:6px}
+.field input{width:100%;background:var(--paper);color:var(--ink);border:2px solid transparent;border-radius:4px;padding:12px 14px;font-size:16px}
+.field input:focus{outline:3px solid var(--focus);outline-offset:1px}
+.field input[aria-invalid="true"]{border-color:#ffb4ab;background:#fff5f4}
+.field .msg{display:block;font-size:13.5px;margin-top:6px;color:#ffd9d4;font-weight:600}
+.trial .btn{width:100%;justify-content:center;margin-top:6px}
+.trial .fine{font-size:12.5px;color:var(--on-blue-muted);margin:14px 0 0}
+.trial-ok{display:none;background:var(--paper);color:var(--ink);border-radius:4px;padding:16px 18px;font-size:15px}
+.trial-ok strong{display:block;font-size:17px;margin-bottom:4px}
+.trial.sent form{display:none}
+.trial.sent .trial-ok{display:block}
+
+/* questions */
+.faq{margin-top:36px;border-top:1.5px solid var(--ink)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;list-style:none;padding:20px 40px 20px 0;font-weight:700;font-size:19px;letter-spacing:-.01em;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:4px;top:14px;font-size:28px;font-weight:400;color:var(--blue)}
+.faq details[open] summary::after{content:"–"}
+.faq details p{margin:-6px 0 22px;max-width:44em;color:#353947}
+
+/* pied */
+.foot{background:var(--ink);color:#cfd2dc;padding:56px 0 40px;font-size:14px}
+.foot-top{display:flex;justify-content:space-between;gap:28px;flex-wrap:wrap;align-items:flex-end;padding-bottom:32px;border-bottom:1px solid #343846;margin-bottom:22px}
+.foot .brand{color:#fff;font-size:40px}
+.foot-top p{margin:10px 0 0;max-width:28em}
+.foot .btn-white{background:#fff;color:var(--ink)}
+.foot small{display:block;color:#9ea3b3;line-height:1.6}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1160px){
+  .hero{grid-template-columns:minmax(0,1fr)}
+  .specimen{max-width:720px;margin-left:auto;width:100%}
+}
+@media (max-width: 1020px){
+  .split,.price-grid{grid-template-columns:minmax(0,1fr)}
+  .hero-copy{padding-top:0}
+  .hero h1{max-width:11em}
+  .proforma .note{margin-right:0}
+  .proforma .stamp-mini{position:static;display:inline-block;margin-top:16px}
+}
+@media (max-width: 720px){
+  body{font-size:16px}
+  .nav a:not(.btn-line){display:none}
+  .brand{font-size:24px}
+  .client{flex-direction:column;align-items:flex-start;gap:10px}
+  .sheet-head{grid-template-columns:1fr}
+  .doc-id{text-align:left}
+  .doc-id dl{justify-content:start}
+  .doc-id dd{text-align:left}
+  /* lignes de facture recomposées */
+  .lines thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .lines tr{display:grid;grid-template-columns:auto auto 1fr;gap:4px 14px;padding:12px 0;border-bottom:1px solid var(--line);align-items:baseline}
+  .lines td{border:0;padding:0;text-align:left}
+  .lines td.desc{grid-column:1 / -1}
+  .lines td.total{text-align:right}
+  .lines td[data-l]::before{content:attr(data-l);display:block;font-family:var(--mono);font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+  .totals{max-width:none}
+  .tot-wrap .stamp{display:none}
+  .stamp-m{display:block;left:auto;right:4px;top:auto;bottom:-14px;margin:0;font-size:22px}
+  .step .lab{font-size:12px}
+  .step .when{display:none}
+  .ruler-tabs{height:auto;display:flex;flex-direction:column;gap:8px;margin-top:14px}
+  .rtab{position:static;transform:none;width:100%;display:flex;gap:12px;align-items:baseline}
+  .rtab::before{display:none}
+  .ruler-track .due-lab{font-size:11px}
+  .ledger-head,.ledger-foot{padding-left:18px;padding-right:18px}
+  .ledger thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .ledger tr{display:grid;grid-template-columns:1fr auto;grid-template-areas:'who amt' 'due due' 'state state';gap:6px 12px;padding:14px 18px;border-bottom:1px solid var(--line)}
+  .ledger tr:last-child{border-bottom:0}
+  .ledger td.who{grid-area:who}.ledger td.amt{grid-area:amt}
+  .ledger td.due::before{content:'Échéance ';color:var(--muted)}
+  .ledger td{padding:0;border:0}
+  .ledger td:first-child,.ledger td:last-child{padding:0}
+  .ledger td.due{grid-area:due;font-size:14px}
+  .ledger td.state{grid-area:state}
+  .proforma{padding:22px 18px 20px}
+  .letter{padding:20px 18px}
+  .trial{padding:24px 20px}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{transition:none !important;animation:none !important;scroll-behavior:auto !important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+
+<!-- filtre d'encre pour les tampons (matière native, aucune image) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <filter id="rough" x="-10%" y="-10%" width="120%" height="120%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" result="n"/>
+    <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.5 1.5" result="holes"/>
+    <feComposite in="SourceGraphic" in2="holes" operator="in" result="inked"/>
+    <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="1" seed="3" result="w"/>
+    <feDisplacementMap in="inked" in2="w" scale="2.2" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+
+<header class="stage">
+  <div class="wrap top">
+    <a class="brand" href="#">soldé</a>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="#relances">Relances</a>
+      <a href="#encaisser">Suivi des paiements</a>
+      <a href="#tarif">Tarif</a>
+      <a href="#questions">Questions</a>
+      <a class="btn-line" href="#essai">Essayer 30 jours</a>
+    </nav>
+  </div>
+
+  <div class="wrap hero" id="contenu">
+    <div class="hero-copy">
+      <h1><span>La facture part.</span><span class="ret">Le paiement revient.</span></h1>
+      <p class="lede">Soldé prépare vos factures avec les mentions obligatoires, les envoie, relance vos clients à votre place et vous dit chaque matin qui vous doit quoi. Pour les artisans, commerçants et PME qui facturent eux-mêmes.</p>
+      <div class="cta-row">
+        <a class="btn btn-white" href="#essai">Commencer l’essai gratuit</a>
+        <a class="link-quiet" href="#facture-exemple">Manipuler l’exemple de facture</a>
+      </div>
+      <p class="hero-note">30 jours sans carte bancaire, sans engagement. Tarif indicatif ensuite : 19 € HT par mois.</p>
+    </div>
+
+    <div class="specimen" id="facture-exemple">
+      <p class="specimen-tag"><span>Exemple fictif — modifiez les quantités et les prix</span></p>
+      <article class="sheet" id="sheet" data-state="0" aria-labelledby="inv-title">
+        <div class="sheet-head">
+          <div class="issuer">
+            <strong>Atelier Morel</strong>
+            <span>Menuiserie · 8 rue des Tanneurs, 35000 Rennes</span>
+            <span>SIRET 000 000 000 00000 (fictif)</span>
+          </div>
+          <div class="doc-id">
+            <div class="kind" id="inv-title">FACTURE</div>
+            <dl>
+              <dt>N°</dt><dd>F-2026-0142</dd>
+              <dt>Émise le</dt><dd>30/09/2026</dd>
+              <dt>Échéance</dt><dd>30/10/2026</dd>
+            </dl>
+          </div>
+        </div>
+        <div class="client">
+          <div>
+            <div class="lbl">Facturé à</div>
+            <strong>Café des Halles</strong>
+            <span>Mme Le Goff · 12 place du Marché, 35000 Rennes</span>
+          </div>
+          <span class="state-pill" id="pill" data-s="0">Brouillon</span>
+          <div class="stamp stamp-m" aria-hidden="true">Payée<small>05·11·2026</small></div>
+        </div>
+
+        <table class="lines">
+          <caption class="sr">Lignes de la facture F-2026-0142</caption>
+          <thead><tr><th scope="col">Désignation</th><th scope="col">Qté</th><th scope="col">Prix unit. HT</th><th scope="col">Total HT</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="desc"><strong>Comptoir en chêne massif</strong><span>Sur mesure, 3,20 m, plateau huilé</span></td>
+              <td data-l="Qté"><label class="sr" for="q1">Quantité, comptoir</label><input class="cell-in qty" id="q1" inputmode="decimal" value="1" data-row="0" data-k="q"></td>
+              <td data-l="Prix unit. HT"><label class="sr" for="p1">Prix unitaire hors taxes, comptoir</label><input class="cell-in" id="p1" inputmode="decimal" value="2 480,00" data-row="0" data-k="p"></td>
+              <td class="total num" data-l="Total HT" id="t0">2 480,00 €</td>
+            </tr>
+            <tr>
+              <td class="desc"><strong>Pose et ajustement sur site</strong><span>Heures de main-d’œuvre</span></td>
+              <td data-l="Qté"><label class="sr" for="q2">Quantité, heures de pose</label><input class="cell-in qty" id="q2" inputmode="decimal" value="6" data-row="1" data-k="q"><span class="unit">h</span></td>
+              <td data-l="Prix unit. HT"><label class="sr" for="p2">Prix unitaire hors taxes, heure de pose</label><input class="cell-in" id="p2" inputmode="decimal" value="55,00" data-row="1" data-k="p"></td>
+              <td class="total num" data-l="Total HT" id="t1">330,00 €</td>
+            </tr>
+            <tr>
+              <td class="desc"><strong>Vernis alimentaire</strong><span>Deux couches, plan de service</span></td>
+              <td data-l="Qté"><label class="sr" for="q3">Quantité, vernis</label><input class="cell-in qty" id="q3" inputmode="decimal" value="1" data-row="2" data-k="q"></td>
+              <td data-l="Prix unit. HT"><label class="sr" for="p3">Prix unitaire hors taxes, vernis</label><input class="cell-in" id="p3" inputmode="decimal" value="180,00" data-row="2" data-k="p"></td>
+              <td class="total num" data-l="Total HT" id="t2">180,00 €</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="err-note" id="err" role="alert"></p>
+
+        <div class="tot-wrap">
+        <dl class="totals num" aria-live="polite">
+          <dt>Total HT</dt><dd id="ht">2 990,00 €</dd>
+          <dt>TVA 20 %</dt><dd id="tva">598,00 €</dd>
+          <dt class="grand">Net à payer</dt><dd class="grand" id="ttc">3 588,00 €</dd>
+        </dl>
+        <div class="stamp" aria-hidden="true">Payée<small>05·11·2026</small></div>
+        </div>
+
+        <p class="legal"><b>Ajouté automatiquement :</b> paiement à 30 jours par virement. Pénalités de retard : trois fois le taux d’intérêt légal. Indemnité forfaitaire de recouvrement : 40&nbsp;€. Pas d’escompte.</p>
+        <p class="lock-note" id="lock">Une facture envoyée ne se modifie plus : pour corriger, Soldé prépare un avoir lié à ce numéro.</p>
+
+      </article>
+
+      <div class="life">
+        <p class="life-title"><b>La vie de cette facture</b><span>Choisissez une étape</span></p>
+        <ol class="steps" id="steps">
+          <li class="now"><button class="step" type="button" data-go="0" aria-current="step"><span class="dot">1</span><span class="lab">Brouillon</span><span class="when">30 sept.</span></button></li>
+          <li><button class="step" type="button" data-go="1"><span class="dot">2</span><span class="lab">Envoyée</span><span class="when">30 sept.</span></button></li>
+          <li><button class="step" type="button" data-go="2"><span class="dot">3</span><span class="lab">Ouverte</span><span class="when">1er oct.</span></button></li>
+          <li><button class="step" type="button" data-go="3"><span class="dot">4</span><span class="lab">Relancée</span><span class="when">31 oct.</span></button></li>
+          <li><button class="step" type="button" data-go="4"><span class="dot">5</span><span class="lab">Payée</span><span class="when">5 nov.</span></button></li>
+        </ol>
+        <div class="life-say" aria-live="polite">
+          <p id="say">Vous saisissez trois lignes. Soldé calcule la TVA, numérote la facture à la suite de la précédente et ajoute les mentions obligatoires.</p>
+          <button class="btn btn-white" type="button" id="advance">Envoyer à Mme Le Goff</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="band" id="relances" aria-labelledby="h-relances">
+    <div class="wrap split">
+      <div>
+        <p class="kicker">Relances</p>
+        <h2 id="h-relances">Vous ne courez plus après vos clients.</h2>
+        <p class="intro">Dès l’échéance passée, Soldé écrit à votre place, sur le ton que vous avez choisi et aux dates que vous avez fixées. Le client reçoit la facture jointe ; vous recevez une copie. Après deux rappels, Soldé s’arrête et vous prévient : la suite vous appartient.</p>
+      </div>
+      <div>
+        <div class="ruler" aria-hidden="false">
+          <div class="ruler-track" aria-hidden="true">
+            <span class="tick due" style="left:0%"></span><span class="due-lab" style="left:0%;transform:none">Échéance</span>
+            <span class="tick" style="left:6.25%"></span><span class="tick" style="left:12.5%"></span><span class="tick" style="left:18.75%"></span><span class="tick" style="left:25%"></span><span class="tick" style="left:31.25%"></span><span class="tick" style="left:37.5%"></span><span class="tick" style="left:43.75%"></span><span class="tick" style="left:50%"></span><span class="tick" style="left:56.25%"></span><span class="tick" style="left:62.5%"></span><span class="tick" style="left:68.75%"></span><span class="tick" style="left:75%"></span><span class="tick" style="left:81.25%"></span><span class="tick" style="left:87.5%"></span><span class="tick" style="left:93.75%"></span><span class="tick" style="left:100%"></span>
+            <span class="tick major" style="left:6.25%"></span><span class="tick major" style="left:50%"></span><span class="tick major" style="left:93.75%"></span>
+          </div>
+          <div class="ruler-tabs" role="tablist" aria-label="Calendrier des relances">
+            <button class="rtab first" role="tab" id="rt1" aria-selected="true" aria-controls="letter" style="left:6.25%" data-r="0"><b>J+1</b><span>Rappel courtois</span></button>
+            <button class="rtab" role="tab" id="rt2" aria-selected="false" aria-controls="letter" tabindex="-1" style="left:50%" data-r="1"><b>J+8</b><span>Second rappel</span></button>
+            <button class="rtab last" role="tab" id="rt3" aria-selected="false" aria-controls="letter" tabindex="-1" style="left:93.75%" data-r="2"><b>J+15</b><span>À vous de voir</span></button>
+          </div>
+        </div>
+
+        <article class="letter" id="letter" role="tabpanel" aria-labelledby="rt1" tabindex="0">
+          <dl class="letter-meta">
+            <dt>À</dt><dd id="l-to">Mme Le Goff — Café des Halles</dd>
+            <dt>Objet</dt><dd id="l-subj">Facture F-2026-0142 — petit rappel</dd>
+            <dt>Envoi</dt><dd id="l-when">31 octobre, 9 h 00, au nom d’Atelier Morel</dd>
+          </dl>
+          <div id="l-body">
+            <p>Bonjour Madame Le Goff,</p>
+            <p>Sauf erreur de notre part, la facture <span class="nw">F-2026-0142</span> de <strong class="js-ttc nw">3 588,00 €</strong>, arrivée à échéance le 30 octobre, n’a pas encore été réglée. Vous la trouverez en pièce jointe.</p>
+            <p>Si le virement est déjà parti, merci de ne pas tenir compte de ce message.</p>
+            <p class="sig">Bien cordialement,<br>Julien Morel — Atelier Morel</p>
+          </div>
+          <div class="letter-foot"><span>Exemple de message, modifiable dans vos réglages</span><span id="l-tone">Ton : courtois</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band-ground" id="encaisser" aria-labelledby="h-encaisser">
+    <div class="wrap">
+      <p class="kicker">Suivi des paiements</p>
+      <h2 id="h-encaisser">Chaque matin, qui vous doit quoi.</h2>
+      <p class="intro">Une seule liste, triée par urgence : ce qui est en retard, ce qui arrive à échéance, ce que le client n’a pas encore ouvert. Et la prochaine relance prévue pour chacun.</p>
+
+      <div class="ledger">
+        <div class="ledger-head">
+          <div class="sum"><span class="lbl">À encaisser au 30 septembre</span><span class="val num">9 162,40 €</span></div>
+          <div class="sum late"><span class="lbl">dont en retard</span><span class="val num">3 390,00 €</span></div>
+        </div>
+        <table>
+          <caption class="sr">Factures en attente de paiement, exemple fictif</caption>
+          <thead><tr><th scope="col">Client</th><th scope="col">Échéance</th><th scope="col">Où en est-on</th><th scope="col" class="amt">Montant TTC</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="who"><strong>Crèche Les Petits Pas</strong><span>F-2026-0128</span></td>
+              <td class="due num">12 sept.</td>
+              <td class="state"><span class="flag late">En retard de 18 jours</span><div class="next">Deux rappels envoyés — à vous de décider</div></td>
+              <td class="amt num">2 150,00 €</td>
+            </tr>
+            <tr>
+              <td class="who"><strong>Boulangerie Kerlann</strong><span>F-2026-0131</span></td>
+              <td class="due num">24 sept.</td>
+              <td class="state"><span class="flag late">En retard de 6 jours</span><div class="next">Second rappel prévu le 2 oct.</div></td>
+              <td class="amt num">1 240,00 €</td>
+            </tr>
+            <tr>
+              <td class="who"><strong>SCI Les Tilleuls</strong><span>F-2026-0136</span></td>
+              <td class="due num">5 oct.</td>
+              <td class="state"><span class="flag">Ouverte le 22 sept.</span><div class="next">Aucune relance avant le 6 oct.</div></td>
+              <td class="amt num">4 812,40 €</td>
+            </tr>
+            <tr>
+              <td class="who"><strong>Cabinet Roux &amp; Associés</strong><span>F-2026-0139</span></td>
+              <td class="due num">15 oct.</td>
+              <td class="state"><span class="flag">Envoyée, pas encore ouverte</span><div class="next">Soldé vous préviendra si elle reste fermée 7 jours</div></td>
+              <td class="amt num">960,00 €</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="ledger-foot">Exemple fictif : clients, montants et dates inventés pour montrer l’écran.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="tarif" aria-labelledby="h-tarif">
+    <div class="wrap">
+      <p class="kicker">Tarif</p>
+      <h2 id="h-tarif">Un seul prix, présenté comme il se doit.</h2>
+      <p class="intro">Tout est inclus, quel que soit le nombre de factures. Vous pouvez arrêter à la fin de n’importe quel mois.</p>
+
+      <div class="price-grid">
+        <article class="proforma" aria-labelledby="pf-title">
+          <div class="proforma-head">
+            <div><div class="kind" id="pf-title">PRO FORMA</div><div class="mono" style="color:var(--muted);margin-top:4px">De : Soldé · À : votre entreprise</div></div>
+            <div class="meta">Réf. ESSAI-30J<br>Valable sans limite</div>
+          </div>
+          <table>
+            <caption class="sr">Ce qui est inclus dans l’abonnement</caption>
+            <tbody>
+              <tr><td>Factures et devis illimités<span>Un devis accepté devient facture en un clic</span></td><td>inclus</td></tr>
+              <tr><td>Mentions obligatoires et numérotation continue<span>Sans trou ni doublon, avoirs liés à leur facture</span></td><td>inclus</td></tr>
+              <tr><td>Relances programmées<span>Ton et dates réglables, arrêt après deux rappels</span></td><td>inclus</td></tr>
+              <tr><td>Suivi d’ouverture et des sommes dues<span>La liste du matin, triée par urgence</span></td><td>inclus</td></tr>
+              <tr><td>Export pour votre comptable<span>Fichier des écritures au format tableur</span></td><td>inclus</td></tr>
+              <tr class="sub"><td>Abonnement mensuel</td><td class="num">19,00 € HT</td></tr>
+            </tbody>
+          </table>
+          <dl class="totals num">
+            <dt>TVA 20 %</dt><dd>3,80 €</dd>
+            <dt class="grand">Par mois</dt><dd class="grand">22,80 € TTC</dd>
+          </dl>
+          <p class="note">Tarif indicatif, à confirmer avant lancement. Les 30 premiers jours ne sont pas facturés.</p>
+          <div class="stamp-mini" aria-hidden="true">Sans engagement</div>
+        </article>
+
+        <div class="trial" id="essai">
+          <h3>Essayez sur vos vraies factures.</h3>
+          <p>30 jours complets, sans carte bancaire. Votre première facture peut partir aujourd’hui.</p>
+          <form id="trial-form" novalidate>
+            <div class="field">
+              <label for="f-co">Nom de votre entreprise</label>
+              <input id="f-co" name="co" autocomplete="organization" aria-describedby="m-co">
+              <span class="msg" id="m-co"></span>
+            </div>
+            <div class="field">
+              <label for="f-mail">Adresse e-mail professionnelle</label>
+              <input id="f-mail" name="mail" type="email" autocomplete="email" aria-describedby="m-mail">
+              <span class="msg" id="m-mail"></span>
+            </div>
+            <button class="btn btn-white" type="submit">Commencer l’essai gratuit</button>
+            <p class="fine">Page de démonstration : ce formulaire ne crée aucun compte et n’envoie rien.</p>
+          </form>
+          <div class="trial-ok" role="status" id="trial-ok" tabindex="-1">
+            <strong>C’est noté.</strong>
+            Sur le vrai service, un lien d’accès partirait maintenant vers <span id="ok-mail"></span>. Ici, rien n’a été envoyé : il s’agit d’une démonstration.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band-ground" id="questions" aria-labelledby="h-q">
+    <div class="wrap">
+      <p class="kicker">Questions</p>
+      <h2 id="h-q">Ce qu’on nous demande avant de commencer.</h2>
+      <div class="faq">
+        <details>
+          <summary>Je me suis trompé sur une facture déjà envoyée. Que faire ?</summary>
+          <p>Une facture émise ne se modifie pas et ne se supprime pas. Soldé prépare un avoir qui annule tout ou partie de la facture, lié à son numéro, puis une nouvelle facture si besoin. La numérotation reste continue.</p>
+        </details>
+        <details>
+          <summary>Mes clients doivent-ils créer un compte ?</summary>
+          <p>Non. Ils reçoivent un e-mail à votre nom avec la facture en PDF. Ils la paient comme d’habitude.</p>
+        </details>
+        <details>
+          <summary>Et si je ne veux pas relancer un client ?</summary>
+          <p>Les relances se coupent client par client, ou facture par facture. Vous gardez aussi la main sur le ton et sur les dates.</p>
+        </details>
+        <details>
+          <summary>Mon comptable pourra-t-il s’en servir ?</summary>
+          <p>Vous exportez vos factures, avoirs et encaissements du mois dans un fichier qu’il peut importer. Il peut aussi recevoir un accès en lecture seule.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <div class="brand">soldé</div>
+        <p>Facturer, relancer, encaisser. Le logiciel de facturation des artisans, commerçants et PME.</p>
+      </div>
+      <a class="btn btn-white" href="#essai">Commencer l’essai gratuit</a>
+    </div>
+    <small>« Soldé » est un nom de travail. Page de démonstration : entreprises, clients, montants et tarifs sont fictifs ou indicatifs.</small>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var intl = new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR'});
+  var fmt = {format:function(n){ return intl.format(n).replace(/\u202f/g,'\u00a0'); }};
+  var $ = function(id){return document.getElementById(id)};
+  var sheet = $('sheet'), pill = $('pill'), say = $('say'), adv = $('advance'), err = $('err');
+  var inputs = [].slice.call(sheet.querySelectorAll('.cell-in'));
+  var state = 0;
+
+  function parse(v){
+    var s = String(v).replace(/\s| | |€/g,'').replace(',', '.');
+    if(s === '' || !/^\d+(\.\d{0,2})?$/.test(s)) return NaN;
+    return parseFloat(s);
+  }
+  function recalc(){
+    var ht = 0, bad = null;
+    for(var r=0;r<3;r++){
+      var q = sheet.querySelector('[data-row="'+r+'"][data-k="q"]');
+      var p = sheet.querySelector('[data-row="'+r+'"][data-k="p"]');
+      var qv = parse(q.value), pv = parse(p.value);
+      [q,p].forEach(function(el){ el.setAttribute('aria-invalid', isNaN(parse(el.value)) ? 'true':'false'); });
+      if(isNaN(qv) || isNaN(pv)){ bad = bad || (isNaN(qv)?q:p); $('t'+r).textContent = '—'; continue; }
+      var t = Math.round(qv*pv*100)/100; ht += t; $('t'+r).textContent = fmt.format(t);
+    }
+    err.textContent = bad ? 'Saisissez un nombre positif, par exemple 12 ou 55,50. Les totaux ignorent la ligne tant qu’elle est incomplète.' : '';
+    var tva = Math.round(ht*20)/100, ttc = Math.round((ht+tva)*100)/100;
+    $('ht').textContent = fmt.format(ht); $('tva').textContent = fmt.format(tva); $('ttc').textContent = fmt.format(ttc);
+    [].forEach.call(document.querySelectorAll('.js-ttc'), function(el){ el.textContent = fmt.format(ttc); });
+    adv.disabled = !!bad && state===0;
+    return !bad;
+  }
+  inputs.forEach(function(el){
+    el.addEventListener('input', recalc);
+    el.addEventListener('blur', function(){ var v = parse(el.value); if(!isNaN(v) && el.dataset.k==='p') el.value = v.toLocaleString('fr-FR',{minimumFractionDigits:2, maximumFractionDigits:2}); });
+  });
+
+  var S = [
+    {pill:'Brouillon', btn:'Envoyer à Mme Le Goff',
+     say:'Vous saisissez trois lignes. Soldé calcule la TVA, numérote la facture à la suite de la précédente et ajoute les mentions obligatoires.'},
+    {pill:'Envoyée', btn:'Voir la suite',
+     say:'Mardi 30 septembre, 18 h 12 : la facture part par e-mail, en PDF, à votre nom. Elle est désormais verrouillée.'},
+    {pill:'Ouverte', btn:'Voir la suite',
+     say:'Mercredi 1er octobre, 8 h 47 : Mme Le Goff ouvre la facture. Vous le voyez dans votre liste du matin.'},
+    {pill:'Relancée', btn:'Voir la suite',
+     say:'Vendredi 31 octobre : l’échéance est passée d’un jour. Soldé envoie le rappel courtois que vous avez choisi.'},
+    {pill:'Payée', btn:'Revenir au brouillon',
+     say:'Mercredi 5 novembre : le virement arrive. La facture est soldée, les relances s’arrêtent d’elles-mêmes.'}
+  ];
+  var steps = [].slice.call(document.querySelectorAll('#steps li'));
+  function go(n){
+    if(n>0 && state===0 && !recalc()){ err.focus && inputs[0]; return; }
+    state = n;
+    sheet.dataset.state = n;
+    pill.dataset.s = n; pill.textContent = S[n].pill;
+    say.textContent = S[n].say; adv.textContent = S[n].btn; adv.disabled = false;
+    inputs.forEach(function(el){ el.readOnly = n>0; });
+    steps.forEach(function(li,i){
+      li.className = i<n ? 'done' : (i===n ? 'now' : '');
+      var b = li.querySelector('button');
+      if(i===n) b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current');
+    });
+  }
+  steps.forEach(function(li,i){ li.querySelector('button').addEventListener('click', function(){ go(i); }); });
+  adv.addEventListener('click', function(){ go(state===4 ? 0 : state+1); });
+
+  /* relances : onglets */
+  var L = [
+    {subj:'Facture F-2026-0142 — petit rappel', when:'31 octobre, 9 h 00, au nom d’Atelier Morel', tone:'Ton : courtois',
+     body:'<p>Bonjour Madame Le Goff,</p><p>Sauf erreur de notre part, la facture <span class="nw">F-2026-0142</span> de <strong class="js-ttc nw"></strong>, arrivée à échéance le 30 octobre, n’a pas encore été réglée. Vous la trouverez en pièce jointe.</p><p>Si le virement est déjà parti, merci de ne pas tenir compte de ce message.</p><p class="sig">Bien cordialement,<br>Julien Morel — Atelier Morel</p>'},
+    {subj:'Facture F-2026-0142 — second rappel', when:'7 novembre, 9 h 00, au nom d’Atelier Morel', tone:'Ton : direct',
+     body:'<p>Bonjour Madame Le Goff,</p><p>La facture F-2026-0142 de <strong class="js-ttc nw"></strong> reste impayée depuis le 30 octobre. Pouvez-vous nous indiquer la date de règlement prévue ?</p><p>Nous rappelons que des pénalités de retard et une indemnité de 40 € pour frais de recouvrement peuvent s’appliquer.</p><p class="sig">Cordialement,<br>Julien Morel — Atelier Morel</p>'},
+    {subj:'Pour vous : F-2026-0142 toujours impayée', when:'14 novembre, 9 h 00 — message adressé à vous seul', tone:'Aucun envoi au client',
+     body:'<p>Julien,</p><p>Le Café des Halles n’a pas réglé la facture <span class="nw">F-2026-0142</span> de <strong class="js-ttc nw"></strong> malgré deux rappels. Soldé s’arrête ici.</p><p>Vous pouvez appeler Mme Le Goff, proposer un échéancier ou préparer une mise en demeure : trois modèles sont prêts dans l’application.</p><p class="sig">— Soldé</p>'}
+  ];
+  var tabs = [].slice.call(document.querySelectorAll('.rtab'));
+  function showR(i, focus){
+    tabs.forEach(function(t,k){ t.setAttribute('aria-selected', k===i ? 'true':'false'); t.tabIndex = k===i ? 0 : -1; });
+    $('letter').setAttribute('aria-labelledby', tabs[i].id);
+    $('l-subj').textContent = L[i].subj; $('l-when').textContent = L[i].when; $('l-tone').textContent = L[i].tone;
+    $('l-to').textContent = i===2 ? 'Julien Morel — Atelier Morel' : 'Mme Le Goff — Café des Halles';
+    $('l-body').innerHTML = L[i].body;
+    recalc();
+    if(focus) tabs[i].focus();
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click', function(){ showR(i); });
+    t.addEventListener('keydown', function(e){
+      var k = e.key, n = null;
+      if(k==='ArrowRight'||k==='ArrowDown') n = (i+1)%tabs.length;
+      if(k==='ArrowLeft'||k==='ArrowUp') n = (i-1+tabs.length)%tabs.length;
+      if(k==='Home') n = 0; if(k==='End') n = tabs.length-1;
+      if(n!==null){ e.preventDefault(); showR(n, true); }
+    });
+  });
+
+  /* essai : validation locale, aucun envoi */
+  var form = $('trial-form');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var co = $('f-co'), mail = $('f-mail'), ok = true, first = null;
+    function set(el, msgEl, msg){ el.setAttribute('aria-invalid', msg ? 'true':'false'); msgEl.textContent = msg; if(msg){ ok=false; first = first || el; } }
+    set(co, $('m-co'), co.value.trim().length < 2 ? 'Indiquez le nom de votre entreprise.' : '');
+    set(mail, $('m-mail'), !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail.value.trim()) ? 'Vérifiez l’adresse : il manque le « @ » ou le domaine (exemple : nom@entreprise.fr).' : '');
+    if(!ok){ first.focus(); return; }
+    $('ok-mail').textContent = mail.value.trim();
+    document.getElementById('essai').classList.add('sent');
+    $('trial-ok').focus();
+  });
+
+  recalc();
+})();
+</script>
+</body>
+</html>

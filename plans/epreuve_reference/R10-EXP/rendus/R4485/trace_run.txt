@@ -1,0 +1,35 @@
+RUN — home-solde-01 — DIRECTION — page d'accueil d'un logiciel de facturation PME — identité + usage (premier contact) — captures 1440/1024/390 + états + revue créative — CLOSED (EXPLORATORY)
+Package : Design Governance V1.1.1 (dg/). Owner de la décision : demandeur du brief (non joignable ; hypothèses dans questions.txt).
+
+DECISION-INTENT : rendre crédible, dès la première scène, la promesse « facturer puis être payé sans relancer soi-même ».
+
+CREATIVE BOOT
+PROMISE : la facture part, le paiement revient.
+PROOF-OBJECT : une vraie facture (mentions légales, TVA, numéro), modifiable sur place, dont on suit la vie : brouillon → envoyée (verrouillée) → ouverte → relancée → payée (tampon).
+GESTURE : modifier une ligne puis « Envoyer » ; CTA principal « Commencer l'essai gratuit ».
+ANTI-DIRECTIONS : hero SaaS à dégradé + dashboard flottant + 3 cartes + mur de logos + témoignages ; palette crème ; police de titre par défaut non comparée ; chiffres clients inventés.
+STRUCTURAL-TENSION : FOCUS unique (la facture) ; PROOF-POSITION intégrée (la preuve est la scène).
+STRUCTURAL-SIGNATURE : tout parle par documents : facture (entrée), lettre de relance sur une règle de jours, liste des sommes dues, tarif présenté en pro forma avec tampon.
+CFT-TARGETS : spécificité, présence, résolution.
+ANCHOR-BASIS : contrainte produit réelle (forme et mentions d'une facture française, règle « une facture émise ne se modifie pas → avoir ») ; aucune référence visuelle observée. ANCHOR-LIMIT : pas de calibration externe ; direction non « acceptée ».
+Alternative située écartée : entrée par le tableau de trésorerie (cash à encaisser) ; écartée car risque de dashboard décoratif et le premier geste d'un prospect est de faire une facture ; reprise en section 3.
+Typographie : Schibsted Grotesk 800 comparée à Familjen Grotesk et Newsreader sur le vrai titre (.work/typo.png) ; retenue pour sa robustesse « outil » ; IBM Plex Mono pour références et libellés de document.
+Route d'asset : CODE-NATIVE (tampon = filtre SVG d'encre, trame de carnet en CSS). Aucune image.
+
+OBSERVATIONS (Playwright/Chromium headless, 30-09-2026, captures dans .work/)
+1er rendu : titre cassé en 5 lignes à 1440 (défaut dominant) ; pastille d'état illisible sur bleu ; chiffres tabulaires espaçant virgules et points ; tampons trop érodés et chevauchant du texte ; onglet J+15 débordant ; 1024 : facture comprimée.
+Corrections : grille 11/13 et titre 64 px (3 lignes) ; pastille dans la feuille ; tabulaires retirés, espace insécable visible ; filtre d'encre allégé, tampon placé dans le blanc à gauche des totaux (desktop) et près de la pastille (mobile) ; onglets alignés aux bords ; hero en une colonne sous 1160 px ; facture compactée pour que la frise de vie apparaisse au pli (1440×900).
+Interactions vérifiées par script : recalcul HT/TVA/TTC ; saisie invalide → message + envoi désactivé ; verrouillage après envoi ; onglets au clavier (flèches) ; formulaire : erreurs + focus sur le premier champ, succès annoncé et focus ; aucune erreur console ; aucun débordement horizontal à 320/390/768/1024/1440.
+Contrastes calculés (WCAG 2.2 AA) : textes ≥ 5,75:1 ; soulignement des champs 3,49:1 ; focus bleu sur clair, ambre sur bleu (5,21:1).
+B1b (auto-comparaison) : décision « champ bleu encre » retirée (fond clair) → .work/b1b_before.png / b1b_after.png ; sans le champ, la facture se dissout dans une mise en page SaaS claire générique ; décision CONFIRMÉE.
+
+REVUE CRÉATIVE (creative_close)
+presence : champ bleu encre plein cadre, feuille blanche comme foyer unique.
+signature : la facture réelle et sa vie (verrouillage → avoir, tampon « Payée » à l'encre), prolongée par la pro forma du tarif.
+craft_detail : mentions obligatoires ajoutées, verrouillage après envoi, relance J+15 adressée au seul artisan.
+dominant_defect : en 1440 la colonne de texte finit bien avant la facture et sa frise (vide bas-gauche) ; en mobile la facture n'entre qu'au bas du premier écran.
+next_polish_action : tester une frise de vie remontée sous le titre en mobile.
+
+LIMITES : NOT-VERIFIED — lecteur d'écran, zoom 200 %, test utilisateur, performance réseau des polices ; regard indépendant absent (auto-comparaison) ; nom, tarifs, fonctions et destinations des boutons hypothétiques (questions.txt) ; aucun claim réglementaire (facturation électronique) publié.
+DECISION-CHANGE : CONFIRMED — champ bleu et facture-foyer confirmés par la paire B1b ; composition initiale du titre abandonnée (capture 1440).
+NEXT-ACTION : faire valider nom, tarif et fonctions par l'owner ; regard externe sur les captures.

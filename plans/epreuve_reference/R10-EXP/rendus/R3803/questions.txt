@@ -1,0 +1,10 @@
+Questions (personne n'a répondu ; le rendu repose sur les hypothèses indiquées)
+
+1. Le produit a-t-il un nom, une marque, un tarif et des captures réelles ?
+   Hypothèse : nom « Soldé » inventé, tarif unique de 19 € HT/mois, fonctions (relances, rapprochement bancaire, accès comptable, Factur-X) inventées. Tout est signalé comme exemple sur la page.
+2. Quel marché : la France (euro, TVA, mentions légales françaises, réforme de la facture électronique) ou un autre pays, par exemple la zone OHADA avec le franc CFA ?
+   Hypothèse : la France. À changer si ce n'est pas le cas : devise, TVA, mentions, encadré sur la réforme.
+3. Où mène le bouton « Créer mon compte » ? Existe-t-il une vraie page d'inscription ?
+   Hypothèse : non. Le bouton affiche un message qui dit que l'inscription n'est pas branchée.
+
+À vérifier avant publication : le calendrier de la réforme (réception obligatoire le 1er septembre 2026, émission par les PME le 1er septembre 2027) et le libellé exact des mentions obligatoires.

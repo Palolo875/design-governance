@@ -1,0 +1,20 @@
+Questions ouvertes (personne n'a répondu ; le rendu avance sur les hypothèses indiquées entre crochets)
+
+1. Nom et identité : quel est le nom de la boulangerie ? Existe-t-il un logo, des couleurs, une enseigne ?
+   [Hypothèse : nom provisoire « Mboa », identité créée pour la maquette.]
+2. Adresse : dans quel quartier de Douala (Akwa, Bonapriso, Bonamoussadi, Makepe…) et quel repère donne-t-on aux clients (« face à… », « carrefour… ») ?
+   [Hypothèse : bloc « Nous trouver » organisé par repère, contenu à renseigner.]
+3. Horaires d'ouverture et heures réelles des fournées (matin, soir) ?
+   [Hypothèse : 5 h 30 – 20 h 30, fournées d'exemple à 5 h 30, 6 h 30, 10 h, 12 h, 16 h 30.]
+4. Produits et prix réels (pains, viennoiseries, salé, pain chargé, douceurs, boissons) ?
+   [Hypothèse : carte et prix d'exemple en FCFA, marqués comme tels.]
+5. Gâteaux sur commande : délai minimal, parfums, tailles, fourchettes de prix, livraison ou retrait, acompte ?
+   [Hypothèse : délai de 48 h, estimation indicative, retrait en boutique ou livraison à préciser.]
+6. Canal de commande : numéro WhatsApp de la boutique ? Téléphone ?
+   [Hypothèse : le message de commande est généré et copiable ; l'envoi direct attend le numéro.]
+7. Moyens de paiement acceptés (espèces, Orange Money, MTN MoMo, carte) ?
+   [Hypothèse : non affirmé ; liste « à confirmer ».]
+8. Photos réelles des produits et de la boutique disponibles ?
+   [Hypothèse : aucune ; rendu sans photo, matière dessinée en code. Des photos réelles changeraient la scène des sections Vitrine et Gâteaux.]
+9. Langues du site : français seul, ou aussi anglais ?
+   [Hypothèse : français.]

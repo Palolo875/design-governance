@@ -1,0 +1,97 @@
+{
+  "pages": {
+    "L": {
+      "qualite": 7,
+      "adequation": 7,
+      "verite": [
+        "Tarif « 19 € HT par mois » (22,80 € TTC) donné comme montant, alors que le montant n'est pas communiqué ; atténué par « Tarif indicatif, à confirmer avant lancement » (défaut partiel)",
+        "Nom « Soldé » présenté comme nom de travail dans le pied de page seulement (signalé, donc pas un défaut)",
+        "Fonctions annexes non demandées : export pour le comptable au format tableur, relance limitée à deux rappels (présenté comme comportement réel du produit)"
+      ],
+      "reprises": {
+        "bloquant": [
+          "Le prix 19 € est mis en avant dans le hero et la facture pro forma ; il faudrait un emplacement neutre « tarif communiqué au lancement » ou un marquage plus visible",
+          "La fonction devis vers facture en un clic n'apparaît que dans une ligne du tableau tarifaire : elle doit avoir sa place dans le parcours"
+        ],
+        "notable": [
+          "Hero très chargé (facture interactive, frise en cinq étapes, encadré, deux CTA) : le bleu saturé plus la trame de lignes fatiguent, l'invite principale se dilue",
+          "Textes de l'exemple très petits et gris clair sur bureau : lisibilité limitée pour des gérants",
+          "Le formulaire « Essayez sur vos vraies factures » est une démo qui ne crée rien : frustrant pour un public qui veut démarrer",
+          "Section « Suivi des paiements » un peu sèche, pas de vue mobile claire du tableau"
+        ],
+        "finition": [
+          "Hiérarchie des tailles de légendes mono un peu trop discrète",
+          "Pied de page très pauvre, aucun lien légal",
+          "Le logo est un simple mot en minuscules, sans signe distinctif"
+        ]
+      },
+      "raison": "Page singulière et honnête, avec une vraie idée (la facture qui se manipule, l'e-mail de relance montré), mais un hero dense, un prix indicatif inventé et la fonction devis-facture trop discrète."
+    },
+    "R": {
+      "qualite": 8,
+      "adequation": 4,
+      "verite": [
+        "Trois formules tarifaires inventées : Solo 12 €, PME 29 €, Équipe 59 € HT par mois, avec limites (20 factures par mois, 3 ou 10 utilisateurs) ; contredit le brief (un seul abonnement, montant non communiqué)",
+        "Badge « Le plus choisi » sur la formule PME : fausse preuve sociale",
+        "Fonctions non fournies présentées comme réelles : signature électronique de devis, rapprochement bancaire automatique, lien de paiement par carte, API et connexion ERP, droits par rôle, multi-établissements, devises (euros, dollars, francs CFA, francs suisses), conservation 10 ans, accès expert-comptable dédié",
+        "Promesses de conformité : facture électronique Factur-X, transmission par plateforme agréée, e-reporting « couvert »",
+        "Aucun bandeau ou mention indiquant que nom, tarifs et exemples sont fictifs, hormis « Données d'exemple » sur les maquettes",
+        "« Facturez en deux minutes » : promesse de temps chiffrée, contraire au ton demandé"
+      ],
+      "reprises": {
+        "bloquant": [
+          "Remplacer la grille à trois formules et les prix par un abonnement unique au montant non communiqué",
+          "Retirer « Le plus choisi » et toute fonction non listée dans le brief (signature en ligne, banque, API, devises, archives 10 ans)",
+          "Retirer « en deux minutes » (promesse chiffrée) et signaler le nom comme provisoire"
+        ],
+        "notable": [
+          "Le bloc réforme de la facture électronique prend la place d'un argument central alors que ce n'est pas dans le brief ; il ajoute du jargon et de l'anxiété",
+          "La page s'allonge avec des sections (détails légaux, six blocs) qui diluent les trois fonctions demandées",
+          "Écarts de ton : le sobre et rassurant vire au commercial (« Votre prochaine facture peut partir ce midi »)"
+        ],
+        "finition": [
+          "Texte mono très petit dans les vignettes de la suite",
+          "Faux tampon « PAYÉE » qui chevauche le total de la facture sur mobile",
+          "Les trois colonnes tarifaires bureau sont trop denses"
+        ]
+      },
+      "raison": "La plus aboutie visuellement (vert sobre, système cohérent, blocs soignés), mais elle invente une grille de trois prix, de nombreuses fonctions et une fausse preuve sociale sans aucun signalement, ce qui la rend inutilisable pour ce client."
+    },
+    "W": {
+      "qualite": 8,
+      "adequation": 7,
+      "verite": [
+        "Tarif « 19 € HT par mois » et « utilisateur supplémentaire 5 € par mois » donnés comme montants ; signalés comme fictifs par le bandeau de tête « Page d'exemple » et le pied de page (défaut atténué)",
+        "Fonctions non listées dans le brief : rapprochement avec le compte bancaire, accès gratuit pour le comptable, avoirs illimités, archivage 10 ans, fichier Factur-X (présentés comme réels)",
+        "Encadré sur la réforme de la facturation électronique au 1er septembre 2027, présenté comme information sourcée « tel qu'annoncé au 30/09/2026 » (contenu factuel hors brief)"
+      ],
+      "reprises": {
+        "bloquant": [
+          "Le montant 19 € et le supplément à 5 € restent des prix inventés, à remplacer par un emplacement « tarif communiqué au lancement » avant présentation hors maquette",
+          "Le bouton secondaire « 19 € HT par mois » du hero s'apparente à un CTA alors qu'il ne mène à rien d'utile : à transformer en simple mention"
+        ],
+        "notable": [
+          "La fonction « devis en facture en un clic » n'est pas montrée de façon explicite ; seule « devis illimités » apparaît dans la liste tarifaire",
+          "Page longue et dense (calculateur, frise, tableau, reform, tarif) ; le calculateur double presque le hero",
+          "Les deux CTA de fin (« Créer mon compte » et « Faire une facture d'abord ») sans formulaire visible",
+          "Bloc réforme hors brief, ajoutant du jargon"
+        ],
+        "finition": [
+          "Texte très petit dans les tableaux et légendes sur bureau",
+          "Motif de copies carbone rose et jaune répété deux fois, un peu décoratif",
+          "Bandeau d'exemple qui reste en tête de page finale"
+        ]
+      },
+      "raison": "Page dense et bien construite qui montre le produit (facture avec tampon, frise cliquable, tableau de suivi, calculateur, tarif en forme de facture) et s'annonce franchement comme exemple, avec des prix fictifs signalés ; le meilleur équilibre entre qualité et fidélité au brief."
+    }
+  },
+  "paires": {
+    "P1": {"choix": "gauche", "raison": "W montre davantage le produit en situation (calculateur, frise, tableau de suivi) et signale franchement son caractère d'exemple, là où L est plus étroite et son hero est surchargé."},
+    "P2": {"choix": "droite", "raison": "R est très propre mais invente trois formules de prix, des fonctions et un « le plus choisi » ; W est aussi soignée et reste dans le brief."},
+    "P3": {"choix": "droite", "raison": "R a un design plus lisse, mais ses faits inventés non signalés (grille tarifaire, fonctions, preuve sociale) contredisent le brief ; L reste plus honnête et plus personnelle."},
+    "P4": {"choix": "gauche", "raison": "W garde un niveau de finition comparable à R tout en respectant les contraintes (tarif unique, pas de preuve inventée)."},
+    "P5": {"choix": "gauche", "raison": "L est fidèle au brief avec une vraie idée de page ; R tombe dans l'invention massive de tarifs et de fonctions."},
+    "P6": {"choix": "droite", "raison": "W est plus complète, plus lisible et mieux équilibrée que L, dont le hero bleu est chargé et dont la fonction devis-facture est peu visible."}
+  },
+  "classement": ["W", "L", "R"]
+}

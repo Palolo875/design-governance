@@ -1,0 +1,13 @@
+
+- **Produit :** « Carnet », logiciel de facturation en ligne pour PME et indépendants. Lancé en 2023, petite équipe.
+- **Cible :** gérants de TPE et PME (1 à 20 salariés), sans comptable à plein temps ; usage sur ordinateur au bureau, consultation sur mobile.
+- **Trois fonctions :**
+  - créer un devis et le transformer en facture en un clic ;
+  - relancer automatiquement les factures impayées ;
+  - voir en un tableau ce qui est encaissé et ce qui reste à encaisser.
+- **Objectif de la page :** faire démarrer un essai gratuit de 30 jours, sans carte bancaire.
+- **Tarif :** un abonnement mensuel après l'essai, **montant non communiqué**.
+- **Preuve disponible :** aucune. Pas de clients nommés, pas de logos, pas de chiffres d'usage, pas de témoignages. **N'en invente pas.**
+- **Ton :** sobre, rassurant, concret ; pas de jargon comptable inutile ; pas de promesse chiffrée.
+- **Langue :** français.
+- **Assets :** aucun. Ni logo ni capture fournis.
