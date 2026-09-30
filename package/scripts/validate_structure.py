@@ -206,6 +206,8 @@ FIDELITY: list[tuple[str, str, str]] = [
     ("prise de brief : humain présent (G2)", r"\*\*Prise de brief\.\*\*", "Humain présent"),
     ("sortie des routes en trace légère (G4)", r"\*\*Sortie\.\*\* Paquet `(?:LITE|ITER|STANDARD|SYSTÈME)`", "Trace légère : la proposition"),
     ("réponse visible : alternative écartée (F2)", r"Pourquoi : la thèse", "l’alternative écartée"),
+    # R11c (V12R_34) : une route RUN-* ne prescrit DECIDED puis CLOSED qu'en trace complète (TRA-01)
+    ("clôture des routes en trace complète (G4b)", r"\*\*Clôture\.\*\*[^.]{0,40}`DECIDED`", "En trace complète"),
     # R7-2 (V12R_24)
     ("ancre et FAIL-ASSUMED (R7-2)", r"sans (?:l’)?ancre[^.]{0,200}`FAIL-ASSUMED`|ancre (?:absente|manquante)[^.]{0,200}`FAIL-ASSUMED`|"
      r"`FAIL-ASSUMED`[^.]{0,120}ancre (?:absente|manquante)", "échec connu"),

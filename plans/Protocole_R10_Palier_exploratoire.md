@@ -152,7 +152,7 @@ Un seul problème évident suffit pour corriger d'abord. Pour P-4 et P-6, le dia
 
 ## 8. Déroulé et arrêt
 
-1. Décisions de l'owner (§9). Raccord R11c appliqué (`V12R_33` §5). Contrôles : B01 218/218, et `package/` identique à la candidate après R11c.
+1. Décisions de l'owner (§9). Raccord R11c appliqué (`V12R_34`, fait). Contrôles : B01 218/218, et `package/` identique à la candidate après R11c.
 2. Production des 6 cas (ordre aléatoire), puis contrôles T.
 3. Captures, planches et mesures mécaniques (E, D, T, H mécanique).
 4. Jugement (J2a et J2b, J1, et D3 s'il y en a), puis révélation de la clé.
