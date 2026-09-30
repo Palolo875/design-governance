@@ -304,7 +304,7 @@ Ces axes servent à produire une **alternative située**, jamais un menu de styl
 > **Alternative située :** position différente parce qu’elle répond à une contrainte, un public, un JTBD ou une opportunité distincte.
 
 <!-- noyau:début BOUCLE-AXE -->
-Pour produire du beau varié sans produire du bruit, faire varier **un axe situé à la fois** : public, JTBD, promesse, geste, structure, densité, matière ou ton. Pour chaque alternative, préciser dans la trace existante :
+Pour produire du beau varié sans produire du bruit, faire varier **un axe situé à la fois** : public, JTBD, promesse, geste, structure, densité, matière ou ton. Pour chaque alternative, préciser en trace complète (en trace légère, la première proposition nomme l’alternative écartée) :
 
 - la décision qu’elle peut changer ;
 - le public, le contexte, le risque ou le JTBD qui la justifie ;
