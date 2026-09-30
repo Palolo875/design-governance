@@ -31,7 +31,7 @@ Chaque raccord aligne un passage sur une règle déjà décidée (`ANC-01`, `TRA
 
 - **Gardes :** 16 erreurs avant, 0 après.
 - **Mutations :** 14/14 rouges.
-- **Suivi complet** (sur copie, puis sur le package) : voir §4.
+- **Suivi complet** (sur copie, puis sur le package) : vert (§4).
 
 ## 3. Écart déclaré et rectification
 
@@ -50,7 +50,11 @@ Chaque raccord aligne un passage sur une règle déjà décidée (`ANC-01`, `TRA
 
 ## 4. Contrôles finaux
 
-Voir le bloc ajouté après exécution.
+Sur le package appliqué :
+- suivi **VERT** : 389 cas, 363 maintenus, 26 migrés, aucune migration nouvelle ; `validate_all` vert ;
+- 13.01 : texte 6/6, non-régression 5/5 ;
+- 13.02 : 38/38 ;
+- B01 : 218/218.
 
 ## 5. Suites de l'audit : décisions de l'owner
 
