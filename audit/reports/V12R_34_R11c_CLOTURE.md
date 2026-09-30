@@ -23,7 +23,7 @@ Aucune modification du noyau compilé (`build_core --check` conforme).
 - **Garde :** rouge avant (4 routes), verte après.
 - **Mutations :** 5/5 rouges (inverse de chaque entrée, et retrait de la condition dans `RUN-DIRECTION`).
 - **Suivi complet :** VERT (389 cas, 363 maintenus, 26 migrés, aucune migration nouvelle ; `validate_all` vert).
-- **13.01 et 13.02 :** voir §5.
+- **13.01 :** texte 6/6, non-régression 5/5. **13.02 :** 38/38.
 - **B01 :** 218/218.
 - **Mesures :**
   - chemin prescrit 13 105 mots (inchangé) ;
@@ -36,7 +36,7 @@ Aucune modification du noyau compilé (`build_core --check` conforme).
 
 ## 5. Porte P2
 
-- **Contrôles finaux :** 13.01 et 13.02 sur le package appliqué, résultats consignés ci-dessous.
+- **Contrôles finaux sur le package appliqué :** suivi vert, 13.01 6/6 et 5/5, 13.02 38/38, B01 218/218.
 - **Inventaire :** PAR-G4b est fermé. Aucun bloquant P2 ne reste ouvert.
 - **Conclusion :** l'axe « cohérence opérationnelle » est tenu sur texte, rubriques « Clôture » comprises. **P2 est conclue** (décision de l'owner du 30-09, confirmée après R11c).
 - **Décision distincte, toujours ouverte :** lever la consigne « pas de run » (protocole R10, §9).
