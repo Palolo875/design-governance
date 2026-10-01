@@ -8,8 +8,9 @@ Contrôles :
   1. HARNAIS : chaque cas de la table de correspondance (audit/data/V12R/V12R_Correspondance_harnais.csv)
      - statut MAINTENU ou MAINTENU-JUSQU-A-REECRITURE : doit être vert ;
      - statut OBSOLETE : peut être rouge, mais sa garde de remplacement doit exister et être verte ;
-     - un cas absent de la table, ou de la table absent du run, est une erreur.
-  2. GARDES DE REMPLACEMENT : « structure:ID » (validate_structure.py) ou « lcf:LCF-xx » (validate_reading_map.py).
+     - un cas absent de la table, ou de la table absent du run (même obsolète), est une erreur (C14, `V12R_41`).
+  2. GARDES DE REMPLACEMENT : « structure:ID » (validate_structure.py) ou « lcf:LCF-xx » (validate_reading_map.py) ;
+     verte seulement si elle est établie : garde connue du validateur, validateur allé au bout, garde non citée.
   3. CLIQUETS (M3) : chemin prescrit LETTRE (mots), négations totales, occurrences de doublons et nombre de
      listes de chargement distinctes ne dépassent pas la référence B05 (audit/data/V12R/V12R_Mesures_B05.json).
   4. VALIDATEURS du package : validate_all.py (sur copie).
@@ -18,6 +19,7 @@ from __future__ import annotations
 
 import csv
 import json
+import re
 import shutil
 import subprocess
 import sys
@@ -41,31 +43,50 @@ def run(cmd: list[str], cwd: Path) -> tuple[int, str]:
     return p.returncode, p.stdout + p.stderr
 
 
-def replacement_ok(root: Path, guard: str, cache: dict) -> bool:
+# Rectification déclarée (audit progressif, C14, `V12R_41`) : une garde de remplacement n'est verte que si elle est
+# établie. Le validateur doit être connu ; la garde doit figurer dans son source ; le validateur doit être allé au bout :
+# bannière PASSED, ou bannière FAILED de contrôle complet suivie de sa liste « - … ». Enfin la garde ne doit être citée
+# par aucune ligne d'erreur. Un arrêt anticipé (« FAILED — message »), une trace Python ou une sortie inconnue n'établissent rien.
+VALIDATORS = {
+    "structure": ("validate_structure.py", "STRUCTURE VALIDATION PASSED", "STRUCTURE VALIDATION FAILED — gardes de propriété"),
+    "lcf": ("validate_reading_map.py", "READING MAP VALIDATION PASSED", "READING MAP VALIDATION FAILED"),
+}
+
+
+def replacement_ok(root: Path, guard: str, cache: dict) -> tuple[bool, str]:
     kind, _, gid = guard.partition(":")
-    script = {"structure": "validate_structure.py", "lcf": "validate_reading_map.py"}.get(kind)
-    if not script or not (root / "scripts" / script).is_file():
-        return False
+    if kind not in VALIDATORS or not gid:
+        return False, f"type de garde inconnu « {guard} »"
+    script, passed, failed = VALIDATORS[kind]
+    path = root / "scripts" / script
+    if not path.is_file():
+        return False, f"validateur absent : {script}"
+    if not re.search(rf"(?<![\w-]){re.escape(gid)}(?![\w-])", path.read_text(encoding="utf-8")):
+        return False, f"garde {gid} inconnue de {script}"
     if script not in cache:
-        cache[script] = run([sys.executable, "-B", str(root / "scripts" / script)], root)
+        cache[script] = run([sys.executable, "-B", str(path)], root)
     code, out = cache[script]
-    return code == 0 or gid not in out
+    lines = [line for line in out.strip().splitlines() if line.strip()]
+    if code == 0 and lines and lines[-1].startswith(passed):
+        return True, ""
+    if code != 0 and lines and lines[0] == failed and all(line.startswith("- ") for line in lines[1:]):
+        cited = [line for line in lines[1:] if re.search(rf"(?<![\w-]){re.escape(gid)}(?![\w-])", line)]
+        return (not cited), (cited[0][:120] if cited else "")
+    return False, f"garde {gid} non établie : {script} interrompu ou sortie inconnue (code {code})"
 
 
-def main() -> int:
-    root = Path(sys.argv[1]).resolve()
-    out_path = Path(sys.argv[sys.argv.index("--out") + 1]) if "--out" in sys.argv else None
+def evaluate(rows: list[dict], results: dict, guard_ok) -> tuple[list[str], dict]:
+    """Confronte la table aux résultats des harnais. guard_ok(garde) -> (vert, motif)."""
     errors: list[str] = []
-
-    # 1-2. Harnais et gardes de remplacement
-    results = carto.run_suite(root)
-    seen = set()
     counts = {"verts": 0, "obsoletes_rouges": 0, "obsoletes_verts": 0}
-    cache: dict = {}
-    for row in table():
+    seen = set()
+    for row in rows:
         key = (row["harnais"], row["cas"])
         seen.add(key)
         st = results.get(row["harnais"], {}).get(row["cas"], "ABSENT")
+        if st == "ABSENT":  # C14 : un cas de la table doit être exécuté, quel que soit son statut
+            errors.append(f"{key[0]} {key[1]} ({row['statut']}) : cas de la table absent du run")
+            continue
         if row["statut"].startswith("MAINTENU"):
             if st != "OK":
                 errors.append(f"{key[0]} {key[1]} ({row['statut']}) : {st}")
@@ -74,8 +95,11 @@ def main() -> int:
         elif row["statut"] == "OBSOLETE":
             if not row["garde_remplacement"] or not row["justification"]:
                 errors.append(f"{key[0]} {key[1]} obsolète sans garde ou sans justification")
-            elif not replacement_ok(root, row["garde_remplacement"], cache):
-                errors.append(f"{key[0]} {key[1]} : garde de remplacement {row['garde_remplacement']} non verte")
+            else:
+                ok, why = guard_ok(row["garde_remplacement"])
+                if not ok:
+                    errors.append(f"{key[0]} {key[1]} : garde de remplacement {row['garde_remplacement']} non verte"
+                                  + (f" ({why})" if why else ""))
             counts["obsoletes_rouges" if st != "OK" else "obsoletes_verts"] += 1
         else:
             errors.append(f"{key[0]} {key[1]} : statut inconnu {row['statut']}")
@@ -83,6 +107,17 @@ def main() -> int:
         for cid in cases:
             if (h, cid) not in seen:
                 errors.append(f"cas hors table : {h} {cid}")
+    return errors, counts
+
+
+def main() -> int:
+    root = Path(sys.argv[1]).resolve()
+    out_path = Path(sys.argv[sys.argv.index("--out") + 1]) if "--out" in sys.argv else None
+
+    # 1-2. Harnais et gardes de remplacement
+    results = carto.run_suite(root)
+    cache: dict = {}
+    errors, counts = evaluate(table(), results, lambda guard: replacement_ok(root, guard, cache))
 
     # 3. Cliquets
     ref = json.loads((DATA / "V12R_Mesures_B05.json").read_text(encoding="utf-8"))

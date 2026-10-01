@@ -56,7 +56,7 @@ Tenue technique, pour les 6 rendus (certain) :
 - aucune erreur JavaScript ;
 - aucun débordement à 390 px ;
 - aucune image vide ;
-- page de 34 à 49 ko, polices comprises dans la cible < 1 Mo ;
+- page de 34 à 49 ko, polices comprises dans la cible < 1 Mo ; *(erratum AP2, C35 : ce sont les octets du HTML seul ; voir §Erratum)*
 - aucun langage du système visible sur la page.
 
 | Critère | État |
@@ -166,7 +166,7 @@ Reprises bloquantes, cumulées sur les deux juges :
 - **B-SAAS :** les trois rendus mettent une facture au centre, avec un tampon « Payée ».
   - Même police de titre dans les trois : une grotesque identique.
   - C3 et C4 portent le même nom provisoire (« Soldé »).
-- **Fonds :** tous blanc cassé. Fin de la convergence Archivo de P1 (probable).
+- **Fonds :** tous blanc cassé. Fin de la convergence Archivo de P1 (probable). *(erratum AP2, C36 : inexact pour deux rendus ; voir §Erratum)*
 
 **Lecture :**
 - **Probable :** la convergence vient du modèle producteur, pas du système : elle est la même sans système. **Le système ne la rompt pas.**
@@ -198,3 +198,22 @@ Reprises bloquantes, cumulées sur les deux juges :
 | **D-25** | Une valeur inconnue est retirée au lieu d'être marquée. Sur B-DLA, C3 et C4 perdent le bouton WhatsApp et l'adresse, qui est l'action principale | Probable ; correction ciblée à décider (lieu : bloc CONTENU du noyau, contenu d'exemple marqué de D-20 et `CNT-01` dans DIRECTION) |
 | **D-26** | Des fonctions inventées pour un produit fictif ne sont pas couvertes par le marquage (C3 et C4 B-SAAS) | Probable ; limite du marquage |
 | Convergence | Même concept, même police de titre et même nom dans toutes les conditions. Signal D-21 et D-22 non levé | Probable ; question de convergence à réexaminer, sans présumer la cause |
+
+## Erratum (01-10-2026, unité AP2 de l'audit progressif externe)
+
+Corrections de ce que les preuves permettent d'affirmer. Elles ne démontrent pas l'usage effectif des blocs compilés et n'annulent pas le signal de convergence.
+
+- **C35, poids de page.**
+  - Mesuré : les octets du fichier HTML, de 33 736 à 49 217.
+  - Non mesuré : les polices. Chaque rendu en charge depuis l'extérieur (deux références par rendu).
+  - « Polices comprises » est donc faux. Le poids réel de la page chargée est inconnu, et aucun dépassement de la cible n'est établi.
+- **C36, fonds.**
+  - Fond de `body` :
+    - blanc cassé dans quatre rendus : C1 B-DLA `#FFFEFA`, C3 B-DLA `#F4F2EC`, C4 B-DLA `#FBF3E6`, C3 B-SAAS `#F3F4F1` ;
+    - **blanc pur dans deux rendus** : C4 B-SAAS (`#ffffff` déclaré) et C1 B-SAAS (aucun fond déclaré, donc blanc par défaut du navigateur).
+  - Les masses colorées, les champs et les premiers écrans n'ont pas été mesurés.
+  - La convergence d'objet reste établie (fournées et heure de Douala ; facture et tampon « Payée »), ainsi que la police de titre commune sur B-SAAS.
+  - La convergence de fond était surestimée.
+  - Le modèle producteur reste une cause possible, sans exclusion des autres.
+- **D-26, honnêteté.** « 0 fait inventé » s'entend **au sens de P-2** (prix, nom et montants marqués). Des fonctions affirmées d'un produit fictif restent hors du marquage, en C3 comme en C4 B-SAAS (§3.4, limites). Tout résumé de ce palier porte cette réserve.
+

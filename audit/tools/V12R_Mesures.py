@@ -285,11 +285,11 @@ def main() -> int:
         print(f"  ×{d['occurrences']:<2d} {','.join(d['fichiers']):45s} « {d['extrait'][:95]} »")
     print("== 5. LISTES DE CHARGEMENT « première lecture » d'un run DIRECTION")
     sets = [tuple(v) for v in ll.values() if v is not None]
-    union = sorted({r for v in sets for r in v})
+    union = sorted({route for v in sets for route in v})
     print(f"  listes : {len(ll)} ; distinctes (renvois exclus) : {distinct_lists(ll)} ; introuvables : {[k for k, v in ll.items() if v is None]}")
     print(f"  {'route':28s}" + "".join(f"{k[:12]:>13s}" for k in ll))
-    for r in union:
-        print(f"  {r:28s}" + "".join(f"{('x' if v and r in v else '·'):>13s}" for v in ll.values()))
+    for route in union:  # audit progressif, C22 : variable distincte de r (atteignabilité exportée en JSON)
+        print(f"  {route:28s}" + "".join(f"{('x' if v and route in v else '·'):>13s}" for v in ll.values()))
     if jpath:
         for v in b.values():
             v.pop("texte")

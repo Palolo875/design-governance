@@ -29,7 +29,7 @@ Cette vue couvre les identifiants D-01 à D-23 et les mineurs transmis. Elle n�
 | D-11 | Entrée dispersée et deux README | **Fermé (R6b-1, `V12R_27`)** : une entrée humaine en quatre questions (README du package, reprise par le README Local généré) ; guide opérateur à un parcours ; README officiel en pointeur ; garde ENT-01 | R6b-1 | ~~Bloquant P2~~ fermé ; facilité réelle à observer (novices, R10) | `V12R_25` ; `V12R_27` |
 | D-24 | README du dépôt : constitution minimale avec l'ancien absolu 2 ; profil agent orienté vers QUICKSTART | **Fermé (R6b-1, `V12R_27`)** : une seule constitution exacte (garde CST-01) ; agent → skill | R6b-1 | ~~Bloquant P2~~ fermé | `V12R_25` ; `V12R_27` |
 | D-25 | Valeur inconnue retirée au lieu d'être marquée : sur B-DLA, C3 et C4 perdent le bouton WhatsApp et l'adresse (action principale) | **Corrigé (`V12R_36`)** : l'action principale reste fonctionnelle avec une valeur d'exemple marquée (`CNT-01`, noyau) ; garde D-25 ; effet non observé (aucun run, décision de l'owner) | D-25 | Fermé sur texte | `V12R_35` §3.5 ; `V12R_36` |
-| D-26 | Fonctions inventées d'un produit fictif hors du marquage (C3 et C4 B-SAAS) | **Signalé (R10 exploratoire, `V12R_35`)** | à décider | Limite du marquage ; effet sur la vérité à suivre en R10 | `V12R_35` §3.4 |
+| D-26 | Fonctions inventées d'un produit fictif hors du marquage (C3 et C4 B-SAAS) | **Signalé (R10 exploratoire, `V12R_35`) ; réserve rétablie dans les résumés (AP2, `V12R_41`)** | à décider : (a) clause dans `CNT-01` (unité AP3) ou (b) limite déclarée | Limite du marquage ; R10 arrêté, effet d'une correction non observable sans nouveau run | `V12R_35` §3.4 et erratum |
 | D-12 | Questions recopiées et tu/vous mêlés | Corrigé documenté | R3 | Préserver la fidélité ; ne pas refaire une correction déjà livrée | V12R_03 |
 | D-13 | Espace initial de QUICKSTART | Corrigé documenté | R3 | Coquille close ; aucune garde nouvelle | V12R_03 |
 | D-14 | Formats de sortie concurrents | Traitement documenté ; raccord à vérifier | R4 ; R6b | Une sortie humaine dérivée de HANDOFF | V12_11 ; V12R_04 |
@@ -93,7 +93,7 @@ Cette vue couvre les identifiants D-01 à D-23 et les mineurs transmis. Elle n�
 **Audit progressif externe (`DG_Audit_progressif_10`, commit `1a4bf2f`, 01-10-2026) : 39 constats C01 à C39, vérifiés sur le dépôt.**
 - **Dispositions (décision de l'owner du 01-10) :** cinq unités AP1 à AP5 ; chaque constat est corrigé, reporté avec justification ou maintenu comme limite.
 - **Fermés par AP1 (`V12R_40`) :** C01 (en-tête YAML de la skill, garde SKL-01), C02 (fichier nu en profil strict), C03 (restauration de `dist` et des deux archives) ; sonde 60/60, mutations 5/5.
-- **AP2 :** errata C34 à C36 et réserve D-26 (C16) ; C14 (suivi) et C22 (export de mesure), par rectification déclarée.
+- **AP2 fait (`V12R_41`) :** errata C34 (V12R_37), C35 et C36 (V12R_35), réserve D-26 rétablie dans les résumés (C16 : disposition normative à décider) ; C14 (suivi) et C22 (export de mesure) rectifiés et déclarés ; sonde 10/10, rouge avant sur quatre scénarios.
 - **AP3 :** C08 (déclencheur UI/UX avant fabrication), C05, C06, C07 (contexte B1b rétabli, sans extension), C09, C10.
 - **AP4 :** C11 à C13, C19 à C21 ; puis façades dérivées : C04, C17, C23, C24, C33, C39, avec AUD-06, AUD-08, AUD-13.
 - **AP5 :** C18 et consolidation documentaire.

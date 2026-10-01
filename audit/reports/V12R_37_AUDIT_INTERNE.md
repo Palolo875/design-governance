@@ -25,7 +25,7 @@
 | **Hiérarchie** | **Tenue dans les principes, affaiblie dans le placement.** | Propriétaires clairs et répétés. Mais des obligations placées où l'agent ne lit pas (AUD-02), et un reste contradictoire sur l'ancre (AUD-03) |
 | **Organisation / architecture** | **Partiellement tenue.** | « Une chose, un lieu » vaut pour les concepts gardés. Il est rompu pour le chargement : 4 prescriptions concurrentes de `CHARGE` (AUD-01). Les façades opérateur n'ont pas suivi la refonte (AUD-06) |
 | **Usage / lecture** | **Chemin agent court et suivi.** Chemin opérateur en retard. | Agent : skill + environ 10 routes, soit 466 à 665 lignes de règles (R10). Humain : entrée « Commencer » claire. Opérateur : QUICKSTART sans trace légère, sans checkpoint, sans noyau |
-| **Exploitation** | **Le noyau et `CHARGE` sont exploités** (certain) ; **SAVOIR et BIBLIOTHEQUE ne le sont presque pas** (certain en R10). Les gestes restent **inobservables** (AUD-05). | Les agents C3 de R10 ont lu exactement la ligne DIRECTION de `CHARGE`, et aucune route SAVOIR ni BIBLIOTHEQUE. Les agents C4 (V1.1.1) ont lu `SAVOIR/TYPE`, `CFT-00` et `TENSION`, et laissé une trace riche |
+| **Exploitation** | **Le noyau et `CHARGE` sont exploités** (certain) ; **SAVOIR et BIBLIOTHEQUE ne le sont presque pas** (certain en R10). *(erratum AP2, C34 : voir §Erratum)* Les gestes restent **inobservables** (AUD-05). | Les agents C3 de R10 ont lu exactement la ligne DIRECTION de `CHARGE`, et aucune route SAVOIR ni BIBLIOTHEQUE. Les agents C4 (V1.1.1) ont lu `SAVOIR/TYPE`, `CFT-00` et `TENSION`, et laissé une trace riche |
 | **Cohérence** | **Bonne sur les concepts gardés ; restes hors gardes.** | 5 constats de cet audit sont invisibles aux gardes (AUD-16) |
 | **Efficacité** | **Non établie, par principe (auto-comparaison).** | Voir §4 |
 
@@ -63,7 +63,7 @@
 |---|---|---|
 | B-DLA (V1.1.1) | Qualité proche de C1 ; plus honnête | Auto-comparaison |
 | P1 (V1.2 après R4) | C3 bat C1 8/8 ; mêmes juges modèles | Auto-comparaison |
-| R10 exploratoire | C3 ne perd aucune paire tranchée (accord 50 %) ; adéquation 7,0 contre 4,75 pour C1 ; 0 fait inventé non signalé, contre environ 5 à 6 pour C1 ; coût 1,7 à 1,8 × C1 et au plus celui de C4 ; convergence intacte | Auto-comparaison, juges d'une seule famille |
+| R10 exploratoire | C3 ne perd aucune paire tranchée (accord 50 %) ; adéquation 7,0 contre 4,75 pour C1 ; 0 fait inventé non signalé au sens de P-2 (fonctions d'un produit fictif hors marquage, D-26), contre environ 5 à 6 pour C1 ; coût 1,7 à 1,8 × C1 et au plus celui de C4 ; convergence intacte | Auto-comparaison, juges d'une seule famille |
 
 - **Probable :** le système améliore l'honnêteté et l'adéquation au besoin.
 - **Hypothétique :** il améliore la qualité visuelle perçue.
@@ -89,3 +89,18 @@
 4. **Convergence :** AUD-07. C'est une question de fabrication : son effet ne s'établit que par un run, que l'owner a arrêté.
 
 AUD-16 est une limite de méthode, à garder en tête pour les gardes à venir : une garde de propriété ne remplace pas une relecture croisée.
+
+## Erratum (01-10-2026, unité AP2 de l'audit progressif externe)
+
+**C34, exploitation de SAVOIR et BIBLIOTHEQUE.**
+- **Ce qui était faux :** « ne le sont presque pas » confondait deux choses, une route non ouverte et un contenu non disponible.
+- **État du noyau lu par les agents C3 de R10** (commit `64265da`) : il compilait 39 blocs.
+  - 16 venaient de SAVOIR et 4 de BIBLIOTHEQUE ;
+  - les 19 autres venaient de DIRECTION (15) et d'ACTION (4).
+- **Formulation exacte :**
+  - les agents C3 n'ont pas ouvert séparément de route SAVOIR ou BIBLIOTHEQUE (traces de lecture déclarées par les agents, `traces_R10.json`) ;
+  - 20 blocs de ces deux sources étaient disponibles dans le noyau qu'ils lisaient (certain) ;
+  - que leurs gestes aient été appliqués n'est pas attesté.
+- **Conséquence pour A2 (`V12R_39`) :** les planchers couleur et typographique qu'A2 a compilés ne figuraient pas parmi ces 39 blocs. A2 garde son objet, mais sa justification (« obligations SAVOIR hors du chemin ») était surestimée pour le reste de SAVOIR.
+- **Effet d'A2 :** non observé.
+
