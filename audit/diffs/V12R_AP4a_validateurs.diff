@@ -1,0 +1,497 @@
+diff --git a/package/V1/official/CHANGELOG.md b/package/V1/official/CHANGELOG.md
+index 773b8d2..ccfb8f2 100644
+--- a/package/V1/official/CHANGELOG.md
++++ b/package/V1/official/CHANGELOG.md
+@@ -38,6 +38,7 @@
+ - **Architecture du chargement (refonte, A2).** `DIRECTION/CHARGE` est la seule liste de chargement, compilée dans le noyau avec sa colonne « Ajouter seulement si » ; la carte de lecture d’ACTION, les déclencheurs critiques de DIRECTION et `ACTION/ROUTING` en sont des vues ; le plancher couleur et typographique de SAVOIR entre dans le noyau ; la trace légère s’écrit à côté de l’artefact, ou après la réponse visible sous « Trace ».
+ - **Outillage (audit progressif, unité 1).** L’en-tête de la skill est cité et se lit en YAML, texte inchangé (garde SKL-01) ; le profil strict traite un nom de fichier nu à extension connue comme un fichier local, résolu depuis le dossier de la carte (tickets, commits et identifiants opaques inchangés) ; le build restaure ensemble `dist` et les deux archives si la promotion échoue.
+ - **Raccords de procédure et de fabrication (audit progressif, unité 3).** `DIRECTION/CHARGE` appelle `ACTION/UI-UX-REALITY` avant fabrication pour une surface UI/UX nouvelle ou substantiellement modifiée (STANDARD, DIRECTION) ; `CLOSED` décrit la persistance et le résultat se déclare à part (`ACTION/RUN-DIRECTION`) ; un petit `ITER` garde le paquet `ITER` ; la portée de l’atelier d’édition (B1b) entre dans le noyau ; `N/A-JUSTIFIED` ne masque ni une preuve manquante ni une confirmation ; un risque non bloquant peut rester en réserve structurée ; les fonctions d’un produit fictif sont des contenus d’exemple marqués.
++- **Validateurs (audit progressif, unité 4a).** Le lecteur de routes refuse un locator répété, un propriétaire incohérent et un titre porteur dupliqué ; les contrats et le manifeste refusent une clé JSON répétée ; le schéma `RUN_CARD` n’admet que les mots-clés réellement interprétés ; dates et heures doivent être réelles ; une valeur d’un autre type que son enum, un schéma non objet ou un Markdown non UTF-8 reçoivent un diagnostic nommé au lieu d’une erreur brute.
+ - **Efficacité.** `NOT-VERIFIED` : l’épreuve de référence donne V1.1.1 ≈ sans système sur la qualité perçue ; l’effet de ces chantiers reste à éprouver (G4).
+ 
+ ## V1.1.1 — Retour d’audit : alignements de textes et de façades
+diff --git a/package/scripts/build_core.py b/package/scripts/build_core.py
+index 66030c8..48832f4 100644
+--- a/package/scripts/build_core.py
++++ b/package/scripts/build_core.py
+@@ -119,6 +119,12 @@ def render(skill_text: str, core: str) -> str:
+ 
+ 
+ def main() -> int:
++    import read_route  # audit progressif, C20 : encodage nommé avant toute lecture
++
++    bad = read_route.non_utf8(read_route.ROOT)
++    if bad:
++        print(f"NOYAU : erreur — Markdown non UTF-8 : {', '.join(bad)}")
++        return 1
+     try:
+         text = SKILL.read_text(encoding="utf-8")
+         new = render(text, compile_core())
+diff --git a/package/scripts/read_route.py b/package/scripts/read_route.py
+index d3c8280..f2023dd 100644
+--- a/package/scripts/read_route.py
++++ b/package/scripts/read_route.py
+@@ -7,6 +7,7 @@ Résolution en trois étapes (READING_MAP, « Résolution des routes ») :
+ 3. sous-locator X/Y/Z : sous-titre commençant par Z dans le bloc de X/Y.
+ Plusieurs titres : « locator ambigu ». Les titres placés dans un bloc de code sont
+ ignorés. Un bloc servi exclut les sous-blocs qui portent leur propre locator.
++Comme le validateur de carte (C11) : locator de table unique, propriétaire et titre cohérents, porteur unique.
+ """
+ from __future__ import annotations
+ 
+@@ -56,7 +57,13 @@ def parse_route_rows(text: str) -> list[tuple[str, str, list[str]]]:
+ 
+ 
+ def parse_routes(text: str) -> dict[str, tuple[str, list[str]]]:
+-    return {locator: (owner, chain) for locator, owner, chain in parse_route_rows(text)}
++    """Audit progressif, C11 : un locator répété dans la table est refusé (la dernière ligne ne gagne plus)."""
++    routes: dict[str, tuple[str, list[str]]] = {}
++    for locator, owner, chain in parse_route_rows(text):
++        if locator in routes:
++            raise RouteError(f"locator en double dans READING_MAP : {locator}")
++        routes[locator] = (owner, chain)
++    return routes
+ 
+ 
+ def headings(lines: list[str]) -> list[tuple[int, int, str]]:
+@@ -107,11 +114,20 @@ def resolve(locator: str, routes: dict[str, tuple[str, list[str]]] | None = None
+         routes = parse_routes(MAP.read_text(encoding="utf-8"))
+     if locator in routes:  # 1. table
+         owner_name, chain = routes[locator]
++        root_locator = "/".join(locator.split("/")[:2])
++        # C11 : mêmes contrôles que validate_reading_map, pour le lecteur autonome.
++        if owner_name != f"{locator.split('/', 1)[0]}.md":
++            raise RouteError(f"propriétaire incohérent : {locator} → {owner_name}")
++        if not chain or heading_locator(chain[0]) != root_locator:
++            raise RouteError(f"destination ne correspond pas au locator : {locator} → {chain[0] if chain else '(vide)'}")
+         path = OFFICIAL / owner_name
+         if not path.is_file():
+             raise RouteError(f"propriétaire absent : {owner_name}")
+         lines = path.read_text(encoding="utf-8").splitlines()
+         heads = headings(lines)
++        carriers = [idx for idx, _, text in heads if heading_locator(text) == root_locator]
++        if len(carriers) > 1:  # porteur dupliqué ; l'absence de titre est diagnostiquée plus bas (titre introuvable)
++            _unique(carriers, lines, root_locator)
+         low, high, index = 0, len(lines), -1
+         for heading in chain:
+             candidates = [idx for idx, _, text in heads if low <= idx < high and text == heading]
+@@ -140,6 +156,19 @@ def resolve(locator: str, routes: dict[str, tuple[str, list[str]]] | None = None
+     raise RouteError(f"locator inconnu : {locator}")
+ 
+ 
++def non_utf8(root: Path) -> list[str]:
++    """Audit progressif, C20 : fichiers Markdown du package illisibles en UTF-8, nommés avant toute lecture."""
++    bad = []
++    for path in sorted(root.rglob("*.md")):
++        if any(part in {".build", "dist", "__pycache__", ".git", ".dist.previous"} for part in path.relative_to(root).parts):
++            continue
++        try:
++            path.read_bytes().decode("utf-8")
++        except UnicodeDecodeError as exc:
++            bad.append(f"{path.relative_to(root)} (octet {exc.start})")
++    return bad
++
++
+ CONCEPT_MARKER = re.compile(r"^\s*<!-- (?:concept:[A-Z0-9\-]+|noyau:(?:début|fin) [A-Z0-9\-]+) -->\s*$")
+ 
+ 
+@@ -167,6 +196,9 @@ def main(argv: list[str] | None = None) -> int:
+     parser = argparse.ArgumentParser(description="Charge le bloc exact d’un locator READING_MAP.")
+     parser.add_argument("locator", help="locator, par exemple DIRECTION/START ou SAVOIR/CRAFT/CFT-01")
+     args = parser.parse_args(argv)
++    bad = non_utf8(ROOT)
++    if bad:
++        fail(f"Markdown non UTF-8 : {', '.join(bad)}")
+     try:
+         path, lines, index = resolve(args.locator)
+     except RouteError as exc:
+diff --git a/package/scripts/validate_contracts.py b/package/scripts/validate_contracts.py
+index 7a7c467..9737e38 100644
+--- a/package/scripts/validate_contracts.py
++++ b/package/scripts/validate_contracts.py
+@@ -12,6 +12,7 @@ import copy
+ import json
+ import re
+ import sys
++from datetime import date
+ from pathlib import Path
+ from typing import Any
+ 
+@@ -75,9 +76,25 @@ def validate(value: Any, schema: dict[str, Any], path: str = "$") -> None:
+                 validate(value[key], child, f"{path}.{key}")
+ 
+ 
++def reject_duplicate_keys(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
++    """Audit progressif, C12 : une clé répétée dans un même objet est refusée (la dernière valeur ne gagne plus)."""
++    result: dict[str, Any] = {}
++    for key, value in pairs:
++        if key in result:
++            raise ValidationError(f"clé répétée : {key}")
++        result[key] = value
++    return result
++
++
++def loads(text: str) -> Any:
++    return json.loads(text, object_pairs_hook=reject_duplicate_keys)
++
++
+ def load(path: Path) -> Any:
+     try:
+-        return json.loads(path.read_text(encoding="utf-8"))
++        return loads(path.read_text(encoding="utf-8"))
++    except ValidationError as exc:
++        raise ValidationError(f"{exc} dans {path}") from exc
+     except (OSError, json.JSONDecodeError, UnicodeDecodeError) as exc:
+         raise ValidationError(f"lecture impossible {path}: {exc}") from exc
+ 
+@@ -105,6 +122,18 @@ PLACEHOLDERS = {"?", "tbd", "todo", "inconnu", "n/a", "à définir", "a definir"
+ SOURCE_DATE = re.compile(r"\d{4}(-\d{2}(-\d{2})?)?")
+ 
+ 
++def source_date_ok(value: str) -> bool:
++    """Audit progressif, C19 : AAAA, AAAA-MM ou AAAA-MM-JJ, composants réels (ni mois 13, ni 30 février)."""
++    if not SOURCE_DATE.fullmatch(value):
++        return False
++    parts = [int(part) for part in value.split("-")]
++    try:
++        date(parts[0], parts[1] if len(parts) > 1 else 1, parts[2] if len(parts) > 2 else 1)
++    except ValueError:
++        return False
++    return True
++
++
+ def check_schema_witness(name: str, schema: dict[str, Any], example: Any) -> None:
+     """Témoins négatifs au niveau schéma : rejetés par validate seul, pour leur motif."""
+     if not isinstance(example, dict):
+@@ -202,7 +231,7 @@ def check_research_brief(document: dict[str, Any]) -> None:
+         if not filled(entry["source"]):
+             raise ValidationError(f"source placeholder : {entry['source']!r}")
+         date = entry["source_date"].strip()
+-        if date != "unknown" and not SOURCE_DATE.fullmatch(date):
++        if date != "unknown" and not source_date_ok(date):
+             raise ValidationError(f"source_date doit être ISO (AAAA, AAAA-MM ou AAAA-MM-JJ) ou unknown : {date}")
+         if entry["source_status"] == "verified_in_run" and (not filled(entry.get("source_locator")) or date == "unknown"):
+             raise ValidationError("source verified_in_run : exige un locator et une date connue")
+@@ -290,6 +319,9 @@ UNIT_CASES: list[tuple[Any, ...]] = [
+     ("C9-4", RB, [(("entries", 0, "source"), "?")], "source placeholder"),
+     ("C9-4b", RB, [(("entries", 0, "source_status"), "verified_in_run"), (("entries", 0, "source_locator"), DELETE)], "exige un locator"),
+     ("C9-4c", RB, [(("entries", 0, "source_date"), "septembre")], "source_date doit être ISO"),
++    # Audit progressif, C19 : une date de forme ISO mais impossible est refusée.
++    ("C19-1", RB, [(("entries", 0, "source_date"), "2026-02-30")], "source_date doit être ISO"),
++    ("C19-2", RB, [(("entries", 0, "source_date"), "2026-13")], "source_date doit être ISO"),
+     ("E2-1", DF, [(("evidence_plan", 0, "method"), "à déterminer")], "evidence_plan[0].method vide ou placeholder"),
+     ("E2-2", RB, [(("entries",), [])], "au moins une entrée exigée"),
+     ("E2-2b", RB, [(("depth",), "none"), (("entries",), [])], "l'incertitude ne peut pas changer"),
+@@ -345,7 +377,10 @@ def detect_type(document: Any) -> str:
+         raise ValidationError("type indéterminé : document vide ou non objet ; utiliser --type")
+     matches = []
+     for name, (schema_path, _) in CONTRACTS.items():
+-        properties = load(schema_path).get("properties", {})
++        schema = load(schema_path)
++        if not isinstance(schema, dict) or not isinstance(schema.get("properties", {}), dict):
++            raise ValidationError(f"schéma inopérant : {schema_path.name} doit être un objet à properties objet")  # C20
++        properties = schema.get("properties", {})
+         if set(document) <= set(properties):
+             matches.append(name)
+     if len(matches) != 1:
+@@ -396,6 +431,11 @@ def main(argv: list[str] | None = None) -> int:
+             errors.append(f"{name}: {exc}")
+     if not errors:
+         errors.extend(check_unit_cases(schemas, documents))
++    try:  # audit progressif, C12 : témoin de clé répétée
++        loads('{"depth": "IMPOSSIBLE", "depth": "targeted"}')
++        errors.append("témoin C12 : une clé répétée est acceptée")
++    except ValidationError:
++        print("+ clés répétées refusées : 1/1")
+     if errors:
+         print("CONTRACT VALIDATION FAILED")
+         print("\n".join(f"- {error}" for error in errors))
+diff --git a/package/scripts/validate_design_governance.py b/package/scripts/validate_design_governance.py
+index 566d28f..3fe2315 100644
+--- a/package/scripts/validate_design_governance.py
++++ b/package/scripts/validate_design_governance.py
+@@ -16,7 +16,14 @@ IS_LOCAL = (ROOT / "official").is_dir() and not (ROOT / "V1" / "official").is_di
+ MANIFEST = ROOT / "scripts" / "package_manifest.json"
+ try:
+     import json
+-    manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
++    def _unique_keys(pairs: list) -> dict:  # audit progressif, C12 : une clé répétée est refusée, pas écrasée
++        keys = [key for key, _ in pairs]
++        repeated = sorted({key for key in keys if keys.count(key) > 1})
++        if repeated:
++            raise ValueError(f"clé répétée : {', '.join(repeated)}")
++        return dict(pairs)
++
++    manifest = json.loads(MANIFEST.read_text(encoding="utf-8"), object_pairs_hook=_unique_keys)
+     if not isinstance(manifest, dict):
+         raise ValueError("le manifest racine doit être un objet")
+     EXPECTED = manifest["local" if IS_LOCAL else "github"]
+@@ -263,6 +270,13 @@ def check_local_autonomy(errors: list[str]) -> None:
+ 
+ 
+ def main() -> int:
++    sys.path.insert(0, str(Path(__file__).resolve().parent))
++    import read_route  # audit progressif, C20 : encodage nommé avant toute lecture
++
++    bad = read_route.non_utf8(ROOT)
++    if bad:
++        print(f"VALIDATION FAILED — Markdown non UTF-8 : {', '.join(bad)}")
++        return 1
+     errors: list[str] = []
+     check_manifest(errors)
+     check_expected_files(errors)
+diff --git a/package/scripts/validate_reading_map.py b/package/scripts/validate_reading_map.py
+index c4e4263..b5ab246 100644
+--- a/package/scripts/validate_reading_map.py
++++ b/package/scripts/validate_reading_map.py
+@@ -102,6 +102,26 @@ def check_map(text: str, errors: list[str]) -> None:
+             errors.append(f"locator cité non résolu : {locator} ({exc})")
+ 
+ 
++def check_reader_witness(text: str, errors: list[str]) -> None:
++    """Audit progressif, C11 : le lecteur autonome refait les contrôles de la carte (témoins synthétiques)."""
++    rows = [line for line in text.splitlines() if line.startswith("| `DIRECTION/START` |")]
++    if not rows:
++        errors.append("témoin du lecteur impossible : ligne DIRECTION/START absente de la table")
++        return
++    try:
++        rr.parse_routes(text.replace(rows[0], rows[0] + "\n" + rows[0], 1))
++        errors.append("témoin du lecteur : un locator répété dans la table est accepté")
++    except rr.RouteError:
++        pass
++    owner, chain = rr.parse_routes(text)["DIRECTION/START"]
++    try:
++        rr.resolve("DIRECTION/START", {"DIRECTION/START": ("SAVOIR.md", chain)})
++        errors.append("témoin du lecteur : un propriétaire incohérent est accepté")
++    except rr.RouteError as exc:
++        if "propriétaire incohérent" not in str(exc):
++            errors.append(f"témoin du lecteur : propriétaire incohérent non diagnostiqué ({exc})")
++
++
+ # ---------- 2. Façades : liste close des conditions (LCF) ----------
+ HANDOFF_TOKENS = re.compile(r"\b(MODE|DECISION-CHANGE|DECISION|RISK|SCOPE|ARTIFACT|OBSERVATION|METHOD|TRACE-LOCATOR|NOT-VERIFIED|"
+                             r"NEXT-ACTION|OWNER|NEXT-PROOF|EXIT-CONDITION)\b")
+@@ -591,6 +611,9 @@ def check_facades(errors: list[str]) -> None:
+ 
+ 
+ def main() -> int:
++    bad = rr.non_utf8(rr.ROOT)  # audit progressif, C20 : encodage nommé avant toute lecture
++    if bad:
++        fail(f"Markdown non UTF-8 : {', '.join(bad)}")
+     if not MAP.is_file():
+         fail("READING_MAP.md absent")
+     text = MAP.read_text(encoding="utf-8")
+@@ -613,6 +636,7 @@ def main() -> int:
+         fail("frontière de non-autorité ou de non-reclassification absente")
+     errors: list[str] = []
+     check_map(text, errors)
++    check_reader_witness(text, errors)
+     check_facades(errors)
+     if errors:
+         print("READING MAP VALIDATION FAILED")
+diff --git a/package/scripts/validate_run_card.py b/package/scripts/validate_run_card.py
+index 8b6c6d4..61d57e4 100644
+--- a/package/scripts/validate_run_card.py
++++ b/package/scripts/validate_run_card.py
+@@ -125,6 +125,16 @@ def validate_node(value: Any, schema: dict[str, Any], path: str = "") -> None:
+                 validate_node(value[key], child_schema, child_path)
+ 
+ 
++def json_type(value: Any) -> str:
++    if value is None:
++        return "null"
++    if isinstance(value, bool):
++        return "boolean"
++    if isinstance(value, (int, float)):
++        return "number"
++    return {str: "string", list: "array", dict: "object"}.get(type(value), type(value).__name__)
++
++
+ class DuplicateKeyError(ValueError):
+     """Clé JSON répétée dans un même objet (E2 O-9)."""
+ 
+@@ -161,6 +171,12 @@ def check_types(value: Any, schema: dict[str, Any], path: str = "") -> None:
+         expected_types = expected if isinstance(expected, list) else [expected]
+         if not any(type_matches(value, item) for item in expected_types):
+             raise ValidationError(f"{format_path(path)} : type attendu {', '.join(expected_types)}")
++    elif isinstance(schema.get("enum"), list):
++        # Audit progressif, C20 : un champ à enum sans type (ex. closure.issue) reçoit le type de ses valeurs, pour que
++        # les contrôles métier ne lisent jamais une liste ou un objet à sa place.
++        expected_types = sorted({json_type(item) for item in schema["enum"]})
++        if json_type(value) not in expected_types:
++            raise ValidationError(f"{format_path(path)} : type attendu {', '.join(expected_types)} (valeurs de l’enum)")
+     if isinstance(value, dict):
+         for key, child in schema.get("properties", {}).items():
+             if key in value:
+@@ -190,7 +206,7 @@ RESERVATION_FIELDS = ("owner", "scope", "date_version", "impact", "next_proof",
+ # L’exception FAIL-ASSUMED étend la réserve commune ; sa date est celle de la carte (date_version non exigée).
+ EXCEPTION_FIELDS = ("owner", "scope", "impact", "next_proof", "review_date", "exit_condition", "gate_axis", "failure_evidence", "requested_by")
+ SYSTEM_FIELDS = ("impact", "owner", "migration", "rollback", "changelog_ref")
+-ISO_DATE = re.compile(r"\d{4}-\d{2}-\d{2}(?:[T ]\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?(?:Z|[+-]\d{2}:\d{2})?)?")
++ISO_DATE = re.compile(r"\d{4}-\d{2}-\d{2}(?:[T ](\d{2}):(\d{2})(?::(\d{2})(?:\.\d+)?)?(?:Z|[+-](\d{2}):(\d{2}))?)?")
+ 
+ 
+ def filled(value: Any) -> bool:
+@@ -199,13 +215,16 @@ def filled(value: Any) -> bool:
+ 
+ 
+ def iso_date(value: Any) -> bool:
+-    if not isinstance(value, str) or not ISO_DATE.fullmatch(value.strip()):
++    match = ISO_DATE.fullmatch(value.strip()) if isinstance(value, str) else None
++    if not match:
+         return False
+     try:
+         date.fromisoformat(value.strip()[:10])
+     except ValueError:
+         return False
+-    return True
++    # Audit progressif, C19 : heure, minute, seconde et fuseau réels (ni 25:61, ni +25:00).
++    hour, minute, second, tz_hour, tz_minute = (int(part) if part else 0 for part in match.groups())
++    return hour <= 23 and minute <= 59 and second <= 59 and tz_hour <= 23 and tz_minute <= 59
+ 
+ 
+ def check_critical_protection(card: dict[str, Any], mode: Any) -> dict[str, Any] | None:
+@@ -796,6 +815,10 @@ UNIT_CASES: list[tuple[Any, ...]] = [
+     ("N4a", EXAMPLE, [((RC, "risk"), CRITICAL)], ((RC, "risk", "critical_protection", "owner"), DELETE), "critical_protection exige le champ owner"),
+     ("N4b", EXAMPLE, [((RC, "risk"), CRITICAL)], ((RC, "risk", "critical_protection", "evidence_locator"), DELETE), "critical_protection exige le champ evidence_locator"),
+     ("N5", EXAMPLE, [], ((RC, "proof", "provenance", "method"), DELETE), "proof.provenance exige le champ method"),
++    # Audit progressif, C19 et C20 : heure ou fuseau impossibles ; issue d'un autre type que ses valeurs d'enum.
++    ("C19-1", EXAMPLE, [], ((RC, "proof", "provenance", "observed_at"), "2026-08-29T25:61"), "observed_at doit être une date ISO"),
++    ("C19-2", EXAMPLE, [], ((RC, "proof", "provenance", "observed_at"), "2026-08-29T10:00+25:00"), "observed_at doit être une date ISO"),
++    ("C20-1", EXAMPLE, [], (CL + ("issue",), []), "type attendu null, string (valeurs de l’enum)"),
+     # Audit progressif, C02 : un nom de fichier nu absent est refusé en profil strict, pour l'artefact comme pour la trace.
+     ("C02-1", RETURNED, STRICT_LITE, ((RC, "artifact", "locator"), "absent.html"), "artefact local absent", True),
+     ("C02-2", RETURNED, STRICT_LITE + [((RC, "trace_locator"), str(EXAMPLE))], ((RC, "trace_locator"), "trace-absente.md"),
+@@ -861,6 +884,18 @@ def check_unit_cases(schema: dict[str, Any], errors: list[str]) -> None:
+     print(f"+ cas unitaires : {passed}/{len(UNIT_CASES)}")
+ 
+ 
++def check_schema_keyword_witness(schema: dict[str, Any], errors: list[str]) -> None:
++    """Audit progressif, C13 : un mot-clé non pris en charge (pattern ajouté à run_card.id) est refusé."""
++    witness = json.loads(json.dumps(schema))
++    witness["properties"]["run_card"]["properties"]["id"]["pattern"] = "^RUN-"
++    try:
++        check_schema_keywords(witness)
++    except ValidationError:
++        print("+ mot-clé de schéma non pris en charge refusé : 1/1")
++        return
++    errors.append("témoin C13 : un mot-clé de schéma non pris en charge est ignoré")
++
++
+ def check_strict_admitted(schema: dict[str, Any], errors: list[str]) -> None:
+     passed = 0
+     for label, locator in STRICT_ADMITTED:
+@@ -917,9 +952,39 @@ def load_schema() -> dict[str, Any]:
+         node = node.get(key) if isinstance(node, dict) else None
+     if not isinstance(node, list) or not node:
+         raise ValidationError("schéma incomplet : properties.run_card.properties.mode.enum absent ou vide")
++    check_schema_keywords(schema)
+     return schema
+ 
+ 
++# Audit progressif, C13 : le sous-ensemble de JSON Schema réellement interprété par validate_node. Un mot-clé hors de
++# cette liste serait ignoré en silence ; il est donc refusé avant toute validation. Les annotations restent admises.
++SCHEMA_KEYWORDS = {"type", "enum", "const", "required", "properties", "additionalProperties", "items", "minLength",
++                   "minItems", "allOf", "anyOf", "if", "then"}
++SCHEMA_ANNOTATIONS = {"$schema", "$id", "$comment", "title", "description", "default", "examples"}
++
++
++def check_schema_keywords(schema: Any, path: str = "$") -> None:
++    if not isinstance(schema, dict):
++        raise ValidationError(f"schéma : sous-schéma non objet à {path}")
++    unknown = sorted(set(schema) - SCHEMA_KEYWORDS - SCHEMA_ANNOTATIONS)
++    if unknown:
++        raise ValidationError(f"schéma : mot-clé non pris en charge à {path} : {', '.join(unknown)}")
++    properties = schema.get("properties", {})
++    if not isinstance(properties, dict):
++        raise ValidationError(f"schéma : properties doit être un objet à {path}")
++    for key, child in properties.items():
++        check_schema_keywords(child, f"{path}.properties.{key}")
++    for key in ("items", "if", "then"):
++        if key in schema:
++            check_schema_keywords(schema[key], f"{path}.{key}")
++    for key in ("allOf", "anyOf"):
++        if key in schema:
++            if not isinstance(schema[key], list):
++                raise ValidationError(f"schéma : {key} doit être une liste à {path}")
++            for index, child in enumerate(schema[key]):
++                check_schema_keywords(child, f"{path}.{key}[{index}]")
++
++
+ def check_schema_witness(schema: dict[str, Any]) -> None:
+     """Témoin négatif avant tout PASS : un mode inventé doit être rejeté par le schéma seul."""
+     document = load_json(EXAMPLE)
+@@ -988,6 +1053,7 @@ def main(argv: list[str] | None = None) -> int:
+     check_fixture_table(schema, errors)
+     check_unit_cases(schema, errors)
+     check_strict_admitted(schema, errors)
++    check_schema_keyword_witness(schema, errors)
+     check_schema_authority(schema, errors)
+ 
+     if errors:
+diff --git a/package/scripts/validate_structure.py b/package/scripts/validate_structure.py
+index 3bfd9e9..f1b50bd 100644
+--- a/package/scripts/validate_structure.py
++++ b/package/scripts/validate_structure.py
+@@ -707,6 +707,10 @@ def check() -> list[str]:
+ 
+ 
+ def main() -> int:
++    bad = rr.non_utf8(ROOT)  # audit progressif, C20 : encodage nommé avant toute lecture (arrêt, pas contrôle complet)
++    if bad:
++        print(f"STRUCTURE VALIDATION FAILED — Markdown non UTF-8 : {', '.join(bad)}")
++        return 1
+     errors = check()
+     if errors:
+         print("STRUCTURE VALIDATION FAILED — gardes de propriété")
+diff --git a/audit/tools/DG_AUDIT_001_Verifications_13-01.py b/audit/tools/DG_AUDIT_001_Verifications_13-01.py
+index 96d7856..1d65359 100644
+--- a/audit/tools/DG_AUDIT_001_Verifications_13-01.py
++++ b/audit/tools/DG_AUDIT_001_Verifications_13-01.py
+@@ -77,18 +77,20 @@ def last(out: str) -> str:
+ 
+ def distributions(github_zip: Path, local_zip: Path) -> list[tuple[str, str, str, bool]]:
+     rows = []
+-    manifest = None
++    # Rectification déclarée (audit progressif, C21, `V12R_43`) : le manifeste est lu dans l'archive GitHub elle-même,
++    # indépendamment des interpréteurs ; un interpréteur absent est « non exécuté » (None), distinct d'un échec.
++    with zipfile.ZipFile(github_zip) as archive:
++        manifest = json.loads(archive.read("scripts/package_manifest.json").decode("utf-8"))
+     for py in ("python3.10", "python3.13"):
+         exe = shutil.which(py)
+         if exe is None:
+-            rows.append((f"D-{py}", "—", f"{py} indisponible", False))
++            rows.append((f"D-{py}", "—", f"{py} indisponible : D-1 à D-3 non exécutés pour cet interpréteur", None))
+             continue
+         with tempfile.TemporaryDirectory() as tmp:
+             g, l = Path(tmp) / "github", Path(tmp) / "local"
+             zipfile.ZipFile(github_zip).extractall(g)
+             zipfile.ZipFile(local_zip).extractall(l)
+             (g / "scripts/build_distributions.sh").chmod(0o755)
+-            manifest = json.loads((g / "scripts/package_manifest.json").read_text(encoding="utf-8"))
+             code, out = run([exe, "-B", "scripts/validate_all.py"], g)
+             rows.append((f"D-1 ({py})", "distribution GitHub", f"validate_all autonome → FULL VALIDATION PASSED [{last(out)}]", code == 0 and "FULL VALIDATION PASSED" in out))
+             code, out = run([exe, "-B", "scripts/validate_all.py"], l)
+@@ -97,7 +99,7 @@ def distributions(github_zip: Path, local_zip: Path) -> list[tuple[str, str, str
+             rows.append((f"D-3 ({py})", "F-RM-003 (Local)", "read_route DIRECTION/START/TREE servi dans l'export Local", code == 0 and "Arbre de classification" in out))
+     for kind, z in (("github", github_zip), ("local", local_zip)):
+         names = [i.filename for i in zipfile.ZipFile(z).infolist() if not i.is_dir()]
+-        ok = manifest is not None and sorted(names) == sorted(manifest[kind]) and len(names) == len(set(names))
++        ok = sorted(names) == sorted(manifest[kind]) and len(names) == len(set(names))
+         rows.append((f"D-4 ({kind})", "C8 O-2", f"membres de l'archive publiée = manifeste ({len(names)})", ok))
+     with zipfile.ZipFile(local_zip) as z:
+         skill = z.read("skill/SKILL.md").decode("utf-8")
+@@ -151,9 +153,10 @@ def main() -> int:
+         print(__doc__)
+         return 2
+     for cid, fiche, label, ok in rows:
+-        print(f"{'OK  ' if ok else 'ÉCHEC'} {cid:14} {fiche:22} {label}")
+-    print(f"\n{mode} : {sum(r[3] for r in rows)}/{len(rows)}")
+-    return 0 if all(r[3] for r in rows) else 1
++        print(f"{'OK  ' if ok else 'INDISP.' if ok is None else 'ÉCHEC'} {cid:14} {fiche:22} {label}")
++    skipped = sum(1 for r in rows if r[3] is None)
++    print(f"\n{mode} : {sum(1 for r in rows if r[3] is True)}/{len(rows)}" + (f" ({skipped} non exécuté(s))" if skipped else ""))
++    return 0 if all(r[3] is True for r in rows) else 1
+ 
+ 
+ if __name__ == "__main__":

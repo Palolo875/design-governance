@@ -77,18 +77,20 @@ def last(out: str) -> str:
 
 def distributions(github_zip: Path, local_zip: Path) -> list[tuple[str, str, str, bool]]:
     rows = []
-    manifest = None
+    # Rectification déclarée (audit progressif, C21, `V12R_43`) : le manifeste est lu dans l'archive GitHub elle-même,
+    # indépendamment des interpréteurs ; un interpréteur absent est « non exécuté » (None), distinct d'un échec.
+    with zipfile.ZipFile(github_zip) as archive:
+        manifest = json.loads(archive.read("scripts/package_manifest.json").decode("utf-8"))
     for py in ("python3.10", "python3.13"):
         exe = shutil.which(py)
         if exe is None:
-            rows.append((f"D-{py}", "—", f"{py} indisponible", False))
+            rows.append((f"D-{py}", "—", f"{py} indisponible : D-1 à D-3 non exécutés pour cet interpréteur", None))
             continue
         with tempfile.TemporaryDirectory() as tmp:
             g, l = Path(tmp) / "github", Path(tmp) / "local"
             zipfile.ZipFile(github_zip).extractall(g)
             zipfile.ZipFile(local_zip).extractall(l)
             (g / "scripts/build_distributions.sh").chmod(0o755)
-            manifest = json.loads((g / "scripts/package_manifest.json").read_text(encoding="utf-8"))
             code, out = run([exe, "-B", "scripts/validate_all.py"], g)
             rows.append((f"D-1 ({py})", "distribution GitHub", f"validate_all autonome → FULL VALIDATION PASSED [{last(out)}]", code == 0 and "FULL VALIDATION PASSED" in out))
             code, out = run([exe, "-B", "scripts/validate_all.py"], l)
@@ -97,7 +99,7 @@ def distributions(github_zip: Path, local_zip: Path) -> list[tuple[str, str, str
             rows.append((f"D-3 ({py})", "F-RM-003 (Local)", "read_route DIRECTION/START/TREE servi dans l'export Local", code == 0 and "Arbre de classification" in out))
     for kind, z in (("github", github_zip), ("local", local_zip)):
         names = [i.filename for i in zipfile.ZipFile(z).infolist() if not i.is_dir()]
-        ok = manifest is not None and sorted(names) == sorted(manifest[kind]) and len(names) == len(set(names))
+        ok = sorted(names) == sorted(manifest[kind]) and len(names) == len(set(names))
         rows.append((f"D-4 ({kind})", "C8 O-2", f"membres de l'archive publiée = manifeste ({len(names)})", ok))
     with zipfile.ZipFile(local_zip) as z:
         skill = z.read("skill/SKILL.md").decode("utf-8")
@@ -151,9 +153,10 @@ def main() -> int:
         print(__doc__)
         return 2
     for cid, fiche, label, ok in rows:
-        print(f"{'OK  ' if ok else 'ÉCHEC'} {cid:14} {fiche:22} {label}")
-    print(f"\n{mode} : {sum(r[3] for r in rows)}/{len(rows)}")
-    return 0 if all(r[3] for r in rows) else 1
+        print(f"{'OK  ' if ok else 'INDISP.' if ok is None else 'ÉCHEC'} {cid:14} {fiche:22} {label}")
+    skipped = sum(1 for r in rows if r[3] is None)
+    print(f"\n{mode} : {sum(1 for r in rows if r[3] is True)}/{len(rows)}" + (f" ({skipped} non exécuté(s))" if skipped else ""))
+    return 0 if all(r[3] is True for r in rows) else 1
 
 
 if __name__ == "__main__":

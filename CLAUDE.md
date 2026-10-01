@@ -119,6 +119,12 @@ Ne rien modifier dans `package/` pendant l'initialisation.
   - C09 : `N/A-JUSTIFIED` distinct d'une preuve manquante ou d'une confirmation (4 lieux ; 5 vrais N/A maintenus) ; C10 : réserve structurée recevable ;
   - D-26 : fonctions d'un produit fictif marquées dans `CNT-01` ;
   - 14/14 mutations rouges ; suivi vert ; 13.01 texte 6/6, mutations 6/6, non-régression 5/5, distributions 9/9 ; 13.02 38/38 ; chemin 13 774, noyau 4 541, doublons 142.
+- **AP4a appliqué** (`V12R_43`, outillage, aucune prose normative) :
+  - C11 : le lecteur de routes refuse locator répété, propriétaire incohérent et porteur dupliqué (témoins dans `validate_reading_map`) ;
+  - C12 : clés JSON répétées refusées (contrats, manifeste) ; C13 : mots-clés de schéma RUN_CARD non interprétés refusés ;
+  - C19 : dates et heures réelles (RUN_CARD, contrats) ; C20 : diagnostics nommés (type d'enum, schéma non objet, Markdown non UTF-8) ;
+  - C21 : 13.01 « distributions » lit le manifeste dans l'archive ; interpréteur absent = `INDISP.` (rectification déclarée) ;
+  - sonde `V12R_Sonde_AP4a.py` 36/36 (22 KO avant) ; mutations 7/7 ; suivi vert ; 13.01 6/6, 6/6, 5/5, 9/9 ; 13.02 38/38.
 - **Chantier en cours : consolidation V1.2**, pilotée par `plans/Plan_V1.2_Suite_Reprise.md` ; architecture dans `plans/Plan_V1.2_Refonte.md`, décisions dans `V12R_14`. Objectif : un premier rendu composé, spécifique et soigné, avec une entrée humaine claire et un effort maîtrisé ; efficacité encore à évaluer. R8b mobilise les moyens et les enseignements transférables ; R8c précise les gestes utiles ; aucun atlas de créations obligatoire.
 
 ## 3. Arborescence
@@ -184,12 +190,12 @@ python3 -B scripts/build_core.py [--check]  # compile le noyau de fabrication da
 python3 scripts/read_route.py ACTION/RUN_CARD  # lire une route
 ```
 
-**Limite connue :** `DG_AUDIT_001_Verifications_13-01.py distributions` cherche `python3.10` et `python3.13`. S'ils sont absents de l'environnement, ces lignes échouent « indisponible » : ce n'est pas une régression.
+**Limite connue :** `DG_AUDIT_001_Verifications_13-01.py distributions` cherche `python3.10` et `python3.13`. S'ils sont absents, leurs lignes sont marquées `INDISP.` (non exécutées, code de sortie non nul) ; D-4 (membres des archives) reste contrôlé (rectification C21, `V12R_43`). Ce n'est pas une régression.
 
 ## 6. Prochaine étape
 
 1. ~~Porte G1 du plan V1.2~~ : franchie le 26-09-2026 (`audit/reports/V12_01_DECISIONS_G1.md`).
-2. ~~B05, lot 1 (A, B, D), addendum, lot 2 (G, H, I, D')~~ : faits (`V12_02` à `V12_04`). Lectures `V12_05` à `V12_11` faites. Mini-épreuve **reportée par l'owner** (27-09-2026). **Refonte (`plans/Plan_V1.2_Refonte.md`) : décisions 1, 2, 4, 7 prises ; R1, R2, R3 et R4 faits. P1 fait (orientation positive). R5b-1, R5b-2, R5a, R8a, R5c (hors ancre), R5d, R6a et R11a faits. Arbitrages décidés (`V12R_14`). Inventaire créé ; R8b, R8c, R7 (et raccords R7-2, R7-3), R11 ciblé, R6b élargi (R6b-1, R6b-2), restes R5, relecture de parcours et raccords R11b faits ; porte P2 franchie et conclue après R11c ; palier exploratoire de R10 fait (`V12R_35`) ; D-25 corrigé et R10 arrêté (`V12R_36`) ; audit interne A1 fait (`V12R_37`) et raccords A1 appliqués (`V12R_38`) ; A2 appliqué (`V12R_39`). Audit progressif externe : AP1, AP2 et AP3 faits (`V12R_40` à `V12R_42`). Prochaine : AP4 (validateurs, puis façades avec AUD-06, 08, 13) → AP5 ; puis AUD-07 → R11 final → R12 — voir `plans/Plan_V1.2_Suite_Reprise.md`**, puis G4.
+2. ~~B05, lot 1 (A, B, D), addendum, lot 2 (G, H, I, D')~~ : faits (`V12_02` à `V12_04`). Lectures `V12_05` à `V12_11` faites. Mini-épreuve **reportée par l'owner** (27-09-2026). **Refonte (`plans/Plan_V1.2_Refonte.md`) : décisions 1, 2, 4, 7 prises ; R1, R2, R3 et R4 faits. P1 fait (orientation positive). R5b-1, R5b-2, R5a, R8a, R5c (hors ancre), R5d, R6a et R11a faits. Arbitrages décidés (`V12R_14`). Inventaire créé ; R8b, R8c, R7 (et raccords R7-2, R7-3), R11 ciblé, R6b élargi (R6b-1, R6b-2), restes R5, relecture de parcours et raccords R11b faits ; porte P2 franchie et conclue après R11c ; palier exploratoire de R10 fait (`V12R_35`) ; D-25 corrigé et R10 arrêté (`V12R_36`) ; audit interne A1 fait (`V12R_37`) et raccords A1 appliqués (`V12R_38`) ; A2 appliqué (`V12R_39`). Audit progressif externe : AP1, AP2, AP3 et AP4a faits (`V12R_40` à `V12R_43`). Prochaine : AP4b (façades avec AUD-06, 08, 13) → AP5 ; puis AUD-07 → R11 final → R12 — voir `plans/Plan_V1.2_Suite_Reprise.md`**, puis G4.
 **Plan de reprise (à lire en premier pour continuer) : `plans/Plan_V1.2_Suite_Reprise.md`** — consignes en vigueur (pas de run ni d'épreuve dans cette phase ; qualité avant nombre de mots), recette d'une unité, lots restants avec périmètre, gardes, réussite et arrêt, porte P2 et R10 progressif.
 3. Suivre le séquencement du plan : G2 (gardes rouges puis vertes) → G3 (non-régression, charge mesurée et justifiée) → G4 (épreuve à l'aveugle avec juges extérieurs) → publication V1.2.0.
 
