@@ -65,9 +65,9 @@ cp -a "$ROOT/scripts/read_route.py" "$STAGE/local/scripts/read_route.py"
 cp -a "$ROOT/scripts/validate_structure.py" "$STAGE/local/scripts/validate_structure.py"
 cp -a "$ROOT/scripts/build_core.py" "$STAGE/local/scripts/build_core.py"
 cat > "$STAGE/local/README.md" <<'EOF'
-# Design Governance V1.1.1 — export Local
+# Design Governance V1.2.0 — export Local
 
-Design Governance V1.1.1 est une expérimentation maintenue qui aide à transformer un brief en proposition de design visuellement dirigée, cultivée, spécifique, construite et polie, puis en travail vérifiable. Son usage recommandé est supervisé ; son efficacité réelle reste `NOT-VERIFIED`.
+Design Governance V1.2.0 est une expérimentation maintenue qui aide à transformer un brief en proposition de design visuellement dirigée, cultivée, spécifique, construite et polie, puis en travail vérifiable. Son usage recommandé est supervisé ; son efficacité réelle reste `NOT-VERIFIED`.
 
 <!-- partage:entree -->
 

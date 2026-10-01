@@ -1,6 +1,6 @@
-# Design Governance V1.1.1
+# Design Governance V1.2.0
 
-Ce dossier contient les sources officielles de **Design Governance V1.1.1**, une expérimentation maintenue : un cadre de direction, de création, de jugement et de vérification du design.
+Ce dossier contient les sources officielles de **Design Governance V1.2.0**, une expérimentation maintenue : un cadre de direction, de création, de jugement et de vérification du design.
 
 Pour commencer, lisez la section [« Commencer »](../../README.md#commencer) du README à la racine du package : vous n’avez pas à choisir de mode. Pour piloter un run, lisez le guide opérateur [`QUICKSTART.md`](./QUICKSTART.md) ; un agent entre par la skill `design-governance-practice`. Le vocabulaire est défini dans [`GLOSSAIRE.md`](./GLOSSAIRE.md).
 

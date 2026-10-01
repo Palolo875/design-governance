@@ -1,0 +1,275 @@
+diff --git a/package/README.md b/package/README.md
+index 229ce12..261235e 100644
+--- a/package/README.md
++++ b/package/README.md
+@@ -1,8 +1,8 @@
+-# Design Governance V1.1.1
++# Design Governance V1.2.0
+ 
+ Design Governance V1 est un cadre de **direction, de création, de jugement et de vérification du design**. Il aide à transformer un brief en décision située, artefact réel, observation pertinente et trace proportionnée au risque.
+ 
+-> **Statut expérimental :** Design Governance V1.1.1 est une expérimentation maintenue. La baseline est contrôlée et destinée à un usage supervisé ; elle ne promet ni beauté automatique, ni réussite universelle, ni validation d’usage, ni conformité sans preuve adaptée.
++> **Statut expérimental :** Design Governance V1.2.0 est une expérimentation maintenue. La baseline est contrôlée et destinée à un usage supervisé ; elle ne promet ni beauté automatique, ni réussite universelle, ni validation d’usage, ni conformité sans preuve adaptée.
+ 
+ <!-- entree:début -->
+ ## Commencer
+@@ -25,8 +25,8 @@ Pour aller plus loin : le [guide opérateur](V1/official/QUICKSTART.md), la [ski
+ | Élément | État |
+ |---|---|
+ | Contrat documentaire et machine | Validé avec réserves explicites |
+-| Build et distributions | Validés et reproductibles |
+-| Architecture de lecture | Durcie ; carte dérivée disponible |
++| Build et distributions | Validés et reproductibles ; validation complète observée en CI hébergée (Linux, Python 3.10 à 3.13) |
++| Architecture de lecture | Noyau de fabrication compilé ; liste de chargement unique ; carte dérivée disponible |
+ | Efficacité sur des runs réels | `NOT-VERIFIED` |
+ | Usage recommandé | Pilote contrôlé, revue humaine et preuve adaptée |
+ 
+diff --git a/package/RELEASE_NOTES.md b/package/RELEASE_NOTES.md
+index f3f3914..77700eb 100644
+--- a/package/RELEASE_NOTES.md
++++ b/package/RELEASE_NOTES.md
+@@ -1,62 +1,75 @@
+-# Release notes — Design Governance V1.1.1
++# Release notes — Design Governance V1.2.0
+ 
+-**Statut expérimental :** Design Governance V1.1.1 est une expérimentation maintenue.  
+-**Date de la version :** 2026-09-26 (V1.0.0 : 2026-09-19)  
++**Statut expérimental :** Design Governance V1.2.0 est une expérimentation maintenue.  
++**Date de la version :** 2026-10-01 (V1.1.1 : 2026-09-26 ; V1.0.0 : 2026-09-19)  
+ **Usage recommandé :** pilote contrôlé, supervision humaine et preuve adaptée au risque
+ 
+ ## Présentation
+ 
+-Design Governance V1.1.1 est une baseline publique pour diriger, créer, juger, construire et vérifier un travail de design. Elle aide à transformer un brief en décision située, artefact réel, observation pertinente et trace proportionnée au risque.
+-
+-La release est présentée comme un système cohérent, utilisable et testable. Elle ne promet ni beauté automatique, ni réussite universelle, ni validation d’usage sans preuve adaptée.
+-
+-## Changements depuis V1.0.0
+-
+-- **Autorité du schéma et oracles de test.** Les validateurs `RUN_CARD` et contrats refusent un schéma absent, vide, incomplet ou hors sous-ensemble, et vérifient qu’un témoin invalide est rejeté. Chaque fixture déclare son motif attendu ; chaque invariant a son cas unitaire à faute unique.
+-- **Contrat `RUN_CARD` migré.** Protection critique à résultat, exception `FAIL-ASSUMED` structurée, axes V/U/A/T, réserves complètes, capacité et version de la preuve, droits, paquet SYSTÈME, B1b, ancres typées, conséquence décisionnelle (`CHANGED`, `CONFIRMED`, `ABANDONED`, `N/A-JUSTIFIED`, `NOT-OBSERVED`), temps du verdict et reclassement. Profil strict : mêmes exigences par mode, locators locaux résolus depuis le dossier de la carte.
+-- **Contrats de production.** Objets facultatifs, scopes attendu et observé séparés, jetons canoniques, couverture risque → contrôle, sources qualifiées, plan de preuve structuré ; CLI ouverte aux fichiers externes avec `--type`.
+-- **Lecture et routes.** Le lecteur résout par table, préfixe et sous-locator (dont `DIRECTION/START/TREE`), refuse l’ambiguïté et ignore les titres des blocs de code. Le validateur de carte contrôle la couverture de tout locator cité et 42 conditions de façade.
+-- **Sources normatives.** Statut `SEED` du cycle de vie ; deux sorties canoniques (réponse visible et handoff) ; table de correspondance `RUN_CARD` par phase ; promesse du validateur (ce qu’il atteste, ce qu’il n’atteste pas) ; triade de conséquence décisionnelle ; cible visuelle en une seule table ; contrat du premier objet relié à `SAVOIR/CRAFT/CFT-00` ; marquage `TRUTH` à deux axes ; regard externe qualifié ; palette sans répartition imposée ; contrat de composant partagé unique dans `BIBLIOTHEQUE/COMPONENTS`.
+-- **Façades.** QUICKSTART, README des deux distributions, glossaire, cartes et skill corrigés sur les écarts relevés ; la cohérence opposable se limite à la liste close des conditions de façade (`validate_reading_map.py`) : une divergence hors de cette liste n’est pas détectée. Efficacité déclarée `NOT-VERIFIED` partout.
+-- **Outils et build.** Archives créées dans le répertoire de travail puis publiées, membres contrôlés contre le manifeste, promotion transactionnelle, liens symboliques refusés, exclusions limitées à la racine ; manifeste sans doublon et version unique ; lectures non UTF-8, clés JSON répétées et types illégaux refusés proprement ; `validate_all.py` lançable depuis n’importe quel dossier ; chemins propres à l’export Local ; actions du workflow épinglées par SHA complet (runtime node24).
+-- **Retour d’audit (V1.1.1).** Triade de conséquence décisionnelle alignée dans la table `RUN_CARD`, le glossaire et les paquets de clôture ; portée écrite de B1b égale à celle du validateur ; sorties par mode définies une seule fois ; façades corrigées (Creative Boot, chargement LITE/ITER, projection machine, QUICKSTART §6, légende, exemples) ; aucun changement de schéma ni d’invariant.
+-
+-**Compatibilité.** Une `RUN_CARD` produite avec V1.0.0 peut devoir être complétée pour satisfaire les invariants migrés ; les exemples et fixtures du package le sont.
++Design Governance aide un agent à produire un travail de design dirigé, construit et soigné dès la première proposition, puis à l’améliorer avec la personne qui le demande. V1.2.0 réorganise le système autour de la fabrication. L’agent lit un **noyau de fabrication**, compilé depuis les sources normatives. Il charge ensuite ce que la ligne de son mode dans `DIRECTION/CHARGE` demande. Il construit une première proposition composée et tient une **trace proportionnée** : légère par défaut, complète si le run est persistant, partagé, audité ou si une acceptation est demandée.
++
++Les cinq sources normatives restent les autorités. Le schéma `RUN_CARD` est inchangé.
++
++## Changements depuis V1.1.1
++
++- **Noyau de fabrication.** Les gestes de structure, de composition, de typographie, de couleur, de contenu et de boucle d’édition sont compilés dans la skill depuis leurs propriétaires (`scripts/build_core.py`). `DIRECTION/CHARGE` est la seule liste de chargement ; les autres tables en sont des vues.
++- **Trace graduée et proposition.** Par défaut, le run s’arrête à une proposition. La première proposition vaut checkpoint, sauf action irréversible ou coûteuse. Valider n’est pas accepter : l’acceptation pour un vrai produit se demande et passe en trace complète.
++- **Vérité du contenu.**
++  - Une destination réelle sans contenu reçoit des exemples marqués, pas des emplacements vides.
++  - L’action principale reste fonctionnelle avec une valeur d’exemple marquée.
++  - Les fonctions affirmées d’un produit fictif sont marquées comme exemples.
++- **Ancre graduée.** On peut explorer sans ancre, avec une limite déclarée. Une direction identitaire n’est acceptée qu’avec une ancre, observée ou fournie pour un produit réel. `FAIL-ASSUMED` est réservé à un échec connu.
++- **Interfaces.** `ACTION/UI-UX-REALITY` est chargé avant la fabrication d’une surface UI/UX nouvelle ou substantiellement modifiée. Toute exigence UI/UX déclarée est couverte : observée, non vérifiée, ou non applicable avec sa raison.
++- **Entrée humaine.** La section « Commencer » du README répond à quatre questions, sans mode à choisir. Le QUICKSTART devient le guide de l’opérateur. La carte de lecture porte les combinaisons par résultat.
++- **Outillage.**
++  - Gardes de propriété (`scripts/validate_structure.py`).
++  - Le lecteur de routes refuse les ambiguïtés.
++  - Clés JSON répétées refusées.
++  - Le schéma `RUN_CARD` est limité aux mots-clés réellement interprétés.
++  - Dates et heures réelles.
++  - Diagnostics nommés au lieu d’erreurs brutes.
++  - Profil strict pour les fichiers locaux.
++  - En cas d’échec, le build restaure ensemble `dist` et les archives.
++  - En-tête YAML de la skill valide.
++- **Charge de lecture.** Le chemin prescrit d’un run `DIRECTION` passe d’environ 23 600 à 13 835 mots. C’est une mesure documentaire, pas une économie observée en usage.
++
++**Compatibilité.**
++- Une `RUN_CARD` valide en V1.1.1 le reste, sauf si elle porte une date ou une heure impossible, désormais refusée.
++- Un contrat de production dont la couverture UI/UX omettait des exigences déclarées doit être complété : une exigence non vérifiée y figure en `NOT-VERIFIED`.
++
++L’historique détaillé est dans `V1/official/CHANGELOG.md`.
+ 
+ ## Ce que contient la baseline
+ 
+ | Élément | Fonction |
+ |---|---|
+-| `V1/official/` | Sources normatives, guides d’entrée, glossaire, carte de lecture et carte d’orchestration. |
+-| `skills/design-governance-practice/` | Couche d’activation et références conditionnelles pour humains et agents. |
+-| `schemas/` | Projections machine, exemples et fixtures de contrôle. |
+-| `scripts/` | Validateurs, runner global et construction des distributions. |
+-
+-Les cinq sources normatives sont `DIRECTION.md`, `ACTION.md`, `SAVOIR.md`, `BIBLIOTHEQUE.md` et `CHANGELOG.md`. Les guides et cartes dérivées orientent la lecture sans créer de règle concurrente.
++| `V1/official/` | Sources normatives, guides d’entrée, glossaire et carte de lecture (`ORCHESTRATION_MAP.md` n’est plus qu’un pointeur vers elle) |
++| `skills/design-governance-practice/` | Couche d’activation : noyau de fabrication compilé, références conditionnelles |
++| `schemas/` | Projections machine, exemples et fixtures de contrôle |
++| `scripts/` | Validateurs, compilation du noyau, runner global et construction des distributions |
+ 
+-## Parcours de découverte
++## Parcours
+ 
+-> **Parcours de V1.1.1, historique.** Dans la candidate courante, une personne commence par la section « Commencer » du README du package ; un agent entre par la skill (noyau de fabrication et `DIRECTION/CHARGE`) et s’arrête par défaut à la proposition ; les guides s’ouvrent à la demande ; `ORCHESTRATION_MAP.md` n’est plus qu’un pointeur vers `READING_MAP.md`. Ces notes seront réécrites en R12.
++**Pour une personne qui fait une demande :** la section « Commencer » du README du package. Elle n’a pas de mode à choisir.
+ 
+-Pour un humain qui découvre le système :
++**Pour un agent :**
+ 
+ ```text
+-README.md → QUICKSTART.md → GLOSSAIRE.md si nécessaire
+-→ READING_MAP.md → ORCHESTRATION_MAP.md si plusieurs capacités sont utiles
+-→ source normative concernée
++lire la skill (noyau de fabrication) → classer avec DIRECTION/START
++→ charger la ligne de son mode dans DIRECTION/CHARGE → construire la première proposition
++→ boucle d’édition → réponse visible et trace légère (trace complète si le run est persistant, partagé, audité ou à accepter)
+ ```
+ 
+-Pour un agent :
+-
+-```text
+-localiser le package → lire README et QUICKSTART
+-→ classer avec DIRECTION/START → charger les propriétaires utiles
+-→ orchestrer si nécessaire → produire → observer → corriger → fermer
+-```
++**Pour un opérateur :** le guide `V1/official/QUICKSTART.md`.
+ 
+ ## Contrôles inclus
+ 
+-Le package contrôle son inventaire, ses liens, son vocabulaire structuré, ses contrats machine, ses fixtures positives et négatives, ses cartes dérivées et la reproductibilité de ses distributions.
++Le package contrôle :
++- son inventaire, ses liens et son vocabulaire structuré ;
++- ses gardes de propriété et son noyau compilé ;
++- ses contrats machine, avec leurs fixtures positives et négatives ;
++- sa carte dérivée et son lecteur de routes ;
++- la reproductibilité de ses distributions.
+ 
+ Ces contrôles établissent la cohérence documentaire et technique du package. Ils ne remplacent ni une observation de rendu, ni un test utilisateur, ni une vérification d’accessibilité exécutée, ni une mesure de performance, ni une preuve d’adoption.
+ 
+@@ -66,11 +79,25 @@ Pour vérifier la baseline :
+ python3 scripts/validate_all.py
+ ```
+ 
+-## Limites déclarées
++La validation complète a été observée sur un runner GitHub hébergé (Linux, Python 3.10, 3.11 et 3.13) le 2026-10-01, dans le dépôt de travail.
+ 
+-V1.1.1 est une baseline expérimentale. Son efficacité de lecture, son adoption, sa charge cognitive, sa performance de production et sa supériorité par rapport à une autre méthode ne sont pas déclarées comme démontrées : leur statut est `NOT-VERIFIED`.
++## Ce que le validateur atteste
+ 
+-Le workflow d’intégration continue est épinglé par SHA ; son exécution sur un runner hébergé n’a pas encore été observée pour cette version (`NOT-VERIFIED`).
++Une `RUN_CARD` validée atteste la forme de la projection et les invariants de la liste close.
+ 
+-L’historique détaillé de construction et de travail est conservé hors de la distribution publique. Il n’est pas nécessaire pour utiliser la baseline.
++Elle n’atteste pas :
++- que les observations ont eu lieu ;
++- la justesse des jugements ;
++- la réalité des droits et des données ;
++- la qualité perceptuelle.
++
++La frontière exacte est écrite dans `ACTION/RUN_CARD`.
++
++## Limites déclarées
+ 
++- **Efficacité : `NOT-VERIFIED`.** Un palier exploratoire a été mené avec six productions, en auto-comparaison et avec des juges modèles d’une seule famille. Il oriente sans prouver. Seule une épreuve à l’aveugle avec des juges extérieurs (G4) pourra établir l’effet de V1.2.0 sur la qualité des rendus.
++- **Convergence.** Le palier exploratoire a observé le même objet central et la même police de titre, avec ou sans système. Ce signal est suivi dans le noyau ; le système ne le rompt pas à lui seul.
++- **Coût.** Lors du palier exploratoire, un run avec le système a coûté 1,7 à 1,8 fois un run sans système, en tokens. Ce coût n’a pas été remesuré depuis.
++- **Intégration continue.** Elle a été observée sous Linux. macOS, Windows et le workflow du package dans un dépôt de distribution autonome n’ont pas été observés.
++- **Champs libres.** Les placeholders n’y sont pas filtrés globalement.
++- **Historique.** L’historique de construction et d’audit est conservé hors de la distribution publique. Il n’est pas nécessaire pour utiliser la baseline.
+diff --git a/package/V1/official/CHANGELOG.md b/package/V1/official/CHANGELOG.md
+index beb6aba..3116714 100644
+--- a/package/V1/official/CHANGELOG.md
++++ b/package/V1/official/CHANGELOG.md
+@@ -1,11 +1,11 @@
+-# Changelog — Design Governance V1.1.1
++# Changelog — Design Governance V1.2.0
+ 
+-**Version publique :** `V1.1.1`  
+-**Statut expérimental :** Design Governance V1.1.1 est une expérimentation maintenue.  
+-**Date de la version :** 2026-09-26  
++**Version publique :** `V1.2.0`  
++**Statut expérimental :** Design Governance V1.2.0 est une expérimentation maintenue.  
++**Date de la version :** 2026-10-01 (V1.1.1 : 2026-09-26)  
+ **Usage recommandé :** pilote contrôlé, supervision humaine et preuve adaptée au risque
+ 
+-## Non publié — candidate V1.2 (B05), chantiers A, B et D
++## V1.2.0 — Refonte : noyau de fabrication, trace graduée et consolidation (2026-10-01)
+ 
+ - **Bilan de fabrication.** `FABRICATION` remplace `ANCHOR-BASIS` et `ANCHOR-LIMIT` dans le Creative Boot ; `CONSTRAINT` inclut la destination ; en produit réel, jamais de faux asset ; capacités absentes : plafond déclaré, rendu livré. Trace seule, schéma `RUN_CARD` inchangé.
+ - **Prise de brief minimale.** `DIRECTION/EXTERNAL-START` : au plus trois demandes, en un seul échange : contenu réel, marque, asset principal ou route autorisée, destination si elle est incertaine ; construire dans tous les cas.
+@@ -41,7 +41,7 @@
+ - **Validateurs (audit progressif, unité 4a).** Le lecteur de routes refuse un locator répété, un propriétaire incohérent et un titre porteur dupliqué ; les contrats et le manifeste refusent une clé JSON répétée ; le schéma `RUN_CARD` n’admet que les mots-clés réellement interprétés ; dates et heures doivent être réelles ; une valeur d’un autre type que son enum, un schéma non objet ou un Markdown non UTF-8 reçoivent un diagnostic nommé au lieu d’une erreur brute.
+ - **Façades (audit progressif, unité 4b).** QUICKSTART, glossaire, carte de lecture, README, flux et exemples exposent la trace légère et la proposition par défaut (la première proposition vaut checkpoint ; fermer suppose la trace complète) ; mode et niveau de trace sont distingués ; la forme courte LITE est située ; l’exemple de brief flou change de domaine et montre sa trace légère ; les guides lient la section « Commencer » ; l’ancien parcours des notes de version est situé comme historique.
+ - **Raccords de chargement et de précision (audit progressif, unité 5b).** Toute exigence UI/UX déclarée est couverte (`OBSERVED`, `NOT-VERIFIED` ou `N/A-JUSTIFIED`) ; `DIRECTION/CHARGE` appelle `DIRECTION/DOMAIN-FRAME` pour une demande nouvelle, ambiguë ou multi-domaines ; les vues de chargement suivent les conditions de `CHARGE` ; le delta local, la comparaison avant/après, le test de masquage, la question de convergence et la preuve par médium sont précisés.
+-- **Efficacité.** `NOT-VERIFIED` : l’épreuve de référence donne V1.1.1 ≈ sans système sur la qualité perçue ; l’effet de ces chantiers reste à éprouver (G4).
++- **Efficacité.** `NOT-VERIFIED` : l’épreuve de référence donne V1.1.1 ≈ sans système sur la qualité perçue ; le palier exploratoire de R10 (six productions, auto-comparaison, juges modèles d’une seule famille) oriente sans prouver ; l’effet de V1.2.0 reste à éprouver par une épreuve à juges extérieurs (G4).
+ 
+ ## V1.1.1 — Retour d’audit : alignements de textes et de façades
+ 
+diff --git a/package/V1/official/QUICKSTART.md b/package/V1/official/QUICKSTART.md
+index 8c08276..31d72ab 100644
+--- a/package/V1/official/QUICKSTART.md
++++ b/package/V1/official/QUICKSTART.md
+@@ -1,6 +1,6 @@
+-# Design Governance V1.1.1 — Quickstart (guide opérateur)
++# Design Governance V1.2.0 — Quickstart (guide opérateur)
+ 
+-**Package Design Governance V1.1.1.** Expérimentation maintenue pour diriger, construire et vérifier un travail de design avec une trace proportionnée au risque. Il est destiné à un usage supervisé et ne constitue pas une preuve d’efficacité en production.
++**Package Design Governance V1.2.0.** Expérimentation maintenue pour diriger, construire et vérifier un travail de design avec une trace proportionnée au risque. Il est destiné à un usage supervisé et ne constitue pas une preuve d’efficacité en production.
+ 
+ > **Rôle de ce guide :** fournir une interface d’activation rapide. Il oriente la lecture et l’action, mais n’ajoute aucune règle, route, gate, axe, statut, verdict ou autorité. Les cinq sources normatives font foi.
+ 
+diff --git a/package/V1/official/README.md b/package/V1/official/README.md
+index 8d16942..def28ba 100644
+--- a/package/V1/official/README.md
++++ b/package/V1/official/README.md
+@@ -1,6 +1,6 @@
+-# Design Governance V1.1.1
++# Design Governance V1.2.0
+ 
+-Ce dossier contient les sources officielles de **Design Governance V1.1.1**, une expérimentation maintenue : un cadre de direction, de création, de jugement et de vérification du design.
++Ce dossier contient les sources officielles de **Design Governance V1.2.0**, une expérimentation maintenue : un cadre de direction, de création, de jugement et de vérification du design.
+ 
+ Pour commencer, lisez la section [« Commencer »](../../README.md#commencer) du README à la racine du package : vous n’avez pas à choisir de mode. Pour piloter un run, lisez le guide opérateur [`QUICKSTART.md`](./QUICKSTART.md) ; un agent entre par la skill `design-governance-practice`. Le vocabulaire est défini dans [`GLOSSAIRE.md`](./GLOSSAIRE.md).
+ 
+diff --git a/package/scripts/build_distributions.sh b/package/scripts/build_distributions.sh
+index adeeb73..ba85e2f 100755
+--- a/package/scripts/build_distributions.sh
++++ b/package/scripts/build_distributions.sh
+@@ -65,9 +65,9 @@ cp -a "$ROOT/scripts/read_route.py" "$STAGE/local/scripts/read_route.py"
+ cp -a "$ROOT/scripts/validate_structure.py" "$STAGE/local/scripts/validate_structure.py"
+ cp -a "$ROOT/scripts/build_core.py" "$STAGE/local/scripts/build_core.py"
+ cat > "$STAGE/local/README.md" <<'EOF'
+-# Design Governance V1.1.1 — export Local
++# Design Governance V1.2.0 — export Local
+ 
+-Design Governance V1.1.1 est une expérimentation maintenue qui aide à transformer un brief en proposition de design visuellement dirigée, cultivée, spécifique, construite et polie, puis en travail vérifiable. Son usage recommandé est supervisé ; son efficacité réelle reste `NOT-VERIFIED`.
++Design Governance V1.2.0 est une expérimentation maintenue qui aide à transformer un brief en proposition de design visuellement dirigée, cultivée, spécifique, construite et polie, puis en travail vérifiable. Son usage recommandé est supervisé ; son efficacité réelle reste `NOT-VERIFIED`.
+ 
+ <!-- partage:entree -->
+ 
+diff --git a/package/scripts/package_manifest.json b/package/scripts/package_manifest.json
+index ab1019b..b10f898 100644
+--- a/package/scripts/package_manifest.json
++++ b/package/scripts/package_manifest.json
+@@ -1,5 +1,5 @@
+ {
+-  "version": "1.1.1",
++  "version": "1.2.0",
+   "github": [
+     ".github/workflows/validate.yml",
+     ".gitignore",
+diff --git a/package/scripts/validate_structure.py b/package/scripts/validate_structure.py
+index 35fd6ca..260b369 100644
+--- a/package/scripts/validate_structure.py
++++ b/package/scripts/validate_structure.py
+@@ -748,6 +748,12 @@ def check_facades(errors: list[str]) -> None:
+         body = notes.read_text(encoding="utf-8")
+         if "lire README et QUICKSTART" in body and "Parcours de V1.1.1, historique" not in body:
+             errors.append("[FAC-01] RELEASE_NOTES : ancien parcours d'agent présenté comme courant (C39)")
++        # R12 (V12R_48) : les notes de version déclarent l'efficacité non vérifiée, l'épreuve G4 à faire et la
++        # frontière de ce que le validateur atteste (réserves de clôture 1, 4 et 5).
++        for needle, origin in (("**Efficacité : `NOT-VERIFIED`.**", "réserves 1 et 4"), ("(G4)", "réserve 1"),
++                               ("## Ce que le validateur atteste", "réserve 5")):
++            if needle not in body:
++                errors.append(f"[FAC-01] RELEASE_NOTES : « {needle} » absent ({origin}, R12)")
+ 
+ 
+ def check() -> list[str]:

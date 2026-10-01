@@ -1,8 +1,8 @@
-# Design Governance V1.1.1
+# Design Governance V1.2.0
 
 Design Governance V1 est un cadre de **direction, de création, de jugement et de vérification du design**. Il aide à transformer un brief en décision située, artefact réel, observation pertinente et trace proportionnée au risque.
 
-> **Statut expérimental :** Design Governance V1.1.1 est une expérimentation maintenue. La baseline est contrôlée et destinée à un usage supervisé ; elle ne promet ni beauté automatique, ni réussite universelle, ni validation d’usage, ni conformité sans preuve adaptée.
+> **Statut expérimental :** Design Governance V1.2.0 est une expérimentation maintenue. La baseline est contrôlée et destinée à un usage supervisé ; elle ne promet ni beauté automatique, ni réussite universelle, ni validation d’usage, ni conformité sans preuve adaptée.
 
 <!-- entree:début -->
 ## Commencer
@@ -25,8 +25,8 @@ Pour aller plus loin : le [guide opérateur](V1/official/QUICKSTART.md), la [ski
 | Élément | État |
 |---|---|
 | Contrat documentaire et machine | Validé avec réserves explicites |
-| Build et distributions | Validés et reproductibles |
-| Architecture de lecture | Durcie ; carte dérivée disponible |
+| Build et distributions | Validés et reproductibles ; validation complète observée en CI hébergée (Linux, Python 3.10 à 3.13) |
+| Architecture de lecture | Noyau de fabrication compilé ; liste de chargement unique ; carte dérivée disponible |
 | Efficacité sur des runs réels | `NOT-VERIFIED` |
 | Usage recommandé | Pilote contrôlé, revue humaine et preuve adaptée |
 

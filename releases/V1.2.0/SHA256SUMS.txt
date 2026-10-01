@@ -1,0 +1,3 @@
+5025c8ec7ec23f17a633d7d24fa8405f775165caf03b0d1d67637e5ae4903d4d  Design_Governance_V1.2.0_GITHUB.zip
+49bfa461bcf9e4f481162ae16ebb73c80da5ec318dadb9e71039535af9a541a5  Design_Governance_V1.2.0_LOCAL.zip
+a6be17e75a0cab8ec94e668f040faf1aceffa023f77d995ef12206543f8cd87f  Design_Governance_V1.2.0.md

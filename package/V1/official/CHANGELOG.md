@@ -1,11 +1,11 @@
-# Changelog — Design Governance V1.1.1
+# Changelog — Design Governance V1.2.0
 
-**Version publique :** `V1.1.1`  
-**Statut expérimental :** Design Governance V1.1.1 est une expérimentation maintenue.  
-**Date de la version :** 2026-09-26  
+**Version publique :** `V1.2.0`  
+**Statut expérimental :** Design Governance V1.2.0 est une expérimentation maintenue.  
+**Date de la version :** 2026-10-01 (V1.1.1 : 2026-09-26)  
 **Usage recommandé :** pilote contrôlé, supervision humaine et preuve adaptée au risque
 
-## Non publié — candidate V1.2 (B05), chantiers A, B et D
+## V1.2.0 — Refonte : noyau de fabrication, trace graduée et consolidation (2026-10-01)
 
 - **Bilan de fabrication.** `FABRICATION` remplace `ANCHOR-BASIS` et `ANCHOR-LIMIT` dans le Creative Boot ; `CONSTRAINT` inclut la destination ; en produit réel, jamais de faux asset ; capacités absentes : plafond déclaré, rendu livré. Trace seule, schéma `RUN_CARD` inchangé.
 - **Prise de brief minimale.** `DIRECTION/EXTERNAL-START` : au plus trois demandes, en un seul échange : contenu réel, marque, asset principal ou route autorisée, destination si elle est incertaine ; construire dans tous les cas.
@@ -41,7 +41,7 @@
 - **Validateurs (audit progressif, unité 4a).** Le lecteur de routes refuse un locator répété, un propriétaire incohérent et un titre porteur dupliqué ; les contrats et le manifeste refusent une clé JSON répétée ; le schéma `RUN_CARD` n’admet que les mots-clés réellement interprétés ; dates et heures doivent être réelles ; une valeur d’un autre type que son enum, un schéma non objet ou un Markdown non UTF-8 reçoivent un diagnostic nommé au lieu d’une erreur brute.
 - **Façades (audit progressif, unité 4b).** QUICKSTART, glossaire, carte de lecture, README, flux et exemples exposent la trace légère et la proposition par défaut (la première proposition vaut checkpoint ; fermer suppose la trace complète) ; mode et niveau de trace sont distingués ; la forme courte LITE est située ; l’exemple de brief flou change de domaine et montre sa trace légère ; les guides lient la section « Commencer » ; l’ancien parcours des notes de version est situé comme historique.
 - **Raccords de chargement et de précision (audit progressif, unité 5b).** Toute exigence UI/UX déclarée est couverte (`OBSERVED`, `NOT-VERIFIED` ou `N/A-JUSTIFIED`) ; `DIRECTION/CHARGE` appelle `DIRECTION/DOMAIN-FRAME` pour une demande nouvelle, ambiguë ou multi-domaines ; les vues de chargement suivent les conditions de `CHARGE` ; le delta local, la comparaison avant/après, le test de masquage, la question de convergence et la preuve par médium sont précisés.
-- **Efficacité.** `NOT-VERIFIED` : l’épreuve de référence donne V1.1.1 ≈ sans système sur la qualité perçue ; l’effet de ces chantiers reste à éprouver (G4).
+- **Efficacité.** `NOT-VERIFIED` : l’épreuve de référence donne V1.1.1 ≈ sans système sur la qualité perçue ; le palier exploratoire de R10 (six productions, auto-comparaison, juges modèles d’une seule famille) oriente sans prouver ; l’effet de V1.2.0 reste à éprouver par une épreuve à juges extérieurs (G4).
 
 ## V1.1.1 — Retour d’audit : alignements de textes et de façades
 

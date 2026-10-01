@@ -1,6 +1,6 @@
-# Design Governance V1.1.1 — Quickstart (guide opérateur)
+# Design Governance V1.2.0 — Quickstart (guide opérateur)
 
-**Package Design Governance V1.1.1.** Expérimentation maintenue pour diriger, construire et vérifier un travail de design avec une trace proportionnée au risque. Il est destiné à un usage supervisé et ne constitue pas une preuve d’efficacité en production.
+**Package Design Governance V1.2.0.** Expérimentation maintenue pour diriger, construire et vérifier un travail de design avec une trace proportionnée au risque. Il est destiné à un usage supervisé et ne constitue pas une preuve d’efficacité en production.
 
 > **Rôle de ce guide :** fournir une interface d’activation rapide. Il oriente la lecture et l’action, mais n’ajoute aucune règle, route, gate, axe, statut, verdict ou autorité. Les cinq sources normatives font foi.
 

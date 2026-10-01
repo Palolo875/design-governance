@@ -26,7 +26,7 @@ Ne rien modifier dans `package/` pendant l'initialisation.
 
 ## 2. État actuel (mis à jour le 01-10-2026 ; historique depuis le 26-09-2026)
 
-- **Version courante : V1.1.1**, dans `package/`. Non publiée.
+- **Version courante : V1.2.0**, dans `package/`, **publiée le 01-10-2026** (`releases/V1.2.0/`, étiquette `v1.2.0`, `V12R_48`), comme expérimentation maintenue ; efficacité `NOT-VERIFIED` (G4 à faire). `main` reste en V1.1.1 tant que l'owner n'a pas décidé la fusion. V1.1.1 est historique (`releases/V1.1.1/`).
 - **Audit DG-AUDIT-001 : clos**, statut final décidé par l'owner : **`AUDIT-PASS-WITH-RESERVATION`**. Dossier : `audit/reports/Audit_Cloture_Finale_DG-AUDIT-001.md`.
 - **Contrôles de V1.1.1 :** 22 harnais 300/300, témoins 40/40 ; harnais R 31/31 ; harnais R03 18/18 ; vérifications 13.01 26/26 ; épreuves déterministes 13.02 38/38.
 - **Réserves ouvertes** (détail dans le dossier de clôture, §3) :
@@ -134,13 +134,14 @@ Ne rien modifier dans `package/` pendant l'initialisation.
 - **AP5b appliqué** (`V12R_46`) : C15 (a) toute exigence UI/UX déclarée couverte (code, exemple ; harnais C9 rectifié, déclaré) ; C25 `DOMAIN-FRAME` dans `CHARGE` (noyau) ; C26 vues alignées sur `CHARGE` ; C27 delta local qualifié ; C28 comparaison et version retenue ; C29 dépendance porteuse ; C30 « si rien ne les justifie » ; C31 cinq responsabilités ; 11/11 mutations ; suivi vert ; 13.01 6/6, 6/6, 5/5, 9/9 ; 13.02 38/38 ; chemin 13 835, noyau 4 602, doublons 142. **Les 39 constats de l'audit progressif ont une disposition.**
 - **AUD-07 disposé sans changement** (01-10-2026) : la convergence d'objet est déjà couverte dans le noyau (test de trame : « l'objet qui organise la page » ; signal de veille R10) ; une question de plus ferait doublon, sans effet observable sans run ; signal maintenu jusqu'à G4.
 - **R11 final fait** (`V12R_47`, package inchangé) : workflow CI à la racine du dépôt (`validate_all` du package, Python 3.10/3.11/3.13, B01) ; runs 3 et 4 **verts** sur les deux branches (`FULL VALIDATION PASSED` lu dans le journal) ; premier push en YAML invalide, corrigé et déclaré ; réserves de clôture disposées : 1 et 4 maintenues (G4), 2 levée dans le périmètre observé, 3 réduite (reliquat déclaré), 5 à communiquer en R12, 6 réduite (−41 % de mots, économie non observée), 7 maintenue, 8 close, 9 en R12.
-- **Chantier en cours : consolidation V1.2**, pilotée par `plans/Plan_V1.2_Suite_Reprise.md` ; architecture dans `plans/Plan_V1.2_Refonte.md`, décisions dans `V12R_14`. Objectif : un premier rendu composé, spécifique et soigné, avec une entrée humaine claire et un effort maîtrisé ; efficacité encore à évaluer. R8b mobilise les moyens et les enseignements transférables ; R8c précise les gestes utiles ; aucun atlas de créations obligatoire.
+- **R12 fait : V1.2.0 publiée** (`V12R_48`, décision (a) de l'owner) : version 1.2.0 partout (manifeste, CHANGELOG daté, titres, README Local), notes de version réécrites (efficacité `NOT-VERIFIED`, G4, frontière du validateur ; garde FAC-01) ; 3/3 mutations ; suivi vert ; 13.01 6/6, 6/6, 5/5, 9/9 ; 13.02 38/38 ; livrables reproductibles dans `releases/V1.2.0/` (GitHub 62 fichiers, Local 58, compilé, `SHA256SUMS.txt`) ; étiquette `v1.2.0`. En attente de l'owner : fusion dans `main` et Release GitHub ; G4.
+- **Chantier V1.2 (historique)**, pilotée par `plans/Plan_V1.2_Suite_Reprise.md` ; architecture dans `plans/Plan_V1.2_Refonte.md`, décisions dans `V12R_14`. Objectif : un premier rendu composé, spécifique et soigné, avec une entrée humaine claire et un effort maîtrisé ; efficacité encore à évaluer. R8b mobilise les moyens et les enseignements transférables ; R8c précise les gestes utiles ; aucun atlas de créations obligatoire.
 
 ## 3. Arborescence
 
 | Chemin | Contenu | Statut |
 |---|---|---|
-| `package/` | Système V1.1.1 (sources, schémas, scripts, skill) | Version courante ; ne se modifie que par PATCH-DECISION |
+| `package/` | Système V1.2.0 (sources, schémas, scripts, skill) | Version courante ; ne se modifie que par PATCH-DECISION |
 | `reference/B01_transfert/` | Baseline B01 = V1.0.0, avec `SHA256SUMS.txt` (218 fichiers) | **Lecture seule, toujours** |
 | `reference/B02/` | Candidate V1.0.1 gelée, jamais utilisée | Gelée |
 | `history/` | Bundles git : `B03_V1.1.0.bundle`, `B04_V1.1.1.bundle` (toutes les étiquettes : `12.00`… `12.06-outils-v1.1.0`, `R.02-*`, `R.03-patch`, `R.03b-seconde-passe`) | Archive ; `git clone history/B04_V1.1.1.bundle /tmp/b04` pour consulter |
@@ -148,7 +149,7 @@ Ne rien modifier dans `package/` pendant l'initialisation.
 | `audit/snapshots/` | Instantanés des harnais (B01, B03 12-00 à 12-06, B04 R.02 et R.03) | Référence de comparaison |
 | `audit/reports/` | Tous les rapports d'audit, le plan maître, le dossier de clôture | Historique |
 | `audit/data/`, `audit/diffs/`, `audit/logs/`, `audit/sources/` | Registres CSV, diffs, journaux et captures, protocole maître d'audit v2.0 | Historique |
-| `releases/` | Zips GitHub/Local et fichier compilé de V1.1.0 et V1.1.1 | Livrables figés |
+| `releases/` | Zips GitHub/Local et fichier compilé de V1.1.0, V1.1.1 et V1.2.0 (avec `SHA256SUMS.txt`) | Livrables figés |
 | `plans/` | Plan V1.2 | Travail en cours |
 
 ## 4. Règles de méthode (non négociables)
@@ -204,7 +205,7 @@ python3 scripts/read_route.py ACTION/RUN_CARD  # lire une route
 ## 6. Prochaine étape
 
 1. ~~Porte G1 du plan V1.2~~ : franchie le 26-09-2026 (`audit/reports/V12_01_DECISIONS_G1.md`).
-2. ~~B05, lot 1 (A, B, D), addendum, lot 2 (G, H, I, D')~~ : faits (`V12_02` à `V12_04`). Lectures `V12_05` à `V12_11` faites. Mini-épreuve **reportée par l'owner** (27-09-2026). **Refonte (`plans/Plan_V1.2_Refonte.md`) : décisions 1, 2, 4, 7 prises ; R1, R2, R3 et R4 faits. P1 fait (orientation positive). R5b-1, R5b-2, R5a, R8a, R5c (hors ancre), R5d, R6a et R11a faits. Arbitrages décidés (`V12R_14`). Inventaire créé ; R8b, R8c, R7 (et raccords R7-2, R7-3), R11 ciblé, R6b élargi (R6b-1, R6b-2), restes R5, relecture de parcours et raccords R11b faits ; porte P2 franchie et conclue après R11c ; palier exploratoire de R10 fait (`V12R_35`) ; D-25 corrigé et R10 arrêté (`V12R_36`) ; audit interne A1 fait (`V12R_37`) et raccords A1 appliqués (`V12R_38`) ; A2 appliqué (`V12R_39`). Audit progressif externe : AP1 à AP5b faits (`V12R_40` à `V12R_46`), tous les constats disposés ; AUD-07 disposé sans changement ; R11 final fait (`V12R_47`, CI verte). Prochaine : R12 (publication V1.2.0, sur feu vert de l'owner) → R11 final → R12 — voir `plans/Plan_V1.2_Suite_Reprise.md`**, puis G4.
+2. ~~B05, lot 1 (A, B, D), addendum, lot 2 (G, H, I, D')~~ : faits (`V12_02` à `V12_04`). Lectures `V12_05` à `V12_11` faites. Mini-épreuve **reportée par l'owner** (27-09-2026). **Refonte (`plans/Plan_V1.2_Refonte.md`) : décisions 1, 2, 4, 7 prises ; R1, R2, R3 et R4 faits. P1 fait (orientation positive). R5b-1, R5b-2, R5a, R8a, R5c (hors ancre), R5d, R6a et R11a faits. Arbitrages décidés (`V12R_14`). Inventaire créé ; R8b, R8c, R7 (et raccords R7-2, R7-3), R11 ciblé, R6b élargi (R6b-1, R6b-2), restes R5, relecture de parcours et raccords R11b faits ; porte P2 franchie et conclue après R11c ; palier exploratoire de R10 fait (`V12R_35`) ; D-25 corrigé et R10 arrêté (`V12R_36`) ; audit interne A1 fait (`V12R_37`) et raccords A1 appliqués (`V12R_38`) ; A2 appliqué (`V12R_39`). Audit progressif externe : AP1 à AP5b faits (`V12R_40` à `V12R_46`), tous les constats disposés ; AUD-07 disposé sans changement ; R11 final fait (`V12R_47`, CI verte) ; **R12 fait : V1.2.0 publiée** (`V12R_48`). Prochaine : décisions de l'owner sur la fusion dans `main` et la Release GitHub ; puis G4 (épreuve à l'aveugle avec juges extérieurs) — voir `plans/Plan_V1.2_Suite_Reprise.md`**.
 **Plan de reprise (à lire en premier pour continuer) : `plans/Plan_V1.2_Suite_Reprise.md`** — consignes en vigueur (pas de run ni d'épreuve dans cette phase ; qualité avant nombre de mots), recette d'une unité, lots restants avec périmètre, gardes, réussite et arrêt, porte P2 et R10 progressif.
 3. Suivre le séquencement du plan : G2 (gardes rouges puis vertes) → G3 (non-régression, charge mesurée et justifiée) → G4 (épreuve à l'aveugle avec juges extérieurs) → publication V1.2.0.
 
