@@ -25,6 +25,7 @@ Gardes :
      aucun mode demandé, vouvoiement ; une seule constitution minimale (ENT-01, CST-01).
  15. PRÉAMBULE DE BIBLIOTHEQUE — ni catégories de lecture ni contrat de promotion avant les routes (MNT-01, D-15).
  16. EN-TÊTE DE LA SKILL — métadonnées `name` et `description` lisibles en YAML : valeur citée dès qu'elle porte « : » (SKL-01, C01).
+ 17. DÉCLENCHEUR UI/UX — `CHARGE` appelle `ACTION/UI-UX-REALITY` en STANDARD et DIRECTION avant fabrication, pas en LITE (UIX-01, C08).
 
 Une reformulation ne casse pas ces gardes ; une suppression, un déplacement, une copie ou un retour du
 vocabulaire retiré les cassent. `scripts/read_route.py` retire les balises à la lecture.
@@ -88,6 +89,7 @@ REFERENCES: list[tuple[str, str]] = [
 
 # 3. Vocabulaire retiré : motif, remplacement, fichiers exemptés (historique).
 RETIRED: list[tuple[str, str, set[str]]] = [
+    (r"`CLOSED` uniquement si la direction est tenue", "CLOSED décrit la persistance ; le résultat se déclare à part (ACTION/STATUS, C05)", {"CHANGELOG.md"}),
     (r"anti-directions?", "MODAL / PARTI", {"CHANGELOG.md"}),
     (r"MODE — DECISION — CHANGE — PROOF", "réponse visible en langage produit (ACTION/HANDOFF)", {"CHANGELOG.md"}),
     (r"déclenche un (?:nouveau )?checkpoint", "la première proposition vaut checkpoint (ACTION/PIPELINE-DIRECTION)", {"CHANGELOG.md"}),
@@ -220,7 +222,7 @@ FIDELITY: list[tuple[str, str, str]] = [
     ("ancre absente : pas de FAIL-ASSUMED, pipeline (AUD-03)", r"Sans ancre utile et spec exploitable", "échec connu"),
     ("preuve indisponible : pas de FAIL-ASSUMED (AUD-03)", r"Si une preuve est indisponible, le mode ne baisse pas", "échec connu"),
     ("trace persistante en trace complète (AUD-04)", r"conserve(?:nt)? une trace persistante", "trace complète"),
-    ("FAST-PATH : clôture en trace complète (AUD-04)", r"clôture avec la forme courte LITE", "trace complète"),
+    ("FAST-PATH : clôture en trace complète (AUD-04)", r"clôture avec (?:la forme courte LITE|le paquet de son mode)", "trace complète"),
     ("sélection structurelle persistée en trace complète (AUD-04)", r"sélection structurelle[^.?]{0,40}persisté", "trace complète"),
     ("flux : fermer en trace complète (AUD-04)", r"[Dd]écider et fermer", "trace complète"),
     ("exemples : niveau de trace (AUD-04)", r"Les champs affichés respectent les contrats d’ACTION", "trace complète"),
@@ -237,6 +239,15 @@ FIDELITY: list[tuple[str, str, str]] = [
     # R7-2 (V12R_24)
     ("ancre et FAIL-ASSUMED (R7-2)", r"sans (?:l’)?ancre[^.]{0,200}`FAIL-ASSUMED`|ancre (?:absente|manquante)[^.]{0,200}`FAIL-ASSUMED`|"
      r"`FAIL-ASSUMED`[^.]{0,120}ancre (?:absente|manquante)", "échec connu"),
+    # Audit progressif, unité AP3 (V12R_42)
+    ("RUN-DIRECTION : CLOSED distinct du résultat (C05)", r"puis `CLOSED` lorsque l’artefact et la trace sont persistés", "ACTION/STATUS"),
+    ("FAST-PATH : paquet du mode, ITER vers ITER (C06)", r"Pour `LITE` et les petits `ITER`", "paquet `ITER` pour un `ITER`"),
+    ("niveau requis : preuve manquante distincte du N/A (C09)", r"Obligation spécialisée\. \|", "NOT-VERIFIED"),
+    ("recherche : confirmation distincte du N/A (C09)", r"Une recherche de domaine et une recherche de calibration visuelle", "confirmation"),
+    ("module sans effet : confirmation distincte du N/A (C09)", r"Quelle décision concrète a changé grâce à ce module", "confirmation"),
+    ("QUICKSTART, fermeture : preuve manquante distincte du N/A (C09)", r"la preuve attendue est obtenue ou déclarée", "ne vaut que si la preuve ne s’applique pas"),
+    ("règle d'or 8 : réserve structurée recevable (C10)", r"ne compense jamais un axe bloquant par une moyenne", "ACCEPTED-WITH-RESERVATION"),
+    ("contenu marqué : fonctions d'un produit fictif (D-26)", r"\*\*Destination réelle sans contenu\.\*\*", "fonctions, intégrations et conformités affirmées"),
 ]
 
 # 13. Entrée humaine (R6b-1) : une seule entrée, balisée dans le README du package et reprise par le README Local ;
@@ -578,7 +589,11 @@ def check_order(errors: list[str]) -> None:
 # AUD-01 et AUD-02 (V12R_39) : ce que la section compilée de la skill doit porter
 CORE_FLOOR = [("| Ajouter seulement si", "colonne « Ajouter seulement si » de DIRECTION/CHARGE (AUD-01)"),
               ("Conçois une palette par rôles", "plancher couleur de SAVOIR/CRAFT/CFT-05 (AUD-02)"),
-              ("Choisis une typographie pour ses langues", "plancher typographique de SAVOIR/TYPE (AUD-02)")]
+              ("Choisis une typographie pour ses langues", "plancher typographique de SAVOIR/TYPE (AUD-02)"),
+              ("Dans le scope de B1b", "portée de l'atelier d'édition et ses deux exceptions (C07)"),
+              ("`ACTION/UI-UX-REALITY` si la surface UI/UX est nouvelle ou substantiellement modifiée",
+               "déclencheur UI/UX avant fabrication (C08)"),
+              ("fonctions, intégrations et conformités affirmées", "fonctions d'un produit fictif marquées (D-26)")]
 
 
 def check_core_floor(errors: list[str]) -> None:
@@ -645,6 +660,28 @@ def check_skill_header(errors: list[str]) -> None:
         errors.append(f"[SKL-01] en-tête de la skill : name « {values['name']} » ≠ design-governance-practice")
 
 
+# 17. Déclencheur UI/UX (audit progressif, C08) : dans DIRECTION/CHARGE, la colonne « Charger d'abord » des lignes
+# STANDARD et DIRECTION appelle ACTION/UI-UX-REALITY pour une surface UI/UX nouvelle ou substantiellement modifiée ;
+# la ligne LITE ne l'appelle pas (un delta local n'est pas une surface nouvelle).
+UI_TRIGGER = "`ACTION/UI-UX-REALITY` si la surface UI/UX est nouvelle ou substantiellement modifiée"
+
+
+def check_ui_trigger(errors: list[str]) -> None:
+    source = (OFFICIAL / "DIRECTION.md").read_text(encoding="utf-8")
+    start = source.find("## DIRECTION/CHARGE")
+    skill = (SKILL_DIR / "SKILL.md").read_text(encoding="utf-8")
+    places = [("CHARGE", source[start:source.find("\n## ", start + 1)] if start >= 0 else ""),
+              ("noyau compilé", skill[skill.find("<!-- noyau:compilé début -->"):skill.find("<!-- noyau:compilé fin -->")])]
+    for place, section in places:
+        rows = {line.split("|")[1].strip(): line.split("|") for line in section.splitlines() if line.startswith("| **")}
+        for mode in ("**STANDARD**", "**DIRECTION**"):
+            cells = rows.get(mode)
+            if not cells or UI_TRIGGER not in cells[2]:
+                errors.append(f"[UIX-01] {place} : la ligne {mode.strip('*')} ne charge pas ACTION/UI-UX-REALITY avant fabrication")
+        if "UI-UX-REALITY" in "|".join(rows.get("**LITE**", [])):
+            errors.append(f"[UIX-01] {place} : la ligne LITE appelle ACTION/UI-UX-REALITY (delta local)")
+
+
 def check() -> list[str]:
     errors: list[str] = []
     corpus = texts()
@@ -665,6 +702,7 @@ def check() -> list[str]:
     check_preamble(errors)
     check_core_floor(errors)
     check_skill_header(errors)
+    check_ui_trigger(errors)
     return errors
 
 

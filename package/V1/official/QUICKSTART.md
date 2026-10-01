@@ -265,7 +265,7 @@ Pour un run persistant, utilisez la `RUN_CARD` d’`ACTION` et conservez un `TRA
 Avant de fermer, vérifiez que :
 
 1. le défaut dominant est corrigé, absent ou explicitement réservé ;
-2. la preuve attendue est obtenue ou déclarée `NOT-VERIFIED`, `NOT-OBSERVED` ou `N/A-JUSTIFIED` avec sa raison ;
+2. la preuve attendue est obtenue ou déclarée `NOT-VERIFIED` ; une conséquence attendue non observée est `NOT-OBSERVED` ; `N/A-JUSTIFIED`, avec sa raison, ne vaut que si la preuve ne s’applique pas ;
 3. une correction technique ou de conformité n’a pas effacé la direction spécifique ;
 4. la trace, les artefacts, les limites et l’owner sont retrouvables ;
 5. une nouvelle itération ne promet plus de changement visible ou utile, ou bien la prochaine action est nommée.

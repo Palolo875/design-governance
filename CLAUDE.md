@@ -111,7 +111,14 @@ Ne rien modifier dans `package/` pendant l'initialisation.
   - outils rectifiés et déclarés : `V12R_Suivi.py` (C14 : tout cas de la table doit être exécuté ; une garde de remplacement n'est verte que si elle est établie) et `V12R_Mesures.py` (C22 : export d'atteignabilité correct) ;
   - errata datés : C34 (`V12R_37`), C35 et C36 (`V12R_35`) ; réserve D-26 rétablie dans les résumés ;
   - sonde `V12R_Sonde_AP2.py` 10/10, l'ancienne version échouant sur 4 scénarios ; suivi vert avec les 26 gardes établies ;
-  - décision attendue : D-26, (a) clause dans `CNT-01` en AP3 (recommandée) ou (b) limite déclarée.
+  - D-26 : option (a) retenue par l'owner.
+- **AP3 appliqué** (`V12R_42`, textes soumis puis validés) :
+  - C08 : `CHARGE` (et sa vue d'ACTION) appelle `ACTION/UI-UX-REALITY` avant fabrication en STANDARD et DIRECTION (surface UI/UX nouvelle ou substantiellement modifiée), LITE exclu ; garde UIX-01 ;
+  - C05 : `CLOSED` décrit la persistance, le résultat se déclare à part (RUN-DIRECTION) ; C06 : petit `ITER` → paquet `ITER` ;
+  - C07 : portée de l'atelier (B1b, deux exceptions) en tête du bloc compilé, sans extension ;
+  - C09 : `N/A-JUSTIFIED` distinct d'une preuve manquante ou d'une confirmation (4 lieux ; 5 vrais N/A maintenus) ; C10 : réserve structurée recevable ;
+  - D-26 : fonctions d'un produit fictif marquées dans `CNT-01` ;
+  - 14/14 mutations rouges ; suivi vert ; 13.01 texte 6/6, mutations 6/6, non-régression 5/5, distributions 9/9 ; 13.02 38/38 ; chemin 13 774, noyau 4 541, doublons 142.
 - **Chantier en cours : consolidation V1.2**, pilotée par `plans/Plan_V1.2_Suite_Reprise.md` ; architecture dans `plans/Plan_V1.2_Refonte.md`, décisions dans `V12R_14`. Objectif : un premier rendu composé, spécifique et soigné, avec une entrée humaine claire et un effort maîtrisé ; efficacité encore à évaluer. R8b mobilise les moyens et les enseignements transférables ; R8c précise les gestes utiles ; aucun atlas de créations obligatoire.
 
 ## 3. Arborescence
@@ -182,7 +189,7 @@ python3 scripts/read_route.py ACTION/RUN_CARD  # lire une route
 ## 6. Prochaine étape
 
 1. ~~Porte G1 du plan V1.2~~ : franchie le 26-09-2026 (`audit/reports/V12_01_DECISIONS_G1.md`).
-2. ~~B05, lot 1 (A, B, D), addendum, lot 2 (G, H, I, D')~~ : faits (`V12_02` à `V12_04`). Lectures `V12_05` à `V12_11` faites. Mini-épreuve **reportée par l'owner** (27-09-2026). **Refonte (`plans/Plan_V1.2_Refonte.md`) : décisions 1, 2, 4, 7 prises ; R1, R2, R3 et R4 faits. P1 fait (orientation positive). R5b-1, R5b-2, R5a, R8a, R5c (hors ancre), R5d, R6a et R11a faits. Arbitrages décidés (`V12R_14`). Inventaire créé ; R8b, R8c, R7 (et raccords R7-2, R7-3), R11 ciblé, R6b élargi (R6b-1, R6b-2), restes R5, relecture de parcours et raccords R11b faits ; porte P2 franchie et conclue après R11c ; palier exploratoire de R10 fait (`V12R_35`) ; D-25 corrigé et R10 arrêté (`V12R_36`) ; audit interne A1 fait (`V12R_37`) et raccords A1 appliqués (`V12R_38`) ; A2 appliqué (`V12R_39`). Audit progressif externe : AP1 et AP2 faits (`V12R_40`, `V12R_41`). Prochaine : AP3 (C08, C05 à C07, C09, C10) → AP4 (validateurs, puis façades avec AUD-06, 08, 13) → AP5 ; puis AUD-07 → R11 final → R12 — voir `plans/Plan_V1.2_Suite_Reprise.md`**, puis G4.
+2. ~~B05, lot 1 (A, B, D), addendum, lot 2 (G, H, I, D')~~ : faits (`V12_02` à `V12_04`). Lectures `V12_05` à `V12_11` faites. Mini-épreuve **reportée par l'owner** (27-09-2026). **Refonte (`plans/Plan_V1.2_Refonte.md`) : décisions 1, 2, 4, 7 prises ; R1, R2, R3 et R4 faits. P1 fait (orientation positive). R5b-1, R5b-2, R5a, R8a, R5c (hors ancre), R5d, R6a et R11a faits. Arbitrages décidés (`V12R_14`). Inventaire créé ; R8b, R8c, R7 (et raccords R7-2, R7-3), R11 ciblé, R6b élargi (R6b-1, R6b-2), restes R5, relecture de parcours et raccords R11b faits ; porte P2 franchie et conclue après R11c ; palier exploratoire de R10 fait (`V12R_35`) ; D-25 corrigé et R10 arrêté (`V12R_36`) ; audit interne A1 fait (`V12R_37`) et raccords A1 appliqués (`V12R_38`) ; A2 appliqué (`V12R_39`). Audit progressif externe : AP1, AP2 et AP3 faits (`V12R_40` à `V12R_42`). Prochaine : AP4 (validateurs, puis façades avec AUD-06, 08, 13) → AP5 ; puis AUD-07 → R11 final → R12 — voir `plans/Plan_V1.2_Suite_Reprise.md`**, puis G4.
 **Plan de reprise (à lire en premier pour continuer) : `plans/Plan_V1.2_Suite_Reprise.md`** — consignes en vigueur (pas de run ni d'épreuve dans cette phase ; qualité avant nombre de mots), recette d'une unité, lots restants avec périmètre, gardes, réussite et arrêt, porte P2 et R10 progressif.
 3. Suivre le séquencement du plan : G2 (gardes rouges puis vertes) → G3 (non-régression, charge mesurée et justifiée) → G4 (épreuve à l'aveugle avec juges extérieurs) → publication V1.2.0.
 

@@ -1,13 +1,14 @@
-# V1.2 — AP3 : diagnostic et textes exacts (raccords de procédure et de fabrication), testés sur copie, non appliqués
+# V1.2 — AP3 : raccords de procédure et de fabrication (C08, C05, C06, C07, C09, C10, D-26)
 
 **Date :** 01-10-2026.
 **Décisions de l'owner :**
 - « (a), allons-y pour AP3 » : D-26 option (a), une clause dans `CNT-01` ;
-- textes soumis avant application, comme convenu en `V12R_41` §7.
+- textes soumis avant application, comme convenu en `V12R_41` §7, puis « Allons-y » (01-10-2026) : appliqués tels quels.
 
 **Pièces :**
 - patch : `audit/tools/V12R_Patch_AP3.py` (+ `_fichiers/scripts/validate_structure.py`) ;
-- package inchangé.
+- diff : `audit/diffs/V12R_AP3_raccords.diff` ;
+- instantané : `audit/snapshots/V12R_Instantane_suivi_AP3.json`.
 
 ## 1. Vérifications préalables (certain)
 
@@ -61,3 +62,18 @@
 - **C07, conséquence connue.** « Hors de ce scope, il ne s'impose pas » reprend la règle d'ACTION/B1b. Cela peut réduire l'usage de l'atelier dans les runs qui ne visent pas une acceptation DIRECTION. L'étendre ailleurs reste un arbitrage distinct, non proposé.
 - **C08, placement.** Le déclencheur est placé dans « Charger d'abord », avec sa condition, sur le modèle de `EXTERNAL-START` (« si le brief est vague »). Il ne va pas dans « Ajouter seulement si », car c'est un contrat requis quand la condition est vraie, pas une option.
 - **Effet sur les rendus :** non observable sans run (R10 arrêté).
+
+## 6. Application et contrôles finaux, sur le package
+
+- **Application :** 14 entrées, textes identiques à ceux du §2 ; noyau recompilé, conforme à sa compilation.
+- **Gardes :** vertes. **Mutations :** 14/14 rouges.
+- **Suivi (rectifié en AP2) :** VERT. 389 cas, 363 maintenus, 26 obsolètes avec gardes établies, aucune migration ; `validate_all` vert.
+- **Cliquets :** chemin 13 774 mots, négations 817, doublons 142, une liste de chargement.
+- **13.01, par sous-contrôle :**
+  - texte 6/6 ;
+  - mutations 6/6 ;
+  - non-régression 5/5 ;
+  - distributions 9/9 (Linux, Python 3.10 et 3.13, archives construites depuis une copie ; pas de CI hébergée).
+- **13.02 :** 38/38. **Sonde AP1 (C01, C02) :** verte. **B01 :** 218/218.
+- **Effet sur les rendus :** non observé (R10 arrêté).
+

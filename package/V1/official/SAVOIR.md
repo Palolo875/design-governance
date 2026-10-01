@@ -53,7 +53,7 @@ Les tags indiquent le statut de lecture. Ils ne transforment pas une heuristique
 |---|---|---|
 | `[DURABLE]` | Principe de jugement stable du système. | Guider une décision ; ne pas le présenter comme loi empirique universelle. |
 | `[MÉTHODE]` | Procédure de raisonnement interne. | Adapter au mode, au contenu et au contexte. |
-| `[REQUIS PAR LE MODULE — scope]` | Obligation spécialisée. | Exécuter ou déclarer `N/A-JUSTIFIED` dans le scope. |
+| `[REQUIS PAR LE MODULE — scope]` | Obligation spécialisée. | Exécuter dans le scope ; sinon déclarer `NOT-VERIFIED` (preuve manquante), ou `N/A-JUSTIFIED` avec sa raison si l’obligation ne s’applique pas. |
 | `[À ADAPTER]` | Point de départ ou valeur illustrative. | Ajuster avec une raison située, un public et une contre-indication. |
 | `[VEILLE]` | Observation datée, outil, tendance ou support. | Vérifier avant de l’invoquer comme fait. |
 | `[OPINION DE SYSTÈME]` | Heuristique éditoriale du corpus. | Utiliser comme hypothèse, jamais comme preuve externe. |
@@ -554,7 +554,7 @@ OWNER / NEXT-PROOF: responsable et prochaine vérification
 RIGHTS / UNCERTAINTY: droits, autorisation ou inconnue lorsque l’asset ou le claim le requiert
 ```
 
-Une recherche de domaine et une recherche de calibration visuelle peuvent se compléter, mais elles ne se substituent pas l’une à l’autre. Une source de tendance ne prouve pas l’usage ; une référence visuelle ne prouve pas les droits ; une convention concurrente ne devient pas une vérité produit ; un résultat généré ne devient pas une observation externe. Lorsque la recherche ne modifie aucune décision, conserve `N/A-JUSTIFIED` et n’approfondis pas par réflexe.
+Une recherche de domaine et une recherche de calibration visuelle peuvent se compléter, mais elles ne se substituent pas l’une à l’autre. Une source de tendance ne prouve pas l’usage ; une référence visuelle ne prouve pas les droits ; une convention concurrente ne devient pas une vérité produit ; un résultat généré ne devient pas une observation externe. Lorsque la recherche ne peut modifier aucune décision, déclare `N/A-JUSTIFIED` et n’approfondis pas par réflexe ; une recherche faite qui confirme la décision est une confirmation (`ACTION/STATUS`), pas un `N/A-JUSTIFIED`.
 
 La profondeur de recherche augmente par déclencheur : confiance ou erreur coûteuse, public ou JTBD incertain, contexte culturel sensible, convention inconnue, matériau ou asset directeur à calibrer, ou écart créatif qui ne peut être défendu par le seul jugement interne. La recherche doit ensuite revenir dans le premier objet, la structure, le contenu, le geste ou la preuve ; sinon elle reste une archive et non un levier de production.
 
@@ -913,7 +913,7 @@ Le terme `same-energy` peut indexer un risque de convergence, mais ne remplace j
 
 ### Test de non-récitation
 
-Avant de conserver un artefact de jugement, demande : « Quelle décision concrète a changé grâce à ce module ? » Si la réponse est aucune, l’artefact est documentaire plutôt que décisionnel ; arrête, simplifie ou justifie `N/A-JUSTIFIED`.
+Avant de conserver un artefact de jugement, demande : « Quelle décision concrète a changé grâce à ce module ? » Si la réponse est aucune, l’artefact est documentaire plutôt que décisionnel ; arrête ou simplifie. Une décision que le module a confirmée se déclare comme confirmation ; `N/A-JUSTIFIED` reste réservé au module qui ne pouvait rien changer.
 
 ## Modes d’échec d’application
 
@@ -986,7 +986,7 @@ Ce résumé n’est pas une procédure de livraison. Il ne crée aucune route, g
 5. Fais passer accessibilité, responsive, récupération et performance avant l’effet.
 6. Sur une surface `DIRECTION`, la spec est toujours requise ; l’ancre suit `DIRECTION/VISUAL_TARGET` (utile, ou absence déclarée en exploration ; avant l’acceptation, absolu 2 de `DIRECTION`).
 7. Exécute les preuves applicables au mode ; déclare `NOT-VERIFIED` plutôt que de le noter comme `PASS`.
-8. Si un risque reste, retourne, passe en `EXPLORATORY` ou journalise un `FAIL-ASSUMED` autorisé ; ne compense jamais un axe bloquant par une moyenne.
+8. Si un risque bloquant reste, retourne, passe en `EXPLORATORY` ou journalise un `FAIL-ASSUMED` autorisé (échec connu) ; un risque non bloquant peut rester en réserve structurée (`ACCEPTED-WITH-RESERVATION`, `ACTION/STATUS`) ; ne compense jamais un axe bloquant par une moyenne.
 
 ---
 

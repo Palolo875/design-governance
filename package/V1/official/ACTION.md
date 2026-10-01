@@ -18,8 +18,8 @@ Cette carte est une vue de `DIRECTION/CHARGE`, pas une seconde liste : elle nomm
 |---|---|
 | `LITE` | `ACTION/RUN-LITE` ; `ACTION/GATE-A` applicable et `ACTION/GATE-B` du risque dominant |
 | `ITER` | `ACTION/RUN-ITER` ; non-régression pertinente ; `ACTION/GATE-A` applicable et `ACTION/GATE-B` du risque touché ; `ACTION/GATE-C` seulement si le craft change |
-| `STANDARD` | `ACTION/RUN-STANDARD` ; `BIBLIOTHEQUE/SELECT` si la structure est ouverte ; `ACTION/GATE-A`, `ACTION/GATE-B` ou `ACTION/GATE-C` ciblés selon le risque |
-| `DIRECTION` | `ACTION/RUN-DIRECTION`, `ACTION/PIPELINE-DIRECTION`, `ACTION/VISUAL_PROOF`, `ACTION/GATE-A`, `ACTION/GATE-C` ; `ACTION/GATE-B` en trace complète (`ACTION/HANDOFF`) |
+| `STANDARD` | `ACTION/RUN-STANDARD` ; `ACTION/UI-UX-REALITY` si la surface UI/UX est nouvelle ou substantiellement modifiée ; `BIBLIOTHEQUE/SELECT` si la structure est ouverte ; `ACTION/GATE-A`, `ACTION/GATE-B` ou `ACTION/GATE-C` ciblés selon le risque |
+| `DIRECTION` | `ACTION/RUN-DIRECTION`, `ACTION/UI-UX-REALITY` si la surface UI/UX est nouvelle ou substantiellement modifiée, `ACTION/PIPELINE-DIRECTION`, `ACTION/VISUAL_PROOF`, `ACTION/GATE-A`, `ACTION/GATE-C` ; `ACTION/GATE-B` en trace complète (`ACTION/HANDOFF`) |
 | `SYSTÈME` | `ACTION/RUN-SYSTEM`, puis `CHANGELOG` pour adoption ou migration |
 
 Le paquet de sortie de chaque mode est défini par `ACTION/CLOSE-PACKAGE` ; `ACTION/RUN-DIRECTION` (ancrages) et `ACTION/RUN-SYSTEM` (`closure.system_package`) en précisent le détail.
@@ -278,7 +278,7 @@ Pour réduire le slop procédural, préfère une proposition principale et une a
 
 ## ACTION/FAST-PATH — preuve minimale sans rituel
 
-Pour `LITE` et les petits `ITER`, arrête le protocole après quatre réponses : décision touchée, risque dominant, preuve la moins coûteuse et conséquence de la preuve ; puis, en trace complète, clôture avec la forme courte LITE (`ACTION/CLOSE-PACKAGE`, ligne LITE) ; en trace légère, la proposition suffit.
+Pour `LITE` et les petits `ITER`, arrête le protocole après quatre réponses : décision touchée, risque dominant, preuve la moins coûteuse et conséquence de la preuve ; puis, en trace complète, clôture avec le paquet de son mode : forme courte LITE pour `LITE`, paquet `ITER` pour un `ITER` (`ACTION/CLOSE-PACKAGE`) ; en trace légère, la proposition suffit.
 
 Si aucune décision ne peut changer, n’ajoute pas de capture, comparaison ou route uniquement pour remplir le paquet. Journalise `N/A-JUSTIFIED` lorsque la procédure ne peut rien modifier.
 
@@ -454,7 +454,7 @@ Les blocs `RUN-*` donnent l’entrée, la sortie et le contrôle minimal de chaq
 
 **Sortie.** Paquet `DIRECTION` d’`ACTION/CLOSE-PACKAGE`. En trace légère (`ACTION/HANDOFF`), la réponse visible et la trace légère en tiennent lieu. Pour chaque ancrage mobilisé, distinguer si nécessaire son rôle de direction, de production ou de vérification, les attributs retenus et rejetés, la transformation effectuée et les limites de transfert ; une référence Web n’est ni une preuve de réussite, ni une autorisation de copie.
 
-**Clôture.** En trace complète, passer à `DECIDED`, puis `CLOSED` uniquement si la direction est tenue et les preuves applicables déclarées. Sinon, passer à `RETURNED`, `RETURN-DIRECTION`, `EXPLORATORY`, `FAIL-ASSUMED` ou `ESCALATED` selon la preuve et le risque.
+**Clôture.** En trace complète, passer à `DECIDED`, puis `CLOSED` lorsque l’artefact et la trace sont persistés : `CLOSED` ne dit pas que la direction est tenue (`ACTION/STATUS`). Le résultat se déclare à part : une direction tenue, preuves applicables déclarées, peut recevoir un verdict accepté ; sinon, l’issue est `RETURNED`, `EXPLORATORY`, `FAIL-ASSUMED` (échec connu) ou `ESCALATED`, avec le verdict `RETURN-DIRECTION` si la direction doit être reprise, selon la preuve et le risque.
 
 ### `ACTION/RUN-SYSTEM`
 
@@ -821,6 +821,8 @@ La preuve minimale est une paire de captures réelles : une capture initiale, pu
 #### Atelier d’édition — opération observable
 
 <!-- noyau:début BOUCLE-ATELIER -->
+Dans le scope de B1b (surface `DIRECTION` qui accepte avec l’axe V positif, en trace complète : `ACTION/B1b`), cet atelier est requis, sauf deux motifs `N/A-JUSTIFIED` : aucune décision principale éditable, ou une paire équivalente encore valide qui couvre la même décision. Hors de ce scope, il ne s’impose pas.
+
 Après la première capture, effectuer une lecture légère en ignorant le texte explicatif et nommer en une phrase la catégorie, la marque et le niveau de preuve que la surface semble raconter. Nommer ensuite la décision principale qui sera mise à l’épreuve. Éditer cette décision par **retrait, réduction ou transformation** ; une décision peut coordonner plusieurs diffs, mais l’unité de compte n’est pas le nombre de changements. Ne rien ajouter pour compenser.
 
 Conserver et comparer la capture suivante. La trace nomme le changement, sa direction, son effet et la décision qu’il confirme, modifie ou abandonne. Conserver l’original lorsqu’il résout mieux la décision est un résultat valide : la variante a alors confirmé une décision par comparaison plutôt que par déclaration.
