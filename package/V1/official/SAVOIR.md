@@ -390,7 +390,7 @@ Formule le compromis : ce qui gagne entre compréhension immédiate et juste dis
 <!-- noyau:fin COMP-COULEUR -->
 
 <!-- noyau:début COMP-CONVERGENCE -->
-**Question de convergence.** Cette palette et cette police de titre sont-elles celles que le modèle produirait sans brief (palette : neutres et un seul accent, sombre et doré, dégradé froid ; police : la grotesque large ou la serif de caractère prise par réflexe) ? Si oui, nomme ce qui, dans le produit, les justifie. Sinon, reconsidère-les. Pour la police de titre, compare au moins deux voix typographiques distinctes (par exemple grotesque, serif, mécane, manuscrite ou vernaculaire du lieu) sur le vrai titre avant de choisir. La question ne prescrit aucun écart : un choix convergent justifié reste valide.
+**Question de convergence.** Cette palette et cette police de titre sont-elles celles que le modèle produirait sans brief (palette : neutres et un seul accent, sombre et doré, dégradé froid ; police : la grotesque large ou la serif de caractère prise par réflexe) ? Si oui, nomme ce qui, dans le produit, les justifie ; si rien ne les justifie, reconsidère-les. Pour la police de titre, compare au moins deux voix typographiques distinctes (par exemple grotesque, serif, mécane, manuscrite ou vernaculaire du lieu) sur le vrai titre avant de choisir. La question ne prescrit aucun écart : un choix convergent justifié reste valide.
 <!-- noyau:fin COMP-CONVERGENCE -->
 
 La palette est conditionnelle : elle est documentée lorsqu’elle peut changer la décision, le thème, le statut ou la direction. Si le système existant est conservé et qu’aucun choix de couleur ne change le run, note cette conservation et sa raison.
@@ -624,7 +624,7 @@ Après classification, décision et risque, et avant de charger une famille, év
 
 Un profil de style règle une manière d’exprimer une décision : rapport au type, matière, densité, contraste et mouvement. Il ne choisit ni JTBD, ni support, ni grille, ni scène.
 
-Le parcours est : `DIRECTION/START → SAVOIR/FRAME → SAVOIR/STYLE si nécessaire → ACTION/RUN-*`. Ajoute `BIBLIOTHEQUE/SELECT` uniquement lorsque la structure d’écran ou la combinaison de routes est ouverte ; si la structure existante suffit, justifie le non-chargement dans la trace.
+Le parcours est : `DIRECTION/START → SAVOIR/FRAME si le cadrage est à éclaircir → SAVOIR/STYLE si nécessaire → ACTION/RUN-*`. Ajoute `BIBLIOTHEQUE/SELECT` uniquement lorsque la structure d’écran ou la combinaison de routes est ouverte ; si la structure existante suffit, justifie le non-chargement dans la trace.
 
 ### Règle de sélection
 
@@ -810,7 +810,7 @@ Le jugement commence par `P0` : direction visuelle, hiérarchie, composition, ty
 
 ### Preuve par médium
 
-[MÉTHODE] Pour tout médium non web — natif mobile, desktop, spatial, print ou embarqué — dérive cinq artefacts de preuve avant de juger :
+[MÉTHODE] Pour tout médium non web — natif mobile, desktop, spatial, print ou embarqué — examine cinq responsabilités de preuve, regroupables dans un même artefact, avant de juger :
 
 | Dérivation | Question | Conséquence de preuve |
 |---|---|---|

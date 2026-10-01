@@ -1014,7 +1014,7 @@ DIRECTION déclenche la classification générale. ACTION appelle ensuite les ro
 | Doute d’application ou théâtre procédural | `SAVOIR/INTEGRITY`. |
 | Une famille de design peut modifier la prochaine décision | Section `DESIGN-ATLAS` de `SAVOIR.md`, puis seulement la route propriétaire utile. |
 | Structure d’un écran | `BIBLIOTHEQUE/SELECT`, puis routes retenues. |
-| Token, composant ou blast radius | `SAVOIR/SYSTEM`, `BIBLIOTHEQUE/COMPONENTS` et `ACTION/RUN-SYSTEM` si partagé. |
+| Token, composant ou blast radius | `SAVOIR/SYSTEM` si une décision partagée change, `BIBLIOTHEQUE/COMPONENTS` si un composant change, `ACTION/RUN-SYSTEM` si partagé. |
 
 Les anciennes références de section ne sont pas des routes quotidiennes. Leur migration est documentée dans `CHANGELOG.md`, et un nouveau run utilise uniquement les routes stables.
 

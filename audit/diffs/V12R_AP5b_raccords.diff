@@ -1,0 +1,281 @@
+diff --git a/package/V1/official/ACTION.md b/package/V1/official/ACTION.md
+index 8f1f0c0..a24a03c 100644
+--- a/package/V1/official/ACTION.md
++++ b/package/V1/official/ACTION.md
+@@ -1014,7 +1014,7 @@ DIRECTION déclenche la classification générale. ACTION appelle ensuite les ro
+ | Doute d’application ou théâtre procédural | `SAVOIR/INTEGRITY`. |
+ | Une famille de design peut modifier la prochaine décision | Section `DESIGN-ATLAS` de `SAVOIR.md`, puis seulement la route propriétaire utile. |
+ | Structure d’un écran | `BIBLIOTHEQUE/SELECT`, puis routes retenues. |
+-| Token, composant ou blast radius | `SAVOIR/SYSTEM`, `BIBLIOTHEQUE/COMPONENTS` et `ACTION/RUN-SYSTEM` si partagé. |
++| Token, composant ou blast radius | `SAVOIR/SYSTEM` si une décision partagée change, `BIBLIOTHEQUE/COMPONENTS` si un composant change, `ACTION/RUN-SYSTEM` si partagé. |
+ 
+ Les anciennes références de section ne sont pas des routes quotidiennes. Leur migration est documentée dans `CHANGELOG.md`, et un nouveau run utilise uniquement les routes stables.
+ 
+diff --git a/package/V1/official/BIBLIOTHEQUE.md b/package/V1/official/BIBLIOTHEQUE.md
+index 06b39e2..409617d 100644
+--- a/package/V1/official/BIBLIOTHEQUE.md
++++ b/package/V1/official/BIBLIOTHEQUE.md
+@@ -328,7 +328,7 @@ Pièces, archives ou preuves mises en scène dans un vide généreux et des prop
+ 
+ ### Test de support
+ 
+-Si texte, données et images sont masqués, cadre, vide, axes et foyer doivent encore indiquer un parti de composition. Ce test est `PERCEPTUAL` ou `EXPERT` ; il ne prouve pas seul l’utilisabilité de la surface.
++Si texte, données et images sont masqués, cadre, vide, axes et foyer doivent encore indiquer un parti de composition. Ce test est `PERCEPTUAL` ou `EXPERT` ; il ne prouve pas seul l’utilisabilité de la surface. Si la composition dépend de ce qui est masqué par une relation déclarée, avec un repli, la dépendance est recevable (`BIBLIOTHEQUE/GATE`, non-généricité) ; le masquage sert à diagnostiquer, pas à exiger un décor indépendant du contenu.
+ 
+ Le support et la scène ne sont pas le même niveau : le support est le champ spatial ; la scène est le scénario de lecture et de preuve qui y prend place.
+ 
+@@ -572,7 +572,7 @@ TEST
+ PROOF-LIMIT
+ ```
+ 
+-Il est accepté uniquement si la version après réduit une ambiguïté, préserve les états critiques et rend une décision plus directe sans exiger davantage d’attention. La preuve se rattache au gate ACTION applicable et à la méthode déclarée ; lorsque la compréhension ou l’usage domine, une tâche utilisateur est requise dans le scope déclaré.
++La comparaison est valide si elle isole la décision et observe le critère déclaré. La version retenue est celle qui réduit une ambiguïté, préserve les états critiques et rend une décision plus directe sans exiger davantage d’attention : l’original s’il résout mieux (`ACTION/B1b`). La preuve se rattache au gate ACTION applicable et à la méthode déclarée ; lorsque la compréhension ou l’usage domine, une tâche utilisateur est requise dans le scope déclaré.
+ 
+ Lorsque le scope le requiert, rattache l’avant/après à `ACTION/GATE-B/B1b` : capture initiale et capture après une seule décision éditée, tâche ou lecture déclarée, variable observable, états critiques, `DECISION-CHANGE`, méthode, scope, owner, `PROOF-LIMIT` et prochaine preuve. Si aucun résultat n’est observé, utilise le statut ACTION approprié, jamais un `PASS` implicite.
+ 
+@@ -619,7 +619,7 @@ Grain, trame, aplat, bordure ou hachure donnent un statut de matière conçue.
+ 
+ ### Contrat de composant partagé
+ 
+-S’applique à un pattern réutilisable, à un composant critique ou à un composant partagé ; un delta local n’en porte aucune obligation. C’est la seule définition de la structure d’un composant : `ACTION` en garde la baseline comme preuve, la migration et le verdict ; `SAVOIR/SYSTEM` en garde le jugement (tokens, modes, interopérabilité, maintenance).
++S’applique à un pattern réutilisable, à un composant critique ou à un composant partagé ; un delta local sans responsabilité critique, réutilisable ou partagée n’en porte aucune obligation ; s’il touche un composant critique ou partagé, ou devient réutilisable, il relève de ce contrat (reclasser avec `DIRECTION/START`). C’est la seule définition de la structure d’un composant : `ACTION` en garde la baseline comme preuve, la migration et le verdict ; `SAVOIR/SYSTEM` en garde le jugement (tokens, modes, interopérabilité, maintenance).
+ 
+ ```text
+ INTENTION / NON-USAGE
+diff --git a/package/V1/official/CHANGELOG.md b/package/V1/official/CHANGELOG.md
+index 1c567a4..beb6aba 100644
+--- a/package/V1/official/CHANGELOG.md
++++ b/package/V1/official/CHANGELOG.md
+@@ -40,6 +40,7 @@
+ - **Raccords de procédure et de fabrication (audit progressif, unité 3).** `DIRECTION/CHARGE` appelle `ACTION/UI-UX-REALITY` avant fabrication pour une surface UI/UX nouvelle ou substantiellement modifiée (STANDARD, DIRECTION) ; `CLOSED` décrit la persistance et le résultat se déclare à part (`ACTION/RUN-DIRECTION`) ; un petit `ITER` garde le paquet `ITER` ; la portée de l’atelier d’édition (B1b) entre dans le noyau ; `N/A-JUSTIFIED` ne masque ni une preuve manquante ni une confirmation ; un risque non bloquant peut rester en réserve structurée ; les fonctions d’un produit fictif sont des contenus d’exemple marqués.
+ - **Validateurs (audit progressif, unité 4a).** Le lecteur de routes refuse un locator répété, un propriétaire incohérent et un titre porteur dupliqué ; les contrats et le manifeste refusent une clé JSON répétée ; le schéma `RUN_CARD` n’admet que les mots-clés réellement interprétés ; dates et heures doivent être réelles ; une valeur d’un autre type que son enum, un schéma non objet ou un Markdown non UTF-8 reçoivent un diagnostic nommé au lieu d’une erreur brute.
+ - **Façades (audit progressif, unité 4b).** QUICKSTART, glossaire, carte de lecture, README, flux et exemples exposent la trace légère et la proposition par défaut (la première proposition vaut checkpoint ; fermer suppose la trace complète) ; mode et niveau de trace sont distingués ; la forme courte LITE est située ; l’exemple de brief flou change de domaine et montre sa trace légère ; les guides lient la section « Commencer » ; l’ancien parcours des notes de version est situé comme historique.
++- **Raccords de chargement et de précision (audit progressif, unité 5b).** Toute exigence UI/UX déclarée est couverte (`OBSERVED`, `NOT-VERIFIED` ou `N/A-JUSTIFIED`) ; `DIRECTION/CHARGE` appelle `DIRECTION/DOMAIN-FRAME` pour une demande nouvelle, ambiguë ou multi-domaines ; les vues de chargement suivent les conditions de `CHARGE` ; le delta local, la comparaison avant/après, le test de masquage, la question de convergence et la preuve par médium sont précisés.
+ - **Efficacité.** `NOT-VERIFIED` : l’épreuve de référence donne V1.1.1 ≈ sans système sur la qualité perçue ; l’effet de ces chantiers reste à éprouver (G4).
+ 
+ ## V1.1.1 — Retour d’audit : alignements de textes et de façades
+diff --git a/package/V1/official/DIRECTION.md b/package/V1/official/DIRECTION.md
+index 3a8e9a5..2967b5b 100644
+--- a/package/V1/official/DIRECTION.md
++++ b/package/V1/official/DIRECTION.md
+@@ -288,8 +288,8 @@ Un run `STANDARD`, `DIRECTION` ou `SYSTÈME` persistant, partagé ou audité con
+ |---|---|---|
+ | **LITE** | `ACTION/RUN-LITE`, `ACTION/FAST-PATH`, `ACTION/GATE-A` applicable et `ACTION/GATE-B` du risque dominant. Sans risque critique touché — voir Protection de niveau (`DIRECTION/START`). | Une route SAVOIR ou BIBLIOTHEQUE si le correctif touche réellement le jugement ou la structure. La section `DESIGN-ATLAS` reste silencieuse ; une famille seule ne reclassifie pas. Si le périmètre, le blast radius, la responsabilité ou le risque dominant change la décision, reviens à `DIRECTION/START` puis reclassifie vers `ITER`, `STANDARD`, `DIRECTION` ou `SYSTÈME`. |
+ | **ITER** | Mémoire locale (direction existante), `ACTION/RUN-ITER`, `ACTION/GATE-A` applicable et `ACTION/GATE-B` du risque touché. Sans risque critique touché — voir Protection de niveau (`DIRECTION/START`). | Une route SAVOIR ; BIBLIOTHEQUE seulement si support, grille, scène ou objet change. `DESIGN-ATLAS` reste silencieux dans le même périmètre ; une famille seule ne reclassifie pas. Si le périmètre, la responsabilité ou le risque dominant change la décision, reviens à `DIRECTION/START`. Les corrections de libellé, overflow, contraste, focus, état ou wrapping restent locales. |
+-| **STANDARD** | `ACTION/RUN-STANDARD` ; `ACTION/UI-UX-REALITY` si la surface UI/UX est nouvelle ou substantiellement modifiée ; `BIBLIOTHEQUE/SELECT` si la structure est ouverte. | `SAVOIR/FRAME` si le cadrage est ambigu, une route BIBLIOTHEQUE structurante et la route SAVOIR du risque dominant. |
+-| **DIRECTION** | `DIRECTION/EXTERNAL-START` si le brief est vague, `DIRECTION/CREATIVE-BOOT`, `DIRECTION/VISUAL_TARGET`, `DIRECTION/FIRST-OBJECT`, `ACTION/FIRST-RENDER`, `ACTION/UI-UX-REALITY` si la surface UI/UX est nouvelle ou substantiellement modifiée, `ACTION/RUN-DIRECTION`, puis `ACTION/GATE-A` et `ACTION/GATE-C` applicables ; en trace complète (`ACTION/HANDOFF`), `ACTION/GATE-B`, `ACTION/RUN_CARD` et `ACTION/CLOSE-PACKAGE`. | `DIRECTION/DOUBLE-LOOP`, `ACTION/ROUTING` ou `SAVOIR/CRAFT/CFT-00` si la décision l’exige (la boucle d’édition et les gestes sont dans le noyau) ; `DIRECTION/DIRECTION-ATELIER` si la tension, le geste produit ou un anti-choix peuvent modifier la première scène ; `SAVOIR/FRAME`, `SAVOIR/CRAFT`, `SAVOIR/TYPE`, `SAVOIR/SOURCE` et `BIBLIOTHEQUE/SELECT` si nécessaires. Charge `SAVOIR/STYLE` seulement si le choix de style peut modifier une décision de composition, de voix, de matière, de contraste ou de relation produit ; jamais comme catalogue automatique. `SAVOIR/CRAFT/CFT-03`, `SAVOIR/STATE` ou `SAVOIR/INTEGRITY` si un détail final peut modifier le caractère, un état, la hiérarchie, la densité ou la robustesse ; `SAVOIR/INTEGRITY` avant un verdict (trace complète). |
++| **STANDARD** | `ACTION/RUN-STANDARD` ; `ACTION/UI-UX-REALITY` si la surface UI/UX est nouvelle ou substantiellement modifiée ; `BIBLIOTHEQUE/SELECT` si la structure est ouverte. | `SAVOIR/FRAME` si le cadrage est ambigu ; `DIRECTION/DOMAIN-FRAME` si la demande est nouvelle, ambiguë ou multi-domaines et que le domaine peut changer la structure, l’expression ou la preuve ; une route BIBLIOTHEQUE structurante et la route SAVOIR du risque dominant. |
++| **DIRECTION** | `DIRECTION/EXTERNAL-START` si le brief est vague, `DIRECTION/CREATIVE-BOOT`, `DIRECTION/VISUAL_TARGET`, `DIRECTION/FIRST-OBJECT`, `ACTION/FIRST-RENDER`, `ACTION/UI-UX-REALITY` si la surface UI/UX est nouvelle ou substantiellement modifiée, `ACTION/RUN-DIRECTION`, puis `ACTION/GATE-A` et `ACTION/GATE-C` applicables ; en trace complète (`ACTION/HANDOFF`), `ACTION/GATE-B`, `ACTION/RUN_CARD` et `ACTION/CLOSE-PACKAGE`. | `DIRECTION/DOUBLE-LOOP`, `ACTION/ROUTING` ou `SAVOIR/CRAFT/CFT-00` si la décision l’exige (la boucle d’édition et les gestes sont dans le noyau) ; `DIRECTION/DIRECTION-ATELIER` si la tension, le geste produit ou un anti-choix peuvent modifier la première scène ; `SAVOIR/FRAME`, `SAVOIR/CRAFT`, `SAVOIR/TYPE`, `SAVOIR/SOURCE` et `BIBLIOTHEQUE/SELECT` si nécessaires ; `DIRECTION/DOMAIN-FRAME` si la demande est nouvelle, ambiguë ou multi-domaines et que le domaine peut changer la structure, l’expression ou la preuve. Charge `SAVOIR/STYLE` seulement si le choix de style peut modifier une décision de composition, de voix, de matière, de contraste ou de relation produit ; jamais comme catalogue automatique. `SAVOIR/CRAFT/CFT-03`, `SAVOIR/STATE` ou `SAVOIR/INTEGRITY` si un détail final peut modifier le caractère, un état, la hiérarchie, la densité ou la robustesse ; `SAVOIR/INTEGRITY` avant un verdict (trace complète). |
+ | **SYSTÈME** | `ACTION/RUN-SYSTEM` ; `BIBLIOTHEQUE/COMPONENTS` si un composant change. | `SAVOIR/SYSTEM` ; `CHANGELOG` si une règle partagée change. |
+ <!-- noyau:fin CHARGE-TABLE -->
+ 
+@@ -792,7 +792,7 @@ Ces déclencheurs disent quand ajouter une route à la ligne du mode dans `DIREC
+ | Ancre absente pour une surface identitaire | En exploration : limite déclarée, run `EXPLORATORY`. Avant l’acceptation : retour à l’ancrage, ou statut prévu par ACTION (absolu 2). | `[FORCÉ]` |
+ | FAIL exigé malgré un gate | Protocole `FAIL-ASSUMED` d’ACTION. | `[REQUIS PAR LE MODULE]` |
+ | Motif possiblement générique ou réflexe | Test motivation/construction `SAVOIR/CRAFT/CFT-01` ; conséquence de gate `ACTION/ANTI-SLOP`. | `[REQUIS PAR LE MODULE]` |
+-| Détail final susceptible de modifier le caractère, l’état, la hiérarchie, la densité ou la robustesse d’une surface `DIRECTION` | `SAVOIR/CRAFT/CFT-03` (composition, densité et harmonie), `SAVOIR/STATE`, `SAVOIR/INTEGRITY` et capture rendue. | Conditionnel : colonne « Ajouter seulement si » de `DIRECTION/CHARGE` |
++| Détail final susceptible de modifier le caractère, l’état, la hiérarchie, la densité ou la robustesse d’une surface `DIRECTION` | `SAVOIR/CRAFT/CFT-03` (composition, densité et harmonie), `SAVOIR/STATE` ou `SAVOIR/INTEGRITY` selon la question ouverte, et capture rendue. | Conditionnel : colonne « Ajouter seulement si » de `DIRECTION/CHARGE` |
+ 
+ ### Index à la demande
+ 
+diff --git a/package/V1/official/SAVOIR.md b/package/V1/official/SAVOIR.md
+index 458eeb2..d0cd3a7 100644
+--- a/package/V1/official/SAVOIR.md
++++ b/package/V1/official/SAVOIR.md
+@@ -390,7 +390,7 @@ Formule le compromis : ce qui gagne entre compréhension immédiate et juste dis
+ <!-- noyau:fin COMP-COULEUR -->
+ 
+ <!-- noyau:début COMP-CONVERGENCE -->
+-**Question de convergence.** Cette palette et cette police de titre sont-elles celles que le modèle produirait sans brief (palette : neutres et un seul accent, sombre et doré, dégradé froid ; police : la grotesque large ou la serif de caractère prise par réflexe) ? Si oui, nomme ce qui, dans le produit, les justifie. Sinon, reconsidère-les. Pour la police de titre, compare au moins deux voix typographiques distinctes (par exemple grotesque, serif, mécane, manuscrite ou vernaculaire du lieu) sur le vrai titre avant de choisir. La question ne prescrit aucun écart : un choix convergent justifié reste valide.
++**Question de convergence.** Cette palette et cette police de titre sont-elles celles que le modèle produirait sans brief (palette : neutres et un seul accent, sombre et doré, dégradé froid ; police : la grotesque large ou la serif de caractère prise par réflexe) ? Si oui, nomme ce qui, dans le produit, les justifie ; si rien ne les justifie, reconsidère-les. Pour la police de titre, compare au moins deux voix typographiques distinctes (par exemple grotesque, serif, mécane, manuscrite ou vernaculaire du lieu) sur le vrai titre avant de choisir. La question ne prescrit aucun écart : un choix convergent justifié reste valide.
+ <!-- noyau:fin COMP-CONVERGENCE -->
+ 
+ La palette est conditionnelle : elle est documentée lorsqu’elle peut changer la décision, le thème, le statut ou la direction. Si le système existant est conservé et qu’aucun choix de couleur ne change le run, note cette conservation et sa raison.
+@@ -624,7 +624,7 @@ Après classification, décision et risque, et avant de charger une famille, év
+ 
+ Un profil de style règle une manière d’exprimer une décision : rapport au type, matière, densité, contraste et mouvement. Il ne choisit ni JTBD, ni support, ni grille, ni scène.
+ 
+-Le parcours est : `DIRECTION/START → SAVOIR/FRAME → SAVOIR/STYLE si nécessaire → ACTION/RUN-*`. Ajoute `BIBLIOTHEQUE/SELECT` uniquement lorsque la structure d’écran ou la combinaison de routes est ouverte ; si la structure existante suffit, justifie le non-chargement dans la trace.
++Le parcours est : `DIRECTION/START → SAVOIR/FRAME si le cadrage est à éclaircir → SAVOIR/STYLE si nécessaire → ACTION/RUN-*`. Ajoute `BIBLIOTHEQUE/SELECT` uniquement lorsque la structure d’écran ou la combinaison de routes est ouverte ; si la structure existante suffit, justifie le non-chargement dans la trace.
+ 
+ ### Règle de sélection
+ 
+@@ -810,7 +810,7 @@ Le jugement commence par `P0` : direction visuelle, hiérarchie, composition, ty
+ 
+ ### Preuve par médium
+ 
+-[MÉTHODE] Pour tout médium non web — natif mobile, desktop, spatial, print ou embarqué — dérive cinq artefacts de preuve avant de juger :
++[MÉTHODE] Pour tout médium non web — natif mobile, desktop, spatial, print ou embarqué — examine cinq responsabilités de preuve, regroupables dans un même artefact, avant de juger :
+ 
+ | Dérivation | Question | Conséquence de preuve |
+ |---|---|---|
+diff --git a/package/schemas/examples/production_contracts.example.json b/package/schemas/examples/production_contracts.example.json
+index 99e22e9..b9af620 100644
+--- a/package/schemas/examples/production_contracts.example.json
++++ b/package/schemas/examples/production_contracts.example.json
+@@ -28,7 +28,15 @@
+       {"requirement":"responsive_matrix: tablette: détail prioritaire, contexte repliable", "artifact_locator":"/incidents@834px", "proof_status":"NOT-VERIFIED"},
+       {"requirement":"accessibility_basis: focus visible", "artifact_locator":"/incidents#alert-focus", "proof_status":"OBSERVED"},
+       {"requirement":"accessibility_basis: contraste", "artifact_locator":"/incidents#contrast", "proof_status":"OBSERVED"},
+-      {"requirement":"robustness_basis: libellés longs", "artifact_locator":"/incidents?fixture=long-labels", "proof_status":"NOT-VERIFIED"}
++      {"requirement":"robustness_basis: libellés longs", "artifact_locator":"/incidents?fixture=long-labels", "proof_status":"NOT-VERIFIED"},
++      {"requirement":"responsive_matrix: desktop: contexte et détail côte à côte", "artifact_locator":"/incidents@1440px", "proof_status":"OBSERVED"},
++      {"requirement":"responsive_matrix: petit écran: séquence guidée", "artifact_locator":"/incidents@390px", "proof_status":"NOT-VERIFIED"},
++      {"requirement":"accessibility_basis: sémantique des statuts", "artifact_locator":"/incidents#status-semantics", "proof_status":"NOT-VERIFIED"},
++      {"requirement":"accessibility_basis: clavier", "artifact_locator":"/incidents#keyboard", "proof_status":"OBSERVED"},
++      {"requirement":"accessibility_basis: information non portée par la couleur", "artifact_locator":"/incidents#status-icons", "proof_status":"NOT-VERIFIED"},
++      {"requirement":"robustness_basis: horodatages variables", "artifact_locator":"/incidents?fixture=timestamps", "proof_status":"NOT-VERIFIED"},
++      {"requirement":"robustness_basis: absence de données", "artifact_locator":"/incidents?state=empty", "proof_status":"NOT-VERIFIED"},
++      {"requirement":"robustness_basis: non-régression du tri", "artifact_locator":"/incidents?sort=severity", "proof_status":"NOT-VERIFIED"}
+     ]
+   },
+   "evaluation_case": {
+diff --git a/package/scripts/validate_contracts.py b/package/scripts/validate_contracts.py
+index 9737e38..339763a 100644
+--- a/package/scripts/validate_contracts.py
++++ b/package/scripts/validate_contracts.py
+@@ -266,21 +266,26 @@ def check_ui_ux_reality_pack(reality: dict[str, Any]) -> None:
+     if not filled(reality["expected_scope"]):
+         raise ValidationError("ui_ux_reality_pack.expected_scope vide ou placeholder")
+     elements = {name: {norm(item) for item in reality[name]} for name in MATRICES}
+-    covered_states: set[str] = set()
++    covered: dict[str, set[str]] = {name: set() for name in MATRICES}
+     for entry in reality["coverage_map"]:
+         matrix, _, element = entry["requirement"].partition(":")
+         matrix, element = matrix.strip(), norm(element)
+         if matrix not in elements or element not in elements[matrix]:
+             raise ValidationError(f"coverage_map : exigence absente des matrices déclarées : {entry['requirement']}")
+-        if matrix == "state_matrix":
+-            covered_states.add(element)
++        covered[matrix].add(element)
+         if entry["proof_status"] == "N/A-JUSTIFIED" and not filled(entry.get("reason")):
+             raise ValidationError(f"coverage_map : N/A-JUSTIFIED exige une raison ({entry['requirement']})")
+         if entry["proof_status"] == "OBSERVED" and not filled(reality.get("observed_scope")):
+             raise ValidationError(f"coverage_map : une exigence OBSERVED exige observed_scope ({entry['requirement']})")
+     for state in reality["state_matrix"]:
+-        if norm(state) not in covered_states:
++        if norm(state) not in covered["state_matrix"]:
+             raise ValidationError(f"coverage_map : état non couvert : {state}")
++    # Audit progressif, C15 (option a de l'owner) : « la couverture de chaque exigence » (ACTION/UI-UX-REALITY) vaut pour
++    # toute exigence déclarée ; une exigence non vérifiée y figure en NOT-VERIFIED, jamais par omission.
++    for name in MATRICES[1:]:
++        for item in reality[name]:
++            if item.strip() and norm(item) not in covered[name]:
++                raise ValidationError(f"coverage_map : exigence déclarée non couverte : {name}: {item}")
+ 
+ 
+ def semantic_check(name: str, document: Any) -> None:
+@@ -316,6 +321,7 @@ UNIT_CASES: list[tuple[Any, ...]] = [
+     ("C9-1b", DF, [(("policy_profile", "risk_coverage", 0, "control"), "contrôle inventé")], "contrôle inconnu"),
+     ("C9-3", PC, [(UI + ("coverage_map", 0, "requirement"), "state_matrix: loading des données source")], "exigence absente des matrices"),
+     ("C9-3b", PC, [(UI + ("coverage_map",), None)], "état non couvert"),
++    ("C15-1", PC, [(UI + ("coverage_map",), None)], "exigence déclarée non couverte"),
+     ("C9-4", RB, [(("entries", 0, "source"), "?")], "source placeholder"),
+     ("C9-4b", RB, [(("entries", 0, "source_status"), "verified_in_run"), (("entries", 0, "source_locator"), DELETE)], "exige un locator"),
+     ("C9-4c", RB, [(("entries", 0, "source_date"), "septembre")], "source_date doit être ISO"),
+@@ -334,6 +340,7 @@ DERIVED = {
+     ("C3-2", 0): lambda d: d["creative_direction_set"]["directions"][0]["structural_changes"][0].upper(),
+     ("C9-1", 0): lambda d: d["domain_risks"] + ["exposition de données personnelles"],
+     ("C9-3b", 0): lambda d: [e for e in d["ui_ux_reality_pack"]["coverage_map"] if not e["requirement"].startswith("state_matrix: loading")],
++    ("C15-1", 0): lambda d: [e for e in d["ui_ux_reality_pack"]["coverage_map"] if not e["requirement"].startswith("robustness_basis: libellés longs")],
+ }
+ 
+ 
+diff --git a/package/scripts/validate_structure.py b/package/scripts/validate_structure.py
+index c14f62d..35fd6ca 100644
+--- a/package/scripts/validate_structure.py
++++ b/package/scripts/validate_structure.py
+@@ -90,6 +90,9 @@ REFERENCES: list[tuple[str, str]] = [
+ 
+ # 3. Vocabulaire retiré : motif, remplacement, fichiers exemptés (historique).
+ RETIRED: list[tuple[str, str, set[str]]] = [
++    (r"Il est accepté uniquement si la version après", "validité de la comparaison distincte de la version retenue (C28)", {"CHANGELOG.md"}),
++    (r"Sinon, reconsidère-les", "si rien ne les justifie, reconsidère-les (C30)", {"CHANGELOG.md"}),
++    (r"dérive cinq artefacts de preuve", "cinq responsabilités de preuve, regroupables (C31)", {"CHANGELOG.md"}),
+     (r"Établissez le mode", "classer d'abord avec DIRECTION/START, par l'opérateur ou l'agent (C24)", {"CHANGELOG.md"}),
+     (r"Forme courte LITE non persistante", "forme courte LITE : trace complète d'un LITE clôturé, distincte de la trace légère (AUD-13)", {"CHANGELOG.md"}),
+     (r"`CLOSED` uniquement si la direction est tenue", "CLOSED décrit la persistance ; le résultat se déclare à part (ACTION/STATUS, C05)", {"CHANGELOG.md"}),
+@@ -262,6 +265,11 @@ FIDELITY: list[tuple[str, str, str]] = [
+     ("flux : la proposition vaut checkpoint (AUD-06)", r"présenter la proposition \(trace légère", "checkpoint"),
+     ("HANDOFF : forme courte LITE distincte de la trace légère (AUD-13)", r"\*\*Forme courte LITE", "distincte de la trace légère"),
+     ("exemples : la sortie par défaut porte sa trace légère (AUD-06)", r"montre la sortie par défaut", "trace légère"),
++    # Audit progressif, unité AP5b (V12R_46) : raccords de chargement et de précision
++    ("SAVOIR/STYLE : FRAME conditionnel comme dans CHARGE (C26)", r"Le parcours est : `DIRECTION/START → SAVOIR/FRAME", "si le cadrage est à éclaircir"),
++    ("contrat de composant : delta local qualifié (C27)", r"S’applique à un pattern réutilisable, à un composant critique ou à un composant partagé", "reclasser"),
++    ("avant/après : version retenue, l'original possible (C28)", r"La comparaison est valide si elle isole la décision", "l’original"),
++    ("test de masquage : dépendance porteuse recevable (C29)", r"Si texte, données et images sont masqués", "dépendance est recevable"),
+ ]
+ 
+ # 13. Entrée humaine (R6b-1) : une seule entrée, balisée dans le README du package et reprise par le README Local ;
+@@ -607,7 +615,8 @@ CORE_FLOOR = [("| Ajouter seulement si", "colonne « Ajouter seulement si » de
+               ("Dans le scope de B1b", "portée de l'atelier d'édition et ses deux exceptions (C07)"),
+               ("`ACTION/UI-UX-REALITY` si la surface UI/UX est nouvelle ou substantiellement modifiée",
+                "déclencheur UI/UX avant fabrication (C08)"),
+-              ("fonctions, intégrations et conformités affirmées", "fonctions d'un produit fictif marquées (D-26)")]
++              ("fonctions, intégrations et conformités affirmées", "fonctions d'un produit fictif marquées (D-26)"),
++              ("`DIRECTION/DOMAIN-FRAME` si la demande est nouvelle", "déclencheur DOMAIN-FRAME dans CHARGE (C25)")]
+ 
+ 
+ def check_core_floor(errors: list[str]) -> None:
+@@ -704,6 +713,10 @@ ROW_NEEDLES = [  # (fichier, début de ligne, mot attendu, constat)
+     ("GLOSSAIRE.md", "| **Livraison** |", "checkpoint", "C33"),
+     ("READING_MAP.md", "| **Agent contrôlé** |", "trace complète", "C04"),
+     ("DIRECTION.md", "| Décision suffisamment établie |", "trace légère", "C33"),
++    ("DIRECTION.md", "| **STANDARD** |", "DIRECTION/DOMAIN-FRAME", "C25"),
++    ("DIRECTION.md", "| **DIRECTION** |", "DIRECTION/DOMAIN-FRAME", "C25"),
++    ("DIRECTION.md", "| Détail final susceptible", "selon la question ouverte", "C26"),
++    ("ACTION.md", "| Token, composant ou blast radius |", "si un composant change", "C26"),
+ ]
+ EXAMPLE_SECTION = "## DIRECTION — fabrication depuis un brief flou"
+ COMMENCER = re.compile(r"\]\((?:\.\./)+README\.md#commencer\)")
+diff --git a/package/skills/design-governance-practice/SKILL.md b/package/skills/design-governance-practice/SKILL.md
+index ac1ec49..24dde7e 100644
+--- a/package/skills/design-governance-practice/SKILL.md
++++ b/package/skills/design-governance-practice/SKILL.md
+@@ -28,8 +28,8 @@ Tu vises l’excellence appropriée au produit, au public, au risque et au conte
+ |---|---|---|
+ | **LITE** | `ACTION/RUN-LITE`, `ACTION/FAST-PATH`, `ACTION/GATE-A` applicable et `ACTION/GATE-B` du risque dominant. Sans risque critique touché — voir Protection de niveau (`DIRECTION/START`). | Une route SAVOIR ou BIBLIOTHEQUE si le correctif touche réellement le jugement ou la structure. La section `DESIGN-ATLAS` reste silencieuse ; une famille seule ne reclassifie pas. Si le périmètre, le blast radius, la responsabilité ou le risque dominant change la décision, reviens à `DIRECTION/START` puis reclassifie vers `ITER`, `STANDARD`, `DIRECTION` ou `SYSTÈME`. |
+ | **ITER** | Mémoire locale (direction existante), `ACTION/RUN-ITER`, `ACTION/GATE-A` applicable et `ACTION/GATE-B` du risque touché. Sans risque critique touché — voir Protection de niveau (`DIRECTION/START`). | Une route SAVOIR ; BIBLIOTHEQUE seulement si support, grille, scène ou objet change. `DESIGN-ATLAS` reste silencieux dans le même périmètre ; une famille seule ne reclassifie pas. Si le périmètre, la responsabilité ou le risque dominant change la décision, reviens à `DIRECTION/START`. Les corrections de libellé, overflow, contraste, focus, état ou wrapping restent locales. |
+-| **STANDARD** | `ACTION/RUN-STANDARD` ; `ACTION/UI-UX-REALITY` si la surface UI/UX est nouvelle ou substantiellement modifiée ; `BIBLIOTHEQUE/SELECT` si la structure est ouverte. | `SAVOIR/FRAME` si le cadrage est ambigu, une route BIBLIOTHEQUE structurante et la route SAVOIR du risque dominant. |
+-| **DIRECTION** | `DIRECTION/EXTERNAL-START` si le brief est vague, `DIRECTION/CREATIVE-BOOT`, `DIRECTION/VISUAL_TARGET`, `DIRECTION/FIRST-OBJECT`, `ACTION/FIRST-RENDER`, `ACTION/UI-UX-REALITY` si la surface UI/UX est nouvelle ou substantiellement modifiée, `ACTION/RUN-DIRECTION`, puis `ACTION/GATE-A` et `ACTION/GATE-C` applicables ; en trace complète (`ACTION/HANDOFF`), `ACTION/GATE-B`, `ACTION/RUN_CARD` et `ACTION/CLOSE-PACKAGE`. | `DIRECTION/DOUBLE-LOOP`, `ACTION/ROUTING` ou `SAVOIR/CRAFT/CFT-00` si la décision l’exige (la boucle d’édition et les gestes sont dans le noyau) ; `DIRECTION/DIRECTION-ATELIER` si la tension, le geste produit ou un anti-choix peuvent modifier la première scène ; `SAVOIR/FRAME`, `SAVOIR/CRAFT`, `SAVOIR/TYPE`, `SAVOIR/SOURCE` et `BIBLIOTHEQUE/SELECT` si nécessaires. Charge `SAVOIR/STYLE` seulement si le choix de style peut modifier une décision de composition, de voix, de matière, de contraste ou de relation produit ; jamais comme catalogue automatique. `SAVOIR/CRAFT/CFT-03`, `SAVOIR/STATE` ou `SAVOIR/INTEGRITY` si un détail final peut modifier le caractère, un état, la hiérarchie, la densité ou la robustesse ; `SAVOIR/INTEGRITY` avant un verdict (trace complète). |
++| **STANDARD** | `ACTION/RUN-STANDARD` ; `ACTION/UI-UX-REALITY` si la surface UI/UX est nouvelle ou substantiellement modifiée ; `BIBLIOTHEQUE/SELECT` si la structure est ouverte. | `SAVOIR/FRAME` si le cadrage est ambigu ; `DIRECTION/DOMAIN-FRAME` si la demande est nouvelle, ambiguë ou multi-domaines et que le domaine peut changer la structure, l’expression ou la preuve ; une route BIBLIOTHEQUE structurante et la route SAVOIR du risque dominant. |
++| **DIRECTION** | `DIRECTION/EXTERNAL-START` si le brief est vague, `DIRECTION/CREATIVE-BOOT`, `DIRECTION/VISUAL_TARGET`, `DIRECTION/FIRST-OBJECT`, `ACTION/FIRST-RENDER`, `ACTION/UI-UX-REALITY` si la surface UI/UX est nouvelle ou substantiellement modifiée, `ACTION/RUN-DIRECTION`, puis `ACTION/GATE-A` et `ACTION/GATE-C` applicables ; en trace complète (`ACTION/HANDOFF`), `ACTION/GATE-B`, `ACTION/RUN_CARD` et `ACTION/CLOSE-PACKAGE`. | `DIRECTION/DOUBLE-LOOP`, `ACTION/ROUTING` ou `SAVOIR/CRAFT/CFT-00` si la décision l’exige (la boucle d’édition et les gestes sont dans le noyau) ; `DIRECTION/DIRECTION-ATELIER` si la tension, le geste produit ou un anti-choix peuvent modifier la première scène ; `SAVOIR/FRAME`, `SAVOIR/CRAFT`, `SAVOIR/TYPE`, `SAVOIR/SOURCE` et `BIBLIOTHEQUE/SELECT` si nécessaires ; `DIRECTION/DOMAIN-FRAME` si la demande est nouvelle, ambiguë ou multi-domaines et que le domaine peut changer la structure, l’expression ou la preuve. Charge `SAVOIR/STYLE` seulement si le choix de style peut modifier une décision de composition, de voix, de matière, de contraste ou de relation produit ; jamais comme catalogue automatique. `SAVOIR/CRAFT/CFT-03`, `SAVOIR/STATE` ou `SAVOIR/INTEGRITY` si un détail final peut modifier le caractère, un état, la hiérarchie, la densité ou la robustesse ; `SAVOIR/INTEGRITY` avant un verdict (trace complète). |
+ | **SYSTÈME** | `ACTION/RUN-SYSTEM` ; `BIBLIOTHEQUE/COMPONENTS` si un composant change. | `SAVOIR/SYSTEM` ; `CHANGELOG` si une règle partagée change. |
+ 
+ La clôture de chaque mode est `ACTION/CLOSE-PACKAGE`, en trace complète ; en trace légère, le run s’arrête à la proposition (`ACTION/HANDOFF`). Pour l’agent, les blocs « noyau » compilés dans la skill tiennent lieu de lecture de fabrication ; README, QUICKSTART et READING_MAP sont des lectures d’orientation pour les humains.
+@@ -118,7 +118,7 @@ Les contrôles principaux sont : alignements nets, compensation optique, proximi
+ 
+ [REQUIS PAR LE MODULE — couleur, thème, statut ou surface identitaire] Conçois une palette par rôles : surfaces, textes, actions, états et frontières. La répartition entre neutres et couleurs est une décision de direction, pas un défaut : une structure neutre à accent, une identité multicolore structurelle ou un codage par zones sont recevables si les rôles, les états, le contraste calculé et un indice non chromatique pour toute information critique tiennent. Une couleur sémantique n’est pas une décoration.
+ 
+-**Question de convergence.** Cette palette et cette police de titre sont-elles celles que le modèle produirait sans brief (palette : neutres et un seul accent, sombre et doré, dégradé froid ; police : la grotesque large ou la serif de caractère prise par réflexe) ? Si oui, nomme ce qui, dans le produit, les justifie. Sinon, reconsidère-les. Pour la police de titre, compare au moins deux voix typographiques distinctes (par exemple grotesque, serif, mécane, manuscrite ou vernaculaire du lieu) sur le vrai titre avant de choisir. La question ne prescrit aucun écart : un choix convergent justifié reste valide.
++**Question de convergence.** Cette palette et cette police de titre sont-elles celles que le modèle produirait sans brief (palette : neutres et un seul accent, sombre et doré, dégradé froid ; police : la grotesque large ou la serif de caractère prise par réflexe) ? Si oui, nomme ce qui, dans le produit, les justifie ; si rien ne les justifie, reconsidère-les. Pour la police de titre, compare au moins deux voix typographiques distinctes (par exemple grotesque, serif, mécane, manuscrite ou vernaculaire du lieu) sur le vrai titre avant de choisir. La question ne prescrit aucun écart : un choix convergent justifié reste valide.
+ 
+ [VEILLE 2026-09] **Marqueurs de vague**, pour nommer `MODAL` (`DIRECTION/CREATIVE-BOOT`), jamais pour interdire : un marqueur gardé par décision reste valide. Vague 1 : violet, police Inter, halos et gradient décoratif, hero SaaS à cartes répétées. Vague 2 : fond beige ou crème, brun, serif de caractère ou serif italique, orange rouille, bandeau défilant, illustration peinte, tramage. Vague 3 : dithering, logos pixel, ASCII, hachures de plan, gravures, bleu Klein, libellés mono en capitales, repères de recadrage, paysage peint en fond. Source : épreuve de référence interne V1.2 (26-09-2026) et revue de références de designers (27-09-2026), 6 rendus sur 6 sur fond crème et brun, avec ou sans système. Signal P1 (27-09-2026, 3 rendus sur 3, même auteur : grotesque large ou condensée, Archivo, sur fond blanc neutre avec un seul accent vif) non retrouvé en R10. Signal R10 (30-09-2026, auto-comparaison, 6 rendus) : même objet central par brief (fournées du jour ; facture tamponnée) et même grotesque de titre sur un brief, avec ou sans système. À revoir avant 2027-03.
+ 
+diff --git a/audit/tools/C9_harnais_non_regression.py b/audit/tools/C9_harnais_non_regression.py
+index 5184524..7aa05a4 100644
+--- a/audit/tools/C9_harnais_non_regression.py
++++ b/audit/tools/C9_harnais_non_regression.py
+@@ -58,8 +58,11 @@ def pc_base(pc):
+         {"requirement": f"state_matrix: {s}", "artifact_locator": f"/incidents?state={i}",
+          "proof_status": "OBSERVED" if "indisponible" in s else "NOT-VERIFIED"} for i, s in enumerate(states)
+     ] + [
+-        {"requirement": "responsive_matrix: tablette: détail prioritaire, contexte repliable", "artifact_locator": "/incidents@834px", "proof_status": "NOT-VERIFIED"},
+-        {"requirement": "accessibility_basis: focus visible", "artifact_locator": "/incidents#alert-focus", "proof_status": "OBSERVED"},
++        # Rectification déclarée (audit progressif, C15 option a, `V12R_46`) : toute exigence déclarée est couverte,
++        # au besoin en NOT-VERIFIED ; la base couvre donc chaque ligne des trois autres matrices, pas seulement deux.
++        {"requirement": f"{matrix}: {item}", "artifact_locator": f"/incidents#{matrix}-{i}",
++         "proof_status": "OBSERVED" if item == "focus visible" else "NOT-VERIFIED"}
++        for matrix in ("responsive_matrix", "accessibility_basis", "robustness_basis") for i, item in enumerate(u[matrix])
+     ]
+     return d
+ 
+@@ -96,7 +99,7 @@ CASES = [
+      m_pc(lambda u: u["coverage_map"].append({"requirement": "state_matrix: source indisponible données", "artifact_locator": "/x", "proof_status": "NOT-VERIFIED"})), "neg", "exigence absente des matrices"),
+     ("P-02", "F-PC-002", "production_contracts", "état critique de state_matrix omis de la couverture",
+      m_pc(lambda u: u.__setitem__("coverage_map", [e for e in u["coverage_map"] if "error source indisponible" not in e["requirement"]])), "neg", "état non couvert"),
+-    ("P-P1", "F-PC-002", "production_contracts", "liaison exacte, tous les états couverts → accepté", lambda docs: pc_base(docs["pc"]), "pos", None),
++    ("P-P1", "F-PC-002", "production_contracts", "liaison exacte, toutes les exigences déclarées couvertes → accepté", lambda docs: pc_base(docs["pc"]), "pos", None),
+     ("R-01", "F-RB-001", "research_brief", "source « ? »", m_rb(lambda e: e.update(source="?")), "neg", "source placeholder"),
+     ("R-02", "F-RB-001", "research_brief", "source vérifiée dans le run sans locator",
+      m_rb(lambda e: (e.update(source_status="verified_in_run"), e.pop("source_locator"))), "neg", "exige un locator"),

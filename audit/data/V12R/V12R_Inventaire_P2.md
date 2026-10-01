@@ -98,6 +98,7 @@ Cette vue couvre les identifiants D-01 à D-23 et les mineurs transmis. Elle n�
 - **AP4a fait (`V12R_43`) :** C11, C12, C13, C19, C20 (validateurs du package) et C21 (outil 13.01, rectification déclarée) ; sonde 36/36 (22 KO avant) ; mutations 7/7.
 - **AP4b fait (`V12R_44`) :** C04, C17, C23, C24, C33, C39 ; AUD-06, AUD-08 et AUD-13 fermés sur texte (garde FAC-01, 21/21 mutations). Maintenus sans changement, avec disposition : `DIRECTION/START` (entrée minimale), bloc BRIEF, `BIBLIOTHEQUE/MICRO`, titres des absolus (décision 8), exemple de reformulation du README (lu par des personnes).
 - **AP5 fait (`V12R_45`) :** C18 fermé (pilotage resynchronisé) ; C32, C37 maintenus sans changement ; C38 réserve maintenue (R11 final) ; C15 (arbitrage) et C25 à C31 : corrections proposées, décision attendue (unité AP5b).
+- **AP5b fait (`V12R_46`) :** C15 option (a) (toute exigence UI/UX déclarée couverte ; harnais C9 rectifié, déclaré) ; C25 à C31 corrigés ; 11/11 mutations. **Les 39 constats de l'audit progressif ont une disposition.**
 - **Différés : dispositions écrites en AP5** (`V12R_45` §2).
 
 ## 2. Réserves de clôture : articulation, sans double comptage

@@ -328,7 +328,7 @@ Pièces, archives ou preuves mises en scène dans un vide généreux et des prop
 
 ### Test de support
 
-Si texte, données et images sont masqués, cadre, vide, axes et foyer doivent encore indiquer un parti de composition. Ce test est `PERCEPTUAL` ou `EXPERT` ; il ne prouve pas seul l’utilisabilité de la surface.
+Si texte, données et images sont masqués, cadre, vide, axes et foyer doivent encore indiquer un parti de composition. Ce test est `PERCEPTUAL` ou `EXPERT` ; il ne prouve pas seul l’utilisabilité de la surface. Si la composition dépend de ce qui est masqué par une relation déclarée, avec un repli, la dépendance est recevable (`BIBLIOTHEQUE/GATE`, non-généricité) ; le masquage sert à diagnostiquer, pas à exiger un décor indépendant du contenu.
 
 Le support et la scène ne sont pas le même niveau : le support est le champ spatial ; la scène est le scénario de lecture et de preuve qui y prend place.
 
@@ -572,7 +572,7 @@ TEST
 PROOF-LIMIT
 ```
 
-Il est accepté uniquement si la version après réduit une ambiguïté, préserve les états critiques et rend une décision plus directe sans exiger davantage d’attention. La preuve se rattache au gate ACTION applicable et à la méthode déclarée ; lorsque la compréhension ou l’usage domine, une tâche utilisateur est requise dans le scope déclaré.
+La comparaison est valide si elle isole la décision et observe le critère déclaré. La version retenue est celle qui réduit une ambiguïté, préserve les états critiques et rend une décision plus directe sans exiger davantage d’attention : l’original s’il résout mieux (`ACTION/B1b`). La preuve se rattache au gate ACTION applicable et à la méthode déclarée ; lorsque la compréhension ou l’usage domine, une tâche utilisateur est requise dans le scope déclaré.
 
 Lorsque le scope le requiert, rattache l’avant/après à `ACTION/GATE-B/B1b` : capture initiale et capture après une seule décision éditée, tâche ou lecture déclarée, variable observable, états critiques, `DECISION-CHANGE`, méthode, scope, owner, `PROOF-LIMIT` et prochaine preuve. Si aucun résultat n’est observé, utilise le statut ACTION approprié, jamais un `PASS` implicite.
 
@@ -619,7 +619,7 @@ Grain, trame, aplat, bordure ou hachure donnent un statut de matière conçue.
 
 ### Contrat de composant partagé
 
-S’applique à un pattern réutilisable, à un composant critique ou à un composant partagé ; un delta local n’en porte aucune obligation. C’est la seule définition de la structure d’un composant : `ACTION` en garde la baseline comme preuve, la migration et le verdict ; `SAVOIR/SYSTEM` en garde le jugement (tokens, modes, interopérabilité, maintenance).
+S’applique à un pattern réutilisable, à un composant critique ou à un composant partagé ; un delta local sans responsabilité critique, réutilisable ou partagée n’en porte aucune obligation ; s’il touche un composant critique ou partagé, ou devient réutilisable, il relève de ce contrat (reclasser avec `DIRECTION/START`). C’est la seule définition de la structure d’un composant : `ACTION` en garde la baseline comme preuve, la migration et le verdict ; `SAVOIR/SYSTEM` en garde le jugement (tokens, modes, interopérabilité, maintenance).
 
 ```text
 INTENTION / NON-USAGE

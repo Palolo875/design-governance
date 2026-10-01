@@ -58,8 +58,11 @@ def pc_base(pc):
         {"requirement": f"state_matrix: {s}", "artifact_locator": f"/incidents?state={i}",
          "proof_status": "OBSERVED" if "indisponible" in s else "NOT-VERIFIED"} for i, s in enumerate(states)
     ] + [
-        {"requirement": "responsive_matrix: tablette: détail prioritaire, contexte repliable", "artifact_locator": "/incidents@834px", "proof_status": "NOT-VERIFIED"},
-        {"requirement": "accessibility_basis: focus visible", "artifact_locator": "/incidents#alert-focus", "proof_status": "OBSERVED"},
+        # Rectification déclarée (audit progressif, C15 option a, `V12R_46`) : toute exigence déclarée est couverte,
+        # au besoin en NOT-VERIFIED ; la base couvre donc chaque ligne des trois autres matrices, pas seulement deux.
+        {"requirement": f"{matrix}: {item}", "artifact_locator": f"/incidents#{matrix}-{i}",
+         "proof_status": "OBSERVED" if item == "focus visible" else "NOT-VERIFIED"}
+        for matrix in ("responsive_matrix", "accessibility_basis", "robustness_basis") for i, item in enumerate(u[matrix])
     ]
     return d
 
@@ -96,7 +99,7 @@ CASES = [
      m_pc(lambda u: u["coverage_map"].append({"requirement": "state_matrix: source indisponible données", "artifact_locator": "/x", "proof_status": "NOT-VERIFIED"})), "neg", "exigence absente des matrices"),
     ("P-02", "F-PC-002", "production_contracts", "état critique de state_matrix omis de la couverture",
      m_pc(lambda u: u.__setitem__("coverage_map", [e for e in u["coverage_map"] if "error source indisponible" not in e["requirement"]])), "neg", "état non couvert"),
-    ("P-P1", "F-PC-002", "production_contracts", "liaison exacte, tous les états couverts → accepté", lambda docs: pc_base(docs["pc"]), "pos", None),
+    ("P-P1", "F-PC-002", "production_contracts", "liaison exacte, toutes les exigences déclarées couvertes → accepté", lambda docs: pc_base(docs["pc"]), "pos", None),
     ("R-01", "F-RB-001", "research_brief", "source « ? »", m_rb(lambda e: e.update(source="?")), "neg", "source placeholder"),
     ("R-02", "F-RB-001", "research_brief", "source vérifiée dans le run sans locator",
      m_rb(lambda e: (e.update(source_status="verified_in_run"), e.pop("source_locator"))), "neg", "exige un locator"),

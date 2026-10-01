@@ -28,7 +28,15 @@
       {"requirement":"responsive_matrix: tablette: détail prioritaire, contexte repliable", "artifact_locator":"/incidents@834px", "proof_status":"NOT-VERIFIED"},
       {"requirement":"accessibility_basis: focus visible", "artifact_locator":"/incidents#alert-focus", "proof_status":"OBSERVED"},
       {"requirement":"accessibility_basis: contraste", "artifact_locator":"/incidents#contrast", "proof_status":"OBSERVED"},
-      {"requirement":"robustness_basis: libellés longs", "artifact_locator":"/incidents?fixture=long-labels", "proof_status":"NOT-VERIFIED"}
+      {"requirement":"robustness_basis: libellés longs", "artifact_locator":"/incidents?fixture=long-labels", "proof_status":"NOT-VERIFIED"},
+      {"requirement":"responsive_matrix: desktop: contexte et détail côte à côte", "artifact_locator":"/incidents@1440px", "proof_status":"OBSERVED"},
+      {"requirement":"responsive_matrix: petit écran: séquence guidée", "artifact_locator":"/incidents@390px", "proof_status":"NOT-VERIFIED"},
+      {"requirement":"accessibility_basis: sémantique des statuts", "artifact_locator":"/incidents#status-semantics", "proof_status":"NOT-VERIFIED"},
+      {"requirement":"accessibility_basis: clavier", "artifact_locator":"/incidents#keyboard", "proof_status":"OBSERVED"},
+      {"requirement":"accessibility_basis: information non portée par la couleur", "artifact_locator":"/incidents#status-icons", "proof_status":"NOT-VERIFIED"},
+      {"requirement":"robustness_basis: horodatages variables", "artifact_locator":"/incidents?fixture=timestamps", "proof_status":"NOT-VERIFIED"},
+      {"requirement":"robustness_basis: absence de données", "artifact_locator":"/incidents?state=empty", "proof_status":"NOT-VERIFIED"},
+      {"requirement":"robustness_basis: non-régression du tri", "artifact_locator":"/incidents?sort=severity", "proof_status":"NOT-VERIFIED"}
     ]
   },
   "evaluation_case": {
