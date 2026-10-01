@@ -99,6 +99,7 @@ Cette vue couvre les identifiants D-01 à D-23 et les mineurs transmis. Elle n�
 - **AP4b fait (`V12R_44`) :** C04, C17, C23, C24, C33, C39 ; AUD-06, AUD-08 et AUD-13 fermés sur texte (garde FAC-01, 21/21 mutations). Maintenus sans changement, avec disposition : `DIRECTION/START` (entrée minimale), bloc BRIEF, `BIBLIOTHEQUE/MICRO`, titres des absolus (décision 8), exemple de reformulation du README (lu par des personnes).
 - **AP5 fait (`V12R_45`) :** C18 fermé (pilotage resynchronisé) ; C32, C37 maintenus sans changement ; C38 réserve maintenue (R11 final) ; C15 (arbitrage) et C25 à C31 : corrections proposées, décision attendue (unité AP5b).
 - **AP5b fait (`V12R_46`) :** C15 option (a) (toute exigence UI/UX déclarée couverte ; harnais C9 rectifié, déclaré) ; C25 à C31 corrigés ; 11/11 mutations. **Les 39 constats de l'audit progressif ont une disposition.**
+- **AUD-07 disposé sans changement (01-10-2026, décision de l'owner « si c'est vraiment nécessaire ») :** pas nécessaire. La convergence d'objet est déjà couverte dans le noyau par le test de trame (« changer […] l'objet qui organise la page ») et par le signal de veille R10 (« même objet central par brief […] avec ou sans système »). Une troisième question ferait doublon, sans effet observable sans run ; un objet convergent peut être le bon (convention pertinente recevable). **Signal maintenu**, à revoir avec G4 (juges extérieurs) ou avant 2027-03.
 - **Différés : dispositions écrites en AP5** (`V12R_45` §2).
 
 ## 2. Réserves de clôture : articulation, sans double comptage
