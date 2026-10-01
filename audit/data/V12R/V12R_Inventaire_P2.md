@@ -107,7 +107,7 @@ Cette vue couvre les identifiants D-01 à D-23 et les mineurs transmis. Elle n�
 | Réserve de la clôture | Objet | Traitement prévu |
 | --- | --- | --- |
 | 1 et 4 | Efficacité et limites des preuves de forme | Questions pour l’usage et les observateurs ; ne pas annoncer leur résolution à P2. |
-| 2 | CI hébergée non observée | R11 final sur la candidate distribuable ; aucune exécution observée dans cette préparation. P2 vérifie les sources, contrôles et distributions locales prévus. |
+| 2 | CI hébergée non observée | **Levée dans le périmètre observé (R11 final, `V12R_47`)** : workflow racine, runs 3 et 4 verts sur les deux branches (Linux, Python 3.10, 3.11 et 3.13, `FULL VALIDATION PASSED`). Non observés : workflow du package dans un dépôt de distribution autonome (R12), macOS, Windows. |
 | 3 | Cas négatifs manquants | Couverture vérifiée (`V12R_22` §5) ; **six cas ajoutés en R11 ciblé** (N1 à N5 : locator de provenance, `observed` / `not_verified`, `failure_action`, champs de la protection critique, champs de provenance ; `V12R_23`), chacun rouge quand sa règle est retirée. Reliquat : les invariants hors de ces trois domaines ne sont pas réexaminés dans cette phase. |
 | 5 | Limite de la promesse du validateur | Conception assumée, à communiquer ; un résultat machine ne devient pas une preuve d’effet. |
 | 6 | Charge et coût | Charge documentaire suivie ; D-23 mesure le coût réel en R10. Ne pas confondre baisse des mots et économie observée. |
