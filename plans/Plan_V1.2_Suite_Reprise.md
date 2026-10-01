@@ -1,10 +1,10 @@
 # Plan de reprise — refonte V1.2 (pour quiconque reprend)
 
-**Date :** 2026-09-27 · **Owner :** Junior (Kamel) · **Plan maître :** `plans/Plan_V1.2_Refonte.md` (lots R1 à R12, décisions §8). Ce document dit **où on en est, comment reprendre, et quoi faire lot par lot**. Il est tenu à jour à chaque unité.
+**Date :** 2026-09-27, mis à jour le 2026-10-01 (AP5) · **Owner :** Junior (Kamel) · **Plan maître :** `plans/Plan_V1.2_Refonte.md` (lots R1 à R12, décisions §8). Ce document dit **où on en est, comment reprendre, et quoi faire lot par lot**. Il est tenu à jour à chaque unité.
 
 ## 1. Consignes de l'owner en vigueur
 
-1. **Pas de run réel ni de mini-épreuve dans cette phase.** On corrige et on améliore le système ; la preuve d'efficacité viendra en R10.
+1. **Pas de run réel ni d'épreuve dans cette phase.** Le palier exploratoire de R10 a été fait (`V12R_35`), puis arrêté par l'owner après la correction de D-25 (`V12R_36`). Toute nouvelle production exige une décision explicite de l'owner ; l'efficacité reste `NOT-VERIFIED`.
 2. **La qualité du résultat prime sur le nombre de mots.** Pas de plafond qui force à couper des gestes de fabrication. On retire seulement les doublons et le texte sans effet sur le rendu ; un ajout qui sert la fabrication est admis et déclaré.
 3. **Méthode non négociable** (`CLAUDE.md` §4) :
    - B01 en lecture seule, 218/218 à chaque unité ;
@@ -16,7 +16,7 @@
 4. **Décisions :** toutes les décisions du plan maître sont prises (`audit/reports/V12R_14_DECISIONS_ARBITRAGES.md`, addendums 1 et 2). Un contenu qui dépend d'une question nouvelle attend la réponse de l'owner.
 5. **Consolider avant d'évaluer.** Aucun run avant la porte **P2 « prêt pour l'évaluation »** (§4). Corriger et améliorer, c'est mettre l'existant à sa place (hiérarchie, organisation, accès, cohérence, clarté, fiabilité), pas ajouter ni retirer au hasard ; chaque modification répond à un défaut identifié, préserve ce qui marche et a une vérification proportionnée. Les moyens de produire du beau interviennent pendant la conception, pas seulement dans les contrôles de fin.
 
-## 2. État (après R11 ciblé, 30-09-2026)
+## 2. État (après AP4b, 01-10-2026)
 
 | Fait | Rapport |
 |---|---|
@@ -37,15 +37,18 @@
 | R6b-2 : READING_MAP porte les combinaisons par résultat ; ORCHESTRATION_MAP en pointeur ; garde MAP-01 ; 2 cas migrés | `V12R_28` |
 | R11 ciblé : Q-04 à Q-13 et R-16 à R-32 instruits sur traces ; contrôle machine nommé par mode, one-shot relié à B1b, exclusion critique conditionnelle, ancre `transformed` en DIRECTION ; six cas négatifs ; trois cas de harnais migrés (M1) | `V12R_22`, `V12R_23` |
 | Relecture de parcours, raccords R11b, porte P2 franchie (décision du 30-09), raccord R11c (clôtures en trace complète) ; protocole du palier exploratoire de R10 écrit, production en attente de la levée de « pas de run » | `V12R_31` à `V12R_34` ; `plans/Protocole_R10_Palier_exploratoire.md` |
+| R10 palier exploratoire (6 productions, auto-comparaison) ; D-25 corrigé ; R10 arrêté par l'owner | `V12R_35`, `V12R_36` |
+| Audit interne A1 (auto-audit) ; raccords A1 ; A2 (`CHARGE` seule liste, plancher SAVOIR dans le noyau, lieu de la trace légère) | `V12R_37` à `V12R_39` |
+| Audit progressif externe (`DG_Audit_progressif_10`, 39 constats) : AP1 outillage (C01 à C03) ; AP2 errata R10 et outils de suivi (C14, C22, C34 à C36) ; AP3 raccords de procédure et de fabrication (C05 à C10, D-26) ; AP4a validateurs (C11 à C13, C19 à C21) ; AP4b façades (C04, C17, C23, C24, C33, C39, AUD-06, 08, 13) ; AP5 pilotage et dispositions (C18, différés) | `V12R_40` à `V12R_45` |
 
-- **Mesures :**
-  - **mesures après R11b** : chemin prescrit 13 105 mots (trace légère) ; noyau 4 012 mots, section avec titre ; doublons 134 (après les restes R5 : chemin 12 937 ; noyau 3 923, section compilée avec son titre ; doublons 134 ; préambule de BIBLIOTHEQUE 804 mots (après R6b-2 : 12 865, 3 888, 145 ; après R7-2 : 12 867 et 3 889 ; après R11 ciblé : 12 839 et 3 861 ; après R7 : 12 795 et 3 861 ; après R8c-2 : 12 682 et 3 748 ; après R11a : 12 187 et 3 302) ;
-  - 24/25 outils de fabrication sur le chemin ; l'outil manquant est **F22** (tests perceptifs), atteignable en un renvoi conditionnel depuis Gate C (`PRC-01`), non compté car la mesure ne suit que les lectures impératives ;
-  - 1 liste de chargement.
+- **Mesures courantes (après AP4b, 01-10-2026)** : chemin prescrit 13 785 mots (trace légère) ; noyau 4 552 mots (section compilée, sans balises) ; doublons 142 ; négations 820 ; 24/25 outils de fabrication sur le chemin (F22 atteignable sous condition depuis Gate C, `PRC-01`) ; 1 liste de chargement.
+- **Mesures historiques, datées :** après R11b (30-09), chemin 13 105, noyau 4 012, doublons 134 ; après A2 (30-09), chemin 13 614, noyau 4 444 ; après AP3 (01-10), chemin 13 774, noyau 4 541. Chaque rapport d'unité garde ses propres mesures.
 - **Gardes :**
-  - `validate_structure.py` : 24 concepts, 4 renvois, 13 vocabulaires retirés, 7 résumés fidèles, 16 termes de glossaire, CHG-01 à CHG-09, ORD-01, UNI-01 (garde bornée) ;
-  - `validate_reading_map.py` : 50 conditions.
-- **Suivi :** vert (372 cas maintenus, 17 migrés).
+  - `validate_structure.py` : 25 concepts, 4 renvois, 33 vocabulaires retirés, 61 résumés fidèles, 16 termes de glossaire, CHG-01 à CHG-09, ORD-01, UNI-01 (bornée), CORE-01, SKL-01, UIX-01, FAC-01 ;
+  - `validate_reading_map.py` : 50 conditions de façade, plus deux témoins du lecteur de routes (C11) ;
+  - suites intégrées : `validate_run_card.py` 87 cas unitaires, 10 locators admis en strict, témoin de schéma ; `validate_contracts.py` 22 cas, témoin de clé répétée.
+- **Suivi (`V12R_Suivi.py`, rectifié en AP2) :** vert ; 389 cas, 363 maintenus, 26 obsolètes dont les gardes de remplacement sont établies.
+- **Preuves directes par unité :** sondes `V12R_Sonde_AP1.py`, `V12R_Sonde_AP2.py`, `V12R_Sonde_AP4a.py`.
 
 ## 3. Reprendre une unité (recette)
 
@@ -91,7 +94,7 @@ git checkout claude/init-repo-claude-md-gm6njm
 | 6 | ~~**Restes R5**~~ **fait** (`V12R_29`, `V12R_30`) ; D-15 fermé | amendement §9 | Copies du handoff (SAVOIR, BIBLIOTHEQUE) → renvois ; maintenance et promotion hors du parcours local (vérifier que le chargement inutile baisse) ; `PRINT_FIELD` relié aux signaux de convergence ; alternative située : DIRECTION le déclenchement, SAVOIR les leviers, ACTION la comparaison |
 | 7 | **Relecture de parcours** **faite** (`V12R_31`) ; raccords **R11b faits** (`V12R_32`, G2 (a)) ; **porte P2 franchie** (`V12R_33`, décision de l'owner du 30-09), conclue après le raccord **R11c** (`V12R_34`, bloquant PAR-G4b relevé par revue) | ci-dessous | Voir « Porte P2 » |
 | 8 | **R10 progressif** (après P2, et quand l'owner lève la consigne « pas de run ») ; protocole écrit (`plans/Protocole_R10_Palier_exploratoire.md`) ; **palier exploratoire fait** (`V12R_35`) : aucun problème évident, coût dans le compromis, qualité encourageante mais incertaine (accord 50 %) ; D-25 et D-26 signalés ; **décision de l'owner : D-25 corrigé (`V12R_36`), puis arrêt de R10 au palier exploratoire** (ni 18 productions, ni run de vérification) | ci-dessous | Palier exploratoire, puis 18 si justifié, puis davantage pour une question précise |
-| 8 bis | **Audit progressif externe** (`DG_Audit_progressif_10`, 01-10) : cinq unités. **AP1 fait** (`V12R_40` : C01 à C03) ; **AP2 fait** (`V12R_41` : errata R10, C14, C22) ; **AP3 fait** (`V12R_42` : C08, C05 à C07, C09, C10, D-26 (a)) ; **AP4a fait** (`V12R_43` : validateurs C11 à C13, C19 à C21) ; **AP4b fait** (`V12R_44` : façades, AUD-06, 08, 13). Suite : AP5 (C18, consolidation) | inventaire, bloc « Audit progressif externe » | Chaque constat reçoit une disposition (correction, report justifié, limite) ; pas de nouvelle production R10 |
+| 8 bis | **Audit progressif externe** (`DG_Audit_progressif_10`, 01-10) : cinq unités. **AP1 fait** (`V12R_40` : C01 à C03) ; **AP2 fait** (`V12R_41` : errata R10, C14, C22) ; **AP3 fait** (`V12R_42` : C08, C05 à C07, C09, C10, D-26 (a)) ; **AP4a fait** (`V12R_43` : validateurs C11 à C13, C19 à C21) ; **AP4b fait** (`V12R_44` : façades, AUD-06, 08, 13) ; **AP5 fait** (`V12R_45` : pilotage, dispositions). Suite : AP5b sur décision (C15, C25 à C31) | inventaire, bloc « Audit progressif externe » | Chaque constat reçoit une disposition (correction, report justifié, limite) ; pas de nouvelle production R10 |
 | 9 | **R11 final**, puis **R12** | amendement §11 | CI hébergée sur la candidate distribuable ; réserves disposées ; V1.2.0 avec R9 reporté ; feu vert final |
 
 ### Porte P2 — prêt pour l'évaluation

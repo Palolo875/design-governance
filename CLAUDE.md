@@ -24,7 +24,7 @@ Ne rien modifier dans `package/` pendant l'initialisation.
 
 **Owner :** Junior (Kamel), designer et développeur, basé à Douala. Il décide de chaque arbitrage.
 
-## 2. État actuel (26-09-2026)
+## 2. État actuel (mis à jour le 01-10-2026 ; historique depuis le 26-09-2026)
 
 - **Version courante : V1.1.1**, dans `package/`. Non publiée.
 - **Audit DG-AUDIT-001 : clos**, statut final décidé par l'owner : **`AUDIT-PASS-WITH-RESERVATION`**. Dossier : `audit/reports/Audit_Cloture_Finale_DG-AUDIT-001.md`.
@@ -130,6 +130,7 @@ Ne rien modifier dans `package/` pendant l'initialisation.
   - AUD-13 : forme courte LITE = trace complète d'un LITE clôturé ; C33 : « Livraison » au glossaire, ligne du noyau « proposer ; en trace complète, décider » ;
   - C17, AUD-08 : exemple de brief flou déplacé (atelier de vélos), cohérent, avec trace légère ; C23 : liens vers « Commencer » (réécrits pour Local par le build) ; C24 : classer d'abord ; C39 : ancien parcours des notes de version situé comme historique ;
   - garde FAC-01 ; 21/21 mutations ; suivi vert ; 13.01 6/6, 6/6, 5/5, 9/9 ; 13.02 38/38 ; chemin 13 785, noyau 4 552, doublons 142.
+- **AP5 fait** (`V12R_45`, package inchangé) : C18 fermé (plan de reprise, plan de refonte, inventaire D-23 et PIL, date de cet état) ; C32 et C37 maintenus ; C38 réserve maintenue ; décisions attendues : C15 ((a) couverture de toute exigence déclarée, recommandée, ou (b) états seuls) et corrections C25 à C31 (unité AP5b).
 - **Chantier en cours : consolidation V1.2**, pilotée par `plans/Plan_V1.2_Suite_Reprise.md` ; architecture dans `plans/Plan_V1.2_Refonte.md`, décisions dans `V12R_14`. Objectif : un premier rendu composé, spécifique et soigné, avec une entrée humaine claire et un effort maîtrisé ; efficacité encore à évaluer. R8b mobilise les moyens et les enseignements transférables ; R8c précise les gestes utiles ; aucun atlas de créations obligatoire.
 
 ## 3. Arborescence
@@ -200,7 +201,7 @@ python3 scripts/read_route.py ACTION/RUN_CARD  # lire une route
 ## 6. Prochaine étape
 
 1. ~~Porte G1 du plan V1.2~~ : franchie le 26-09-2026 (`audit/reports/V12_01_DECISIONS_G1.md`).
-2. ~~B05, lot 1 (A, B, D), addendum, lot 2 (G, H, I, D')~~ : faits (`V12_02` à `V12_04`). Lectures `V12_05` à `V12_11` faites. Mini-épreuve **reportée par l'owner** (27-09-2026). **Refonte (`plans/Plan_V1.2_Refonte.md`) : décisions 1, 2, 4, 7 prises ; R1, R2, R3 et R4 faits. P1 fait (orientation positive). R5b-1, R5b-2, R5a, R8a, R5c (hors ancre), R5d, R6a et R11a faits. Arbitrages décidés (`V12R_14`). Inventaire créé ; R8b, R8c, R7 (et raccords R7-2, R7-3), R11 ciblé, R6b élargi (R6b-1, R6b-2), restes R5, relecture de parcours et raccords R11b faits ; porte P2 franchie et conclue après R11c ; palier exploratoire de R10 fait (`V12R_35`) ; D-25 corrigé et R10 arrêté (`V12R_36`) ; audit interne A1 fait (`V12R_37`) et raccords A1 appliqués (`V12R_38`) ; A2 appliqué (`V12R_39`). Audit progressif externe : AP1 à AP4b faits (`V12R_40` à `V12R_44`). Prochaine : AP5 (C18, consolidation documentaire, dispositions des constats différés) ; puis AUD-07 → R11 final → R12 — voir `plans/Plan_V1.2_Suite_Reprise.md`**, puis G4.
+2. ~~B05, lot 1 (A, B, D), addendum, lot 2 (G, H, I, D')~~ : faits (`V12_02` à `V12_04`). Lectures `V12_05` à `V12_11` faites. Mini-épreuve **reportée par l'owner** (27-09-2026). **Refonte (`plans/Plan_V1.2_Refonte.md`) : décisions 1, 2, 4, 7 prises ; R1, R2, R3 et R4 faits. P1 fait (orientation positive). R5b-1, R5b-2, R5a, R8a, R5c (hors ancre), R5d, R6a et R11a faits. Arbitrages décidés (`V12R_14`). Inventaire créé ; R8b, R8c, R7 (et raccords R7-2, R7-3), R11 ciblé, R6b élargi (R6b-1, R6b-2), restes R5, relecture de parcours et raccords R11b faits ; porte P2 franchie et conclue après R11c ; palier exploratoire de R10 fait (`V12R_35`) ; D-25 corrigé et R10 arrêté (`V12R_36`) ; audit interne A1 fait (`V12R_37`) et raccords A1 appliqués (`V12R_38`) ; A2 appliqué (`V12R_39`). Audit progressif externe : AP1 à AP5 faits (`V12R_40` à `V12R_45`). Prochaine : AP5b sur décision (C15, C25 à C31) ; puis AUD-07 → R11 final → R12 — voir `plans/Plan_V1.2_Suite_Reprise.md`**, puis G4.
 **Plan de reprise (à lire en premier pour continuer) : `plans/Plan_V1.2_Suite_Reprise.md`** — consignes en vigueur (pas de run ni d'épreuve dans cette phase ; qualité avant nombre de mots), recette d'une unité, lots restants avec périmètre, gardes, réussite et arrêt, porte P2 et R10 progressif.
 3. Suivre le séquencement du plan : G2 (gardes rouges puis vertes) → G3 (non-régression, charge mesurée et justifiée) → G4 (épreuve à l'aveugle avec juges extérieurs) → publication V1.2.0.
 
