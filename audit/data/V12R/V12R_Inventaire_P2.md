@@ -113,4 +113,4 @@ Cette vue couvre les identifiants D-01 à D-23 et les mineurs transmis. Elle n�
 | 6 | Charge et coût | Charge documentaire suivie ; D-23 mesure le coût réel en R10. Ne pas confondre baisse des mots et économie observée. |
 | 7 | Placeholders de champs libres | Maintien décidé ; aucun filtre global ni restauration d’INV-E11. |
 | 8 | Mineurs transmis | Rapprochés des Q/R ci-dessus ; DAILY traité par R4/R11a. Ne pas les ajouter une seconde fois comme défauts indépendants. |
-| 9 | V1.1.1 non publiée | **V1.2.0 publiée le 01-10-2026** (R12, `V12R_48`, `releases/V1.2.0/`, étiquette `v1.2.0`) ; fusion dans `main` et Release GitHub sur décision de l'owner. |
+| 9 | V1.1.1 non publiée | **V1.2.0 publiée le 01-10-2026** (R12, `V12R_48`, `releases/V1.2.0/`, commit `ea5c150` ; étiquette et Release GitHub à créer par l'owner) ; fusion dans `main` et Release GitHub sur décision de l'owner. |

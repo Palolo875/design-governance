@@ -38,7 +38,7 @@ Le schéma `RUN_CARD` est inchangé (décision 3). Aucune règle normative ne ch
 | `SHA256SUMS.txt` | Empreintes complètes | — |
 
 - **Reproductibilité (certain) :** un second build indépendant, depuis une copie fraîche du package, donne des empreintes identiques pour les deux archives.
-- **Étiquette :** `v1.2.0`, posée sur le commit de publication.
+- **Étiquette :** `v1.2.0`, posée **localement** sur le commit de publication `ea5c150`. Son envoi a été refusé par le dépôt distant (HTTP 403) : l'accès de cette session ne pousse que des branches, et le dépôt distant n'a aucune étiquette, pas même `v1.1.1-import`. Le commit `ea5c150` est bien sur les deux branches. L'étiquette et la Release GitHub sont à créer par l'owner, sur `ea5c150`.
 
 ## 4. Écarts et limites
 
