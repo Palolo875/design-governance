@@ -4,13 +4,13 @@
 
 > **Rôle de ce guide :** fournir une interface d’activation rapide. Il oriente la lecture et l’action, mais n’ajoute aucune règle, route, gate, axe, statut, verdict ou autorité. Les cinq sources normatives font foi.
 
-> **Pour qui :** ce guide sert à piloter un run (opérateur, designer ou agent). Pour faire simplement une demande, la section « Commencer » du README du package suffit : vous n’avez pas à choisir de mode.
+> **Pour qui :** ce guide sert à piloter un run (opérateur, designer ou agent). Pour faire simplement une demande, la section [« Commencer »](../../README.md#commencer) du README du package suffit : vous n’avez pas à choisir de mode.
 
 V1 aide à transformer une demande en **décision située, artefact réel, observation pertinente et trace honnête**. Elle ne promet ni beauté automatique, ni réussite universelle, ni validation d’usage sans preuve adaptée. Elle vise néanmoins un niveau positif : lorsque la décision visuelle est ouverte et que les capacités sont disponibles, le premier rendu doit déjà être composé, spécifique, crédible, présentable et suffisamment résolu pour être jugé comme un objet réel.
 
 ## Parcours commun
 
-Pour piloter un run, commencez ici ; les sections suivantes n’approfondissent que si le risque, le périmètre ou la décision le justifie. Notez :
+Pour piloter un run, commencez ici ; les sections suivantes n’approfondissent que si le risque, le périmètre ou la décision le justifie. Une fois la demande classée par `DIRECTION/START` (par l’opérateur ou l’agent, jamais par la personne qui demande), notez :
 
 ```text
 MODE — DECISION — RISK — NEXT-PROOF — OWNER
@@ -26,13 +26,13 @@ Répondez ensuite à ces cinq questions :
 | Qu’est-ce qui est réellement disponible ? | Artefact, navigateur, DOM/CSS, contraste, clavier/AT, participant, runtime, donnée ou source. |
 | Qui porte la décision et la prochaine action ? | Owner explicite, avec confirmation ou escalade si nécessaire. |
 
-Produisez la ligne de run, faites l’action la moins coûteuse qui peut changer la décision, puis choisissez une seule suite : **corriger**, **approfondir la preuve**, **rouvrir**, **reclassifier** ou **fermer**. Passez aux sections suivantes seulement si le risque, le périmètre ou la décision le justifie.
+Produisez la ligne de run, faites l’action la moins coûteuse qui peut changer la décision, puis choisissez une seule suite : **corriger**, **approfondir la preuve**, **rouvrir**, **reclassifier**, **proposer** ou **fermer**. Par défaut, le run s’arrête à la proposition, en trace légère : la première proposition vaut checkpoint, sauf action irréversible ou coûteuse ; **fermer** suppose la trace complète (run persistant, partagé, audité ou acceptation demandée). Passez aux sections suivantes seulement si le risque, le périmètre ou la décision le justifie.
 
 ## Carte de résolution rapide
 
 Si la demande est déjà identifiable, consultez [`READING_MAP.md`](./READING_MAP.md) pour le premier chemin, la perspective conditionnelle et la sortie attendue. Cette carte est dérivée et non normative. Si le brief est vague, commencez directement par `DIRECTION/START`.
 
-Une sortie de run a deux formes : la **réponse visible**, par défaut, et le **handoff**, pour une reprise ou un run persistant (voir `ACTION/HANDOFF`). Utilisez `N/A-JUSTIFIED` lorsqu’un champ ou une perspective ne s’applique pas.
+Une sortie de run a deux formes : la **réponse visible**, par défaut, et le **handoff**, pour une reprise ou un run persistant (voir `ACTION/HANDOFF`). Le niveau de trace ne dépend pas du mode : sans persistance, partage, audit ni acceptation demandée, la **trace légère** suffit (six lignes au plus, à côté de l’artefact ou sous « Trace » après la réponse) ; dans les autres cas, la **trace complète** s’impose. Utilisez `N/A-JUSTIFIED` lorsqu’un champ ou une perspective ne s’applique pas.
 
 ## 1. Choisir la profondeur de lecture
 
@@ -62,7 +62,7 @@ Les cinq absolus de `DIRECTION` protègent chaque run : leur résumé est dans l
 
 Avant de construire ou de modifier, répondez aux cinq questions du parcours commun.
 
-Produisez ensuite la ligne minimale :
+Produisez ensuite la ligne minimale ; elle reprend la ligne du parcours commun avec un identifiant et l’état du run (`ACTION/STATUS`), l’owner restant nommé dans l’entrée minimale de `DIRECTION/START` :
 
 ```text
 ID — MODE — DECISION — RISK — NEXT-PROOF — STATE
@@ -169,9 +169,9 @@ Le one-shot réduit le nombre de cycles ; il ne supprime pas :
 3. l’observation du premier rendu ou comportement ;
 4. la revue créative lorsque la décision est visuelle ;
 5. la vérification du risque dominant ;
-6. la persistance des preuves, limites et décisions.
+6. la trace des preuves, limites et décisions, à son niveau (légère par défaut, complète si le run est persistant, partagé ou audité).
 
-La sortie one-shot peut être une décision directement clôturée si l’observation confirme que le défaut dominant est absent ou corrigé et qu’aucune nouvelle itération ne promet un changement visible ou utile. Sinon, le run retourne à la branche appropriée : correction, réouverture, reclassification ou prochaine preuve.
+En trace légère, la sortie one-shot est la proposition. En trace complète, la sortie one-shot peut être une décision directement clôturée si l’observation confirme que le défaut dominant est absent ou corrigé et qu’aucune nouvelle itération ne promet un changement visible ou utile. Sinon, le run retourne à la branche appropriée : correction, réouverture, reclassification ou prochaine preuve.
 
 ## 8. Handoff agentique
 
@@ -186,7 +186,7 @@ CONSTRAINTS — contraintes de produit, technique, contenu, droits et délai.
 OUTPUT — artefact, trace, preuve, limite et prochaine action attendus.
 ```
 
-L’agent localise le package réellement fourni, classe la demande avec `DIRECTION/START`, charge uniquement les propriétaires utiles, produit l’artefact, vérifie le risque dominant et restitue par défaut la réponse visible en langage produit : ce qui a été fait, pourquoi, ce qui manque pour la vraie version, la suite (voir `ACTION/HANDOFF`).
+L’agent localise le package réellement fourni, lit le noyau de la skill, classe la demande avec `DIRECTION/START`, charge la ligne de son mode dans `DIRECTION/CHARGE` et seulement les propriétaires utiles, produit l’artefact, vérifie le risque dominant et restitue par défaut la réponse visible en langage produit : ce qui a été fait, pourquoi, ce qui manque pour la vraie version, la suite (voir `ACTION/HANDOFF`), avec la trace légère par défaut.
 
 Il demande confirmation avant toute action externe, irréversible, publique, destructive, financière ou persistante hors du périmètre autorisé. Il ne choisit pas un mode plus léger parce qu’une capacité manque. Il déclare la capacité indisponible, requalifie la protection nécessaire ou conserve explicitement la limite.
 

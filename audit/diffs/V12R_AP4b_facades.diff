@@ -1,0 +1,403 @@
+diff --git a/package/README.md b/package/README.md
+index 15b588d..229ce12 100644
+--- a/package/README.md
++++ b/package/README.md
+@@ -51,7 +51,7 @@ V1 vise une première proposition composée, spécifique et soignée, sans impos
+ | Reviewer ou lead | [`READING_MAP.md`](V1/official/READING_MAP.md), puis `ACTION.md` | Preuve dans le scope, limites et décision de clôture. |
+ | Mainteneur du package | Ce README, `CHANGELOG.md` et les validateurs | Contrat cohérent, testable et reproductible. |
+ 
+-Le mode d’un run est choisi par l’agent avec `DIRECTION/START`, seule classification ; il n’est jamais demandé à la personne qui fait la demande. Le parcours complet d’un run est : classer, diriger, construire, observer, corriger, fermer ; chaque mode n’en garde que les étapes de sa route.
++Le mode d’un run est choisi par l’agent avec `DIRECTION/START`, seule classification ; il n’est jamais demandé à la personne qui fait la demande. Le parcours complet d’un run est : classer, diriger, construire, observer, corriger, puis proposer (par défaut, en trace légère : la première proposition vaut checkpoint) ou fermer (trace complète) ; chaque mode n’en garde que les étapes de sa route.
+ 
+ Le README oriente la navigation. Il ne crée aucune règle concurrente. Les sources normatives font foi dans leur périmètre.
+ 
+diff --git a/package/RELEASE_NOTES.md b/package/RELEASE_NOTES.md
+index a268751..f3f3914 100644
+--- a/package/RELEASE_NOTES.md
++++ b/package/RELEASE_NOTES.md
+@@ -36,6 +36,8 @@ Les cinq sources normatives sont `DIRECTION.md`, `ACTION.md`, `SAVOIR.md`, `BIBL
+ 
+ ## Parcours de découverte
+ 
++> **Parcours de V1.1.1, historique.** Dans la candidate courante, une personne commence par la section « Commencer » du README du package ; un agent entre par la skill (noyau de fabrication et `DIRECTION/CHARGE`) et s’arrête par défaut à la proposition ; les guides s’ouvrent à la demande ; `ORCHESTRATION_MAP.md` n’est plus qu’un pointeur vers `READING_MAP.md`. Ces notes seront réécrites en R12.
++
+ Pour un humain qui découvre le système :
+ 
+ ```text
+diff --git a/package/V1/official/ACTION.md b/package/V1/official/ACTION.md
+index d2de7ac..8f1f0c0 100644
+--- a/package/V1/official/ACTION.md
++++ b/package/V1/official/ACTION.md
+@@ -61,7 +61,7 @@ L’agent active le système en silence : la personne donne l’objectif, le pé
+ **Trace légère par défaut.** Hors run persistant, partagé ou audité, la trace tient en six lignes au plus : mode ; thèse (promesse → objet de preuve → geste) ; modal, trame et parti ; plafond atteint et contenus marqués ; défaut dominant restant ; prochaine preuve. Elle s’écrit à côté de l’artefact quand l’agent écrit des fichiers (fichier de trace ou en-tête du fichier livré) ; sinon, après la réponse visible, sous « Trace ». Les planchers s’appliquent pendant la fabrication (vérité, `ACTION/GATE-A` selon le profil de surface, boucle d’édition) ; seule leur écriture s’allège. Le run livre une **proposition** `EXPLORATORY` : ni verdict, ni acceptation, ni clôture, ni `RUN_CARD`. **Trace complète** (handoff, `ACTION/RUN_CARD`, `ACTION/CLOSE-PACKAGE`, gates écrits, `B1b` dans son scope) si le run est persistant, partagé, audité, ou si une acceptation ou une clôture est demandée.
+ <!-- noyau:fin TRACE -->
+ 
+-**Formes.** La ligne de run de `DIRECTION` est la mémoire de lancement, sous-ensemble de lancement de ce handoff ; le handoff est la transmission ; `ACTION/CLOSE-PACKAGE` est la clôture par mode ; la `RUN_CARD` JSON est la projection persistante, selon la table de correspondance d’`ACTION/RUN_CARD`. **Forme courte LITE non persistante :** le paquet LITE de `ACTION/CLOSE-PACKAGE` ; les autres champs du handoff sont `N/A-JUSTIFIED` par défaut, avec deux pertes déclarées (METHOD, EXIT-CONDITION) ; TRACE-LOCATOR est alors l’artefact. Une reprise par un autre agent exige OWNER et NEXT-ACTION ; sinon la forme courte reste une préparation.
++**Formes.** La ligne de run de `DIRECTION` est la mémoire de lancement, sous-ensemble de lancement de ce handoff ; le handoff est la transmission ; `ACTION/CLOSE-PACKAGE` est la clôture par mode ; la `RUN_CARD` JSON est la projection persistante, selon la table de correspondance d’`ACTION/RUN_CARD`. **Forme courte LITE** (trace complète d’un `LITE` clôturé sans `RUN_CARD`, distincte de la trace légère, qui ne clôture pas) : le paquet LITE de `ACTION/CLOSE-PACKAGE` ; les autres champs du handoff sont `N/A-JUSTIFIED` par défaut, avec deux pertes déclarées (METHOD, EXIT-CONDITION) ; TRACE-LOCATOR est alors l’artefact. Une reprise par un autre agent exige OWNER et NEXT-ACTION ; sinon la forme courte reste une préparation.
+ 
+ Le handoff réutilise les champs existants ; il ne crée ni statut, ni gate, ni nouveau schéma. Les champs non applicables sont marqués `N/A-JUSTIFIED`. Un run persistant utilise la projection `RUN_CARD` et son validateur. Une sortie courte qui ne peut pas fournir ces éléments reste une préparation, une clarification ou une décision non clôturée ; elle ne doit pas être présentée comme une preuve complète.
+ 
+diff --git a/package/V1/official/CHANGELOG.md b/package/V1/official/CHANGELOG.md
+index ccfb8f2..1c567a4 100644
+--- a/package/V1/official/CHANGELOG.md
++++ b/package/V1/official/CHANGELOG.md
+@@ -39,6 +39,7 @@
+ - **Outillage (audit progressif, unité 1).** L’en-tête de la skill est cité et se lit en YAML, texte inchangé (garde SKL-01) ; le profil strict traite un nom de fichier nu à extension connue comme un fichier local, résolu depuis le dossier de la carte (tickets, commits et identifiants opaques inchangés) ; le build restaure ensemble `dist` et les deux archives si la promotion échoue.
+ - **Raccords de procédure et de fabrication (audit progressif, unité 3).** `DIRECTION/CHARGE` appelle `ACTION/UI-UX-REALITY` avant fabrication pour une surface UI/UX nouvelle ou substantiellement modifiée (STANDARD, DIRECTION) ; `CLOSED` décrit la persistance et le résultat se déclare à part (`ACTION/RUN-DIRECTION`) ; un petit `ITER` garde le paquet `ITER` ; la portée de l’atelier d’édition (B1b) entre dans le noyau ; `N/A-JUSTIFIED` ne masque ni une preuve manquante ni une confirmation ; un risque non bloquant peut rester en réserve structurée ; les fonctions d’un produit fictif sont des contenus d’exemple marqués.
+ - **Validateurs (audit progressif, unité 4a).** Le lecteur de routes refuse un locator répété, un propriétaire incohérent et un titre porteur dupliqué ; les contrats et le manifeste refusent une clé JSON répétée ; le schéma `RUN_CARD` n’admet que les mots-clés réellement interprétés ; dates et heures doivent être réelles ; une valeur d’un autre type que son enum, un schéma non objet ou un Markdown non UTF-8 reçoivent un diagnostic nommé au lieu d’une erreur brute.
++- **Façades (audit progressif, unité 4b).** QUICKSTART, glossaire, carte de lecture, README, flux et exemples exposent la trace légère et la proposition par défaut (la première proposition vaut checkpoint ; fermer suppose la trace complète) ; mode et niveau de trace sont distingués ; la forme courte LITE est située ; l’exemple de brief flou change de domaine et montre sa trace légère ; les guides lient la section « Commencer » ; l’ancien parcours des notes de version est situé comme historique.
+ - **Efficacité.** `NOT-VERIFIED` : l’épreuve de référence donne V1.1.1 ≈ sans système sur la qualité perçue ; l’effet de ces chantiers reste à éprouver (G4).
+ 
+ ## V1.1.1 — Retour d’audit : alignements de textes et de façades
+diff --git a/package/V1/official/DIRECTION.md b/package/V1/official/DIRECTION.md
+index 6f2df05..3a8e9a5 100644
+--- a/package/V1/official/DIRECTION.md
++++ b/package/V1/official/DIRECTION.md
+@@ -567,7 +567,7 @@ La seconde boucle n’est pas une suite de petits polish. Après observation, ch
+ | Direction faible, interchangeable ou contradictoire | Rouvrir la direction, reformuler ou requalifier la cible avant de continuer le polish. |
+ | Risque ou périmètre changé | Reclassifier avec `DIRECTION/START`. |
+ | Preuve insuffisante | Déclarer la limite et produire la prochaine preuve proportionnée. |
+-| Décision suffisamment établie | Décider et persister la trace ; ne pas prolonger le polish sans changement attendu. |
++| Décision suffisamment établie | Proposer (trace légère : la proposition vaut checkpoint) ; en trace complète, décider et persister la trace. Ne pas prolonger le polish sans changement attendu. |
+ <!-- noyau:fin BOUCLE-DIAGNOSTIC -->
+ 
+ <!-- noyau:début BOUCLE-QUESTIONS -->
+diff --git a/package/V1/official/GLOSSAIRE.md b/package/V1/official/GLOSSAIRE.md
+index 42e70cc..226eb10 100644
+--- a/package/V1/official/GLOSSAIRE.md
++++ b/package/V1/official/GLOSSAIRE.md
+@@ -9,11 +9,11 @@ Ce glossaire explique les mots nécessaires pour commencer. Il n’ajoute aucune
+ | **JTBD** | « Job to be done » : la tâche ou le progrès concret que la personne cherche à accomplir dans le contexte déclaré. |
+ | **Blast radius** | L’étendue des consommateurs, surfaces ou décisions susceptibles d’être touchés par un changement. |
+ | **Preuve** | Ce qui permet de confirmer ou d’infirmer une décision dans un périmètre déclaré : observation, capture, test, mesure, comparaison ou retour adapté. |
+-| **Mode** | Le niveau de protection et de trace adapté au travail : `LITE`, `ITER`, `STANDARD`, `DIRECTION` ou `SYSTÈME`. |
++| **Mode** | Le niveau de protection adapté au travail : `LITE`, `ITER`, `STANDARD`, `DIRECTION` ou `SYSTÈME`. Le niveau de trace (légère ou complète) se choisit à part, selon que le run est persistant, partagé ou audité. |
+ | **FAST-PATH** | Une vue courte pour un delta local ou une décision presque tranchée. Elle réduit la formalité, jamais la preuve requise ni l’honnêteté du statut. |
+ | **Façade d’activation** | Le cadrage court avant les routes détaillées : mode, risque dominant, décision à changer, prochaine preuve et owner. Elle n’est ni un nouveau mode ni un nouveau gate. |
+ | **Source propriétaire** | Le fichier normatif responsable d’une règle. Un guide peut la résumer, mais ne peut pas la remplacer. |
+-| **Run** | Un travail délimité, avec une décision, un risque, un artefact, une preuve et une clôture. |
++| **Run** | Un travail délimité, avec une décision, un risque, un artefact et une preuve. Il s’arrête à une proposition (trace légère) ou à une clôture (trace complète). |
+ | **RUN_CARD** | La trace structurée et persistante d’un run : exigée en `STANDARD`, `DIRECTION`, `SYSTÈME` et pour tout `ITER` sérialisé (voir `ACTION/RUN_CARD`). Elle porte décision, risque, artefact, preuve, limite et clôture. |
+ | **Artefact** | Le résultat concret que l’on peut inspecter : code, écran, capture, composant, test, diff ou autre livrable. |
+ | **Owner** | La personne ou l’équipe responsable de la décision, de la reprise ou de l’escalade. |
+@@ -35,9 +35,10 @@ Ce glossaire explique les mots nécessaires pour commencer. Il n’ajoute aucune
+ | **Plafond** | Le niveau qu’une couche peut atteindre avec les moyens disponibles ; lorsqu’il est bas, l’agent le déclare et dit ce qui le relèverait. |
+ | **Objet de preuve** | L’élément de la première scène qui rend la promesse crédible : de préférence un composant, une donnée, un état ou une interaction du produit. |
+ | **Défaut dominant** | Le défaut qui pèse le plus sur la qualité perçue ou sur l’usage ; c’est lui que l’on corrige en premier. |
+-| **Trace légère** | La trace par défaut d’un run ni persistant, ni partagé, ni audité : six lignes au plus (mode, thèse, modal, trame et parti, plafond, défaut dominant, prochaine preuve). Le run livre une proposition, sans verdict ni clôture. |
++| **Trace légère** | La trace par défaut d’un run ni persistant, ni partagé, ni audité : six lignes au plus (mode ; thèse ; modal, trame et parti ; plafond atteint et contenus marqués ; défaut dominant restant ; prochaine preuve). Le run livre une proposition, sans verdict ni clôture. |
+ | **Trace complète** | La trace d’un run persistant, partagé, audité ou dont on demande l’acceptation : handoff, `RUN_CARD`, paquet de clôture et gates écrits. |
+ | **Première proposition** | Le premier rendu, présenté avec sa thèse et ce qu’il faut décider. Il vaut checkpoint, sauf action irréversible ou coûteuse. |
++| **Livraison** | La remise d’un artefact à une personne : la première proposition (trace légère ; elle vaut checkpoint) ou la remise acceptée (trace complète). Les preuves applicables au mode sont dues dans les deux cas ; seule leur écriture s’allège en trace légère. |
+ | **Trame modale** | L’ordre de sections que n’importe quelle IA produirait pour un brief. Le test de trame la nomme, puis la rompt ou la justifie par la tâche. |
+ | **Profil de surface** | Le type de surface (vitrine, application, scène, hors Web) qui fixe les contrôles d’accessibilité à faire d’office. |
+ | **Vérité de scène** | La règle qui marque comme illustratif tout exemple, chiffre ou témoignage non observé, et qui le signale au public en langage produit. |
+@@ -76,8 +77,10 @@ Ces exemples illustrent l’usage des termes ; ils ne créent pas de règle supp
+ 
+ ## Pour commencer sans vocabulaire préalable
+ 
+-1. Établissez le mode, le risque dominant, la décision à changer, la prochaine preuve et l’owner.
+-2. Vérifiez ou confirmez le classement avec `DIRECTION/START` et choisissez le propriétaire normatif utile.
++Cette suite s’adresse à l’opérateur ou à l’agent ; une personne qui fait une demande n’a pas de mode à choisir (section « Commencer » du README du package).
++
++1. Classez la demande avec `DIRECTION/START` : mode et risque dominant ; notez la décision à changer, la prochaine preuve et l’owner.
++2. Chargez la ligne de ce mode dans `DIRECTION/CHARGE`, puis seulement le propriétaire normatif utile.
+ 3. Produisez ou modifiez l’artefact, puis observez-le dans le scope déclaré.
+ 4. Isolez le défaut dominant, corrigez l’artefact lorsque c’est nécessaire, observez à nouveau et séparez ce qui a été observé de ce qui reste non vérifié.
+ 
+diff --git a/package/V1/official/ORCHESTRATION_MAP.md b/package/V1/official/ORCHESTRATION_MAP.md
+index 4a93275..5bc590b 100644
+--- a/package/V1/official/ORCHESTRATION_MAP.md
++++ b/package/V1/official/ORCHESTRATION_MAP.md
+@@ -1,3 +1,3 @@
+ # ORCHESTRATION_MAP — combinaisons dérivées par résultat
+ 
+-**Statut :** pointeur de compatibilité. Les combinaisons par résultat recherché, leurs garde-fous et leur condition d’arrêt sont désormais dans [`READING_MAP.md`](READING_MAP.md), section « Combinaisons par résultat recherché ». Ce fichier ne porte plus de contenu propre.
++**Statut :** pointeur de compatibilité. Les combinaisons par résultat recherché, leurs garde-fous et leur condition d’arrêt sont désormais dans [`READING_MAP.md`](READING_MAP.md#combinaisons-par-résultat-recherché), section « Combinaisons par résultat recherché ». Ce fichier ne porte plus de contenu propre.
+diff --git a/package/V1/official/QUICKSTART.md b/package/V1/official/QUICKSTART.md
+index cadf950..8c08276 100644
+--- a/package/V1/official/QUICKSTART.md
++++ b/package/V1/official/QUICKSTART.md
+@@ -4,13 +4,13 @@
+ 
+ > **Rôle de ce guide :** fournir une interface d’activation rapide. Il oriente la lecture et l’action, mais n’ajoute aucune règle, route, gate, axe, statut, verdict ou autorité. Les cinq sources normatives font foi.
+ 
+-> **Pour qui :** ce guide sert à piloter un run (opérateur, designer ou agent). Pour faire simplement une demande, la section « Commencer » du README du package suffit : vous n’avez pas à choisir de mode.
++> **Pour qui :** ce guide sert à piloter un run (opérateur, designer ou agent). Pour faire simplement une demande, la section [« Commencer »](../../README.md#commencer) du README du package suffit : vous n’avez pas à choisir de mode.
+ 
+ V1 aide à transformer une demande en **décision située, artefact réel, observation pertinente et trace honnête**. Elle ne promet ni beauté automatique, ni réussite universelle, ni validation d’usage sans preuve adaptée. Elle vise néanmoins un niveau positif : lorsque la décision visuelle est ouverte et que les capacités sont disponibles, le premier rendu doit déjà être composé, spécifique, crédible, présentable et suffisamment résolu pour être jugé comme un objet réel.
+ 
+ ## Parcours commun
+ 
+-Pour piloter un run, commencez ici ; les sections suivantes n’approfondissent que si le risque, le périmètre ou la décision le justifie. Notez :
++Pour piloter un run, commencez ici ; les sections suivantes n’approfondissent que si le risque, le périmètre ou la décision le justifie. Une fois la demande classée par `DIRECTION/START` (par l’opérateur ou l’agent, jamais par la personne qui demande), notez :
+ 
+ ```text
+ MODE — DECISION — RISK — NEXT-PROOF — OWNER
+@@ -26,13 +26,13 @@ Répondez ensuite à ces cinq questions :
+ | Qu’est-ce qui est réellement disponible ? | Artefact, navigateur, DOM/CSS, contraste, clavier/AT, participant, runtime, donnée ou source. |
+ | Qui porte la décision et la prochaine action ? | Owner explicite, avec confirmation ou escalade si nécessaire. |
+ 
+-Produisez la ligne de run, faites l’action la moins coûteuse qui peut changer la décision, puis choisissez une seule suite : **corriger**, **approfondir la preuve**, **rouvrir**, **reclassifier** ou **fermer**. Passez aux sections suivantes seulement si le risque, le périmètre ou la décision le justifie.
++Produisez la ligne de run, faites l’action la moins coûteuse qui peut changer la décision, puis choisissez une seule suite : **corriger**, **approfondir la preuve**, **rouvrir**, **reclassifier**, **proposer** ou **fermer**. Par défaut, le run s’arrête à la proposition, en trace légère : la première proposition vaut checkpoint, sauf action irréversible ou coûteuse ; **fermer** suppose la trace complète (run persistant, partagé, audité ou acceptation demandée). Passez aux sections suivantes seulement si le risque, le périmètre ou la décision le justifie.
+ 
+ ## Carte de résolution rapide
+ 
+ Si la demande est déjà identifiable, consultez [`READING_MAP.md`](./READING_MAP.md) pour le premier chemin, la perspective conditionnelle et la sortie attendue. Cette carte est dérivée et non normative. Si le brief est vague, commencez directement par `DIRECTION/START`.
+ 
+-Une sortie de run a deux formes : la **réponse visible**, par défaut, et le **handoff**, pour une reprise ou un run persistant (voir `ACTION/HANDOFF`). Utilisez `N/A-JUSTIFIED` lorsqu’un champ ou une perspective ne s’applique pas.
++Une sortie de run a deux formes : la **réponse visible**, par défaut, et le **handoff**, pour une reprise ou un run persistant (voir `ACTION/HANDOFF`). Le niveau de trace ne dépend pas du mode : sans persistance, partage, audit ni acceptation demandée, la **trace légère** suffit (six lignes au plus, à côté de l’artefact ou sous « Trace » après la réponse) ; dans les autres cas, la **trace complète** s’impose. Utilisez `N/A-JUSTIFIED` lorsqu’un champ ou une perspective ne s’applique pas.
+ 
+ ## 1. Choisir la profondeur de lecture
+ 
+@@ -62,7 +62,7 @@ Les cinq absolus de `DIRECTION` protègent chaque run : leur résumé est dans l
+ 
+ Avant de construire ou de modifier, répondez aux cinq questions du parcours commun.
+ 
+-Produisez ensuite la ligne minimale :
++Produisez ensuite la ligne minimale ; elle reprend la ligne du parcours commun avec un identifiant et l’état du run (`ACTION/STATUS`), l’owner restant nommé dans l’entrée minimale de `DIRECTION/START` :
+ 
+ ```text
+ ID — MODE — DECISION — RISK — NEXT-PROOF — STATE
+@@ -169,9 +169,9 @@ Le one-shot réduit le nombre de cycles ; il ne supprime pas :
+ 3. l’observation du premier rendu ou comportement ;
+ 4. la revue créative lorsque la décision est visuelle ;
+ 5. la vérification du risque dominant ;
+-6. la persistance des preuves, limites et décisions.
++6. la trace des preuves, limites et décisions, à son niveau (légère par défaut, complète si le run est persistant, partagé ou audité).
+ 
+-La sortie one-shot peut être une décision directement clôturée si l’observation confirme que le défaut dominant est absent ou corrigé et qu’aucune nouvelle itération ne promet un changement visible ou utile. Sinon, le run retourne à la branche appropriée : correction, réouverture, reclassification ou prochaine preuve.
++En trace légère, la sortie one-shot est la proposition. En trace complète, la sortie one-shot peut être une décision directement clôturée si l’observation confirme que le défaut dominant est absent ou corrigé et qu’aucune nouvelle itération ne promet un changement visible ou utile. Sinon, le run retourne à la branche appropriée : correction, réouverture, reclassification ou prochaine preuve.
+ 
+ ## 8. Handoff agentique
+ 
+@@ -186,7 +186,7 @@ CONSTRAINTS — contraintes de produit, technique, contenu, droits et délai.
+ OUTPUT — artefact, trace, preuve, limite et prochaine action attendus.
+ ```
+ 
+-L’agent localise le package réellement fourni, classe la demande avec `DIRECTION/START`, charge uniquement les propriétaires utiles, produit l’artefact, vérifie le risque dominant et restitue par défaut la réponse visible en langage produit : ce qui a été fait, pourquoi, ce qui manque pour la vraie version, la suite (voir `ACTION/HANDOFF`).
++L’agent localise le package réellement fourni, lit le noyau de la skill, classe la demande avec `DIRECTION/START`, charge la ligne de son mode dans `DIRECTION/CHARGE` et seulement les propriétaires utiles, produit l’artefact, vérifie le risque dominant et restitue par défaut la réponse visible en langage produit : ce qui a été fait, pourquoi, ce qui manque pour la vraie version, la suite (voir `ACTION/HANDOFF`), avec la trace légère par défaut.
+ 
+ Il demande confirmation avant toute action externe, irréversible, publique, destructive, financière ou persistante hors du périmètre autorisé. Il ne choisit pas un mode plus léger parce qu’une capacité manque. Il déclare la capacité indisponible, requalifie la protection nécessaire ou conserve explicitement la limite.
+ 
+diff --git a/package/V1/official/READING_MAP.md b/package/V1/official/READING_MAP.md
+index bf30846..5c137a4 100644
+--- a/package/V1/official/READING_MAP.md
++++ b/package/V1/official/READING_MAP.md
+@@ -35,7 +35,7 @@ Les cinq absolus de `DIRECTION` protègent chaque run : résumé dans la section
+ | Preuve, vérification ou clôture | `ACTION` | Gate et route correspondant au risque |
+ | Règle ou route durable | `CHANGELOG` et source propriétaire | `ACTION` pour preuve et `BIBLIOTHEQUE/EVOLUTION` si structure |
+ 
+-Sortie : réponse visible et handoff (`ACTION/HANDOFF`) ; clôture : `ACTION/CLOSE-PACKAGE`.
++Sortie : réponse visible et trace légère par défaut ; handoff et clôture (`ACTION/CLOSE-PACKAGE`) en trace complète (`ACTION/HANDOFF`).
+ 
+ ## Combinaisons par résultat recherché
+ 
+@@ -55,7 +55,7 @@ La combinaison choisie reste dans la trace existante du run, seulement si elle p
+ | **Vitesse sans appauvrissement** | `DIRECTION/START` + `ACTION/FAST-PATH` + `LITE` ou `ITER` correctement classé | Ajouter une seule capacité si elle peut changer la décision ; reclassifier si le risque ou le périmètre augmente | Artefact réel, observation ciblée, preuve minimale applicable et prochaine action. |
+ | **Système maintenable** | `ACTION/RUN-SYSTEM` + `BIBLIOTHEQUE/COMPONENTS` si un composant change + migration, rollback et `CHANGELOG` (paquet SYSTÈME) | `BIBLIOTHEQUE/EVOLUTION` ou `SAVOIR/SYSTEM` selon la décision partagée | Consumers, compatibilité, non-régression, owner, migration et condition de reprise. |
+ | **Domaine sensible ou incertain** | `DIRECTION/DOMAIN-FRAME` + `SAVOIR/SOURCE` + `ACTION/STRUCTURED-PROOF` | Contexte culturel, conventions, confiance ou recherche seulement si un déclencheur peut changer la décision | Source ou observation reliée à la décision, transformation, rejet et limite. |
+-| **Agent contrôlé** | `DIRECTION/START` + `ACTION/AUTHORITY` + `SKILL.md` + owner | Cette carte et `RUN_CARD` seulement si plusieurs capacités sont réellement nécessaires | Artefact livré, autonomie exercée, décision, preuve, limite, escalade et prochaine action. |
++| **Agent contrôlé** | `DIRECTION/START` + `ACTION/AUTHORITY` + `SKILL.md` + owner | Cette carte seulement si plusieurs capacités sont réellement nécessaires ; `RUN_CARD` en trace complète (run persistant, partagé, audité ou acceptation demandée), quel que soit le nombre de capacités | Artefact livré, autonomie exercée, décision, preuve, limite, escalade et prochaine action. |
+ 
+ Ces combinaisons ne sont pas des parcours obligatoires. Elles indiquent des capacités compatibles ; les sources propriétaires définissent le contenu exact des routes.
+ 
+diff --git a/package/V1/official/README.md b/package/V1/official/README.md
+index cc5a5ba..8d16942 100644
+--- a/package/V1/official/README.md
++++ b/package/V1/official/README.md
+@@ -2,7 +2,7 @@
+ 
+ Ce dossier contient les sources officielles de **Design Governance V1.1.1**, une expérimentation maintenue : un cadre de direction, de création, de jugement et de vérification du design.
+ 
+-Pour commencer, lisez la section « Commencer » du README à la racine du package : vous n’avez pas à choisir de mode. Pour piloter un run, lisez le guide opérateur [`QUICKSTART.md`](./QUICKSTART.md) ; un agent entre par la skill `design-governance-practice`. Le vocabulaire est défini dans [`GLOSSAIRE.md`](./GLOSSAIRE.md).
++Pour commencer, lisez la section [« Commencer »](../../README.md#commencer) du README à la racine du package : vous n’avez pas à choisir de mode. Pour piloter un run, lisez le guide opérateur [`QUICKSTART.md`](./QUICKSTART.md) ; un agent entre par la skill `design-governance-practice`. Le vocabulaire est défini dans [`GLOSSAIRE.md`](./GLOSSAIRE.md).
+ 
+ ## Sources normatives
+ 
+diff --git a/package/scripts/build_distributions.sh b/package/scripts/build_distributions.sh
+index b446272..adeeb73 100755
+--- a/package/scripts/build_distributions.sh
++++ b/package/scripts/build_distributions.sh
+@@ -143,10 +143,12 @@ from pathlib import Path
+ import sys
+ 
+ root = Path(sys.argv[1])
+-targets = sorted((root / "skill").rglob("*.md")) + [root / "official" / "QUICKSTART.md"]
++targets = sorted((root / "skill").rglob("*.md")) + [root / "official" / "QUICKSTART.md", root / "official" / "README.md"]
+ for path in targets:
+     text = path.read_text(encoding="utf-8")
+     rewritten = text.replace("V1/official/", "official/").replace("skills/design-governance-practice/", "skill/")
++    # Audit progressif, C23 : le README du package est à ../../ depuis V1/official/, à ../ depuis official/ (Local).
++    rewritten = rewritten.replace("](../../README.md", "](../README.md")
+     if rewritten != text:
+         path.write_text(rewritten, encoding="utf-8")
+ PY
+diff --git a/package/scripts/validate_structure.py b/package/scripts/validate_structure.py
+index f1b50bd..c14f62d 100644
+--- a/package/scripts/validate_structure.py
++++ b/package/scripts/validate_structure.py
+@@ -26,6 +26,7 @@ Gardes :
+  15. PRÉAMBULE DE BIBLIOTHEQUE — ni catégories de lecture ni contrat de promotion avant les routes (MNT-01, D-15).
+  16. EN-TÊTE DE LA SKILL — métadonnées `name` et `description` lisibles en YAML : valeur citée dès qu'elle porte « : » (SKL-01, C01).
+  17. DÉCLENCHEUR UI/UX — `CHARGE` appelle `ACTION/UI-UX-REALITY` en STANDARD et DIRECTION avant fabrication, pas en LITE (UIX-01, C08).
++ 18. FAÇADES — trace légère et proposition dans les guides, glossaire et carte ; exemple hors domaine de référence ; liens vers « Commencer » (FAC-01, AP4b).
+ 
+ Une reformulation ne casse pas ces gardes ; une suppression, un déplacement, une copie ou un retour du
+ vocabulaire retiré les cassent. `scripts/read_route.py` retire les balises à la lecture.
+@@ -89,6 +90,8 @@ REFERENCES: list[tuple[str, str]] = [
+ 
+ # 3. Vocabulaire retiré : motif, remplacement, fichiers exemptés (historique).
+ RETIRED: list[tuple[str, str, set[str]]] = [
++    (r"Établissez le mode", "classer d'abord avec DIRECTION/START, par l'opérateur ou l'agent (C24)", {"CHANGELOG.md"}),
++    (r"Forme courte LITE non persistante", "forme courte LITE : trace complète d'un LITE clôturé, distincte de la trace légère (AUD-13)", {"CHANGELOG.md"}),
+     (r"`CLOSED` uniquement si la direction est tenue", "CLOSED décrit la persistance ; le résultat se déclare à part (ACTION/STATUS, C05)", {"CHANGELOG.md"}),
+     (r"anti-directions?", "MODAL / PARTI", {"CHANGELOG.md"}),
+     (r"MODE — DECISION — CHANGE — PROOF", "réponse visible en langage produit (ACTION/HANDOFF)", {"CHANGELOG.md"}),
+@@ -248,6 +251,17 @@ FIDELITY: list[tuple[str, str, str]] = [
+     ("QUICKSTART, fermeture : preuve manquante distincte du N/A (C09)", r"la preuve attendue est obtenue ou déclarée", "ne vaut que si la preuve ne s’applique pas"),
+     ("règle d'or 8 : réserve structurée recevable (C10)", r"ne compense jamais un axe bloquant par une moyenne", "ACCEPTED-WITH-RESERVATION"),
+     ("contenu marqué : fonctions d'un produit fictif (D-26)", r"\*\*Destination réelle sans contenu\.\*\*", "fonctions, intégrations et conformités affirmées"),
++    # Audit progressif, unité AP4b (V12R_44) : façades dérivées des contrats stabilisés
++    ("QUICKSTART : suite par défaut, la proposition (C04)", r"choisissez une seule suite", "trace complète"),
++    ("QUICKSTART : niveau de trace distinct du mode (C04)", r"Une sortie de run a deux formes : la \*\*réponse visible\*\*", "trace légère"),
++    ("QUICKSTART : sortie one-shot selon la trace (C04)", r"la sortie one-shot peut être une décision directement clôturée", "trace complète"),
++    ("QUICKSTART : l'agent lit le noyau et CHARGE (AUD-06)", r"L’agent localise le package réellement fourni", "DIRECTION/CHARGE"),
++    ("QUICKSTART : la ligne de run suit le classement (C24)", r"Pour piloter un run, commencez ici", "DIRECTION/START"),
++    ("READING_MAP : sortie par défaut (C04)", r"^Sortie : réponse visible", "trace légère"),
++    ("README : parcours, proposer ou fermer (AUD-06)", r"Le parcours complet d’un run est", "trace légère"),
++    ("flux : la proposition vaut checkpoint (AUD-06)", r"présenter la proposition \(trace légère", "checkpoint"),
++    ("HANDOFF : forme courte LITE distincte de la trace légère (AUD-13)", r"\*\*Forme courte LITE", "distincte de la trace légère"),
++    ("exemples : la sortie par défaut porte sa trace légère (AUD-06)", r"montre la sortie par défaut", "trace légère"),
+ ]
+ 
+ # 13. Entrée humaine (R6b-1) : une seule entrée, balisée dans le README du package et reprise par le README Local ;
+@@ -682,6 +696,47 @@ def check_ui_trigger(errors: list[str]) -> None:
+             errors.append(f"[UIX-01] {place} : la ligne LITE appelle ACTION/UI-UX-REALITY (delta local)")
+ 
+ 
++# 18. Façades (audit progressif, AP4b) : lignes de table, sections et liens que les façades doivent porter.
++ROW_NEEDLES = [  # (fichier, début de ligne, mot attendu, constat)
++    ("GLOSSAIRE.md", "| **Mode** |", "se choisit à part", "C04"),
++    ("GLOSSAIRE.md", "| **Run** |", "proposition", "C04"),
++    ("GLOSSAIRE.md", "| **Trace légère** |", "plafond atteint et contenus marqués", "C04"),
++    ("GLOSSAIRE.md", "| **Livraison** |", "checkpoint", "C33"),
++    ("READING_MAP.md", "| **Agent contrôlé** |", "trace complète", "C04"),
++    ("DIRECTION.md", "| Décision suffisamment établie |", "trace légère", "C33"),
++]
++EXAMPLE_SECTION = "## DIRECTION — fabrication depuis un brief flou"
++COMMENCER = re.compile(r"\]\((?:\.\./)+README\.md#commencer\)")
++
++
++def check_facades(errors: list[str]) -> None:
++    for name, prefix, needle, origin in ROW_NEEDLES:
++        path = OFFICIAL / name
++        rows = [line for line in path.read_text(encoding="utf-8").splitlines() if line.startswith(prefix)] if path.is_file() else []
++        if len(rows) != 1 or needle not in rows[0]:
++            errors.append(f"[FAC-01] {name} : ligne « {prefix} » absente, multiple ou sans « {needle} » ({origin})")
++    examples = SKILL_DIR / "references" / "examples.md"
++    text = examples.read_text(encoding="utf-8") if examples.is_file() else ""
++    start = text.find(EXAMPLE_SECTION)
++    section = text[start:text.find("\n## ", start + 1)] if start >= 0 else ""
++    if not section or "Trace (trace légère" not in section or "PROCHAINE PREUVE" not in section:
++        errors.append("[FAC-01] examples.md : la fabrication depuis un brief flou ne montre pas sa trace légère (AUD-06)")
++    if re.search(r"boulangerie", section, re.I):
++        errors.append("[FAC-01] examples.md : exemple dans le domaine du brief de référence B-DLA (AUD-08)")
++    for name in ("README.md", "QUICKSTART.md"):
++        path = OFFICIAL / name
++        if path.is_file() and not COMMENCER.search(path.read_text(encoding="utf-8")):
++            errors.append(f"[FAC-01] {name} : la section « Commencer » du README du package n'est pas liée (C23)")
++    readme = ROOT / "README.md"
++    if readme.is_file() and "## Commencer" not in readme.read_text(encoding="utf-8"):
++        errors.append("[FAC-01] README du package : titre « Commencer » absent, cible des liens (C23)")
++    notes = ROOT / "RELEASE_NOTES.md"
++    if notes.is_file():
++        body = notes.read_text(encoding="utf-8")
++        if "lire README et QUICKSTART" in body and "Parcours de V1.1.1, historique" not in body:
++            errors.append("[FAC-01] RELEASE_NOTES : ancien parcours d'agent présenté comme courant (C39)")
++
++
+ def check() -> list[str]:
+     errors: list[str] = []
+     corpus = texts()
+@@ -703,6 +758,7 @@ def check() -> list[str]:
+     check_core_floor(errors)
+     check_skill_header(errors)
+     check_ui_trigger(errors)
++    check_facades(errors)
+     return errors
+ 
+ 
+diff --git a/package/skills/design-governance-practice/SKILL.md b/package/skills/design-governance-practice/SKILL.md
+index d565006..ac1ec49 100644
+--- a/package/skills/design-governance-practice/SKILL.md
++++ b/package/skills/design-governance-practice/SKILL.md
+@@ -163,7 +163,7 @@ La seconde boucle n’est pas une suite de petits polish. Après observation, ch
+ | Direction faible, interchangeable ou contradictoire | Rouvrir la direction, reformuler ou requalifier la cible avant de continuer le polish. |
+ | Risque ou périmètre changé | Reclassifier avec `DIRECTION/START`. |
+ | Preuve insuffisante | Déclarer la limite et produire la prochaine preuve proportionnée. |
+-| Décision suffisamment établie | Décider et persister la trace ; ne pas prolonger le polish sans changement attendu. |
++| Décision suffisamment établie | Proposer (trace légère : la proposition vaut checkpoint) ; en trace complète, décider et persister la trace. Ne pas prolonger le polish sans changement attendu. |
+ 
+ Dans le scope de B1b (surface `DIRECTION` qui accepte avec l’axe V positif, en trace complète : `ACTION/B1b`), cet atelier est requis, sauf deux motifs `N/A-JUSTIFIED` : aucune décision principale éditable, ou une paire équivalente encore valide qui couvre la même décision. Hors de ce scope, il ne s’impose pas.
+ 
+diff --git a/package/skills/design-governance-practice/references/examples.md b/package/skills/design-governance-practice/references/examples.md
+index 4359089..b059838 100644
+--- a/package/skills/design-governance-practice/references/examples.md
++++ b/package/skills/design-governance-practice/references/examples.md
+@@ -4,7 +4,7 @@
+ >
+ > **Trace, pas sérialisation.** Ces blocs sont des traces : leurs noms (`OBSERVED`, `AXES`, `RISK` en phrase…) ne sont pas des clés JSON. Pour produire une `RUN_CARD`, partir de `schemas/run_card.example.json`, suivre [machine_projection.md](machine_projection.md) et la table de correspondance d’`ACTION/RUN_CARD`, puis contrôler avec `scripts/validate_run_card.py`.
+ >
+-> **Niveau de trace.** Les exemples qui se terminent par `CLOSED` montrent une trace complète (clôture demandée ou run persistant) ; « fabrication depuis un brief flou » montre la sortie par défaut : une proposition et sa réponse visible, sans clôture.
++> **Niveau de trace.** Les exemples qui se terminent par `CLOSED` montrent une trace complète (clôture demandée ou run persistant) ; « fabrication depuis un brief flou » montre la sortie par défaut : une proposition, sa réponse visible et sa trace légère, sans clôture.
+ 
+ ## LITE — correctif local
+ 
+@@ -29,21 +29,23 @@ Ne pas charger l’atlas ou une analyse de style si aucune responsabilité de de
+ 
+ ## DIRECTION — fabrication depuis un brief flou
+ 
+-**Demande :** « Il me faut un site pour ma boulangerie. » Rien d’autre.
++**Demande :** « Il me faut un site pour mon atelier de réparation de vélos. » Rien d’autre.
+ 
+-**Prise de brief, en un seul échange :** l’agent demande les contenus réels (produits, prix, horaires, adresse), le logo ou les couleurs s’ils existent, et deux ou trois photos du comptoir ; la destination est une vraie mise en ligne. Faute de réponse, il construit avec des hypothèses nommées.
++**Prise de brief, en un seul échange, avant le build :** la personne est présente. L’agent demande les contenus réels (services, tarifs, horaires, adresse, numéro), le logo ou les couleurs s’ils existent, et deux ou trois photos de l’atelier ; la destination est une vraie mise en ligne. La personne répond avec deux photos de l’atelier, sans tarifs ni horaires. L’agent construit avec les photos reçues et des contenus d’exemple marqués pour le reste.
++
++**Réponse visible :** « J’ai construit une page d’accueil organisée autour du tableau de l’atelier : les réparations du jour et le délai annoncé. Pourquoi : on veut savoir quand son vélo sera prêt avant de passer ; j’ai écarté la grande photo d’entrée suivie de trois cartes de services, que n’importe quel atelier aurait. Ce qui manque pour la vraie version : vos tarifs, vos horaires et votre numéro ; ceux affichés sont des exemples marqués comme tels, et le bouton « Appeler l’atelier » fonctionne avec un numéro d’exemple. La suite : envoyez ces éléments, je les intègre et je vérifie le mobile. »
++
++**Trace (trace légère, écrite à côté de l’artefact) :**
+ 
+ ```text
+-THÈSE: le pain du jour se choisit d’un coup d’œil, avant d’entrer
+-OBJET DE PREUVE: la vitrine du jour, composant codé (produit, prix, heure de sortie du four)
+-MODAL: photo pleine largeur, titre centré, trois cartes « nos valeurs »
+-PARTI: s’écarter pour la première scène, où la vitrine du jour remplace la photo ; garder la navigation attendue
+-FABRICATION: typographie et couleur au plafond (polices libres, palette tirée des photos) ; photos du client moyennes, traitement commun choisi pour unifier la série ; aucune illustration dessinée
+-DÉFAUT DOMINANT: après capture, les prix se lisent mal sur mobile ; taille et contraste corrigés, seconde capture comparée
++MODE: DIRECTION
++THÈSE: savoir quand son vélo sera prêt → le tableau de l’atelier, composant codé (réparations du jour, délai, tarif indicatif) → le tableau remplace la photo d’entrée
++MODAL, TRAME ET PARTI: photo pleine largeur, titre centré, trois cartes « nos services » ; trame héros → services → avis → contact, rompue : le tableau ouvre la page ; s’écarter pour la première scène seulement, garder la navigation et le contact attendus
++PLAFOND ET CONTENUS MARQUÉS: typographie et couleur au plafond (polices libres, palette tirée des deux photos) ; photos du client moyennes, traitement commun ; tarifs, horaires et numéro marqués « exemple »
++DÉFAUT DOMINANT RESTANT: aucun bloquant ; les délais se lisaient mal sur mobile, taille et contraste corrigés, seconde capture comparée
++PROCHAINE PREUVE: vrais tarifs, horaires et numéro intégrés, puis capture mobile
+ ```
+ 
+-**Réponse visible :** « J’ai construit une page d’accueil organisée autour de la vitrine du jour. Pourquoi : on choisit son pain avant d’entrer, la page le permet en un coup d’œil. Ce qui manque pour la vraie version : vos prix, vos horaires et une photo du comptoir en lumière du jour ; les produits affichés sont des exemples marqués comme tels. La suite : envoyez ces éléments, je les intègre et je vérifie le mobile. »
+-
+ ## DIRECTION — première scène identitaire
+ 
+ **Demande :** créer une hero mémorable pour un service de cartographie sonore, sans page SaaS générique.
+diff --git a/package/skills/design-governance-practice/references/flow.md b/package/skills/design-governance-practice/references/flow.md
+index 2b43a81..858db3c 100644
+--- a/package/skills/design-governance-practice/references/flow.md
++++ b/package/skills/design-governance-practice/references/flow.md
+@@ -17,7 +17,7 @@ flowchart LR
+   I --> J[Owner et prochaine preuve]
+ ```
+ 
+-En texte : **classer et protéger le run, cultiver et diriger la décision, composer et construire l’artefact, polir et observer le rendu, vérifier et corriger ce qui est observable, puis présenter la proposition (trace légère) ou décider et fermer avec ses limites (trace complète)**. Un risque critique ramène au classement (reclassification) ; une preuve absente reste `NOT-VERIFIED`, avec owner et prochaine preuve. La boucle créative élève le résultat ; la boucle de gouvernance protège le risque, la preuve et la vérité de ce qui peut être affirmé.
++En texte : **classer et protéger le run, cultiver et diriger la décision, composer et construire l’artefact, polir et observer le rendu, vérifier et corriger ce qui est observable, puis présenter la proposition (trace légère ; la première proposition vaut checkpoint) ou décider et fermer avec ses limites (trace complète)**. Un risque critique ramène au classement (reclassification) ; une preuve absente reste `NOT-VERIFIED`, avec owner et prochaine preuve. La boucle créative élève le résultat ; la boucle de gouvernance protège le risque, la preuve et la vérité de ce qui peut être affirmé.
+ 
+ Charger `DIRECTION/START` avant un build, une modification, une vérification, une action externe ou une décision persistante. Charger les routes approfondies uniquement si elles peuvent modifier une décision, un artefact, une preuve, une limite ou la prochaine action.
+ 

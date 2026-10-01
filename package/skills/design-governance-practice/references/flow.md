@@ -17,7 +17,7 @@ flowchart LR
   I --> J[Owner et prochaine preuve]
 ```
 
-En texte : **classer et protéger le run, cultiver et diriger la décision, composer et construire l’artefact, polir et observer le rendu, vérifier et corriger ce qui est observable, puis présenter la proposition (trace légère) ou décider et fermer avec ses limites (trace complète)**. Un risque critique ramène au classement (reclassification) ; une preuve absente reste `NOT-VERIFIED`, avec owner et prochaine preuve. La boucle créative élève le résultat ; la boucle de gouvernance protège le risque, la preuve et la vérité de ce qui peut être affirmé.
+En texte : **classer et protéger le run, cultiver et diriger la décision, composer et construire l’artefact, polir et observer le rendu, vérifier et corriger ce qui est observable, puis présenter la proposition (trace légère ; la première proposition vaut checkpoint) ou décider et fermer avec ses limites (trace complète)**. Un risque critique ramène au classement (reclassification) ; une preuve absente reste `NOT-VERIFIED`, avec owner et prochaine preuve. La boucle créative élève le résultat ; la boucle de gouvernance protège le risque, la preuve et la vérité de ce qui peut être affirmé.
 
 Charger `DIRECTION/START` avant un build, une modification, une vérification, une action externe ou une décision persistante. Charger les routes approfondies uniquement si elles peuvent modifier une décision, un artefact, une preuve, une limite ou la prochaine action.
 

@@ -51,7 +51,7 @@ V1 vise une première proposition composée, spécifique et soignée, sans impos
 | Reviewer ou lead | [`READING_MAP.md`](V1/official/READING_MAP.md), puis `ACTION.md` | Preuve dans le scope, limites et décision de clôture. |
 | Mainteneur du package | Ce README, `CHANGELOG.md` et les validateurs | Contrat cohérent, testable et reproductible. |
 
-Le mode d’un run est choisi par l’agent avec `DIRECTION/START`, seule classification ; il n’est jamais demandé à la personne qui fait la demande. Le parcours complet d’un run est : classer, diriger, construire, observer, corriger, fermer ; chaque mode n’en garde que les étapes de sa route.
+Le mode d’un run est choisi par l’agent avec `DIRECTION/START`, seule classification ; il n’est jamais demandé à la personne qui fait la demande. Le parcours complet d’un run est : classer, diriger, construire, observer, corriger, puis proposer (par défaut, en trace légère : la première proposition vaut checkpoint) ou fermer (trace complète) ; chaque mode n’en garde que les étapes de sa route.
 
 Le README oriente la navigation. Il ne crée aucune règle concurrente. Les sources normatives font foi dans leur périmètre.
 

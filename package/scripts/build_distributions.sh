@@ -143,10 +143,12 @@ from pathlib import Path
 import sys
 
 root = Path(sys.argv[1])
-targets = sorted((root / "skill").rglob("*.md")) + [root / "official" / "QUICKSTART.md"]
+targets = sorted((root / "skill").rglob("*.md")) + [root / "official" / "QUICKSTART.md", root / "official" / "README.md"]
 for path in targets:
     text = path.read_text(encoding="utf-8")
     rewritten = text.replace("V1/official/", "official/").replace("skills/design-governance-practice/", "skill/")
+    # Audit progressif, C23 : le README du package est à ../../ depuis V1/official/, à ../ depuis official/ (Local).
+    rewritten = rewritten.replace("](../../README.md", "](../README.md")
     if rewritten != text:
         path.write_text(rewritten, encoding="utf-8")
 PY

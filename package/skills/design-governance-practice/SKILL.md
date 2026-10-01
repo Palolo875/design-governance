@@ -163,7 +163,7 @@ La seconde boucle n’est pas une suite de petits polish. Après observation, ch
 | Direction faible, interchangeable ou contradictoire | Rouvrir la direction, reformuler ou requalifier la cible avant de continuer le polish. |
 | Risque ou périmètre changé | Reclassifier avec `DIRECTION/START`. |
 | Preuve insuffisante | Déclarer la limite et produire la prochaine preuve proportionnée. |
-| Décision suffisamment établie | Décider et persister la trace ; ne pas prolonger le polish sans changement attendu. |
+| Décision suffisamment établie | Proposer (trace légère : la proposition vaut checkpoint) ; en trace complète, décider et persister la trace. Ne pas prolonger le polish sans changement attendu. |
 
 Dans le scope de B1b (surface `DIRECTION` qui accepte avec l’axe V positif, en trace complète : `ACTION/B1b`), cet atelier est requis, sauf deux motifs `N/A-JUSTIFIED` : aucune décision principale éditable, ou une paire équivalente encore valide qui couvre la même décision. Hors de ce scope, il ne s’impose pas.
 

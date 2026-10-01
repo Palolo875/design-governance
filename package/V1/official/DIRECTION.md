@@ -567,7 +567,7 @@ La seconde boucle n’est pas une suite de petits polish. Après observation, ch
 | Direction faible, interchangeable ou contradictoire | Rouvrir la direction, reformuler ou requalifier la cible avant de continuer le polish. |
 | Risque ou périmètre changé | Reclassifier avec `DIRECTION/START`. |
 | Preuve insuffisante | Déclarer la limite et produire la prochaine preuve proportionnée. |
-| Décision suffisamment établie | Décider et persister la trace ; ne pas prolonger le polish sans changement attendu. |
+| Décision suffisamment établie | Proposer (trace légère : la proposition vaut checkpoint) ; en trace complète, décider et persister la trace. Ne pas prolonger le polish sans changement attendu. |
 <!-- noyau:fin BOUCLE-DIAGNOSTIC -->
 
 <!-- noyau:début BOUCLE-QUESTIONS -->

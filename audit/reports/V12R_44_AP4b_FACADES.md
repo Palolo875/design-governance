@@ -1,10 +1,11 @@
-# V1.2 — AP4b : façades (C04, C17, C23, C24, C33, C39 ; AUD-06, AUD-08, AUD-13) — diagnostic et textes, testés sur copie
+# V1.2 — AP4b : façades (C04, C17, C23, C24, C33, C39 ; AUD-06, AUD-08, AUD-13)
 
 **Date :** 01-10-2026.
-**Décision de l'owner :** « Allons-y pour AP4b ». Les textes sont soumis avant application, comme pour AP3.
+**Décision de l'owner :** « Allons-y pour AP4b ». Les textes ont été soumis avant application, comme pour AP3, puis validés (« Allons-y », 01-10-2026) et appliqués tels quels. Les deux points du §5 sont retenus comme proposés : l'exemple du README reste, et « livraison » est définie hors des absolus.
 **Pièces :**
 - patch : `audit/tools/V12R_Patch_AP4b.py`, 26 entrées dont les textes exacts, plus `_fichiers/` (`validate_structure.py`, `build_distributions.sh`) ;
-- package inchangé à ce stade.
+- diff : `audit/diffs/V12R_AP4b_facades.diff` ;
+- instantané : `audit/snapshots/V12R_Instantane_suivi_AP4b.json`.
 
 ## 1. Diagnostic (certain, relu sur les sources)
 
@@ -92,3 +93,13 @@
 - **Point à valider : README, exemple de reformulation.** L'entrée humaine du README (« trop froid pour une boulangerie ») garde le domaine boulangerie. Elle est lue par des personnes, pas par l'agent (AUD-10). Elle fait partie de l'entrée validée en R6b-1. Je propose de la laisser, sauf avis contraire.
 - **Point à valider : C33, lieu de la définition.** « Livraison » est définie dans le GLOSSAIRE et la ligne du noyau, pas dans les absolus (décision 8 : lois inchangées).
 - **Effet sur l'usage :** non observé (pas d'observation novice ni de run).
+
+## 6. Application et contrôles finaux, sur le package
+
+- **Application :** 26 entrées et deux fichiers remplacés ; noyau recompilé et conforme.
+- **Gardes :** vertes. **Mutations :** 21/21 rouges.
+- **Suivi :** VERT. 389 cas, aucune migration, `validate_all` vert ; cliquets : 13 785 mots, négations 820, doublons 142, une liste.
+- **13.01, par sous-contrôle :** texte 6/6 ; mutations 6/6 ; non-régression 5/5 ; distributions 9/9 (Linux, Python 3.10 et 3.13, archives construites depuis une copie, pas de CI hébergée). Le lien du README officiel dans l'export Local est `../README.md#commencer`.
+- **13.02 :** 38/38. **Sondes AP1 et AP4a :** vertes. **B01 :** 218/218.
+- **Effet sur l'usage :** non observé.
+

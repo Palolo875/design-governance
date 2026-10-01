@@ -36,6 +36,8 @@ Les cinq sources normatives sont `DIRECTION.md`, `ACTION.md`, `SAVOIR.md`, `BIBL
 
 ## Parcours de découverte
 
+> **Parcours de V1.1.1, historique.** Dans la candidate courante, une personne commence par la section « Commencer » du README du package ; un agent entre par la skill (noyau de fabrication et `DIRECTION/CHARGE`) et s’arrête par défaut à la proposition ; les guides s’ouvrent à la demande ; `ORCHESTRATION_MAP.md` n’est plus qu’un pointeur vers `READING_MAP.md`. Ces notes seront réécrites en R12.
+
 Pour un humain qui découvre le système :
 
 ```text

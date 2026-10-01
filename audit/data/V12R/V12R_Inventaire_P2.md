@@ -96,7 +96,7 @@ Cette vue couvre les identifiants D-01 à D-23 et les mineurs transmis. Elle n�
 - **AP2 fait (`V12R_41`) :** errata C34 (V12R_37), C35 et C36 (V12R_35), réserve D-26 rétablie dans les résumés (C16 : disposition normative à décider) ; C14 (suivi) et C22 (export de mesure) rectifiés et déclarés ; sonde 10/10, rouge avant sur quatre scénarios.
 - **AP3 fait (`V12R_42`) :** C08 (déclencheur UI/UX avant fabrication, garde UIX-01), C05, C06, C07 (portée B1b compilée, sans extension), C09 (4 lieux corrigés ; 5 vrais N/A maintenus : BIBLIOTHEQUE l. 27, 43, 172, 762 ; DIRECTION l. 393), C10 ; D-26 fermé sur texte (option (a), clause dans `CNT-01`), effet non observé ; mutations 14/14.
 - **AP4a fait (`V12R_43`) :** C11, C12, C13, C19, C20 (validateurs du package) et C21 (outil 13.01, rectification déclarée) ; sonde 36/36 (22 KO avant) ; mutations 7/7.
-- **AP4b :** façades dérivées : C04, C17, C23, C24, C33, C39, avec AUD-06, AUD-08, AUD-13.
+- **AP4b fait (`V12R_44`) :** C04, C17, C23, C24, C33, C39 ; AUD-06, AUD-08 et AUD-13 fermés sur texte (garde FAC-01, 21/21 mutations). Maintenus sans changement, avec disposition : `DIRECTION/START` (entrée minimale), bloc BRIEF, `BIBLIOTHEQUE/MICRO`, titres des absolus (décision 8), exemple de reformulation du README (lu par des personnes).
 - **AP5 :** C18 et consolidation documentaire.
 - **Différés, disposition à écrire :** C15 (portée à arbitrer), C25, C26, C30, C32, C37, C38 ; précisions C27 à C29 et C31 (secondaires).
 

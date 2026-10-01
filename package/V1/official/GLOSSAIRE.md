@@ -9,11 +9,11 @@ Ce glossaire explique les mots nécessaires pour commencer. Il n’ajoute aucune
 | **JTBD** | « Job to be done » : la tâche ou le progrès concret que la personne cherche à accomplir dans le contexte déclaré. |
 | **Blast radius** | L’étendue des consommateurs, surfaces ou décisions susceptibles d’être touchés par un changement. |
 | **Preuve** | Ce qui permet de confirmer ou d’infirmer une décision dans un périmètre déclaré : observation, capture, test, mesure, comparaison ou retour adapté. |
-| **Mode** | Le niveau de protection et de trace adapté au travail : `LITE`, `ITER`, `STANDARD`, `DIRECTION` ou `SYSTÈME`. |
+| **Mode** | Le niveau de protection adapté au travail : `LITE`, `ITER`, `STANDARD`, `DIRECTION` ou `SYSTÈME`. Le niveau de trace (légère ou complète) se choisit à part, selon que le run est persistant, partagé ou audité. |
 | **FAST-PATH** | Une vue courte pour un delta local ou une décision presque tranchée. Elle réduit la formalité, jamais la preuve requise ni l’honnêteté du statut. |
 | **Façade d’activation** | Le cadrage court avant les routes détaillées : mode, risque dominant, décision à changer, prochaine preuve et owner. Elle n’est ni un nouveau mode ni un nouveau gate. |
 | **Source propriétaire** | Le fichier normatif responsable d’une règle. Un guide peut la résumer, mais ne peut pas la remplacer. |
-| **Run** | Un travail délimité, avec une décision, un risque, un artefact, une preuve et une clôture. |
+| **Run** | Un travail délimité, avec une décision, un risque, un artefact et une preuve. Il s’arrête à une proposition (trace légère) ou à une clôture (trace complète). |
 | **RUN_CARD** | La trace structurée et persistante d’un run : exigée en `STANDARD`, `DIRECTION`, `SYSTÈME` et pour tout `ITER` sérialisé (voir `ACTION/RUN_CARD`). Elle porte décision, risque, artefact, preuve, limite et clôture. |
 | **Artefact** | Le résultat concret que l’on peut inspecter : code, écran, capture, composant, test, diff ou autre livrable. |
 | **Owner** | La personne ou l’équipe responsable de la décision, de la reprise ou de l’escalade. |
@@ -35,9 +35,10 @@ Ce glossaire explique les mots nécessaires pour commencer. Il n’ajoute aucune
 | **Plafond** | Le niveau qu’une couche peut atteindre avec les moyens disponibles ; lorsqu’il est bas, l’agent le déclare et dit ce qui le relèverait. |
 | **Objet de preuve** | L’élément de la première scène qui rend la promesse crédible : de préférence un composant, une donnée, un état ou une interaction du produit. |
 | **Défaut dominant** | Le défaut qui pèse le plus sur la qualité perçue ou sur l’usage ; c’est lui que l’on corrige en premier. |
-| **Trace légère** | La trace par défaut d’un run ni persistant, ni partagé, ni audité : six lignes au plus (mode, thèse, modal, trame et parti, plafond, défaut dominant, prochaine preuve). Le run livre une proposition, sans verdict ni clôture. |
+| **Trace légère** | La trace par défaut d’un run ni persistant, ni partagé, ni audité : six lignes au plus (mode ; thèse ; modal, trame et parti ; plafond atteint et contenus marqués ; défaut dominant restant ; prochaine preuve). Le run livre une proposition, sans verdict ni clôture. |
 | **Trace complète** | La trace d’un run persistant, partagé, audité ou dont on demande l’acceptation : handoff, `RUN_CARD`, paquet de clôture et gates écrits. |
 | **Première proposition** | Le premier rendu, présenté avec sa thèse et ce qu’il faut décider. Il vaut checkpoint, sauf action irréversible ou coûteuse. |
+| **Livraison** | La remise d’un artefact à une personne : la première proposition (trace légère ; elle vaut checkpoint) ou la remise acceptée (trace complète). Les preuves applicables au mode sont dues dans les deux cas ; seule leur écriture s’allège en trace légère. |
 | **Trame modale** | L’ordre de sections que n’importe quelle IA produirait pour un brief. Le test de trame la nomme, puis la rompt ou la justifie par la tâche. |
 | **Profil de surface** | Le type de surface (vitrine, application, scène, hors Web) qui fixe les contrôles d’accessibilité à faire d’office. |
 | **Vérité de scène** | La règle qui marque comme illustratif tout exemple, chiffre ou témoignage non observé, et qui le signale au public en langage produit. |
@@ -76,8 +77,10 @@ Ces exemples illustrent l’usage des termes ; ils ne créent pas de règle supp
 
 ## Pour commencer sans vocabulaire préalable
 
-1. Établissez le mode, le risque dominant, la décision à changer, la prochaine preuve et l’owner.
-2. Vérifiez ou confirmez le classement avec `DIRECTION/START` et choisissez le propriétaire normatif utile.
+Cette suite s’adresse à l’opérateur ou à l’agent ; une personne qui fait une demande n’a pas de mode à choisir (section « Commencer » du README du package).
+
+1. Classez la demande avec `DIRECTION/START` : mode et risque dominant ; notez la décision à changer, la prochaine preuve et l’owner.
+2. Chargez la ligne de ce mode dans `DIRECTION/CHARGE`, puis seulement le propriétaire normatif utile.
 3. Produisez ou modifiez l’artefact, puis observez-le dans le scope déclaré.
 4. Isolez le défaut dominant, corrigez l’artefact lorsque c’est nécessaire, observez à nouveau et séparez ce qui a été observé de ce qui reste non vérifié.
 

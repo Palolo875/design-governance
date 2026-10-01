@@ -26,6 +26,7 @@ Gardes :
  15. PRÉAMBULE DE BIBLIOTHEQUE — ni catégories de lecture ni contrat de promotion avant les routes (MNT-01, D-15).
  16. EN-TÊTE DE LA SKILL — métadonnées `name` et `description` lisibles en YAML : valeur citée dès qu'elle porte « : » (SKL-01, C01).
  17. DÉCLENCHEUR UI/UX — `CHARGE` appelle `ACTION/UI-UX-REALITY` en STANDARD et DIRECTION avant fabrication, pas en LITE (UIX-01, C08).
+ 18. FAÇADES — trace légère et proposition dans les guides, glossaire et carte ; exemple hors domaine de référence ; liens vers « Commencer » (FAC-01, AP4b).
 
 Une reformulation ne casse pas ces gardes ; une suppression, un déplacement, une copie ou un retour du
 vocabulaire retiré les cassent. `scripts/read_route.py` retire les balises à la lecture.
@@ -89,6 +90,8 @@ REFERENCES: list[tuple[str, str]] = [
 
 # 3. Vocabulaire retiré : motif, remplacement, fichiers exemptés (historique).
 RETIRED: list[tuple[str, str, set[str]]] = [
+    (r"Établissez le mode", "classer d'abord avec DIRECTION/START, par l'opérateur ou l'agent (C24)", {"CHANGELOG.md"}),
+    (r"Forme courte LITE non persistante", "forme courte LITE : trace complète d'un LITE clôturé, distincte de la trace légère (AUD-13)", {"CHANGELOG.md"}),
     (r"`CLOSED` uniquement si la direction est tenue", "CLOSED décrit la persistance ; le résultat se déclare à part (ACTION/STATUS, C05)", {"CHANGELOG.md"}),
     (r"anti-directions?", "MODAL / PARTI", {"CHANGELOG.md"}),
     (r"MODE — DECISION — CHANGE — PROOF", "réponse visible en langage produit (ACTION/HANDOFF)", {"CHANGELOG.md"}),
@@ -248,6 +251,17 @@ FIDELITY: list[tuple[str, str, str]] = [
     ("QUICKSTART, fermeture : preuve manquante distincte du N/A (C09)", r"la preuve attendue est obtenue ou déclarée", "ne vaut que si la preuve ne s’applique pas"),
     ("règle d'or 8 : réserve structurée recevable (C10)", r"ne compense jamais un axe bloquant par une moyenne", "ACCEPTED-WITH-RESERVATION"),
     ("contenu marqué : fonctions d'un produit fictif (D-26)", r"\*\*Destination réelle sans contenu\.\*\*", "fonctions, intégrations et conformités affirmées"),
+    # Audit progressif, unité AP4b (V12R_44) : façades dérivées des contrats stabilisés
+    ("QUICKSTART : suite par défaut, la proposition (C04)", r"choisissez une seule suite", "trace complète"),
+    ("QUICKSTART : niveau de trace distinct du mode (C04)", r"Une sortie de run a deux formes : la \*\*réponse visible\*\*", "trace légère"),
+    ("QUICKSTART : sortie one-shot selon la trace (C04)", r"la sortie one-shot peut être une décision directement clôturée", "trace complète"),
+    ("QUICKSTART : l'agent lit le noyau et CHARGE (AUD-06)", r"L’agent localise le package réellement fourni", "DIRECTION/CHARGE"),
+    ("QUICKSTART : la ligne de run suit le classement (C24)", r"Pour piloter un run, commencez ici", "DIRECTION/START"),
+    ("READING_MAP : sortie par défaut (C04)", r"^Sortie : réponse visible", "trace légère"),
+    ("README : parcours, proposer ou fermer (AUD-06)", r"Le parcours complet d’un run est", "trace légère"),
+    ("flux : la proposition vaut checkpoint (AUD-06)", r"présenter la proposition \(trace légère", "checkpoint"),
+    ("HANDOFF : forme courte LITE distincte de la trace légère (AUD-13)", r"\*\*Forme courte LITE", "distincte de la trace légère"),
+    ("exemples : la sortie par défaut porte sa trace légère (AUD-06)", r"montre la sortie par défaut", "trace légère"),
 ]
 
 # 13. Entrée humaine (R6b-1) : une seule entrée, balisée dans le README du package et reprise par le README Local ;
@@ -682,6 +696,47 @@ def check_ui_trigger(errors: list[str]) -> None:
             errors.append(f"[UIX-01] {place} : la ligne LITE appelle ACTION/UI-UX-REALITY (delta local)")
 
 
+# 18. Façades (audit progressif, AP4b) : lignes de table, sections et liens que les façades doivent porter.
+ROW_NEEDLES = [  # (fichier, début de ligne, mot attendu, constat)
+    ("GLOSSAIRE.md", "| **Mode** |", "se choisit à part", "C04"),
+    ("GLOSSAIRE.md", "| **Run** |", "proposition", "C04"),
+    ("GLOSSAIRE.md", "| **Trace légère** |", "plafond atteint et contenus marqués", "C04"),
+    ("GLOSSAIRE.md", "| **Livraison** |", "checkpoint", "C33"),
+    ("READING_MAP.md", "| **Agent contrôlé** |", "trace complète", "C04"),
+    ("DIRECTION.md", "| Décision suffisamment établie |", "trace légère", "C33"),
+]
+EXAMPLE_SECTION = "## DIRECTION — fabrication depuis un brief flou"
+COMMENCER = re.compile(r"\]\((?:\.\./)+README\.md#commencer\)")
+
+
+def check_facades(errors: list[str]) -> None:
+    for name, prefix, needle, origin in ROW_NEEDLES:
+        path = OFFICIAL / name
+        rows = [line for line in path.read_text(encoding="utf-8").splitlines() if line.startswith(prefix)] if path.is_file() else []
+        if len(rows) != 1 or needle not in rows[0]:
+            errors.append(f"[FAC-01] {name} : ligne « {prefix} » absente, multiple ou sans « {needle} » ({origin})")
+    examples = SKILL_DIR / "references" / "examples.md"
+    text = examples.read_text(encoding="utf-8") if examples.is_file() else ""
+    start = text.find(EXAMPLE_SECTION)
+    section = text[start:text.find("\n## ", start + 1)] if start >= 0 else ""
+    if not section or "Trace (trace légère" not in section or "PROCHAINE PREUVE" not in section:
+        errors.append("[FAC-01] examples.md : la fabrication depuis un brief flou ne montre pas sa trace légère (AUD-06)")
+    if re.search(r"boulangerie", section, re.I):
+        errors.append("[FAC-01] examples.md : exemple dans le domaine du brief de référence B-DLA (AUD-08)")
+    for name in ("README.md", "QUICKSTART.md"):
+        path = OFFICIAL / name
+        if path.is_file() and not COMMENCER.search(path.read_text(encoding="utf-8")):
+            errors.append(f"[FAC-01] {name} : la section « Commencer » du README du package n'est pas liée (C23)")
+    readme = ROOT / "README.md"
+    if readme.is_file() and "## Commencer" not in readme.read_text(encoding="utf-8"):
+        errors.append("[FAC-01] README du package : titre « Commencer » absent, cible des liens (C23)")
+    notes = ROOT / "RELEASE_NOTES.md"
+    if notes.is_file():
+        body = notes.read_text(encoding="utf-8")
+        if "lire README et QUICKSTART" in body and "Parcours de V1.1.1, historique" not in body:
+            errors.append("[FAC-01] RELEASE_NOTES : ancien parcours d'agent présenté comme courant (C39)")
+
+
 def check() -> list[str]:
     errors: list[str] = []
     corpus = texts()
@@ -703,6 +758,7 @@ def check() -> list[str]:
     check_core_floor(errors)
     check_skill_header(errors)
     check_ui_trigger(errors)
+    check_facades(errors)
     return errors
 
 
