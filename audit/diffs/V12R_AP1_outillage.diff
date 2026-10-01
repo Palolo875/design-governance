@@ -1,0 +1,295 @@
+diff --git a/package/V1/official/CHANGELOG.md b/package/V1/official/CHANGELOG.md
+index 01cac0d..5cd5d79 100644
+--- a/package/V1/official/CHANGELOG.md
++++ b/package/V1/official/CHANGELOG.md
+@@ -36,6 +36,7 @@
+ - **Action principale conservée (refonte, D-25).** Faute de valeur réelle, l’action principale d’une page (commander, écrire, appeler, venir) reste fonctionnelle avec une valeur d’exemple marquée, au lieu d’être retirée.
+ - **Raccords d’audit (refonte, audit A1).** `FAIL-ASSUMED` réservé à un échec connu dans le pipeline et l’absolu 4 ; persistance et clôture en trace complète (DIRECTION, `FAST-PATH`, BIBLIOTHEQUE, flux, exemples) ; règle CTA reliée à la valeur d’exemple marquée ; l’agent lit le noyau et `CHARGE`, READING_MAP sert aux personnes ; veille mise à jour (R10) ; redite retirée de l’entrée humaine.
+ - **Architecture du chargement (refonte, A2).** `DIRECTION/CHARGE` est la seule liste de chargement, compilée dans le noyau avec sa colonne « Ajouter seulement si » ; la carte de lecture d’ACTION, les déclencheurs critiques de DIRECTION et `ACTION/ROUTING` en sont des vues ; le plancher couleur et typographique de SAVOIR entre dans le noyau ; la trace légère s’écrit à côté de l’artefact, ou après la réponse visible sous « Trace ».
++- **Outillage (audit progressif, unité 1).** L’en-tête de la skill est cité et se lit en YAML, texte inchangé (garde SKL-01) ; le profil strict traite un nom de fichier nu à extension connue comme un fichier local, résolu depuis le dossier de la carte (tickets, commits et identifiants opaques inchangés) ; le build restaure ensemble `dist` et les deux archives si la promotion échoue.
+ - **Efficacité.** `NOT-VERIFIED` : l’épreuve de référence donne V1.1.1 ≈ sans système sur la qualité perçue ; l’effet de ces chantiers reste à éprouver (G4).
+ 
+ ## V1.1.1 — Retour d’audit : alignements de textes et de façades
+diff --git a/package/scripts/build_distributions.sh b/package/scripts/build_distributions.sh
+index 259ae81..b446272 100755
+--- a/package/scripts/build_distributions.sh
++++ b/package/scripts/build_distributions.sh
+@@ -8,7 +8,15 @@ STAGE="$WORK/dist"
+ BACKUP="$ROOT/.dist.previous"
+ 
+ ARCHIVES="$WORK/archives"
++ARCHIVES_BACKUP="$ROOT/.archives.previous"
++ZIPS=(Design_Governance_V1_GITHUB.zip Design_Governance_V1_LOCAL.zip)
+ 
++# Audit progressif, C03 : une sauvegarde d’archives laissée par une restauration incomplète n’est ni restaurée à
++# l’aveugle ni supprimée (impossible de savoir quelles archives en place sont neuves).
++if [[ -e "$ARCHIVES_BACKUP" ]]; then
++  echo "BUILD FAILED — sauvegarde d’archives $ARCHIVES_BACKUP présente : résolution manuelle requise (aucune suppression)" >&2
++  exit 1
++fi
+ # E2 O-3 : une sauvegarde laissée par un échec précédent est restaurée, jamais supprimée.
+ if [[ -e "$BACKUP" ]]; then
+   if [[ -e "$DIST" ]]; then
+@@ -221,19 +229,52 @@ PY
+ 
+ # Publier uniquement après validations et archivage réussis.
+ # E2 O-3 : promotion transactionnelle ; en cas d’échec, la sauvegarde est restaurée avant tout nettoyage.
+-if [[ -e "$DIST" ]]; then
+-  mv "$DIST" "$BACKUP"
+-fi
+-if ! mv "$STAGE" "$DIST"; then
+-  if [[ -e "$BACKUP" && ! -e "$DIST" ]]; then
+-    mv "$BACKUP" "$DIST"
++# Audit progressif, C03 : la transaction couvre dist ET les deux archives ; un échec à n’importe quelle étape remet
++# l’ensemble antérieur (dist et archives), puis une relance normale repart d’un état propre.
++saved=" " published=" " dist_promoted=0
++rollback() {
++  local ok=1 name
++  for name in "${ZIPS[@]}"; do
++    if [[ "$saved" == *" $name "* ]]; then
++      mv -f "$ARCHIVES_BACKUP/$name" "$ROOT/$name" || ok=0
++    elif [[ "$published" == *" $name "* ]]; then
++      rm -f "$ROOT/$name" || ok=0  # aucune archive antérieure : l’archive neuve est retirée
++    fi
++  done
++  if (( dist_promoted )); then
++    if [[ -e "$BACKUP" ]]; then
++      { rm -rf "$DIST" && mv "$BACKUP" "$DIST"; } || ok=0
++    else
++      rm -rf "$DIST" || ok=0  # aucun dist antérieur : le dist neuf est retiré
++    fi
++  elif [[ -e "$BACKUP" && ! -e "$DIST" ]]; then
++    mv "$BACKUP" "$DIST" || ok=0
++  fi
++  if (( ok )); then
++    rmdir "$ARCHIVES_BACKUP" 2>/dev/null || true
++    echo "BUILD FAILED — $1 ; dist et archives antérieurs restaurés" >&2
++  else
++    echo "BUILD FAILED — $1 ; restauration incomplète : sauvegardes conservées ($BACKUP, $ARCHIVES_BACKUP), résolution manuelle requise" >&2
+   fi
+-  echo "BUILD FAILED — promotion impossible ; dist antérieur restauré" >&2
+   exit 1
++}
++mkdir "$ARCHIVES_BACKUP"
++for name in "${ZIPS[@]}"; do
++  if [[ -e "$ROOT/$name" ]]; then
++    mv "$ROOT/$name" "$ARCHIVES_BACKUP/$name" || rollback "sauvegarde de $name impossible"
++    saved+="$name "
++  fi
++done
++if [[ -e "$DIST" ]]; then
++  mv "$DIST" "$BACKUP" || rollback "sauvegarde de dist impossible"
+ fi
+-mv -f "$ARCHIVES/Design_Governance_V1_GITHUB.zip" "$ROOT/Design_Governance_V1_GITHUB.zip"
+-mv -f "$ARCHIVES/Design_Governance_V1_LOCAL.zip" "$ROOT/Design_Governance_V1_LOCAL.zip"
+-rm -rf "$BACKUP" "$WORK"
++mv "$STAGE" "$DIST" || rollback "promotion de dist impossible"
++dist_promoted=1
++for name in "${ZIPS[@]}"; do
++  mv -f "$ARCHIVES/$name" "$ROOT/$name" || rollback "publication de $name impossible"
++  published+="$name "
++done
++rm -rf "$BACKUP" "$WORK" "$ARCHIVES_BACKUP"
+ 
+ printf 'Generated:\n  %s\n  %s\n' \
+   "$ROOT/Design_Governance_V1_GITHUB.zip" \
+diff --git a/package/scripts/validate_run_card.py b/package/scripts/validate_run_card.py
+index 1a8e38b..8b6c6d4 100644
+--- a/package/scripts/validate_run_card.py
++++ b/package/scripts/validate_run_card.py
+@@ -539,9 +539,25 @@ def check_semantic_contract(document: Any) -> None:
+     check_b1b(closure, mode)
+ 
+ 
++# Audit progressif, C02 : un nom de fichier nu (sans dossier) est local s'il porte une extension de fichier de cette liste
++# fermée ; un ticket, un commit, une version ou un identifiant opaque n'est pas un chemin et reste hors du contrôle d'existence.
++LOCAL_FILE_EXTENSIONS = {
++    "html", "htm", "css", "js", "mjs", "json", "md", "txt", "csv", "pdf", "xml",
++    "png", "jpg", "jpeg", "gif", "webp", "avif", "svg", "ico", "mp4", "webm", "mov",
++    "zip", "fig", "sketch", "psd", "ai", "pptx", "docx", "xlsx", "woff", "woff2", "ttf", "otf",
++}
++BARE_FILE = re.compile(r"^[^\s/\\:]+\.([A-Za-z0-9]+)$")
++
++
+ def is_local_locator(locator: str) -> bool:
+-    return locator.startswith("file://") or (
+-        not re.match(r"^[a-z][a-z0-9+.-]*://", locator, re.I) and (locator.startswith(("/", "./", "../")) or "/" in locator))
++    if locator.startswith("file://"):
++        return True
++    if re.match(r"^[a-z][a-z0-9+.-]*://", locator, re.I):
++        return False
++    if locator.startswith(("/", "./", "../")) or "/" in locator:
++        return True
++    bare = BARE_FILE.match(locator)
++    return bool(bare and bare.group(1).lower() in LOCAL_FILE_EXTENSIONS)
+ 
+ 
+ def check_strict_contract(document: Any, source_path: Path) -> None:
+@@ -578,7 +594,7 @@ def check_strict_contract(document: Any, source_path: Path) -> None:
+     locators = [("artifact.locator", artifact.get("locator")), ("trace_locator", card.get("trace_locator"))]
+     if not isinstance(artifact.get("locator"), str) or not artifact["locator"].strip():
+         raise ValidationError("strict : artifact.locator doit être renseigné")
+-    base = source_path.parent
++    base = source_path.resolve().parent  # dossier de la carte, quel que soit le dossier de lancement
+     for label, locator in locators:
+         if not isinstance(locator, str) or not locator.strip():
+             continue  # l’exigence de trace suit le mode, comme en profil normal
+@@ -780,6 +796,25 @@ UNIT_CASES: list[tuple[Any, ...]] = [
+     ("N4a", EXAMPLE, [((RC, "risk"), CRITICAL)], ((RC, "risk", "critical_protection", "owner"), DELETE), "critical_protection exige le champ owner"),
+     ("N4b", EXAMPLE, [((RC, "risk"), CRITICAL)], ((RC, "risk", "critical_protection", "evidence_locator"), DELETE), "critical_protection exige le champ evidence_locator"),
+     ("N5", EXAMPLE, [], ((RC, "proof", "provenance", "method"), DELETE), "proof.provenance exige le champ method"),
++    # Audit progressif, C02 : un nom de fichier nu absent est refusé en profil strict, pour l'artefact comme pour la trace.
++    ("C02-1", RETURNED, STRICT_LITE, ((RC, "artifact", "locator"), "absent.html"), "artefact local absent", True),
++    ("C02-2", RETURNED, STRICT_LITE + [((RC, "trace_locator"), str(EXAMPLE))], ((RC, "trace_locator"), "trace-absente.md"),
++     "trace local absent", True),
++]
++
++# Audit progressif, C02 : locators que le profil strict admet (aucun refus involontaire). Chaque valeur remplace
++# trace_locator d'une carte LITE stricte valide ; les chemins relatifs se résolvent depuis le dossier de la carte.
++STRICT_ADMITTED = [
++    ("fichier nu présent", "run_card.example.json"),
++    ("chemin relatif présent", "./run_card.example.json"),
++    ("URL", "https://atelier.exemple.cm/runs/42"),
++    ("ticket", "JIRA-142"),
++    ("numéro de ticket", "#128"),
++    ("commit", "1a4bf2f664a17be95ab9c0303a9e2b5a6803b250"),
++    ("commit court", "1a4bf2f"),
++    ("version", "v1.2.0"),
++    ("identifiant opaque", "run-2026-10-01.a"),
++    ("domaine sans schéma", "atelier.exemple.cm"),
+ ]
+ 
+ 
+@@ -826,6 +861,21 @@ def check_unit_cases(schema: dict[str, Any], errors: list[str]) -> None:
+     print(f"+ cas unitaires : {passed}/{len(UNIT_CASES)}")
+ 
+ 
++def check_strict_admitted(schema: dict[str, Any], errors: list[str]) -> None:
++    passed = 0
++    for label, locator in STRICT_ADMITTED:
++        try:
++            document = load_json(RETURNED)
++            for path, value in STRICT_LITE + [((RC, "trace_locator"), locator)]:
++                apply_edit(document, path, value)
++            validate_card(document, schema, strict=True, source_path=EXAMPLE)
++        except (KeyError, IndexError, TypeError, ValidationError) as exc:
++            errors.append(f"locator strict admis refusé ({label}, « {locator} ») : {exc}")
++            continue
++        passed += 1
++    print(f"+ locators admis en profil strict : {passed}/{len(STRICT_ADMITTED)}")
++
++
+ def check_fixture_table(schema: dict[str, Any], errors: list[str]) -> None:
+     present = {path.name for path in FIXTURES.glob("*.json")}
+     for name in sorted(present - set(FIXTURE_TABLE)):
+@@ -937,6 +987,7 @@ def main(argv: list[str] | None = None) -> int:
+     check_fixture(EXAMPLE, schema, True, errors)
+     check_fixture_table(schema, errors)
+     check_unit_cases(schema, errors)
++    check_strict_admitted(schema, errors)
+     check_schema_authority(schema, errors)
+ 
+     if errors:
+diff --git a/package/scripts/validate_structure.py b/package/scripts/validate_structure.py
+index f0dbe11..72d05eb 100644
+--- a/package/scripts/validate_structure.py
++++ b/package/scripts/validate_structure.py
+@@ -24,6 +24,7 @@ Gardes :
+  13. ENTRÉE HUMAINE — une seule entrée balisée (README du package, reprise par le README Local), quatre questions,
+      aucun mode demandé, vouvoiement ; une seule constitution minimale (ENT-01, CST-01).
+  15. PRÉAMBULE DE BIBLIOTHEQUE — ni catégories de lecture ni contrat de promotion avant les routes (MNT-01, D-15).
++ 16. EN-TÊTE DE LA SKILL — métadonnées `name` et `description` lisibles en YAML : valeur citée dès qu'elle porte « : » (SKL-01, C01).
+ 
+ Une reformulation ne casse pas ces gardes ; une suppression, un déplacement, une copie ou un retour du
+ vocabulaire retiré les cassent. `scripts/read_route.py` retire les balises à la lecture.
+@@ -32,6 +33,7 @@ Usage : python3 scripts/validate_structure.py
+ """
+ from __future__ import annotations
+ 
++import json
+ import re
+ import sys
+ from pathlib import Path
+@@ -587,6 +589,62 @@ def check_core_floor(errors: list[str]) -> None:
+             errors.append(f"[CORE-01] noyau : {label} absent de la section compilée")
+ 
+ 
++# 16. En-tête de la skill (audit progressif, C01) : métadonnées YAML lisibles par un hôte, sans dépendance tierce.
++# Sous-ensemble contrôlé : une paire « clé: valeur » par ligne ; une valeur non citée ne porte ni « : », ni « # »
++# précédé d'une espace, ni indicateur initial ; une valeur citée est décodée (doubles : échappements JSON ; simples : '').
++SKILL_KEYS = ("name", "description")
++PLAIN_FORBIDDEN_START = tuple("[]{}#&*!|>'\"%@`,") + ("- ", "? ", ": ")
++
++
++def skill_header(text: str) -> tuple[dict[str, str], list[str]]:
++    lines = text.splitlines()
++    if not lines or lines[0] != "---" or "---" not in lines[1:]:
++        return {}, ["en-tête YAML absent (--- en première ligne, puis ---)"]
++    values: dict[str, str] = {}
++    problems: list[str] = []
++    for number, line in enumerate(lines[1:lines.index("---", 1)], start=2):
++        key, sep, raw = line.partition(":")
++        if not sep or not re.fullmatch(r"[a-z][a-z0-9_-]*", key) or not raw.startswith(" "):
++            problems.append(f"ligne {number} : paire « clé: valeur » attendue")
++            continue
++        raw = raw[1:].rstrip()
++        if raw.startswith('"'):
++            try:
++                value = json.loads(raw)
++            except json.JSONDecodeError:
++                problems.append(f"{key} : chaîne entre guillemets doubles mal formée")
++                continue
++        elif raw.startswith("'"):
++            if len(raw) < 2 or not raw.endswith("'") or "'" in raw[1:-1].replace("''", ""):
++                problems.append(f"{key} : chaîne entre guillemets simples mal formée")
++                continue
++            value = raw[1:-1].replace("''", "'")
++        else:
++            if raw.startswith(PLAIN_FORBIDDEN_START) or ": " in raw or " #" in raw or raw.endswith(":"):
++                problems.append(f"{key} : valeur non citée contenant « : », « # » ou un indicateur YAML (citer la valeur)")
++                continue
++            value = raw
++        if key in values:
++            problems.append(f"{key} : clé répétée")
++        values[key] = value
++    return values, problems
++
++
++def check_skill_header(errors: list[str]) -> None:
++    path = SKILL_DIR / "SKILL.md"
++    if not path.is_file():
++        errors.append("[SKL-01] SKILL.md absent")
++        return
++    values, problems = skill_header(path.read_text(encoding="utf-8"))
++    for problem in problems:
++        errors.append(f"[SKL-01] en-tête de la skill : {problem}")
++    for key in SKILL_KEYS:
++        if not values.get(key, "").strip() and not any(problem.startswith(f"{key} :") for problem in problems):
++            errors.append(f"[SKL-01] en-tête de la skill : champ {key} absent ou vide")
++    if values.get("name") and values["name"] != "design-governance-practice":
++        errors.append(f"[SKL-01] en-tête de la skill : name « {values['name']} » ≠ design-governance-practice")
++
++
+ def check() -> list[str]:
+     errors: list[str] = []
+     corpus = texts()
+@@ -606,6 +664,7 @@ def check() -> list[str]:
+     check_maps(errors)
+     check_preamble(errors)
+     check_core_floor(errors)
++    check_skill_header(errors)
+     return errors
+ 
+ 
+diff --git a/package/skills/design-governance-practice/SKILL.md b/package/skills/design-governance-practice/SKILL.md
+index d18796e..c518d77 100644
+--- a/package/skills/design-governance-practice/SKILL.md
++++ b/package/skills/design-governance-practice/SKILL.md
+@@ -1,6 +1,6 @@
+ ---
+ name: design-governance-practice
+-description: Produire avec Design Governance V1 un travail de design de niveau designer senior (projet, interface, application, identité ou scène), beau, vrai et situé, même à partir d’un brief flou : gestes de fabrication, prise de brief minimale, plafond déclaré et trace proportionnée au risque. Utiliser pour toute demande de design à construire, corriger ou juger ; charger les sources progressivement, sans créer de règles concurrentes.
++description: "Produire avec Design Governance V1 un travail de design de niveau designer senior (projet, interface, application, identité ou scène), beau, vrai et situé, même à partir d’un brief flou : gestes de fabrication, prise de brief minimale, plafond déclaré et trace proportionnée au risque. Utiliser pour toute demande de design à construire, corriger ou juger ; charger les sources progressivement, sans créer de règles concurrentes."
+ ---
+ 
+ # Design Governance V1 — pratique

@@ -90,6 +90,15 @@ Cette vue couvre les identifiants D-01 à D-23 et les mineurs transmis. Elle n�
 - **Corrigés par A2 (`V12R_39`) :** AUD-01 (`CHARGE` seule liste, tables en vues, colonne « Ajouter seulement si » dans le noyau), AUD-02 (plancher couleur et typographique dans le noyau), AUD-05 (lieu de la trace légère).
 - **Lots suivants :** AUD-06, AUD-08, AUD-13 (façades) ; AUD-07 (convergence).
 
+**Audit progressif externe (`DG_Audit_progressif_10`, commit `1a4bf2f`, 01-10-2026) : 39 constats C01 à C39, vérifiés sur le dépôt.**
+- **Dispositions (décision de l'owner du 01-10) :** cinq unités AP1 à AP5 ; chaque constat est corrigé, reporté avec justification ou maintenu comme limite.
+- **Fermés par AP1 (`V12R_40`) :** C01 (en-tête YAML de la skill, garde SKL-01), C02 (fichier nu en profil strict), C03 (restauration de `dist` et des deux archives) ; sonde 60/60, mutations 5/5.
+- **AP2 :** errata C34 à C36 et réserve D-26 (C16) ; C14 (suivi) et C22 (export de mesure), par rectification déclarée.
+- **AP3 :** C08 (déclencheur UI/UX avant fabrication), C05, C06, C07 (contexte B1b rétabli, sans extension), C09, C10.
+- **AP4 :** C11 à C13, C19 à C21 ; puis façades dérivées : C04, C17, C23, C24, C33, C39, avec AUD-06, AUD-08, AUD-13.
+- **AP5 :** C18 et consolidation documentaire.
+- **Différés, disposition à écrire :** C15 (portée à arbitrer), C25, C26, C30, C32, C37, C38 ; précisions C27 à C29 et C31 (secondaires).
+
 ## 2. Réserves de clôture : articulation, sans double comptage
 
 | Réserve de la clôture | Objet | Traitement prévu |

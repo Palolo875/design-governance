@@ -1,6 +1,6 @@
 ---
 name: design-governance-practice
-description: Produire avec Design Governance V1 un travail de design de niveau designer senior (projet, interface, application, identité ou scène), beau, vrai et situé, même à partir d’un brief flou : gestes de fabrication, prise de brief minimale, plafond déclaré et trace proportionnée au risque. Utiliser pour toute demande de design à construire, corriger ou juger ; charger les sources progressivement, sans créer de règles concurrentes.
+description: "Produire avec Design Governance V1 un travail de design de niveau designer senior (projet, interface, application, identité ou scène), beau, vrai et situé, même à partir d’un brief flou : gestes de fabrication, prise de brief minimale, plafond déclaré et trace proportionnée au risque. Utiliser pour toute demande de design à construire, corriger ou juger ; charger les sources progressivement, sans créer de règles concurrentes."
 ---
 
 # Design Governance V1 — pratique
